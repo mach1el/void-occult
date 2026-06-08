@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I-Ching KB · Tàng Thư Lục Hào</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Noto+Serif:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16110d; --ink-2:#1f1813; --paper:#ece0c8; --paper-dim:#b9ab8e;
+    --cinnabar:#c0392b; --cinnabar-bright:#d9543f; --gold:#c9a24a; --gold-soft:#e0c178;
+    --jade:#5f9e7e; --jade-soft:#84c2a2; --line:#3a2f24;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(circle at 50% 0%, rgba(192,57,43,.12), transparent 45%),
+      radial-gradient(circle at 15% 95%, rgba(201,162,74,.08), transparent 45%),
+      var(--ink);
+    color:var(--paper);font-family:'Noto Serif',serif;line-height:1.62;
+    min-height:100vh;padding:0 0 80px;position:relative;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+  header{text-align:center;padding:80px 0 26px}
+  .seal{
+    display:inline-flex;align-items:center;justify-content:center;width:120px;height:120px;
+    border:3px solid var(--cinnabar);border-radius:12px;color:var(--cinnabar-bright);
+    font-family:'Noto Serif SC',serif;font-weight:900;font-size:54px;line-height:1;
+    box-shadow:0 0 0 1px rgba(192,57,43,.25), inset 0 0 28px rgba(192,57,43,.12);
+    transform:rotate(-3deg);margin-bottom:28px;background:rgba(192,57,43,.04);
+  }
+  header h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(2.6rem,7vw,4.2rem);line-height:1.02;color:var(--paper);letter-spacing:.01em}
+  header h1 em{color:var(--gold-soft);font-style:italic}
+  header .sub{color:var(--paper-dim);font-size:1.05rem;margin-top:16px;letter-spacing:.04em}
+  .rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:34px auto;max-width:420px}
+
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px}
+  @media(max-width:620px){.cards{grid-template-columns:1fr}}
+  a.card{
+    display:block;text-decoration:none;color:inherit;
+    background:linear-gradient(160deg,var(--ink-2),rgba(31,24,19,.55));
+    border:1px solid var(--line);border-radius:14px;padding:30px 28px;
+    box-shadow:0 18px 40px -28px rgba(0,0,0,.9);
+    transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    position:relative;overflow:hidden;
+  }
+  a.card:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 26px 50px -26px rgba(0,0,0,1)}
+  a.card .han{font-family:'Noto Serif SC',serif;font-size:2.6rem;font-weight:700;line-height:1;display:block;margin-bottom:14px}
+  a.card.one .han{color:var(--cinnabar-bright)}
+  a.card.two .han{color:var(--gold-soft)}
+  a.card .tier{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.92rem;color:var(--paper-dim);letter-spacing:.05em}
+  a.card h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.7rem;margin:4px 0 10px;color:var(--paper)}
+  a.card p{font-size:.95rem;color:var(--paper-dim);line-height:1.5}
+  a.card .go{margin-top:16px;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:1.05rem}
+  a.card .go .arr{transition:transform .25s ease;display:inline-block}
+  a.card:hover .go .arr{transform:translateX(6px)}
+
+  footer{text-align:center;margin-top:56px;color:var(--paper-dim);font-size:.85rem;letter-spacing:.05em}
+  footer .han{color:var(--cinnabar-bright);font-size:1.1rem}
+  footer a{color:var(--gold-soft);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="seal han">易</div>
+    <h1>Tàng Thư <em>Lục Hào</em></h1>
+    <div class="sub">I-Ching Knowledge Base · cheat sheet luận quẻ Văn Vương</div>
+    <div class="rule"></div>
+  </header>
+
+  <div class="cards">
+    <a class="card one" href="luc-hao-co-ban.html">
+      <span class="han">基</span>
+      <div class="tier">Tầng 1 · Nền tảng</div>
+      <h2>Luận Giải Căn Bản</h2>
+      <p>Ngũ Hành sinh khắc · Lục Thân · Thế–Ứng · chọn Dụng Thần · đo Vượng–Suy. Kèm ví dụ an một quẻ hoàn chỉnh.</p>
+      <div class="go">Mở bài <span class="arr">→</span></div>
+    </a>
+
+    <a class="card two" href="luc-hao-nang-cao.html">
+      <span class="han">進</span>
+      <div class="tier">Tầng 2 · Nâng cao</div>
+      <h2>Luận Giải Nâng Cao</h2>
+      <p>Hào động &amp; biến quái · 6 kiểu hóa · Tuần Không · Phục–Phi thần · quyền lực Nhật–Nguyệt · Hợp–Xung–Hội cục · cờ báo xấu.</p>
+      <div class="go">Mở bài <span class="arr">→</span></div>
+    </a>
+  </div>
+
+  <footer>
+    <div class="han">六爻</div>
+    Gieo nhiều · ghi lại · đối chiếu — luật là khung, quẻ thật mới dạy nghề.
+    <br><span style="opacity:.6">🤖 st_mich43l</span>
+  </footer>
+
+</div>
+</body>
+</html>

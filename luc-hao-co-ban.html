@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lục Hào · Cheat Sheet Luận Giải Căn Bản</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Noto+Serif:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16110d;
+    --ink-2:#1f1813;
+    --paper:#ece0c8;
+    --paper-dim:#b9ab8e;
+    --cinnabar:#c0392b;
+    --cinnabar-bright:#d9543f;
+    --gold:#c9a24a;
+    --gold-soft:#e0c178;
+    --jade:#5f9e7e;
+    --jade-soft:#84c2a2;
+    --line:#3a2f24;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(circle at 18% 12%, rgba(192,57,43,.10), transparent 42%),
+      radial-gradient(circle at 85% 88%, rgba(201,162,74,.08), transparent 45%),
+      var(--ink);
+    color:var(--paper);
+    font-family:'Noto Serif', serif;
+    line-height:1.62;
+    padding:0 0 90px;
+    position:relative;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+  .han{font-family:'Noto Serif SC', serif}
+
+  /* ---- Header ---- */
+  header{text-align:center;padding:64px 0 34px;position:relative}
+  .seal{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:108px;height:108px;border:3px solid var(--cinnabar);border-radius:10px;
+    color:var(--cinnabar-bright);font-family:'Noto Serif SC',serif;font-weight:900;
+    font-size:40px;line-height:1;letter-spacing:-2px;
+    box-shadow:0 0 0 1px rgba(192,57,43,.25), inset 0 0 24px rgba(192,57,43,.12);
+    transform:rotate(-3deg);margin-bottom:26px;
+    background:rgba(192,57,43,.04);
+  }
+  header h1{
+    font-family:'Cormorant Garamond', serif;font-weight:700;
+    font-size:clamp(2.4rem,6vw,3.8rem);letter-spacing:.02em;color:var(--paper);
+    line-height:1.04;
+  }
+  header h1 em{color:var(--gold-soft);font-style:italic}
+  header .sub{color:var(--paper-dim);font-size:1.02rem;margin-top:14px;letter-spacing:.04em}
+  .rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:30px auto;max-width:420px}
+
+  /* ---- Section ---- */
+  section{margin:54px 0;position:relative}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:24px}
+  .sec-num{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;
+    color:var(--cinnabar-bright);min-width:42px
+  }
+  .sec-head h2{
+    font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(1.6rem,4vw,2.2rem);
+    color:var(--paper);letter-spacing:.01em
+  }
+  .sec-head h2 .han{font-size:.78em;color:var(--gold);margin-left:8px}
+  p.lead{color:var(--paper-dim);margin-bottom:18px;max-width:760px}
+
+  /* ---- Card ---- */
+  .card{
+    background:linear-gradient(160deg, var(--ink-2), rgba(31,24,19,.55));
+    border:1px solid var(--line);border-radius:12px;padding:26px 28px;
+    box-shadow:0 18px 40px -28px rgba(0,0,0,.9);
+  }
+
+  /* ---- Ngu Hanh diagram ---- */
+  .nguhanh{display:grid;grid-template-columns:minmax(280px,1fr) 1fr;gap:30px;align-items:center}
+  .nguhanh svg{width:100%;height:auto;max-width:400px;margin:0 auto;display:block}
+  .legend{display:flex;flex-direction:column;gap:18px}
+  .legend .row{display:flex;gap:14px;align-items:flex-start}
+  .legend .dot{width:22px;height:22px;border-radius:50%;flex-shrink:0;margin-top:3px}
+  .legend .sinh{background:var(--jade)}
+  .legend .khac{background:var(--cinnabar)}
+  .legend h4{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;letter-spacing:.02em}
+  .legend .sinh-t{color:var(--jade-soft)}
+  .legend .khac-t{color:var(--cinnabar-bright)}
+  .legend code{font-family:'Noto Serif SC',serif;color:var(--gold-soft);font-size:1.02rem}
+  .legend small{color:var(--paper-dim);display:block;font-size:.92rem;margin-top:3px}
+
+  /* ---- Tables ---- */
+  table{width:100%;border-collapse:collapse;font-size:.98rem}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{
+    font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.08rem;
+    color:var(--gold-soft);letter-spacing:.03em;border-bottom:1px solid var(--gold)
+  }
+  tbody tr:hover{background:rgba(201,162,74,.05)}
+  td .han{color:var(--gold);font-size:1.05em;font-weight:500}
+  .tag{
+    display:inline-block;font-size:.78rem;padding:2px 9px;border-radius:20px;
+    border:1px solid currentColor;letter-spacing:.04em;font-family:'Noto Serif',serif
+  }
+  .t-self{color:var(--gold-soft)}
+  .t-good{color:var(--jade-soft)}
+  .t-bad{color:var(--cinnabar-bright)}
+
+  /* ---- Vuong suy bar ---- */
+  .vsbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .vsbar .item{flex:1;min-width:120px;border:1px solid var(--line);border-radius:10px;padding:14px 16px;text-align:center;background:var(--ink-2)}
+  .vsbar .item .han{display:block;font-size:1.7rem;font-weight:700;color:var(--gold)}
+  .vsbar .item b{font-family:'Cormorant Garamond',serif;font-size:1.15rem;display:block;margin:4px 0 2px}
+  .vsbar .item small{color:var(--paper-dim);font-size:.86rem}
+  .vsbar .strong{border-color:var(--jade)}
+  .vsbar .strong .han{color:var(--jade-soft)}
+  .vsbar .weak{border-color:var(--cinnabar)}
+  .vsbar .weak .han{color:var(--cinnabar-bright)}
+
+  /* ---- Worked example ---- */
+  .qua{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:start}
+  @media(max-width:640px){.qua{grid-template-columns:1fr}.nguhanh{grid-template-columns:1fr}}
+  .hexcol{background:var(--ink-2);border:1px solid var(--line);border-radius:12px;padding:20px}
+  .hexcol h4{font-family:'Cormorant Garamond',serif;text-align:center;font-size:1.2rem;margin-bottom:4px;color:var(--gold-soft)}
+  .hexcol .qname{text-align:center;color:var(--paper-dim);font-size:.85rem;margin-bottom:16px}
+  .hexrow{display:grid;grid-template-columns:54px 80px 1fr;align-items:center;gap:10px;padding:7px 0;border-bottom:1px dashed rgba(58,47,36,.7)}
+  .hexrow:last-child{border-bottom:none}
+  .yao{display:flex;gap:6px;justify-content:center}
+  .yao .bar{height:9px;background:var(--paper);border-radius:1px}
+  .yang .bar{width:62px}
+  .yin .bar{width:27px}
+  .najia{font-family:'Noto Serif SC',serif;color:var(--gold);font-size:.96rem;text-align:center}
+  .najia small{display:block;color:var(--paper-dim);font-family:'Noto Serif',serif;font-size:.74rem}
+  .relrole{font-size:.92rem}
+  .relrole .han{color:var(--gold)}
+  .badge{font-size:.72rem;padding:1px 8px;border-radius:14px;margin-left:6px;font-family:'Noto Serif',serif}
+  .b-the{background:var(--cinnabar);color:#fff}
+  .b-ung{background:var(--gold);color:#231a0f}
+  .b-use{background:var(--jade);color:#0e1a14}
+
+  .steps{counter-reset:s;list-style:none}
+  .steps li{position:relative;padding:0 0 18px 46px;margin-bottom:4px}
+  .steps li::before{
+    counter-increment:s;content:counter(s);position:absolute;left:0;top:-2px;
+    width:30px;height:30px;border-radius:50%;border:1.5px solid var(--cinnabar);
+    color:var(--cinnabar-bright);display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.05rem
+  }
+  .steps li:not(:last-child)::after{content:"";position:absolute;left:15px;top:30px;bottom:0;width:1px;background:var(--line)}
+  .steps b{color:var(--gold-soft);font-weight:600}
+  .verdict{
+    margin-top:8px;border-left:3px solid var(--jade);background:rgba(95,158,126,.08);
+    padding:16px 20px;border-radius:0 10px 10px 0
+  }
+  .verdict b{color:var(--jade-soft)}
+
+  .note{font-size:.9rem;color:var(--paper-dim);font-style:italic;margin-top:16px;padding-left:14px;border-left:2px solid var(--gold)}
+  footer{text-align:center;margin-top:60px;color:var(--paper-dim);font-size:.86rem;letter-spacing:.05em}
+  footer .han{color:var(--cinnabar-bright);font-size:1.1rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="seal han">六爻</div>
+    <h1>Lục Hào · <em>Luận Giải Căn Bản</em></h1>
+    <div class="sub">Cheat sheet tầng nền — từ Ngũ Hành tới một quẻ hoàn chỉnh</div>
+    <div class="rule"></div>
+  </header>
+
+  <!-- 1. NGU HANH -->
+  <section>
+    <div class="sec-head"><span class="sec-num">壹</span><h2>Ngũ Hành sinh khắc<span class="han">五行</span></h2></div>
+    <p class="lead">Đây là "bộ máy tính" của Lục Hào. Mọi luận đoán đều quy về hai vòng: <b style="color:var(--jade-soft)">sinh</b> (nuôi dưỡng) và <b style="color:var(--cinnabar-bright)">khắc</b> (chế ngự). Thuộc nằm lòng trước đã.</p>
+    <div class="card nguhanh">
+      <svg viewBox="0 0 400 400" role="img" aria-label="Vòng Ngũ Hành sinh khắc">
+        <defs>
+          <marker id="ag" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#5f9e7e"/></marker>
+          <marker id="ar" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c0392b"/></marker>
+        </defs>
+        <!-- KHAC (star, red) -->
+        <g stroke="#c0392b" stroke-width="1.6" opacity="0.78" marker-end="url(#ar)" fill="none">
+          <line x1="200" y1="84" x2="276" y2="298"/>   <!-- Moc -> Tho -->
+          <line x1="278" y1="312" x2="91" y2="167"/>   <!-- Tho -> Thuy -->
+          <line x1="73" y1="160" x2="322" y2="160"/>   <!-- Thuy -> Hoa -->
+          <line x1="330" y1="170" x2="135" y2="306"/>  <!-- Hoa -> Kim -->
+          <line x1="124" y1="298" x2="192" y2="86"/>   <!-- Kim -> Moc -->
+        </g>
+        <!-- SINH (pentagon, green) -->
+        <g stroke="#5f9e7e" stroke-width="2.4" opacity="0.92" marker-end="url(#ag)" fill="none">
+          <path d="M214,58 Q300,90 330,140"/>     <!-- Moc -> Hoa -->
+          <path d="M340,176 Q330,260 300,300"/>    <!-- Hoa -> Tho -->
+          <path d="M255,330 Q200,350 145,330"/>    <!-- Tho -> Kim -->
+          <path d="M100,300 Q70,260 60,176"/>      <!-- Kim -> Thuy -->
+          <path d="M70,140 Q100,90 186,58"/>       <!-- Thuy -> Moc -->
+        </g>
+        <!-- NODES -->
+        <g font-family="'Noto Serif SC',serif" text-anchor="middle">
+          <g><circle cx="200" cy="50" r="34" fill="#1f1813" stroke="#5f9e7e" stroke-width="2"/><text x="200" y="48" font-size="26" fill="#84c2a2" font-weight="700">木</text><text x="200" y="66" font-size="11" fill="#b9ab8e" font-family="'Noto Serif',serif">Mộc</text></g>
+          <g><circle cx="343" cy="154" r="34" fill="#1f1813" stroke="#c0392b" stroke-width="2"/><text x="343" y="152" font-size="26" fill="#d9543f" font-weight="700">火</text><text x="343" y="170" font-size="11" fill="#b9ab8e" font-family="'Noto Serif',serif">Hỏa</text></g>
+          <g><circle cx="288" cy="321" r="34" fill="#1f1813" stroke="#c9a24a" stroke-width="2"/><text x="288" y="319" font-size="26" fill="#e0c178" font-weight="700">土</text><text x="288" y="337" font-size="11" fill="#b9ab8e" font-family="'Noto Serif',serif">Thổ</text></g>
+          <g><circle cx="112" cy="321" r="34" fill="#1f1813" stroke="#dcd2bb" stroke-width="2"/><text x="112" y="319" font-size="26" fill="#ece0c8" font-weight="700">金</text><text x="112" y="337" font-size="11" fill="#b9ab8e" font-family="'Noto Serif',serif">Kim</text></g>
+          <g><circle cx="57" cy="154" r="34" fill="#1f1813" stroke="#6f9bc0" stroke-width="2"/><text x="57" y="152" font-size="26" fill="#a8c6e0" font-weight="700">水</text><text x="57" y="170" font-size="11" fill="#b9ab8e" font-family="'Noto Serif',serif">Thủy</text></g>
+        </g>
+      </svg>
+      <div class="legend">
+        <div class="row">
+          <span class="dot sinh"></span>
+          <div>
+            <h4 class="sinh-t">Tương Sinh — vòng nuôi</h4>
+            <code>木→火→土→金→水→木</code>
+            <small>Mộc sinh Hỏa, Hỏa sinh Thổ, Thổ sinh Kim, Kim sinh Thủy, Thủy sinh Mộc.</small>
+          </div>
+        </div>
+        <div class="row">
+          <span class="dot khac"></span>
+          <div>
+            <h4 class="khac-t">Tương Khắc — vòng chế</h4>
+            <code>木→土→水→火→金→木</code>
+            <small>Mộc khắc Thổ, Thổ khắc Thủy, Thủy khắc Hỏa, Hỏa khắc Kim, Kim khắc Mộc.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. LUC THAN -->
+  <section>
+    <div class="sec-head"><span class="sec-num">貳</span><h2>Lục Thân<span class="han">六親</span></h2></div>
+    <p class="lead">6 "vai diễn" trong quẻ. Cách xác định: lấy <b>ngũ hành của Cung</b> làm <b style="color:var(--gold-soft)">"Ta"</b>, rồi so từng hào với Ta theo sinh–khắc. Học theo công thức, không học vẹt.</p>
+    <div class="card">
+      <table>
+        <thead><tr><th>Lục Thân</th><th>Quan hệ với "Ta" (Cung)</th><th>Đại diện cho điều gì</th></tr></thead>
+        <tbody>
+          <tr><td><span class="han">兄弟</span> Huynh Đệ</td><td>Đồng hành với Ta</td><td>Anh em, bạn bè, đối thủ, cạnh tranh — hao tài</td></tr>
+          <tr><td><span class="han">父母</span> Phụ Mẫu</td><td><b>Sinh</b> ra Ta</td><td>Cha mẹ, nhà cửa, giấy tờ, văn bằng, che chở</td></tr>
+          <tr><td><span class="han">子孫</span> Tử Tôn</td><td>Ta <b>sinh</b> ra</td><td>Con cháu, phúc lành, thuốc men, giải tai ách</td></tr>
+          <tr><td><span class="han">妻財</span> Thê Tài</td><td>Ta <b>khắc</b></td><td>Vợ, tiền tài, của cải, vật chất nắm được</td></tr>
+          <tr><td><span class="han">官鬼</span> Quan Quỷ</td><td><b>Khắc</b> Ta</td><td>Công danh, chồng, bệnh tật, tai họa, kẻ địch</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Mẹo nhớ "Ta" = ngũ hành của Cung quẻ: cái <i>sinh ra ta</i> là cha mẹ, cái <i>ta sinh</i> là con cháu, cái <i>ta khắc</i> được là tiền tài (nắm trong tay), cái <i>khắc ta</i> là quan/quỷ (áp chế ta), cái <i>cùng loại</i> là anh em.</p>
+    </div>
+  </section>
+
+  <!-- 3. THE UNG -->
+  <section>
+    <div class="sec-head"><span class="sec-num">叁</span><h2>Thế &amp; Ứng<span class="han">世應</span></h2></div>
+    <div class="card">
+      <p style="margin-bottom:10px"><b style="color:var(--cinnabar-bright)" class="han">世</b> <b>Thế</b> — là <b>mình</b>, là chủ thể đang hỏi. Là trục để mọi phân tích quy chiếu về.</p>
+      <p><b style="color:var(--gold-soft)" class="han">應</b> <b>Ứng</b> — là <b>đối phương / việc</b> đang hỏi, hoặc môi trường ngoài. Thế–Ứng luôn cách nhau 3 hào.</p>
+      <p class="note">Quan hệ căn bản: Ứng sinh Thế → ngoại cảnh thuận; Ứng khắc Thế → có trở lực; Thế khắc Ứng → mình chủ động nắm được việc.</p>
+    </div>
+  </section>
+
+  <!-- 4. DUNG THAN -->
+  <section>
+    <div class="sec-head"><span class="sec-num">肆</span><h2>Chọn Dụng Thần<span class="han">用神</span></h2></div>
+    <p class="lead">Bước <b>quan trọng nhất</b>: chọn đúng hào Lục Thân đại diện cho điều mình hỏi. Chọn sai Dụng Thần → luận sai từ gốc.</p>
+    <div class="card">
+      <table>
+        <thead><tr><th>Hỏi về…</th><th>Dụng Thần</th></tr></thead>
+        <tbody>
+          <tr><td>Tiền bạc, làm ăn, cầu tài, vợ</td><td><span class="han">妻財</span> Thê Tài <span class="tag t-self">Tài</span></td></tr>
+          <tr><td>Công danh, thi cử đỗ đạt, công việc, chồng, bệnh</td><td><span class="han">官鬼</span> Quan Quỷ</td></tr>
+          <tr><td>Con cái, sức khỏe, bình an, vật nuôi, giải hạn</td><td><span class="han">子孫</span> Tử Tôn</td></tr>
+          <tr><td>Cha mẹ, nhà đất, xe, giấy tờ, hợp đồng, học hành</td><td><span class="han">父母</span> Phụ Mẫu</td></tr>
+          <tr><td>Anh em, bạn bè, đồng nghiệp, hùn hạp</td><td><span class="han">兄弟</span> Huynh Đệ</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 5. VUONG SUY -->
+  <section>
+    <div class="sec-head"><span class="sec-num">伍</span><h2>Đo mạnh yếu<span class="han">旺衰</span></h2></div>
+    <p class="lead">Sau khi có Dụng Thần, đo nó mạnh hay yếu dựa vào <b>Nguyệt lệnh</b> (tháng) và <b>Nhật thần</b> (ngày gieo). Đây là tầng căn bản nhất.</p>
+    <div class="card">
+      <div class="vsbar">
+        <div class="item strong"><span class="han">旺</span><b>Vượng</b><small>Cùng hành với tháng — mạnh nhất</small></div>
+        <div class="item strong"><span class="han">相</span><b>Tướng</b><small>Được tháng sinh — đang lên</small></div>
+        <div class="item"><span class="han">休</span><b>Hưu</b><small>Sinh ra tháng — nghỉ, hơi yếu</small></div>
+        <div class="item weak"><span class="han">囚</span><b>Tù</b><small>Bị tháng khắc — bị giam, yếu</small></div>
+        <div class="item weak"><span class="han">死</span><b>Tử</b><small>Khắc tháng — kiệt, yếu nhất</small></div>
+      </div>
+      <p class="note">Nguyên tắc gọn: hào được <b>Nguyệt sinh / Nhật sinh</b> hoặc đồng hành thì vượng → việc thành; bị <b>khắc</b>, lại gặp Tù/Tử thì suy → việc khó.</p>
+    </div>
+  </section>
+
+  <!-- 6. WORKED EXAMPLE -->
+  <section>
+    <div class="sec-head"><span class="sec-num">陸</span><h2>Ráp lại: một quẻ thật<span class="han">實例</span></h2></div>
+    <p class="lead"><b>Tình huống:</b> Gieo hỏi <i>"Tháng này cầu tài có lợi không?"</i> — gieo được quẻ <b>Càn vi Thiên</b> (乾為天), 6 hào tĩnh (không có hào động). Giả định: <b>tháng Dần</b> (Nguyệt lệnh = Mộc), <b>ngày Tý</b> (Nhật thần = Thủy).</p>
+
+    <div class="card qua">
+      <div class="hexcol">
+        <h4 class="han">乾為天</h4>
+        <div class="qname">Càn vi Thiên · Cung Càn (金)</div>
+
+        <div class="hexrow">
+          <div class="yao yang"><div class="bar"></div></div>
+          <div class="najia">壬戌<small>Tuất · Thổ</small></div>
+          <div class="relrole"><span class="han">父母</span> Phụ Mẫu<span class="badge b-the">Thế</span></div>
+        </div>
+        <div class="hexrow">
+          <div class="yao yang"><div class="bar"></div></div>
+          <div class="najia">壬申<small>Thân · Kim</small></div>
+          <div class="relrole"><span class="han">兄弟</span> Huynh Đệ</div>
+        </div>
+        <div class="hexrow">
+          <div class="yao yang"><div class="bar"></div></div>
+          <div class="najia">壬午<small>Ngọ · Hỏa</small></div>
+          <div class="relrole"><span class="han">官鬼</span> Quan Quỷ</div>
+        </div>
+        <div class="hexrow">
+          <div class="yao yang"><div class="bar"></div></div>
+          <div class="najia">甲辰<small>Thìn · Thổ</small></div>
+          <div class="relrole"><span class="han">父母</span> Phụ Mẫu<span class="badge b-ung">Ứng</span></div>
+        </div>
+        <div class="hexrow">
+          <div class="yao yang"><div class="bar"></div></div>
+          <div class="najia">甲寅<small>Dần · Mộc</small></div>
+          <div class="relrole"><span class="han">妻財</span> Thê Tài<span class="badge b-use">Dụng</span></div>
+        </div>
+        <div class="hexrow">
+          <div class="yao yang"><div class="bar"></div></div>
+          <div class="najia">甲子<small>Tý · Thủy</small></div>
+          <div class="relrole"><span class="han">子孫</span> Tử Tôn</div>
+        </div>
+      </div>
+
+      <div>
+        <ol class="steps">
+          <li><b>Xác định Cung &amp; "Ta".</b> Quẻ thuộc Cung Càn → ngũ hành Cung là <b>Kim</b>. Vậy "Ta" = Kim, mọi Lục Thân tính theo Kim.</li>
+          <li><b>An Lục Thân.</b> Ví dụ hào 2 nạp Dần (Mộc): Kim khắc Mộc → Mộc là <i>cái Ta khắc</i> → <b>Thê Tài</b>. Làm tương tự cho 6 hào (xem cột bên trái).</li>
+          <li><b>Định Thế–Ứng.</b> Quẻ Bát Thuần (8 quẻ thuần) luôn có Thế ở hào 6, Ứng ở hào 3.</li>
+          <li><b>Chọn Dụng Thần.</b> Hỏi cầu tài → Dụng Thần là <b>Thê Tài</b> = hào 2 (Dần Mộc).</li>
+          <li><b>Đo mạnh yếu Dụng Thần.</b> Tháng Dần là Mộc → Dụng Thần (Mộc) <b>lâm Nguyệt lệnh</b> → cực vượng. Ngày Tý là Thủy → Thủy sinh Mộc → <b>Nhật thần lại sinh</b> Dụng Thần. Tài tinh vừa vượng vừa được sinh phù.</li>
+        </ol>
+        <div class="verdict">
+          <b>Luận:</b> Thê Tài lâm Nguyệt, được Nhật sinh → <b>tài khí vượng tướng</b>. Ở tầng căn bản, đây là quẻ <b>cầu tài thuận lợi</b>, nên tiến hành — tiền tài sung túc trong tháng.
+        </div>
+        <p class="note">Đây mới là tầng nền (an quẻ → chọn Dụng Thần → đo vượng suy). Các lớp sâu hơn — hào động sinh biến quái, Không vong, Phục thần, Tiến/Thoái thần, quan hệ Tài với Thế — để dành cho bài sau, đúng tinh thần "chưa vội áp dụng kiến thức cao".</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="han">易</div>
+    Lục Hào · Cheat Sheet Luận Giải Căn Bản — luyện bằng số quẻ đã luận, không bằng số sách đã đọc.
+  </footer>
+
+</div>
+</body>
+</html>
