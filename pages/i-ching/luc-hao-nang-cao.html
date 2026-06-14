@@ -6,12 +6,15 @@
 <title>Lục Hào · Cheat Sheet Nâng Cao</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Noto+Serif:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+Display:ital,wght@0,600;0,700;1,600;1,700&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#16110d; --ink-2:#1f1813; --paper:#ece0c8; --paper-dim:#b9ab8e;
     --cinnabar:#c0392b; --cinnabar-bright:#d9543f; --gold:#c9a24a; --gold-soft:#e0c178;
     --jade:#5f9e7e; --jade-soft:#84c2a2; --line:#3a2f24;
+    --font-vn:'Noto Serif','Times New Roman',serif;
+    --font-display:'Noto Serif Display','Noto Serif','Times New Roman',serif;
+    --font-han:'Noto Serif TC','Noto Serif CJK TC','Noto Serif SC','Songti TC','PMingLiU',serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -20,7 +23,7 @@
       radial-gradient(circle at 82% 10%, rgba(192,57,43,.10), transparent 42%),
       radial-gradient(circle at 12% 90%, rgba(201,162,74,.08), transparent 45%),
       var(--ink);
-    color:var(--paper);font-family:'Noto Serif',serif;line-height:1.62;
+    color:var(--paper);font-family:var(--font-vn);line-height:1.62;
     padding:0 0 90px;position:relative;
   }
   body::before{
@@ -28,26 +31,26 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
   }
   .wrap{max-width:980px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
-  .han{font-family:'Noto Serif SC',serif}
+  .han{font-family:var(--font-han)}
 
   header{text-align:center;padding:64px 0 30px}
   .seal{
     display:inline-flex;align-items:center;justify-content:center;width:108px;height:108px;
     border:3px solid var(--gold);border-radius:10px;color:var(--gold-soft);
-    font-family:'Noto Serif SC',serif;font-weight:900;font-size:46px;line-height:1;
+    font-family:var(--font-han);font-weight:900;font-size:46px;line-height:1;
     box-shadow:0 0 0 1px rgba(201,162,74,.25), inset 0 0 24px rgba(201,162,74,.12);
     transform:rotate(3deg);margin-bottom:26px;background:rgba(201,162,74,.04);
   }
-  header h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(2.4rem,6vw,3.8rem);line-height:1.04;color:var(--paper)}
+  header h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.4rem,6vw,3.8rem);line-height:1.04;color:var(--paper)}
   header h1 em{color:var(--cinnabar-bright);font-style:italic}
   header .sub{color:var(--paper-dim);font-size:1.02rem;margin-top:14px;letter-spacing:.03em}
-  header .tier{display:inline-block;margin-top:14px;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);border:1px solid var(--gold);border-radius:30px;padding:4px 18px;font-size:.95rem}
+  header .tier{display:inline-block;margin-top:14px;font-family:var(--font-display);font-style:italic;color:var(--gold);border:1px solid var(--gold);border-radius:30px;padding:4px 18px;font-size:.95rem}
   .rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:28px auto;max-width:420px}
 
   section{margin:54px 0}
   .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:22px}
-  .sec-num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:var(--cinnabar-bright);min-width:42px}
-  .sec-head h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(1.55rem,4vw,2.15rem);color:var(--paper)}
+  .sec-num{font-family:var(--font-display);font-style:italic;font-size:1.5rem;color:var(--cinnabar-bright);min-width:42px}
+  .sec-head h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.55rem,4vw,2.15rem);color:var(--paper)}
   .sec-head h2 .han{font-size:.74em;color:var(--gold);margin-left:8px}
   p.lead{color:var(--paper-dim);margin-bottom:18px;max-width:780px}
 
@@ -57,7 +60,7 @@
 
   table{width:100%;border-collapse:collapse;font-size:.96rem}
   th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
-  thead th{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.06rem;color:var(--gold-soft);letter-spacing:.03em;border-bottom:1px solid var(--gold)}
+  thead th{font-family:var(--font-display);font-weight:600;font-size:1.06rem;color:var(--gold-soft);letter-spacing:.03em;border-bottom:1px solid var(--gold)}
   tbody tr:hover{background:rgba(201,162,74,.05)}
   td .han, .hl-han{color:var(--gold);font-weight:500}
   .good{color:var(--jade-soft)} .bad{color:var(--cinnabar-bright)}
@@ -67,7 +70,7 @@
 
   /* transformation cards */
   .tcard{border:1px solid var(--line);border-radius:11px;padding:18px 20px;background:var(--ink-2)}
-  .tcard h4{font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:2px}
+  .tcard h4{font-family:var(--font-display);font-size:1.3rem;margin-bottom:2px}
   .tcard h4 .han{font-size:.85em;margin-right:8px}
   .tcard.gd{border-color:rgba(95,158,126,.5)} .tcard.gd h4{color:var(--jade-soft)}
   .tcard.bd{border-color:rgba(192,57,43,.5)} .tcard.bd h4{color:var(--cinnabar-bright)}
@@ -77,17 +80,17 @@
   .arrow{color:var(--cinnabar-bright);font-weight:700;padding:0 4px}
 
   /* void table */
-  .void td:first-child{color:var(--gold);font-family:'Noto Serif SC',serif}
+  .void td:first-child{color:var(--gold);font-family:var(--font-han)}
   .void .vchi{color:var(--cinnabar-bright);font-weight:600}
 
   /* chips */
   .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
-  .chip{border:1px solid var(--line);border-radius:30px;padding:7px 15px;font-size:.95rem;background:var(--ink-2);font-family:'Noto Serif SC',serif}
-  .chip b{color:var(--paper);font-family:'Noto Serif',serif;font-weight:600}
+  .chip{border:1px solid var(--line);border-radius:30px;padding:7px 15px;font-size:.95rem;background:var(--ink-2);font-family:var(--font-han)}
+  .chip b{color:var(--paper);font-family:var(--font-vn);font-weight:600}
   .chip.hop{border-color:rgba(95,158,126,.5)} .chip.hop .han{color:var(--jade-soft)}
   .chip.xung{border-color:rgba(192,57,43,.5)} .chip.xung .han{color:var(--cinnabar-bright)}
   .chip.cuc{border-color:rgba(201,162,74,.5)} .chip.cuc .han{color:var(--gold-soft)}
-  h3.mini{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--gold-soft);margin:18px 0 6px}
+  h3.mini{font-family:var(--font-display);font-size:1.2rem;color:var(--gold-soft);margin:18px 0 6px}
   h3.mini:first-child{margin-top:0}
 
   footer{text-align:center;margin-top:60px;color:var(--paper-dim);font-size:.86rem;letter-spacing:.05em}
