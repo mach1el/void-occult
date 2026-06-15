@@ -6,7 +6,7 @@
 <title>Lục Hào · Cheat Sheet Luận Giải Căn Bản</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Noto+Serif:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+Display:ital,wght@0,600;0,700;1,600;1,700&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#16110d;
@@ -20,6 +20,9 @@
     --jade:#5f9e7e;
     --jade-soft:#84c2a2;
     --line:#3a2f24;
+    --font-vn:'Noto Serif','Times New Roman',serif;
+    --font-display:'Noto Serif Display','Noto Serif','Times New Roman',serif;
+    --font-han:'Noto Serif TC','Noto Serif CJK TC','Noto Serif SC','Songti TC','PMingLiU',serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -29,7 +32,7 @@
       radial-gradient(circle at 85% 88%, rgba(201,162,74,.08), transparent 45%),
       var(--ink);
     color:var(--paper);
-    font-family:'Noto Serif', serif;
+    font-family:var(--font-vn);
     line-height:1.62;
     padding:0 0 90px;
     position:relative;
@@ -39,21 +42,21 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
   }
   .wrap{max-width:980px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
-  .han{font-family:'Noto Serif SC', serif}
+  .han{font-family:var(--font-han)}
 
   /* ---- Header ---- */
   header{text-align:center;padding:64px 0 34px;position:relative}
   .seal{
     display:inline-flex;align-items:center;justify-content:center;
     width:108px;height:108px;border:3px solid var(--cinnabar);border-radius:10px;
-    color:var(--cinnabar-bright);font-family:'Noto Serif SC',serif;font-weight:900;
+    color:var(--cinnabar-bright);font-family:var(--font-han);font-weight:900;
     font-size:40px;line-height:1;letter-spacing:-2px;
     box-shadow:0 0 0 1px rgba(192,57,43,.25), inset 0 0 24px rgba(192,57,43,.12);
     transform:rotate(-3deg);margin-bottom:26px;
     background:rgba(192,57,43,.04);
   }
   header h1{
-    font-family:'Cormorant Garamond', serif;font-weight:700;
+    font-family:var(--font-display);font-weight:700;
     font-size:clamp(2.4rem,6vw,3.8rem);letter-spacing:.02em;color:var(--paper);
     line-height:1.04;
   }
@@ -65,11 +68,11 @@
   section{margin:54px 0;position:relative}
   .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:24px}
   .sec-num{
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;
+    font-family:var(--font-display);font-style:italic;font-size:1.5rem;
     color:var(--cinnabar-bright);min-width:42px
   }
   .sec-head h2{
-    font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(1.6rem,4vw,2.2rem);
+    font-family:var(--font-display);font-weight:600;font-size:clamp(1.6rem,4vw,2.2rem);
     color:var(--paper);letter-spacing:.01em
   }
   .sec-head h2 .han{font-size:.78em;color:var(--gold);margin-left:8px}
@@ -90,24 +93,24 @@
   .legend .dot{width:22px;height:22px;border-radius:50%;flex-shrink:0;margin-top:3px}
   .legend .sinh{background:var(--jade)}
   .legend .khac{background:var(--cinnabar)}
-  .legend h4{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;letter-spacing:.02em}
+  .legend h4{font-family:var(--font-display);font-size:1.25rem;font-weight:600;letter-spacing:.02em}
   .legend .sinh-t{color:var(--jade-soft)}
   .legend .khac-t{color:var(--cinnabar-bright)}
-  .legend code{font-family:'Noto Serif SC',serif;color:var(--gold-soft);font-size:1.02rem}
+  .legend code{font-family:var(--font-han);color:var(--gold-soft);font-size:1.02rem}
   .legend small{color:var(--paper-dim);display:block;font-size:.92rem;margin-top:3px}
 
   /* ---- Tables ---- */
   table{width:100%;border-collapse:collapse;font-size:.98rem}
   th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
   thead th{
-    font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.08rem;
+    font-family:var(--font-display);font-weight:600;font-size:1.08rem;
     color:var(--gold-soft);letter-spacing:.03em;border-bottom:1px solid var(--gold)
   }
   tbody tr:hover{background:rgba(201,162,74,.05)}
   td .han{color:var(--gold);font-size:1.05em;font-weight:500}
   .tag{
     display:inline-block;font-size:.78rem;padding:2px 9px;border-radius:20px;
-    border:1px solid currentColor;letter-spacing:.04em;font-family:'Noto Serif',serif
+    border:1px solid currentColor;letter-spacing:.04em;font-family:var(--font-vn)
   }
   .t-self{color:var(--gold-soft)}
   .t-good{color:var(--jade-soft)}
@@ -117,7 +120,7 @@
   .vsbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
   .vsbar .item{flex:1;min-width:120px;border:1px solid var(--line);border-radius:10px;padding:14px 16px;text-align:center;background:var(--ink-2)}
   .vsbar .item .han{display:block;font-size:1.7rem;font-weight:700;color:var(--gold)}
-  .vsbar .item b{font-family:'Cormorant Garamond',serif;font-size:1.15rem;display:block;margin:4px 0 2px}
+  .vsbar .item b{font-family:var(--font-display);font-size:1.15rem;display:block;margin:4px 0 2px}
   .vsbar .item small{color:var(--paper-dim);font-size:.86rem}
   .vsbar .strong{border-color:var(--jade)}
   .vsbar .strong .han{color:var(--jade-soft)}
@@ -128,7 +131,7 @@
   .qua{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:start}
   @media(max-width:640px){.qua{grid-template-columns:1fr}.nguhanh{grid-template-columns:1fr}}
   .hexcol{background:var(--ink-2);border:1px solid var(--line);border-radius:12px;padding:20px}
-  .hexcol h4{font-family:'Cormorant Garamond',serif;text-align:center;font-size:1.2rem;margin-bottom:4px;color:var(--gold-soft)}
+  .hexcol h4{font-family:var(--font-display);text-align:center;font-size:1.2rem;margin-bottom:4px;color:var(--gold-soft)}
   .hexcol .qname{text-align:center;color:var(--paper-dim);font-size:.85rem;margin-bottom:16px}
   .hexrow{display:grid;grid-template-columns:54px 80px 1fr;align-items:center;gap:10px;padding:7px 0;border-bottom:1px dashed rgba(58,47,36,.7)}
   .hexrow:last-child{border-bottom:none}
@@ -136,11 +139,11 @@
   .yao .bar{height:9px;background:var(--paper);border-radius:1px}
   .yang .bar{width:62px}
   .yin .bar{width:27px}
-  .najia{font-family:'Noto Serif SC',serif;color:var(--gold);font-size:.96rem;text-align:center}
-  .najia small{display:block;color:var(--paper-dim);font-family:'Noto Serif',serif;font-size:.74rem}
+  .najia{font-family:var(--font-han);color:var(--gold);font-size:.96rem;text-align:center}
+  .najia small{display:block;color:var(--paper-dim);font-family:var(--font-vn);font-size:.74rem}
   .relrole{font-size:.92rem}
   .relrole .han{color:var(--gold)}
-  .badge{font-size:.72rem;padding:1px 8px;border-radius:14px;margin-left:6px;font-family:'Noto Serif',serif}
+  .badge{font-size:.72rem;padding:1px 8px;border-radius:14px;margin-left:6px;font-family:var(--font-vn)}
   .b-the{background:var(--cinnabar);color:#fff}
   .b-ung{background:var(--gold);color:#231a0f}
   .b-use{background:var(--jade);color:#0e1a14}
@@ -151,7 +154,7 @@
     counter-increment:s;content:counter(s);position:absolute;left:0;top:-2px;
     width:30px;height:30px;border-radius:50%;border:1.5px solid var(--cinnabar);
     color:var(--cinnabar-bright);display:flex;align-items:center;justify-content:center;
-    font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.05rem
+    font-family:var(--font-display);font-weight:600;font-size:1.05rem
   }
   .steps li:not(:last-child)::after{content:"";position:absolute;left:15px;top:30px;bottom:0;width:1px;background:var(--line)}
   .steps b{color:var(--gold-soft);font-weight:600}
@@ -203,12 +206,12 @@
           <path d="M70,140 Q100,90 186,58"/>       <!-- Thuy -> Moc -->
         </g>
         <!-- NODES -->
-        <g font-family="'Noto Serif SC',serif" text-anchor="middle">
-          <g><circle cx="200" cy="50" r="34" fill="#1f1813" stroke="#5f9e7e" stroke-width="2"/><text x="200" y="48" font-size="26" fill="#84c2a2" font-weight="700">木</text><text x="200" y="66" font-size="11" fill="#b9ab8e" font-family="'Noto Serif',serif">Mộc</text></g>
-          <g><circle cx="343" cy="154" r="34" fill="#1f1813" stroke="#c0392b" stroke-width="2"/><text x="343" y="152" font-size="26" fill="#d9543f" font-weight="700">火</text><text x="343" y="170" font-size="11" fill="#b9ab8e" font-family="'Noto Serif',serif">Hỏa</text></g>
-          <g><circle cx="288" cy="321" r="34" fill="#1f1813" stroke="#c9a24a" stroke-width="2"/><text x="288" y="319" font-size="26" fill="#e0c178" font-weight="700">土</text><text x="288" y="337" font-size="11" fill="#b9ab8e" font-family="'Noto Serif',serif">Thổ</text></g>
-          <g><circle cx="112" cy="321" r="34" fill="#1f1813" stroke="#dcd2bb" stroke-width="2"/><text x="112" y="319" font-size="26" fill="#ece0c8" font-weight="700">金</text><text x="112" y="337" font-size="11" fill="#b9ab8e" font-family="'Noto Serif',serif">Kim</text></g>
-          <g><circle cx="57" cy="154" r="34" fill="#1f1813" stroke="#6f9bc0" stroke-width="2"/><text x="57" y="152" font-size="26" fill="#a8c6e0" font-weight="700">水</text><text x="57" y="170" font-size="11" fill="#b9ab8e" font-family="'Noto Serif',serif">Thủy</text></g>
+        <g font-family="'Noto Serif TC','Noto Serif SC',serif" text-anchor="middle">
+          <g><circle cx="200" cy="50" r="34" fill="#1f1813" stroke="#5f9e7e" stroke-width="2"/><text x="200" y="48" font-size="26" fill="#84c2a2" font-weight="700">木</text><text x="200" y="66" font-size="11" fill="#b9ab8e" font-family="'Noto Serif','Times New Roman',serif">Mộc</text></g>
+          <g><circle cx="343" cy="154" r="34" fill="#1f1813" stroke="#c0392b" stroke-width="2"/><text x="343" y="152" font-size="26" fill="#d9543f" font-weight="700">火</text><text x="343" y="170" font-size="11" fill="#b9ab8e" font-family="'Noto Serif','Times New Roman',serif">Hỏa</text></g>
+          <g><circle cx="288" cy="321" r="34" fill="#1f1813" stroke="#c9a24a" stroke-width="2"/><text x="288" y="319" font-size="26" fill="#e0c178" font-weight="700">土</text><text x="288" y="337" font-size="11" fill="#b9ab8e" font-family="'Noto Serif','Times New Roman',serif">Thổ</text></g>
+          <g><circle cx="112" cy="321" r="34" fill="#1f1813" stroke="#dcd2bb" stroke-width="2"/><text x="112" y="319" font-size="26" fill="#ece0c8" font-weight="700">金</text><text x="112" y="337" font-size="11" fill="#b9ab8e" font-family="'Noto Serif','Times New Roman',serif">Kim</text></g>
+          <g><circle cx="57" cy="154" r="34" fill="#1f1813" stroke="#6f9bc0" stroke-width="2"/><text x="57" y="152" font-size="26" fill="#a8c6e0" font-weight="700">水</text><text x="57" y="170" font-size="11" fill="#b9ab8e" font-family="'Noto Serif','Times New Roman',serif">Thủy</text></g>
         </g>
       </svg>
       <div class="legend">

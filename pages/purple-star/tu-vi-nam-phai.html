@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tử Vi · Void Occult</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+Display:ital,wght@0,600;0,700;1,600;1,700&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tu-vi-nam-phai.css">
+</head>
+<body>
+<div class="galaxy-fx" aria-hidden="true"></div>
+<div class="wrap">
+  <nav class="topbar">
+    <a href="../../index.html">← Void Occult</a>
+  </nav>
+
+  <header>
+    <div>
+      <div class="eyebrow">Tử Vi Đẩu Số</div>
+      <h1>Lá Số <em>Tử Vi</em></h1>
+    </div>
+    <div class="seal han">紫微</div>
+  </header>
+
+  <main class="shell">
+    <aside class="panel">
+      <div class="panel-head">
+        <h2>Dữ liệu sinh</h2>
+      </div>
+      <div class="panel-body">
+        <form id="chartForm" class="form-grid">
+          <div class="field">
+            <label for="solarDate">Ngày DL</label>
+            <input id="solarDate" name="solarDate" type="text" inputmode="numeric" autocomplete="off" placeholder="dd/mm/yyyy" value="21/09/1991">
+          </div>
+          <div class="field">
+            <label for="birthHour">Giờ sinh</label>
+            <select id="birthHour" name="birthHour"></select>
+          </div>
+          <div class="field">
+            <label for="gender">Giới tính</label>
+            <select id="gender" name="gender">
+              <option value="male">Nam</option>
+              <option value="female">Nữ</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="annualYear">Lưu niên</label>
+            <input id="annualYear" name="annualYear" type="number" min="1900" max="2100" value="2026">
+          </div>
+          <div class="field">
+            <label for="timezone">Múi giờ</label>
+            <select id="timezone" name="timezone">
+              <option value="7">Việt Nam UTC+7</option>
+              <option value="8">UTC+8</option>
+              <option value="0">UTC+0</option>
+            </select>
+          </div>
+        </form>
+
+        <div class="toggles">
+          <label class="toggle"><input id="showMutagens" type="checkbox" checked> Tứ Hóa</label>
+          <label class="toggle"><input id="showPhi" type="checkbox"> Phi Hóa</label>
+          <label class="toggle"><input id="showAnnual" type="checkbox" checked> Sao lưu</label>
+        </div>
+      </div>
+    </aside>
+
+    <section>
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Lá số 12 cung</h2>
+          <span id="chartMode" class="pill khoa"></span>
+        </div>
+        <div class="panel-body chart-scroll">
+          <div id="chartGrid" class="chart-grid"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="han">斗數</div>
+    Void Occult · Tử Vi
+  </footer>
+</div>
+
+<script src="tu-vi-engine.js"></script>
+</body>
+</html>
