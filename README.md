@@ -9,9 +9,11 @@ A personal static knowledge base for **I-Ching / Liu Yao (六爻)** and **Purple
 | `index.html` | Category hub for I-Ching and Purple Star |
 | `pages/i-ching/luc-hao-co-ban.html` | Level 1 - Five Phases, Six Relations, Shi-Ying, Useful God, strength/weakness, and a worked hexagram example |
 | `pages/i-ching/luc-hao-nang-cao.html` | Level 2 - moving lines, transformed hexagrams, six transformation patterns, Void, Hidden/Flying Spirits, Day/Month influence, combinations and clashes |
-| `pages/purple-star/tu-vi-nam-phai.html` | Purple Star base chart builder - solar input, browser lunar conversion, Nam Phái palace placement, major stars, expanded auxiliary stars, Vòng Tràng Sinh, Tuần/Triệt, natal Tứ Hóa, Phi Hóa cung can, and annual stars |
-| `pages/purple-star/tu-vi-nam-phai.css` | Purple Star chart UI styles |
-| `pages/purple-star/tu-vi-engine.js` | Static browser engine for lunar conversion, star placement, Tứ Hóa, Phi Hóa, and annual layers |
+| `pages/purple-star/tu-vi-dau-so.html` | Tử Vi Đẩu Số chart builder - solar input, browser lunar conversion, school selector (Nam Phái / Trung Châu), and chart export (copy text / `.txt` / PNG) |
+| `pages/purple-star/tu-vi-nam-phai.css` | Purple Star chart UI styles (shared by both schools) |
+| `pages/purple-star/tu-vi-engine-nam-phai.js` | Nam Phái engine - full auxiliary star set, Tuần/Triệt, Vòng Thái Tuế & Bác Sĩ, natal Tứ Hóa, Phi Hóa cung can, tiểu hạn + lưu niên |
+| `pages/purple-star/tu-vi-engine-trung-chau.js` | Trung Châu (Vương Đình Chi) engine - lean star set, signature stars (Thiên Vu / Thiên Nguyệt / Âm Sát / Nguyệt Giải), đại vận + lưu niên Tứ Hóa, lưu Thái Tuế (no tiểu hạn) |
+| `pages/purple-star/tu-vi-app.js` | App shell - form + school selector (saved to `localStorage`), dispatches to the active engine, and builds the copy-paste text + PNG export |
 
 ## View Locally
 
@@ -51,7 +53,8 @@ git push
 - I-Ching articles are standalone HTML pages. The Tử Vi page keeps its CSS and engine JS beside the page in `pages/purple-star/`, so the chart can scale while still deploying directly to Netlify without a build pipeline.
 - When adding new material, keep the same structure: short concept explanation, quick reference table, memory tip, and applied example. If the article starts a new level, link it from `index.html` so it stays discoverable.
 - This repo is not an automated casting or hexagram-calculation tool. For real readings, record the question, casting time, Day Spirit, Month Command, primary hexagram, moving lines, and transformed hexagram separately so the reading can be reviewed later.
-- The Tử Vi page expects solar birth data, converts to lunar data in the browser, and keeps chart logic in `pages/purple-star/tu-vi-engine.js` so the page can scale without turning into one monolithic HTML file.
+- The Tử Vi page expects solar birth data and converts to lunar data in the browser. Chart logic is split into two independent engines - `tu-vi-engine-nam-phai.js` (Nam Phái) and `tu-vi-engine-trung-chau.js` (Trung Châu) - each registering itself on `window.TuViEngines`; `tu-vi-app.js` owns the form, the school toggle, and export, then dispatches to whichever engine is selected. This keeps each school's astrology rules isolated while sharing one UI.
+- Chart export: **⧉ Sao chép text** copies a structured plain-text lá số (birth data, Mệnh/Thân/Cục, đại vận, lưu niên, per-palace stars + Tứ Hóa) for pasting into AI chat agents; **⭳ Tải .txt** downloads the same text; **⛶ Tải ảnh** renders the chart to PNG via html2canvas (the zodiac watermark images are skipped so export still works from `file://`).
 
 ---
 🤖 st_mich43l
