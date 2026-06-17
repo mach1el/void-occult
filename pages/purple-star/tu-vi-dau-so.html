@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tử Vi · Void Occult</title>
+<title>Void Occult · Tử Vi Đẩu Số</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+Display:ital,wght@0,600;0,700;1,600;1,700&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
@@ -30,10 +30,20 @@
         <h2>Dữ liệu sinh</h2>
       </div>
       <div class="panel-body">
+        <div class="school-tabs" role="radiogroup" aria-label="Trường phái">
+          <label class="school-tab">
+            <input type="radio" name="school" value="nam-phai" checked>
+            <span>Nam phái</span>
+          </label>
+          <label class="school-tab">
+            <input type="radio" name="school" value="trung-chau">
+            <span>Trung Châu phái</span>
+          </label>
+        </div>
         <form id="chartForm" class="form-grid">
           <div class="field">
             <label for="solarDate">Ngày DL</label>
-            <input id="solarDate" name="solarDate" type="text" inputmode="numeric" autocomplete="off" placeholder="dd/mm/yyyy" value="21/09/1991">
+            <input id="solarDate" name="solarDate" type="text" inputmode="numeric" autocomplete="off" placeholder="Ngày/Tháng/Năm" value="21/09/1991">
           </div>
           <div class="field">
             <label for="birthHour">Giờ sinh</label>
@@ -53,9 +63,9 @@
           <div class="field">
             <label for="timezone">Múi giờ</label>
             <select id="timezone" name="timezone">
-              <option value="7">Việt Nam UTC+7</option>
-              <option value="8">UTC+8</option>
-              <option value="0">UTC+0</option>
+              <option value="7">Việt Nam +7</option>
+              <option value="8">Trung Quốc +8</option>
+              <option value="0">Giờ gốc +0</option>
             </select>
           </div>
         </form>
@@ -72,7 +82,11 @@
       <div class="panel">
         <div class="panel-head">
           <h2>Lá số 12 cung</h2>
-          <span id="chartMode" class="pill khoa"></span>
+          <div class="chart-actions">
+            <button type="button" id="copyChartText" class="btn-ghost" title="Sao chép văn bản lá số để dán vào trợ lý AI">⧉ Sao chép văn bản</button>
+            <button type="button" id="downloadChartText" class="btn-ghost" title="Tải văn bản lá số dạng .txt">⭳ Tải .txt</button>
+            <button type="button" id="downloadChartImage" class="btn-ghost" title="Tải lá số thành ảnh">⛶ Tải ảnh</button>
+          </div>
         </div>
         <div class="panel-body chart-scroll">
           <div id="chartGrid" class="chart-grid"></div>
@@ -83,10 +97,13 @@
 
   <footer>
     <div class="han">斗數</div>
-    Void Occult · Tử Vi
+    Void Occult · Tử Vi Đẩu Số
   </footer>
 </div>
 
-<script src="tu-vi-engine.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="tu-vi-engine-nam-phai.js"></script>
+<script src="tu-vi-engine-trung-chau.js"></script>
+<script src="tu-vi-app.js"></script>
 </body>
 </html>

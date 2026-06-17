@@ -181,8 +181,6 @@
   const ELEMENT_GENERATES = {Mộc:"Hỏa",Hỏa:"Thổ",Thổ:"Kim",Kim:"Thủy",Thủy:"Mộc"};
   const ELEMENT_CONTROLS = {Mộc:"Thổ",Thổ:"Thủy",Thủy:"Hỏa",Hỏa:"Kim",Kim:"Mộc"};
 
-  const form = document.getElementById("chartForm");
-  const controls = ["showMutagens","showPhi","showAnnual"].map(id => document.getElementById(id));
   const els = {
     solarDate: document.getElementById("solarDate"),
     annualYear: document.getElementById("annualYear"),
@@ -194,22 +192,6 @@
 
   function fix(n, mod = 12){
     return ((n % mod) + mod) % mod;
-  }
-
-  function option(select, value, label = value){
-    const el = document.createElement("option");
-    el.value = value;
-    el.textContent = label;
-    select.appendChild(el);
-  }
-
-  function setupForm(){
-    HOUR_BRANCHES.forEach((branch, index) => {
-      const ranges = ["23:00-01:00","01:00-03:00","03:00-05:00","05:00-07:00","07:00-09:00","09:00-11:00","11:00-13:00","13:00-15:00","15:00-17:00","17:00-19:00","19:00-21:00","21:00-23:00"];
-      option(els.hour, branch, `${branch} ${BRANCH_HAN[branch]} · ${ranges[index].replace(/:00/g, "")}`);
-    });
-    els.hour.value = "Dần";
-    els.annualYear.value = new Date().getFullYear();
   }
 
   function isValidDateParts(day, month, year){
@@ -656,7 +638,22 @@
     return month + (isLeap && day > 15 ? 1 : 0);
   }
 
-  function assignAnnualFlow(palaces, annualBranch, birthMonth, birthDay, birthLeap, hourIndex){
+  // Lưu niên đại vận (cung khởi tháng Giêng của năm xem):
+  // Trong mỗi đại vận 10 năm với cung gốc G và cung xung chiếu O = G + 6:
+  //   năm 1 = G; năm 2 = O; từ năm 3 trở đi = O + (m - 4) * s, với s là chiều đại vận
+  //   (Dương Nam/Âm Nữ s = +1 thuận; Âm Nam/Dương Nữ s = -1 nghịch).
+  function getLuuNienDaiVanIndex(majorFortunePalace, smallLimit, nominalAge, directionSign){
+    if(!majorFortunePalace){
+      return smallLimit && smallLimit.palace ? smallLimit.palace.index : null;
+    }
+    const G = majorFortunePalace.index;
+    const m = nominalAge - majorFortunePalace.majorFortune.start + 1; // năm thứ m trong đại vận (1..10)
+    if(m <= 1) return G;
+    if(m === 2) return fix(G + 6);
+    return fix(G + 6 + (m - 4) * directionSign);
+  }
+
+  function assignAnnualFlow(palaces, annualBranch, birthMonth, birthDay, birthLeap, hourIndex, monthAnchorIndex){
     palaces.forEach(palace => {
       palace.isAnnualPalace = false;
       palace.isTaiTuePalace = false;
@@ -665,12 +662,16 @@
     });
     const annualIndex = cycleBranchToIndex(annualBranch);
     const adjustedMonth = adjustedLunarMonth(birthMonth, birthDay, birthLeap);
-    // Lưu Đẩu Quân: từ cung Thái Tuế đếm nghịch tới tháng sinh, rồi thuận theo giờ sinh
-    const monthStartIndex = fix(annualIndex - adjustedMonth + hourIndex + 1);
-    addStar(palaces, monthStartIndex, "Lưu Đẩu Quân", "annual", "annual");
+    // Sao Lưu Đẩu Quân: từ cung Thái Tuế đếm nghịch tới tháng sinh, rồi thuận theo giờ sinh
+    const dauQuanIndex = fix(annualIndex - adjustedMonth + hourIndex + 1);
+    addStar(palaces, dauQuanIndex, "Lưu Đẩu Quân", "annual", "annual");
     const taiTuePalace = palaces[annualIndex];
-    const monthStartPalace = palaces[monthStartIndex];
     taiTuePalace.isTaiTuePalace = true;
+    // Khởi tháng (lưu nguyệt): mốc Tháng 1 = cung Tiểu Hạn của năm xem, từ đó đếm nghịch tới
+    // tháng sinh được giờ Tý, rồi đếm thuận tới giờ sinh ra cung Tháng Giêng; 12 tháng chạy thuận.
+    const monthAnchor = (monthAnchorIndex == null) ? annualIndex : fix(monthAnchorIndex);
+    const monthStartIndex = fix(monthAnchor - adjustedMonth + hourIndex + 1);
+    const monthStartPalace = palaces[monthStartIndex];
     monthStartPalace.isMonthStart = true;
     const months = Array.from({length:12}, (_, offset) => {
       const palace = palaces[fix(monthStartIndex + offset)];
@@ -679,7 +680,7 @@
       palace.flowMonths.push(item);
       return item;
     });
-    return {annualIndex, taiTuePalace, monthStartIndex, monthStartPalace, months, adjustedMonth};
+    return {annualIndex, taiTuePalace, dauQuanIndex, monthStartIndex, monthStartPalace, months, adjustedMonth};
   }
 
   function getVoidMarkers(yearStem, yearBranch){
@@ -738,8 +739,8 @@
     const lunar = solarToLunar(solar.day, solar.month, solar.year, timeZone);
     const birthHourBranch = els.hour.value || "Tý";
     const {stem:yearStem, branch:yearBranch} = stemBranchForYear(lunar.year);
-    const annualYear = Math.max(1900, Math.min(2100, Number(els.annualYear.value) || new Date().getFullYear()));
-    els.annualYear.value = annualYear;
+    const rawAnnual = Number(els.annualYear.value);
+    const annualYear = (rawAnnual >= 1900 && rawAnnual <= 2100) ? rawAnnual : new Date().getFullYear();
     const annual = stemBranchForYear(annualYear);
     const month = lunar.month;
     const day = lunar.day;
@@ -774,7 +775,12 @@
 
     const majorFortunePalace = assignMajorFortunes(palaces, menhIndex, cuc.number, directionSign, nominalAge);
     const smallLimit = assignSmallLimits(palaces, yearBranch, els.gender.value, nominalAge);
-    const annualFlow = assignAnnualFlow(palaces, annual.branch, month, day, lunar.leap, hourIndex);
+    // Lưu niên đại vận (zigzag trong đại vận) — cung vận của năm xem.
+    const luuNienDaiVanIndex = getLuuNienDaiVanIndex(majorFortunePalace, smallLimit, nominalAge, directionSign);
+    if(luuNienDaiVanIndex != null) palaces[luuNienDaiVanIndex].isLuuNienDaiVan = true;
+    // Khởi tháng (lưu nguyệt): mốc Tháng 1 = cung Tiểu Hạn của năm xem.
+    const monthAnchorIndex = smallLimit.palace ? smallLimit.palace.index : luuNienDaiVanIndex;
+    const annualFlow = assignAnnualFlow(palaces, annual.branch, month, day, lunar.leap, hourIndex, monthAnchorIndex);
     if(smallLimit.palace) smallLimit.palace.isAnnualPalace = true;
 
     addMonthDayHourStars(palaces, month, day, hourIndex);
@@ -1096,15 +1102,13 @@
     });
   }
 
+  let lastData = null;
   function render(){
-    const data = buildChartData();
-    renderChart(data);
+    lastData = buildChartData();
+    renderChart(lastData);
     setupTamHop();
   }
 
-  setupForm();
-  form.addEventListener("input", render);
-  form.addEventListener("change", render);
-  controls.forEach(control => control.addEventListener("change", render));
-  render();
+  window.TuViEngines = window.TuViEngines || {};
+  window.TuViEngines["nam-phai"] = { render, getData: () => lastData };
 })();
