@@ -21,7 +21,11 @@
   --font-han:'Noto Serif TC','Noto Serif CJK TC','Noto Serif SC','Songti TC','PMingLiU',serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 body{
   height:100vh;
   overflow:hidden;
@@ -236,6 +240,87 @@ input:focus{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
+}
+/* Bố cục gọn dùng KHI chụp ảnh (html2canvas): sao tốt/xấu xếp sát nhau bằng flex
+   thay vì grid 1fr/1fr (tránh 2 cột cách xa nhau & lỗi render grid của html2canvas). */
+.chart-grid.capture-compact .stars-layer{
+  display:flex;
+  align-items:flex-start;
+  gap:0 7px;
+}
+.chart-grid.capture-compact .stars-good,
+.chart-grid.capture-compact .stars-bad{
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+}
+.chart-grid.capture-compact .stars-bad{padding-left:7px}
+.chart-grid.capture-compact .star{max-width:none}
+/* Ô ôm sát nội dung khi chụp -> bớt khoảng trống, lá số gọn & cao vừa phải */
+.chart-grid.capture-compact{gap:3px;grid-template-rows:repeat(4,minmax(0,auto))}
+.chart-grid.capture-compact .palace-cell{min-height:0}
+.chart-grid.capture-compact .palace-header{padding:2px 6px 1px}
+.chart-grid.capture-compact .stars{padding:1px 5px 3px;flex:0 0 auto}
+.chart-grid.capture-compact .palace-meta{margin-top:2px}
+
+/* Ảnh lá số hiển thị thay lưới live trên mobile (chạm để phóng to) */
+.chart-image-mobile{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:6px;
+  cursor:zoom-in;
+}
+.chart-image-mobile[hidden]{display:none}
+.chart-image-hint{
+  display:none;
+  margin-top:7px;
+  text-align:center;
+  color:var(--amber-soft);
+  font-size:.72rem;
+  letter-spacing:.02em;
+  opacity:.8;
+}
+/* Chỉ hiện gợi ý phóng to trên mobile */
+@media(max-width:700px){.chart-image-hint{display:block}}
+
+/* ── Trình xem lá số dạng ảnh (phóng to / kéo) ── */
+.image-viewer{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  display:flex;
+  flex-direction:column;
+  background:rgba(8,6,16,.97);
+  backdrop-filter:blur(2px);
+}
+.image-viewer[hidden]{display:none}
+.iv-bar{
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 12px;
+  border-bottom:1px solid var(--line);
+}
+.iv-hint{color:var(--muted);font-size:.72rem;letter-spacing:.02em}
+.iv-scroll{
+  flex:1;
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pinch-zoom;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding:10px;
+}
+.iv-scroll img{
+  display:block;
+  max-width:none;
+  height:auto;
+  border-radius:6px;
+  box-shadow:0 18px 50px -20px rgba(0,0,0,.8);
 }
 .btn-ghost{
   display:inline-flex;
@@ -680,6 +765,13 @@ input:focus{
   margin-top:2px;
   padding-top:2px;
   border-top:1px solid rgba(95,227,224,.16);
+}
+/* Vạch ngăn natal / sao lưu trong mỗi cột (tốt hoặc xấu) */
+.stars-luu-sep{
+  display:block;
+  height:0;
+  margin:2px 1px 1px;
+  border-top:1px dashed rgba(95,227,224,.28);
 }
 .stars-good,
 .stars-bad{
@@ -1196,23 +1288,113 @@ footer .han{
 @media(max-width:1300px){
   .shell{grid-template-columns:220px minmax(0,1fr)}
 }
+/* ── Mobile / tablet: natural document flow, chart grows & pans horizontally ── */
 @media(max-width:1060px){
   body{height:auto;overflow:auto}
-  .wrap{height:auto;overflow:visible}
+  .wrap{height:auto;min-height:0;overflow:visible;display:block}
+  /* Neutralise the desktop fill-viewport flex bases so panels size to content */
   .shell{
     grid-template-columns:1fr;
+    align-items:start;
     height:auto;
+    min-height:0;
     overflow:visible;
+    gap:12px;
+    flex:none;
   }
-  .shell > aside,.shell > section{grid-column:1}
-  .shell > section > .panel{height:640px}
+  .shell > aside,.shell > section{grid-column:1;align-self:stretch}
+  /* Chart panel grows to fit the whole chart - no internal clipping/collapse */
+  .shell > section > .panel{height:auto;flex:none;overflow:visible}
+  .shell > section > .panel > .panel-body{overflow:visible;min-height:0;flex:none}
+  .chart-scroll{height:auto;min-height:0;padding:8px}
+  .chart-grid{flex:0 0 auto;min-height:0}
   .form-grid,.toggles{grid-template-columns:1fr}
 }
 @media(max-width:700px){
-  .wrap{padding:0 10px}
-  .topbar{align-items:flex-start;flex-direction:column}
-  .shell > section > .panel{height:560px}
-  .field{grid-template-columns:78px minmax(0,1fr)}
-  .major-name-row{font-size:.6rem}
-  .star{font-size:.54rem}
+  .wrap{padding:0 8px}
+  .topbar{align-items:flex-start;flex-direction:column;gap:6px}
+  .panel-head{flex-wrap:wrap}
+  .chart-actions{width:100%}
+  .btn-ghost{flex:1 1 0;justify-content:center;font-size:.64rem;padding:6px 4px}
+  .field{grid-template-columns:84px minmax(0,1fr)}
+  /* Lá số dùng "frame-mode" (khung dọc 1080×1440 scale vừa màn hình) — xem khối .frame-mode bên dưới. */
+}
+
+/* ── Mobile: dựng lá số vào khung dọc 1080×1440 rồi transform:scale cho vừa màn hình ──
+   (class .frame-mode được JS gắn vào #chartGrid khi <=700px; transform & chiều cao do JS đặt) */
+.chart-grid.frame-mode{
+  position:absolute;
+  top:0;
+  left:0;
+  width:1080px;
+  height:1440px;
+  min-width:0;
+  display:block;
+  gap:0;
+  padding:0;
+  transform-origin:top left;
+  background:url("../../khung-la-so.svg") 0 0 / 1080px 1440px no-repeat;
+}
+.chart-grid.frame-mode .tam-hop-lines{display:none}
+.chart-grid.frame-mode .palace-cell{
+  position:absolute;
+  width:265px;
+  height:355px;
+  min-height:0;
+  margin:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  overflow:hidden;
+}
+.chart-grid.frame-mode [data-branch="Tỵ"]  {left:10px;  top:10px}
+.chart-grid.frame-mode [data-branch="Ngọ"] {left:275px; top:10px}
+.chart-grid.frame-mode [data-branch="Mùi"] {left:540px; top:10px}
+.chart-grid.frame-mode [data-branch="Thân"]{left:805px; top:10px}
+.chart-grid.frame-mode [data-branch="Thìn"]{left:10px;  top:365px}
+.chart-grid.frame-mode [data-branch="Dậu"] {left:805px; top:365px}
+.chart-grid.frame-mode [data-branch="Mão"] {left:10px;  top:720px}
+.chart-grid.frame-mode [data-branch="Tuất"]{left:805px; top:720px}
+.chart-grid.frame-mode [data-branch="Dần"] {left:10px;  top:1075px}
+.chart-grid.frame-mode [data-branch="Sửu"] {left:275px; top:1075px}
+.chart-grid.frame-mode [data-branch="Tý"]  {left:540px; top:1075px}
+.chart-grid.frame-mode [data-branch="Hợi"] {left:805px; top:1075px}
+.chart-grid.frame-mode .center-panel{
+  position:absolute;
+  left:275px;
+  top:365px;
+  width:530px;
+  height:710px;
+  margin:0;
+  border:0;
+  border-radius:0;
+}
+/* Giữ nguyên cỡ chữ desktop trong frame-mode (cells ~265px đã được canh chuẩn);
+   muốn đọc to thì pinch-zoom. Phóng font sẽ làm tràn/đè sao ở cung dày. */
+
+/* ── Chế độ chụp ảnh Mobile (Background AI) ── */
+.chart-grid.capture-compact {
+  background-image: url('../../assets/bg-mobile.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8) inset;
+}
+
+.chart-grid.capture-compact .palace-cell {
+  background: rgba(0, 0, 0, 0.4); /* Làm tối nền cung để chữ dễ đọc trên nền vũ trụ */
+  backdrop-filter: blur(2px);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.chart-grid.capture-compact .zodiac-bg {
+  opacity: 0.15; /* Giảm mờ hình con giáp ẩn */
+}
+
+.chart-grid.capture-compact .center-panel {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }

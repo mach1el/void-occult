@@ -888,6 +888,28 @@
     return `<div class="${className} stars-layer${state}">${side(good, "stars-good")}${side(bad, "stars-bad")}</div>`;
   }
 
+  // Gộp natal + lưu niên vào CÙNG 2 cột tốt/xấu (sao lưu xếp dưới, ngăn bằng vạch mảnh).
+  function renderCellStars(natal, annual, data, sortFn){
+    const ng = natal.filter(isBeneficMinor).slice().sort(sortFn);
+    const nb = natal.filter(s => !isBeneficMinor(s)).slice().sort(sortFn);
+    const ag = annual.filter(isBeneficMinor).slice().sort(sortFn);
+    const ab = annual.filter(s => !isBeneficMinor(s)).slice().sort(sortFn);
+    const goodCount = ng.length + ag.length;
+    const badCount = nb.length + ab.length;
+    if(!goodCount && !badCount) return "";
+    const col = (natalItems, annualItems, sideClass) => {
+      if(!natalItems.length && !annualItems.length) return "";
+      const total = natalItems.length + annualItems.length;
+      const density = total >= 9 ? " is-split-dense" : total >= 6 ? " is-split-packed" : "";
+      const natalHtml = natalItems.map(s => renderStarChip(s, data)).join("");
+      const sep = (natalItems.length && annualItems.length) ? '<span class="stars-luu-sep" aria-hidden="true"></span>' : "";
+      const annualHtml = annualItems.map(s => renderStarChip(s, data)).join("");
+      return `<div class="${sideClass}${density}">${natalHtml}${sep}${annualHtml}</div>`;
+    };
+    const state = `${goodCount ? " has-good" : ""}${badCount ? " has-bad" : ""}`;
+    return `<div class="stars-natal stars-layer${state}">${col(ng, ag, "stars-good")}${col(nb, ab, "stars-bad")}</div>`;
+  }
+
   function phiCornerForPalace(data, palace){
     if(!document.getElementById("showPhi").checked) return "";
     const hits = data.phiFlows.filter(flow => flow.source.index === palace.index);
@@ -1027,8 +1049,7 @@
 
       const visibleStarCount = minorNatal.length + annualStack.length;
       const densityClass = visibleStarCount >= 30 ? " is-ultra-packed" : visibleStarCount >= 22 ? " is-overpacked" : visibleStarCount >= 14 ? " is-packed" : "";
-      const minorInner = renderSplitStars(minorNatal, "stars-natal", data, sortFn);
-      const annualInner = renderSplitStars(annualStack, "stars-annual-row", data, sortFn);
+      const starsInner = renderCellStars(minorNatal, annualStack, data, sortFn);
 
       const marks = [
         palace.isMenh ? `<span class="mark">Mệnh</span>` : "",
@@ -1050,7 +1071,7 @@
               <span class="stem">${palace.stem}${STEM_HAN[palace.stem]}</span>
             </div>
           </div>
-          <div class="stars">${minorInner}${annualInner}</div>
+          <div class="stars">${starsInner}</div>
           ${phiCorner}
           ${renderPalaceMeta(data, palace)}
         </article>`;
@@ -1060,6 +1081,8 @@
   }
 
   function setupTamHop(){
+    // Bỏ hiệu ứng nối tam hợp trên mobile (frame-mode scale làm lệch toạ độ, lại không có hover thật).
+    if(window.innerWidth <= 700) return;
     const svg = document.getElementById("tamHopSvg");
     const grid = els.chart;
 

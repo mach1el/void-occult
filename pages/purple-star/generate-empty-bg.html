@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Generate Empty Chart PNG</title>
+<style>
+  body { background: #0c0a18; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+  .grid {
+    width: 1080px; height: 1440px;
+    background: linear-gradient(155deg, #0a0a1f 0%, #07091a 56%, #050610 100%);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 4px; padding: 12px;
+    border: 2px solid #2e2552;
+    box-sizing: border-box;
+  }
+  .cell { border: 1px solid #2e2552; border-radius: 8px; background: rgba(0,0,0,0.2); }
+  .center { grid-column: 2 / 4; grid-row: 2 / 4; border: none; background: none; display: flex; align-items: center; justify-content: center; }
+  .logo { font-size: 60px; color: #ece6f7; font-family: 'Noto Serif', serif; font-weight: bold; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+  <p>Đang tạo ảnh PNG...</p>
+  <div class="grid" id="capture">
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+    <div class="cell"></div><div class="center"><div class="logo">LÁ SỐ TỬ VI</div></div><div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+  <script>
+    setTimeout(() => {
+      htmlToImage.toPng(document.getElementById('capture')).then(url => {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'khung-la-so-rong.png';
+        a.click();
+        document.querySelector('p').innerText = "Đã tải xuống file khung-la-so-rong.png!";
+      });
+    }, 1000);
+  </script>
+</body>
+</html>

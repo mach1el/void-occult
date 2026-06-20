@@ -23,9 +23,43 @@
     return (checked && checked.value) || DEFAULT_SCHOOL;
   }
 
+  // Mobile: dựng lá số vào khung dọc 1080×1440 (CSS .frame-mode) rồi transform:scale cho vừa màn hình.
+  // Dùng lưới live (trình duyệt tự vẽ -> font/layout luôn chuẩn, không cần html2canvas); pinch-zoom để đọc.
+  const FRAME_W = 1080, FRAME_H = 1440;
+  function updateChartView() {
+    const grid = document.getElementById("chartGrid");
+    const img = document.getElementById("chartImageMobile");
+    if(img){ img.hidden = true; img.removeAttribute("src"); }
+    if(!grid) return;
+    const scroll = grid.parentElement;
+    grid.style.display = "";
+    grid.style.opacity = "1";
+    if(window.innerWidth <= 700 && scroll){
+      grid.classList.add("frame-mode");
+      scroll.style.position = "relative";
+      scroll.style.overflow = "hidden";
+      scroll.style.padding = "0";
+      const avail = scroll.clientWidth;
+      if(avail > 50){
+        const scale = avail / FRAME_W;
+        grid.style.transform = "scale(" + scale + ")";
+        scroll.style.height = (FRAME_H * scale) + "px";
+      }
+    } else {
+      grid.classList.remove("frame-mode");
+      grid.style.transform = "";
+      if(scroll){ scroll.style.position = ""; scroll.style.overflow = ""; scroll.style.padding = ""; scroll.style.height = ""; }
+    }
+  }
+  let frameResizeT = null;
+  window.addEventListener("resize", () => { clearTimeout(frameResizeT); frameResizeT = setTimeout(updateChartView, 150); });
+
   function render(){
     const engine = (window.TuViEngines || {})[activeSchool()];
-    if(engine && typeof engine.render === "function") engine.render();
+    if(engine && typeof engine.render === "function") {
+      engine.render();
+      updateChartView();
+    }
   }
 
   function setupHourSelect(){
