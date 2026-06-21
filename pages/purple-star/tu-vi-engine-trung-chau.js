@@ -977,25 +977,22 @@
   }
 
   // Gộp natal + lưu niên vào CÙNG 2 cột tốt/xấu (sao lưu xếp dưới, ngăn bằng vạch mảnh).
+  // Chia sao thành 2 cột CÂN số lượng (sao tốt dồn trái, sao xấu/yếu sang phải) -> mọi cung
+  // đều có 2 cột đều nhau, tránh cảnh 1 cột dài 1 cột ngắn.
   function renderCellStars(natal, annual, data, sortFn){
-    const ng = natal.filter(isBeneficMinor).slice().sort(sortFn);
-    const nb = natal.filter(s => !isBeneficMinor(s)).slice().sort(sortFn);
-    const ag = annual.filter(isBeneficMinor).slice().sort(sortFn);
-    const ab = annual.filter(s => !isBeneficMinor(s)).slice().sort(sortFn);
-    const goodCount = ng.length + ag.length;
-    const badCount = nb.length + ab.length;
-    if(!goodCount && !badCount) return "";
-    const col = (natalItems, annualItems, sideClass) => {
-      if(!natalItems.length && !annualItems.length) return "";
-      const total = natalItems.length + annualItems.length;
-      const density = total >= 9 ? " is-split-dense" : total >= 6 ? " is-split-packed" : "";
-      const natalHtml = natalItems.map(s => renderStarChip(s, data)).join("");
-      const sep = (natalItems.length && annualItems.length) ? '<span class="stars-luu-sep" aria-hidden="true"></span>' : "";
-      const annualHtml = annualItems.map(s => renderStarChip(s, data)).join("");
-      return `<div class="${sideClass}${density}">${natalHtml}${sep}${annualHtml}</div>`;
-    };
-    const state = `${goodCount ? " has-good" : ""}${badCount ? " has-bad" : ""}`;
-    return `<div class="stars-natal stars-layer${state}">${col(ng, ag, "stars-good")}${col(nb, ab, "stars-bad")}</div>`;
+    const all = natal.concat(annual);
+    const good = all.filter(isBeneficMinor).slice().sort(sortFn);
+    const bad = all.filter(s => !isBeneficMinor(s)).slice().sort(sortFn);
+    const ordered = good.concat(bad);
+    if(!ordered.length) return "";
+    const half = Math.ceil(ordered.length / 2);
+    const left = ordered.slice(0, half);
+    const right = ordered.slice(half);
+    const col = (items, sideClass) => items.length
+      ? `<div class="${sideClass}">${items.map(s => renderStarChip(s, data)).join("")}</div>`
+      : "";
+    const state = `${left.length ? " has-good" : ""}${right.length ? " has-bad" : ""}`;
+    return `<div class="stars-natal stars-layer${state}">${col(left, "stars-good")}${col(right, "stars-bad")}</div>`;
   }
 
   function phiCornerForPalace(data, palace){
@@ -1100,19 +1097,14 @@
     const fortuneChip = fortune
       ? `<span class="fortune-chip ${fortune.active ? "is-active" : ""}" title="Đại vận ${fortune.start}-${fortune.end} tuổi tại ${palace.name} ${palace.branch}">ĐV ${fortune.start}-${fortune.end}</span>`
       : "";
-    const smallLimitChip = palace.isSmallLimitPalace
-      ? `<span class="flow-chip annual-flow" title="Tiểu hạn ${data.nominalAge} tuổi tại ${palace.name} ${palace.branch}; ${els.gender.value === "male" ? "nam thuận" : "nữ nghịch"}">TH</span>`
-      : "";
-    const taiTueChip = palace.isTaiTuePalace
-      ? `<span class="flow-chip tai-tue-flow" title="Thái Tuế lưu niên ${data.annualYear} ${data.annualStem}${STEM_HAN[data.annualStem]} ${data.annualBranch}${BRANCH_HAN[data.annualBranch]} tại ${palace.name} ${palace.branch}">TT</span>`
-      : "";
+    // TH (Tiểu Hạn) & TT (Thái Tuế) không ghi ở cung nữa — đã có trong bảng giữa lá số.
     const monthChips = (palace.flowMonths || []).map(item => {
       const startClass = palace.isMonthStart && item.month === 1 ? " is-start" : "";
       return `<span class="month-chip${startClass}" title="Tháng ${item.month} (${item.label}) tại ${palace.name} ${palace.branch}">T${item.month}</span>`;
     }).join("");
     const stageElement = elementForStar(palace.changSheng);
     const stageTitle = stageElement ? `${palace.changSheng} · Ngũ hành ${stageElement}` : palace.changSheng;
-    return `<div class="palace-meta"><span class="stage ${elementClassForStar(palace.changSheng)}" title="${stageTitle}">${palace.changSheng}</span>${fortuneChip}${smallLimitChip}${taiTueChip}${monthChips}</div>`;
+    return `<div class="palace-meta"><span class="stage ${elementClassForStar(palace.changSheng)}" title="${stageTitle}">${palace.changSheng}</span>${fortuneChip}${monthChips}</div>`;
   }
 
   function renderChart(data){
@@ -1137,7 +1129,8 @@
 
       const visibleStarCount = minorNatal.length + annualStack.length;
       const densityClass = visibleStarCount >= 30 ? " is-ultra-packed" : visibleStarCount >= 22 ? " is-overpacked" : visibleStarCount >= 14 ? " is-packed" : "";
-      const starsInner = renderCellStars(minorNatal, annualStack, data, sortFn);
+      const minorInner = renderSplitStars(minorNatal, "stars-natal", data, sortFn);
+      const annualInner = renderSplitStars(annualStack, "stars-annual-row", data, sortFn);
 
       const marks = [
         palace.isMenh ? `<span class="mark">Mệnh</span>` : "",
@@ -1159,7 +1152,7 @@
               <span class="stem">${palace.stem}${STEM_HAN[palace.stem]}</span>
             </div>
           </div>
-          <div class="stars">${starsInner}</div>
+          <div class="stars">${minorInner}${annualInner}</div>
           ${phiCorner}
           ${renderPalaceMeta(data, palace)}
         </article>`;

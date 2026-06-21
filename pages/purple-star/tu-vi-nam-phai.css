@@ -169,7 +169,7 @@ h1{display:none}
 .shell > section > .panel > .panel-body{
   flex:1 1 0;
   min-height:0;
-  overflow:hidden;
+  overflow:auto;
 }
 .panel-head{
   display:flex;
@@ -762,9 +762,9 @@ input:focus{
   grid-template-columns:minmax(0,1fr);
 }
 .stars-annual-row{
-  margin-top:2px;
-  padding-top:2px;
-  border-top:1px solid rgba(95,227,224,.16);
+  margin-top:4px;
+  padding-top:3px;
+  border-top:1px dashed rgba(136,188,214,.32);
 }
 /* Vạch ngăn natal / sao lưu trong mỗi cột (tốt hoặc xấu) */
 .stars-luu-sep{
@@ -1326,20 +1326,20 @@ footer .han{
   position:absolute;
   top:0;
   left:0;
-  width:1080px;
-  height:1440px;
+  width:864px;
+  height:1296px;
   min-width:0;
   display:block;
   gap:0;
   padding:0;
   transform-origin:top left;
-  background:url("../../khung-la-so.svg") 0 0 / 1080px 1440px no-repeat;
+  background:url("../../khung-la-so.svg") 0 0 / 864px 1296px no-repeat;
 }
 .chart-grid.frame-mode .tam-hop-lines{display:none}
 .chart-grid.frame-mode .palace-cell{
   position:absolute;
-  width:265px;
-  height:355px;
+  width:212px;
+  height:320px;
   min-height:0;
   margin:0;
   border:0;
@@ -1347,28 +1347,41 @@ footer .han{
   background:transparent;
   overflow:hidden;
 }
-.chart-grid.frame-mode [data-branch="Tỵ"]  {left:10px;  top:10px}
-.chart-grid.frame-mode [data-branch="Ngọ"] {left:275px; top:10px}
-.chart-grid.frame-mode [data-branch="Mùi"] {left:540px; top:10px}
-.chart-grid.frame-mode [data-branch="Thân"]{left:805px; top:10px}
-.chart-grid.frame-mode [data-branch="Thìn"]{left:10px;  top:365px}
-.chart-grid.frame-mode [data-branch="Dậu"] {left:805px; top:365px}
-.chart-grid.frame-mode [data-branch="Mão"] {left:10px;  top:720px}
-.chart-grid.frame-mode [data-branch="Tuất"]{left:805px; top:720px}
-.chart-grid.frame-mode [data-branch="Dần"] {left:10px;  top:1075px}
-.chart-grid.frame-mode [data-branch="Sửu"] {left:275px; top:1075px}
-.chart-grid.frame-mode [data-branch="Tý"]  {left:540px; top:1075px}
-.chart-grid.frame-mode [data-branch="Hợi"] {left:805px; top:1075px}
+.chart-grid.frame-mode [data-branch="Tỵ"]  {left:8px;   top:8px}
+.chart-grid.frame-mode [data-branch="Ngọ"] {left:220px; top:8px}
+.chart-grid.frame-mode [data-branch="Mùi"] {left:432px; top:8px}
+.chart-grid.frame-mode [data-branch="Thân"]{left:644px; top:8px}
+.chart-grid.frame-mode [data-branch="Thìn"]{left:8px;   top:328px}
+.chart-grid.frame-mode [data-branch="Dậu"] {left:644px; top:328px}
+.chart-grid.frame-mode [data-branch="Mão"] {left:8px;   top:648px}
+.chart-grid.frame-mode [data-branch="Tuất"]{left:644px; top:648px}
+.chart-grid.frame-mode [data-branch="Dần"] {left:8px;   top:968px}
+.chart-grid.frame-mode [data-branch="Sửu"] {left:220px; top:968px}
+.chart-grid.frame-mode [data-branch="Tý"]  {left:432px; top:968px}
+.chart-grid.frame-mode [data-branch="Hợi"] {left:644px; top:968px}
 .chart-grid.frame-mode .center-panel{
   position:absolute;
-  left:275px;
-  top:365px;
-  width:530px;
-  height:710px;
+  left:220px;
+  top:328px;
+  width:424px;
+  height:640px;
   margin:0;
   border:0;
   border-radius:0;
 }
+/* Ô frame-mode rộng 212px -> ép lại 2 cột TỐT-trái / XẤU-phải
+   (ghi đè rule @media max-width:1280px vốn gộp về 1 cột cho màn hẹp). */
+.chart-grid.frame-mode .stars-layer{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.chart-grid.frame-mode .stars-layer:not(.has-good),
+.chart-grid.frame-mode .stars-layer:not(.has-bad){grid-template-columns:minmax(0,1fr)}
+.chart-grid.frame-mode .stars-bad{
+  padding-left:6px;
+  padding-top:0;
+  border-left:1px solid rgba(217,122,112,.28);
+  border-top:0;
+}
+.chart-grid.frame-mode .stars-annual-row .stars-bad{border-left-color:rgba(136,188,214,.22);border-top:0}
+.chart-grid.frame-mode .stars-layer:not(.has-good) .stars-bad{padding-left:0;border-left:0}
 /* Giữ nguyên cỡ chữ desktop trong frame-mode (cells ~265px đã được canh chuẩn);
    muốn đọc to thì pinch-zoom. Phóng font sẽ làm tràn/đè sao ở cung dày. */
 

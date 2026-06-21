@@ -23,9 +23,9 @@
     return (checked && checked.value) || DEFAULT_SCHOOL;
   }
 
-  // Mobile: dựng lá số vào khung dọc 1080×1440 (CSS .frame-mode) rồi transform:scale cho vừa màn hình.
-  // Dùng lưới live (trình duyệt tự vẽ -> font/layout luôn chuẩn, không cần html2canvas); pinch-zoom để đọc.
-  const FRAME_W = 1080, FRAME_H = 1440;
+  // Lá số luôn dựng ở khung gốc 864×1152 (CSS .frame-mode) rồi transform:scale cho vừa khung hiển thị.
+  // Desktop (>1060): vừa cả rộng lẫn cao, căn giữa, không cuộn. ≤1060: vừa bề ngang, cuộn dọc.
+  const FRAME_W = 864, FRAME_H = 1296;
   function updateChartView() {
     const grid = document.getElementById("chartGrid");
     const img = document.getElementById("chartImageMobile");
@@ -35,24 +35,31 @@
     grid.style.display = "";
     grid.style.opacity = "1";
     if(window.innerWidth <= 700 && scroll){
+      // Mobile: khung dọc, scale vừa bề ngang, trang cuộn dọc.
       grid.classList.add("frame-mode");
+      grid.style.transformOrigin = "top left";
       scroll.style.position = "relative";
       scroll.style.overflow = "hidden";
       scroll.style.padding = "0";
-      const avail = scroll.clientWidth;
-      if(avail > 50){
-        const scale = avail / FRAME_W;
+      const availW = scroll.clientWidth;
+      if(availW > 50){
+        const scale = availW / FRAME_W;
         grid.style.transform = "scale(" + scale + ")";
         scroll.style.height = (FRAME_H * scale) + "px";
       }
     } else {
+      // Tablet/Desktop: lưới rộng tự co theo chiều ngang (CSS reflow), gỡ frame-mode + inline styles.
       grid.classList.remove("frame-mode");
       grid.style.transform = "";
+      grid.style.transformOrigin = "";
       if(scroll){ scroll.style.position = ""; scroll.style.overflow = ""; scroll.style.padding = ""; scroll.style.height = ""; }
     }
   }
-  let frameResizeT = null;
-  window.addEventListener("resize", () => { clearTimeout(frameResizeT); frameResizeT = setTimeout(updateChartView, 150); });
+  let frameRAF = null;
+  window.addEventListener("resize", () => {
+    if(frameRAF) cancelAnimationFrame(frameRAF);
+    frameRAF = requestAnimationFrame(updateChartView);
+  });
 
   function render(){
     const engine = (window.TuViEngines || {})[activeSchool()];
