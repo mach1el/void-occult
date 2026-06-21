@@ -23,43 +23,116 @@
     return (checked && checked.value) || DEFAULT_SCHOOL;
   }
 
-  // Lá số luôn dựng ở khung gốc 864×1152 (CSS .frame-mode) rồi transform:scale cho vừa khung hiển thị.
-  // Desktop (>1060): vừa cả rộng lẫn cao, căn giữa, không cuộn. ≤1060: vừa bề ngang, cuộn dọc.
+  // Lá số có 2 chế độ co: <=1060px dùng frame-mode theo bề ngang;
+  // desktop thấp/hẹp thì scale lưới hiện tại để vừa khung lá số.
   const FRAME_W = 864, FRAME_H = 1296;
+  const FRAME_MODE_MAX_W = 1060;
+  const DESKTOP_FIT_MIN_H = 560;
+  const DESKTOP_VIEWPORT_GAP = 132;
+  const DESKTOP_NATURAL_MIN_H = 932;
+
+  function contentBoxSize(el){
+    const cs = window.getComputedStyle(el);
+    const px = (v) => parseFloat(v) || 0;
+    return {
+      width: Math.max(0, el.clientWidth - px(cs.paddingLeft) - px(cs.paddingRight)),
+      height: Math.max(0, el.clientHeight - px(cs.paddingTop) - px(cs.paddingBottom))
+    };
+  }
+
+  function resetChartFit(grid, scroll, panel){
+    grid.classList.remove("frame-mode");
+    grid.style.transform = "";
+    grid.style.transformOrigin = "";
+    grid.style.zoom = "";
+    grid.style.width = "";
+    grid.style.height = "";
+    if(scroll){
+      scroll.style.flex = "";
+      scroll.style.position = "";
+      scroll.style.overflow = "";
+      scroll.style.padding = "";
+      scroll.style.height = "";
+      scroll.style.minHeight = "";
+    }
+    if(panel){
+      panel.style.height = "";
+      panel.style.minHeight = "";
+    }
+  }
+
   function updateChartView() {
     const grid = document.getElementById("chartGrid");
     const img = document.getElementById("chartImageMobile");
     if(img){ img.hidden = true; img.removeAttribute("src"); }
     if(!grid) return;
     const scroll = grid.parentElement;
+    const panel = scroll && scroll.closest ? scroll.closest(".panel") : null;
     grid.style.display = "";
     grid.style.opacity = "1";
-    if(window.innerWidth <= 700 && scroll){
-      // Mobile: khung dọc, scale vừa bề ngang, trang cuộn dọc.
+    resetChartFit(grid, scroll, panel);
+    if(window.innerWidth <= FRAME_MODE_MAX_W && scroll){
+      // Tablet/mobile: khung dọc, scale vừa bề ngang, trang cuộn dọc.
       grid.classList.add("frame-mode");
       grid.style.transformOrigin = "top left";
       scroll.style.position = "relative";
       scroll.style.overflow = "hidden";
       scroll.style.padding = "0";
-      const availW = scroll.clientWidth;
+      let availW = scroll.clientWidth;
+      if (availW <= 50) {
+        availW = window.innerWidth - 30; // Fallback in case of layout thrashing
+      }
       if(availW > 50){
         const scale = availW / FRAME_W;
+        const visualH = FRAME_H * scale;
+        grid.style.zoom = "";
         grid.style.transform = "scale(" + scale + ")";
-        scroll.style.height = (FRAME_H * scale) + "px";
+        scroll.style.flex = "0 0 " + visualH + "px";
+        scroll.style.height = visualH + "px";
+        scroll.style.minHeight = visualH + "px";
       }
-    } else {
-      // Tablet/Desktop: lưới rộng tự co theo chiều ngang (CSS reflow), gỡ frame-mode + inline styles.
-      grid.classList.remove("frame-mode");
-      grid.style.transform = "";
-      grid.style.transformOrigin = "";
-      if(scroll){ scroll.style.position = ""; scroll.style.overflow = ""; scroll.style.padding = ""; scroll.style.height = ""; }
+      return;
+    }
+
+    if(scroll && panel){
+      const head = panel.querySelector(".panel-head");
+      const headH = head ? head.getBoundingClientRect().height : 0;
+      const box = contentBoxSize(scroll);
+      const naturalH = Math.max(grid.scrollHeight, grid.getBoundingClientRect().height, DESKTOP_NATURAL_MIN_H);
+      const targetChartH = Math.max(DESKTOP_FIT_MIN_H, window.innerHeight - DESKTOP_VIEWPORT_GAP - headH);
+      const widthScale = box.width < FRAME_W ? box.width / FRAME_W : 1;
+      const heightScale = targetChartH < naturalH ? targetChartH / naturalH : 1;
+      const scale = Math.min(1, widthScale, heightScale);
+
+      if(scale < 0.995 && box.width > 50 && naturalH > 50){
+        const cs = window.getComputedStyle(scroll);
+        const padY = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
+        const visualH = Math.ceil(naturalH * scale + padY);
+
+        panel.style.height = "auto";
+        panel.style.minHeight = "0";
+        scroll.style.flex = "0 0 " + visualH + "px";
+        scroll.style.position = "relative";
+        scroll.style.overflow = "hidden";
+        scroll.style.height = visualH + "px";
+        scroll.style.minHeight = visualH + "px";
+        grid.style.transformOrigin = "top left";
+        grid.style.transform = "scale(" + scale + ")";
+        grid.style.width = (box.width / scale) + "px";
+        grid.style.height = naturalH + "px";
+      }
     }
   }
   let frameRAF = null;
-  window.addEventListener("resize", () => {
+  function queueChartViewUpdate(){
     if(frameRAF) cancelAnimationFrame(frameRAF);
     frameRAF = requestAnimationFrame(updateChartView);
-  });
+  }
+  window.addEventListener("resize", queueChartViewUpdate);
+  window.addEventListener("load", queueChartViewUpdate);
+  if(window.visualViewport){
+    window.visualViewport.addEventListener("resize", queueChartViewUpdate);
+  }
 
   function render(){
     const engine = (window.TuViEngines || {})[activeSchool()];
@@ -123,6 +196,7 @@
     if(mf && mf.majorFortune) L.push(`Đại vận hiện hành: ${mf.majorFortune.start}–${mf.majorFortune.end} tuổi · cung ${mf.name} (${mf.branch})`);
     L.push(`Năm xem: ${data.annualYear} ${data.annualStem} ${data.annualBranch} (${data.nominalAge} tuổi)`);
     if(data.taiTuePalace) L.push(`Lưu Thái Tuế: cung ${data.taiTuePalace.name} (${data.taiTuePalace.branch})`);
+    if(data.smallLimitPalace) L.push(`Tiểu Hạn: cung ${data.smallLimitPalace.name} (${data.smallLimitPalace.branch})`);
     L.push("");
     L.push(`Tứ Hóa năm sinh (${data.yearStem}): ${fmtMutagens(data.natalMutagens)}`);
     if(data.majorMutagens && data.majorMutagens.length) L.push(`Tứ Hóa đại vận: ${fmtMutagens(data.majorMutagens)}`);
@@ -154,6 +228,47 @@
     const engine = (window.TuViEngines || {})[school];
     const data = engine && engine.getData ? engine.getData() : null;
     return buildChartText(data, school);
+  }
+
+  // Serialize lá số -> DTO JSON (gửi backend Python). Tránh tham chiếu vòng của getData().
+  function serializeChart(data, school){
+    if(!data) return null;
+    const ef = ((window.TuViEngines || {})[school] || {}).elementForStar || (() => "");
+    const mf = data.majorFortunePalace;
+    const tt = data.taiTuePalace;
+    const sl = data.smallLimitPalace;
+    const recs = (arr) => (arr || []).map(r => ({ mutagen:r.mutagen, starName:r.starName, palaceName:r.palace ? r.palace.name : null }));
+    return {
+      school,
+      menhElement: data.menhElement || "",
+      menhBranch: data.menhBranch || "",
+      yearStem: data.yearStem || "", yearBranch: data.yearBranch || "",
+      annualStem: data.annualStem || "", annualBranch: data.annualBranch || "",
+      annualYear: data.annualYear || null, nominalAge: data.nominalAge || null,
+      majorFortunePalace: (mf && mf.majorFortune) ? { name:mf.name, branch:mf.branch, start:mf.majorFortune.start, end:mf.majorFortune.end } : null,
+      taiTuePalace: tt ? { name:tt.name, branch:tt.branch } : null,
+      smallLimitPalace: sl ? { name:sl.name, branch:sl.branch } : null,
+      palaces: (data.palaces || []).map(p => ({
+        index: p.index, branch: p.branch, name: p.name, stem: p.stem || "",
+        isMenh: !!p.isMenh, isThan: !!p.isThan, changSheng: p.changSheng || "",
+        majorFortuneActive: !!(p.majorFortune && p.majorFortune.active),
+        flowMonths: (p.flowMonths || []).map(m => m.month),
+        stars: (p.stars || []).map(s => ({
+          name: s.name, layer: s.layer || "", brightness: s.brightness || "",
+          source: s.source || "", targetStar: s.targetStar || null, element: ef(s.name)
+        }))
+      })),
+      natalMutagens: recs(data.natalMutagens),
+      annualMutagens: recs(data.annualMutagens),
+      majorMutagens: recs(data.majorMutagens),
+    };
+  }
+
+  function currentChartData(){
+    const school = activeSchool();
+    const engine = (window.TuViEngines || {})[school];
+    const data = engine && engine.getData ? engine.getData() : null;
+    return serializeChart(data, school);
   }
 
   function copyText(text){
@@ -269,4 +384,33 @@
   setupSchoolSelector();
   setupExport();
   render();
+
+  // Cho module chat (Gemini) lấy text lá số hiện tại làm ngữ cảnh luận giải.
+  window.VoidOccult = window.VoidOccult || {};
+  window.VoidOccult.getChartText = currentChartText;
+  window.VoidOccult.getChartData = currentChartData;
+  window.VoidOccult.getSchool = activeSchool;
+
+  // Floating Scroll Button Logic
+  const fabBtn = document.getElementById("fabScrollBtn");
+  if(fabBtn) {
+    const aiChat = document.getElementById("aiChat");
+    window.addEventListener("scroll", () => {
+      if(window.scrollY > window.innerHeight * 0.4) {
+        fabBtn.classList.add("is-up");
+        fabBtn.title = "Cuộn lên đầu trang";
+      } else {
+        fabBtn.classList.remove("is-up");
+        fabBtn.title = "Cuộn xuống Chat AI";
+      }
+    });
+    
+    fabBtn.addEventListener("click", () => {
+      if(fabBtn.classList.contains("is-up")) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if(aiChat) {
+        aiChat.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
 })();

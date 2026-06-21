@@ -81,7 +81,7 @@
     "Đinh":{Lộc:"Thái Âm",Quyền:"Thiên Đồng",Khoa:"Thiên Cơ",Kỵ:"Cự Môn"},
     "Mậu":{Lộc:"Tham Lang",Quyền:"Thái Âm",Khoa:"Hữu Bật",Kỵ:"Thiên Cơ"},
     "Kỷ":{Lộc:"Vũ Khúc",Quyền:"Tham Lang",Khoa:"Thiên Lương",Kỵ:"Văn Khúc"},
-    "Canh":{Lộc:"Thái Dương",Quyền:"Vũ Khúc",Khoa:"Thái Âm",Kỵ:"Thiên Đồng"},
+    "Canh":{Lộc:"Thái Dương",Quyền:"Vũ Khúc",Khoa:"Thiên Phủ",Kỵ:"Thiên Đồng"},
     "Tân":{Lộc:"Cự Môn",Quyền:"Thái Dương",Khoa:"Văn Khúc",Kỵ:"Văn Xương"},
     "Nhâm":{Lộc:"Thiên Lương",Quyền:"Tử Vi",Khoa:"Tả Phụ",Kỵ:"Vũ Khúc"},
     "Quý":{Lộc:"Phá Quân",Quyền:"Cự Môn",Khoa:"Thái Âm",Kỵ:"Tham Lang"}
@@ -105,7 +105,7 @@
     "Long Đức","Phúc Đức","Thiên Đức","Nguyệt Đức","Thiên Giải","Địa Giải","Giải Thần",
     "Đào Hoa","Hồng Loan","Thiên Hỷ","Hỷ Thần","Thanh Long","Thai Phụ","Phong Cáo",
     "Thiên Y","Hoa Cái","Thiếu Dương","Thiếu Âm","Bác Sĩ","Lực Sĩ","Tướng Quân",
-    "Tấu Thư","Tam Thai","Bát Tọa","Long Trì","Phượng Các"
+    "Tấu Thư","Tam Thai","Bát Tọa","Long Trì","Phượng Các","Tướng Tinh","Phàn An","Tuế Dịch","Hàm Trì"
   ]);
   const BAD_MINOR_NAMES = new Set([
     "Kình Dương","Đà La","Hỏa Tinh","Linh Tinh","Địa Không","Địa Kiếp","Thiên Không",
@@ -113,7 +113,7 @@
     "Tuần","Triệt","Thiên La","Địa Võng","Thiên Sứ","Thiên Thương","Thiên Riêu",
     "Thái Tuế","Thiên Hình","Cô Thần","Quả Tú","Đẩu Quân","Kiếp Sát","Phá Toái",
     "Phục Binh","Quan Phù","Tử Phù","Tuế Phá","Điếu Khách","Trực Phù","Lưu Hà",
-    "Phi Liêm","Bệnh Phù","Quan Phủ","Thiên Sát","Nguyệt Sát","Tai Sát"
+    "Phi Liêm","Bệnh Phù","Quan Phủ","Thiên Sát","Nguyệt Sát","Tai Sát","Tức Thần","Chỉ Bối","Vong Thần"
   ]);
   const BRIGHT_CLASS = {Miếu:"b-mieu",Vượng:"b-vuong",Đắc:"b-dac",Hãm:"b-ham",Bình:"b-binh"};
   const STAR_ELEMENTS = {
@@ -132,11 +132,12 @@
     "Bác Sĩ":"Thủy","Lực Sĩ":"Hỏa","Thanh Long":"Thủy","Tiểu Hao":"Hỏa","Tướng Quân":"Mộc","Tấu Thư":"Kim","Phi Liêm":"Hỏa","Hỷ Thần":"Hỏa","Bệnh Phù":"Mộc","Đại Hao":"Hỏa","Phục Binh":"Hỏa","Quan Phủ":"Hỏa",
     "Thái Tuế":"Hỏa","Thiếu Dương":"Hỏa","Tang Môn":"Mộc","Thiếu Âm":"Thủy","Quan Phù":"Hỏa","Tử Phù":"Kim","Tuế Phá":"Hỏa","Long Đức":"Thủy","Bạch Hổ":"Kim","Phúc Đức":"Thổ","Điếu Khách":"Hỏa","Trực Phù":"Kim",
     "Đẩu Quân":"Hỏa","Âm Sát":"Thủy","Tuần":"Hỏa","Triệt":"Kim","Tuần Không":"Hỏa","Triệt Không":"Kim",
-    "Kiếp Sát":"Hỏa",
+    "Kiếp Sát":"Hỏa","Tướng Tinh":"Mộc","Phàn An":"Thủy","Tuế Dịch":"Hỏa","Tức Thần":"Hỏa","Tai Sát":"Thủy","Thiên Sát":"Thổ","Chỉ Bối":"Kim","Hàm Trì":"Thủy","Nguyệt Sát":"Hỏa","Vong Thần":"Mộc",
     "Tràng Sinh":"Thủy","Mộc Dục":"Thủy","Quan Đới":"Kim","Lâm Quan":"Kim","Đế Vượng":"Kim","Suy":"Thủy","Bệnh":"Hỏa","Tử":"Hỏa","Mộ":"Thổ","Tuyệt":"Thổ","Thai":"Thổ","Dưỡng":"Mộc"
   };
   const TAI_TUE_CYCLE = ["Thái Tuế","Thiếu Dương","Tang Môn","Thiếu Âm","Quan Phù","Tử Phù","Tuế Phá","Long Đức","Bạch Hổ","Phúc Đức","Điếu Khách","Trực Phù"];
   const DOCTOR_CYCLE = ["Bác Sĩ","Lực Sĩ","Thanh Long","Tiểu Hao","Tướng Quân","Tấu Thư","Phi Liêm","Hỷ Thần","Bệnh Phù","Đại Hao","Phục Binh","Quan Phủ"];
+  const TUONG_TINH_CYCLE = ["Tướng Tinh", "Phàn An", "Tuế Dịch", "Tức Thần", "Hoa Cái", "Kiếp Sát", "Tai Sát", "Thiên Sát", "Chỉ Bối", "Hàm Trì", "Nguyệt Sát", "Vong Thần"];
   // Lưu Văn Xương / Lưu Văn Khúc an theo CAN lưu niên (không theo giờ như nguyên cục)
   const LUU_VAN_XUONG = {Giáp:"Tỵ",Ất:"Ngọ",Bính:"Thân",Đinh:"Dậu",Mậu:"Thân",Kỷ:"Dậu",Canh:"Hợi",Tân:"Tý",Nhâm:"Dần",Quý:"Mão"};
   const LUU_VAN_KHUC  = {Giáp:"Dậu",Ất:"Thân",Bính:"Ngọ",Đinh:"Tỵ",Mậu:"Ngọ",Kỷ:"Tỵ",Canh:"Mão",Tân:"Dần",Nhâm:"Tý",Quý:"Hợi"};
@@ -154,7 +155,7 @@
   ];
   const STEM_KHOI_VIET = {
     Giáp:["Sửu","Mùi"], Ất:["Tý","Thân"], Bính:["Hợi","Dậu"], Đinh:["Hợi","Dậu"], Mậu:["Sửu","Mùi"],
-    Kỷ:["Tý","Thân"], Canh:["Ngọ","Dần"], Tân:["Ngọ","Dần"], Nhâm:["Mão","Tỵ"], Quý:["Mão","Tỵ"]
+    Kỷ:["Tý","Thân"], Canh:["Sửu","Mùi"], Tân:["Ngọ","Dần"], Nhâm:["Mão","Tỵ"], Quý:["Mão","Tỵ"]
   };
   const STEM_SUPPORT = {
     Giáp:{ThiênQuan:"Mùi",ThiênPhúc:"Dậu"},
@@ -428,6 +429,13 @@
     return BRANCHES.indexOf("Thìn") + CYCLE_BRANCHES.indexOf(yearBranch);
   }
 
+  function getTuongTinhIndex(yearBranch){
+    if(["Dần","Ngọ","Tuất"].includes(yearBranch)) return BRANCHES.indexOf("Ngọ");
+    if(["Thân","Tý","Thìn"].includes(yearBranch)) return BRANCHES.indexOf("Tý");
+    if(["Tỵ","Dậu","Sửu"].includes(yearBranch)) return BRANCHES.indexOf("Dậu");
+    return BRANCHES.indexOf("Mão");
+  }
+
   function getPhuongCacIndex(yearBranch){
     return BRANCHES.indexOf("Tuất") - CYCLE_BRANCHES.indexOf(yearBranch);
   }
@@ -544,7 +552,7 @@
     addStar(palaces, getPhaToaiIndex(yearBranch), "Phá Toái", "harm");
   }
 
-  // An Hỏa Tinh / Linh Tinh theo năm sinh và giờ sinh (Nam Phái)
+  // An Hỏa Tinh / Linh Tinh theo năm sinh và giờ sinh (Trung Châu Phái)
   function addHoaLinhStars(palaces, yearBranch, hourIndex){
     const hoaStart = (["Dần","Ngọ","Tuất"].includes(yearBranch)) ? BRANCHES.indexOf("Sửu")
                    : (["Thân","Tý","Thìn"].includes(yearBranch)) ? BRANCHES.indexOf("Dần")
@@ -554,7 +562,7 @@
     const linhStart = (["Dần","Ngọ","Tuất"].includes(yearBranch)) ? BRANCHES.indexOf("Mão")
                     : BRANCHES.indexOf("Tuất");
     addStar(palaces, hoaStart + hourIndex, "Hỏa Tinh", "harm");
-    addStar(palaces, linhStart - hourIndex, "Linh Tinh", "harm"); // Linh đi nghịch giờ
+    addStar(palaces, linhStart + hourIndex, "Linh Tinh", "harm"); // Linh Tinh đi thuận (Trung Châu)
   }
 
   function addMonthDayHourStars(palaces, month, day, hourIndex){
@@ -748,8 +756,8 @@
     addStarAtBranch(palaces, TC_NGUYET_GIAI[month], "Nguyệt Giải", "helper");
   }
 
-  // Lục cát + lục sát + Lộc Tồn/Thiên Mã
-  function addTCLucCatSat(palaces, yearStem, yearBranch, month, hourIndex){
+  // Lục cát + lục sát + Lộc Tồn/Thiên Mã + Vòng Bác Sĩ
+  function addTCLucCatSat(palaces, yearStem, yearBranch, month, hourIndex, directionSign){
     addStar(palaces, BRANCHES.indexOf("Thìn") + month - 1, "Tả Phụ", "helper");
     addStar(palaces, BRANCHES.indexOf("Tuất") - (month - 1), "Hữu Bật", "helper");
     addStar(palaces, BRANCHES.indexOf("Tuất") - hourIndex, "Văn Xương", "helper");
@@ -761,6 +769,7 @@
     addStar(palaces, lu, "Lộc Tồn", "wealth");
     addStar(palaces, lu + 1, "Kình Dương", "tough");
     addStar(palaces, lu - 1, "Đà La", "tough");
+    addCycle(palaces, lu, DOCTOR_CYCLE, directionSign, "cycle"); // Vòng Bác Sĩ
     addHoaLinhStars(palaces, yearBranch, hourIndex); // Hỏa Tinh, Linh Tinh
     addStar(palaces, BRANCHES.indexOf("Hợi") - hourIndex, "Địa Không", "harm");
     addStar(palaces, BRANCHES.indexOf("Hợi") + hourIndex, "Địa Kiếp", "harm");
@@ -876,13 +885,24 @@
     });
 
     // ===== Bộ sao tinh giản Trung Châu =====
-    addTCLucCatSat(palaces, yearStem, yearBranch, month, hourIndex);
+    addTCLucCatSat(palaces, yearStem, yearBranch, month, hourIndex, directionSign);
     addTCKhoaDanh(palaces, yearStem, month, day, hourIndex);
     addTCMiscStars(palaces, yearBranch, month);
     addTCSignatureStars(palaces, month);
     addTCLifeStars(palaces, menhIndex, thanIndex, yearBranch);
     addChangSheng(palaces, cuc, directionSign);
     addTCAnnualStars(palaces, annual.stem, annual.branch);
+
+    // ===== Bổ sung các sao bị thiếu (để lá số đầy đủ) =====
+    addCycle(palaces, cycleBranchToIndex(yearBranch), TAI_TUE_CYCLE, 1, "cycle"); // Vòng Thái Tuế
+    addCycle(palaces, getTuongTinhIndex(yearBranch), TUONG_TINH_CYCLE, 1, "cycle"); // Vòng Tướng Tinh (Phàn An, Tức Thần, Vong Thần...)
+    const voidMarkers = getVoidMarkers(yearStem, yearBranch);
+    addVoidStars(palaces, voidMarkers); // Tuần, Triệt
+    addFixedPalaceStars(palaces); // Thiên La, Địa Võng, Thiên Sứ, Thiên Thương
+    addStar(palaces, BRANCHES.indexOf(yearBranch) - (month - 1) + hourIndex, "Đẩu Quân", "harm");
+    addStarAtBranch(palaces, LUU_HA_BY_STEM[yearStem], "Lưu Hà", "harm");
+    addStar(palaces, getThienKhongIndex(yearBranch), "Thiên Không", "void");
+    addStar(palaces, getKiepSatIndex(yearBranch), "Kiếp Sát", "harm");
 
     // Tứ Hóa: bản mệnh (can năm sinh), đại vận (can cung đại hạn), lưu niên (can năm xem)
     const natalMutagens = getMutagenRecords(yearStem, palaces);
@@ -893,7 +913,6 @@
     addMutagenStars(palaces, annualMutagens, "annual-mutagen");
     const phiFlows = getPhiFlows(palaces);
     const annualStars = palaces.flatMap(palace => palace.stars.filter(star => star.source === "annual").map(star => ({...star, palace})));
-    const voidMarkers = [];
     const starCount = palaces.reduce((sum, palace) => sum + palace.stars.length, 0);
     return {
       solar, lunar, timeZone, birthHourBranch, yearStem, yearBranch,
@@ -1214,5 +1233,5 @@
   }
 
   window.TuViEngines = window.TuViEngines || {};
-  window.TuViEngines["trung-chau"] = { render, getData: () => lastData };
+  window.TuViEngines["trung-chau"] = { render, getData: () => lastData, elementForStar };
 })();

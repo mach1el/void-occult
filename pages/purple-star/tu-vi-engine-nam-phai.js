@@ -1131,5 +1131,5 @@
   }
 
   window.TuViEngines = window.TuViEngines || {};
-  window.TuViEngines["nam-phai"] = { render, getData: () => lastData };
+  window.TuViEngines["nam-phai"] = { render, getData: () => lastData, elementForStar };
 })();

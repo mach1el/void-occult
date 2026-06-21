@@ -15,14 +15,31 @@ A personal static knowledge base for **I-Ching / Liu Yao (六爻)** and **Purple
 | `pages/purple-star/tu-vi-engine-trung-chau.js` | Trung Châu (Vương Đình Chi) engine - lean star set, signature stars (Thiên Vu / Thiên Nguyệt / Âm Sát / Nguyệt Giải), đại vận + lưu niên Tứ Hóa, lưu Thái Tuế (no tiểu hạn) |
 | `pages/purple-star/tu-vi-app.js` | App shell - form + school selector (saved to `localStorage`), dispatches to the active engine, and builds the copy-paste text + PNG export |
 
-## View Locally
+## View Locally (chỉ frontend tĩnh)
 
-Open `index.html` directly in a browser, or run:
+Mở `index.html` trực tiếp, hoặc:
 
 ```bash
 python3 -m http.server 8080
-# http://localhost:8080
+# http://localhost:8080            -> trang chủ (index.html)
 ```
+
+## Chạy local đầy đủ (frontend + backend luận giải, Docker)
+
+Backend Python (FastAPI) trong `backend/` dựng prompt liên cung + KB rồi gọi Gemini
+(key ẩn server-side). Chạy cả hai bằng Docker Compose:
+
+```bash
+cp backend/.env.example backend/.env     # rồi điền GEMINI_API_KEY (key Gemini của bạn)
+docker compose up --build
+```
+
+- **Trang chủ:** http://localhost:8080/ → `index.html` (nginx serve `/` = homepage)
+- **Lá số:** http://localhost:8080/pages/purple-star/tu-vi-dau-so.html
+- **Backend health:** http://localhost:8000/health
+
+`deploy/nginx.conf` đặt `/` = `index.html` và **chặn** `/backend/` + dotfiles (`.env`, `.git`…)
+để không lộ API key qua web. KHÔNG commit `backend/.env` (đã `.gitignore`).
 
 ## Deploy (Netlify)
 

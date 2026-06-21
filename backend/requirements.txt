@@ -1,0 +1,8 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+google-genai>=0.3
+
+# RAG (giai đoạn 2 — chưa cần ngay):
+# sentence-transformers>=2.7
+# faiss-cpu>=1.8

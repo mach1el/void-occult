@@ -19,6 +19,9 @@
   --font-vn:'Noto Serif','Times New Roman',serif;
   --font-display:'Noto Serif Display','Noto Serif','Times New Roman',serif;
   --font-han:'Noto Serif TC','Noto Serif CJK TC','Noto Serif SC','Songti TC','PMingLiU',serif;
+  --font-stars-major:'Lora', var(--font-display);
+  --font-stars-minor:'Be Vietnam Pro', sans-serif;
+  --font-chat:'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{
@@ -27,8 +30,7 @@ html{
   text-size-adjust: 100%;
 }
 body{
-  height:100vh;
-  overflow:hidden;
+  min-height:100vh;
   background:
     linear-gradient(90deg, rgba(150,200,255,.025) 1px, transparent 1px),
     linear-gradient(0deg, rgba(150,200,255,.02) 1px, transparent 1px),
@@ -89,14 +91,13 @@ body::after{
 a{color:inherit}
 .wrap{
   width:min(2048px,100%);
-  height:100vh;
+  min-height:100vh;
   margin:0 auto;
   padding:0 clamp(8px,1.2vw,24px);
   position:relative;
   z-index:1;
   display:flex;
   flex-direction:column;
-  overflow:hidden;
 }
 .han{font-family:var(--font-han)}
 
@@ -133,9 +134,6 @@ h1{display:none}
   gap:6px;
   align-items:center;
   margin-top:8px;
-  flex:1 1 0;
-  min-height:0;
-  overflow:hidden;
 }
 .shell > aside{
   grid-column:1;
@@ -148,7 +146,6 @@ h1{display:none}
   min-width:0;
   display:flex;
   flex-direction:column;
-  min-height:0;
 }
 
 /* ── Panels ── */
@@ -160,16 +157,15 @@ h1{display:none}
 }
 /* Chart panel: stretches to fill section column */
 .shell > section > .panel{
-  flex:1 1 0;
-  min-height:0;
+  height: calc(100vh - 80px);
+  min-height: 920px;
   display:flex;
   flex-direction:column;
-  overflow:hidden;
 }
 .shell > section > .panel > .panel-body{
-  flex:1 1 0;
-  min-height:0;
-  overflow:auto;
+  flex: 1 1 0;
+  min-height: 0;
+  display:block;
 }
 .panel-head{
   display:flex;
@@ -413,13 +409,10 @@ input:focus{
 
 /* ── Chart ── */
 .chart-scroll{
-  height:100%;
+  height: 100%;
   padding:6px;
   display:flex;
   flex-direction:column;
-  overflow:auto;
-  scrollbar-width:thin;
-  scrollbar-color:var(--line) transparent;
 }
 .chart-grid{
   flex:1 0 auto;
@@ -648,11 +641,11 @@ input:focus{
   align-items:center;
   gap:2px;
   white-space:nowrap;
-  font-family:var(--font-display);
+  font-family:var(--font-stars-major);
   font-weight:600;
   font-size:.66rem;
   color:var(--amber-soft);
-  line-height:1.05;
+  line-height:1.15;
 }
 .star-bright{
   display:block;
@@ -842,10 +835,10 @@ input:focus{
 .stars-annual-row .star{
   opacity:.92;
 }
-.stars .star{font-size:.46rem;line-height:1.08}
-.palace-cell.is-packed .stars .star{font-size:.39rem;line-height:1.04}
-.palace-cell.is-overpacked .stars .star{font-size:.36rem;line-height:1.02}
-.palace-cell.is-ultra-packed .stars .star{font-size:.34rem;line-height:1}
+.stars .star{font-size:.46rem;line-height:1.15;font-family:var(--font-stars-minor)}
+.palace-cell.is-packed .stars .star{font-size:.39rem;line-height:1.15;font-family:var(--font-stars-minor)}
+.palace-cell.is-overpacked .stars .star{font-size:.36rem;line-height:1.1;font-family:var(--font-stars-minor)}
+.palace-cell.is-ultra-packed .stars .star{font-size:.34rem;line-height:1.1;font-family:var(--font-stars-minor)}
 .palace-cell.is-packed .minor-bright,
 .palace-cell.is-packed .star .src{font-size:.32rem}
 .palace-cell.is-overpacked .minor-bright,
@@ -1288,7 +1281,7 @@ footer .han{
 @media(max-width:1300px){
   .shell{grid-template-columns:220px minmax(0,1fr)}
 }
-/* ── Mobile / tablet: natural document flow, chart grows & pans horizontally ── */
+/* ── Mobile / tablet: natural document flow, chart scale vừa bề ngang ── */
 @media(max-width:1060px){
   body{height:auto;overflow:auto}
   .wrap{height:auto;min-height:0;overflow:visible;display:block}
@@ -1300,14 +1293,14 @@ footer .han{
     min-height:0;
     overflow:visible;
     gap:12px;
-    flex:none;
   }
   .shell > aside,.shell > section{grid-column:1;align-self:stretch}
   /* Chart panel grows to fit the whole chart - no internal clipping/collapse */
-  .shell > section > .panel{height:auto;flex:none;overflow:visible}
-  .shell > section > .panel > .panel-body{overflow:visible;min-height:0;flex:none}
-  .chart-scroll{height:auto;min-height:0;padding:8px}
-  .chart-grid{flex:0 0 auto;min-height:0}
+  .shell > section > .panel{height:auto;min-height:0;overflow:visible}
+  .shell > section > .panel > .panel-body{overflow:visible;min-height:0;display:block}
+  .chart-scroll{height:auto;min-height:0;padding:8px;display:block}
+  .chart-grid{min-height:0;display:grid}
+  
   .form-grid,.toggles{grid-template-columns:1fr}
 }
 @media(max-width:700px){
@@ -1317,11 +1310,11 @@ footer .han{
   .chart-actions{width:100%}
   .btn-ghost{flex:1 1 0;justify-content:center;font-size:.64rem;padding:6px 4px}
   .field{grid-template-columns:84px minmax(0,1fr)}
-  /* Lá số dùng "frame-mode" (khung dọc 1080×1440 scale vừa màn hình) — xem khối .frame-mode bên dưới. */
+  /* Lá số dùng "frame-mode" (khung dọc 864×1296 scale vừa màn hình) — xem khối .frame-mode bên dưới. */
 }
 
-/* ── Mobile: dựng lá số vào khung dọc 1080×1440 rồi transform:scale cho vừa màn hình ──
-   (class .frame-mode được JS gắn vào #chartGrid khi <=700px; transform & chiều cao do JS đặt) */
+/* ── Tablet/mobile: dựng lá số vào khung dọc 864×1296 rồi transform:scale cho vừa màn hình ──
+   (class .frame-mode được JS gắn vào #chartGrid khi <=1060px; transform & chiều cao do JS đặt) */
 .chart-grid.frame-mode{
   position:absolute;
   top:0;
@@ -1336,6 +1329,9 @@ footer .han{
   background:url("../../khung-la-so.svg") 0 0 / 864px 1296px no-repeat;
 }
 .chart-grid.frame-mode .tam-hop-lines{display:none}
+/* Bỏ filter/blend/xoay của watermark con giáp khi ở frame-mode (transform-scale làm
+   các layer hợp thành này bị mờ/răng cưa, lộ rõ ở góc ô). */
+.chart-grid.frame-mode .zodiac-bg{filter:none;mix-blend-mode:normal;transform:none;opacity:.14}
 .chart-grid.frame-mode .palace-cell{
   position:absolute;
   width:212px;
@@ -1410,4 +1406,163 @@ footer .han{
   backdrop-filter: blur(4px);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ── Chat luận giải AI (Gemini) - Inline Layout ── */
+.chat-section{
+  width:100%;max-width:none;margin:24px 0 60px;padding:0;
+}
+.ai-chat{
+  position:relative;z-index:10;font-family:var(--font-chat);
+  color:var(--paper);font-size:.92rem;line-height:1.55;letter-spacing:0;
+}
+.ai-chat-panel{
+  display:flex;flex-direction:column;width:100%;min-height:500px;
+  border:1px solid var(--line);border-radius:8px;overflow:hidden;
+  background:linear-gradient(180deg, #18122c, #0e0a1c);
+  box-shadow:0 10px 40px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(180,155,255,.04);
+}
+.ai-chat-head{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:12px 18px;border-bottom:1px solid var(--line);font-size:.88rem;flex-shrink:0;
+  background:rgba(255,255,255,0.02);
+}
+.ai-chat-head strong{font-family:var(--font-chat);font-weight:600;font-size:.98rem;color:var(--amber-soft);line-height:1.25}
+.ai-chat-head-actions{display:flex;gap:8px}
+.ai-icon-btn{
+  width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid var(--line);border-radius:8px;background:rgba(12,10,24,.5);
+  color:var(--muted);font-size:.9rem;cursor:pointer;transition:color .15s,border-color .15s;
+}
+.ai-icon-btn:hover{color:var(--amber-soft);border-color:var(--amber)}
+.ai-chat-settings{
+  padding:16px 20px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:12px;
+  background:rgba(12,10,24,.6);flex-shrink:0;
+}
+.ai-chat-settings[hidden]{display:none}
+.ai-chat-settings label{display:flex;flex-direction:column;gap:6px;font-size:.7rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.ai-chat-settings input{
+  padding:10px 12px;border:1px solid var(--line);border-radius:8px;
+  background:rgba(8,6,16,.8);color:var(--paper);font-size:.88rem;font-family:var(--font-chat);
+}
+.ai-chat-settings input:focus{outline:none;border-color:var(--amber)}
+.ai-settings-row{display:flex;align-items:center;gap:16px;font-size:.8rem}
+.ai-settings-row a{color:var(--blue);text-decoration:none}
+.ai-mini-btn{
+  padding:8px 16px;border-radius:8px;border:1px solid var(--amber);
+  background:var(--amber-dim);color:var(--amber-soft);font-size:.8rem;font-weight:600;cursor:pointer;
+}
+.ai-note{font-size:.7rem;color:var(--muted);line-height:1.5;margin:0}
+
+/* Chat Messages Area */
+.ai-chat-msgs{
+  flex:1 1 0;min-height:280px;max-height:600px;overflow-y:auto;
+  display:flex;flex-direction:column;scrollbar-width:thin;
+}
+.ai-msg{
+  display:flex;gap:14px;padding:18px 20px;
+  font-size:.92rem;font-weight:400;line-height:1.58;
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.ai-msg-user{background:rgba(255,255,255,0.02)}
+.ai-msg-ai{background:transparent}
+
+/* Avatar Icons */
+.ai-msg-avatar{
+  width:30px;height:30px;flex-shrink:0;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;background:rgba(255,255,255,0.08);
+}
+.ai-msg-user .ai-msg-avatar{background:var(--amber-dim);border:1px solid rgba(196,154,53,.3)}
+.ai-msg-ai .ai-msg-avatar{background:rgba(180,155,255,.1);border:1px solid rgba(180,155,255,.2)}
+
+/* Message Content */
+.ai-msg-content{flex:1;min-width:0;color:var(--ash)}
+.ai-msg-user .ai-msg-content{color:var(--paper)}
+.ai-msg-content p{margin:0 0 .55em}
+.ai-msg-content p:last-child{margin-bottom:0}
+.ai-msg-content ul{margin:.45em 0;padding-left:1.25em}
+.ai-msg-content li{margin:.25em 0}
+.ai-msg-content strong{color:var(--amber-soft);font-weight:700}
+.ai-msg-content code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:6px;font-size:.9em;font-family:monospace}
+
+.ai-msg.is-thinking .ai-msg-content{opacity:.7;font-style:italic}
+.ai-msg.is-warn{background:rgba(217,122,112,.05);border-bottom-color:rgba(217,122,112,.1)}
+.ai-msg.is-warn .ai-msg-content{color:#e6a8a0}
+
+/* Chat Input */
+.ai-chat-input{
+  display:flex;gap:12px;padding:16px 18px;flex-shrink:0;align-items:flex-end;
+  background:rgba(12,10,24,.4);
+}
+.ai-chat-input textarea{
+  flex:1;resize:none;max-height:150px;padding:12px 14px;
+  border:1px solid var(--line);border-radius:12px;
+  background:rgba(8,6,16,.8);color:var(--paper);
+  font-size:.9rem;font-family:var(--font-chat);line-height:1.45;
+  box-shadow:inset 0 2px 4px rgba(0,0,0,.2);
+}
+.ai-chat-input textarea:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 1px var(--amber) inset}
+.ai-send-btn{
+  width:44px;height:44px;flex-shrink:0;border-radius:12px;border:1px solid var(--amber);
+  background:var(--amber-dim);color:var(--amber-soft);font-size:1.1rem;
+  cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;
+}
+.ai-send-btn:hover:not(:disabled){background:rgba(196,154,53,.25);transform:scale(1.02)}
+.ai-send-btn:disabled{opacity:.4;cursor:default;transform:none}
+
+@media(max-width:700px){
+  .chat-section{padding:0;margin:20px 0}
+  .ai-chat{font-size:.9rem;line-height:1.52}
+  .ai-chat-panel{border-radius:0;border-left:none;border-right:none;min-height:560px}
+  .ai-chat-head{padding:11px 14px}
+  .ai-chat-head strong{font-size:.94rem}
+  .ai-msg{padding:14px 12px;gap:10px;font-size:.9rem;line-height:1.54}
+  .ai-msg-avatar{width:26px;height:26px;font-size:.92rem}
+  .ai-chat-input{padding:10px;gap:10px}
+  .ai-chat-input textarea{padding:10px 12px;font-size:1rem;line-height:1.4; /* prevent iOS zoom */}
+  .ai-send-btn{width:42px;height:42px;font-size:1.05rem}
+}
+
+/* ── Floating Scroll Button ── */
+.fab-chat-btn{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:90;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:linear-gradient(135deg, rgba(36,27,62,.9), rgba(20,15,38,.9));
+  color:var(--amber-soft);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 8px 24px rgba(0,0,0,.5), inset 0 0 0 1px rgba(180,155,255,.1);
+  transition:all .2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.fab-chat-btn:hover{
+  transform:translateY(-3px) scale(1.05);
+  border-color:var(--amber);
+  background:linear-gradient(135deg, rgba(46,37,82,.95), rgba(26,20,48,.95));
+  box-shadow:0 12px 28px rgba(0,0,0,.6), inset 0 0 0 1px rgba(205,162,58,.2);
+}
+.fab-chat-btn:active{
+  transform:translateY(0) scale(0.95);
+}
+.fab-icon{
+  transition:transform .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.fab-chat-btn.is-up .fab-icon{
+  transform:rotate(180deg);
+}
+@media(max-width:700px){
+  .fab-chat-btn{
+    right:10px;
+    bottom:10px;
+    width:42px;
+    height:42px;
+  }
 }
