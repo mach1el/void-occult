@@ -31,12 +31,16 @@ Backend Python (FastAPI) trong `backend/` dựng prompt liên cung + KB rồi g�
 
 ```bash
 cp backend/.env.example backend/.env     # rồi điền GEMINI_API_KEY (key Gemini của bạn)
+docker compose -f ../routing/docker-compose.yml up -d
 docker compose up --build
 ```
 
-- **Trang chủ:** http://localhost:8080/ → `index.html` (nginx serve `/` = homepage)
-- **Lá số:** http://localhost:8080/pages/purple-star/tu-vi-dau-so.html
-- **Backend health:** http://localhost:8000/health
+- **Trang chủ:** http://void-occult.localhost/ → `index.html`
+- **Lá số:** http://void-occult.localhost/pages/purple-star/tu-vi-dau-so.html
+- **Backend health:** http://void-occult.localhost/health
+
+Central Nginx trong `../routing` là ingress duy nhất publish port ra host.
+Frontend và backend chỉ expose port trong Docker network `routing`.
 
 `deploy/nginx.conf` đặt `/` = `index.html` và **chặn** `/backend/` + dotfiles (`.env`, `.git`…)
 để không lộ API key qua web. KHÔNG commit `backend/.env` (đã `.gitignore`).
