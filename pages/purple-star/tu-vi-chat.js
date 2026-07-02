@@ -1,7 +1,7 @@
 /* Chat luận giải lá số Tử Vi — gọi backend Python (FastAPI).
    - Build prompt (liên cung) + RAG + LLM chạy server-side; API key ẩn ở backend.
    - Frontend gửi {question, chartText, chart, history} và stream kết quả về.
-   - BACKEND_URL cấu hình trong tu-vi-config.js (mặc định http://localhost:8000). */
+   - BACKEND_URL cấu hình trong tu-vi-config.js; mặc định dùng cùng origin. */
 (function(){
   "use strict";
 
@@ -66,8 +66,8 @@
   }
 
   function backendUrl(){
-    const base = cfg("BACKEND_URL") || (localStorage.getItem("voidocc.backend") || "").trim() || "http://localhost:8000";
-    return base.replace(/\/+$/, "");
+    const base = cfg("BACKEND_URL") || (localStorage.getItem("voidocc.backend") || "").trim();
+    return base ? base.replace(/\/+$/, "") : window.location.origin;
   }
 
   // Gọi backend Python (FastAPI) — build prompt/RAG + LLM chạy server-side, stream kết quả về.
@@ -111,7 +111,7 @@
       thinking.classList.remove("is-thinking");
       thinking.classList.add("is-warn");
       contentEl.innerHTML = formatMarkdown("⚠ Lỗi: " + (err && err.message ? err.message : err) +
-        "\n\nKiểm tra backend đã chạy chưa (`uvicorn app.main:app --port 8000`) và cấu hình `BACKEND_URL`.");
+        "\n\nKiểm tra backend và central routing đã chạy, hoặc cấu hình `BACKEND_URL`.");
       if(history.length && history[history.length-1].role === "user") history.pop();
     } finally {
       busy = false; setSendState();
