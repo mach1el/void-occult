@@ -254,7 +254,7 @@ function Palace({
   const stars = visibleStars(palace, showAnnual, showMutagens);
   const columns = [
     stars.compactBenefic,
-    showPhi ? stars.malefic.slice(0, 7) : stars.compactMalefic,
+    stars.compactMalefic,
   ];
   const fortune = palace.majorFortune;
   const marks = [palace.isThan ? "Thân" : ""].filter(Boolean);
