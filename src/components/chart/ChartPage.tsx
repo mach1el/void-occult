@@ -206,7 +206,7 @@ export function ChartPage() {
   function fieldChange(
     key: keyof Pick<
       FormState,
-      "solarDate" | "birthHour" | "gender" | "annualYear" | "timezone"
+      "solarDate" | "birthHour" | "gender" | "annualYear" | "timezone" | "flowBase"
     >,
   ) {
     return (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
