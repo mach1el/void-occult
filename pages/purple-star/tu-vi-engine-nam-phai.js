@@ -680,7 +680,7 @@
     return fix(G + 6 + (m - 2) * directionSign);
   }
 
-  function assignAnnualFlow(palaces, annualBranch, birthMonth, birthDay, birthLeap, hourIndex, monthAnchorPalaceIndex, annualStem){
+  function assignAnnualFlow(palaces, annualBranch, birthMonth, birthDay, birthLeap, hourIndex, monthAnchorPalaceIndex, annualStem, flowBase = "tieu-han"){
     palaces.forEach(palace => {
       palace.isAnnualPalace = false;
       palace.isTaiTuePalace = false;
@@ -700,7 +700,16 @@
     taiTuePalace.isTaiTuePalace = true;
     
     const monthAnchor = (monthAnchorPalaceIndex == null) ? annualPalaceIndex : fix(monthAnchorPalaceIndex);
-    const monthStartIndex = fix(monthAnchor - adjustedMonth + hourIndex + 1);
+    
+    let monthStartIndex;
+    if (flowBase === "tieu-han") {
+      // Tiểu hạn của năm là tháng sinh, đếm nghịch tới tháng Giêng
+      monthStartIndex = fix(monthAnchor - (adjustedMonth - 1));
+    } else {
+      // Lưu niên đại vận: nghịch tháng sinh, thuận giờ sinh
+      monthStartIndex = fix(monthAnchor - adjustedMonth + hourIndex + 1);
+    }
+    
     const monthStartPalace = palaces[monthStartIndex];
     monthStartPalace.isMonthStart = true;
     
@@ -828,7 +837,7 @@
     } else if (flowBase === "thai-tue") {
       monthAnchorPalaceIndex = annualPalaceIndex; // in BRANCHES space (Dần=0)
     }
-    const annualFlow = assignAnnualFlow(palaces, annual.branch, month, day, lunar.leap, hourIndex, monthAnchorPalaceIndex, annual.stem);
+    const annualFlow = assignAnnualFlow(palaces, annual.branch, month, day, lunar.leap, hourIndex, monthAnchorPalaceIndex, annual.stem, flowBase);
     if(smallLimit.palace) smallLimit.palace.isAnnualPalace = true;
 
     addMonthDayHourStars(palaces, month, day, hourIndex);

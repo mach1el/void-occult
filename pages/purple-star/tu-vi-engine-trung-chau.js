@@ -688,7 +688,7 @@
     return fix(G + 6 + (m - 2) * directionSign);
   }
 
-  function assignAnnualFlow(palaces, annualBranch, birthMonth, birthDay, birthLeap, hourIndex, monthAnchorPalaceIndex, annualStem){
+  function assignAnnualFlow(palaces, annualBranch, birthMonth, birthDay, birthLeap, hourIndex, monthAnchorPalaceIndex, annualStem, flowBase = "tieu-han"){
     palaces.forEach(palace => {
       palace.isAnnualPalace = false;
       palace.isTaiTuePalace = false;
@@ -707,7 +707,16 @@
     taiTuePalace.isTaiTuePalace = true;
     
     const monthAnchor = (monthAnchorPalaceIndex == null) ? annualPalaceIndex : fix(monthAnchorPalaceIndex);
-    const monthStartIndex = fix(monthAnchor - adjustedMonth + hourIndex + 1);
+    
+    let monthStartIndex;
+    if (flowBase === "tieu-han") {
+      // Tiểu hạn của năm là tháng sinh, đếm nghịch tới tháng Giêng
+      monthStartIndex = fix(monthAnchor - (adjustedMonth - 1));
+    } else {
+      // Lưu niên đại vận: nghịch tháng sinh, thuận giờ sinh
+      monthStartIndex = fix(monthAnchor - adjustedMonth + hourIndex + 1);
+    }
+    
     const monthStartPalace = palaces[monthStartIndex];
     monthStartPalace.isMonthStart = true;
     
@@ -918,11 +927,13 @@
     const luuNienDaiVanIndex = getLuuNienDaiVanIndex(majorFortunePalace, null, nominalAge, directionSign);
     if(luuNienDaiVanIndex != null) palaces[luuNienDaiVanIndex].isLuuNienDaiVan = true;
 
-    const flowBase = document.getElementById("flowBase") ? document.getElementById("flowBase").value : "thai-tue";
+    const flowBase = document.getElementById("flowBase") ? document.getElementById("flowBase").value : "tieu-han";
     let monthAnchorPalaceIndex = annualPalaceIndex;
-    if (flowBase === "dai-van" && luuNienDaiVanIndex != null) {
+    if (flowBase === "tieu-han" && smallLimit && smallLimit.palace) {
+      monthAnchorPalaceIndex = smallLimit.palace.index;
+    } else if (flowBase === "dai-van" && luuNienDaiVanIndex != null) {
       monthAnchorPalaceIndex = luuNienDaiVanIndex;
-    } else if (flowBase === "thai-tue" || flowBase === "tieu-han") {
+    } else if (flowBase === "thai-tue") {
       monthAnchorPalaceIndex = annualPalaceIndex;
     }
 
@@ -934,7 +945,8 @@
       lunar.leap,
       hourIndex,
       monthAnchorPalaceIndex,
-      annual.stem
+      annual.stem,
+      flowBase
     );
     const taiTuePalace = annualFlow.taiTuePalace;
     taiTuePalace.isAnnualPalace = true;

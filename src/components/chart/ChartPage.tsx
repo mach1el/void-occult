@@ -345,7 +345,6 @@ export function ChartPage() {
                     onChange={fieldChange("flowBase")}
                   >
                     <option value="tieu-han">Tiểu Hạn</option>
-                    <option value="thai-tue">Lưu Niên (Thái Tuế)</option>
                     <option value="dai-van">Lưu Niên Đại Vận</option>
                   </select>
                 </div>
