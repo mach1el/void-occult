@@ -6,6 +6,7 @@ import {
   type RefObject,
 } from "react";
 import { getEngine, SCHOOL_LABEL } from "../../lib/chart";
+import compactChartCss from "./compact-chart.css?raw";
 import {
   compareNatalBeforeAnnual,
   isAnnualStar,
@@ -747,11 +748,13 @@ export function CompactChart({
       <div className="compact-chart-capture" ref={captureRef}>
         <svg
           className="compact-chart-svg"
+          xmlns="http://www.w3.org/2000/svg"
           viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
           role="img"
           aria-label={`Lá số Tử Vi ${SCHOOL_LABEL[school]}`}
           preserveAspectRatio="xMidYMid meet"
         >
+          <style>{compactChartCss}</style>
           <title>Lá số Tử Vi {SCHOOL_LABEL[school]}</title>
           <rect width={WIDTH} height={HEIGHT} className="compact-sheet-bg" />
           {palaces.map((palace) => (

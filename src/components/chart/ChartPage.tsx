@@ -190,7 +190,6 @@ export function ChartPage() {
       const blob = await toBlob(chart, {
         backgroundColor: "#f3f3e9",
         pixelRatio: 2,
-        cacheBust: true,
       });
       if (!blob) throw new Error("Không tạo được dữ liệu ảnh");
       downloadBlob(blob, `la-so-tu-vi-${school}-${fileStamp}.png`);
