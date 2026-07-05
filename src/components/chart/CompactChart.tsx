@@ -367,7 +367,7 @@ function Palace({
       )}
 
       <text x="9" y="239" className="compact-palace-footer">
-        {BRANCH_HAN[palace.branch] || ""}
+        {BRANCH_HAN[palace.branch] || ""} {palace.branch}
       </text>
       <text x="90" y="239" textAnchor="middle" className="compact-palace-footer">
         {palace.changSheng || ""}
