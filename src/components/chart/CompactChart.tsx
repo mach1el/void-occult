@@ -352,20 +352,17 @@ function Palace({
               )
               .join(" · ")}
           </title>
-          {phiFlows.slice(0, 4).map((flow, index) => (
-            <text
-              x="170"
-              y={195 + index * 9.5}
-              textAnchor="end"
-              className={`compact-phi-flow is-${flow.mutagen.toLowerCase()}`}
-              key={`${flow.mutagen}-${flow.starName}`}
-            >
-              {MUTAGEN_ABBREVIATIONS[flow.mutagen] ?? flow.mutagen}→
-              {flow.self
-                ? "Tự"
-                : PALACE_ABBREVIATIONS[flow.target?.name ?? ""] ?? "?"}
-            </text>
-          ))}
+          <text x="90" y="226" textAnchor="middle">
+            {phiFlows.slice(0, 4).map((flow, index) => (
+              <tspan
+                key={`${flow.mutagen}-${flow.starName}`}
+                className={`compact-phi-flow is-${flow.mutagen.toLowerCase()}`}
+                dx={index === 0 ? 0 : 8}
+              >
+                {MUTAGEN_ABBREVIATIONS[flow.mutagen] ?? flow.mutagen}→{flow.self ? "Tự" : PALACE_ABBREVIATIONS[flow.target?.name ?? ""] ?? "?"}
+              </tspan>
+            ))}
+          </text>
         </g>
       )}
 
