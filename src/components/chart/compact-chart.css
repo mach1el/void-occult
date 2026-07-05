@@ -139,7 +139,7 @@
   display: block;
   width: 100%;
   height: auto;
-  font-family: "Be Vietnam Pro", Arial, sans-serif;
+  font-family: var(--font-vn), serif;
 }
 
 .compact-chart-capture {
@@ -317,7 +317,7 @@
 
 .compact-void-marker text {
   fill: #f4f0df;
-  font-family: "Be Vietnam Pro", Arial, sans-serif;
+  font-family: var(--font-vn), serif;
   font-size: 8px;
   font-weight: 800;
   letter-spacing: 0.2px;

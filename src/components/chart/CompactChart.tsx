@@ -259,6 +259,7 @@ function Palace({
   const fortune = palace.majorFortune;
   const marks = [palace.isThan ? "Thân" : ""].filter(Boolean);
   const flowMonth = showAnnual ? palace.flowMonths?.[0] : undefined;
+  const minorStartY = (stars.major.length > 1 ? (marks.length ? 68 : 56) : (marks.length ? 51 : 40)) + 16;
 
   function keyDown(event: KeyboardEvent<SVGGElement>) {
     if (event.key === "Enter" || event.key === " ") {
@@ -331,7 +332,7 @@ function Palace({
         column.map((star, rowIndex) => (
           <text
             x={columnIndex === 0 ? 9 : 94}
-            y={84 + rowIndex * 13}
+            y={minorStartY + rowIndex * 13}
             className="compact-minor-star"
             fill={starColor(star, school)}
             key={`${star.name}-${star.source ?? ""}-${columnIndex}-${rowIndex}`}
@@ -354,7 +355,7 @@ function Palace({
           {phiFlows.slice(0, 4).map((flow, index) => (
             <text
               x="170"
-              y={181 + index * 10}
+              y={195 + index * 9.5}
               textAnchor="end"
               className={`compact-phi-flow is-${flow.mutagen.toLowerCase()}`}
               key={`${flow.mutagen}-${flow.starName}`}
