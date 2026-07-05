@@ -69,6 +69,7 @@ interface FormState {
   gender: "male" | "female";
   annualYear: string;
   timezone: string;
+  flowBase: string;
   showMutagens: boolean;
   showPhi: boolean;
   showAnnual: boolean;
@@ -97,10 +98,11 @@ export function ChartPage() {
   const [school, setSchool] = useState<School>(initialSchool);
   const [form, setForm] = useState<FormState>({
     solarDate: "21/09/1991",
-    birthHour: "Dần",
-    gender: "male",
+    birthHour: "Dậu",
+    gender: "female",
     annualYear: String(new Date().getFullYear()),
     timezone: "7",
+    flowBase: "dai-van",
     showMutagens: true,
     showPhi: false,
     showAnnual: true,
@@ -116,9 +118,7 @@ export function ChartPage() {
     document.title = "Lá Số Tử Vi · Void Occult";
     let active = true;
     Promise.all([
-      // @ts-expect-error Legacy IIFE is intentionally imported for side effects.
       import("../../../pages/purple-star/tu-vi-engine-nam-phai.js"),
-      // @ts-expect-error Legacy IIFE is intentionally imported for side effects.
       import("../../../pages/purple-star/tu-vi-engine-trung-chau.js"),
     ])
       .then(() => {
@@ -190,7 +190,6 @@ export function ChartPage() {
       const blob = await toBlob(chart, {
         backgroundColor: "#f3f3e9",
         pixelRatio: 2,
-        cacheBust: true,
       });
       if (!blob) throw new Error("Không tạo được dữ liệu ảnh");
       downloadBlob(blob, `la-so-tu-vi-${school}-${fileStamp}.png`);
@@ -205,7 +204,7 @@ export function ChartPage() {
   function fieldChange(
     key: keyof Pick<
       FormState,
-      "solarDate" | "birthHour" | "gender" | "annualYear" | "timezone"
+      "solarDate" | "birthHour" | "gender" | "annualYear" | "timezone" | "flowBase"
     >,
   ) {
     return (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
@@ -214,18 +213,18 @@ export function ChartPage() {
 
   const copyLabel =
     copyState === "success"
-      ? "Đã chép ✓"
+      ? "✓"
       : copyState === "error"
-        ? "Lỗi sao chép"
-        : "⧉ Sao chép văn bản";
+        ? "⚠"
+        : "⧉ Copy";
   const imageLabel =
     imageState === "working"
-      ? "Đang tạo…"
+      ? "…"
       : imageState === "success"
-        ? "Đã tải ✓"
+        ? "✓"
         : imageState === "error"
-          ? "Lỗi xuất ảnh"
-          : "⛶ Tải ảnh";
+          ? "⚠"
+          : "⛶ Ảnh";
 
   return (
     <>
@@ -336,6 +335,19 @@ export function ChartPage() {
                   />
                 </div>
                 <div className="field">
+                  <label htmlFor="flowBase">Xem vận năm theo</label>
+                  <select
+                    id="flowBase"
+                    name="flowBase"
+                    value={form.flowBase}
+                    onChange={fieldChange("flowBase")}
+                  >
+                    <option value="luu-nien">Lưu Niên (Xem Hạn)</option>
+                    <option value="tieu-han">Tiểu Hạn</option>
+                    <option value="dai-van">Lưu Niên Đại Vận</option>
+                  </select>
+                </div>
+                <div className="field">
                   <label htmlFor="timezone">Múi giờ</label>
                   <select
                     id="timezone"
@@ -390,12 +402,14 @@ export function ChartPage() {
             <div className="chart-panel chart-workspace">
               <div className="panel-head">
                 <h2>Lá số 12 cung</h2>
-                <div className="chart-actions">
+                <div className="chart-actions" style={{ flexWrap: 'nowrap' }}>
                   <button
                     type="button"
                     className="btn-ghost"
                     onClick={copyChart}
                     disabled={!enginesReady}
+                    title="Sao chép văn bản"
+                    aria-label="Sao chép văn bản"
                   >
                     {copyLabel}
                   </button>
@@ -404,14 +418,18 @@ export function ChartPage() {
                     className="btn-ghost"
                     onClick={downloadText}
                     disabled={!enginesReady}
+                    title="Tải file .txt"
+                    aria-label="Tải file .txt"
                   >
-                    ⭳ Tải .txt
+                    ⭳ TXT
                   </button>
                   <button
                     type="button"
                     className="btn-ghost"
                     onClick={downloadImage}
                     disabled={!enginesReady || imageState === "working"}
+                    title="Tải ảnh PNG"
+                    aria-label="Tải ảnh PNG"
                   >
                     {imageLabel}
                   </button>

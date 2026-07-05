@@ -26,13 +26,12 @@
 
 @media (min-width: 1360px) {
   .shell {
-    width: min(1800px, 100%);
+    width: 100%;
+    max-width: 1920px;
     margin-inline: auto;
-    grid-template-columns:
-      minmax(720px, 1.15fr)
-      minmax(520px, 0.95fr);
+    grid-template-columns: minmax(720px, 900px) minmax(420px, 1fr);
     grid-template-rows: auto auto;
-    gap: 12px;
+    gap: 16px;
     align-items: start;
     justify-content: center;
   }
@@ -49,69 +48,97 @@
 
   .shell > aside > .panel-head {
     height: 100%;
-    padding: 10px 16px;
+    padding: 8px 14px;
     border-right: 1px solid var(--line);
     border-bottom: 0;
   }
 
   .shell > aside .panel-body {
     display: grid;
-    grid-template-columns: minmax(230px, 280px) minmax(0, 1fr) auto;
-    gap: 12px;
+    grid-template-columns: minmax(210px, 250px) minmax(0, 1fr) auto;
+    gap: 10px;
     align-items: center;
-    padding: 9px 12px;
+    padding: 6px 10px;
   }
 
   .shell > aside .school-tabs {
     margin: 0;
+    gap: 3px;
+    padding: 3px;
+  }
+
+  .shell > aside .school-tab {
+    min-height: 30px;
+    font-size: 0.74rem;
   }
 
   .shell > aside .form-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 8px;
+    grid-template-columns:
+      1.05fr
+      1.12fr
+      0.9fr
+      0.72fr
+      1.18fr
+      0.9fr;
+    gap: 6px;
   }
 
   .shell > aside .field {
     grid-template-columns: 1fr;
-    gap: 3px;
+    gap: 2px;
     align-items: stretch;
+    min-width: 0;
   }
 
   .shell > aside .field label {
-    font-size: 0.55rem;
+    font-size: 0.5rem;
+    line-height: 1.1;
+  }
+
+  .shell > aside .field select,
+  .shell > aside .field input {
+    min-height: 28px;
+    padding-block: 3px;
+    font-size: 0.74rem;
   }
 
   .shell > aside .toggles {
     display: flex;
-    gap: 5px;
+    gap: 4px;
     margin: 0;
   }
 
   .shell > aside .toggle {
-    min-height: 30px;
-    padding-inline: 7px;
+    min-height: 28px;
+    padding-inline: 6px;
+    font-size: 0.66rem;
   }
 
   .shell > .chart-section {
     grid-column: 1;
     grid-row: 2;
-    align-self: start;
+    align-self: stretch;
   }
 
   .shell > .chat-section {
-    position: sticky;
-    top: 12px;
     grid-column: 2;
     grid-row: 2;
-    width: 100%;
-    min-width: 0;
-    align-self: start;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
     margin: 0;
     padding: 0;
   }
 
+  .chat-section .ai-chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
   .chat-section .ai-chat-panel {
-    height: calc(100vh - 150px);
+    flex: 1;
+    height: auto;
     min-height: 640px;
   }
 
@@ -143,7 +170,7 @@
   display: block;
   width: 100%;
   height: auto;
-  font-family: "Be Vietnam Pro", Arial, sans-serif;
+  font-family: var(--font-vn), serif;
 }
 
 .compact-chart-capture {
@@ -288,7 +315,7 @@
 }
 
 .compact-tam-hop path {
-  fill: rgb(196 154 53 / 7%);
+  fill: transparent;
   stroke: rgb(173 126 28 / 90%);
   stroke-width: 2.2;
   stroke-dasharray: 7 5;
@@ -321,7 +348,7 @@
 
 .compact-void-marker text {
   fill: #f4f0df;
-  font-family: "Be Vietnam Pro", Arial, sans-serif;
+  font-family: var(--font-vn), serif;
   font-size: 8px;
   font-weight: 800;
   letter-spacing: 0.2px;
@@ -406,7 +433,7 @@
   z-index: 300;
   inset: 0;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   padding: 20px;
   background: rgb(5 4 12 / 72%);
@@ -590,6 +617,7 @@
   }
 
   .compact-detail-backdrop {
+    align-items: flex-end;
     padding: 0;
   }
 

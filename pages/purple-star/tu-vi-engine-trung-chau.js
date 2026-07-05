@@ -1,3 +1,10 @@
+import {
+  getAnnualMajorFortuneIndex,
+  getFirstFlowMonthIndex,
+  getFlowMonthBaseIndex,
+  getSmallLimitBranchRing,
+} from "../../src/lib/annual-flow";
+
 (() => {
   const STEMS = ["Giáp","Ất","Bính","Đinh","Mậu","Kỷ","Canh","Tân","Nhâm","Quý"];
   const STEM_HAN = {Giáp:"甲",Ất:"乙",Bính:"丙",Đinh:"丁",Mậu:"戊",Kỷ:"己",Canh:"庚",Tân:"辛",Nhâm:"壬",Quý:"癸"};
@@ -673,49 +680,61 @@
     return month + (isLeap && day > 15 ? 1 : 0);
   }
 
-  // Lưu niên đại vận (cung khởi tháng Giêng của năm xem):
-  // Trong mỗi đại vận 10 năm với cung gốc G và cung xung chiếu O = G + 6:
-  //   năm 1 = G; năm 2 = O; từ năm 3 trở đi = O + (m - 4) * s, với s là chiều đại vận
-  //   (Dương Nam/Âm Nữ s = +1 thuận; Âm Nam/Dương Nữ s = -1 nghịch).
-  function getLuuNienDaiVanIndex(majorFortunePalace, smallLimit, nominalAge, directionSign){
-    if(!majorFortunePalace){
-      return smallLimit && smallLimit.palace ? smallLimit.palace.index : null;
-    }
-    const G = majorFortunePalace.index;
-    const m = nominalAge - majorFortunePalace.majorFortune.start + 1; // năm thứ m trong đại vận (1..10)
-    if(m <= 1) return G;
-    if(m === 2) return fix(G + 6);
-    return fix(G + 6 + (m - 4) * directionSign);
+  // Tính cung Lưu Niên Đại Vận để luận vận năm; không dùng làm gốc T1.
+  function getLNDVBase(majorFortunePalace, nominalAge, directionSign) {
+    if (!majorFortunePalace) return null;
+    return getAnnualMajorFortuneIndex(
+      majorFortunePalace.index,
+      majorFortunePalace.majorFortune.start,
+      nominalAge,
+      directionSign
+    );
   }
 
-  function assignAnnualFlow(palaces, annualBranch, birthMonth, birthDay, birthLeap, hourIndex, monthAnchorIndex){
+  // Router khởi T1 theo lựa chọn xem vận năm.
+  function calculateThang1(flowBase, birthYearBranch, gender, currentYearBranch, adjustedMonth, hourIndex) {
+    const baseCung = getFlowMonthBaseIndex(
+      flowBase,
+      birthYearBranch,
+      gender,
+      currentYearBranch
+    );
+    return getFirstFlowMonthIndex(baseCung, adjustedMonth, hourIndex);
+  }
+
+  function assignAnnualFlow(palaces, annualBranch, birthMonth, birthDay, birthLeap, hourIndex, monthStartIndex, annualStem){
     palaces.forEach(palace => {
       palace.isAnnualPalace = false;
       palace.isTaiTuePalace = false;
       palace.isMonthStart = false;
       palace.flowMonths = [];
     });
-    const annualIndex = cycleBranchToIndex(annualBranch);
+    
+    const annualPalaceIndex = BRANCHES.indexOf(annualBranch);
     const adjustedMonth = adjustedLunarMonth(birthMonth, birthDay, birthLeap);
+    
     // Sao Lưu Đẩu Quân: từ cung Thái Tuế đếm nghịch tới tháng sinh, rồi thuận theo giờ sinh
-    const dauQuanIndex = fix(annualIndex - adjustedMonth + hourIndex + 1);
+    const dauQuanIndex = fix(annualPalaceIndex - adjustedMonth + hourIndex + 1);
     addStar(palaces, dauQuanIndex, "Lưu Đẩu Quân", "annual", "annual");
-    const taiTuePalace = palaces[annualIndex];
+    
+    const taiTuePalace = palaces[annualPalaceIndex];
     taiTuePalace.isTaiTuePalace = true;
-    // Khởi tháng (lưu nguyệt): mốc Tháng 1 = cung Tiểu Hạn của năm xem, từ đó đếm nghịch tới
-    // tháng sinh được giờ Tý, rồi đếm thuận tới giờ sinh ra cung Tháng Giêng; 12 tháng chạy thuận.
-    const monthAnchor = (monthAnchorIndex == null) ? annualIndex : fix(monthAnchorIndex);
-    const monthStartIndex = fix(monthAnchor - adjustedMonth + hourIndex + 1);
+    
     const monthStartPalace = palaces[monthStartIndex];
     monthStartPalace.isMonthStart = true;
+    
+    const yearStemIndex = STEMS.indexOf(annualStem);
     const months = Array.from({length:12}, (_, offset) => {
       const palace = palaces[fix(monthStartIndex + offset)];
       const month = offset + 1;
-      const item = {month, label:MONTH_NAMES[offset], palace};
+      const mStemIndex = ((yearStemIndex % 5) * 2 + 2 + offset) % 10;
+      const stem = STEMS[mStemIndex];
+      const branch = palace.smallLimitBranch || palace.branch;
+      const item = {month, label:MONTH_NAMES[offset], palace, stem, branch};
       palace.flowMonths.push(item);
       return item;
     });
-    return {annualIndex, taiTuePalace, dauQuanIndex, monthStartIndex, monthStartPalace, months, adjustedMonth};
+    return {annualPalaceIndex, taiTuePalace, dauQuanIndex, monthStartIndex, monthStartPalace, months, adjustedMonth};
   }
 
   function getVoidMarkers(yearStem, yearBranch){
@@ -884,6 +903,10 @@
     const directionSign = direction === "thuận" ? 1 : -1;
     const nominalAge = Math.max(1, annualYear - lunar.year + 1);
 
+    const smallLimitBranchRing = getSmallLimitBranchRing(
+      yearBranch,
+      els.gender.value
+    );
     const palaces = BRANCHES.map((branch, index) => {
       const name = PALACES_BY_FORWARD_BRANCH[fix(index - menhIndex)];
       return {
@@ -892,6 +915,7 @@
         name,
         han: PALACE_HAN[name],
         stem: getPalaceStem(yearStem, index),
+        smallLimitBranch: smallLimitBranchRing[index],
         isMenh: index === menhIndex,
         isThan: index === thanIndex,
         stars: []
@@ -905,6 +929,27 @@
     // Trung Châu: KHÔNG dùng tiểu hạn. Lưu mệnh năm = cung lưu Thái Tuế (chi năm xem).
     // Lưu nguyệt vẫn khởi từ cung Thái Tuế để 12 tháng hiện đầy đủ trên lá số.
     const annualBranchIndex = cycleBranchToIndex(annual.branch);
+    const annualPalaceIndex = BRANCHES.indexOf(annual.branch);
+
+    // Lưu niên đại vận (zigzag trong đại vận) — cung vận của năm xem.
+    const luuNienDaiVanIndex = getLNDVBase(
+      majorFortunePalace,
+      nominalAge,
+      directionSign
+    );
+    if(luuNienDaiVanIndex != null) palaces[luuNienDaiVanIndex].isLuuNienDaiVan = true;
+
+    const flowBase = document.getElementById("flowBase") ? document.getElementById("flowBase").value : "luu-nien";
+    const adjustedMonth = adjustedLunarMonth(month, day, lunar.leap);
+    const monthStartIndex = calculateThang1(
+      flowBase,
+      yearBranch,
+      els.gender.value,
+      annual.branch,
+      adjustedMonth,
+      hourIndex
+    );
+    
     const annualFlow = assignAnnualFlow(
       palaces,
       annual.branch,
@@ -912,7 +957,8 @@
       day,
       lunar.leap,
       hourIndex,
-      annualBranchIndex
+      monthStartIndex,
+      annual.stem
     );
     const taiTuePalace = annualFlow.taiTuePalace;
     taiTuePalace.isAnnualPalace = true;

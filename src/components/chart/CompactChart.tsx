@@ -6,6 +6,7 @@ import {
   type RefObject,
 } from "react";
 import { getEngine, SCHOOL_LABEL } from "../../lib/chart";
+import compactChartCss from "./compact-chart.css?raw";
 import {
   compareNatalBeforeAnnual,
   isAnnualStar,
@@ -70,6 +71,21 @@ const TAM_HOP: Record<string, string[]> = {
   Hợi: ["Hợi", "Mão", "Mùi"],
   Mão: ["Hợi", "Mão", "Mùi"],
   Mùi: ["Hợi", "Mão", "Mùi"],
+};
+
+const XUNG_CHIEU: Record<string, string> = {
+  Tý: "Ngọ",
+  Sửu: "Mùi",
+  Dần: "Thân",
+  Mão: "Dậu",
+  Thìn: "Tuất",
+  Tỵ: "Hợi",
+  Ngọ: "Tý",
+  Mùi: "Sửu",
+  Thân: "Dần",
+  Dậu: "Mão",
+  Tuất: "Thìn",
+  Hợi: "Tỵ",
 };
 
 const BRANCH_HAN: Record<string, string> = {
@@ -254,11 +270,12 @@ function Palace({
   const stars = visibleStars(palace, showAnnual, showMutagens);
   const columns = [
     stars.compactBenefic,
-    showPhi ? stars.malefic.slice(0, 7) : stars.compactMalefic,
+    stars.compactMalefic,
   ];
   const fortune = palace.majorFortune;
   const marks = [palace.isThan ? "Thân" : ""].filter(Boolean);
   const flowMonth = showAnnual ? palace.flowMonths?.[0] : undefined;
+  const minorStartY = (stars.major.length > 1 ? (marks.length ? 68 : 56) : (marks.length ? 51 : 40)) + 16;
 
   function keyDown(event: KeyboardEvent<SVGGElement>) {
     if (event.key === "Enter" || event.key === " ") {
@@ -287,6 +304,7 @@ function Palace({
         width={CELL_WIDTH}
         height={CELL_HEIGHT}
         className="compact-palace-bg"
+        pointerEvents="all"
       />
       <text x="9" y="18" className="compact-palace-stem">
         {STEM_ABBREVIATIONS[palace.stem ?? ""] ?? palace.stem} {palace.branch}
@@ -331,7 +349,7 @@ function Palace({
         column.map((star, rowIndex) => (
           <text
             x={columnIndex === 0 ? 9 : 94}
-            y={84 + rowIndex * 13}
+            y={minorStartY + rowIndex * 13}
             className="compact-minor-star"
             fill={starColor(star, school)}
             key={`${star.name}-${star.source ?? ""}-${columnIndex}-${rowIndex}`}
@@ -351,31 +369,31 @@ function Palace({
               )
               .join(" · ")}
           </title>
-          {phiFlows.slice(0, 4).map((flow, index) => (
-            <text
-              x="170"
-              y={181 + index * 10}
-              textAnchor="end"
-              className={`compact-phi-flow is-${flow.mutagen.toLowerCase()}`}
-              key={`${flow.mutagen}-${flow.starName}`}
-            >
-              {MUTAGEN_ABBREVIATIONS[flow.mutagen] ?? flow.mutagen}→
-              {flow.self
-                ? "Tự"
-                : PALACE_ABBREVIATIONS[flow.target?.name ?? ""] ?? "?"}
-            </text>
-          ))}
+          <text x="90" y="226" textAnchor="middle">
+            {phiFlows.slice(0, 4).map((flow, index) => (
+              <tspan
+                key={`${flow.mutagen}-${flow.starName}`}
+                className={`compact-phi-flow is-${flow.mutagen.toLowerCase()}`}
+                dx={index === 0 ? 0 : 8}
+              >
+                {MUTAGEN_ABBREVIATIONS[flow.mutagen] ?? flow.mutagen}→{flow.self ? "Tự" : PALACE_ABBREVIATIONS[flow.target?.name ?? ""] ?? "?"}
+              </tspan>
+            ))}
+          </text>
         </g>
       )}
 
       <text x="9" y="239" className="compact-palace-footer">
-        {BRANCH_HAN[palace.branch]} {palace.changSheng || ""}
+        {flowMonth?.branch || ""}
+      </text>
+      <text x="90" y="239" textAnchor="middle" className="compact-palace-footer">
+        {palace.changSheng || ""}
       </text>
       {flowMonth && (
         <text
-          x="90"
+          x="170"
           y="239"
-          textAnchor="middle"
+          textAnchor="end"
           className="compact-flow-month"
         >
           <title>
@@ -385,9 +403,7 @@ function Palace({
           T{flowMonth.month}
         </text>
       )}
-      <text x="170" y="239" textAnchor="end" className="compact-palace-footer">
-        {fortune ? `ĐV ${fortune.start}–${fortune.end}` : ""}
-      </text>
+
       <rect
         width={CELL_WIDTH}
         height={CELL_HEIGHT}
@@ -407,18 +423,28 @@ function palaceCenter(branch: string): Position | null {
     : null;
 }
 
-function TrineLines({ branches }: { branches: string[] | null }) {
-  if (!branches) return null;
-  const points = branches
+function RelationLines({ branch }: { branch: string | null }) {
+  if (!branch) return null;
+  const center = palaceCenter(branch);
+  if (!center) return null;
+
+  const tamHop = (TAM_HOP[branch] ?? []).filter((b) => b !== branch);
+  const xungChieu = XUNG_CHIEU[branch];
+
+  const targets = [...tamHop, xungChieu]
+    .filter((b): b is string => Boolean(b))
     .map(palaceCenter)
     .filter((point): point is Position => Boolean(point));
-  if (points.length !== 3) return null;
-  const path = `M ${points[0]!.x} ${points[0]!.y} L ${points[1]!.x} ${points[1]!.y} L ${points[2]!.x} ${points[2]!.y} Z`;
+
+  const path = targets
+    .map((target) => `M ${center.x} ${center.y} L ${target.x} ${target.y}`)
+    .join(" ");
 
   return (
     <g className="compact-tam-hop" aria-hidden="true">
       <path d={path} />
-      {points.map((point, index) => (
+      <circle cx={center.x} cy={center.y} r="4" />
+      {targets.map((point, index) => (
         <circle cx={point.x} cy={point.y} r="4" key={index} />
       ))}
     </g>
@@ -715,7 +741,7 @@ export function CompactChart({
   captureRef,
 }: CompactChartProps) {
   const [selectedPalace, setSelectedPalace] = useState<ChartPalace | null>(null);
-  const [activeTrine, setActiveTrine] = useState<string[] | null>(null);
+  const [hoveredBranch, setHoveredBranch] = useState<string | null>(null);
   const palaces = useMemo(
     () =>
       data
@@ -748,11 +774,13 @@ export function CompactChart({
       <div className="compact-chart-capture" ref={captureRef}>
         <svg
           className="compact-chart-svg"
+          xmlns="http://www.w3.org/2000/svg"
           viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
           role="img"
           aria-label={`Lá số Tử Vi ${SCHOOL_LABEL[school]}`}
           preserveAspectRatio="xMidYMid meet"
         >
+          <style>{compactChartCss}</style>
           <title>Lá số Tử Vi {SCHOOL_LABEL[school]}</title>
           <rect width={WIDTH} height={HEIGHT} className="compact-sheet-bg" />
           {palaces.map((palace) => (
@@ -764,20 +792,22 @@ export function CompactChart({
               showPhi={showPhi}
               phiFlows={phiFlowsByPalace.get(palace.index) ?? []}
               trineState={
-                activeTrine
-                  ? activeTrine.includes(palace.branch)
+                hoveredBranch
+                  ? palace.branch === hoveredBranch ||
+                    TAM_HOP[hoveredBranch]?.includes(palace.branch) ||
+                    XUNG_CHIEU[hoveredBranch] === palace.branch
                     ? "active"
                     : "dim"
                   : null
               }
-              onTrineEnter={(branch) => setActiveTrine(TAM_HOP[branch] ?? null)}
-              onTrineLeave={() => setActiveTrine(null)}
+              onTrineEnter={(branch) => setHoveredBranch(branch)}
+              onTrineLeave={() => setHoveredBranch(null)}
               onSelect={setSelectedPalace}
               key={`${palace.name}-${palace.branch}`}
             />
           ))}
           <Center data={data} school={school} gender={gender} />
-          <TrineLines branches={activeTrine} />
+          <RelationLines branch={hoveredBranch} />
           <VoidMarkers markers={data.voidMarkers ?? []} />
           <rect
             x="1"
@@ -785,6 +815,7 @@ export function CompactChart({
             width={WIDTH - 2}
             height={HEIGHT - 2}
             className="compact-sheet-outline"
+            pointerEvents="none"
           />
         </svg>
       </div>

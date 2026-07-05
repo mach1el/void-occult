@@ -1417,7 +1417,7 @@ footer .han{
   color:var(--paper);font-size:.92rem;line-height:1.55;letter-spacing:0;
 }
 .ai-chat-panel{
-  display:flex;flex-direction:column;width:100%;min-height:500px;
+  display:flex;flex-direction:column;width:100%;height:100%;min-height:500px;
   border:1px solid var(--line);border-radius:8px;overflow:hidden;
   background:linear-gradient(180deg, #18122c, #0e0a1c);
   box-shadow:0 10px 40px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(180,155,255,.04);
@@ -1456,7 +1456,7 @@ footer .han{
 
 /* Chat Messages Area */
 .ai-chat-msgs{
-  flex:1 1 0;min-height:280px;max-height:600px;overflow-y:auto;
+  flex:1 1 0;min-height:280px;overflow-y:auto;
   display:flex;flex-direction:column;scrollbar-width:thin;
 }
 .ai-msg{
