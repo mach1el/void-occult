@@ -82,7 +82,7 @@ export interface ChartData {
 }
 
 export interface ChartEngine {
-  render(): void;
+  calculate(): ChartData;
   getData(): ChartData | null;
   elementForStar(name: string): string;
 }

@@ -135,8 +135,7 @@ export function ChartPage() {
   useEffect(() => {
     if (!enginesReady) return;
     const engine = getEngine(school);
-    engine?.render();
-    setChartData(engine?.getData() ?? null);
+    setChartData(engine?.calculate() ?? null);
   }, [enginesReady, form, school]);
 
   const context = useCallback(() => {
@@ -478,9 +477,6 @@ export function ChartPage() {
                   showMutagens={form.showMutagens}
                   showPhi={form.showPhi}
                 />
-              </div>
-              <div className="legacy-chart-host" aria-hidden="true">
-                <div id="chartGrid" className="chart-grid" />
               </div>
             </div>
           </section>

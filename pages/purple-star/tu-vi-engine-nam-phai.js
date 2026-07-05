@@ -7,43 +7,12 @@ import {
 
 (() => {
   const STEMS = ["Giáp","Ất","Bính","Đinh","Mậu","Kỷ","Canh","Tân","Nhâm","Quý"];
-  const STEM_HAN = {Giáp:"甲",Ất:"乙",Bính:"丙",Đinh:"丁",Mậu:"戊",Kỷ:"己",Canh:"庚",Tân:"辛",Nhâm:"壬",Quý:"癸"};
   const BRANCHES = ["Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi","Tý","Sửu"];
-  const BRANCH_HAN = {Tý:"子",Sửu:"丑",Dần:"寅",Mão:"卯",Thìn:"辰",Tỵ:"巳",Ngọ:"午",Mùi:"未",Thân:"申",Dậu:"酉",Tuất:"戌",Hợi:"亥"};
-  const BRANCH_ZODIAC_NAME = {Tý:"Chuột",Sửu:"Trâu",Dần:"Hổ",Mão:"Mèo",Thìn:"Rồng",Tỵ:"Rắn",Ngọ:"Ngựa",Mùi:"Dê",Thân:"Khỉ",Dậu:"Gà",Tuất:"Chó",Hợi:"Heo"};
-  const BRANCH_ZODIAC_ASSET = {
-    Tý:"/assets/zodiac/transparent/ty.png",
-    Sửu:"/assets/zodiac/transparent/suu.png",
-    Dần:"/assets/zodiac/transparent/dan.png",
-    Mão:"/assets/zodiac/transparent/mao.png",
-    Thìn:"/assets/zodiac/transparent/thin.png",
-    Tỵ:"/assets/zodiac/transparent/ti.png",
-    Ngọ:"/assets/zodiac/transparent/ngo.png",
-    Mùi:"/assets/zodiac/transparent/mui.png",
-    Thân:"/assets/zodiac/transparent/than.png",
-    Dậu:"/assets/zodiac/transparent/dau.png",
-    Tuất:"/assets/zodiac/transparent/tuat.png",
-    Hợi:"/assets/zodiac/transparent/hoi.png"
-  };
   const CYCLE_BRANCHES = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
   const HOUR_BRANCHES = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
   const MONTH_NAMES = ["Giêng","Hai","Ba","Tư","Năm","Sáu","Bảy","Tám","Chín","Mười","Một","Chạp"];
   const PALACES_BY_FORWARD_BRANCH = ["Mệnh","Phụ Mẫu","Phúc Đức","Điền Trạch","Quan Lộc","Nô Bộc","Thiên Di","Tật Ách","Tài Bạch","Tử Tức","Phu Thê","Huynh Đệ"];
   const PALACE_HAN = {"Mệnh":"命","Huynh Đệ":"兄弟","Phu Thê":"夫妻","Tử Tức":"子女","Tài Bạch":"財帛","Tật Ách":"疾厄","Thiên Di":"遷移","Nô Bộc":"奴僕","Quan Lộc":"官祿","Điền Trạch":"田宅","Phúc Đức":"福德","Phụ Mẫu":"父母"};
-  const PALACE_SHORT = {"Mệnh":"Mệnh","Huynh Đệ":"Huynh","Phu Thê":"Phu","Tử Tức":"Tử","Tài Bạch":"Tài","Tật Ách":"Tật","Thiên Di":"Di","Nô Bộc":"Nô","Quan Lộc":"Quan","Điền Trạch":"Điền","Phúc Đức":"Phúc","Phụ Mẫu":"Phụ"};
-  const GRID_ORDER = ["Tỵ","Ngọ","Mùi","Thân","Thìn","Dậu","Mão","Tuất","Dần","Sửu","Tý","Hợi"];
-  const TAM_HOP = {
-    Dần:["Dần","Ngọ","Tuất"], Ngọ:["Dần","Ngọ","Tuất"], Tuất:["Dần","Ngọ","Tuất"],
-    Thân:["Thân","Tý","Thìn"], Tý:["Thân","Tý","Thìn"], Thìn:["Thân","Tý","Thìn"],
-    Tỵ:["Tỵ","Dậu","Sửu"],    Dậu:["Tỵ","Dậu","Sửu"],  Sửu:["Tỵ","Dậu","Sửu"],
-    Hợi:["Hợi","Mão","Mùi"],  Mão:["Hợi","Mão","Mùi"],  Mùi:["Hợi","Mão","Mùi"]
-  };
-  const GRID_AREAS = {
-    "Tỵ":"1 / 1", "Ngọ":"1 / 2", "Mùi":"1 / 3", "Thân":"1 / 4",
-    "Thìn":"2 / 1", "Dậu":"2 / 4",
-    "Mão":"3 / 1", "Tuất":"3 / 4",
-    "Dần":"4 / 1", "Sửu":"4 / 2", "Tý":"4 / 3", "Hợi":"4 / 4"
-  };
   const TIGER_RULE = {Giáp:"Bính",Kỷ:"Bính",Ất:"Mậu",Canh:"Mậu",Bính:"Canh",Tân:"Canh",Đinh:"Nhâm",Nhâm:"Nhâm",Mậu:"Giáp",Quý:"Giáp"};
   const STEM_POLARITY = {Giáp:"Dương",Bính:"Dương",Mậu:"Dương",Canh:"Dương",Nhâm:"Dương",Ất:"Âm",Đinh:"Âm",Kỷ:"Âm",Tân:"Âm",Quý:"Âm"};
   const NAP_AM_ELEMENTS = [
@@ -99,30 +68,6 @@ import {
   const TIANFU_OFFSETS = [
     ["Thiên Phủ",0], ["Thái Âm",1], ["Tham Lang",2], ["Cự Môn",3], ["Thiên Tướng",4], ["Thiên Lương",5], ["Thất Sát",6], ["Phá Quân",10]
   ];
-  const MUTAGEN_CLASS = {Lộc:"loc",Quyền:"quyen",Khoa:"khoa",Kỵ:"ky"};
-  const MUTAGEN_SHORT = {Lộc:"L",Quyền:"Q",Khoa:"Kh",Kỵ:"Kỵ"};
-  const ELEMENT_CLASS = {Kim:"element-kim",Mộc:"element-moc",Thủy:"element-thuy",Hỏa:"element-hoa",Thổ:"element-tho"};
-  const LAYER_SORT = {major:0,soft:1,wealth:2,mutagen:3,helper:4,move:5,romance:6,cycle:7,annual:8,tough:9,harm:10,void:11};
-  const GOOD_LAYERS = new Set(["soft","wealth","helper","move","romance"]);
-  const BAD_LAYERS = new Set(["tough","harm","void"]);
-  const GOOD_MINOR_NAMES = new Set([
-    "Tả Phụ","Tả Phù","Hữu Bật","Thiên Khôi","Thiên Việt","Văn Xương","Văn Khúc",
-    "Hóa Lộc","Hóa Quyền","Hóa Khoa","Lộc Tồn","Thiên Mã","Thiên Tài","Thiên Thọ",
-    "Ân Quang","Thiên Quý","Thiên Quan","Thiên Phúc","Quốc Ấn","Đường Phù","Thiên Trù",
-    "Long Đức","Phúc Đức","Thiên Đức","Nguyệt Đức","Thiên Giải","Địa Giải","Giải Thần",
-    "Đào Hoa","Hồng Loan","Thiên Hỷ","Hỷ Thần","Thanh Long","Thai Phụ","Phong Cáo",
-    "Thiên Y","Hoa Cái","Thiếu Dương","Thiếu Âm","Bác Sĩ","Lực Sĩ","Tướng Quân",
-    "Tấu Thư","Tam Thai","Bát Tọa","Long Trì","Phượng Các"
-  ]);
-  const BAD_MINOR_NAMES = new Set([
-    "Kình Dương","Đà La","Hỏa Tinh","Linh Tinh","Địa Không","Địa Kiếp","Thiên Không",
-    "Đại Hao","Tiểu Hao","Tang Môn","Bạch Hổ","Thiên Khốc","Thiên Hư","Hóa Kỵ",
-    "Tuần","Triệt","Thiên La","Địa Võng","Thiên Sứ","Thiên Thương","Thiên Riêu",
-    "Thái Tuế","Thiên Hình","Cô Thần","Quả Tú","Đẩu Quân","Kiếp Sát","Phá Toái",
-    "Phục Binh","Quan Phù","Tử Phù","Tuế Phá","Điếu Khách","Trực Phù","Lưu Hà",
-    "Phi Liêm","Bệnh Phù","Quan Phủ","Thiên Sát","Nguyệt Sát","Tai Sát"
-  ]);
-  const BRIGHT_CLASS = {Miếu:"b-mieu",Vượng:"b-vuong",Đắc:"b-dac",Hãm:"b-ham",Bình:"b-binh"};
   const STAR_ELEMENTS = {
     "Tử Vi":"Thổ","Thiên Cơ":"Mộc","Thái Dương":"Hỏa","Vũ Khúc":"Kim","Thiên Đồng":"Thủy","Liêm Trinh":"Hỏa",
     "Thiên Phủ":"Thổ","Thái Âm":"Thủy","Tham Lang":"Mộc","Cự Môn":"Thủy","Thiên Tướng":"Thủy","Thiên Lương":"Thổ","Thất Sát":"Kim","Phá Quân":"Thủy",
@@ -193,8 +138,7 @@ import {
     annualYear: document.getElementById("annualYear"),
     timezone: document.getElementById("timezone"),
     hour: document.getElementById("birthHour"),
-    gender: document.getElementById("gender"),
-    chart: document.getElementById("chartGrid")
+    gender: document.getElementById("gender")
   };
 
   function fix(n, mod = 12){
@@ -927,276 +871,13 @@ import {
     return STAR_ELEMENTS[baseStarName(name)] || "";
   }
 
-  function elementClassForStar(name){
-    const element = elementForStar(name);
-    return element ? ELEMENT_CLASS[element] : "";
-  }
-
-  function isBeneficMinor(star){
-    const name = baseStarName(star.name);
-    if(GOOD_MINOR_NAMES.has(name)) return true;
-    if(BAD_MINOR_NAMES.has(name)) return false;
-    if(star.source === "natal-mutagen" || star.source === "annual-mutagen") return star.mutagen !== "Kỵ";
-    if(GOOD_LAYERS.has(star.layer)) return true;
-    if(BAD_LAYERS.has(star.layer)) return false;
-    return true;
-  }
-
-  function renderSplitStars(stars, className, data, sortFn){
-    if(!stars.length) return "";
-    const good = stars.filter(isBeneficMinor).slice().sort(sortFn);
-    const bad = stars.filter(star => !isBeneficMinor(star)).slice().sort(sortFn);
-    const side = (items, sideClass) => {
-      if(!items.length) return "";
-      const density = items.length >= 9 ? " is-split-dense" : items.length >= 6 ? " is-split-packed" : "";
-      return `<div class="${sideClass}${density}">${items.map(star => renderStarChip(star, data)).join("")}</div>`;
-    };
-    const state = `${good.length ? " has-good" : ""}${bad.length ? " has-bad" : ""}`;
-    return `<div class="${className} stars-layer${state}">${side(good, "stars-good")}${side(bad, "stars-bad")}</div>`;
-  }
-
-  // Gộp natal + lưu niên vào CÙNG 2 cột tốt/xấu (sao lưu xếp dưới, ngăn bằng vạch mảnh).
-  function renderCellStars(natal, annual, data, sortFn){
-    const ng = natal.filter(isBeneficMinor).slice().sort(sortFn);
-    const nb = natal.filter(s => !isBeneficMinor(s)).slice().sort(sortFn);
-    const ag = annual.filter(isBeneficMinor).slice().sort(sortFn);
-    const ab = annual.filter(s => !isBeneficMinor(s)).slice().sort(sortFn);
-    const goodCount = ng.length + ag.length;
-    const badCount = nb.length + ab.length;
-    if(!goodCount && !badCount) return "";
-    
-    const col = (natalItems, annualItems, sideClass) => {
-      if(!natalItems.length && !annualItems.length) return "";
-      const total = natalItems.length + annualItems.length;
-      const density = total >= 9 ? " is-split-dense" : total >= 6 ? " is-split-packed" : "";
-      const natalHtml = natalItems.map(s => renderStarChip(s, data)).join("");
-      const sep = (natalItems.length && annualItems.length) ? '<span class="stars-luu-sep" aria-hidden="true"></span>' : "";
-      const annualHtml = annualItems.map(s => renderStarChip(s, data)).join("");
-      return `<div class="${sideClass}${density}">${natalHtml}${sep}${annualHtml}</div>`;
-    };
-    
-    const state = `${goodCount ? " has-good" : ""}${badCount ? " has-bad" : ""}`;
-    return `<div class="stars-natal stars-layer${state}">${col(ng, ag, "stars-good")}${col(nb, ab, "stars-bad")}</div>`;
-  }
-
-  function phiCornerForPalace(data, palace){
-    if(!document.getElementById("showPhi").checked) return "";
-    const hits = data.phiFlows.filter(flow => flow.source.index === palace.index);
-    if(!hits.length) return "";
-    const chips = hits.map(flow => {
-      const target = flow.target ? `${flow.target.name} ${flow.target.branch}` : "chưa an";
-      const self = flow.self ? " · tự hóa" : "";
-      const title = `${palace.name} ${palace.stem} phi Hóa ${flow.mutagen} ${flow.starName} nhập ${target}${self}`;
-      return `<span class="phi-chip" title="${title}"><span class="phi-kind ${MUTAGEN_CLASS[flow.mutagen]}">${MUTAGEN_SHORT[flow.mutagen]}</span><span class="phi-star">${flow.starName}</span><span class="phi-target">→ ${flow.target ? PALACE_SHORT[flow.target.name] : "?"}</span></span>`;
-    }).join("");
-    return `<div class="phi-corner">${chips}</div>`;
-  }
-
-
-
-  function renderNatalMutagenList(data){
-    return data.natalMutagens.map(item => {
-      const palace = item.palace ? `${PALACE_SHORT[item.palace.name]} ${item.palace.branch}` : "chưa an";
-      const title = `Năm sinh ${data.yearStem}${data.yearBranch}: Hóa ${item.mutagen} tại ${item.starName}${item.palace ? ` (${item.palace.name} ${item.palace.branch})` : ""}`;
-      return `<span class="ci-hua-item" title="${title}"><span class="hua ${MUTAGEN_CLASS[item.mutagen]}">${MUTAGEN_SHORT[item.mutagen]}</span><span>${item.starName}</span><small>${palace}</small></span>`;
-    }).join("");
-  }
-
-  function formatSolar(data){
-    return `${String(data.solar.day).padStart(2,"0")}/${String(data.solar.month).padStart(2,"0")}/${data.solar.year}`;
-  }
-
-  function formatLunar(data){
-    return `${String(data.lunar.day).padStart(2,"0")}/${String(data.lunar.month).padStart(2,"0")}${data.lunar.leap ? " nhuận" : ""}/${data.lunar.year}`;
-  }
-
-  function renderCenterPanel(data){
-    const thanPalace = data.palaces[data.thanIndex];
-    const genderLabel = els.gender.value === "male" ? "Nam" : "Nữ";
-    const solarText = formatSolar(data);
-    const lunarText = `${formatLunar(data)} · giờ ${data.birthHourBranch}${BRANCH_HAN[data.birthHourBranch]}`;
-    const canChiText = `${data.yearStem}${STEM_HAN[data.yearStem]} ${data.yearBranch}${BRANCH_HAN[data.yearBranch]}`;
-    const major = data.majorFortunePalace ? data.majorFortunePalace.majorFortune : null;
-    const majorPalaceText = data.majorFortunePalace ? `${data.majorFortunePalace.name} ${data.majorFortunePalace.branch}` : `khởi ${data.cuc.number} tuổi`;
-    const smallLimitText = data.smallLimitPalace ? `${data.nominalAge} tuổi · ${data.smallLimitPalace.name} ${data.smallLimitPalace.branch}` : `${data.nominalAge} tuổi`;
-    const smallLimitStartText = data.smallLimitStartPalace ? `${data.smallLimitDirection} · khởi ${data.smallLimitStartPalace.branch}` : data.smallLimitDirection;
-    const taiTueText = data.taiTuePalace ? `${data.taiTuePalace.name} ${data.taiTuePalace.branch}` : "";
-    return `
-      <div class="ci-head">
-        <div class="ci-seal">紫微</div>
-        <div class="ci-title">
-          <strong>${canChiText}</strong>
-          <span>${solarText}</span>
-        </div>
-      </div>
-      <div class="ci-subline">${lunarText}</div>
-      <div class="ci-grid">
-        <div class="ci-card"><b>Mệnh</b><span>${data.menhBranch} · ${data.menhElement}</span><small>${data.cucMenhRelation.label}</small></div>
-        <div class="ci-card"><b>Thân</b><span>${thanPalace.name}</span><small>${thanPalace.branch}</small></div>
-        <div class="ci-card"><b>Cục</b><span>${data.cuc.name}</span><small>${data.cucMenhRelation.detail}</small></div>
-        <div class="ci-card"><b>Âm dương</b><span>${data.yearPolarity} ${genderLabel}</span><small>${data.direction} · đại vận khởi ${data.cuc.number}</small></div>
-        <div class="ci-card"><b>Đại vận</b><span>${major ? `${major.start}-${major.end}` : "chưa nhập"}</span><small>${majorPalaceText}</small></div>
-        <div class="ci-card"><b>Tiểu hạn</b><span>${smallLimitText}</span><small>${smallLimitStartText}</small></div>
-        <div class="ci-card"><b>Lưu niên</b><span>${data.annualYear} ${data.annualStem}${STEM_HAN[data.annualStem]} ${data.annualBranch}${BRANCH_HAN[data.annualBranch]}</span><small>Thái Tuế: ${taiTueText}</small></div>
-      </div>
-      <div class="ci-hua-block">
-        <div class="ci-section-title">Tứ Hóa năm sinh</div>
-        <div class="ci-hua-list" aria-label="Tứ Hóa năm sinh">${renderNatalMutagenList(data)}</div>
-      </div>`;
-  }
-
-  function renderMajorStar(star){
-    const bc = BRIGHT_CLASS[star.brightness] || "";
-    const starSlug = baseStarName(star.name).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/Đ/g, "D").replace(/đ/g, "d").toLowerCase().replace(/\s+/g, "-");
-    const brightHtml = star.brightness
-      ? `<span class="star-bright">${star.brightness}</span>`
-      : "";
-    const element = elementForStar(star.name);
-    const title = `${star.name}${star.brightness ? " · " + star.brightness : ""}${element ? " · " + element : ""}`;
-    return `<span class="major-star ${bc} ${elementClassForStar(star.name)} star-${starSlug}" title="${title}"><span class="major-name-row">${star.name}</span>${brightHtml}</span>`;
-  }
-
-  function renderStarChip(star, data){
-    const bright = star.brightness === "Đắc"
-      ? `<span class="minor-bright is-dac">(Đ)</span>`
-      : star.brightness === "Hãm"
-        ? `<span class="minor-bright is-ham">(H)</span>`
-        : "";
-    const element = elementForStar(star.name);
-    const elementText = element ? ` · Ngũ hành ${element}` : "";
-    const title = star.source === "natal-mutagen"
-      ? `Tứ Hóa năm sinh: ${star.name} nhập ${star.targetStar}${elementText}`
-      : star.source === "annual-mutagen"
-        ? `Tứ Hóa năm ${data.annualYear}: ${baseStarName(star.name)} nhập ${star.targetStar}${elementText}`
-        : `${star.source === "annual" ? "Sao lưu niên" : "Sao nguyên cục"}${elementText}`;
-    const name = star.source === "annual" || star.source === "annual-mutagen"
-      ? `<span class="src">L.</span>${baseStarName(star.name)}`
-      : star.name;
-    const huaClass = star.source === "natal-mutagen" || star.source === "annual-mutagen" ? `hua-star hua-${MUTAGEN_CLASS[star.mutagen]}` : "";
-    return `<span class="star ${star.layer} ${elementClassForStar(star.name)} ${huaClass}" title="${title}">${name}${bright}</span>`;
-  }
-
-  function renderPalaceMeta(data, palace){
-    const fortune = palace.majorFortune;
-    const fortuneChip = fortune
-      ? `<span class="fortune-chip ${fortune.active ? "is-active" : ""}" title="Đại vận ${fortune.start}-${fortune.end} tuổi tại ${palace.name} ${palace.branch}">ĐV ${fortune.start}-${fortune.end}</span>`
-      : "";
-    // TH (Tiểu Hạn) & TT (Thái Tuế) không ghi ở cung nữa — đã có trong bảng giữa lá số.
-    const monthChips = (palace.flowMonths || []).map(item => {
-      const startClass = palace.isMonthStart && item.month === 1 ? " is-start" : "";
-      return `<span class="month-chip${startClass}" title="Tháng ${item.month} (${item.label}) tại ${palace.name} ${palace.branch}">T${item.month}</span>`;
-    }).join("");
-    const stageElement = elementForStar(palace.changSheng);
-    const stageTitle = stageElement ? `${palace.changSheng} · Ngũ hành ${stageElement}` : palace.changSheng;
-    return `<div class="palace-meta"><span class="stage ${elementClassForStar(palace.changSheng)}" title="${stageTitle}">${palace.changSheng}</span>${fortuneChip}${monthChips}</div>`;
-  }
-
-  function renderChart(data){
-    const showMutagens = document.getElementById("showMutagens").checked;
-    const showAnnual = document.getElementById("showAnnual").checked;
-    const cells = GRID_ORDER.map(branch => {
-      const palace = data.palaces[BRANCHES.indexOf(branch)];
-      const phiCorner = phiCornerForPalace(data, palace);
-
-      const sortFn = (a, b) => (LAYER_SORT[a.layer] ?? 6) - (LAYER_SORT[b.layer] ?? 6);
-      const allNatal = palace.stars.filter(s => s.source !== "annual" && s.source !== "annual-mutagen");
-      const annualVisible = showAnnual ? palace.stars.filter(s => s.source === "annual").sort(sortFn) : [];
-      const annualMutagenVisible = showMutagens ? palace.stars.filter(s => s.source === "annual-mutagen").sort(sortFn) : [];
-
-      const majorStars = allNatal.filter(s => s.layer === "major");
-      const natalMutagenStars = allNatal.filter(s => s.source === "natal-mutagen");
-      const minorNatal = allNatal.filter(s => s.layer !== "major" && s.source !== "natal-mutagen").concat(natalMutagenStars);
-
-      const majorHtml  = majorStars.map(s => renderMajorStar(s)).join("");
-      const annualStack = annualVisible.concat(annualMutagenVisible).sort(sortFn);
-      const majorRowHtml = majorHtml || '<span class="void-diep">Vô chính diệu</span>';
-
-      const visibleStarCount = minorNatal.length + annualStack.length;
-      const densityClass = visibleStarCount >= 30 ? " is-ultra-packed" : visibleStarCount >= 22 ? " is-overpacked" : visibleStarCount >= 14 ? " is-packed" : "";
-      const minorInner = renderSplitStars(minorNatal, "stars-natal", data, sortFn);
-      const annualInner = renderSplitStars(annualStack, "stars-annual-row", data, sortFn);
-
-      const marks = [
-        palace.isMenh ? `<span class="mark">Mệnh</span>` : "",
-        palace.isThan ? `<span class="mark">Thân</span>` : ""
-      ].join("");
-
-      return `
-        <article class="palace-cell ${palace.isMenh ? "is-menh" : ""} ${palace.isThan ? "is-than" : ""} ${palace.majorFortune && palace.majorFortune.active ? "is-major-fortune" : ""} ${palace.isAnnualPalace ? "is-annual-palace" : ""}${densityClass}" style="grid-area:${GRID_AREAS[branch]}" data-branch="${branch}" data-zodiac-name="${BRANCH_ZODIAC_NAME[branch]}">
-          <img class="zodiac-bg" src="${BRANCH_ZODIAC_ASSET[branch]}" alt="" aria-hidden="true" decoding="async">
-          <div class="palace-header">
-            <div class="palace-namerow">
-              <span class="palace-han han">${palace.han}</span>
-              <span class="palace-vname">${palace.name}</span>
-              ${marks}
-              ${majorRowHtml ? `<span class="palace-major-row">${majorRowHtml}</span>` : ""}
-            </div>
-            <div class="palace-inforow">
-              <span class="branch-tag"><b class="han">${BRANCH_HAN[branch]}</b> ${branch}</span>
-              <span class="stem">${palace.stem}${STEM_HAN[palace.stem]}</span>
-            </div>
-          </div>
-          <div class="stars">${minorInner}${annualInner}</div>
-          ${phiCorner}
-          ${renderPalaceMeta(data, palace)}
-        </article>`;
-    }).join("");
-
-    els.chart.innerHTML = `${cells}<section class="center-panel">${renderCenterPanel(data)}</section><svg class="tam-hop-lines" id="tamHopSvg" aria-hidden="true"></svg>`;
-  }
-
-  function setupTamHop(){
-    // Bỏ hiệu ứng nối tam hợp trên mobile (frame-mode scale làm lệch toạ độ, lại không có hover thật).
-    if(window.innerWidth <= 700) return;
-    const svg = document.getElementById("tamHopSvg");
-    const grid = els.chart;
-
-    grid.querySelectorAll('.palace-cell').forEach(cell => {
-      cell.addEventListener('mouseenter', () => {
-        const branch = cell.dataset.branch;
-        const group = TAM_HOP[branch];
-        if(!group || !svg) return;
-
-        grid.querySelectorAll('.palace-cell').forEach(c => {
-          const inGroup = group.includes(c.dataset.branch);
-          c.classList.toggle('th-active', inGroup);
-          c.classList.toggle('th-dim', !inGroup);
-        });
-
-        const gRect = grid.getBoundingClientRect();
-        const pts = group.map(b => {
-          const el = grid.querySelector(`[data-branch="${b}"]`);
-          if(!el) return null;
-          const r = el.getBoundingClientRect();
-          return [(r.left+r.right)/2 - gRect.left, (r.top+r.bottom)/2 - gRect.top];
-        }).filter(Boolean);
-
-        if(pts.length === 3){
-          const [[ax,ay],[bx,by],[cx,cy]] = pts;
-          svg.innerHTML =
-            `<line x1="${ax}" y1="${ay}" x2="${bx}" y2="${by}"/>` +
-            `<line x1="${bx}" y1="${by}" x2="${cx}" y2="${cy}"/>` +
-            `<line x1="${cx}" y1="${cy}" x2="${ax}" y2="${ay}"/>` +
-            `<circle cx="${ax}" cy="${ay}" r="4" class="th-dot"/>` +
-            `<circle cx="${bx}" cy="${by}" r="4" class="th-dot"/>` +
-            `<circle cx="${cx}" cy="${cy}" r="4" class="th-dot"/>`;
-        }
-      });
-
-      cell.addEventListener('mouseleave', () => {
-        grid.querySelectorAll('.palace-cell').forEach(c => c.classList.remove('th-active','th-dim'));
-        if(svg) svg.innerHTML = '';
-      });
-    });
-  }
 
   let lastData = null;
-  function render(){
+  function calculate(){
     lastData = buildChartData();
-    renderChart(lastData);
-    setupTamHop();
+    return lastData;
   }
 
   window.TuViEngines = window.TuViEngines || {};
-  window.TuViEngines["nam-phai"] = { render, getData: () => lastData, elementForStar };
+  window.TuViEngines["nam-phai"] = { calculate, getData: () => lastData, elementForStar };
 })();

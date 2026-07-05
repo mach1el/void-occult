@@ -95,8 +95,7 @@ bị gãy.
 
 - Gemini API key chỉ tồn tại ở backend; frontend không còn UI lưu API key trong
   `localStorage`.
-- Zodiac assets và engine Tử Vi được tách khỏi initial bundle; engine chỉ
-  lazy-load khi mở `/tu-vi`.
+- Engine Tử Vi được tách khỏi initial bundle và chỉ lazy-load khi mở `/tu-vi`.
 - Export ảnh dùng trực tiếp package `html-to-image`.
 - Nginx container dùng SPA fallback; central routing, hostname và TLS thuộc repo
   `../routing`.
