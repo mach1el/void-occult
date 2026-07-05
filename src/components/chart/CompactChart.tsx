@@ -384,6 +384,7 @@ function Palace({
       )}
 
       <text x="9" y="239" className="compact-palace-footer">
+        {flowMonth?.branch || ""}
       </text>
       <text x="90" y="239" textAnchor="middle" className="compact-palace-footer">
         {palace.changSheng || ""}

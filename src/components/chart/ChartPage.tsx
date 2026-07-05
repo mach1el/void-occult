@@ -102,7 +102,7 @@ export function ChartPage() {
     gender: "female",
     annualYear: String(new Date().getFullYear()),
     timezone: "7",
-    flowBase: "tieu-han",
+    flowBase: "dai-van",
     showMutagens: true,
     showPhi: false,
     showAnnual: true,
@@ -118,9 +118,7 @@ export function ChartPage() {
     document.title = "Lá Số Tử Vi · Void Occult";
     let active = true;
     Promise.all([
-      // @ts-expect-error Legacy IIFE is intentionally imported for side effects.
       import("../../../pages/purple-star/tu-vi-engine-nam-phai.js"),
-      // @ts-expect-error Legacy IIFE is intentionally imported for side effects.
       import("../../../pages/purple-star/tu-vi-engine-trung-chau.js"),
     ])
       .then(() => {
@@ -337,13 +335,14 @@ export function ChartPage() {
                   />
                 </div>
                 <div className="field">
-                  <label htmlFor="flowBase">Gốc Lưu Nguyệt</label>
+                  <label htmlFor="flowBase">Xem vận năm theo</label>
                   <select
                     id="flowBase"
                     name="flowBase"
                     value={form.flowBase}
                     onChange={fieldChange("flowBase")}
                   >
+                    <option value="luu-nien">Lưu Niên (Xem Hạn)</option>
                     <option value="tieu-han">Tiểu Hạn</option>
                     <option value="dai-van">Lưu Niên Đại Vận</option>
                   </select>
