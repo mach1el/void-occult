@@ -367,13 +367,16 @@ function Palace({
       )}
 
       <text x="9" y="239" className="compact-palace-footer">
-        {BRANCH_HAN[palace.branch]} {palace.changSheng || ""}
+        {BRANCH_HAN[palace.branch] || ""}
+      </text>
+      <text x="90" y="239" textAnchor="middle" className="compact-palace-footer">
+        {palace.changSheng || ""}
       </text>
       {flowMonth && (
         <text
-          x="90"
+          x="170"
           y="239"
-          textAnchor="middle"
+          textAnchor="end"
           className="compact-flow-month"
         >
           <title>
@@ -383,9 +386,7 @@ function Palace({
           T{flowMonth.month}
         </text>
       )}
-      <text x="170" y="239" textAnchor="end" className="compact-palace-footer">
-        {fortune ? `ĐV ${fortune.start}–${fortune.end}` : ""}
-      </text>
+
       <rect
         width={CELL_WIDTH}
         height={CELL_HEIGHT}
