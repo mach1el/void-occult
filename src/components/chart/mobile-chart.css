@@ -36,57 +36,6 @@
     box-shadow: 0 3px 14px rgb(205 162 58 / 18%);
   }
 
-  .chart-overview {
-    height: min(72svh, 760px) !important;
-    min-height: 460px !important;
-    padding: 0 !important;
-    overflow: auto !important;
-    overscroll-behavior-x: contain;
-    overscroll-behavior-y: auto;
-    touch-action: pan-x pan-y;
-    scrollbar-width: thin;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .chart-overview.is-reading {
-    position: absolute !important;
-    left: -10000px;
-    width: 1px;
-    height: 1px !important;
-    min-height: 0 !important;
-    overflow: hidden !important;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .chart-overview .chart-grid.frame-mode {
-    position: relative;
-    inset: auto;
-    flex: none;
-    transform: none !important;
-    transform-origin: top left;
-  }
-
-  .mobile-overview-hint {
-    display: block;
-    position: sticky;
-    z-index: 20;
-    left: 10px;
-    bottom: 10px;
-    width: max-content;
-    max-width: calc(100vw - 56px);
-    margin: -42px 0 10px 10px;
-    padding: 7px 10px;
-    border: 1px solid rgb(205 162 58 / 35%);
-    border-radius: 999px;
-    color: var(--amber-soft);
-    background: rgb(12 10 24 / 88%);
-    font-family: var(--font-chat);
-    font-size: 0.72rem;
-    backdrop-filter: blur(10px);
-    pointer-events: none;
-  }
-
   .mobile-chart-reader {
     display: block;
     padding: 0 10px 12px;

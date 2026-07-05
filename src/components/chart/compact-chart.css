@@ -575,18 +575,6 @@
   background: #171717;
 }
 
-.legacy-chart-host {
-  position: fixed !important;
-  z-index: -1;
-  top: 0;
-  left: -10000px;
-  width: 1200px;
-  height: 1000px;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-
 @media (max-width: 960px) {
   .compact-chart-stage {
     padding: 0;
