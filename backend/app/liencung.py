@@ -174,6 +174,13 @@ def build_focus(chart: Optional[dict], question: str, ci: Optional[dict] = None)
   set_names = {x["p"]["name"] for x in sset}
   menh_el = element_of(chart.get("menhElement"))
   L = [f"[TRỌNG TÂM] Câu hỏi thuộc nhóm: {intent['label']}. Bắt buộc luận theo liên cung dưới đây (không đọc cung đơn lẻ):"]
+  if chart.get("birthMonthStem") and chart.get("birthDayStem"):
+    L.append(
+      f"[CAN CHI SINH] Năm {chart.get('yearStem', '')} {chart.get('yearBranch', '')}"
+      f" · Tháng {chart.get('birthMonthStem', '')} {chart.get('birthMonthBranch', '')}"
+      f" · Ngày {chart.get('birthDayStem', '')} {chart.get('birthDayBranch', '')}"
+      f" · Giờ {chart.get('birthHourStem', '')} {chart.get('birthHourBranch', '')}"
+    )
 
   for x in sset:
     g = group_stars(x["p"])

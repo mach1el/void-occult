@@ -47,6 +47,12 @@ class ChartDTO(BaseModel):
   menhBranch: str = ""
   yearStem: str = ""
   yearBranch: str = ""
+  birthMonthStem: str = ""
+  birthMonthBranch: str = ""
+  birthDayStem: str = ""
+  birthDayBranch: str = ""
+  birthHourStem: str = ""
+  birthHourBranch: str = ""
   annualStem: str = ""
   annualBranch: str = ""
   annualYear: Optional[int] = None
