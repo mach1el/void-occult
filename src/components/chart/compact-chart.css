@@ -410,7 +410,7 @@
   z-index: 300;
   inset: 0;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   padding: 20px;
   background: rgb(5 4 12 / 72%);
@@ -594,6 +594,7 @@
   }
 
   .compact-detail-backdrop {
+    align-items: flex-end;
     padding: 0;
   }
 
