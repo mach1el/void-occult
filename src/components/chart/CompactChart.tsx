@@ -73,6 +73,21 @@ const TAM_HOP: Record<string, string[]> = {
   Mùi: ["Hợi", "Mão", "Mùi"],
 };
 
+const XUNG_CHIEU: Record<string, string> = {
+  Tý: "Ngọ",
+  Sửu: "Mùi",
+  Dần: "Thân",
+  Mão: "Dậu",
+  Thìn: "Tuất",
+  Tỵ: "Hợi",
+  Ngọ: "Tý",
+  Mùi: "Sửu",
+  Thân: "Dần",
+  Dậu: "Mão",
+  Tuất: "Thìn",
+  Hợi: "Tỵ",
+};
+
 const BRANCH_HAN: Record<string, string> = {
   Tý: "子",
   Sửu: "丑",
@@ -408,18 +423,28 @@ function palaceCenter(branch: string): Position | null {
     : null;
 }
 
-function TrineLines({ branches }: { branches: string[] | null }) {
-  if (!branches) return null;
-  const points = branches
+function RelationLines({ branch }: { branch: string | null }) {
+  if (!branch) return null;
+  const center = palaceCenter(branch);
+  if (!center) return null;
+
+  const tamHop = (TAM_HOP[branch] ?? []).filter((b) => b !== branch);
+  const xungChieu = XUNG_CHIEU[branch];
+
+  const targets = [...tamHop, xungChieu]
+    .filter((b): b is string => Boolean(b))
     .map(palaceCenter)
     .filter((point): point is Position => Boolean(point));
-  if (points.length !== 3) return null;
-  const path = `M ${points[0]!.x} ${points[0]!.y} L ${points[1]!.x} ${points[1]!.y} L ${points[2]!.x} ${points[2]!.y} Z`;
+
+  const path = targets
+    .map((target) => `M ${center.x} ${center.y} L ${target.x} ${target.y}`)
+    .join(" ");
 
   return (
     <g className="compact-tam-hop" aria-hidden="true">
       <path d={path} />
-      {points.map((point, index) => (
+      <circle cx={center.x} cy={center.y} r="4" />
+      {targets.map((point, index) => (
         <circle cx={point.x} cy={point.y} r="4" key={index} />
       ))}
     </g>
@@ -716,7 +741,7 @@ export function CompactChart({
   captureRef,
 }: CompactChartProps) {
   const [selectedPalace, setSelectedPalace] = useState<ChartPalace | null>(null);
-  const [activeTrine, setActiveTrine] = useState<string[] | null>(null);
+  const [hoveredBranch, setHoveredBranch] = useState<string | null>(null);
   const palaces = useMemo(
     () =>
       data
@@ -767,20 +792,22 @@ export function CompactChart({
               showPhi={showPhi}
               phiFlows={phiFlowsByPalace.get(palace.index) ?? []}
               trineState={
-                activeTrine
-                  ? activeTrine.includes(palace.branch)
+                hoveredBranch
+                  ? palace.branch === hoveredBranch ||
+                    TAM_HOP[hoveredBranch]?.includes(palace.branch) ||
+                    XUNG_CHIEU[hoveredBranch] === palace.branch
                     ? "active"
                     : "dim"
                   : null
               }
-              onTrineEnter={(branch) => setActiveTrine(TAM_HOP[branch] ?? null)}
-              onTrineLeave={() => setActiveTrine(null)}
+              onTrineEnter={(branch) => setHoveredBranch(branch)}
+              onTrineLeave={() => setHoveredBranch(null)}
               onSelect={setSelectedPalace}
               key={`${palace.name}-${palace.branch}`}
             />
           ))}
           <Center data={data} school={school} gender={gender} />
-          <TrineLines branches={activeTrine} />
+          <RelationLines branch={hoveredBranch} />
           <VoidMarkers markers={data.voidMarkers ?? []} />
           <rect
             x="1"
