@@ -103,6 +103,8 @@
     align-self: stretch;
     display: flex;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
   }
 
   .chat-section .ai-chat {
@@ -113,6 +115,7 @@
 
   .chat-section .ai-chat-panel {
     flex: 1;
+    height: auto;
     min-height: 640px;
   }
 
