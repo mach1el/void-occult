@@ -292,7 +292,7 @@
 }
 
 .compact-tam-hop path {
-  fill: rgb(196 154 53 / 7%);
+  fill: transparent;
   stroke: rgb(173 126 28 / 90%);
   stroke-width: 2.2;
   stroke-dasharray: 7 5;
