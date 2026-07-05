@@ -69,6 +69,7 @@ interface FormState {
   gender: "male" | "female";
   annualYear: string;
   timezone: string;
+  flowBase: string;
   showMutagens: boolean;
   showPhi: boolean;
   showAnnual: boolean;
