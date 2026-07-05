@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,600&family=Noto+Serif+Display:ital,wght@0,600;0,700;1,600&family=Noto+Serif+TC:wght@500;700;900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Be Vietnam Pro", system-ui, sans-serif;
+  --font-serif: "Noto Serif", Georgia, serif;
+  --font-display: "Noto Serif Display", "Noto Serif", Georgia, serif;
+  --font-han: "Noto Serif TC", "Noto Serif", serif;
+  --color-void: #0b0a12;
+  --color-ink: #14111d;
+  --color-paper: #eee5d3;
+  --color-muted: #a9a0b3;
+  --color-cinnabar: #d55342;
+  --color-gold: #dfbd6d;
+  --color-jade: #75b697;
+}
+
+:root {
+  color: #eee5d3;
+  background: #0b0a12;
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  color: #0b0a12;
+  background: #dfbd6d;
+}
+
+.home-noise {
+  background-image:
+    radial-gradient(circle at 50% -10%, rgb(126 77 151 / 24%), transparent 35%),
+    radial-gradient(circle at 8% 78%, rgb(213 83 66 / 12%), transparent 30%),
+    radial-gradient(circle at 92% 84%, rgb(117 182 151 / 10%), transparent 32%);
+}
+
+.home-noise::before {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  opacity: 0.17;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+}
+
+.feature-card::after {
+  position: absolute;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 9999px;
+  content: "";
+  right: -5rem;
+  bottom: -6rem;
+  background: var(--card-glow);
+  filter: blur(50px);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.feature-card:hover::after {
+  opacity: 0.2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

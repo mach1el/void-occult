@@ -24,15 +24,19 @@ services:
       - routing
 
   frontend:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: deploy/frontend.Dockerfile
+    image: void-occult-frontend:local
     container_name: voidocc-frontend
     expose:
       - "80"
-    volumes:
-      - ./:/usr/share/nginx/html:ro                               # site tĩnh (cả repo)
-      - ./deploy/nginx.conf:/etc/nginx/conf.d/default.conf:ro     # "/" = homepage + chặn /backend, dotfiles
     depends_on:
       - backend
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
     restart: unless-stopped
     networks:
       - routing

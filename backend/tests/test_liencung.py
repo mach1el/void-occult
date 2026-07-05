@@ -1,4 +1,4 @@
-"""Test thuần stdlib cho build_focus — chạy: python -m unittest (từ backend/)."""
+"""Test thuần stdlib — chạy: python -m unittest discover -s tests (từ backend/)."""
 import sys
 import unittest
 from pathlib import Path

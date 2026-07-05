@@ -5,18 +5,18 @@
   const BRANCH_HAN = {Tý:"子",Sửu:"丑",Dần:"寅",Mão:"卯",Thìn:"辰",Tỵ:"巳",Ngọ:"午",Mùi:"未",Thân:"申",Dậu:"酉",Tuất:"戌",Hợi:"亥"};
   const BRANCH_ZODIAC_NAME = {Tý:"Chuột",Sửu:"Trâu",Dần:"Hổ",Mão:"Mèo",Thìn:"Rồng",Tỵ:"Rắn",Ngọ:"Ngựa",Mùi:"Dê",Thân:"Khỉ",Dậu:"Gà",Tuất:"Chó",Hợi:"Heo"};
   const BRANCH_ZODIAC_ASSET = {
-    Tý:"assets/zodiac/transparent/ty.png",
-    Sửu:"assets/zodiac/transparent/suu.png",
-    Dần:"assets/zodiac/transparent/dan.png",
-    Mão:"assets/zodiac/transparent/mao.png",
-    Thìn:"assets/zodiac/transparent/thin.png",
-    Tỵ:"assets/zodiac/transparent/ti.png",
-    Ngọ:"assets/zodiac/transparent/ngo.png",
-    Mùi:"assets/zodiac/transparent/mui.png",
-    Thân:"assets/zodiac/transparent/than.png",
-    Dậu:"assets/zodiac/transparent/dau.png",
-    Tuất:"assets/zodiac/transparent/tuat.png",
-    Hợi:"assets/zodiac/transparent/hoi.png"
+    Tý:"/assets/zodiac/transparent/ty.png",
+    Sửu:"/assets/zodiac/transparent/suu.png",
+    Dần:"/assets/zodiac/transparent/dan.png",
+    Mão:"/assets/zodiac/transparent/mao.png",
+    Thìn:"/assets/zodiac/transparent/thin.png",
+    Tỵ:"/assets/zodiac/transparent/ti.png",
+    Ngọ:"/assets/zodiac/transparent/ngo.png",
+    Mùi:"/assets/zodiac/transparent/mui.png",
+    Thân:"/assets/zodiac/transparent/than.png",
+    Dậu:"/assets/zodiac/transparent/dau.png",
+    Tuất:"/assets/zodiac/transparent/tuat.png",
+    Hợi:"/assets/zodiac/transparent/hoi.png"
   };
   const CYCLE_BRANCHES = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
   const HOUR_BRANCHES = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
@@ -225,6 +225,33 @@
       stem: STEMS[fix(year + 6, 10)],
       branch: CYCLE_BRANCHES[fix(year + 8, 12)]
     };
+  }
+
+  function stemBranchForLunarMonth(yearStem, lunarMonth){
+    const tigerStem = TIGER_RULE[yearStem];
+    return {
+      stem: STEMS[fix(STEMS.indexOf(tigerStem) + lunarMonth - 1, 10)],
+      branch: CYCLE_BRANCHES[fix(lunarMonth + 1, 12)]
+    };
+  }
+
+  function stemBranchForSolarDay(day, month, year){
+    const julianDay = jdFromDate(day, month, year);
+    return {
+      stem: STEMS[fix(julianDay + 9, 10)],
+      branch: CYCLE_BRANCHES[fix(julianDay + 1, 12)]
+    };
+  }
+
+  function stemForHour(dayStem, hourBranch){
+    const tyStemByDay = {
+      Giáp:"Giáp", Kỷ:"Giáp", Ất:"Bính", Canh:"Bính", Bính:"Mậu",
+      Tân:"Mậu", Đinh:"Canh", Nhâm:"Canh", Mậu:"Nhâm", Quý:"Nhâm"
+    };
+    return STEMS[fix(
+      STEMS.indexOf(tyStemByDay[dayStem]) + HOUR_BRANCHES.indexOf(hourBranch),
+      10
+    )];
   }
 
   function cycleBranchToIndex(branch){
@@ -739,6 +766,9 @@
     const lunar = solarToLunar(solar.day, solar.month, solar.year, timeZone);
     const birthHourBranch = els.hour.value || "Tý";
     const {stem:yearStem, branch:yearBranch} = stemBranchForYear(lunar.year);
+    const birthMonthPillar = stemBranchForLunarMonth(yearStem, lunar.month);
+    const birthDayPillar = stemBranchForSolarDay(solar.day, solar.month, solar.year);
+    const birthHourStem = stemForHour(birthDayPillar.stem, birthHourBranch);
     const rawAnnual = Number(els.annualYear.value);
     const annualYear = (rawAnnual >= 1900 && rawAnnual <= 2100) ? rawAnnual : new Date().getFullYear();
     const annual = stemBranchForYear(annualYear);
@@ -807,6 +837,9 @@
     const starCount = palaces.reduce((sum, palace) => sum + palace.stars.length, 0);
     return {
       solar, lunar, timeZone, birthHourBranch, yearStem, yearBranch,
+      birthMonthStem:birthMonthPillar.stem, birthMonthBranch:birthMonthPillar.branch,
+      birthDayStem:birthDayPillar.stem, birthDayBranch:birthDayPillar.branch,
+      birthHourStem,
       annualYear, annualStem:annual.stem, annualBranch:annual.branch,
       nominalAge, month, day, menhIndex, thanIndex, menhBranch, menhElement,
       cucMenhRelation, cuc, starts, direction, directionSign, yearPolarity,
