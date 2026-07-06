@@ -2,7 +2,7 @@ name: Build & Deploy
 
 # Build apexvoid-occult images, push to Docker Hub, then deploy on the VPS by pulling
 # the new tag (via ansible-library). Config/secrets live in ansible-library;
-# this repo needs DOCKERHUB_TOKEN + ANSIBLE_VAULT_PASSWORD.
+# this repo needs DOCKER_HUB_TOKEN + ANSIBLE_VAULT_PASSWORD.
 
 on:
   push:
@@ -31,5 +31,5 @@ jobs:
           {"name": "apexvoid-occult-frontend", "context": ".",        "dockerfile": "deploy/frontend.Dockerfile"}
         ]
     secrets:
-      registry-token: ${{ secrets.DOCKERHUB_TOKEN }}
+      registry-token: ${{ secrets.DOCKER_HUB_TOKEN }}
       vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
