@@ -1,22 +1,30 @@
-# Void Occult
+# 🔮 Void Occult
+
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
+[![Tailwind](https://img.shields.io/badge/Tailwind-v4-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-backend-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Gemini](https://img.shields.io/badge/Google-Gemini-8E75B2?style=flat-square&logo=googlegemini&logoColor=white)](https://ai.google.dev/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
 
 Frontend cho thư viện Kinh Dịch / Lục Hào, công cụ lập lá số Tử Vi Đẩu Số và
 backend luận giải Gemini.
 
-## Tech stack
+## 🧱 Tech stack
 
-- React 19 + TypeScript strict
-- Vite 8
-- Tailwind CSS 4
-- FastAPI + Gemini
-- Docker Compose
-- Nginx chỉ phục vụ bundle frontend bên trong container; ingress và TLS do repo
+- ⚛️ **React 19** + 📘 **TypeScript** strict
+- ⚡ **Vite 8**
+- 🎨 **Tailwind CSS 4**
+- 🐍 **FastAPI** + 🔮 **Gemini** (streaming, key ẩn server-side)
+- 🐳 **Docker Compose**
+- 🌐 Nginx chỉ phục vụ bundle frontend bên trong container; ingress và TLS do repo
   `../routing` quản lý
 
 Frontend được build thành artifact `dist/`. Container không còn mount hoặc public
 toàn bộ source repository, và không còn cấu hình/phụ thuộc Netlify.
 
-## Cấu trúc
+## 📂 Cấu trúc
 
 ```text
 src/
@@ -35,7 +43,7 @@ deploy/
 Hai engine Tử Vi hiện hữu được giữ nguyên làm domain layer để tránh thay đổi thuật
 toán an sao. React giao tiếp với engine qua adapter typed trong `src/lib/chart.ts`.
 
-## Phát triển frontend
+## 💻 Phát triển frontend
 
 Yêu cầu Node.js 22.12 trở lên.
 
@@ -62,7 +70,7 @@ cd backend
 python -m unittest discover -s tests
 ```
 
-## Chạy đầy đủ bằng Docker
+## 🐳 Chạy đầy đủ bằng Docker
 
 Tạo `backend/.env` và điền `GEMINI_API_KEY`, sau đó bảo đảm network của project
 `routing` đã tồn tại:
@@ -79,7 +87,7 @@ Services chỉ `expose` trong Docker network `routing`:
 Repo này không publish host port và không sửa cấu hình ingress của
 `Projects/routing`.
 
-## Routes
+## 🔗 Routes
 
 Public qua central ingress (`../routing`): `apexvoid.net`, `fate.apexvoid.net`,
 và `void-occult.localhost` (HTTP-only cho dev) đều trỏ vào stack này.
@@ -95,7 +103,7 @@ và `void-occult.localhost` (HTTP-only cho dev) đều trỏ vào stack này.
 Các URL `.html` cũ vẫn được frontend map tương thích để bookmark hiện hữu không
 bị gãy.
 
-## Ghi chú kiến trúc
+## 🏛️ Ghi chú kiến trúc
 
 - Gemini API key chỉ tồn tại ở backend; frontend không còn UI lưu API key trong
   `localStorage`.
