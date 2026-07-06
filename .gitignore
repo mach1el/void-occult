@@ -2,6 +2,7 @@
 pages/purple-star/tu-vi-config.js
 .env
 .env.*
+!.env.example
 node_modules/
 dist/
 *.tsbuildinfo

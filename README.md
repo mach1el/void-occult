@@ -81,12 +81,16 @@ Repo này không publish host port và không sửa cấu hình ingress của
 
 ## Routes
 
-- `/` — trang chủ
+Public qua central ingress (`../routing`): `apexvoid.net`, `fate.apexvoid.net`,
+và `void-occult.localhost` (HTTP-only cho dev) đều trỏ vào stack này.
+
+- `/` — trang chủ (`voidocc-frontend`)
 - `/kinh-dich/luc-hao-co-ban`
 - `/kinh-dich/luc-hao-nang-cao`
-- `/tu-vi`
-- `/api/interpret` — Gemini streaming qua FastAPI
-- `/health` — backend health
+- `/tu-vi` — lá số Tử Vi (lazy-load engine)
+- `/api/interpret` — Gemini streaming qua FastAPI (`voidocc-backend`)
+- `/health` — backend health (`voidocc-backend`)
+- `/api/debug/*` — bị ingress chặn (404) ở production
 
 Các URL `.html` cũ vẫn được frontend map tương thích để bookmark hiện hữu không
 bị gãy.
