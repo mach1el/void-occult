@@ -81,8 +81,8 @@ docker compose up --build -d
 
 Services chỉ `expose` trong Docker network `routing`:
 
-- `voidocc-frontend:80`
-- `voidocc-backend:8000`
+- `apexvoid-occult-frontend:80`
+- `apexvoid-occult-backend:8000`
 
 Repo này không publish host port và không sửa cấu hình ingress của
 `Projects/routing`.
@@ -92,12 +92,12 @@ Repo này không publish host port và không sửa cấu hình ingress của
 Public qua central ingress (`../routing`): `apexvoid.net`, `fate.apexvoid.net`,
 và `void-occult.localhost` (HTTP-only cho dev) đều trỏ vào stack này.
 
-- `/` — trang chủ (`voidocc-frontend`)
+- `/` — trang chủ (`apexvoid-occult-frontend`)
 - `/kinh-dich/luc-hao-co-ban`
 - `/kinh-dich/luc-hao-nang-cao`
 - `/tu-vi` — lá số Tử Vi (lazy-load engine)
-- `/api/interpret` — Gemini streaming qua FastAPI (`voidocc-backend`)
-- `/health` — backend health (`voidocc-backend`)
+- `/api/interpret` — Gemini streaming qua FastAPI (`apexvoid-occult-backend`)
+- `/health` — backend health (`apexvoid-occult-backend`)
 - `/api/debug/*` — bị ingress chặn (404) ở production
 
 Các URL `.html` cũ vẫn được frontend map tương thích để bookmark hiện hữu không

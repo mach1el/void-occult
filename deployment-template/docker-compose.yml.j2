@@ -1,0 +1,41 @@
+{# Rendered on the VPS by ansible (deploy_image role). Do not edit on the host. #}
+{# Vars come from ansible-library: image_tag, registry_namespace, apexvoid_occult_* #}
+services:
+  backend:
+    image: "{{ registry_namespace }}/apexvoid-occult-backend:{{ image_tag }}"
+    container_name: apexvoid-occult-backend
+    expose:
+      - "8000"
+    environment:
+      GEMINI_API_KEY: "{{ apexvoid_occult_gemini_api_key }}"
+      GEMINI_MODEL: "{{ apexvoid_occult_gemini_model }}"
+      GEMINI_THINKING_BUDGET: "{{ apexvoid_occult_gemini_thinking_budget }}"
+      GEMINI_MAX_OUTPUT_TOKENS: "{{ apexvoid_occult_gemini_max_output_tokens }}"
+      ALLOW_ORIGINS: "{{ apexvoid_occult_allow_origins }}"
+    # google-genai (httpx) tries IPv6 first; containers have no IPv6 route.
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=1
+      - net.ipv6.conf.default.disable_ipv6=1
+    restart: unless-stopped
+    networks:
+      - routing
+
+  frontend:
+    image: "{{ registry_namespace }}/apexvoid-occult-frontend:{{ image_tag }}"
+    container_name: apexvoid-occult-frontend
+    expose:
+      - "80"
+    depends_on:
+      - backend
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+    restart: unless-stopped
+    networks:
+      - routing
+
+networks:
+  routing:
+    name: "{{ routing_network | default('routing') }}"
+    external: true

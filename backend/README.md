@@ -96,7 +96,7 @@ tests/
 
 ## 🐳 Docker
 
-Backend không chạy độc lập ở production — nó là service `voidocc-backend` trong
+Backend không chạy độc lập ở production — nó là service `apexvoid-occult-backend` trong
 `docker-compose.yml` ở repo gốc, chỉ `expose` cổng `8000` trong Docker network
 `routing`. Central ingress (`../routing`) proxy `apexvoid.net/api/*` và
 `/health` vào đây. Xem [README gốc](../README.md) để chạy full stack.

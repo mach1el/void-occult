@@ -6,7 +6,7 @@
 services:
   backend:
     build: ./backend
-    container_name: voidocc-backend
+    container_name: apexvoid-occult-backend
     expose:
       - "8000"
     env_file:
@@ -28,7 +28,7 @@ services:
       context: .
       dockerfile: deploy/frontend.Dockerfile
     image: void-occult-frontend:local
-    container_name: voidocc-frontend
+    container_name: apexvoid-occult-frontend
     expose:
       - "80"
     depends_on:
