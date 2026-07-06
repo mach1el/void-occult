@@ -15,6 +15,10 @@
   --violet-deep:#3a2a6b;
   --cyan:#5fe3e0;
   --cyan-deep:#1b6b78;
+  --galaxy-violet:#7044d9;
+  --galaxy-blue:#286fc4;
+  --galaxy-cyan:#39c6cf;
+  --galaxy-rose:#b54b91;
   --ash:#cdc7dc;
   --font-vn:'Noto Serif','Times New Roman',serif;
   --font-display:'Noto Serif Display','Noto Serif','Times New Roman',serif;
@@ -32,10 +36,9 @@ html{
 body{
   min-height:100vh;
   background:
-    linear-gradient(90deg, rgba(150,200,255,.025) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(150,200,255,.02) 1px, transparent 1px),
-    linear-gradient(155deg, #0a0a1f 0%, #07091a 56%, #050610 100%);
-  background-size:44px 44px, 44px 44px, auto;
+    radial-gradient(ellipse 80% 55% at 8% 2%, rgba(66,35,116,.28), transparent 64%),
+    radial-gradient(ellipse 70% 52% at 96% 8%, rgba(22,80,137,.24), transparent 66%),
+    linear-gradient(155deg, #09071a 0%, #070a1d 48%, #040611 100%);
   background-attachment:fixed;
   color:var(--paper);
   font-family:var(--font-vn);
@@ -46,45 +49,73 @@ body::before{
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.16;
+  opacity:.13;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
 }
-/* ── Galaxy nebula (animated) ── */
+/* ── Galaxy backdrop ── */
 .galaxy-fx{
   position:fixed;
-  top:-30%;left:-30%;
-  width:160%;height:160%;
+  inset:-20%;
   z-index:0;
   pointer-events:none;
+  overflow:hidden;
   background:
-    radial-gradient(38% 30% at 22% 24%, rgba(146,92,238,.55) 0%, rgba(96,58,176,.18) 45%, transparent 70%),
-    radial-gradient(34% 28% at 78% 18%, rgba(46,196,214,.45) 0%, rgba(30,120,150,.12) 46%, transparent 68%),
-    radial-gradient(40% 32% at 84% 82%, rgba(150,74,224,.48) 0%, transparent 66%),
-    radial-gradient(34% 30% at 14% 80%, rgba(40,176,200,.40) 0%, transparent 64%),
-    radial-gradient(26% 24% at 52% 52%, rgba(120,80,210,.24) 0%, transparent 66%);
-  will-change:transform,filter;
-  animation:galaxyDrift 18s ease-in-out infinite alternate, galaxyHue 10s linear infinite;
+    radial-gradient(ellipse 35% 29% at 17% 24%, rgba(112,68,217,.68) 0%, rgba(78,42,158,.28) 42%, transparent 72%),
+    radial-gradient(ellipse 34% 27% at 84% 19%, rgba(57,198,207,.48) 0%, rgba(27,105,145,.22) 44%, transparent 72%),
+    radial-gradient(ellipse 38% 33% at 86% 83%, rgba(181,75,145,.46) 0%, rgba(101,42,118,.18) 44%, transparent 72%),
+    radial-gradient(ellipse 34% 31% at 12% 82%, rgba(40,111,196,.50) 0%, rgba(28,65,140,.18) 45%, transparent 72%),
+    radial-gradient(ellipse 29% 24% at 52% 53%, rgba(105,76,191,.26) 0%, transparent 70%);
+  filter:saturate(115%);
+  will-change:transform;
+  animation:galaxyDrift 34s ease-in-out infinite alternate;
+}
+.galaxy-fx::before{
+  content:"";
+  position:absolute;
+  inset:8%;
+  opacity:.52;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.95) 0 1px, transparent 1.35px),
+    radial-gradient(circle, rgba(164,215,255,.75) 0 .8px, transparent 1.2px),
+    radial-gradient(circle, rgba(221,197,255,.72) 0 .7px, transparent 1.1px);
+  background-size:173px 173px, 257px 257px, 389px 389px;
+  background-position:19px 37px, 91px 13px, 47px 121px;
+  animation:starDrift 90s linear infinite;
+}
+.galaxy-fx::after{
+  content:"";
+  position:absolute;
+  inset:18% -12%;
+  opacity:.72;
+  background:
+    linear-gradient(118deg,
+      transparent 27%,
+      rgba(104,69,190,.05) 35%,
+      rgba(94,89,190,.17) 44%,
+      rgba(58,166,194,.14) 51%,
+      rgba(177,74,145,.09) 59%,
+      transparent 71%);
+  filter:blur(28px);
+  transform:rotate(-5deg);
 }
 @keyframes galaxyDrift{
-  0%{transform:translate3d(-6%,-4%,0) scale(1.06) rotate(0deg)}
-  50%{transform:translate3d(6%,4%,0) scale(1.22) rotate(6deg)}
-  100%{transform:translate3d(-4%,6%,0) scale(1.12) rotate(-4deg)}
+  0%{transform:translate3d(-2%,-1%,0) scale(1.02) rotate(-1deg)}
+  100%{transform:translate3d(2%,1.5%,0) scale(1.08) rotate(2deg)}
 }
-@keyframes galaxyHue{
-  0%{filter:hue-rotate(0deg)}
-  50%{filter:hue-rotate(70deg)}
-  100%{filter:hue-rotate(0deg)}
+@keyframes starDrift{
+  to{transform:translate3d(54px,38px,0)}
 }
 @media (prefers-reduced-motion:reduce){
-  .galaxy-fx{animation:none}
+  .galaxy-fx,
+  .galaxy-fx::before{animation:none}
 }
 body::after{
   content:"";
   position:fixed;
   top:0;left:0;right:0;
   height:3px;
-  background:linear-gradient(90deg, transparent 0%, var(--violet) 22%, var(--cyan) 50%, var(--violet) 78%, transparent 100%);
-  opacity:.8;
+  background:linear-gradient(90deg, transparent 0%, var(--galaxy-violet) 22%, var(--galaxy-cyan) 50%, var(--galaxy-rose) 78%, transparent 100%);
+  opacity:.72;
   pointer-events:none;
   z-index:100;
 }
@@ -150,10 +181,12 @@ h1{display:none}
 
 /* ── Panels ── */
 .panel{
-  background:linear-gradient(180deg, rgba(36,27,62,.96), rgba(20,15,38,.95));
-  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(29,22,55,.92), rgba(13,12,33,.91));
+  border:1px solid rgba(121,99,179,.32);
   border-radius:8px;
-  box-shadow:0 20px 52px -26px rgba(0,0,0,.78), 0 0 0 1px rgba(180,155,255,.06);
+  box-shadow:0 20px 52px -26px rgba(0,0,0,.82), 0 0 0 1px rgba(180,155,255,.05);
+  backdrop-filter:blur(18px) saturate(112%);
+  -webkit-backdrop-filter:blur(18px) saturate(112%);
 }
 /* Chart panel: stretches to fill section column */
 .shell > section > .panel{
@@ -385,9 +418,11 @@ footer .han{
 }
 .ai-chat-panel{
   display:flex;flex-direction:column;width:100%;height:100%;min-height:500px;
-  border:1px solid var(--line);border-radius:8px;overflow:hidden;
-  background:linear-gradient(180deg, #18122c, #0e0a1c);
+  border:1px solid rgba(103,91,162,.34);border-radius:8px;overflow:hidden;
+  background:linear-gradient(180deg, rgba(22,18,48,.94), rgba(8,9,26,.94));
   box-shadow:0 10px 40px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(180,155,255,.04);
+  backdrop-filter:blur(16px) saturate(110%);
+  -webkit-backdrop-filter:blur(16px) saturate(110%);
 }
 .ai-chat-head{
   display:flex;align-items:center;justify-content:space-between;gap:8px;
