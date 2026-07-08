@@ -18,7 +18,7 @@ from __future__ import annotations
 import unicodedata
 from typing import Optional
 
-from .constants import (FIVE, SINH, KHAC, INTENTS, TIMING_KW, MONTHLY_KW, CACH_CUC, SAT, KEY_PHU)
+from .constants import (FIVE, SINH, KHAC, INTENTS, TIMING_KW, MONTHLY_KW, CACH_CUC, SAT, KEY_PHU, THAI_TUE_RING)
 
 
 def norm(s) -> str:
@@ -187,7 +187,12 @@ def build_focus(chart: Optional[dict], question: str, ci: Optional[dict] = None)
     parts = []
     if g["major"]:
       parts.append("Chính tinh: " + ", ".join(_lbl(s) for s in g["major"]))
-    kp = [s for s in g["phu"] if s["name"] in KEY_PHU]
+    kp = []
+    for s in g["phu"]:
+      if s["name"] in KEY_PHU:
+        if not timing and s["name"] in THAI_TUE_RING:
+          continue
+        kp.append(s)
     if kp:
       parts.append("Phụ tinh: " + ", ".join(_lbl(s) for s in kp))
     if g["hoa"]:
