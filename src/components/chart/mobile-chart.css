@@ -125,7 +125,9 @@
     margin: 0 -10px 12px;
     padding: 0 10px 7px;
     overflow-x: auto;
+    overscroll-behavior-x: contain;
     scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
 
