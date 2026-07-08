@@ -605,21 +605,21 @@
   }
 
   .compact-detail-backdrop {
-    align-items: flex-end;
-    padding: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    padding-top: max(14px, env(safe-area-inset-top));
+    padding-bottom: max(14px, env(safe-area-inset-bottom));
   }
 
   .compact-detail-sheet {
-    width: 100%;
-    max-height: 86svh;
-    border-right: 0;
-    border-bottom: 0;
-    border-left: 0;
-    border-radius: 18px 18px 0 0;
+    width: min(94vw, 520px);
+    max-height: min(82svh, 720px);
+    border-radius: 16px;
   }
 
   .compact-detail-handle {
-    display: block;
+    display: none;
     width: 42px;
     height: 4px;
     margin: 8px auto 0;

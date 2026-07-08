@@ -118,6 +118,30 @@ const HOUR_RANGES: Record<string, string> = {
   Hợi: "21–23",
 };
 
+function useDesktopTrineInteractions() {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+
+    const query = window.matchMedia(
+      "(min-width: 961px) and (hover: hover) and (pointer: fine)",
+    );
+    const sync = () => setEnabled(query.matches);
+
+    sync();
+    if (query.addEventListener) {
+      query.addEventListener("change", sync);
+      return () => query.removeEventListener("change", sync);
+    }
+
+    query.addListener(sync);
+    return () => query.removeListener(sync);
+  }, []);
+
+  return enabled;
+}
+
 const STEM_ABBREVIATIONS: Record<string, string> = {
   Giáp: "G.",
   Ất: "Ấ.",
@@ -742,6 +766,7 @@ export function CompactChart({
 }: CompactChartProps) {
   const [selectedPalace, setSelectedPalace] = useState<ChartPalace | null>(null);
   const [hoveredBranch, setHoveredBranch] = useState<string | null>(null);
+  const canUseRelationLines = useDesktopTrineInteractions();
   const palaces = useMemo(
     () =>
       data
@@ -764,6 +789,11 @@ export function CompactChart({
     }
     return flows;
   }, [data]);
+  useEffect(() => {
+    if (!canUseRelationLines && hoveredBranch) setHoveredBranch(null);
+  }, [canUseRelationLines, hoveredBranch]);
+
+  const activeRelationBranch = canUseRelationLines ? hoveredBranch : null;
 
   if (!data) {
     return <div className="compact-chart-loading">Đang lập lá số…</div>;
@@ -792,22 +822,26 @@ export function CompactChart({
               showPhi={showPhi}
               phiFlows={phiFlowsByPalace.get(palace.index) ?? []}
               trineState={
-                hoveredBranch
-                  ? palace.branch === hoveredBranch ||
-                    TAM_HOP[hoveredBranch]?.includes(palace.branch) ||
-                    XUNG_CHIEU[hoveredBranch] === palace.branch
+                activeRelationBranch
+                  ? palace.branch === activeRelationBranch ||
+                    TAM_HOP[activeRelationBranch]?.includes(palace.branch) ||
+                    XUNG_CHIEU[activeRelationBranch] === palace.branch
                     ? "active"
                     : "dim"
                   : null
               }
-              onTrineEnter={(branch) => setHoveredBranch(branch)}
-              onTrineLeave={() => setHoveredBranch(null)}
+              onTrineEnter={(branch) => {
+                if (canUseRelationLines) setHoveredBranch(branch);
+              }}
+              onTrineLeave={() => {
+                if (canUseRelationLines) setHoveredBranch(null);
+              }}
               onSelect={setSelectedPalace}
               key={`${palace.name}-${palace.branch}`}
             />
           ))}
           <Center data={data} school={school} gender={gender} />
-          <RelationLines branch={hoveredBranch} />
+          <RelationLines branch={activeRelationBranch} />
           <VoidMarkers markers={data.voidMarkers ?? []} />
           <rect
             x="1"
