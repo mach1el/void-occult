@@ -15,7 +15,7 @@ class TestKBVocab(unittest.TestCase):
         }
         self.phu_tinh = set(KEY_PHU)
         self.tu_hoa = {"Hóa Lộc", "Hóa Quyền", "Hóa Khoa", "Hóa Kỵ"}
-        self.khac = {"Tuần", "Triệt"}
+        self.khac = {"Tuần", "Triệt", "Tuần Không", "Triệt Không"}
         self.valid_stars = self.chinh_tinh | self.phu_tinh | self.tu_hoa | self.khac
         self.valid_stars = self.valid_stars.union({"Lưu " + x for x in self.valid_stars})
         
