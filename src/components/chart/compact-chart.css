@@ -196,11 +196,18 @@
   outline: none;
 }
 
-.compact-palace:hover .compact-palace-bg,
-.compact-palace:focus .compact-palace-bg {
+.compact-palace:focus-visible .compact-palace-bg {
   fill: #e9eddd;
   stroke: #405e2d;
   stroke-width: 2.3;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .compact-palace:hover .compact-palace-bg {
+    fill: #e9eddd;
+    stroke: #405e2d;
+    stroke-width: 2.3;
+  }
 }
 
 .compact-palace.is-menh .compact-palace-bg {
@@ -445,6 +452,7 @@
   max-height: min(82svh, 760px);
   overflow: auto;
   overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   border: 1px solid rgb(180 155 255 / 35%);
   border-radius: 18px;
   color: var(--paper);
@@ -593,11 +601,17 @@
   .compact-chart-svg {
     width: 100%;
     max-width: 720px;
+    touch-action: pan-y;
   }
 
   .compact-chart-capture {
     width: 100%;
     max-width: 720px;
+    touch-action: pan-y;
+  }
+
+  .compact-palace {
+    cursor: default;
   }
 
   .compact-tam-hop {
