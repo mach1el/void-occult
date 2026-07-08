@@ -1,22 +1,37 @@
+---
+intent: [wealth]
+timing: false
+requires_stars: []
+---
 # Cung Tài Bạch: Tiền Bạc và Sự Nghiệp Tài Chính
 
-Cung Tài Bạch thể hiện cách thức đương số kiếm tiền, năng lực quản lý tài chính, thái độ đối với vật chất và mức độ giàu có trong cuộc đời. Tuy nhiên, để đánh giá toàn diện về tài sản, phải kết hợp cả Tài Bạch (tiền mặt, dòng tiền), Điền Trạch (bất động sản, tài sản tích lũy) và Phúc Đức (cách tiêu tiền, lộc trời cho).
+Cung Tài Bạch thể hiện cách thức kiếm tiền và dòng tiền luân chuyển. Phải kết hợp Điền Trạch (tài sản tích lũy) và Phúc Đức (năng lực hưởng thụ) để ra kết luận cuối cùng.
 
 ## 1. Mối Tương Quan Mệnh - Tài Bạch - Phúc Đức - Điền Trạch
-- **Tài Bạch xung chiếu Phúc Đức**: Cách kiếm tiền ảnh hưởng đến sự thanh thản nội tâm, và ngược lại, "Lộc" từ Phúc Đức quyết định sự hanh thông của Tài Bạch. Kiếm tiền bất chấp thủ đoạn thì Phúc giảm, Phúc tốt thì tự nhiên tiền tới.
-- **Tài Bạch vs Điền Trạch**: Tài Bạch là tiền lưu động (làm ra bao nhiêu), Điền Trạch là cái kho giữ của (giữ lại được bao nhiêu). Nhiều người Tài Bạch rất sáng (kiếm tiền cực giỏi) nhưng Điền Trạch bị phá (Không Kiếp, Đại Hao) thì kiếm mười tiêu mười một, cuối đời tay trắng.
+- **Tài Bạch xung chiếu Phúc Đức**: Dòng tiền phụ thuộc vào Phúc Đức. Phúc Đức xấu (nhiều Sát Tinh) thì kiếm tiền dễ dính pháp lý hoặc thị phi.
+- **Tài Bạch vs Điền Trạch**: Tài Bạch sáng mà Điền Trạch bị Không Kiếp, Đại Hao tàn phá thì "kiếm mười tiêu mười một". Trọng số: Sự hao tán ở Điền Trạch THẮNG năng lực kiếm tiền ở Tài Bạch. Phủ định: KHÔNG ĐƯỢC kết luận là giàu có hậu vận nếu Điền Trạch xấu.
 
-## 2. Ảnh Hưởng Của Chính Tinh Tại Cung Tài Bạch
-- **Tử Vi, Thiên Phủ**: Tài tinh vĩ đại. Kiếm tiền bằng năng lực lãnh đạo, danh tiếng và uy tín. Tiền bạc dồi dào, thu nhập ổn định, hiếm khi phải lo lắng về cái ăn cái mặc.
-- **Vũ Khúc, Thái Âm**: Hai kho tài lộc lớn nhất của Tử Vi. Vũ Khúc kiếm tiền bằng hành động thực tế, kinh doanh buôn bán, rất nhạy bén với tiền. Thái Âm kiếm tiền nhẹ nhàng hơn, thường là từ bất động sản, tích lũy đất đai hoặc các kế hoạch dài hạn.
-- **Thiên Cơ, Cự Môn**: Kiếm tiền bằng trí óc, sự tư duy, môi giới, hoặc dùng lời nói (Cự Môn - luật sư, diễn giả, sales). Tiền bạc thường đến từ sự nỗ lực trí tuệ chứ không phải từ may mắn.
-- **Tham Lang**: Kiếm tiền bằng giao tế, quan hệ xã hội, hoặc các cơ hội đột phá. Dễ bạo phát bạo tàn, thích những công việc mang tính rủi ro cao, đầu tư mạo hiểm.
-- **Thất Sát, Phá Quân**: Kiếm tiền trong sự cạnh tranh khốc liệt, tiên phong đi đầu. Thường trải qua nhiều thăng trầm, "lên voi xuống chó". Tiền bạc đi liền với sự vất vả, bôn ba.
-- **Thiên Đồng, Thiên Lương**: Kiếm tiền bằng sự nhẹ nhàng, an nhàn. Không quá đặt nặng vật chất nhưng thường "có lộc trời cho", lúc thiếu lại có người giúp. Làm các nghề liên quan đến giáo dục, y tế, phục vụ cộng đồng rất dễ sinh tài.
+## 2. Phân Vai Chính Tinh Tại Tài Bạch (Nam Phái)
+- **Vũ Khúc (Tài Tinh Chính - Tính Động)**: Kiếm tiền bằng hành động thực tế, kinh doanh, xoay vòng vốn liên tục.
+- **Thái Âm (Tài Tinh Tàng - Tính Tĩnh)**: Kiếm tiền bằng tích lũy dài hạn, điền sản, nhà đất. Càng về hậu vận càng no đủ.
+- **Thiên Phủ (Khố Tinh - Cái Kho)**: Kiếm tiền bằng quản trị dòng tiền, thủ quỹ, ngân hàng. Trọng sự an toàn hơn mạo hiểm.
+- **Tham Lang**: Đầu cơ, mạo hiểm, bạo phát bạo tàn. Trọng số: Nếu hội Hỏa Tinh hoặc Linh Tinh đắc địa thì thành cách `Tham Hỏa Tương Phùng` / `Tham Linh Tương Phùng`, bạo phát khổng lồ. Ngoại lệ: Nếu Tham Lang ngộ Hóa Kỵ thì tuyệt đối cấm đầu cơ.
+- **Thiên Cơ, Cự Môn**: Dùng chất xám, miệng lưỡi (sales, giảng dạy). Phủ định: Không có tư chất làm giàu từ tay trắng nếu thiếu Hóa Lộc.
+- **Thất Sát, Phá Quân**: Tiên phong, cạnh tranh khốc liệt. Nếu Phá Quân ngộ Tuần Không hoặc Triệt Không thì tiền tài gãy đổ giữa chừng.
 
-## 3. Các Phụ Tinh Tác Động Đến Tiền Bạc
-- **Lộc Tồn, Hóa Lộc**: Dấu hiệu của sự giàu có. Lộc Tồn là kho báu giữ lại được, cẩn trọng trong chi tiêu (đôi khi bủn xỉn). Hóa Lộc là dòng tiền luân chuyển, thích đầu tư, biết cách làm tiền đẻ ra tiền.
-- **Đại Hao, Tiểu Hao (Song Hao)**: Nếu đắc địa (Mão, Dậu) thì là người "dám đầu tư dám thu lời", tiêu tiền lớn để làm việc lớn (buôn tài bán giỏi). Nếu hãm địa thì tiêu xài hoang phí, làm bao nhiêu xào bấy nhiêu, không giữ được của.
-- **Địa Không, Địa Kiếp**: Kẻ thù số một của cung Tài Bạch. Chủ về sự bạo phát bạo tàn. Có thể giàu lên cực nhanh nhờ liều lĩnh, nhưng cũng có thể mất trắng sau một đêm vì sai lầm hoặc bị lừa gạt.
-- **Hỏa Tinh, Linh Tinh**: Kiếm tiền trong sự vội vã, chớp nhoáng. Thường có sự hao tài bất ngờ do nóng vội, quyết định sai lầm.
-- **Hóa Kỵ**: Rất dễ vướng vào rắc rối, kiện tụng, thị phi liên quan đến tiền bạc. Cho vay không đòi được, hoặc bị người đời ganh ghét vì tiền. Tuyệt đối tránh làm ăn chung chạ hoặc cho vay mượn.
+## 3. Các Phụ Tinh Và Luật Đầu Tư
+- **Lộc Tồn vs Hóa Lộc**: Lộc Tồn là tiền giữ lại được (tính tĩnh). Hóa Lộc là tiền luân chuyển (tính động). Có cả hai là cách `Song Lộc Trùng Phùng`.
+- **Đại Hao, Tiểu Hao (Song Hao) — Phân nhánh đắc/hãm và Lộc:**
+  <!-- requires: any_of[Đại Hao, Tiểu Hao] -->
+  - Đắc địa (Mão, Dậu) hội Lộc Tồn hoặc Hóa Lộc: Dám cược lớn, buôn tài bán giỏi, "buôn một bán mười". Kết luận: Thúc đẩy đầu tư.
+  - Hãm địa, không có Lộc đi kèm: Làm bao nhiêu xào bấy nhiêu, tiền như muối bỏ bể. Kết luận: Quản lý chi tiêu gắt gao.
+  - Song Hao trùng phùng (Hao gốc gặp Lưu Đại Hao / Lưu Tiểu Hao): Trọng số: Phá vỡ mọi cát tinh. Kết luận: Báo động đỏ, cấm đầu tư, nguy cơ phá sản.
+- **Địa Không, Địa Kiếp (Bạo Phát Bạo Tàn)**: 
+  <!-- requires: any_of[Địa Không, Địa Kiếp] -->
+  - Đắc địa hội Hóa Lộc: Bạo phát nhanh chóng nhưng không bền vững nếu Điền Trạch kém.
+  - Hãm địa hội Hóa Kỵ: Bạo tàn, trắng tay. Phủ định: KHÔNG ĐƯỢC khuyên đương số liều lĩnh trong đại vận này.
+
+**KẾT LUẬN CHO AI**:
+- Khi cung Tài Bạch có `Song Hao trùng phùng` hoặc `Địa Không, Địa Kiếp` hãm địa hội Kỵ: Bỏ qua mọi Cát Tinh, yêu cầu đương số đóng băng dòng vốn, không cho vay mượn.
+- Khi đánh giá mức độ giàu có, BẮT BUỘC phải chiếu sang Điền Trạch: Nếu Tài Bạch tốt nhưng Điền Trạch xấu, hãy nói rõ "Tiền vào cửa trước, ra cửa sau".
+- Thiếu Hóa Lộc, Lộc Tồn hoặc Vũ Khúc, không dùng những từ như "đại phú đại quý".
