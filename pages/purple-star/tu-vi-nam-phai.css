@@ -29,74 +29,35 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{
-  scroll-behavior:smooth;
+  scroll-behavior:auto;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 body{
   min-height:100vh;
   background:
-    radial-gradient(ellipse 80% 55% at 8% 2%, rgba(66,35,116,.28), transparent 64%),
-    radial-gradient(ellipse 70% 52% at 96% 8%, rgba(22,80,137,.24), transparent 66%),
+    radial-gradient(ellipse 80% 52% at 8% 0%, rgba(112,68,217,.34), transparent 70%),
+    radial-gradient(ellipse 70% 48% at 96% 6%, rgba(57,198,207,.22), transparent 72%),
+    radial-gradient(ellipse 78% 55% at 96% 100%, rgba(181,75,145,.20), transparent 72%),
+    radial-gradient(ellipse 70% 48% at 4% 92%, rgba(40,111,196,.20), transparent 72%),
     linear-gradient(155deg, #09071a 0%, #070a1d 48%, #040611 100%);
-  background-attachment:fixed;
+  background-attachment:scroll;
   color:var(--paper);
   font-family:var(--font-vn);
   line-height:1.56;
 }
 body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.13;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+  display:none;
 }
 /* ── Galaxy backdrop ── */
 .galaxy-fx{
-  position:fixed;
-  inset:-20%;
-  z-index:0;
-  pointer-events:none;
-  overflow:hidden;
-  background:
-    radial-gradient(ellipse 35% 29% at 17% 24%, rgba(112,68,217,.68) 0%, rgba(78,42,158,.28) 42%, transparent 72%),
-    radial-gradient(ellipse 34% 27% at 84% 19%, rgba(57,198,207,.48) 0%, rgba(27,105,145,.22) 44%, transparent 72%),
-    radial-gradient(ellipse 38% 33% at 86% 83%, rgba(181,75,145,.46) 0%, rgba(101,42,118,.18) 44%, transparent 72%),
-    radial-gradient(ellipse 34% 31% at 12% 82%, rgba(40,111,196,.50) 0%, rgba(28,65,140,.18) 45%, transparent 72%),
-    radial-gradient(ellipse 29% 24% at 52% 53%, rgba(105,76,191,.26) 0%, transparent 70%);
-  filter:saturate(115%);
-  will-change:transform;
-  animation:galaxyDrift 34s ease-in-out infinite alternate;
+  display:none;
 }
 .galaxy-fx::before{
-  content:"";
-  position:absolute;
-  inset:8%;
-  opacity:.52;
-  background-image:
-    radial-gradient(circle, rgba(255,255,255,.95) 0 1px, transparent 1.35px),
-    radial-gradient(circle, rgba(164,215,255,.75) 0 .8px, transparent 1.2px),
-    radial-gradient(circle, rgba(221,197,255,.72) 0 .7px, transparent 1.1px);
-  background-size:173px 173px, 257px 257px, 389px 389px;
-  background-position:19px 37px, 91px 13px, 47px 121px;
-  animation:starDrift 90s linear infinite;
+  display:none;
 }
 .galaxy-fx::after{
-  content:"";
-  position:absolute;
-  inset:18% -12%;
-  opacity:.72;
-  background:
-    linear-gradient(118deg,
-      transparent 27%,
-      rgba(104,69,190,.05) 35%,
-      rgba(94,89,190,.17) 44%,
-      rgba(58,166,194,.14) 51%,
-      rgba(177,74,145,.09) 59%,
-      transparent 71%);
-  filter:blur(28px);
-  transform:rotate(-5deg);
+  display:none;
 }
 @keyframes galaxyDrift{
   0%{transform:translate3d(-2%,-1%,0) scale(1.02) rotate(-1deg)}
@@ -185,8 +146,8 @@ h1{display:none}
   border:1px solid rgba(121,99,179,.32);
   border-radius:8px;
   box-shadow:0 20px 52px -26px rgba(0,0,0,.82), 0 0 0 1px rgba(180,155,255,.05);
-  backdrop-filter:blur(18px) saturate(112%);
-  -webkit-backdrop-filter:blur(18px) saturate(112%);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
 }
 /* Chart panel: stretches to fill section column */
 .shell > section > .panel{
@@ -446,6 +407,7 @@ footer .han{
 /* ── Chat luận giải AI (Gemini) - Inline Layout ── */
 .chat-section{
   width:100%;max-width:none;margin:24px 0 60px;padding:0;
+  contain:layout paint;
 }
 .ai-chat{
   position:relative;z-index:10;font-family:var(--font-chat);
@@ -464,8 +426,8 @@ footer .han{
     0 20px 52px -28px rgba(0,0,0,.9),
     0 0 36px -24px rgba(112,68,217,.72),
     inset 0 1px 0 rgba(218,207,255,.06);
-  backdrop-filter:blur(16px) saturate(110%);
-  -webkit-backdrop-filter:blur(16px) saturate(110%);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
 }
 .ai-chat-head{
   display:flex;align-items:center;justify-content:space-between;gap:8px;
