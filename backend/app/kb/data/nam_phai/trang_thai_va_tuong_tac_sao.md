@@ -30,6 +30,14 @@ Chính tinh đóng vai trò là cái "thể" (bản chất, chiếc xe), còn Ph
 ### C. Hung Tinh / Ám Tinh cần Hóa Giải
 - Các sao mang tính chất khắc nghiệt cần có đúng Phụ tinh để "chế hóa" mới dùng được.
 - *Ví dụ*: **Cự Môn** là Ám tinh (cái miệng thị phi), rất cần **Hóa Lộc, Hóa Khoa** hoặc **Tuần/Triệt** để che chở. Cự Môn + Hóa Lộc thì nói ra tiền (luật sư, sales xuất sắc). Nhưng Cự Môn + Kình Dương/Hóa Kỵ thì suốt đời vướng kiện cáo, khẩu thiệt.
-- *Ví dụ*: **Tham Lang** rất cần **Hỏa Tinh / Linh Tinh** (cách cục Tham Hỏa / Tham Linh tương phùng) thì mới bạo phát phú quý tột bậc. Nếu Tham Lang đi với Đào Hoa tinh thì chỉ rước họa tửu sắc.
+
+### D. Bản Chất Hai Mặt Của Lục Sát Tinh (Kình, Đà, Hỏa, Linh, Không, Kiếp)
+Tuyệt đối không được mặc định cứ thấy Sát Tinh là phá tài, thất bại, hay tai họa. Sát tinh mang năng lượng bạo phát bạo tàn, sát phạt và đột phá cực mạnh. Khi kết hợp với Chính Tinh, nó sinh ra hai thái cực:
+
+- **Hướng Cát (Phát Dã Như Lôi)**: Nếu Sát tinh ở trạng thái **Đắc Địa / Miếu Vượng** và đi cùng những Chính tinh mang tính võ cách, khai phá mạnh mẽ (như bộ **Sát - Phá - Tham** đắc địa, hoặc **Vũ Khúc**), Sát tinh trở thành vũ khí hạng nặng. Nó tạo ra sự đột phá chớp nhoáng, làm giàu hoặc thăng tiến quyền lực vô cùng nhanh chóng ("phát dã như lôi", bạo phát phú quý). 
+  - *Ví dụ*: **Tham Lang** rất cần **Hỏa Tinh / Linh Tinh** (cách cục Tham Hỏa / Tham Linh tương phùng) thì mới bạo phát phú quý tột bậc. Nếu Tham Lang vắng Hỏa Linh mà đi với Đào Hoa tinh thì chỉ rước họa tửu sắc.
+  - *Ví dụ*: **Thất Sát, Phá Quân** gặp **Kình Dương, Không Kiếp (đắc địa)** thì dũng mãnh, dám nghĩ dám làm, tay trắng làm nên nghiệp lớn.
+
+- **Hướng Hung (Gục Ngã, Phá Bại)**: Sát tinh chỉ trở nên nguy hiểm tột độ khi nó **Hãm Địa** hoặc hội tụ quá nhiều (bầy Sát tinh) tấn công vào một cung mà bản cung đó (đặc biệt là **Mệnh / Thân**) lại quá yếu. Nếu Mệnh/Thân vô chính diệu, Chính tinh hãm địa, vắng bóng Cát tinh trợ lực mà phải gánh bầy Sát tinh, đương số sẽ không đủ nội lực chống đỡ. Khi đó, Sát tinh mới thực sự gieo rắc tai họa nặng nề, tai nạn, phá sản, không thể gượng dậy nổi.
 
 **Kết luận**: Khi LLM luận giải lá số, phải xét sự khác biệt rạch ròi giữa sao Miếu/Vượng và Hãm địa. Tuyệt đối không được mô tả đặc tính của sao một cách chung chung. Phải xem Chính tinh đó đang "đi cùng ai" trong bản cung và tam hợp để định hình chính xác bức tranh.

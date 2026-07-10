@@ -12,8 +12,8 @@ Một sai lầm rất phổ biến khi luận giải Tử Vi là lấy "Sao Tĩn
 - **Vai trò**: Là **"ngòi nổ"**, dùng để kích hoạt sự kiện, chỉ ra chính xác biến cố, được/mất của riêng năm đó.
 - Các sao Lưu nòng cốt để xem hạn: *Lưu Thái Tuế, Lưu Lộc Tồn, Lưu Kình Dương, Lưu Đà La, Lưu Khốc, Lưu Hư, Lưu Thiên Mã, Lưu Đào Hoa, Lưu Hồng Loan, Lưu Thiên Hỷ, và Lưu Tứ Hóa*.
 
-## 3. Cách Xem Hạn Hỷ Sự Đa Chiều (Tình Duyên, Thăng Tiến, Sinh Con)
-Hỷ sự không chỉ giới hạn ở việc "có người yêu" hay "cưới hỏi". Hỷ (niềm vui) mang ý nghĩa đa chiều và tính chất của tin vui phụ thuộc vào việc "Bộ Ba Hỷ Tinh" (Lưu Đào Hoa, Lưu Hồng Loan, Lưu Thiên Hỷ) và Lưu Thái Tuế hội hợp với Cát tinh nào, bay vào cung nào trong năm đó:
+## 3. Cách Xem Hạn Hỷ Tín Đa Chiều (Tình Duyên, Tài Lộc, Thăng Tiến, Sinh Con)
+**Tuyệt đối không mặc định Hỷ Tín (Tin vui từ Đào, Hồng, Hỷ) chủ yếu là có người yêu hay cưới hỏi.** Hỷ (niềm vui) mang ý nghĩa đa chiều và tính chất của tin vui phụ thuộc vào việc "Bộ Ba Hỷ Tinh" (Lưu Đào Hoa, Lưu Hồng Loan, Lưu Thiên Hỷ) và Lưu Thái Tuế hội hợp với Cát tinh nào, bay vào cung nào trong năm đó:
 
 1. **Hỷ Sự Tình Duyên (Cưới Hỏi)**: 
    - Điều kiện: Lưu Hỷ Tinh hoặc Lưu Thái Tuế rơi vào cung **Phu Thê**, **Mệnh**, hoặc **Phúc Đức**. 
@@ -31,4 +31,4 @@ Hỷ sự không chỉ giới hạn ở việc "có người yêu" hay "cưới 
    - Tránh nhầm lẫn: Cấm kỵ sự xuất hiện của **Lưu Hóa Kỵ**, Tuần Triệt, Không Kiếp tại cung có Hỷ Tinh. Nếu Hỷ Tinh đi kèm Sát tinh, tin vui biến thành trò cười, thị phi (ví dụ: được thăng chức nhưng bị đàm tiếu hãm hại, mua nhà nhưng dính kiện cáo giấy tờ, cưới hỏi nhưng cãi vã đứt gánh).
 
 **Nguyên Tắc Bắt Buộc Cho AI (LLM)**: 
-Khi người dùng hỏi về hạn 1 năm (như hỷ sự, thăng chức, tai nạn...), AI **PHẢI** lấy hệ thống sao Lưu (Lưu Niên) của năm đó làm căn cứ chính để trả lời. Phải nêu rõ tên sao Lưu (ví dụ: Lưu Hồng Loan, Lưu Hóa Lộc) tác động vào cung nào, tránh việc liệt kê sao Tĩnh rồi gán ghép cho sự kiện của một năm.
+Khi người dùng hỏi về hạn 1 năm (như hỷ sự, thăng chức, tai nạn...), AI **PHẢI** lấy hệ thống sao Lưu (Lưu Niên) của năm đó làm căn cứ chính để trả lời. Bắt buộc LLM phải căn cứ vào việc Hỷ tinh rơi vào cung nào và đi cùng sao nào để luận ra đúng bản chất tin vui (Ví dụ: ở Tài Bạch là tiền bạc hanh thông, ở Quan Lộc là đỗ đạt thăng chức, ở Điền Trạch là mua nhà, ở Tử Tức là thêm con cái). Tuyệt đối không được "vơ đũa cả nắm" hễ thấy Hỷ Tinh là phán có người yêu. Phải nêu rõ tên sao Lưu tác động vào cung nào, tránh việc liệt kê sao Tĩnh rồi gán ghép cho sự kiện của một năm.
