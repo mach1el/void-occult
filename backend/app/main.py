@@ -3,6 +3,7 @@
 Chạy:  uvicorn app.main:app --reload --port 8000  (từ thư mục backend/)
 """
 import os
+import re
 import time
 import json
 import logging
@@ -115,8 +116,6 @@ async def interpret(req: InterpretRequest, request: Request):
 
       # Sau khi stream xong, kiểm tra lưu trữ memory
       final_text = "".join(full_response)
-      import re
-      import os
       match = re.search(r'\[MEMORY_STORE\]\s*Năm:\s*(.*?)\s*Tổ hợp sao:\s*(.*?)\s*Biến cố:\s*(.*?)\s*\[/MEMORY_STORE\]', final_text, re.DOTALL | re.IGNORECASE)
       if match:
         mem = {
