@@ -16,9 +16,11 @@ Hợp đồng dữ liệu (chart dict):
 """
 from __future__ import annotations
 import unicodedata
+import re
 from typing import Optional
 
 from .constants import (FIVE, SINH, KHAC, INTENTS, TIMING_KW, MONTHLY_KW, CACH_CUC, SAT, KEY_PHU, THAI_TUE_RING)
+from .annual_stars import get_annual_stars
 
 
 def norm(s) -> str:
@@ -272,6 +274,18 @@ def build_focus(chart: Optional[dict], question: str, ci: Optional[dict] = None)
     L.append("[YÊU CẦU THÁNG] BẮT BUỘC trình bày diễn tiến theo trình tự 12 tháng "
              "(gộp các tháng cùng cung/cùng tính chất cho gọn), mỗi mốc nêu rõ tháng đó cát hay hung "
              "dựa trên cung lưu-mệnh + tứ hóa lưu niên rọi vào — KHÔNG được chỉ luận tổng quan cả năm.")
+
+  years_mentioned = set(re.findall(r'\b(19\d{2}|20\d{2})\b', question))
+  if years_mentioned:
+    L.append("\n[GIẢ LẬP LÁ SỐ CÁC NĂM ĐƯỢC NHẮC TỚI (Dùng cho Nghiệm Lý / Dự Báo Động)]")
+    for y_str in sorted(years_mentioned):
+      y = int(y_str)
+      if y != chart.get("annualYear"):
+        ann = get_annual_stars(y)
+        L.append(f"• Năm {y} ({ann['stem']} {ann['branch']}):")
+        L.append(f"  - Sao Lưu Niên tại các cung: Thái Tuế ({ann['stars']['Lưu Thái Tuế']}), Lộc Tồn ({ann['stars']['Lưu Lộc Tồn']}), Kình Dương ({ann['stars']['Lưu Kình Dương']}), Đà La ({ann['stars']['Lưu Đà La']}), Thiên Mã ({ann['stars']['Lưu Thiên Mã']})")
+        L.append(f"  - Tứ Hóa Lưu Niên: Hóa Lộc ({ann['mutagens']['Lộc']}), Hóa Quyền ({ann['mutagens']['Quyền']}), Hóa Khoa ({ann['mutagens']['Khoa']}), Hóa Kỵ ({ann['mutagens']['Kỵ']})")
+    L.append("  -> BẮT BUỘC kết hợp các sao lưu này vào lá số gốc để phân tích nếu đương số hỏi/nghiệm lý về các năm trên.")
 
   L.append("[YÊU CẦU] Chỉ luận trên cung/sao đã liệt kê; mỗi nhận định nêu căn cứ (cung + cách cục + sinh-khắc + Tứ Hóa). Tuyệt đối không thêm sao/cung không có ở trên.")
   return "\n".join(L)

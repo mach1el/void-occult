@@ -96,9 +96,11 @@ async def interpret(req: InterpretRequest, request: Request):
     return JSONResponse(status_code=400, content={"error": str(e)})
 
   async def gen():
+    full_response = []
     try:
       async def _run():
         async for chunk in client.stream_async(system, contents):
+          full_response.append(chunk)
           yield f"event: delta\ndata: {json.dumps(chunk)}\n\n"
       
       generator = _run()
@@ -110,6 +112,27 @@ async def interpret(req: InterpretRequest, request: Request):
         except StopAsyncIteration:
           yield "event: done\ndata: {}\n\n"
           break
+
+      # Sau khi stream xong, kiểm tra lưu trữ memory
+      final_text = "".join(full_response)
+      import re
+      import os
+      match = re.search(r'\[MEMORY_STORE\]\s*Năm:\s*(.*?)\s*Tổ hợp sao:\s*(.*?)\s*Biến cố:\s*(.*?)\s*\[/MEMORY_STORE\]', final_text, re.DOTALL | re.IGNORECASE)
+      if match:
+        mem = {
+          "year": match.group(1).strip(),
+          "pattern": match.group(2).strip(),
+          "outcome": match.group(3).strip()
+        }
+        mem_path = os.path.join(os.path.dirname(__file__), "memories.json")
+        memories = []
+        if os.path.exists(mem_path):
+          with open(mem_path, "r", encoding="utf-8") as f:
+            try: memories = json.load(f)
+            except Exception: pass
+        memories.append(mem)
+        with open(mem_path, "w", encoding="utf-8") as f:
+          json.dump(memories, f, ensure_ascii=False, indent=2)
 
     except Exception:
       logger.exception("Error during LLM stream")
