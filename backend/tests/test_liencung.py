@@ -50,6 +50,15 @@ def _mock_chart():
   }
 
 
+def _mock_chart_voi_sao_luu():
+  base = _mock_chart()
+  for p in base["palaces"]:
+    if p["name"] == "Phu Thê":
+      p["stars"].append(_star("Lưu Lộc Tồn", src="annual"))
+      p["stars"].append(_star("Lưu Hóa Quyền", src="annual"))
+  return base
+
+
 class TestBuildFocus(unittest.TestCase):
   def test_intent(self):
     self.assertEqual(classify_intent("Sự nghiệp năm nay thế nào?")["intent"]["key"], "career")
@@ -81,6 +90,40 @@ class TestBuildFocus(unittest.TestCase):
     f = build_focus(_mock_chart(), "Chuyện tình duyên hôn nhân?")
     self.assertIn("[chính] Phu Thê", f)
     self.assertNotIn("[ĐẠI VẬN hiện hành]", f)
+
+  def test_natal_love_khong_ro_sao_luu(self):
+    chart = _mock_chart_voi_sao_luu()
+    ci = classify_intent("người vợ tương lai của tôi là người thế nào?")
+    self.assertFalse(ci["timing"])
+    focus = build_focus(chart, "người vợ tương lai của tôi là người thế nào?", ci)
+    self.assertNotIn("Lưu Lộc Tồn", focus)
+    self.assertNotIn("Lưu Hóa Quyền", focus)
+    self.assertNotIn("Lưu niên", focus)
+
+  def test_timing_love_co_sao_luu(self):
+    chart = _mock_chart_voi_sao_luu()
+    ci = classify_intent("năm nay có lấy vợ không?")
+    self.assertTrue(ci["timing"])
+    focus = build_focus(chart, "năm nay có lấy vợ không?", ci)
+    self.assertIn("Lưu Lộc Tồn", focus)
+    self.assertIn("Lưu Hóa Quyền", focus)
+    self.assertIn("Lưu niên", focus)
+
+  def test_natal_van_giu_tu_hoa_nam_sinh(self):
+    chart = _mock_chart_voi_sao_luu()
+    ci = classify_intent("người vợ tương lai của tôi là người thế nào?")
+    focus = build_focus(chart, "người vợ tương lai của tôi là người thế nào?", ci)
+    self.assertIn("Năm sinh:", focus)
+
+  def test_overview_khong_keo_luu_nien(self):
+    chart = _mock_chart_voi_sao_luu()
+    ci = classify_intent("luận tổng quan mệnh cách của tôi")
+    self.assertEqual(ci["intent"]["key"], "overview")
+    self.assertFalse(ci["timing"])
+    focus = build_focus(chart, "luận tổng quan mệnh cách của tôi", ci)
+    self.assertNotIn("Sao lưu", focus)
+    self.assertNotIn("Lưu niên", focus)
+    self.assertIn("TỔNG QUAN", focus)
 
 
 if __name__ == "__main__":

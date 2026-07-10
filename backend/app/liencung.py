@@ -174,6 +174,10 @@ def build_focus(chart: Optional[dict], question: str, ci: Optional[dict] = None)
   set_names = {x["p"]["name"] for x in sset}
   menh_el = element_of(chart.get("menhElement"))
   L = [f"[TRỌNG TÂM] Câu hỏi thuộc nhóm: {intent['label']}. Bắt buộc luận theo liên cung dưới đây (không đọc cung đơn lẻ):"]
+  if timing:
+    L.append("[NHIỆM VỤ] Đây là câu hỏi diễn biến hạn (thời điểm). TRỤC CHÍNH là các cung/sao có đuôi 'lưu niên' hoặc 'Lưu Thái Tuế' của năm hiện tại; đại vận chỉ đóng vai trò nền.")
+  else:
+    L.append("[NHIỆM VỤ] Đây là câu hỏi TỔNG QUAN / mệnh cách (không có yếu tố năm tháng). TẬP TRUNG CAO ĐỘ vào [CÁCH CỤC] tĩnh và các tín hiệu Năm sinh. Tuyệt đối KHÔNG nhắc đến các sao lưu hay tứ hóa lưu niên.")
   if chart.get("birthMonthStem") and chart.get("birthDayStem"):
     L.append(
       f"[CAN CHI SINH] Năm {chart.get('yearStem', '')} {chart.get('yearBranch', '')}"
@@ -197,7 +201,7 @@ def build_focus(chart: Optional[dict], question: str, ci: Optional[dict] = None)
       parts.append("Phụ tinh: " + ", ".join(_lbl(s) for s in kp))
     if g["hoa"]:
       parts.append("Tứ Hóa: " + ", ".join(s["name"] + (f"→{s['targetStar']}" if s.get("targetStar") else "") for s in g["hoa"]))
-    if g["luu"]:
+    if timing and g["luu"]:
       parts.append("Sao lưu: " + ", ".join(s["name"] for s in g["luu"]))
     if timing and x["p"].get("flowMonths"):
       parts.append(f"Lưu Nguyệt: Tháng {', '.join(str(m) for m in x['p']['flowMonths'])}")
@@ -230,9 +234,9 @@ def build_focus(chart: Optional[dict], question: str, ci: Optional[dict] = None)
     L.append("[NGŨ HÀNH SINH-KHẮC — đã tính sẵn, dùng đúng kết quả này]")
     L.extend("• " + s for s in sk[:12])
 
-  hua = (_hua_into_set(set_names, chart.get("natalMutagens"), "Năm sinh:")
-         + _hua_into_set(set_names, chart.get("annualMutagens"), f"Lưu niên {chart.get('annualStem','')}:"))
+  hua = _hua_into_set(set_names, chart.get("natalMutagens"), "Năm sinh:")
   if timing:
+    hua += _hua_into_set(set_names, chart.get("annualMutagens"), f"Lưu niên {chart.get('annualStem','')}:")
     hua += _hua_into_set(set_names, chart.get("majorMutagens"), "Đại vận:")
   if hua:
     L.append("[TỨ HÓA PHI TINH vào nhóm cung đang xét]")
