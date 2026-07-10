@@ -52,6 +52,30 @@ class GeminiClient:
     for chunk in stream:
       yield from _answer_text(chunk)
 
+  async def stream_async(self, system: str, contents: list[dict]):
+    try:
+      from google import genai
+      from google.genai import types
+    except ImportError as e:
+      raise LLMError("Chưa cài google-genai (pip install google-genai).") from e
+
+    client = genai.Client(api_key=self.api_key)
+    cfg = types.GenerateContentConfig(
+      system_instruction=system,
+      temperature=self.temperature,
+      max_output_tokens=self.max_output_tokens,
+      thinking_config=types.ThinkingConfig(
+        thinking_budget=self.thinking_budget,
+        include_thoughts=False,
+      ),
+    )
+    stream = await client.aio.models.generate_content_stream(
+      model=self.model, contents=contents, config=cfg
+    )
+    async for chunk in stream:
+      for text in _answer_text(chunk):
+        yield text
+
 
 def _answer_text(chunk) -> Iterator[str]:
   """Trích phần TRẢ LỜI từ 1 chunk, bỏ qua phần suy luận (part.thought=True) nếu có."""

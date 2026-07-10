@@ -2,8 +2,8 @@
 
 Frontend serialize chart từ engine.getData() thành ChartDTO rồi POST."""
 from __future__ import annotations
-from typing import Optional
-from pydantic import BaseModel
+from typing import Optional, Literal
+from pydantic import BaseModel, Field
 
 
 class StarDTO(BaseModel):
@@ -25,7 +25,7 @@ class PalaceDTO(BaseModel):
   changSheng: str = ""
   majorFortuneActive: bool = False
   flowMonths: list[int] = []   # lưu nguyệt: các tháng (1-12) có lưu-mệnh rơi vào cung này
-  stars: list[StarDTO] = []
+  stars: list[StarDTO] = Field(default_factory=list, max_length=30)
 
 
 class MutagenDTO(BaseModel):
@@ -60,19 +60,19 @@ class ChartDTO(BaseModel):
   majorFortunePalace: Optional[PalaceRef] = None
   taiTuePalace: Optional[PalaceRef] = None
   smallLimitPalace: Optional[PalaceRef] = None   # cung Tiểu Hạn của năm xem
-  palaces: list[PalaceDTO] = []
+  palaces: list[PalaceDTO] = Field(default_factory=list, max_length=12)
   natalMutagens: list[MutagenDTO] = []
   annualMutagens: list[MutagenDTO] = []
   majorMutagens: list[MutagenDTO] = []
 
 
 class HistoryTurn(BaseModel):
-  role: str              # "user" | "model"
-  text: str
+  role: Literal["user", "model"]
+  text: str = Field(max_length=8000)
 
 
 class InterpretRequest(BaseModel):
-  question: str
-  chartText: str = ""    # lá số dạng text (grounding cho system)
+  question: str = Field(min_length=1, max_length=1000)
+  chartText: str = Field("", max_length=8000)    # lá số dạng text (grounding cho system)
   chart: Optional[ChartDTO] = None  # lá số có cấu trúc (để dựng liên cung)
-  history: list[HistoryTurn] = []
+  history: list[HistoryTurn] = Field(default_factory=list, max_length=12)

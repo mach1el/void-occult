@@ -20,8 +20,32 @@ on:
   workflow_dispatch:
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Node deps
+        run: npm ci
+      - name: Test Frontend
+        run: npm run typecheck && npm test
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install Python deps
+        run: pip install -r backend/requirements.txt
+      - name: Test Backend
+        run: cd backend && python -m unittest discover -s tests
+
   release:
-    uses: mach1el/action-library/.github/workflows/build-push-deploy.yml@master
+    needs: test
+    permissions:
+      contents: read
+    uses: mach1el/action-library/.github/workflows/build-push-deploy.yml@e9594acd93befdd1020ad06687ba05d03b14c80e
     with:
       project: apexvoid-occult
       registry-namespace: mich43l

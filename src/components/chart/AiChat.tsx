@@ -47,12 +47,21 @@ export function AiChat({ getContext }: AiChatProps) {
   const nextId = useRef(1);
   const messageBox = useRef<HTMLDivElement>(null);
 
+  const abortController = useRef<AbortController | null>(null);
+
   useEffect(() => {
     const box = messageBox.current;
     if (box) box.scrollTop = box.scrollHeight;
   }, [messages]);
 
+  useEffect(() => {
+    return () => {
+      abortController.current?.abort();
+    };
+  }, []);
+
   function clear() {
+    abortController.current?.abort();
     setHistory([]);
     setMessages([
       {
@@ -82,7 +91,7 @@ export function AiChat({ getContext }: AiChatProps) {
       return;
     }
 
-    const requestHistory = history;
+    const requestHistory = history.slice(-6);
     const aiMessageId = nextId.current++;
     setInput("");
     setBusy(true);
@@ -92,10 +101,13 @@ export function AiChat({ getContext }: AiChatProps) {
       { id: aiMessageId, role: "ai", text: "Đang luận giải…" },
     ]);
 
+    abortController.current = new AbortController();
+
     try {
       const response = await fetch(`${endpoint()}/api/interpret`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: abortController.current.signal,
         body: JSON.stringify({
           question,
           chartText,
@@ -117,26 +129,49 @@ export function AiChat({ getContext }: AiChatProps) {
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
       let answer = "";
+      let buffer = "";
       for (;;) {
         const { done, value } = await reader.read();
         if (done) break;
-        answer += decoder.decode(value, { stream: true });
-        setMessages((current) =>
-          current.map((message) =>
-            message.id === aiMessageId
-              ? { ...message, text: answer }
-              : message,
-          ),
-        );
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n\n");
+        buffer = lines.pop() ?? "";
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          const [eventLine, dataLine] = line.split("\n");
+          if (!eventLine || !dataLine) continue;
+          
+          const event = eventLine.replace("event: ", "").trim();
+          const dataStr = dataLine.replace("data: ", "").trim();
+          
+          if (event === "error") {
+            const data = JSON.parse(dataStr);
+            throw new Error(data.message);
+          } else if (event === "delta") {
+            const chunk = JSON.parse(dataStr);
+            answer += chunk;
+            setMessages((current) =>
+              current.map((message) =>
+                message.id === aiMessageId
+                  ? { ...message, text: answer }
+                  : message,
+              ),
+            );
+          }
+        }
       }
-      answer += decoder.decode();
+      
+      buffer += decoder.decode();
       if (!answer.trim()) throw new Error("Backend không trả về nội dung");
       setHistory((current) => [
-        ...current,
+        ...current.slice(-5),
         { role: "user", text: question },
         { role: "model", text: answer },
       ]);
     } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") {
+        return;
+      }
       const reason = error instanceof Error ? error.message : String(error);
       setMessages((current) =>
         current.map((message) =>

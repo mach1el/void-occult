@@ -1,9 +1,12 @@
+import sys
 import unittest
 import pathlib
 import re
 
-from backend.app.constants import KEY_PHU
-from backend.app.kb.retriever import CORE_DOCS, INTENT_DOCS, TIMING_DOCS, MONTHLY_DOCS, TIMING_BY_INTENT
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
+
+from app.constants import KEY_PHU  # noqa: E402
+from app.kb.retriever import CORE_DOCS, INTENT_DOCS, TIMING_DOCS, MONTHLY_DOCS, TIMING_BY_INTENT  # noqa: E402
 
 class TestKBVocab(unittest.TestCase):
     def setUp(self):
