@@ -114,7 +114,7 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
         <div className="flex flex-nowrap overflow-x-auto gap-3 pb-2 custom-scrollbar">
           {chart.luck.pillars.map((lp, i) => (
             <div key={i} className="min-w-[80px] flex-shrink-0 flex flex-col border border-white/10 rounded overflow-hidden text-center bg-black/20">
-              <div className="bg-white/5 py-1 text-xs text-muted border-b border-white/10">Tuổi {lp.startAge}</div>
+              <div className="bg-white/5 py-1 text-xs text-muted border-b border-white/10">Tuổi {lp.startAgeYear}</div>
               <div className="py-3 px-2 flex flex-col gap-1">
                 <div className={`text-xl font-han font-medium ${getElementColor(lp.pillar.stem)}`}>{lp.pillar.stem}</div>
                 <div className={`text-xl font-han font-medium ${getElementColor(lp.pillar.branch)}`}>{lp.pillar.branch}</div>
