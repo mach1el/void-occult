@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { generateBaziChart } from "@/lib/bazi/bazi-engine";
+import { buildBaziText } from "@/lib/bazi/bazi-text";
 import {
   DEFAULT_MANUAL_LONGITUDE,
   DEFAULT_PROVINCE_CODE,
@@ -47,6 +48,7 @@ export function BaziPage() {
     () => stored.manualLongitude ?? DEFAULT_MANUAL_LONGITUDE
   );
   const [timezone, setTimezone] = useState(() => stored.timezone ?? 7);
+  const [copyState, setCopyState] = useState<"idle" | "success" | "error">("idle");
 
   const longitude = resolveLongitude(provinceCode, manualLongitude);
 
@@ -97,12 +99,41 @@ export function BaziPage() {
     }
   }, [dateInput, timeInput, gender, longitude, timezone]);
 
+  async function copyChart() {
+    if (!chart) return;
+    const text = buildBaziText(chart);
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopyState("success");
+    } catch {
+      setCopyState("error");
+    }
+    window.setTimeout(() => setCopyState("idle"), 1500);
+  }
+
+  const copyLabel =
+    copyState === "success"
+      ? "✓ Đã chép"
+      : copyState === "error"
+        ? "⚠ Lỗi"
+        : "⧉ Copy Lá Số";
+
   return (
     <div className="min-h-screen bg-void text-paper font-sans p-4 lg:p-8">
       <div className="max-w-5xl mx-auto space-y-6">
-        <header className="flex flex-col gap-2">
-          <h1 className="text-2xl font-display text-gold">Lá Số Bát Tự</h1>
-          <p className="text-sm text-muted">Hệ thống an lá số Tứ Trụ (Bát Tự) dựa trên thuật toán thiên văn chính xác.</p>
+        <header className="flex justify-between items-start gap-4">
+          <div className="flex flex-col gap-2">
+            <h1 className="text-2xl font-display text-gold">Lá Số Bát Tự</h1>
+            <p className="text-sm text-muted">Hệ thống an lá số Tứ Trụ (Bát Tự) dựa trên thuật toán thiên văn chính xác.</p>
+          </div>
+          {chart && (
+            <button
+              onClick={copyChart}
+              className="text-sm bg-white/5 hover:bg-white/10 border border-white/10 rounded px-3 py-1.5 transition-colors whitespace-nowrap text-paper"
+            >
+              {copyLabel}
+            </button>
+          )}
         </header>
 
         <section className="bg-ink rounded-lg p-4 lg:p-6 border border-white/5 grid gap-4 lg:grid-cols-4 sm:grid-cols-2">
