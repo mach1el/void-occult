@@ -344,14 +344,14 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
         </div>
         
         {showLuck && (
-          <div className="flex flex-nowrap overflow-x-auto gap-4 pb-4 custom-scrollbar px-1 pt-2">
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 px-1 pt-2 pb-4">
             {chart.luck.pillars.map((lp, i) => {
               const active = isLuckPillarActive(chart.luck.pillars, i, now);
               return (
                 <div
                   key={i}
                   data-testid="luck-pillar-tile"
-                  className={`min-w-[100px] flex-shrink-0 flex flex-col border rounded-lg overflow-hidden text-center transition-all ${
+                  className={`flex flex-col border rounded-lg overflow-hidden text-center transition-all ${
                     active ? "border-gold/80 ring-2 ring-gold/40 bg-gold/10 scale-105 z-10 shadow-lg" : "border-white/10 bg-black/30 hover:bg-black/10"
                   }`}
                 >
