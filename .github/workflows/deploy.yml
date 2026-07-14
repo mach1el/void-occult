@@ -10,7 +10,6 @@ on:
     paths:
       - "backend/**"
       - "src/**"
-      - "pages/**"
       - "deploy/**"
       - "deployment-template/**"
       - "index.html"
