@@ -14,7 +14,7 @@ export function buildBaziText(chart: BaziFullChart): string {
   // 1. Tiêu đề
   out.push(`============================`);
   out.push(`LÁ SỐ BÁT TỰ (TỨ TRỤ)`);
-  out.push(`Ngày sinh: ${chart.startDate.toLocaleString('vi-VN')}`);
+  out.push(`Giờ sinh thực tế: ${chart.metadata.trueSolarTime.toLocaleString('vi-VN')}`);
   out.push(`Giới tính: ${chart.isYangGender ? "Dương" : "Âm"} ${chart.gender === "M" ? "Nam" : "Nữ"}`);
   out.push(`============================\n`);
 
