@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { BaziFullChart, BaziPillarDetail, DerivedPillarDetail } from "@/lib/bazi/bazi-engine";
 import { LuckPillar } from "@/lib/bazi/luck-pillars";
 import { SymbolicStar } from "@/lib/bazi/symbolic-stars";
+import { calculateElementStrength } from "@/lib/bazi/element-strength";
+import { determineYongShen } from "@/lib/bazi/yong-shen";
+import { ElementRadar } from "./ElementRadar";
 
 function getElementColor(char: string) {
   const wood = ["Giáp", "Ất", "Dần", "Mão"];
@@ -213,6 +216,10 @@ function isLuckPillarActive(pillars: LuckPillar[], index: number, now: Date): bo
 export function BaziChart({ chart }: { chart: BaziFullChart }) {
   const now = new Date();
   const [showLuck, setShowLuck] = useState(true);
+  const [showYongShenCalc, setShowYongShenCalc] = useState(false);
+
+  const strength = useMemo(() => calculateElementStrength(chart), [chart]);
+  const yongShen = useMemo(() => determineYongShen(strength), [strength]);
 
   // Bát Tự đọc từ phải sang trái
   const pillars: { title: string; detail: BaziPillarDetail; isDayPillar: boolean; key: "year" | "month" | "day" | "hour" }[] = [
@@ -224,7 +231,7 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
 
   return (
     <div className="space-y-8">
-      {/* 4 Cột Bát Tự */}
+      {/* Tứ Trụ, Đặt dưới Khối Dụng Thần như yêu cầu hoặc trên? Thường để Tứ Trụ ở trên cho dễ nhìn */}
       <section>
         <h2 className="text-xl font-display text-paper mb-4">Tứ Trụ (Bát Tự)</h2>
         <div className="flex flex-col-reverse md:flex-row gap-4">
@@ -233,6 +240,73 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
               <PillarColumn title={p.title} detail={p.detail} isDayPillar={p.isDayPillar} pillarKey={p.key} />
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Dụng Thần & Radar */}
+      <section>
+        <h2 className="text-xl font-display text-paper mb-4">Phân Tích Ngũ Hành & Dụng Thần</h2>
+        <div className="border border-white/10 rounded-lg p-4 bg-ink flex flex-col md:flex-row gap-6 items-start">
+          <div className="flex-1 space-y-4 w-full">
+            <div className="flex items-center gap-3">
+              <span className={`px-2 py-1 rounded text-xs uppercase tracking-wide font-medium
+                ${yongShen.dayMasterVerdict === "vượng" ? "bg-cinnabar/20 text-cinnabar" : 
+                  yongShen.dayMasterVerdict === "nhược" ? "bg-water/20 text-water" : "bg-gold/20 text-gold"}`}
+              >
+                Nhật Chủ: {yongShen.dayMasterVerdict}
+              </span>
+              <span className="text-sm text-muted">
+                Theo {yongShen.methodLabel}
+              </span>
+            </div>
+
+            <div className="text-paper leading-relaxed">
+              Dụng Thần thiên về <strong className="text-gold">{yongShen.dungThan.join(", ") || "Không rõ"}</strong> · 
+              Hỷ Thần: <strong className="text-jade">{yongShen.hyThan.join(", ") || "-"}</strong> · 
+              Kỵ Thần: <strong className="text-cinnabar">{yongShen.kyThan.join(", ") || "-"}</strong>
+            </div>
+
+            {yongShen.confidence === "cần cân nhắc" && (
+              <div className="text-sm text-gold/80 bg-gold/10 p-2 rounded border border-gold/20">
+                ⚠ Cục diện gần trung hòa, dụng thần chưa rõ ràng — nên tham chiếu thêm.
+              </div>
+            )}
+
+            <div className="mt-4 border-t border-white/10 pt-4">
+              <button 
+                onClick={() => setShowYongShenCalc(!showYongShenCalc)}
+                className="text-xs text-muted hover:text-paper flex items-center gap-1"
+              >
+                {showYongShenCalc ? "▼ Thu gọn cách tính" : "▶ Xem cách tính (Minh Bạch)"}
+              </button>
+              
+              {showYongShenCalc && (
+                <div className="mt-3 space-y-4 bg-black/20 p-3 rounded text-sm text-muted">
+                  <div>
+                    <strong className="text-paper block mb-1">Cách tính điểm Ngũ Hành:</strong>
+                    <ul className="list-disc pl-4 space-y-1 text-xs">
+                      {strength.breakdown.map((item, idx) => (
+                        <li key={idx}>
+                          <span className={`${getElementColor(item.element)} font-medium`}>{item.element}</span> từ {item.source}: {item.reason}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <strong className="text-paper block mb-1">Lý luận tìm Dụng Thần:</strong>
+                    <ul className="list-disc pl-4 space-y-1 text-xs">
+                      {yongShen.reasoning.map((r, idx) => (
+                        <li key={idx}>{r}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="w-full md:w-auto flex justify-center py-2 md:py-0 md:px-4">
+            <ElementRadar strength={strength} />
+          </div>
         </div>
       </section>
 
@@ -294,12 +368,7 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
       </section>
 
       {/* Dụng Thần (Placeholder) */}
-      <section>
-        <h2 className="text-xl font-display text-paper mb-4">Phân Tích Dụng Thần</h2>
-        <div className="border border-dashed border-white/20 rounded-lg p-8 text-center bg-white/[0.01]">
-          <p className="text-muted text-sm">Hệ thống LLM sẽ tự động luận giải và phân tích Dụng Thần tại đây.</p>
-        </div>
-      </section>
+
     </div>
   );
 }

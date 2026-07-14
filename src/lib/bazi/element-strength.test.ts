@@ -13,8 +13,8 @@ test("calculateElementStrength should sum up to total breakdown", () => {
   }
   
   let totalFromScores = 0;
-  for (const el in strength.scores) {
-    totalFromScores += strength.scores[el as any];
+  for (const el of Object.values(strength.scores)) {
+    totalFromScores += el;
   }
   
   expect(Math.abs(totalFromBreakdown - totalFromScores)).toBeLessThan(0.01);
