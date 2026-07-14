@@ -6,6 +6,7 @@ import { calculateElementStrength } from "@/lib/bazi/element-strength";
 import { determineYongShen } from "@/lib/bazi/yong-shen";
 import { ElementRadar } from "./ElementRadar";
 import { AnnualYearsTable } from "./AnnualYearsTable";
+import { useDragScroll } from "./useDragScroll";
 
 function getElementColor(char: string) {
   const wood = ["Giáp", "Ất", "Dần", "Mão"];
@@ -229,6 +230,8 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
 
   const strength = useMemo(() => calculateElementStrength(chart), [chart]);
   const yongShen = useMemo(() => determineYongShen(strength), [strength]);
+  
+  const dragScroll = useDragScroll();
 
   // Bát Tự đọc từ phải sang trái
   const pillars: { title: string; detail: BaziPillarDetail; isDayPillar: boolean; key: "year" | "month" | "day" | "hour" }[] = [
@@ -243,9 +246,16 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
       {/* Tứ Trụ, Đặt dưới Khối Dụng Thần như yêu cầu hoặc trên? Thường để Tứ Trụ ở trên cho dễ nhìn */}
       <section>
         <h2 className="text-xl font-display text-paper mb-4">Tứ Trụ (Bát Tự)</h2>
-        <div className="flex flex-nowrap md:flex-row gap-4 overflow-x-auto pb-4 custom-scrollbar snap-x">
+        <div 
+          className={`flex flex-nowrap md:flex-row gap-4 overflow-x-auto pb-4 custom-scrollbar snap-x ${dragScroll.className}`}
+          onPointerDown={dragScroll.onPointerDown}
+          onPointerMove={dragScroll.onPointerMove}
+          onPointerUp={dragScroll.onPointerUp}
+          onPointerCancel={dragScroll.onPointerCancel}
+          onWheel={dragScroll.onWheel}
+        >
           {pillars.map((p) => (
-            <div key={p.title} className="flex-1 min-w-[200px] snap-center">
+            <div key={p.title} className="flex-1 min-w-[200px] snap-center" onClickCapture={dragScroll.onClickCapture}>
               <PillarColumn title={p.title} detail={p.detail} isDayPillar={p.isDayPillar} pillarKey={p.key} voids={chart.voids} />
             </div>
           ))}
@@ -344,13 +354,21 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
         </div>
         
         {showLuck && (
-          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 px-1 pt-2 pb-4">
+          <div 
+            className={`grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 px-1 pt-2 pb-4 overflow-x-auto custom-scrollbar ${dragScroll.className}`}
+            onPointerDown={dragScroll.onPointerDown}
+            onPointerMove={dragScroll.onPointerMove}
+            onPointerUp={dragScroll.onPointerUp}
+            onPointerCancel={dragScroll.onPointerCancel}
+            onWheel={dragScroll.onWheel}
+          >
             {chart.luck.pillars.map((lp, i) => {
               const active = isLuckPillarActive(chart.luck.pillars, i, now);
               return (
                 <div
                   key={i}
                   data-testid="luck-pillar-tile"
+                  onClickCapture={dragScroll.onClickCapture}
                   className={`flex flex-col border rounded-lg overflow-hidden text-center transition-all ${
                     active ? "border-gold/80 ring-2 ring-gold/40 bg-gold/10 scale-105 z-10 shadow-lg" : "border-white/10 bg-black/30 hover:bg-black/10"
                   }`}
