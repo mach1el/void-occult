@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { AnnualYear } from "@/lib/bazi/annual-years";
 import { Element, ELEMENTS } from "@/lib/bazi/elements";
+import { useDragScroll } from "./useDragScroll";
 
 interface AnnualYearsTableProps {
   annualYears: AnnualYear[];
@@ -9,6 +10,7 @@ interface AnnualYearsTableProps {
 
 export function AnnualYearsTable({ annualYears, getElementColor }: AnnualYearsTableProps) {
   const currentYear = new Date().getFullYear();
+  const dragScroll = useDragScroll();
 
   // Nhóm theo đại vận (luckPillarIndex)
   // Mỗi mảng con là một dòng (thường là 10 năm của một đại vận)
@@ -38,7 +40,14 @@ export function AnnualYearsTable({ annualYears, getElementColor }: AnnualYearsTa
         Bảng Lưu Niên
       </h3>
       
-      <div className="overflow-x-auto pb-4 custom-scrollbar">
+      <div 
+        className={`overflow-x-auto pb-4 custom-scrollbar ${dragScroll.className}`}
+        onPointerDown={dragScroll.onPointerDown}
+        onPointerMove={dragScroll.onPointerMove}
+        onPointerUp={dragScroll.onPointerUp}
+        onPointerCancel={dragScroll.onPointerCancel}
+        onWheel={dragScroll.onWheel}
+      >
         <div className="flex flex-col gap-4 min-w-max">
           {rows.map(row => (
             <div key={row.index} className="flex flex-col gap-2">
@@ -52,6 +61,7 @@ export function AnnualYearsTable({ annualYears, getElementColor }: AnnualYearsTa
                   return (
                     <div 
                       key={ay.year}
+                      onClickCapture={dragScroll.onClickCapture}
                       className={`
                         grid grid-rows-[auto_1fr_auto_auto] w-full text-center p-1.5 sm:p-2 lg:p-3 rounded-lg border transition-all
                         ${isCurrent 
