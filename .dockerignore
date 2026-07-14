@@ -6,5 +6,3 @@ backend/.env
 backend/.venv
 backend/__pycache__
 backend/.pytest_cache
-pages/purple-star/tu-vi-config.js
-pages/purple-star/*.docx

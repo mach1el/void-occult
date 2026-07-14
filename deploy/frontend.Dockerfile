@@ -6,7 +6,6 @@ RUN npm ci
 
 COPY index.html tsconfig*.json vite.config.ts ./
 COPY src ./src
-COPY pages ./pages
 RUN npm run build
 
 FROM nginx:alpine

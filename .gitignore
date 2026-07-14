@@ -1,5 +1,3 @@
-# API key cấu hình cục bộ (không commit) — xem tu-vi-config.example.js
-pages/purple-star/tu-vi-config.js
 .env
 .env.*
 !.env.example
@@ -8,4 +6,3 @@ dist/
 *.tsbuildinfo
 __pycache__/
 *.pyc
-pages/purple-star/*.docx
