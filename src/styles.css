@@ -58,6 +58,23 @@ a {
   background: #dfbd6d;
 }
 
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 8px 0;
+}
+.topbar a {
+  text-decoration: none;
+  color: var(--color-gold);
+  letter-spacing: 0.03em;
+  transition: color 0.18s;
+}
+.topbar a:hover {
+  color: var(--color-paper);
+}
+
 .home-noise {
   background-image:
     radial-gradient(circle at 50% -10%, rgb(126 77 151 / 24%), transparent 35%),

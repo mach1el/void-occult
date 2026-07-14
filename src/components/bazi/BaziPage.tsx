@@ -120,7 +120,11 @@ export function BaziPage() {
 
   return (
     <div className="min-h-screen bg-void text-paper font-sans p-4 lg:p-8">
-      <div className="max-w-5xl mx-auto space-y-6">
+      <div className="max-w-[1440px] mx-auto space-y-6">
+        <nav className="topbar mb-6">
+          <a href="/">← Void Occult</a>
+        </nav>
+
         <header className="flex justify-between items-start gap-4">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-display text-gold">Lá Số Bát Tự</h1>
@@ -136,9 +140,9 @@ export function BaziPage() {
           )}
         </header>
 
-        <section className="bg-ink rounded-lg p-4 lg:p-6 border border-white/5 grid gap-4 lg:grid-cols-4 sm:grid-cols-2">
-          <div className="flex flex-col gap-1 lg:col-span-2">
-            <label className="text-xs text-muted uppercase tracking-wider">Ngày Giờ Sinh (Dương Lịch)</label>
+        <section className="bg-ink rounded-lg p-4 lg:p-6 border border-white/5 flex flex-col lg:flex-row gap-4 items-end">
+          <div className="flex flex-col gap-1 flex-[2] min-w-[280px]">
+            <label className="text-xs text-muted uppercase tracking-wider">Ngày Giờ Sinh (DL)</label>
             <div className="flex gap-2">
               <input
                 type="text"
@@ -149,30 +153,30 @@ export function BaziPage() {
               />
               <input
                 type="text"
-                placeholder="HH:MM"
+                placeholder="HH:mm"
                 value={timeInput}
                 onChange={(e) => setTimeInput(e.target.value)}
                 className="bg-void border border-white/10 rounded px-3 py-2 text-sm focus:border-gold outline-none w-24 flex-shrink-0 text-center"
               />
             </div>
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 w-full lg:w-32 flex-shrink-0">
             <label className="text-xs text-muted uppercase tracking-wider">Giới Tính</label>
             <select
               value={gender}
               onChange={(e) => setGender(e.target.value as "M" | "F")}
-              className="bg-void border border-white/10 rounded px-3 py-2 text-sm focus:border-gold outline-none"
+              className="bg-void border border-white/10 rounded px-3 py-2 text-sm focus:border-gold outline-none w-full"
             >
               <option value="M">Nam</option>
               <option value="F">Nữ</option>
             </select>
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 flex-1 min-w-[200px]">
             <label className="text-xs text-muted uppercase tracking-wider">Nơi Sinh (Tỉnh/Thành)</label>
             <select
               value={provinceCode}
               onChange={(e) => setProvinceCode(e.target.value)}
-              className="bg-void border border-white/10 rounded px-3 py-2 text-sm focus:border-gold outline-none"
+              className="bg-void border border-white/10 rounded px-3 py-2 text-sm focus:border-gold outline-none w-full"
             >
               {PROVINCES.map((p) => (
                 <option key={p.code} value={p.code}>
@@ -188,18 +192,22 @@ export function BaziPage() {
                 value={manualLongitude}
                 onChange={(e) => setManualLongitude(parseFloat(e.target.value))}
                 placeholder="Kinh độ (độ)"
-                className="mt-1 bg-void border border-white/10 rounded px-3 py-2 text-sm focus:border-gold outline-none"
+                className="mt-1 bg-void border border-white/10 rounded px-3 py-2 text-sm focus:border-gold outline-none w-full"
               />
             )}
           </div>
-          <div className="flex flex-col gap-1">
-            <label className="text-xs text-muted uppercase tracking-wider">Múi Giờ (UTC+)</label>
-            <input
-              type="number"
+          <div className="flex flex-col gap-1 w-full lg:w-56 flex-shrink-0">
+            <label className="text-xs text-muted uppercase tracking-wider" title="Sinh ở miền Nam 1959–1975 chọn UTC+8">
+              Múi Giờ (UTC+)
+            </label>
+            <select
               value={timezone}
-              onChange={(e) => setTimezone(parseInt(e.target.value))}
-              className="bg-void border border-white/10 rounded px-3 py-2 text-sm focus:border-gold outline-none"
-            />
+              onChange={(e) => setTimezone(parseInt(e.target.value, 10))}
+              className="bg-void border border-white/10 rounded px-3 py-2 text-sm focus:border-gold outline-none w-full"
+            >
+              <option value={7}>UTC+7 (Mặc định)</option>
+              <option value={8}>UTC+8 (Miền Nam 1959-1975)</option>
+            </select>
           </div>
         </section>
 
