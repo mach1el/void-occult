@@ -22,8 +22,8 @@ const SCHOOLS = ["nam-phai", "trung-chau"] as const;
 type School = (typeof SCHOOLS)[number];
 
 const ENGINE_PATHS: Record<School, string> = {
-  "nam-phai": path.join(ROOT, "pages/purple-star/tu-vi-engine-nam-phai.js"),
-  "trung-chau": path.join(ROOT, "pages/purple-star/tu-vi-engine-trung-chau.js"),
+  "nam-phai": path.join(ROOT, "src/lib/ziwei/engine-nam-phai.ts"),
+  "trung-chau": path.join(ROOT, "src/lib/ziwei/engine-trung-chau.ts"),
 };
 
 interface EngineModule {

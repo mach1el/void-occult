@@ -6,8 +6,8 @@ import type {
   MutagenRecord,
   School,
 } from "../types/chart";
-import * as namPhaiEngine from "../../pages/purple-star/tu-vi-engine-nam-phai.js";
-import * as trungChauEngine from "../../pages/purple-star/tu-vi-engine-trung-chau.js";
+import * as namPhaiEngine from "./ziwei/engine-nam-phai";
+import * as trungChauEngine from "./ziwei/engine-trung-chau";
 
 export const SCHOOL_LABEL: Record<School, string> = {
   "nam-phai": "Nam phái",
@@ -15,8 +15,8 @@ export const SCHOOL_LABEL: Record<School, string> = {
 };
 
 const ENGINES: Record<School, ChartEngine> = {
-  "nam-phai": namPhaiEngine as unknown as ChartEngine,
-  "trung-chau": trungChauEngine as unknown as ChartEngine,
+  "nam-phai": namPhaiEngine,
+  "trung-chau": trungChauEngine,
 };
 
 const PALACE_ORDER = [

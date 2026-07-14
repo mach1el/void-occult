@@ -6,6 +6,24 @@ export interface ChartStar {
   brightness?: string;
   source?: string;
   targetStar?: string | null;
+  mutagen?: string;
+}
+
+export interface ZiweiStart {
+  ziweiIndex: number;
+  tianfuIndex: number;
+  borrowed: number;
+  quotient: number;
+}
+
+// palace ở đây trỏ ngược lại chính ChartPalace chứa nó (xem ChartPalace.flowMonths) —
+// tham chiếu vòng có thật ở runtime (palace.flowMonths[i].palace === palace).
+export interface FlowMonthEntry {
+  month: number;
+  label?: string;
+  palace: ChartPalace;
+  stem?: string;
+  branch?: string;
 }
 
 export interface ChartPalace {
@@ -18,11 +36,19 @@ export interface ChartPalace {
   isThan?: boolean;
   isTaiTuePalace?: boolean;
   isAnnualPalace?: boolean;
+  isMonthStart?: boolean;
+  isSmallLimitPalace?: boolean;
+  isLuuNienDaiVan?: boolean;
   smallLimitBranch?: string;
+  smallLimitAges?: number[];
+  // Chỉ trung-chau tính: tên cung theo trùng bài đại hạn/lưu niên.
+  majorPalaceName?: string | null;
+  annualPalaceName?: string;
   changSheng?: string;
-  flowMonths?: Array<{ month: number; label?: string; stem?: string; branch?: string }>;
+  flowMonths?: FlowMonthEntry[];
   stars?: ChartStar[];
   majorFortune?: {
+    order?: number;
     active?: boolean;
     start: number;
     end: number;
@@ -50,7 +76,9 @@ export interface MutagenRecord {
 
 export interface ChartData {
   solar: { day: number; month: number; year: number };
-  lunar: { day: number; month: number; year: number; leap?: boolean };
+  // leap là 0|1 ở runtime (solarToLunar trả lunarLeap dạng number), không phải boolean thật.
+  lunar: { day: number; month: number; year: number; leap?: number };
+  timeZone: number;
   birthHourBranch: string;
   yearStem: string;
   yearBranch: string;
@@ -61,11 +89,16 @@ export interface ChartData {
   birthHourStem: string;
   yearPolarity: string;
   direction: string;
+  directionSign: 1 | -1;
   menhBranch: string;
   menhElement: string;
+  menhIndex: number;
   thanIndex: number;
-  cuc: { name: string; number: number };
-  cucMenhRelation: { label: string };
+  month: number;
+  day: number;
+  cuc: { name: string; number: number; element?: string; stem?: string };
+  cucMenhRelation: { label: string; detail?: string };
+  starts: ZiweiStart;
   annualYear: number;
   annualStem: string;
   annualBranch: string;
@@ -74,6 +107,16 @@ export interface ChartData {
   majorFortunePalace?: ChartPalace | null;
   taiTuePalace?: ChartPalace | null;
   smallLimitPalace?: ChartPalace | null;
+  // Ý nghĩa khác nhau giữa 2 phái (tiểu hạn ở nam-phai, lưu Thái Tuế ở trung-chau) và
+  // không có nơi tiêu thụ nào trong src/ hiện tại — giữ lại để khớp snapshot, không xoá.
+  smallLimitStartPalace?: ChartPalace | null;
+  smallLimitDirection?: string;
+  annualPalace?: ChartPalace | null;
+  monthStartPalace?: ChartPalace | null;
+  monthlyPalaces?: FlowMonthEntry[];
+  annualMonthSeed?: number;
+  annualStars?: Array<ChartStar & { palace: ChartPalace }>;
+  starCount?: number;
   natalMutagens?: MutagenRecord[];
   annualMutagens?: MutagenRecord[];
   majorMutagens?: MutagenRecord[];
