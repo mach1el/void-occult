@@ -1,4 +1,5 @@
 import { useState } from "react";
+import donateQr from "../../assets/donate-qr.jpg";
 
 export function SupportButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,7 +52,7 @@ export function SupportButton() {
               {/* VietQR Image */}
               <div className="mx-auto border border-white/10 rounded-xl overflow-hidden bg-white/5 p-2 w-full max-w-[240px]">
                 <img
-                  src="/images/donate-qr.jpg"
+                  src={donateQr}
                   alt="VietQR Donate"
                   className="w-full h-auto rounded-lg"
                 />
