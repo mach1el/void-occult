@@ -1,5 +1,6 @@
 import { lazy, Suspense, type ReactNode } from "react";
 import { HomePage } from "./components/shared/HomePage";
+import { SupportButton } from "./components/shared/SupportButton";
 
 const ChartPage = lazy(() =>
   import("./components/ziwei/ChartPage").then((module) => ({
@@ -49,16 +50,41 @@ export function App() {
   const path = LEGACY_PATH_REDIRECTS[rawPath] ?? rawPath;
 
   if (path === "/tu-vi") {
-    return loading(<ChartPage />);
+    return (
+      <>
+        {loading(<ChartPage />)}
+        <SupportButton />
+      </>
+    );
   }
   if (path === "/kinh-dich/luc-hao-co-ban") {
-    return loading(<BasicArticlePage />);
+    return (
+      <>
+        {loading(<BasicArticlePage />)}
+        <SupportButton />
+      </>
+    );
   }
   if (path === "/kinh-dich/luc-hao-nang-cao") {
-    return loading(<AdvancedArticlePage />);
+    return (
+      <>
+        {loading(<AdvancedArticlePage />)}
+        <SupportButton />
+      </>
+    );
   }
   if (path === "/bat-tu" || path === "/bazi") {
-    return loading(<BaziPage />);
+    return (
+      <>
+        {loading(<BaziPage />)}
+        <SupportButton />
+      </>
+    );
   }
-  return <HomePage />;
+  return (
+    <>
+      <HomePage />
+      <SupportButton />
+    </>
+  );
 }
