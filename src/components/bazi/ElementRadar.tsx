@@ -1,14 +1,7 @@
 import { useMemo } from "react";
 import { ElementStrength } from "@/lib/bazi/element-strength";
-import { Element, ELEMENTS } from "@/lib/bazi/elements";
-
-const ELEMENT_COLORS: Record<Element, string> = {
-  Mộc: "var(--color-jade)",
-  Hỏa: "var(--color-cinnabar)",
-  Thổ: "var(--color-earth)",
-  Kim: "var(--color-metal)",
-  Thủy: "var(--color-water)"
-};
+import { ELEMENTS } from "@/lib/bazi/elements";
+import { ELEMENT_COLOR_VAR } from "./element-colors";
 
 interface ElementRadarProps {
   strength: ElementStrength;
@@ -94,7 +87,7 @@ export function ElementRadar({ strength, size = 200 }: ElementRadarProps) {
             cx={p.pt.x}
             cy={p.pt.y}
             r={3}
-            fill={ELEMENT_COLORS[p.el]}
+            fill={ELEMENT_COLOR_VAR[p.el]}
           />
         ))}
 
@@ -136,7 +129,7 @@ export function ElementRadar({ strength, size = 200 }: ElementRadarProps) {
                 y="-4"
                 textAnchor={textAnchor}
                 className="text-xs font-bold"
-                fill={ELEMENT_COLORS[p.el]}
+                fill={ELEMENT_COLOR_VAR[p.el]}
                 style={{ textShadow: "0 1px 3px rgba(0,0,0,0.8)" }}
               >
                 {p.el}

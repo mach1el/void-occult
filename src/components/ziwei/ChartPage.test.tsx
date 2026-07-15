@@ -8,6 +8,10 @@ const chartCss = readFileSync(
   resolve(process.cwd(), "src/styles/tu-vi.css"),
   "utf8",
 );
+const globalStylesCss = readFileSync(
+  resolve(process.cwd(), "src/styles.css"),
+  "utf8",
+);
 const compactChartCss = readFileSync(
   resolve(process.cwd(), "src/components/ziwei/compact-chart.css"),
   "utf8",
@@ -49,14 +53,34 @@ describe("ChartPage profile form", () => {
   it("keeps the Mystic Gold palette semantic across chart modes", () => {
     expect(chartCss).toContain("--surface-raised:#1b1734");
     expect(chartCss).toContain("--amber:#d6ae55");
-    expect(chartCss).toContain("--element-kim:#d8d3c8");
-    expect(chartCss).toContain("--element-moc:#79c98f");
-    expect(chartCss).toContain("--element-thuy:#78aeea");
-    expect(chartCss).toContain("--element-hoa:#ef756c");
-    expect(chartCss).toContain("--element-tho:#d9aa5c");
     expect(compactChartCss).toContain("fill: var(--void)");
     expect(compactChartCss).toContain("fill: var(--amber-soft)");
     expect(mobileChartCss).toContain("color: var(--element-kim) !important");
     expect(mobileChartCss).toContain("background: var(--danger-soft)");
+  });
+
+  it("defines ngũ hành + tứ hóa tokens in exactly one place (src/styles.css :root)", () => {
+    // Đọc giá trị thật từ CSS (không hard-code lại hex trong test, tránh vướng
+    // grep dò hex ngũ hành và tránh test tự khớp với giá trị nó tự đặt ra).
+    const readVar = (name: string) => {
+      const match = globalStylesCss.match(
+        new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{6})`),
+      );
+      return match?.[1];
+    };
+
+    const elementTokens = ["element-moc", "element-hoa", "element-tho", "element-kim", "element-thuy"];
+    const mutagenTokens = ["mutagen-loc", "mutagen-quyen", "mutagen-khoa", "mutagen-ky"];
+    for (const token of [...elementTokens, ...mutagenTokens]) {
+      expect(readVar(token), `--${token} phải được định nghĩa trong src/styles.css`).toBeDefined();
+    }
+
+    // Kim (bạc) và Thổ (vàng đất) phải khác màu — bug đã biết cần tránh lặp lại.
+    expect(readVar("element-kim")).not.toBe(readVar("element-tho"));
+
+    // tu-vi.css KHÔNG được định nghĩa lại --element-*/--mutagen-*, tránh đè
+    // token toàn cục khi trang Tử Vi mount (thứ tự cascade sẽ ưu tiên bản sau).
+    expect(chartCss).not.toMatch(/--element-(kim|moc|thuy|hoa|tho)\s*:/);
+    expect(chartCss).not.toMatch(/--mutagen-(loc|quyen|khoa|ky)\s*:/);
   });
 });

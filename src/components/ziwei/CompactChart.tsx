@@ -247,13 +247,13 @@ function compactName(star: ChartStar): string {
   return name;
 }
 
-function starColor(star: ChartStar, school: School): string {
+export function starColor(star: ChartStar, school: School): string {
   const source = star.source ?? "";
   if (source.endsWith("-mutagen")) {
-    if (star.name.includes("Kỵ")) return "var(--cinnabar)";
-    if (star.name.includes("Lộc")) return "var(--jade)";
-    if (star.name.includes("Quyền")) return "var(--amber)";
-    return "var(--blue)";
+    if (star.name.includes("Kỵ")) return "var(--mutagen-ky)";
+    if (star.name.includes("Lộc")) return "var(--mutagen-loc)";
+    if (star.name.includes("Quyền")) return "var(--mutagen-quyen)";
+    return "var(--mutagen-khoa)";
   }
   const element = getEngine(school)?.elementForStar(star.name);
   return (

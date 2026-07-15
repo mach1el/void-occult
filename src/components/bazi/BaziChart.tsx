@@ -4,23 +4,17 @@ import { LuckPillar } from "@/lib/bazi/luck-pillars";
 import { SymbolicStar } from "@/lib/bazi/symbolic-stars";
 import { calculateElementStrength } from "@/lib/bazi/element-strength";
 import { determineYongShen } from "@/lib/bazi/yong-shen";
+import { getElement } from "@/lib/bazi/elements";
+import { ELEMENT_COLOR_VAR } from "./element-colors";
 import { ElementRadar } from "./ElementRadar";
 import { AnnualYearsTable } from "./AnnualYearsTable";
 import { useDragScroll } from "./useDragScroll";
 
-function getElementColor(char: string) {
-  const wood = ["Giáp", "Ất", "Dần", "Mão"];
-  const fire = ["Bính", "Đinh", "Tị", "Ngọ"];
-  const earth = ["Mậu", "Kỷ", "Thìn", "Tuất", "Sửu", "Mùi"];
-  const metal = ["Canh", "Tân", "Thân", "Dậu"];
-  const water = ["Nhâm", "Quý", "Hợi", "Tý"];
-
-  if (wood.includes(char)) return "text-jade";
-  if (fire.includes(char)) return "text-cinnabar";
-  if (earth.includes(char)) return "text-earth";
-  if (metal.includes(char)) return "text-metal";
-  if (water.includes(char)) return "text-water";
-  return "text-white";
+// Màu ngũ hành của can/chi — dùng chung token --element-* (xem element-colors.ts),
+// phân loại can/chi dựa trên getElement() đã có ở lib/bazi/elements.ts (không lặp
+// lại mảng ngũ hành riêng, không đụng logic phân loại đó).
+function getElementColor(char: string): string {
+  return ELEMENT_COLOR_VAR[getElement(char)];
 }
 
 const STAR_SOURCE_LABEL: Record<SymbolicStar["sourceType"], string> = {
@@ -106,12 +100,18 @@ function PillarColumn({
           >
             {detail.tenGod}
           </div>
-          <div className={`text-2xl lg:text-3xl font-han font-bold leading-none ${getElementColor(detail.pillar.stem)}`}>
+          <div
+            className="text-2xl lg:text-3xl font-han font-bold leading-none"
+            style={{ color: getElementColor(detail.pillar.stem) }}
+          >
             {detail.pillar.stem}
           </div>
         </div>
         <div className="flex flex-col items-center mt-1.5">
-          <div className={`text-2xl lg:text-3xl font-han font-bold leading-none ${getElementColor(detail.pillar.branch)}`}>
+          <div
+            className="text-2xl lg:text-3xl font-han font-bold leading-none"
+            style={{ color: getElementColor(detail.pillar.branch) }}
+          >
             {detail.pillar.branch}
           </div>
         </div>
@@ -127,7 +127,7 @@ function PillarColumn({
           return (
             <div key={i} className="flex justify-between items-center px-1">
               <span className="flex flex-col items-start leading-tight">
-                <span className={`${getElementColor(hidden.stem)} ${style.stem}`}>{hidden.stem}</span>
+                <span className={style.stem} style={{ color: getElementColor(hidden.stem) }}>{hidden.stem}</span>
                 <span className={style.role}>{hidden.type}</span>
               </span>
               <span className={style.tenGod}>{hidden.tenGod}</span>
@@ -194,10 +194,10 @@ function DerivedInfoCard({ detail }: { detail: DerivedPillarDetail }) {
         {detail.name}
       </div>
       <div className="flex items-center gap-2 mb-2">
-        <span className={`text-xl font-han font-bold ${getElementColor(detail.pillar.stem)}`}>
+        <span className="text-xl font-han font-bold" style={{ color: getElementColor(detail.pillar.stem) }}>
           {detail.pillar.stem}
         </span>
-        <span className={`text-xl font-han font-bold ${getElementColor(detail.pillar.branch)}`}>
+        <span className="text-xl font-han font-bold" style={{ color: getElementColor(detail.pillar.branch) }}>
           {detail.pillar.branch}
         </span>
       </div>
@@ -301,7 +301,7 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
                     <ul className="list-disc pl-4 space-y-1 text-xs">
                       {strength.breakdown.map((item, idx) => (
                         <li key={idx}>
-                          <span className={`${getElementColor(item.element)} font-medium`}>{item.element}</span> từ {item.source}: {item.reason}
+                          <span className="font-medium" style={{ color: ELEMENT_COLOR_VAR[item.element] }}>{item.element}</span> từ {item.source}: {item.reason}
                         </li>
                       ))}
                     </ul>
@@ -375,10 +375,16 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
                   </div>
                   <div className="py-3 px-1 flex flex-col gap-1">
                     <div className="text-[10px] text-muted/60 uppercase tracking-widest">{lp.tenGod}</div>
-                    <div className={`text-2xl font-han font-bold leading-none ${getElementColor(lp.pillar.stem)}`}>
+                    <div
+                      className="text-2xl font-han font-bold leading-none"
+                      style={{ color: getElementColor(lp.pillar.stem) }}
+                    >
                       {lp.pillar.stem}
                     </div>
-                    <div className={`text-2xl font-han font-bold leading-none mt-1 ${getElementColor(lp.pillar.branch)}`}>
+                    <div
+                      className="text-2xl font-han font-bold leading-none mt-1"
+                      style={{ color: getElementColor(lp.pillar.branch) }}
+                    >
                       {lp.pillar.branch}
                     </div>
                     <div className="text-[10px] text-muted/60 uppercase tracking-widest mt-1">{lp.lifeStage}</div>

@@ -73,8 +73,8 @@ export function AnnualYearsTable({ annualYears, getElementColor }: AnnualYearsTa
                       <div className="text-[9px] sm:text-[10px] lg:text-[11px] text-white/60 mb-1.5 leading-none font-medium uppercase tracking-wider">{ay.tenGod}</div>
                       
                       <div className="flex flex-col items-center justify-center text-lg sm:text-xl lg:text-2xl font-bold font-serif leading-none gap-1.5 my-1">
-                        <span className={getElementColor(ay.pillar.stem)}>{ay.pillar.stem}</span>
-                        <span className={getElementColor(ay.pillar.branch)}>{ay.pillar.branch}</span>
+                        <span style={{ color: getElementColor(ay.pillar.stem) }}>{ay.pillar.stem}</span>
+                        <span style={{ color: getElementColor(ay.pillar.branch) }}>{ay.pillar.branch}</span>
                       </div>
                       
                       <div className="flex flex-col items-center justify-end mt-2 w-full">

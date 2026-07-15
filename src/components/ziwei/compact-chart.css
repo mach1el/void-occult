@@ -303,19 +303,19 @@
 }
 
 .compact-phi-flow.is-lộc {
-  fill: var(--amber-soft);
+  fill: var(--mutagen-loc);
 }
 
 .compact-phi-flow.is-quyền {
-  fill: var(--cinnabar);
+  fill: var(--mutagen-quyen);
 }
 
 .compact-phi-flow.is-khoa {
-  fill: var(--jade);
+  fill: var(--mutagen-khoa);
 }
 
 .compact-phi-flow.is-kỵ {
-  fill: #d299ef;
+  fill: var(--mutagen-ky);
 }
 
 .compact-tam-hop {

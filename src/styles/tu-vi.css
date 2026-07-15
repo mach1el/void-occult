@@ -24,11 +24,8 @@
   --galaxy-cyan:#39c6cf;
   --galaxy-rose:#b54b91;
   --ash:#d4ccdf;
-  --element-kim:#d8d3c8;
-  --element-moc:#79c98f;
-  --element-thuy:#78aeea;
-  --element-hoa:#ef756c;
-  --element-tho:#d9aa5c;
+  /* --element-* và --mutagen-* KHÔNG định nghĩa lại ở đây — nguồn duy nhất là
+     src/styles.css :root (nạp toàn cục), tránh đè token khi trang Tử Vi mount. */
   --danger-soft:rgba(224,107,101,.12);
   --success-soft:rgba(114,197,160,.12);
   --font-vn:'Noto Serif','Times New Roman',serif;

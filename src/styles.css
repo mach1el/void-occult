@@ -24,6 +24,20 @@
   font-family: var(--font-sans);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+
+  /* Ngũ hành — nguồn màu DUY NHẤT cho mọi hệ (Tử Vi sao, Bát Tự can/chi/radar).
+     Tách khỏi --color-* trang trí ở @theme vì cần tương phản riêng trên nền tối
+     --color-void. Kim và Thổ CỐ Ý khác hệ màu (bạc vs vàng đất), không trùng. */
+  --element-moc: #3fa564;
+  --element-hoa: #d1495b;
+  --element-tho: #c98a3c;
+  --element-kim: #cbd3da;
+  --element-thuy: #4d8fd6;
+  /* Tứ Hóa — Lộc/Quyền/Khoa/Kỵ, dùng chung cho sao tứ hóa và Phi Hóa. */
+  --mutagen-loc: #2f9e4f;
+  --mutagen-quyen: #c76a1c;
+  --mutagen-khoa: #3f74c4;
+  --mutagen-ky: #cf3b3f;
 }
 
 * {
