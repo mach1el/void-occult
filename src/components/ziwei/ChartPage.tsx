@@ -364,7 +364,8 @@ export function ChartPage() {
                 className="profile-form"
                 onSubmit={(event) => event.preventDefault()}
               >
-                <label className="profile-field">
+                <div className="profile-fields-grid">
+                  <label className="profile-field">
                   <FieldIcon name="user" />
                   <span className="sr-only">Họ và tên</span>
                   <input
@@ -376,9 +377,9 @@ export function ChartPage() {
                     value={form.name}
                     onChange={fieldChange("name")}
                   />
-                </label>
+                  </label>
 
-                <label className="profile-field">
+                  <label className="profile-field">
                   <FieldIcon name="calendar" />
                   <span className="sr-only">Ngày sinh dương lịch</span>
                   <input
@@ -390,9 +391,9 @@ export function ChartPage() {
                     value={form.solarDate}
                     onChange={fieldChange("solarDate")}
                   />
-                </label>
+                  </label>
 
-                <label className="profile-field">
+                  <label className="profile-field">
                   <FieldIcon name="clock" />
                   <span className="sr-only">Giờ sinh</span>
                   <select
@@ -407,9 +408,9 @@ export function ChartPage() {
                       </option>
                     ))}
                   </select>
-                </label>
+                  </label>
 
-                <label className="profile-field">
+                  <label className="profile-field">
                   <FieldIcon name="gender" />
                   <span className="sr-only">Giới tính</span>
                   <select
@@ -421,9 +422,9 @@ export function ChartPage() {
                     <option value="male">Nam giới</option>
                     <option value="female">Nữ giới</option>
                   </select>
-                </label>
+                  </label>
 
-                <label className="profile-field">
+                  <label className="profile-field">
                   <FieldIcon name="calendar" />
                   <span className="sr-only">Năm xem</span>
                   <select
@@ -441,9 +442,9 @@ export function ChartPage() {
                       );
                     })}
                   </select>
-                </label>
+                  </label>
 
-                <label className="profile-field">
+                  <label className="profile-field">
                   <FieldIcon name="work" />
                   <span className="sr-only">Tình trạng công việc</span>
                   <select
@@ -460,9 +461,9 @@ export function ChartPage() {
                     <option value="Đã nghỉ hưu">Đã nghỉ hưu</option>
                     <option value="Khác">Khác</option>
                   </select>
-                </label>
+                  </label>
 
-                <label className="profile-field">
+                  <label className="profile-field">
                   <FieldIcon name="relationship" />
                   <span className="sr-only">Tình trạng mối quan hệ</span>
                   <select
@@ -481,13 +482,15 @@ export function ChartPage() {
                     <option value="Góa">Góa</option>
                     <option value="Khác">Khác</option>
                   </select>
-                </label>
+                  </label>
+                </div>
 
-                <div
-                  className="school-tabs profile-school"
-                  role="radiogroup"
-                  aria-label="Trường phái"
-                >
+                <div className="profile-options-grid">
+                  <div
+                    className="school-tabs profile-school"
+                    role="radiogroup"
+                    aria-label="Trường phái"
+                  >
                   {(
                     [
                       ["nam-phai", "Nam phái"],
@@ -505,9 +508,9 @@ export function ChartPage() {
                       <span>{label}</span>
                     </label>
                   ))}
-                </div>
+                  </div>
 
-                <label className="profile-field profile-field-plain">
+                  <label className="profile-field profile-field-plain">
                   <span className="sr-only">Cách xem vận</span>
                   <select
                     name="flowBase"
@@ -519,9 +522,9 @@ export function ChartPage() {
                     <option value="tieu-han">Tiểu Hạn</option>
                     <option value="dai-van">Lưu Niên Đại Vận</option>
                   </select>
-                </label>
+                  </label>
 
-                <label className="profile-field profile-field-plain">
+                  <label className="profile-field profile-field-plain">
                   <span className="sr-only">Múi giờ</span>
                   <select
                     name="timezone"
@@ -533,9 +536,9 @@ export function ChartPage() {
                     <option value="8">Trung Quốc +8</option>
                     <option value="0">Giờ gốc +0</option>
                   </select>
-                </label>
+                  </label>
 
-                <div className="profile-toggles" aria-label="Lớp sao hiển thị">
+                  <div className="profile-toggles" aria-label="Lớp sao hiển thị">
                   <label className="toggle">
                     <input
                       type="checkbox"
@@ -566,14 +569,14 @@ export function ChartPage() {
                     />
                     Sao lưu
                   </label>
+                  </div>
                 </div>
               </form>
             </div>
           </aside>
 
-          <div className="workspace-grid">
-            <section className="chart-section">
-              <div className="chart-panel chart-workspace">
+          <section className="chart-section">
+            <div className="chart-panel chart-workspace">
               <div className="panel-head">
                 <h2>Lá số 12 cung</h2>
                 <div className="chart-actions" style={{ flexWrap: 'nowrap' }}>
@@ -651,11 +654,10 @@ export function ChartPage() {
                   showPhi={form.showPhi}
                 />
               </div>
-              </div>
-            </section>
+            </div>
+          </section>
 
-            <AiChat getContext={context} />
-          </div>
+          <AiChat getContext={context} />
         </main>
 
         <footer>
