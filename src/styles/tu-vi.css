@@ -744,16 +744,19 @@ body{
 .profile-field input::placeholder{color:#beb5d0;opacity:1}
 .profile-field select{
   cursor:pointer;
-  color-scheme:dark;
-  background-color:#17132d;
+  color-scheme:only dark;
+  background-color:transparent;
 }
 .profile-field select option{
-  color:#f5f1ff;
-  background-color:#17132d;
+  color:#f5f1ff !important;
+  background-color:#17132d !important;
 }
 .profile-field select option:checked{
-  color:#fff;
-  background-color:#5d4792;
+  color:#fff !important;
+  background-color:#5d4792 !important;
+}
+.profile-field select option:disabled{
+  color:#8f86a4 !important;
 }
 .profile-field-plain{
   grid-template-columns:minmax(0,1fr);
