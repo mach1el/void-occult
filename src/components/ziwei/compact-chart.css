@@ -38,8 +38,7 @@
 
   .shell > aside {
     position: static;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
+    display: block;
     grid-column: 1 / -1;
     grid-row: 1;
     width: 100%;
