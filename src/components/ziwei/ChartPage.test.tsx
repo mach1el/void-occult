@@ -10,7 +10,7 @@ describe("ChartPage profile form", () => {
     expect(screen.getByLabelText("Tình trạng công việc")).toBeInTheDocument();
     expect(screen.getByLabelText("Tình trạng mối quan hệ")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText("Tùy chọn chuyên sâu"));
+    fireEvent.click(screen.getByText("Tùy chọn"));
     expect(screen.getByLabelText("Trường phái")).toBeInTheDocument();
     expect(screen.getByText("Cách xem vận")).toBeInTheDocument();
   });

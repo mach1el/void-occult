@@ -615,7 +615,7 @@ body{
 /* Guided birth profile */
 .birth-panel{overflow:hidden}
 .birth-panel-intro{
-  padding:28px 24px 20px;
+  padding:20px 18px 14px;
   text-align:center;
   border-bottom:1px solid rgba(180,155,255,.12);
   background:
@@ -624,7 +624,7 @@ body{
 }
 .birth-kicker{
   display:block;
-  margin-bottom:8px;
+  margin-bottom:5px;
   color:var(--amber-soft);
   font-size:.65rem;
   font-weight:700;
@@ -635,32 +635,32 @@ body{
   display:block;
   color:#f5f1ff;
   font-family:var(--font-display);
-  font-size:clamp(1.5rem,2vw,2rem);
+  font-size:clamp(1.3rem,1.7vw,1.7rem);
   font-weight:650;
   line-height:1.2;
   letter-spacing:-.02em;
 }
 .birth-panel-intro p{
-  margin-top:8px;
+  margin-top:5px;
   color:#aaa1c3;
   font-size:.78rem;
 }
-.birth-panel .panel-body{padding:18px}
+.birth-panel .panel-body{padding:12px}
 .profile-form{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:11px;
+  gap:7px;
 }
 .profile-field{
   min-width:0;
-  min-height:52px;
+  min-height:42px;
   display:grid;
-  grid-template-columns:38px minmax(0,1fr);
+  grid-template-columns:30px minmax(0,1fr);
   align-items:center;
-  gap:10px;
-  padding:6px 10px 6px 7px;
+  gap:7px;
+  padding:4px 9px 4px 5px;
   border:1px solid rgba(193,180,239,.2);
-  border-radius:15px;
+  border-radius:11px;
   background:rgba(247,243,255,.075);
   color:#d8d0ed;
   overflow:visible;
@@ -683,18 +683,18 @@ body{
   transform:translateY(-1px);
 }
 .field-icon{
-  width:38px;
-  height:38px;
+  width:30px;
+  height:30px;
   display:grid;
   place-items:center;
   border:1px solid rgba(240,210,122,.16);
-  border-radius:11px;
+  border-radius:8px;
   color:var(--amber-soft);
   background:linear-gradient(145deg,rgba(240,210,122,.12),rgba(208,90,142,.07));
 }
 .field-icon svg{
-  width:20px;
-  height:20px;
+  width:17px;
+  height:17px;
   stroke-width:1.7;
   stroke-linecap:round;
   stroke-linejoin:round;
@@ -703,7 +703,7 @@ body{
 .profile-field input[type="number"],
 .profile-field select{
   min-width:0;
-  min-height:38px;
+  min-height:32px;
   padding:0;
   border:0;
   border-radius:0;
@@ -712,7 +712,7 @@ body{
   box-shadow:none;
   color:#f1edf9;
   font-family:var(--font-chat);
-  font-size:.85rem;
+  font-size:.78rem;
   text-overflow:ellipsis;
 }
 .profile-field input::placeholder{color:#968da9;opacity:1}
@@ -722,7 +722,7 @@ body{
 }
 .field-suffix{
   grid-column:2;
-  margin-top:-10px;
+  margin-top:-8px;
   color:#776e91;
   font-size:.62rem;
   line-height:1;
@@ -740,16 +740,17 @@ body{
   border:0;
 }
 .advanced-options{
-  margin-top:14px;
-  border-top:1px solid rgba(180,155,255,.12);
+  position:relative;
+  margin-top:8px;
+  border-top:1px solid rgba(180,155,255,.1);
 }
 .advanced-options summary{
-  min-height:42px;
+  min-height:34px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   color:#aaa1c3;
-  font-size:.72rem;
+  font-size:.66rem;
   font-weight:650;
   letter-spacing:.04em;
   cursor:pointer;
@@ -758,16 +759,35 @@ body{
 .advanced-options summary::-webkit-details-marker{display:none}
 .advanced-options summary::after{
   content:"+";
-  width:24px;
-  height:24px;
+  width:21px;
+  height:21px;
   display:grid;
   place-items:center;
   border:1px solid rgba(180,155,255,.18);
-  border-radius:8px;
+  border-radius:7px;
   transition:transform .2s ease;
 }
 .advanced-options[open] summary::after{transform:rotate(45deg)}
-.advanced-options-body{padding:2px 0 4px}
+.advanced-options-body{
+  position:absolute;
+  z-index:30;
+  top:38px;
+  left:-4px;
+  right:-4px;
+  padding:10px;
+  border:1px solid rgba(196,180,255,.24);
+  border-radius:13px;
+  background:linear-gradient(155deg,rgba(29,22,59,.98),rgba(7,10,30,.98));
+  box-shadow:0 22px 46px -20px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  transform-origin:top center;
+  animation:optionsReveal .16s ease-out;
+}
+@keyframes optionsReveal{
+  from{opacity:0;transform:translateY(-4px) scale(.985)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
 .advanced-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .advanced-field{
   display:grid;
@@ -778,7 +798,7 @@ body{
   letter-spacing:.03em;
 }
 .advanced-field select{
-  min-height:38px;
+  min-height:34px;
   border-color:rgba(180,155,255,.18);
   border-radius:10px;
   background:rgba(7,8,26,.55);
@@ -786,7 +806,7 @@ body{
   font-family:var(--font-chat);
 }
 .school-tabs{
-  margin-bottom:10px;
+  margin-bottom:7px;
   border-color:rgba(180,155,255,.16);
   border-radius:12px;
   background:rgba(7,8,26,.42);
@@ -796,11 +816,11 @@ body{
   color:#16102b;
   background:linear-gradient(135deg,#f0d27a,#d9a85b);
 }
-.toggles{grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.toggles{grid-template-columns:repeat(3,1fr);gap:6px;margin-top:7px}
 .toggle{
   justify-content:center;
-  min-height:36px;
-  padding:6px;
+  min-height:30px;
+  padding:4px;
   border-color:rgba(180,155,255,.15);
   border-radius:10px;
   background:rgba(7,8,26,.42);
@@ -827,17 +847,17 @@ body{
 
 @media(max-width:1300px){
   .shell{grid-template-columns:310px minmax(0,1fr)}
-  .birth-panel .panel-body{padding:14px}
-  .profile-form{gap:8px}
-  .profile-field{grid-template-columns:34px minmax(0,1fr);padding-left:6px}
-  .field-icon{width:34px;height:34px}
+  .birth-panel .panel-body{padding:10px}
+  .profile-form{gap:6px}
+  .profile-field{grid-template-columns:29px minmax(0,1fr);padding-left:5px}
+  .field-icon{width:29px;height:29px}
 }
 @media(max-width:1060px){
   .shell{grid-template-columns:1fr;gap:16px}
   .shell > aside{position:relative;top:auto}
-  .birth-panel{width:min(720px,100%);margin:0 auto}
-  .birth-panel .panel-body{padding:20px}
-  .profile-form{gap:12px}
+  .birth-panel{width:min(680px,100%);margin:0 auto}
+  .birth-panel .panel-body{padding:12px}
+  .profile-form{gap:8px}
   .panel,.ai-chat-panel{
     backdrop-filter:none;
     -webkit-backdrop-filter:none;
@@ -848,19 +868,26 @@ body{
   .wrap{padding:0 10px}
   .topbar{min-height:44px;flex-direction:row;align-items:center}
   .shell{margin-top:10px;gap:12px}
-  .birth-panel-intro{padding:22px 16px 16px}
-  .birth-panel .birth-panel-intro h1{font-size:1.55rem}
+  .birth-panel-intro{padding:17px 14px 12px}
+  .birth-panel .birth-panel-intro h1{font-size:1.4rem}
   .birth-panel-intro p{font-size:.75rem}
-  .birth-panel .panel-body{padding:12px}
-  .profile-form{gap:9px}
+  .birth-panel .panel-body{padding:10px}
+  .profile-form{gap:7px}
   .profile-field{
-    min-height:50px;
-    grid-template-columns:36px minmax(0,1fr);
-    gap:8px;
-    border-radius:14px;
+    min-height:44px;
+    grid-template-columns:31px minmax(0,1fr);
+    gap:7px;
+    border-radius:12px;
   }
-  .field-icon{width:36px;height:36px}
+  .field-icon{width:31px;height:31px}
   .profile-field input[type="text"],.profile-field select{font-size:.8rem}
+  .advanced-options-body{
+    position:static;
+    margin-top:2px;
+    padding:8px;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
   .advanced-grid{grid-template-columns:1fr}
   .toggles{grid-template-columns:1fr 1fr}
   .chart-workspace,.panel,.ai-chat-panel{border-radius:16px}

@@ -1,0 +1,13 @@
+---
+description: Git workflow for all project changes
+alwaysApply: true
+---
+
+# Git Workflow
+
+- Before changing code, create a focused branch from the latest local `master`.
+- Never commit feature or fix work directly to `master`.
+- After verification, update the changelog when the change is user-visible.
+- Commit the completed work with the repository's commit-message style.
+- Push the feature branch to `origin` and set its upstream.
+- Never force-push `master`.

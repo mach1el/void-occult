@@ -486,7 +486,7 @@ export function ChartPage() {
               </form>
 
               <details className="advanced-options">
-                <summary>Tùy chọn chuyên sâu</summary>
+                <summary>Tùy chọn</summary>
                 <div className="advanced-options-body">
                   <div
                     className="school-tabs"
