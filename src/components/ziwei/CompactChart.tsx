@@ -250,20 +250,20 @@ function compactName(star: ChartStar): string {
 function starColor(star: ChartStar, school: School): string {
   const source = star.source ?? "";
   if (source.endsWith("-mutagen")) {
-    if (star.name.includes("Kỵ")) return "#c9363a";
-    if (star.name.includes("Lộc")) return "#23843d";
-    if (star.name.includes("Quyền")) return "#b75b14";
-    return "#3561a9";
+    if (star.name.includes("Kỵ")) return "var(--cinnabar)";
+    if (star.name.includes("Lộc")) return "var(--jade)";
+    if (star.name.includes("Quyền")) return "var(--amber)";
+    return "var(--blue)";
   }
   const element = getEngine(school)?.elementForStar(star.name);
   return (
     {
-      Kim: "#5e6562",
-      Mộc: "#23843d",
-      Thủy: "#315f9d",
-      Hỏa: "#c9363a",
-      Thổ: "#b66a13",
-    }[element ?? ""] ?? "#263026"
+      Kim: "var(--element-kim)",
+      Mộc: "var(--element-moc)",
+      Thủy: "var(--element-thuy)",
+      Hỏa: "var(--element-hoa)",
+      Thổ: "var(--element-tho)",
+    }[element ?? ""] ?? "var(--ash)"
   );
 }
 

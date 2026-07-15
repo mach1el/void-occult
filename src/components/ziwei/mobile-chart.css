@@ -16,7 +16,7 @@
     padding: 4px;
     border: 1px solid var(--line);
     border-radius: 10px;
-    background: rgb(10 8 22 / 70%);
+    background: rgb(9 7 20 / 74%);
   }
 
   .mobile-chart-switch button {
@@ -31,9 +31,9 @@
   }
 
   .mobile-chart-switch button.is-active {
-    color: #17101f;
+    color: var(--void);
     background: linear-gradient(180deg, var(--amber-soft), var(--amber));
-    box-shadow: 0 3px 14px rgb(205 162 58 / 18%);
+    box-shadow: 0 3px 14px rgb(214 174 85 / 22%);
   }
 
   .mobile-chart-reader {
@@ -57,11 +57,11 @@
   .mobile-chart-summary {
     margin-bottom: 12px;
     overflow: hidden;
-    border: 1px solid rgb(180 155 255 / 22%);
+    border: 1px solid var(--line-soft);
     border-radius: 12px;
     background:
-      radial-gradient(circle at 85% 10%, rgb(95 227 224 / 8%), transparent 34%),
-      rgb(12 10 28 / 72%);
+      radial-gradient(circle at 85% 10%, rgb(214 174 85 / 8%), transparent 34%),
+      rgb(18 16 38 / 78%);
   }
 
   .mobile-summary-title {
@@ -70,7 +70,7 @@
     justify-content: space-between;
     gap: 10px;
     padding: 11px 12px;
-    border-bottom: 1px solid rgb(180 155 255 / 14%);
+    border-bottom: 1px solid var(--line-soft);
   }
 
   .mobile-summary-title span {
@@ -103,8 +103,8 @@
     flex-direction: column;
     gap: 2px;
     padding: 10px 12px;
-    border-right: 1px solid rgb(180 155 255 / 10%);
-    border-bottom: 1px solid rgb(180 155 255 / 10%);
+    border-right: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
   }
 
   .mobile-summary-grid > div:nth-child(2n) {
@@ -146,11 +146,11 @@
   .mobile-palace-nav a {
     flex: 0 0 auto;
     scroll-snap-align: start;
-    border: 1px solid rgb(180 155 255 / 20%);
+    border: 1px solid var(--line-soft);
     border-radius: 999px;
     padding: 7px 11px;
     color: var(--ash);
-    background: rgb(12 10 28 / 66%);
+    background: rgb(18 16 38 / 78%);
     font-size: 0.74rem;
     line-height: 1;
     text-decoration: none;
@@ -164,22 +164,22 @@
   .mobile-palace-card {
     scroll-margin-top: 10px;
     overflow: hidden;
-    border: 1px solid rgb(70 57 116 / 86%);
+    border: 1px solid var(--line-soft);
     border-radius: 12px;
-    background: linear-gradient(165deg, rgb(31 24 55 / 97%), rgb(15 12 29 / 98%));
+    background: linear-gradient(165deg, rgb(27 23 52 / 98%), rgb(9 7 20 / 99%));
     box-shadow: 0 14px 30px -24px #000;
   }
 
   .mobile-palace-card.is-menh {
-    border-color: rgb(180 155 255 / 62%);
+    border-color: rgb(214 174 85 / 68%);
     box-shadow:
-      inset 0 0 35px rgb(120 80 210 / 7%),
+      inset 0 0 35px rgb(214 174 85 / 7%),
       0 14px 30px -24px #000;
   }
 
   .mobile-palace-card.is-than {
     box-shadow:
-      inset 0 0 0 1px rgb(127 181 154 / 48%),
+      inset 0 0 0 1px rgb(114 197 160 / 54%),
       0 14px 30px -24px #000;
   }
 
@@ -189,8 +189,8 @@
     justify-content: space-between;
     gap: 12px;
     padding: 12px 13px 10px;
-    border-bottom: 1px solid rgb(180 155 255 / 14%);
-    background: rgb(255 255 255 / 1.5%);
+    border-bottom: 1px solid var(--line-soft);
+    background: rgb(214 174 85 / 2.5%);
   }
 
   .mobile-palace-head > div:first-child {
@@ -240,12 +240,12 @@
   }
 
   .mobile-star-section + .mobile-star-section {
-    border-left: 1px solid rgb(180 155 255 / 10%);
+    border-left: 1px solid var(--line-soft);
   }
 
   .mobile-star-section.is-major {
-    border-bottom: 1px solid rgb(180 155 255 / 10%);
-    background: rgb(205 162 58 / 3%);
+    border-bottom: 1px solid var(--line-soft);
+    background: rgb(214 174 85 / 4%);
   }
 
   .mobile-star-section h4 {
@@ -261,7 +261,7 @@
   .mobile-flow-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    border-bottom: 1px solid rgb(180 155 255 / 10%);
+    border-bottom: 1px solid var(--line-soft);
   }
 
   .mobile-star-list {
@@ -275,11 +275,11 @@
     align-items: center;
     gap: 4px;
     min-height: 27px;
-    border: 1px solid rgb(180 155 255 / 14%);
+    border: 1px solid var(--line-soft);
     border-radius: 7px;
     padding: 4px 7px;
     color: var(--ash);
-    background: rgb(7 8 20 / 45%);
+    background: rgb(9 7 20 / 58%);
     font-size: 0.76rem;
     font-weight: 500;
     line-height: 1.2;
@@ -287,7 +287,7 @@
 
   .mobile-star-list.is-major .mobile-star {
     min-height: 32px;
-    border-color: rgb(205 162 58 / 28%);
+    border-color: rgb(214 174 85 / 36%);
     color: var(--amber-soft);
     font-family: var(--font-vn);
     font-size: 0.95rem;
@@ -295,17 +295,18 @@
   }
 
   .mobile-star-list.is-good .mobile-star {
-    border-color: rgb(127 181 154 / 17%);
+    border-color: rgb(114 197 160 / 28%);
+    background: var(--success-soft);
   }
 
   .mobile-star-list.is-bad .mobile-star {
-    border-color: rgb(208 90 142 / 20%);
-    color: #e5a6ba;
+    border-color: rgb(224 107 101 / 32%);
+    background: var(--danger-soft);
   }
 
   .mobile-star-list.is-annual .mobile-star {
-    border-color: rgb(127 166 216 / 20%);
-    color: #a9c7ec;
+    border-color: rgb(120 174 234 / 30%);
+    background: rgb(120 174 234 / 8%);
   }
 
   .mobile-brightness,
@@ -326,8 +327,8 @@
 
   .mobile-phi-section {
     padding: 9px 12px;
-    border-bottom: 1px solid rgb(180 155 255 / 10%);
-    background: rgb(91 66 126 / 8%);
+    border-bottom: 1px solid var(--line-soft);
+    background: rgb(70 53 115 / 12%);
   }
 
   .mobile-phi-section h4 {
@@ -345,10 +346,10 @@
   }
 
   .mobile-phi-section span {
-    border: 1px solid rgb(174 135 210 / 20%);
+    border: 1px solid rgb(180 155 255 / 28%);
     border-radius: 999px;
     padding: 3px 7px;
-    color: #cbb7e8;
+    color: var(--violet);
     font-size: 0.68rem;
   }
 
@@ -359,34 +360,34 @@
     gap: 6px 12px;
     padding: 8px 12px;
     color: var(--muted);
-    background: rgb(7 8 20 / 36%);
+    background: rgb(9 7 20 / 52%);
     font-family: var(--font-chat);
     font-size: 0.66rem;
     letter-spacing: 0;
   }
 
   .mobile-element-kim {
-    color: #e8dfc5 !important;
+    color: var(--element-kim) !important;
   }
 
   .mobile-element-mộc,
   .mobile-element-moc {
-    color: #94d0aa !important;
+    color: var(--element-moc) !important;
   }
 
   .mobile-element-thủy,
   .mobile-element-thuy {
-    color: #91bced !important;
+    color: var(--element-thuy) !important;
   }
 
   .mobile-element-hỏa,
   .mobile-element-hoa {
-    color: #ef9d90 !important;
+    color: var(--element-hoa) !important;
   }
 
   .mobile-element-thổ,
   .mobile-element-tho {
-    color: #e3c979 !important;
+    color: var(--element-tho) !important;
   }
 }
 
@@ -397,7 +398,7 @@
   }
 
   .mobile-star-section + .mobile-star-section {
-    border-top: 1px solid rgb(180 155 255 / 10%);
+    border-top: 1px solid var(--line-soft);
     border-left: 0;
   }
 

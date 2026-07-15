@@ -180,14 +180,14 @@
 }
 
 .compact-sheet-bg {
-  fill: #f3f3e9;
+  fill: var(--void);
 }
 
 .compact-sheet-outline,
 .compact-palace-bg,
 .compact-center-bg {
   fill: transparent;
-  stroke: #718554;
+  stroke: var(--line);
   stroke-width: 1.4;
 }
 
@@ -197,39 +197,40 @@
 }
 
 .compact-palace:focus-visible .compact-palace-bg {
-  fill: #e9eddd;
-  stroke: #405e2d;
+  fill: #211b3b;
+  stroke: var(--amber-soft);
   stroke-width: 2.3;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .compact-palace:hover .compact-palace-bg {
-    fill: #e9eddd;
-    stroke: #405e2d;
+    fill: #211b3b;
+    stroke: var(--amber);
     stroke-width: 2.3;
   }
 }
 
 .compact-palace.is-menh .compact-palace-bg {
-  fill: #eef2e5;
+  fill: rgba(214, 174, 85, 0.08);
+  stroke: var(--amber);
   stroke-width: 2.2;
 }
 
 .compact-palace.is-than .compact-palace-bg {
-  fill: #eaf2ec;
-  stroke: #4f8063;
+  fill: rgba(114, 197, 160, 0.07);
+  stroke: var(--jade);
   stroke-width: 2.2;
 }
 
 .compact-palace.is-menh.is-than .compact-palace-bg {
-  fill: #e8f0e3;
-  stroke: #397052;
+  fill: rgba(214, 174, 85, 0.1);
+  stroke: var(--amber-soft);
   stroke-width: 2.5;
 }
 
 .compact-palace.is-trine-active .compact-palace-bg {
-  fill: #edf0dc;
-  stroke: #b28725;
+  fill: rgba(214, 174, 85, 0.07);
+  stroke: var(--amber);
   stroke-width: 2.1;
 }
 
@@ -243,26 +244,26 @@
 }
 
 .compact-palace-stem {
-  fill: #b66416;
+  fill: var(--amber);
   font-size: 9px;
   font-weight: 700;
 }
 
 .compact-palace-name {
-  fill: #182116;
+  fill: var(--paper);
   font-size: 10.5px;
   font-weight: 800;
   letter-spacing: 0.15px;
 }
 
 .compact-palace-age {
-  fill: #263026;
+  fill: var(--ash);
   font-size: 9px;
   font-weight: 700;
 }
 
 .compact-palace-mark {
-  fill: #347a46;
+  fill: var(--jade);
   font-size: 8px;
   font-weight: 700;
 }
@@ -273,7 +274,7 @@
 }
 
 .compact-empty-major {
-  fill: #a2a49c;
+  fill: var(--muted);
   font-size: 12px;
   font-weight: 700;
 }
@@ -284,37 +285,37 @@
 }
 
 .compact-palace-footer {
-  fill: #263026;
+  fill: var(--ash);
   font-size: 8.5px;
   font-weight: 600;
 }
 
 .compact-flow-month {
-  fill: #4d5d3b;
+  fill: var(--muted);
   font-size: 8px;
   font-weight: 700;
 }
 
 .compact-phi-flow {
-  fill: #725f8d;
+  fill: var(--violet);
   font-size: 6.8px;
   font-weight: 750;
 }
 
 .compact-phi-flow.is-lộc {
-  fill: #a2660e;
+  fill: var(--amber-soft);
 }
 
 .compact-phi-flow.is-quyền {
-  fill: #a64035;
+  fill: var(--cinnabar);
 }
 
 .compact-phi-flow.is-khoa {
-  fill: #397651;
+  fill: var(--jade);
 }
 
 .compact-phi-flow.is-kỵ {
-  fill: #725394;
+  fill: #d299ef;
 }
 
 .compact-tam-hop {
@@ -323,17 +324,17 @@
 
 .compact-tam-hop path {
   fill: transparent;
-  stroke: rgb(173 126 28 / 90%);
+  stroke: rgb(214 174 85 / 88%);
   stroke-width: 2.2;
   stroke-dasharray: 7 5;
   stroke-linecap: round;
-  filter: drop-shadow(0 0 2px rgb(173 126 28 / 50%));
+  filter: drop-shadow(0 0 3px rgb(214 174 85 / 48%));
   animation: none;
 }
 
 .compact-tam-hop circle {
-  fill: #b17c19;
-  stroke: #f3e1a2;
+  fill: var(--amber);
+  stroke: var(--amber-soft);
   stroke-width: 1;
 }
 
@@ -348,13 +349,13 @@
 }
 
 .compact-void-marker rect {
-  fill: #171717;
-  stroke: #d8c48a;
+  fill: #05040d;
+  stroke: var(--cinnabar);
   stroke-width: 0.7;
 }
 
 .compact-void-marker text {
-  fill: #f4f0df;
+  fill: #ffe9e6;
   font-family: var(--font-vn), serif;
   font-size: 8px;
   font-weight: 800;
@@ -362,7 +363,7 @@
 }
 
 .compact-center-bg {
-  fill: #f7f7ef;
+  fill: #0e0c20;
 }
 
 .compact-center::before {
@@ -370,27 +371,27 @@
 }
 
 .compact-center-kicker {
-  fill: #7c846f;
+  fill: var(--muted);
   font-size: 8.5px;
   font-weight: 700;
   letter-spacing: 1.4px;
 }
 
 .compact-center-title {
-  fill: #48643a;
+  fill: var(--amber-soft);
   font-family: "Noto Serif Display", Georgia, serif;
   font-size: 26px;
   font-weight: 700;
 }
 
 .compact-center-year {
-  fill: #9b671c;
+  fill: var(--amber);
   font-size: 10px;
   font-weight: 700;
 }
 
 .compact-center-seal {
-  fill: rgb(72 100 58 / 6%);
+  fill: rgb(214 174 85 / 5%);
   font-family: "Noto Serif TC", serif;
   font-size: 116px;
   font-weight: 900;
@@ -398,31 +399,31 @@
 }
 
 .compact-center-label {
-  fill: #5f685a;
+  fill: var(--muted);
   font-size: 10px;
   font-weight: 600;
 }
 
 .compact-center-value {
-  fill: #244f99;
+  fill: var(--paper);
   font-size: 11px;
   font-weight: 700;
 }
 
 .compact-center-pillar {
-  fill: #244f99;
+  fill: var(--blue);
   font-size: 10.5px;
   font-weight: 700;
 }
 
 .compact-center-pillar-cell line,
 .compact-center-detail-cell line {
-  stroke: rgb(113 133 84 / 16%);
+  stroke: rgb(104 88 148 / 24%);
   stroke-width: 0.6;
 }
 
 .compact-center-divider {
-  stroke: rgb(113 133 84 / 22%);
+  stroke: rgb(214 174 85 / 22%);
   stroke-width: 0.7;
 }
 
@@ -454,12 +455,12 @@
   overflow: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  border: 1px solid rgb(180 155 255 / 35%);
+  border: 1px solid var(--line-soft);
   border-radius: 18px;
   color: var(--paper);
   background:
-    radial-gradient(circle at 90% 0, rgb(95 227 224 / 8%), transparent 32%),
-    linear-gradient(160deg, #20183a, #0e0b1d);
+    radial-gradient(circle at 90% 0, rgb(214 174 85 / 8%), transparent 32%),
+    linear-gradient(160deg, var(--surface-raised), var(--void));
   box-shadow: 0 30px 90px -30px #000;
 }
 
@@ -477,7 +478,7 @@
   gap: 16px;
   padding: 14px 16px;
   border-bottom: 1px solid var(--line);
-  background: rgb(25 19 45 / 94%);
+  background: rgb(27 23 52 / 96%);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
@@ -549,10 +550,10 @@
   min-height: 34px;
   align-items: center;
   gap: 5px;
-  border: 1px solid rgb(180 155 255 / 17%);
+  border: 1px solid var(--line-soft);
   border-radius: 9px;
   padding: 6px 9px;
-  background: rgb(7 7 18 / 45%);
+  background: rgb(9 7 20 / 58%);
   font-size: 0.84rem;
 }
 
@@ -581,8 +582,8 @@
 .compact-detail-meta .is-void-marker {
   border-radius: 4px;
   padding: 2px 7px;
-  color: #f4e9c9;
-  background: #171717;
+  color: #ffe9e6;
+  background: #180d16;
 }
 
 @media (max-width: 960px) {

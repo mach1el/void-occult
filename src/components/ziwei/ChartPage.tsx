@@ -281,7 +281,7 @@ export function ChartPage() {
     setImageState("working");
     try {
       const blob = await toBlob(chart, {
-        backgroundColor: "#f3f3e9",
+        backgroundColor: "#090714",
         pixelRatio: 2,
       });
       if (!blob) throw new Error("Không tạo được dữ liệu ảnh");

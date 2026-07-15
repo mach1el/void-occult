@@ -8,6 +8,14 @@ const chartCss = readFileSync(
   resolve(process.cwd(), "src/styles/tu-vi.css"),
   "utf8",
 );
+const compactChartCss = readFileSync(
+  resolve(process.cwd(), "src/components/ziwei/compact-chart.css"),
+  "utf8",
+);
+const mobileChartCss = readFileSync(
+  resolve(process.cwd(), "src/components/ziwei/mobile-chart.css"),
+  "utf8",
+);
 
 describe("ChartPage profile form", () => {
   it("exposes profile and chart options in one toolbar", () => {
@@ -33,8 +41,22 @@ describe("ChartPage profile form", () => {
       /\.profile-field select\{[^}]*background-color:transparent;/,
     );
     expect(chartCss).toMatch(
-      /\.profile-field select option\{[^}]*background-color:#17132d !important;/,
+      /\.profile-field select option\{[^}]*background-color:var\(--surface-raised\) !important;/,
     );
     expect(chartCss).toContain("color-scheme:only dark");
+  });
+
+  it("keeps the Mystic Gold palette semantic across chart modes", () => {
+    expect(chartCss).toContain("--surface-raised:#1b1734");
+    expect(chartCss).toContain("--amber:#d6ae55");
+    expect(chartCss).toContain("--element-kim:#d8d3c8");
+    expect(chartCss).toContain("--element-moc:#79c98f");
+    expect(chartCss).toContain("--element-thuy:#78aeea");
+    expect(chartCss).toContain("--element-hoa:#ef756c");
+    expect(chartCss).toContain("--element-tho:#d9aa5c");
+    expect(compactChartCss).toContain("fill: var(--void)");
+    expect(compactChartCss).toContain("fill: var(--amber-soft)");
+    expect(mobileChartCss).toContain("color: var(--element-kim) !important");
+    expect(mobileChartCss).toContain("background: var(--danger-soft)");
   });
 });
