@@ -482,58 +482,60 @@ export function ChartPage() {
                     <option value="Khác">Khác</option>
                   </select>
                 </label>
-              </form>
 
-              <details className="advanced-options">
-                <summary>Tùy chọn</summary>
-                <div className="advanced-options-body">
-                  <div
-                    className="school-tabs advanced-span-2"
-                    role="radiogroup"
-                    aria-label="Trường phái"
+                <div
+                  className="school-tabs profile-school"
+                  role="radiogroup"
+                  aria-label="Trường phái"
+                >
+                  {(
+                    [
+                      ["nam-phai", "Nam phái"],
+                      ["trung-chau", "Trung Châu"],
+                    ] as const
+                  ).map(([value, label]) => (
+                    <label className="school-tab" key={value}>
+                      <input
+                        type="radio"
+                        name="school"
+                        value={value}
+                        checked={school === value}
+                        onChange={() => changeSchool(value)}
+                      />
+                      <span>{label}</span>
+                    </label>
+                  ))}
+                </div>
+
+                <label className="profile-field profile-field-plain">
+                  <span className="sr-only">Cách xem vận</span>
+                  <select
+                    name="flowBase"
+                    aria-label="Cách xem vận"
+                    value={form.flowBase}
+                    onChange={fieldChange("flowBase")}
                   >
-                    {(
-                      [
-                        ["nam-phai", "Nam phái"],
-                        ["trung-chau", "Trung Châu"],
-                      ] as const
-                    ).map(([value, label]) => (
-                      <label className="school-tab" key={value}>
-                        <input
-                          type="radio"
-                          name="school"
-                          value={value}
-                          checked={school === value}
-                          onChange={() => changeSchool(value)}
-                        />
-                        <span>{label}</span>
-                      </label>
-                    ))}
-                  </div>
-                  <label className="advanced-field">
-                    <span>Cách xem vận</span>
-                    <select
-                      name="flowBase"
-                      value={form.flowBase}
-                      onChange={fieldChange("flowBase")}
-                    >
-                      <option value="luu-nien">Lưu Niên</option>
-                      <option value="tieu-han">Tiểu Hạn</option>
-                      <option value="dai-van">Lưu Niên Đại Vận</option>
-                    </select>
-                  </label>
-                  <label className="advanced-field">
-                    <span>Múi giờ</span>
-                    <select
-                      name="timezone"
-                      value={form.timezone}
-                      onChange={fieldChange("timezone")}
-                    >
-                      <option value="7">Việt Nam +7</option>
-                      <option value="8">Trung Quốc +8</option>
-                      <option value="0">Giờ gốc +0</option>
-                    </select>
-                  </label>
+                    <option value="luu-nien">Lưu Niên</option>
+                    <option value="tieu-han">Tiểu Hạn</option>
+                    <option value="dai-van">Lưu Niên Đại Vận</option>
+                  </select>
+                </label>
+
+                <label className="profile-field profile-field-plain">
+                  <span className="sr-only">Múi giờ</span>
+                  <select
+                    name="timezone"
+                    aria-label="Múi giờ"
+                    value={form.timezone}
+                    onChange={fieldChange("timezone")}
+                  >
+                    <option value="7">Việt Nam +7</option>
+                    <option value="8">Trung Quốc +8</option>
+                    <option value="0">Giờ gốc +0</option>
+                  </select>
+                </label>
+
+                <div className="profile-toggles" aria-label="Lớp sao hiển thị">
                   <label className="toggle">
                     <input
                       type="checkbox"
@@ -565,12 +567,13 @@ export function ChartPage() {
                     Sao lưu
                   </label>
                 </div>
-              </details>
+              </form>
             </div>
           </aside>
 
-          <section className="chart-section">
-            <div className="chart-panel chart-workspace">
+          <div className="workspace-grid">
+            <section className="chart-section">
+              <div className="chart-panel chart-workspace">
               <div className="panel-head">
                 <h2>Lá số 12 cung</h2>
                 <div className="chart-actions" style={{ flexWrap: 'nowrap' }}>
@@ -648,10 +651,11 @@ export function ChartPage() {
                   showPhi={form.showPhi}
                 />
               </div>
-            </div>
-          </section>
+              </div>
+            </section>
 
-          <AiChat getContext={context} />
+            <AiChat getContext={context} />
+          </div>
         </main>
 
         <footer>
