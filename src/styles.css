@@ -41,7 +41,7 @@
 
   /* Scheme khung cảnh (context) — nền/bề mặt/viền/chữ/trạng thái toàn app.
      Dẫn xuất từ void/ink/paper/muted/gold ở @theme, KHÔNG phải màu dữ liệu
-     (xem --element-*/--mutagen-* ở trên). Tử Vi giữ hệ token riêng trong
+     (xem --element-* và --mutagen-* ở trên). Tử Vi giữ hệ token riêng trong
      src/styles/tu-vi.css, không đọc nhóm này. */
   --surface-1: #14111d;
   --surface-2: #1b1726;
@@ -115,16 +115,33 @@ a {
   color: var(--color-paper);
 }
 
-.home-noise {
+/* Quầng khí dùng chung cho mọi route (bọc ở App.tsx, không riêng trang chủ).
+   position:fixed + z-index âm: luôn nằm dưới nội dung trang, không cuộn theo
+   nội dung dù trang dài (lá số Bát Tự) — không phụ thuộc page có khai báo
+   position/z-index hay không. Màu giữ nguyên palette gốc tím/son/ngọc — chỉ
+   đổi cơ chế dựng so với .home-noise cũ (trước là background trên div cuộn
+   theo nội dung). Tử Vi có "galaxy" atmosphere riêng, KHÔNG dùng class này. */
+.app-atmosphere {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  --atmosphere-intensity: 1;
+  opacity: var(--atmosphere-intensity);
   background-image:
     radial-gradient(circle at 50% -10%, rgb(126 77 151 / 24%), transparent 35%),
     radial-gradient(circle at 8% 78%, rgb(213 83 66 / 12%), transparent 30%),
     radial-gradient(circle at 92% 84%, rgb(117 182 151 / 10%), transparent 32%);
 }
 
-.home-noise::before {
-  position: fixed;
-  z-index: 0;
+/* Trang nội dung dày (lá số, bảng biểu) — quầng mờ hơn, không đua với dữ liệu. */
+.app-atmosphere--soft {
+  --atmosphere-intensity: 0.45;
+}
+
+.app-atmosphere::before {
+  position: absolute;
   inset: 0;
   content: "";
   pointer-events: none;

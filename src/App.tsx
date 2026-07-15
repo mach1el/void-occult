@@ -45,45 +45,45 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
   "/pages/i-ching/luc-hao-nang-cao.html": "/kinh-dich/luc-hao-nang-cao",
 };
 
+// Quầng khí phủ toàn app (xem .app-atmosphere trong src/styles.css).
+// - Tử Vi: có "galaxy" atmosphere riêng (body radial trong tu-vi.css) — KHÔNG
+//   nhận class này để tránh chồng lớp hai hệ quầng khí khác palette.
+// - Kinh Dịch (/kinh-dich/*): nội dung là HTML tĩnh legacy tự mang <style> với
+//   body{background:...} riêng (cinnabar/gold) — cũng KHÔNG nhận class này,
+//   vì .app-atmosphere (tím/son/ngọc, fixed, z-index âm) vẫn nằm TRÊN nền
+//   body thật của legacy content trong stacking order, nên sẽ chồng hai quầng
+//   khí khác palette lên nhau. Xem PR mục "Phát hiện thêm".
+// - Bát Tự: chưa có quầng khí nào → dùng bản mờ (--soft) để không đua với lá số.
+// - Trang chủ: giữ cường độ đậm như thiết kế gốc.
+export function atmosphereClassFor(path: string): string | null {
+  if (path === "/tu-vi") return null;
+  if (path === "/kinh-dich/luc-hao-co-ban" || path === "/kinh-dich/luc-hao-nang-cao") return null;
+  if (path === "/") return "app-atmosphere";
+  return "app-atmosphere app-atmosphere--soft";
+}
+
 export function App() {
   const rawPath = normalizePath(window.location.pathname);
   const path = LEGACY_PATH_REDIRECTS[rawPath] ?? rawPath;
+  const atmosphereClass = atmosphereClassFor(path);
 
+  let content: ReactNode;
   if (path === "/tu-vi") {
-    return (
-      <>
-        {loading(<ChartPage />)}
-        <SupportButton />
-      </>
-    );
+    content = loading(<ChartPage />);
+  } else if (path === "/kinh-dich/luc-hao-co-ban") {
+    content = loading(<BasicArticlePage />);
+  } else if (path === "/kinh-dich/luc-hao-nang-cao") {
+    content = loading(<AdvancedArticlePage />);
+  } else if (path === "/bat-tu" || path === "/bazi") {
+    content = loading(<BaziPage />);
+  } else {
+    content = <HomePage />;
   }
-  if (path === "/kinh-dich/luc-hao-co-ban") {
-    return (
-      <>
-        {loading(<BasicArticlePage />)}
-        <SupportButton />
-      </>
-    );
-  }
-  if (path === "/kinh-dich/luc-hao-nang-cao") {
-    return (
-      <>
-        {loading(<AdvancedArticlePage />)}
-        <SupportButton />
-      </>
-    );
-  }
-  if (path === "/bat-tu" || path === "/bazi") {
-    return (
-      <>
-        {loading(<BaziPage />)}
-        <SupportButton />
-      </>
-    );
-  }
+
   return (
     <>
-      <HomePage />
+      {atmosphereClass && <div className={atmosphereClass} aria-hidden="true" />}
+      {content}
       <SupportButton />
     </>
   );

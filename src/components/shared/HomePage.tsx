@@ -68,7 +68,7 @@ const accentClasses = {
 
 export function HomePage() {
   return (
-    <div className="home-noise min-h-screen overflow-hidden bg-void text-paper">
+    <div className="min-h-screen bg-void text-paper">
       <main className="relative z-10 mx-auto w-full max-w-6xl px-5 pb-16 sm:px-8">
         <header className="flex min-h-[58vh] flex-col items-center justify-center py-20 text-center">
           <div className="mb-8 grid size-24 -rotate-3 place-items-center rounded-2xl border-2 border-cinnabar/85 bg-cinnabar/5 font-han text-5xl font-black text-cinnabar shadow-[inset_0_0_28px_rgba(213,83,66,.12),0_0_45px_rgba(213,83,66,.08)] sm:size-28 sm:text-6xl">
