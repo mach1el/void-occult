@@ -662,6 +662,7 @@ body{
   grid-template-columns:minmax(420px,1.25fr) minmax(360px,.9fr);
   gap:10px;
   align-items:start;
+  color-scheme:dark;
 }
 .profile-fields-grid{
   display:grid;
@@ -685,9 +686,9 @@ body{
   align-items:center;
   gap:7px;
   padding:4px 9px 4px 5px;
-  border:1px solid rgba(193,180,239,.2);
+  border:1px solid rgba(202,190,244,.3);
   border-radius:11px;
-  background:rgba(247,243,255,.075);
+  background:rgba(247,243,255,.1);
   color:#d8d0ed;
   overflow:visible;
   cursor:text;
@@ -698,12 +699,12 @@ body{
     transform .2s ease;
 }
 .profile-field:hover{
-  border-color:rgba(203,186,255,.38);
-  background:rgba(247,243,255,.1);
+  border-color:rgba(211,198,255,.56);
+  background:rgba(247,243,255,.15);
 }
 .profile-field:focus-within{
-  border-color:rgba(95,227,224,.6);
-  background:rgba(247,243,255,.11);
+  border-color:rgba(95,227,224,.82);
+  background:rgba(247,243,255,.17);
   box-shadow:0 0 0 3px rgba(95,227,224,.1),0 12px 28px -20px rgba(95,227,224,.8);
   transform:translateY(-1px);
 }
@@ -740,10 +741,19 @@ body{
   font-size:.78rem;
   text-overflow:ellipsis;
 }
-.profile-field input::placeholder{color:#968da9;opacity:1}
+.profile-field input::placeholder{color:#beb5d0;opacity:1}
 .profile-field select{
   cursor:pointer;
   color-scheme:dark;
+  background-color:#17132d;
+}
+.profile-field select option{
+  color:#f5f1ff;
+  background-color:#17132d;
+}
+.profile-field select option:checked{
+  color:#fff;
+  background-color:#5d4792;
 }
 .profile-field-plain{
   grid-template-columns:minmax(0,1fr);
@@ -763,12 +773,16 @@ body{
 .school-tabs{
   margin:0;
   padding:3px;
-  border-color:rgba(180,155,255,.16);
+  border-color:rgba(202,190,244,.3);
   border-radius:12px;
-  background:rgba(7,8,26,.42);
+  background:rgba(7,8,26,.68);
 }
 .profile-school{min-width:0}
-.school-tab{font-family:var(--font-chat);font-size:.72rem}
+.school-tab{
+  color:#c8bfdc;
+  font-family:var(--font-chat);
+  font-size:.72rem;
+}
 .school-tab:has(input:checked){
   color:#16102b;
   background:linear-gradient(135deg,#f0d27a,#d9a85b);
@@ -777,9 +791,10 @@ body{
   justify-content:center;
   min-height:34px;
   padding:4px;
-  border-color:rgba(180,155,255,.15);
+  border-color:rgba(202,190,244,.3);
   border-radius:10px;
-  background:rgba(7,8,26,.42);
+  background:rgba(7,8,26,.68);
+  color:#e5dff2;
   font-family:var(--font-chat);
   font-size:.66rem;
   text-transform:none;
