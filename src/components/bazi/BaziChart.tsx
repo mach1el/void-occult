@@ -95,7 +95,7 @@ function PillarColumn({
       </div>
 
       {/* Can Chi */}
-      <div className="flex flex-col items-center py-4 gap-1">
+      <div className="flex flex-col items-center py-3 lg:py-4 gap-1">
         <div className="flex flex-col items-center">
           <div
             className={
@@ -106,12 +106,12 @@ function PillarColumn({
           >
             {detail.tenGod}
           </div>
-          <div className={`text-3xl font-han font-bold leading-none ${getElementColor(detail.pillar.stem)}`}>
+          <div className={`text-2xl lg:text-3xl font-han font-bold leading-none ${getElementColor(detail.pillar.stem)}`}>
             {detail.pillar.stem}
           </div>
         </div>
         <div className="flex flex-col items-center mt-1.5">
-          <div className={`text-3xl font-han font-bold leading-none ${getElementColor(detail.pillar.branch)}`}>
+          <div className={`text-2xl lg:text-3xl font-han font-bold leading-none ${getElementColor(detail.pillar.branch)}`}>
             {detail.pillar.branch}
           </div>
         </div>
@@ -120,7 +120,7 @@ function PillarColumn({
       <div className="h-px bg-white/10 mx-2" />
 
       {/* Tàng Can & Thập Thần, xếp theo trọng số Bản khí > Trung khí > Dư khí */}
-      <div className="p-2 text-center flex flex-col gap-1.5 bg-white/[0.02]">
+      <div className="p-1.5 lg:p-2 text-center flex flex-col gap-1 lg:gap-1.5 bg-white/[0.02]">
         <div className="text-[10px] uppercase text-muted/50 tracking-widest pb-0.5">Tàng Can</div>
         {detail.hiddenStems.map((hidden, i) => {
           const style = HIDDEN_STEM_STYLE[hidden.type] ?? FALLBACK_HIDDEN_STEM_STYLE;
@@ -139,7 +139,7 @@ function PillarColumn({
       <div className="h-px bg-white/10 mx-2" />
 
       {/* Trường Sinh */}
-      <div className="px-3 py-1.5 flex justify-between items-center text-xs bg-white/[0.02]">
+      <div className="px-2 py-1 lg:px-3 lg:py-1.5 flex justify-between items-center text-xs bg-white/[0.02]">
         <span className="text-muted/50 uppercase tracking-widest text-[9px]">Trường Sinh</span>
         <span className="text-right text-paper/90 font-medium" data-testid="life-stage">
           {detail.lifeStage}
@@ -149,7 +149,7 @@ function PillarColumn({
       <div className="h-px bg-white/10 mx-2" />
 
       {/* Thông tin phụ */}
-      <div className="p-2.5 text-xs flex flex-col gap-1.5 bg-black/20 flex-1">
+      <div className="p-2 lg:p-2.5 text-xs flex flex-col gap-1 lg:gap-1.5 bg-black/20 flex-1">
         <div className="flex justify-between items-center">
           <span className="text-muted/50 uppercase tracking-widest text-[9px]">Nạp Âm</span>
           <span className="text-right text-paper/80">{detail.nayin}</span>
@@ -229,7 +229,7 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
   const [showYongShenCalc, setShowYongShenCalc] = useState(false);
 
   const strength = useMemo(() => calculateElementStrength(chart), [chart]);
-  const yongShen = useMemo(() => determineYongShen(strength), [strength]);
+  const yongShen = useMemo(() => determineYongShen(strength, chart.month.branch), [strength, chart.month.branch]);
   
   const dragScroll = useDragScroll();
 
@@ -246,16 +246,9 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
       {/* Tứ Trụ, Đặt dưới Khối Dụng Thần như yêu cầu hoặc trên? Thường để Tứ Trụ ở trên cho dễ nhìn */}
       <section>
         <h2 className="text-xl font-display text-paper mb-4">Tứ Trụ (Bát Tự)</h2>
-        <div 
-          className={`flex flex-nowrap md:flex-row gap-4 overflow-x-auto pb-4 custom-scrollbar snap-x ${dragScroll.className}`}
-          onPointerDown={dragScroll.onPointerDown}
-          onPointerMove={dragScroll.onPointerMove}
-          onPointerUp={dragScroll.onPointerUp}
-          onPointerCancel={dragScroll.onPointerCancel}
-          onWheel={dragScroll.onWheel}
-        >
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4 pb-4">
           {pillars.map((p) => (
-            <div key={p.title} className="flex-1 min-w-[200px] snap-center" onClickCapture={dragScroll.onClickCapture}>
+            <div key={p.title} className="min-w-0">
               <PillarColumn title={p.title} detail={p.detail} isDayPillar={p.isDayPillar} pillarKey={p.key} voids={chart.voids} />
             </div>
           ))}
@@ -275,7 +268,9 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
                 Nhật Chủ: {yongShen.dayMasterVerdict}
               </span>
               <span className="text-sm text-muted">
-                Theo {yongShen.methodLabel}
+                {yongShen.dayMasterVerdict === "trung hòa"
+                  ? `Nhật Chủ trung hòa — tham chiếu Pháp Điều Hậu: thiên về ${yongShen.dungThan.join(", ")}`
+                  : `Theo ${yongShen.methodLabel}`}
               </span>
             </div>
 

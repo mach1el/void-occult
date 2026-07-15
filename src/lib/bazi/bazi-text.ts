@@ -7,7 +7,7 @@ import { determineYongShen } from "./yong-shen";
  */
 export function buildBaziText(chart: BaziFullChart): string {
   const strength = calculateElementStrength(chart);
-  const yongShen = determineYongShen(strength);
+  const yongShen = determineYongShen(strength, chart.month.branch);
 
   const out: string[] = [];
   

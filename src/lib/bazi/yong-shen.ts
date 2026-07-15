@@ -17,19 +17,52 @@ export interface YongShenResult {
 
 export function determineYongShen(
   strength: ElementStrength,
+  monthBranch: string,
   conventions: BaziConventions = DEFAULT_CONVENTIONS
 ): YongShenResult {
   const method = conventions.baziYongShenMethod;
-  
+
   if (method === "phu-uc") {
-    return determineYongShenPhuUc(strength);
+    return determineYongShenPhuUc(strength, monthBranch);
   }
-  
+
   // Fallback hoặc các phương pháp khác nếu implement sau
-  return determineYongShenPhuUc(strength);
+  return determineYongShenPhuUc(strength, monthBranch);
 }
 
-function determineYongShenPhuUc(strength: ElementStrength): YongShenResult {
+const WINTER_BRANCHES = ["Hợi", "Tý", "Sửu"];
+const SUMMER_BRANCHES = ["Tỵ", "Ngọ", "Mùi"];
+
+/**
+ * Điều Hậu (Hàn Noãn) — dùng làm nguồn tham chiếu khi Phù Ức không kết luận
+ * được (trung hòa). Nguồn: quy tắc cổ điển "Đông sinh dụng Hỏa, Hạ sinh dụng
+ * Thủy" (điều hòa khí hậu lạnh/nóng của tháng sinh).
+ * Xuân (Dần/Mão/Thìn) và Thu (Thân/Dậu/Tuất): quy tắc đầy đủ phụ thuộc Can
+ * Nhật Chủ (khô/ẩm) nhưng hệ thống này chưa có bảng đối chiếu đáng tin cho
+ * từng Can — không bịa, nên liệt kê cả Thủy và Hỏa làm hướng tham khảo.
+ */
+function determineDieuHauFallback(monthBranch: string): { dungThan: Element[]; reasoning: string[] } {
+  if (WINTER_BRANCHES.includes(monthBranch)) {
+    return {
+      dungThan: ["Hỏa"],
+      reasoning: [`Điều Hậu: tháng sinh (chi ${monthBranch}) thuộc mùa Đông, khí hậu hàn lạnh — tham chiếu thiên về Hỏa để sưởi ấm cục diện.`],
+    };
+  }
+  if (SUMMER_BRANCHES.includes(monthBranch)) {
+    return {
+      dungThan: ["Thủy"],
+      reasoning: [`Điều Hậu: tháng sinh (chi ${monthBranch}) thuộc mùa Hạ, khí hậu viêm nhiệt — tham chiếu thiên về Thủy để giải nhiệt cục diện.`],
+    };
+  }
+  return {
+    dungThan: ["Thủy", "Hỏa"],
+    reasoning: [
+      `Điều Hậu: tháng sinh (chi ${monthBranch}) thuộc mùa Xuân/Thu. Quy tắc đầy đủ ở hai mùa này phụ thuộc chi tiết vào Can Nhật Chủ (khô/ẩm), hệ thống chưa có bảng đối chiếu đáng tin nên tạm liệt kê cả Thủy và Hỏa, cần thầy xác nhận quy tắc cụ thể.`,
+    ],
+  };
+}
+
+function determineYongShenPhuUc(strength: ElementStrength, monthBranch: string): YongShenResult {
   const dm = strength.dayMasterElement;
   const verdict = strength.dayMasterStrength.verdict;
   const reasoning: string[] = [];
@@ -64,8 +97,12 @@ function determineYongShenPhuUc(strength: ElementStrength): YongShenResult {
     reasoning.push(`Kỵ Thần (Hành sinh trợ thêm): ${generating} (Ấn), ${dm} (Tỷ/Kiếp).`);
   } else {
     reasoning.push("Cục diện Nhật Chủ Trung Hòa, chưa lệch hẳn về bên nào.");
-    reasoning.push("Dụng Thần theo pháp Phù Ức không thật sự rõ ràng ở trạng thái này. Cần kết hợp xem thêm Điều Hậu hoặc Thông Quan.");
+    reasoning.push("Dụng Thần theo pháp Phù Ức không thật sự rõ ràng ở trạng thái này. Chuyển sang tham chiếu Điều Hậu.");
     confidence = "cần cân nhắc";
+
+    const dieuHau = determineDieuHauFallback(monthBranch);
+    dungThan = dieuHau.dungThan;
+    reasoning.push(...dieuHau.reasoning);
   }
 
   // Tinh chỉnh confidence nếu sát mép
@@ -75,9 +112,11 @@ function determineYongShenPhuUc(strength: ElementStrength): YongShenResult {
     reasoning.push(`Lưu ý: Tỷ lệ ${p}% khá gần ngưỡng trung hòa (40-60%), cần cân nhắc kỹ lưỡng.`);
   }
 
+  const usingDieuHau = verdict === "trung hòa";
+
   return {
-    method: "phu-uc",
-    methodLabel: "Pháp Phù Ức",
+    method: usingDieuHau ? "dieu-hau" : "phu-uc",
+    methodLabel: usingDieuHau ? "Pháp Điều Hậu (tham chiếu)" : "Pháp Phù Ức",
     dayMasterVerdict: verdict,
     dungThan,
     hyThan,

@@ -140,8 +140,8 @@ export function BaziPage() {
           )}
         </header>
 
-        <section className="bg-ink rounded-lg p-4 lg:p-6 border border-white/5 flex flex-col lg:flex-row gap-4 items-end">
-          <div className="flex flex-col gap-1 flex-[2] min-w-[280px]">
+        <section className="bg-ink rounded-lg p-3 lg:p-6 border border-white/5 grid grid-cols-2 gap-3 items-stretch lg:flex lg:flex-row lg:gap-4 lg:items-end">
+          <div className="col-span-2 flex flex-col gap-1 lg:flex-[2] lg:min-w-[280px]">
             <label className="text-xs text-muted uppercase tracking-wider">Ngày Giờ Sinh (DL)</label>
             <div className="flex gap-2">
               <input
@@ -160,7 +160,7 @@ export function BaziPage() {
               />
             </div>
           </div>
-          <div className="flex flex-col gap-1 w-full lg:w-32 flex-shrink-0">
+          <div className="col-span-1 flex flex-col gap-1 lg:w-32 lg:flex-shrink-0">
             <label className="text-xs text-muted uppercase tracking-wider">Giới Tính</label>
             <select
               value={gender}
@@ -171,7 +171,7 @@ export function BaziPage() {
               <option value="F">Nữ</option>
             </select>
           </div>
-          <div className="flex flex-col gap-1 flex-1 min-w-[200px]">
+          <div className="order-4 lg:order-none col-span-2 flex flex-col gap-1 lg:flex-1 lg:min-w-[200px]">
             <label className="text-xs text-muted uppercase tracking-wider">Nơi Sinh (Tỉnh/Thành)</label>
             <select
               value={provinceCode}
@@ -196,7 +196,7 @@ export function BaziPage() {
               />
             )}
           </div>
-          <div className="flex flex-col gap-1 w-full lg:w-56 flex-shrink-0">
+          <div className="order-3 lg:order-none col-span-1 flex flex-col gap-1 lg:w-56 lg:flex-shrink-0">
             <label className="text-xs text-muted uppercase tracking-wider" title="Sinh ở miền Nam 1959–1975 chọn UTC+8">
               Múi Giờ (UTC+)
             </label>
