@@ -72,8 +72,15 @@ class HistoryTurn(BaseModel):
   text: str = Field(max_length=8000)
 
 
+class UserContext(BaseModel):
+  name: str = Field("", max_length=80)
+  occupationStatus: str = Field("", max_length=80)
+  relationshipStatus: str = Field("", max_length=80)
+
+
 class InterpretRequest(BaseModel):
   question: str = Field(min_length=1, max_length=1000)
   chartText: str = Field("", max_length=8000)    # lá số dạng text (grounding cho system)
   chart: Optional[ChartDTO] = None  # lá số có cấu trúc (để dựng liên cung)
+  profile: UserContext = Field(default_factory=UserContext)
   history: list[HistoryTurn] = Field(default_factory=list, max_length=12)

@@ -123,7 +123,13 @@ async def interpret(req: InterpretRequest, request: Request):
 
   kb_ctx = _retriever.retrieve(chart, ci)
   system = build_system()
-  user_turn = build_user_turn(req.question, focus, kb_ctx, req.chartText)
+  user_turn = build_user_turn(
+    req.question,
+    focus,
+    kb_ctx,
+    req.chartText,
+    req.profile.model_dump(),
+  )
 
   contents = [{"role": m.role, "parts": [{"text": m.text}]} for m in req.history]
   contents.append({"role": "user", "parts": [{"text": user_turn}]})

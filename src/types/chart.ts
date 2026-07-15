@@ -133,6 +133,12 @@ export interface BirthInput {
   flowBase: string;
 }
 
+export interface UserContext {
+  name: string;
+  occupationStatus: string;
+  relationshipStatus: string;
+}
+
 export interface ChartEngine {
   calculate(input: BirthInput): ChartData;
   getData(): ChartData | null;

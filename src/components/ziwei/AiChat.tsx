@@ -5,7 +5,7 @@ import {
   useRef,
   useState,
 } from "react";
-import type { ChartDto } from "@/types/chart";
+import type { ChartDto, UserContext } from "@/types/chart";
 
 interface HistoryTurn {
   role: "user" | "model";
@@ -23,6 +23,7 @@ interface AiChatProps {
   getContext(): {
     chartText: string;
     chart: ChartDto | null;
+    profile: UserContext;
   };
 }
 
@@ -77,7 +78,7 @@ export function AiChat({ getContext }: AiChatProps) {
     const question = input.trim();
     if (!question || busy) return;
 
-    const { chartText, chart } = getContext();
+    const { chartText, chart, profile } = getContext();
     if (!chartText || !chart) {
       setMessages((current) => [
         ...current,
@@ -112,6 +113,7 @@ export function AiChat({ getContext }: AiChatProps) {
           question,
           chartText,
           chart,
+          profile,
           history: requestHistory,
         }),
       });

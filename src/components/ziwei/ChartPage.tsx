@@ -1,5 +1,6 @@
 import {
   type ChangeEvent,
+  type ReactNode,
   useCallback,
   useEffect,
   useMemo,
@@ -15,7 +16,12 @@ import {
   getEngine,
   serializeChart,
 } from "@/lib/ziwei/chart";
-import type { BirthInput, ChartData, School } from "@/types/chart";
+import type {
+  BirthInput,
+  ChartData,
+  School,
+  UserContext,
+} from "@/types/chart";
 import { AiChat } from "./AiChat";
 import { CompactChart } from "./CompactChart";
 import { MobileChart } from "./MobileChart";
@@ -64,9 +70,12 @@ const HOUR_RANGES = [
 ];
 
 interface FormState {
+  name: string;
   solarDate: string;
   birthHour: string;
   gender: "male" | "female";
+  occupationStatus: string;
+  relationshipStatus: string;
   annualYear: string;
   timezone: string;
   flowBase: string;
@@ -77,10 +86,70 @@ interface FormState {
 
 type Notice = "idle" | "working" | "success" | "error";
 type MobileChartMode = "compact" | "reading";
+type FieldIconName =
+  | "user"
+  | "calendar"
+  | "clock"
+  | "gender"
+  | "work"
+  | "relationship";
+
+function FieldIcon({ name }: { name: FieldIconName }) {
+  const paths: Record<FieldIconName, ReactNode> = {
+    user: (
+      <>
+        <circle cx="12" cy="8" r="3.2" />
+        <path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6" />
+      </>
+    ),
+    calendar: (
+      <>
+        <rect x="3.5" y="5" width="17" height="15.5" rx="3" />
+        <path d="M8 3v4M16 3v4M3.5 10h17M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01" />
+      </>
+    ),
+    clock: (
+      <>
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="M12 7.5V12l-2.5 2.5" />
+      </>
+    ),
+    gender: (
+      <>
+        <circle cx="8.5" cy="9" r="4" />
+        <circle cx="15.5" cy="15" r="4" />
+        <path d="M11.5 6h5V1M15.5 2l4 4M8.5 13v8M5.5 18h6" />
+      </>
+    ),
+    work: (
+      <>
+        <rect x="3" y="7" width="18" height="13" rx="3" />
+        <path d="M9 7V4.5h6V7M3 12h18M10 12v2h4v-2" />
+      </>
+    ),
+    relationship: (
+      <>
+        <path d="M12 20S4 15.6 4 9.5C4 6.7 5.8 5 8.2 5c1.7 0 3 1 3.8 2.2C12.8 6 14.1 5 15.8 5 18.2 5 20 6.7 20 9.5 20 15.6 12 20 12 20Z" />
+      </>
+    ),
+  };
+
+  return (
+    <span className="field-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        {paths[name]}
+      </svg>
+    </span>
+  );
+}
 
 function initialSchool(): School {
-  const saved = localStorage.getItem("tuvi.school");
-  return saved === "trung-chau" ? saved : "nam-phai";
+  try {
+    const saved = window.localStorage?.getItem("tuvi.school");
+    return saved === "trung-chau" ? saved : "nam-phai";
+  } catch {
+    return "nam-phai";
+  }
 }
 
 function buildBirthInput(form: FormState): BirthInput {
@@ -108,9 +177,12 @@ function downloadBlob(blob: Blob, filename: string) {
 export function ChartPage() {
   const [school, setSchool] = useState<School>(initialSchool);
   const [form, setForm] = useState<FormState>({
+    name: "",
     solarDate: "21/09/1991",
     birthHour: "Dậu",
     gender: "female",
+    occupationStatus: "",
+    relationshipStatus: "",
     annualYear: String(new Date().getFullYear()),
     timezone: "7",
     flowBase: "dai-van",
@@ -123,6 +195,17 @@ export function ChartPage() {
   const [copyState, setCopyState] = useState<Notice>("idle");
   const [imageState, setImageState] = useState<Notice>("idle");
   const compactChartRef = useRef<HTMLDivElement>(null);
+  const birthInput = useMemo(
+    () => buildBirthInput(form),
+    [
+      form.annualYear,
+      form.birthHour,
+      form.flowBase,
+      form.gender,
+      form.solarDate,
+      form.timezone,
+    ],
+  );
 
   useEffect(() => {
     document.title = "Lá Số Tử Vi · Void Occult";
@@ -130,16 +213,28 @@ export function ChartPage() {
 
   useEffect(() => {
     const engine = getEngine(school);
-    setChartData(engine?.calculate(buildBirthInput(form)) ?? null);
-  }, [form, school]);
+    setChartData(engine?.calculate(birthInput) ?? null);
+  }, [birthInput, school]);
 
   const context = useCallback(() => {
     const data = getEngine(school)?.getData() ?? null;
+    const profile: UserContext = {
+      name: form.name.trim(),
+      occupationStatus: form.occupationStatus,
+      relationshipStatus: form.relationshipStatus,
+    };
     return {
       chartText: buildChartText(data, school, form.gender),
       chart: serializeChart(data, school),
+      profile,
     };
-  }, [form.gender, school]);
+  }, [
+    form.gender,
+    form.name,
+    form.occupationStatus,
+    form.relationshipStatus,
+    school,
+  ]);
 
   const fileStamp = useMemo(
     () => form.solarDate.replace(/\D/g, "") || "laso",
@@ -151,7 +246,11 @@ export function ChartPage() {
   }
 
   function changeSchool(next: School) {
-    localStorage.setItem("tuvi.school", next);
+    try {
+      window.localStorage?.setItem("tuvi.school", next);
+    } catch {
+      // Trình duyệt có thể chặn storage; lựa chọn vẫn hoạt động trong phiên.
+    }
     setSchool(next);
   }
 
@@ -198,7 +297,15 @@ export function ChartPage() {
   function fieldChange(
     key: keyof Pick<
       FormState,
-      "solarDate" | "birthHour" | "gender" | "annualYear" | "timezone" | "flowBase"
+      | "name"
+      | "solarDate"
+      | "birthHour"
+      | "gender"
+      | "occupationStatus"
+      | "relationshipStatus"
+      | "annualYear"
+      | "timezone"
+      | "flowBase"
     >,
   ) {
     return (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
@@ -246,149 +353,224 @@ export function ChartPage() {
         </header>
 
         <main className="shell">
-          <aside className="panel">
-            <div className="panel-head">
-              <h2>Dữ liệu sinh</h2>
+          <aside className="panel birth-panel">
+            <div className="birth-panel-intro">
+              <span className="birth-kicker">Tử Vi Đẩu Số</span>
+              <h1>Lập lá số Tử Vi</h1>
+              <p>Khám phá vận mệnh · Định hướng tương lai</p>
             </div>
             <div className="panel-body">
-              <div
-                className="school-tabs"
-                role="radiogroup"
-                aria-label="Trường phái"
+              <form
+                className="profile-form"
+                onSubmit={(event) => event.preventDefault()}
               >
-                {(
-                  [
-                    ["nam-phai", "Nam phái"],
-                    ["trung-chau", "Trung Châu phái"],
-                  ] as const
-                ).map(([value, label]) => (
-                  <label className="school-tab" key={value}>
-                    <input
-                      type="radio"
-                      name="school"
-                      value={value}
-                      checked={school === value}
-                      onChange={() => changeSchool(value)}
-                    />
-                    <span>{label}</span>
-                  </label>
-                ))}
-              </div>
-
-              <form className="form-grid" onSubmit={(event) => event.preventDefault()}>
-                <div className="field">
-                  <label htmlFor="solarDate">Ngày DL</label>
+                <label className="profile-field profile-field-wide">
+                  <FieldIcon name="user" />
+                  <span className="sr-only">Họ và tên</span>
                   <input
-                    id="solarDate"
+                    name="name"
+                    type="text"
+                    autoComplete="name"
+                    maxLength={80}
+                    placeholder="Họ và tên"
+                    value={form.name}
+                    onChange={fieldChange("name")}
+                  />
+                </label>
+
+                <label className="profile-field profile-field-wide">
+                  <FieldIcon name="calendar" />
+                  <span className="sr-only">Ngày sinh dương lịch</span>
+                  <input
                     name="solarDate"
                     type="text"
                     inputMode="numeric"
-                    autoComplete="off"
-                    placeholder="Ngày/Tháng/Năm"
+                    autoComplete="bday"
+                    placeholder="Ngày / Tháng / Năm"
                     value={form.solarDate}
                     onChange={fieldChange("solarDate")}
                   />
-                </div>
-                <div className="field">
-                  <label htmlFor="birthHour">Giờ sinh</label>
+                  <span className="field-suffix">Dương lịch</span>
+                </label>
+
+                <label className="profile-field profile-field-wide">
+                  <FieldIcon name="clock" />
+                  <span className="sr-only">Giờ sinh</span>
                   <select
-                    id="birthHour"
                     name="birthHour"
+                    aria-label="Giờ sinh"
                     value={form.birthHour}
                     onChange={fieldChange("birthHour")}
                   >
                     {HOUR_BRANCHES.map((branch, index) => (
                       <option value={branch} key={branch}>
-                        {branch} {BRANCH_HAN[branch]} · {HOUR_RANGES[index]}
+                        Giờ {branch} {BRANCH_HAN[branch]} · {HOUR_RANGES[index]}
                       </option>
                     ))}
                   </select>
-                </div>
-                <div className="field">
-                  <label htmlFor="gender">Giới tính</label>
+                </label>
+
+                <label className="profile-field">
+                  <FieldIcon name="gender" />
+                  <span className="sr-only">Giới tính</span>
                   <select
-                    id="gender"
                     name="gender"
+                    aria-label="Giới tính"
                     value={form.gender}
                     onChange={fieldChange("gender")}
                   >
-                    <option value="male">Nam</option>
-                    <option value="female">Nữ</option>
+                    <option value="male">Nam giới</option>
+                    <option value="female">Nữ giới</option>
                   </select>
-                </div>
-                <div className="field">
-                  <label htmlFor="annualYear">Lưu niên</label>
-                  <input
-                    id="annualYear"
+                </label>
+
+                <label className="profile-field">
+                  <FieldIcon name="calendar" />
+                  <span className="sr-only">Năm xem</span>
+                  <select
                     name="annualYear"
-                    type="number"
-                    min="1900"
-                    max="2100"
+                    aria-label="Năm xem"
                     value={form.annualYear}
                     onChange={fieldChange("annualYear")}
-                  />
-                </div>
-                <div className="field">
-                  <label htmlFor="flowBase">Xem vận năm theo</label>
-                  <select
-                    id="flowBase"
-                    name="flowBase"
-                    value={form.flowBase}
-                    onChange={fieldChange("flowBase")}
                   >
-                    <option value="luu-nien">Lưu Niên (Xem Hạn)</option>
-                    <option value="tieu-han">Tiểu Hạn</option>
-                    <option value="dai-van">Lưu Niên Đại Vận</option>
+                    {Array.from({ length: 11 }, (_, index) => {
+                      const year = new Date().getFullYear() - 5 + index;
+                      return (
+                        <option value={year} key={year}>
+                          Năm xem {year}
+                        </option>
+                      );
+                    })}
                   </select>
-                </div>
-                <div className="field">
-                  <label htmlFor="timezone">Múi giờ</label>
+                </label>
+
+                <label className="profile-field">
+                  <FieldIcon name="work" />
+                  <span className="sr-only">Tình trạng công việc</span>
                   <select
-                    id="timezone"
-                    name="timezone"
-                    value={form.timezone}
-                    onChange={fieldChange("timezone")}
+                    name="occupationStatus"
+                    aria-label="Tình trạng công việc"
+                    value={form.occupationStatus}
+                    onChange={fieldChange("occupationStatus")}
                   >
-                    <option value="7">Việt Nam +7</option>
-                    <option value="8">Trung Quốc +8</option>
-                    <option value="0">Giờ gốc +0</option>
+                    <option value="">Công việc hiện tại</option>
+                    <option value="Đang đi học">Đang đi học</option>
+                    <option value="Đang làm việc">Đang làm việc</option>
+                    <option value="Tự doanh">Tự doanh</option>
+                    <option value="Tạm nghỉ việc">Tạm nghỉ việc</option>
+                    <option value="Đã nghỉ hưu">Đã nghỉ hưu</option>
+                    <option value="Khác">Khác</option>
                   </select>
-                </div>
+                </label>
+
+                <label className="profile-field">
+                  <FieldIcon name="relationship" />
+                  <span className="sr-only">Tình trạng mối quan hệ</span>
+                  <select
+                    name="relationshipStatus"
+                    aria-label="Tình trạng mối quan hệ"
+                    value={form.relationshipStatus}
+                    onChange={fieldChange("relationshipStatus")}
+                  >
+                    <option value="">Mối quan hệ hiện tại</option>
+                    <option value="Độc thân">Độc thân</option>
+                    <option value="Đang hẹn hò">Đang hẹn hò</option>
+                    <option value="Đã kết hôn">Đã kết hôn</option>
+                    <option value="Ly thân hoặc ly hôn">
+                      Ly thân / ly hôn
+                    </option>
+                    <option value="Góa">Góa</option>
+                    <option value="Khác">Khác</option>
+                  </select>
+                </label>
               </form>
 
-              <div className="toggles">
-                <label className="toggle">
-                  <input
-                    id="showMutagens"
-                    type="checkbox"
-                    checked={form.showMutagens}
-                    onChange={(event) =>
-                      update("showMutagens", event.target.checked)
-                    }
-                  />{" "}
-                  Tứ Hóa
-                </label>
-                <label className="toggle">
-                  <input
-                    id="showPhi"
-                    type="checkbox"
-                    checked={form.showPhi}
-                    onChange={(event) => update("showPhi", event.target.checked)}
-                  />{" "}
-                  Phi Hóa
-                </label>
-                <label className="toggle">
-                  <input
-                    id="showAnnual"
-                    type="checkbox"
-                    checked={form.showAnnual}
-                    onChange={(event) =>
-                      update("showAnnual", event.target.checked)
-                    }
-                  />{" "}
-                  Sao lưu
-                </label>
-              </div>
+              <details className="advanced-options">
+                <summary>Tùy chọn chuyên sâu</summary>
+                <div className="advanced-options-body">
+                  <div
+                    className="school-tabs"
+                    role="radiogroup"
+                    aria-label="Trường phái"
+                  >
+                    {(
+                      [
+                        ["nam-phai", "Nam phái"],
+                        ["trung-chau", "Trung Châu"],
+                      ] as const
+                    ).map(([value, label]) => (
+                      <label className="school-tab" key={value}>
+                        <input
+                          type="radio"
+                          name="school"
+                          value={value}
+                          checked={school === value}
+                          onChange={() => changeSchool(value)}
+                        />
+                        <span>{label}</span>
+                      </label>
+                    ))}
+                  </div>
+                  <div className="advanced-grid">
+                    <label className="advanced-field">
+                      <span>Cách xem vận</span>
+                      <select
+                        name="flowBase"
+                        value={form.flowBase}
+                        onChange={fieldChange("flowBase")}
+                      >
+                        <option value="luu-nien">Lưu Niên</option>
+                        <option value="tieu-han">Tiểu Hạn</option>
+                        <option value="dai-van">Lưu Niên Đại Vận</option>
+                      </select>
+                    </label>
+                    <label className="advanced-field">
+                      <span>Múi giờ</span>
+                      <select
+                        name="timezone"
+                        value={form.timezone}
+                        onChange={fieldChange("timezone")}
+                      >
+                        <option value="7">Việt Nam +7</option>
+                        <option value="8">Trung Quốc +8</option>
+                        <option value="0">Giờ gốc +0</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div className="toggles">
+                    <label className="toggle">
+                      <input
+                        type="checkbox"
+                        checked={form.showMutagens}
+                        onChange={(event) =>
+                          update("showMutagens", event.target.checked)
+                        }
+                      />
+                      Tứ Hóa
+                    </label>
+                    <label className="toggle">
+                      <input
+                        type="checkbox"
+                        checked={form.showPhi}
+                        onChange={(event) =>
+                          update("showPhi", event.target.checked)
+                        }
+                      />
+                      Phi Hóa
+                    </label>
+                    <label className="toggle">
+                      <input
+                        type="checkbox"
+                        checked={form.showAnnual}
+                        onChange={(event) =>
+                          update("showAnnual", event.target.checked)
+                        }
+                      />
+                      Sao lưu
+                    </label>
+                  </div>
+                </div>
+              </details>
             </div>
           </aside>
 
