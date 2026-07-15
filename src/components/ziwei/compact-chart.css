@@ -350,8 +350,8 @@
 
 .compact-void-marker rect {
   fill: #05040d;
-  stroke: var(--cinnabar);
-  stroke-width: 0.7;
+  stroke: rgb(224 107 101 / 62%);
+  stroke-width: 0.45;
 }
 
 .compact-void-marker text {
