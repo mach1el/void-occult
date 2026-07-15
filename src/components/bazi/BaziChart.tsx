@@ -229,7 +229,7 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
   const [showYongShenCalc, setShowYongShenCalc] = useState(false);
 
   const strength = useMemo(() => calculateElementStrength(chart), [chart]);
-  const yongShen = useMemo(() => determineYongShen(strength), [strength]);
+  const yongShen = useMemo(() => determineYongShen(strength, chart.month.branch), [strength, chart.month.branch]);
   
   const dragScroll = useDragScroll();
 
@@ -268,7 +268,9 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
                 Nhật Chủ: {yongShen.dayMasterVerdict}
               </span>
               <span className="text-sm text-muted">
-                Theo {yongShen.methodLabel}
+                {yongShen.dayMasterVerdict === "trung hòa"
+                  ? `Nhật Chủ trung hòa — tham chiếu Pháp Điều Hậu: thiên về ${yongShen.dungThan.join(", ")}`
+                  : `Theo ${yongShen.methodLabel}`}
               </span>
             </div>
 
