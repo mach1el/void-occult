@@ -32,8 +32,8 @@
 
   .mobile-chart-switch button.is-active {
     color: var(--void);
-    background: linear-gradient(180deg, var(--amber-soft), var(--amber));
-    box-shadow: 0 3px 14px rgb(214 174 85 / 22%);
+    background: linear-gradient(180deg, #fff1c4 0%, var(--amber-soft) 42%, var(--amber) 100%);
+    box-shadow: 0 3px 14px rgb(226 188 95 / 30%);
   }
 
   .mobile-chart-reader {
@@ -314,11 +314,11 @@
      sao) lùi xuống nền nhưng vẫn sáng rõ (nâng 1 tông so với bản đầu — xem
      src/lib/ziwei/star-classification.ts TIER_OPACITY). */
   .mobile-star.is-tier-2 {
-    opacity: 0.96;
+    opacity: 0.98;
   }
 
   .mobile-star.is-tier-3 {
-    opacity: 0.75;
+    opacity: 0.86;
   }
 
   .mobile-brightness,

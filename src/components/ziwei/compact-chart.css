@@ -289,11 +289,11 @@
    xuống nền nhưng vẫn sáng rõ (nâng 1 tông so với bản đầu — xem
    src/lib/ziwei/star-classification.ts TIER_OPACITY). */
 .compact-minor-star.is-tier-2 {
-  opacity: 0.96;
+  opacity: 0.98;
 }
 
 .compact-minor-star.is-tier-3 {
-  opacity: 0.75;
+  opacity: 0.86;
 }
 
 .compact-palace-footer {

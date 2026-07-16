@@ -52,7 +52,7 @@ describe("ChartPage profile form", () => {
 
   it("keeps the Mystic Gold palette semantic across chart modes", () => {
     expect(chartCss).toContain("--surface-raised:#1b1734");
-    expect(chartCss).toContain("--amber:#d6ae55");
+    expect(chartCss).toContain("--amber:#e2bc5f");
     expect(compactChartCss).toContain("fill: var(--void)");
     expect(compactChartCss).toContain("fill: var(--amber-soft)");
     expect(mobileChartCss).toContain("color: var(--element-kim) !important");

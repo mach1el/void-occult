@@ -141,9 +141,9 @@ describe("starDisplayOpacity", () => {
     const tier2 = starDisplayOpacity({ name: "Tả Phụ", layer: "helper" });
     const tier3 = starDisplayOpacity({ name: "Thiên Khốc", layer: "tough" });
 
-    // Sáng hơn giá trị cũ (0.9 / 0.62) — đây là fix "sáng lên 1 tone".
-    expect(tier2).toBeGreaterThan(0.9);
-    expect(tier3).toBeGreaterThan(0.62);
+    // Sáng hơn giá trị cũ (0.9 / 0.62) và gần với full opacity để dễ đọc trên nền void.
+    expect(tier2).toBeGreaterThan(0.96);
+    expect(tier3).toBeGreaterThan(0.75);
     // Vẫn giữ thứ bậc tầng 1 > tầng 2 > tầng 3 để không mất phân cấp thị giác.
     expect(tier1).toBeGreaterThan(tier2);
     expect(tier2).toBeGreaterThan(tier3);

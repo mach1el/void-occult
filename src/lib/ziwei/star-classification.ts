@@ -164,10 +164,9 @@ export function starTier(star: ChartStar): StarTier {
   return 3;
 }
 
-// Nâng 1 tông so với bản đầu (2: 0.9→0.96, 3: 0.62→0.75) theo phản hồi thực
-// tế trên lá số live — tầng 3 từng trông quá tối, giờ vẫn phân biệt được với
-// tầng 1/2 nhưng dễ đọc hơn.
-const TIER_OPACITY: Record<StarTier, number> = { 1: 1, 2: 0.96, 3: 0.75 };
+// Nâng thêm 1 bậc sáng cho phụ tinh trên nền void (2: 0.96→0.98, 3: 0.75→0.86)
+// — vẫn giữ thứ bậc 1 > 2 > 3 để chính tinh nổi nhất.
+const TIER_OPACITY: Record<StarTier, number> = { 1: 1, 2: 0.98, 3: 0.86 };
 
 // Chỉ ĐỌC star.brightness (đã tính sẵn ở engine) để đổi độ mờ — không đụng
 // bảng BRIGHTNESS hay cách xác định miếu/hãm. Hãm là sao yếu, cho trông yếu

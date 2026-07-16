@@ -11,7 +11,7 @@
   --color-paper: #eee5d3;
   --color-muted: #a9a0b3;
   --color-cinnabar: #d55342;
-  --color-gold: #dfbd6d;
+  --color-gold: #e8c878;
   --color-metal: #e2e8f0;
   --color-jade: #75b697;
   --color-earth: #b47a46;
@@ -28,16 +28,16 @@
   /* Ngũ hành — nguồn màu DUY NHẤT cho mọi hệ (Tử Vi sao, Bát Tự can/chi/radar).
      Tách khỏi --color-* trang trí ở @theme vì cần tương phản riêng trên nền tối
      --color-void. Kim và Thổ CỐ Ý khác hệ màu (bạc vs vàng đất), không trùng. */
-  --element-moc: #3fa564;
-  --element-hoa: #d1495b;
-  --element-tho: #c98a3c;
-  --element-kim: #cbd3da;
-  --element-thuy: #4d8fd6;
+  --element-moc: #52c07a;
+  --element-hoa: #e86372;
+  --element-tho: #d9a24f;
+  --element-kim: #dce2e8;
+  --element-thuy: #63a6e8;
   /* Tứ Hóa — Lộc/Quyền/Khoa/Kỵ, dùng chung cho sao tứ hóa và Phi Hóa. */
-  --mutagen-loc: #2f9e4f;
-  --mutagen-quyen: #c76a1c;
-  --mutagen-khoa: #3f74c4;
-  --mutagen-ky: #cf3b3f;
+  --mutagen-loc: #3bb562;
+  --mutagen-quyen: #d87a28;
+  --mutagen-khoa: #5086d4;
+  --mutagen-ky: #e04b4f;
 
   /* Scheme khung cảnh (context) — nền/bề mặt/viền/chữ/trạng thái toàn app.
      Dẫn xuất từ void/ink/paper/muted/gold ở @theme, KHÔNG phải màu dữ liệu
@@ -54,11 +54,11 @@
   --text-muted: #a9a0b3;
   --text-dim: rgb(169 160 179 / 55%);
 
-  --accent: #dfbd6d;
-  --accent-hover: #e8ca80;
+  --accent: #e8c878;
+  --accent-hover: #f2d792;
   --state-hover: rgb(255 255 255 / 6%);
-  --state-active: rgb(223 189 109 / 14%);
-  --state-selected: rgb(223 189 109 / 20%);
+  --state-active: rgb(232 200 120 / 14%);
+  --state-selected: rgb(232 200 120 / 20%);
 
   /* Nền sáng dự phòng cho ngữ cảnh sáng (ví dụ xuất ảnh nếu sau này đổi hướng).
      Ảnh xuất lá số hiện tại vẫn dùng nền tối #090714, token này định nghĩa
@@ -100,7 +100,7 @@ a {
 
 ::selection {
   color: #0b0a12;
-  background: #dfbd6d;
+  background: #e8c878;
 }
 
 .topbar {

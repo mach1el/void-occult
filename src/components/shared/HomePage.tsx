@@ -57,7 +57,7 @@ const accentClasses = {
   gold: {
     text: "text-gold",
     border: "hover:border-gold/60",
-    glow: "#dfbd6d",
+    glow: "#e8c878",
   },
   jade: {
     text: "text-jade",

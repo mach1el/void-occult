@@ -6,23 +6,25 @@ export function SupportButton() {
 
   return (
     <>
-      {/* Floating Action Button */}
+      {/* Floating Action Button — soft/blurred on mobile so it stays out of the way */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 md:bottom-8 md:right-8 w-14 h-14 bg-ink border border-[var(--border-strong)] rounded-full flex items-center justify-center shadow-2xl hover:scale-110 hover:border-gold/50 transition-all z-50 group"
+        className="support-fab fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-[var(--border-strong)] bg-ink/70 shadow-2xl backdrop-blur-md transition-all hover:scale-110 hover:border-gold/50 hover:bg-ink group max-md:opacity-55 max-md:blur-[1.5px] max-md:hover:opacity-100 max-md:hover:blur-none max-md:focus-visible:opacity-100 max-md:focus-visible:blur-none max-md:active:opacity-100 max-md:active:blur-none"
         aria-label="Support My Work"
       >
-        <span className="text-2xl text-gold group-hover:animate-pulse">❤️</span>
+        <span className="text-2xl text-gold drop-shadow-[0_0_8px_rgba(232,200,120,0.35)] group-hover:animate-pulse">
+          ❤️
+        </span>
       </button>
 
       {/* Modal Overlay */}
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-void/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-sm bg-ink border border-[var(--border-subtle)] rounded-2xl p-6 md:p-8 shadow-2xl shadow-gold/5 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-void/80 p-4 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-sm rounded-2xl border border-[var(--border-subtle)] bg-ink p-6 shadow-2xl shadow-gold/5 md:p-8 animate-in zoom-in-95 duration-200">
             {/* Close Button */}
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-4 right-4 text-muted hover:text-paper transition-colors"
+              className="absolute top-4 right-4 text-muted transition-colors hover:text-paper"
               aria-label="Close"
             >
               <svg
@@ -41,20 +43,22 @@ export function SupportButton() {
               </svg>
             </button>
 
-            <div className="text-center space-y-6">
+            <div className="space-y-6 text-center">
               <div className="space-y-2">
-                <h2 className="text-2xl font-serif font-bold text-gold">Support My Work</h2>
+                <h2 className="support-title bg-gradient-to-br from-[#fff1c4] via-[var(--color-gold)] to-[#c9963a] bg-clip-text font-serif text-2xl font-bold text-transparent">
+                  Support My Work
+                </h2>
                 <p className="text-sm text-muted">
                   Nếu bạn thấy các công cụ này hữu ích, hãy ủng hộ để giúp duy trì và phát triển thêm các tính năng mới nhé! ❤️
                 </p>
               </div>
 
               {/* VietQR Image */}
-              <div className="mx-auto border border-[var(--border-subtle)] rounded-xl overflow-hidden bg-[var(--surface-1)] p-2 w-full max-w-[240px]">
+              <div className="mx-auto w-full max-w-[240px] overflow-hidden rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-1)] p-2">
                 <img
                   src={donateQr}
                   alt="VietQR Donate"
-                  className="w-full h-auto rounded-lg"
+                  className="h-auto w-full rounded-lg"
                 />
               </div>
 
@@ -63,7 +67,7 @@ export function SupportButton() {
                 href="https://paypal.me/stmichael01"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-[#00457C] hover:bg-[#0079C1] text-white font-medium rounded-lg transition-colors border border-transparent"
+                className="flex w-full items-center justify-center gap-2 rounded-lg border border-transparent bg-[#00457C] px-4 py-3 font-medium text-white transition-colors hover:bg-[#0079C1]"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
