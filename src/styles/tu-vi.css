@@ -413,8 +413,8 @@ footer .han{
 /* ── Chat luận giải AI (Gemini) - Inline Layout ── */
 .chat-section{
   width:100%;max-width:none;margin:0;padding:0;
-  /* Không dùng contain:layout — nó làm panel chỉ cao theo nội dung,
-     lệch đáy so với lá số cùng hàng (grid stretch không lan xuống con). */
+  /* Bỏ layout containment: nếu bật, panel chỉ cao theo nội dung
+     và lệch đáy so với lá số cùng hàng (grid stretch không lan xuống con). */
 }
 .ai-chat{
   position:relative;z-index:10;flex:1;display:flex;flex-direction:column;min-height:0;

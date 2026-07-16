@@ -89,8 +89,8 @@ describe("ChartPage profile form", () => {
     expect(compactChartCss).toMatch(
       /\.shell\s+\.compact-chart-svg\s*\{[^}]*width:\s*100%/,
     );
-    // Chat cùng hàng phải stretch full chiều cao lá số (không còn contain:layout).
-    expect(chartCss).not.toMatch(/\.chat-section\{[^}]*contain\s*:/);
+    // Chat cùng hàng phải stretch full chiều cao lá số (không còn layout containment).
+    expect(chartCss).not.toMatch(/\.chat-section\{[^}]*\bcontain\s*:/);
     expect(chartCss).toMatch(
       /\.shell\s*>\s*\.chat-section\s*>\s*\.ai-chat\{[^}]*flex:\s*1\s+1\s+0/,
     );
