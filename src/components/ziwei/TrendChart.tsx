@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import type { TrendPoint } from "@/lib/ziwei/trend-score";
+import type { TrendPoint } from "@/lib/ziwei/trend";
 import "./trend-chart.css";
 
 interface TrendChartProps {
@@ -55,8 +55,8 @@ export function TrendChart({
   onSelectPoint,
   selectedLabel = null,
 }: TrendChartProps) {
-  const [showTaiLoc, setShowTaiLoc] = useState(true);
-  const [showThachThuc, setShowThachThuc] = useState(true);
+  const [showCat, setShowCat] = useState(true);
+  const [showHung, setShowHung] = useState(true);
 
   const width = 640;
   const height = 260;
@@ -69,13 +69,13 @@ export function TrendChart({
     const toX = (index: number) => pad.left + (index / n) * plotW;
     const toY = (value: number) => pad.top + (1 - value / 100) * plotH;
 
-    const taiPts = points.map((point, index) => ({
+    const catPts = points.map((point, index) => ({
       x: toX(index),
-      y: toY(point.taiLoc),
+      y: toY(point.cat),
     }));
-    const thachPts = points.map((point, index) => ({
+    const hungPts = points.map((point, index) => ({
       x: toX(index),
-      y: toY(point.thachThuc),
+      y: toY(point.hung),
     }));
 
     const labelStep =
@@ -85,12 +85,12 @@ export function TrendChart({
       toX,
       toY,
       baselineY: pad.top + plotH,
-      taiLine: catmullRomPath(taiPts),
-      thachLine: catmullRomPath(thachPts),
-      taiArea: areaPath(catmullRomPath(taiPts), taiPts, pad.top + plotH),
-      thachArea: areaPath(catmullRomPath(thachPts), thachPts, pad.top + plotH),
-      taiPts,
-      thachPts,
+      catLine: catmullRomPath(catPts),
+      hungLine: catmullRomPath(hungPts),
+      catArea: areaPath(catmullRomPath(catPts), catPts, pad.top + plotH),
+      hungArea: areaPath(catmullRomPath(hungPts), hungPts, pad.top + plotH),
+      catPts,
+      hungPts,
       labelStep,
       currentIndex: points.findIndex((point) => point.isCurrent),
     };
@@ -115,40 +115,45 @@ export function TrendChart({
           <label className="trend-chart-toggle">
             <input
               type="checkbox"
-              checked={showTaiLoc}
-              onChange={(event) => setShowTaiLoc(event.target.checked)}
+              checked={showCat}
+              onChange={(event) => setShowCat(event.target.checked)}
             />
-            Tài lộc
+            Cát
           </label>
           <label className="trend-chart-toggle">
             <input
               type="checkbox"
-              checked={showThachThuc}
-              onChange={(event) => setShowThachThuc(event.target.checked)}
+              checked={showHung}
+              onChange={(event) => setShowHung(event.target.checked)}
             />
-            Thách thức
+            Hung
           </label>
         </div>
       </header>
 
       <p className="trend-chart-disclaimer">
-        Biểu đồ xu hướng — mô hình tham khảo, không phải định mệnh.
+        Biểu đồ xu hướng — engine heuristic tất định, không phải định mệnh.
       </p>
 
       <details className="trend-chart-method">
         <summary>Xem cách tính</summary>
         <div className="trend-chart-method-body">
           <p>
-            <strong>Tài lộc</strong> đo cơ hội từ Lưu/ĐV Hóa Lộc·Quyền·Khoa, cát
-            tinh hội và chính tinh miếu/vượng tại cung trọng.
+            <strong>Cát</strong> đo cơ hội từ Hóa Lộc·Quyền·Khoa, lục cát hội và
+            chính tinh miếu/vượng trong **tam phương tứ chính** của cung hạn; cộng cách
+            cục cặp sao (Lộc Mã, Long–Kỵ, Vũ Tham mộ…). Đại vận và Lưu niên cùng
+            khung nhìn này.
           </p>
           <p>
-            <strong>Thách thức</strong> đo rủi ro từ Hóa Kỵ, sát tinh, chính tinh
-            hãm, Tuần/Triệt và hung tinh vòng Thái Tuế — độc lập, không trừ Tài lộc.
+            <strong>Hung</strong> đo áp lực từ Hóa Kỵ, lục sát, chính tinh hãm,
+            Tuần/Triệt và hung tinh vòng Thái Tuế — độc lập với Cát. Vùng địa
+            chi điều chỉnh: Kỵ/Kình/Đà đắc mộ thì giảm hung; Lộc/Quyền/Khoa ở
+            mộ bị hạn chế.
           </p>
           <p>
-            Bấm một mốc trên đường cong để mở bài làm chi tiết (breakdown) của
-            engine.
+            Phase 3: Thai Tọa / Quang Quý / Phụ Cáo, Quốc Ấn·Đường Phù·Thiên
+            Quan/Phúc/Trù, giải tinh, Long Phượng, vòng Trường Sinh (qua
+            Tràng Sinh trên cung), và cặp Thai Tọa / Quang Quý.
           </p>
         </div>
       </details>
@@ -157,7 +162,7 @@ export function TrendChart({
         className="trend-chart-svg"
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label={`${title}. Tài lộc và Thách thức theo mốc thời gian, thang 0 đến 100.`}
+        aria-label={`${title}. Cát và Hung theo mốc thời gian, thang 0 đến 100.`}
       >
         <title>{title}</title>
 
@@ -179,16 +184,16 @@ export function TrendChart({
           );
         })}
 
-        {showThachThuc && (
+        {showHung && (
           <>
-            <path className="trend-area is-thach" d={geometry.thachArea} />
-            <path className="trend-line is-thach" d={geometry.thachLine} fill="none" />
+            <path className="trend-area is-hung" d={geometry.hungArea} />
+            <path className="trend-line is-hung" d={geometry.hungLine} fill="none" />
           </>
         )}
-        {showTaiLoc && (
+        {showCat && (
           <>
-            <path className="trend-area is-tai" d={geometry.taiArea} />
-            <path className="trend-line is-tai" d={geometry.taiLine} fill="none" />
+            <path className="trend-area is-cat" d={geometry.catArea} />
+            <path className="trend-line is-cat" d={geometry.catLine} fill="none" />
           </>
         )}
 
@@ -245,21 +250,21 @@ export function TrendChart({
                 }}
                 tabIndex={0}
                 role="button"
-                aria-label={`Mốc ${point.label}: Tài lộc ${point.taiLoc}, Thách thức ${point.thachThuc}`}
+                aria-label={`Mốc ${point.label}: Cát ${point.cat}, Hung ${point.hung}`}
               />
-              {showTaiLoc && (
+              {showCat && (
                 <circle
-                  className="trend-dot is-tai"
+                  className="trend-dot is-cat"
                   cx={x}
-                  cy={geometry.toY(point.taiLoc)}
+                  cy={geometry.toY(point.cat)}
                   r={active ? 4.5 : 3}
                 />
               )}
-              {showThachThuc && (
+              {showHung && (
                 <circle
-                  className="trend-dot is-thach"
+                  className="trend-dot is-hung"
                   cx={x}
-                  cy={geometry.toY(point.thachThuc)}
+                  cy={geometry.toY(point.hung)}
                   r={active ? 4.5 : 3}
                 />
               )}

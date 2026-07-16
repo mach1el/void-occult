@@ -5,7 +5,7 @@ import {
   shortPalaceName,
   type PalaceStrength,
   type ScoreLine,
-} from "@/lib/ziwei/trend-score";
+} from "@/lib/ziwei/trend";
 import "./palace-radar.css";
 
 interface PalaceRadarProps {

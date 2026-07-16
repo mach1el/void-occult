@@ -1,4 +1,4 @@
-import type { ScoreLine, TrendPoint } from "@/lib/ziwei/trend-score";
+import type { ScoreLine, TrendPoint } from "@/lib/ziwei/trend";
 
 interface TrendPointPanelProps {
   point: TrendPoint | null;
@@ -12,7 +12,7 @@ function BreakdownList({
 }: {
   title: string;
   lines: ScoreLine[];
-  tone: "tai" | "thach";
+  tone: "cat" | "hung";
 }) {
   if (!lines.length) {
     return (
@@ -51,9 +51,9 @@ export function TrendPointPanel({ point, onClose }: TrendPointPanelProps) {
           <p className="trend-point-kicker">Bài làm engine (tất định)</p>
           <h3>Mốc {point.label}</h3>
           <p className="trend-point-scores">
-            Tài lộc <strong>{point.taiLoc}</strong>
+            Cát <strong>{point.cat}</strong>
             <span aria-hidden="true"> · </span>
-            Thách thức <strong>{point.thachThuc}</strong>
+            Hung <strong>{point.hung}</strong>
             {point.isCurrent ? <span className="trend-point-current"> · Hiện hành</span> : null}
           </p>
         </div>
@@ -63,20 +63,9 @@ export function TrendPointPanel({ point, onClose }: TrendPointPanelProps) {
       </header>
 
       <div className="trend-point-panel-body">
-        <BreakdownList title="Tài lộc" lines={point.breakdown.taiLoc} tone="tai" />
-        <BreakdownList
-          title="Thách thức"
-          lines={point.breakdown.thachThuc}
-          tone="thach"
-        />
+        <BreakdownList title="Cát" lines={point.breakdown.cat} tone="cat" />
+        <BreakdownList title="Hung" lines={point.breakdown.hung} tone="hung" />
       </div>
-
-      <footer className="trend-point-panel-foot">
-        <button type="button" className="btn-ghost" disabled title="Sắp có">
-          Luận chi tiết mốc này
-        </button>
-        <small>Sắp có — LLM chỉ diễn giải tổ hợp sẵn có, không tạo số.</small>
-      </footer>
     </aside>
   );
 }

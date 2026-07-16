@@ -20,7 +20,7 @@ import {
   getDaiVanTrend,
   getLuuNienTrend,
   type TrendPoint,
-} from "@/lib/ziwei/trend-score";
+} from "@/lib/ziwei/trend";
 import type {
   BirthInput,
   ChartData,
@@ -684,31 +684,34 @@ export function ChartPage() {
                 />
               </div>
 
-              <div className="trend-charts">
-                <TrendChart
-                  title="Xu hướng Đại vận"
-                  points={daiVanTrend}
-                  currentLabel="Chính vận"
-                  selectedLabel={selectedTrendPoint?.label ?? null}
-                  onSelectPoint={setSelectedTrendPoint}
-                />
-                <TrendChart
-                  title="Xu hướng Lưu niên"
-                  points={luuNienTrend}
-                  currentLabel="Năm nay"
-                  selectedLabel={selectedTrendPoint?.label ?? null}
-                  onSelectPoint={setSelectedTrendPoint}
-                />
-                <TrendPointPanel
-                  point={selectedTrendPoint}
-                  onClose={() => setSelectedTrendPoint(null)}
-                />
-                {chartData ? <PalaceRadar chart={chartData} compact /> : null}
-              </div>
             </div>
           </section>
 
           <AiChat getContext={context} />
+
+          <section className="trend-section" aria-label="Xu hướng và độ vững 12 cung">
+            <div className="trend-charts">
+              {chartData ? <PalaceRadar chart={chartData} compact /> : null}
+              <TrendChart
+                title="Xu hướng Đại vận"
+                points={daiVanTrend}
+                currentLabel="Chính vận"
+                selectedLabel={selectedTrendPoint?.label ?? null}
+                onSelectPoint={setSelectedTrendPoint}
+              />
+              <TrendChart
+                title="Xu hướng Lưu niên"
+                points={luuNienTrend}
+                currentLabel="Năm nay"
+                selectedLabel={selectedTrendPoint?.label ?? null}
+                onSelectPoint={setSelectedTrendPoint}
+              />
+              <TrendPointPanel
+                point={selectedTrendPoint}
+                onClose={() => setSelectedTrendPoint(null)}
+              />
+            </div>
+          </section>
         </main>
 
         <footer>

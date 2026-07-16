@@ -1,7 +1,11 @@
+.trend-section {
+  min-width: 0;
+}
+
 .trend-charts {
   display: grid;
   gap: 14px;
-  margin-top: 14px;
+  margin-top: 0;
   padding: 0 4px 12px;
 }
 
@@ -115,32 +119,32 @@
   font-family: var(--font-chat);
 }
 
-.trend-area.is-tai {
+.trend-area.is-cat {
   fill: color-mix(in srgb, var(--jade) 28%, transparent);
 }
 
-.trend-area.is-thach {
-  fill: color-mix(in srgb, var(--muted) 22%, transparent);
+.trend-area.is-hung {
+  fill: color-mix(in srgb, #e06b65 24%, transparent);
 }
 
-.trend-line.is-tai {
+.trend-line.is-cat {
   stroke: var(--jade);
   stroke-width: 2.2;
 }
 
-.trend-line.is-thach {
-  stroke: var(--muted);
+.trend-line.is-hung {
+  stroke: #e06b65;
   stroke-width: 2.2;
 }
 
-.trend-dot.is-tai {
+.trend-dot.is-cat {
   fill: var(--jade);
   stroke: var(--void);
   stroke-width: 1;
 }
 
-.trend-dot.is-thach {
-  fill: var(--ash);
+.trend-dot.is-hung {
+  fill: #e06b65;
   stroke: var(--void);
   stroke-width: 1;
 }
@@ -246,12 +250,12 @@
   text-transform: uppercase;
 }
 
-.trend-breakdown.is-tai h4 {
+.trend-breakdown.is-cat h4 {
   color: var(--jade);
 }
 
-.trend-breakdown.is-thach h4 {
-  color: var(--ash);
+.trend-breakdown.is-hung h4 {
+  color: #e06b65;
 }
 
 .trend-breakdown ul {
@@ -293,24 +297,6 @@
   color: var(--muted);
   font-family: var(--font-chat);
   font-size: 0.76rem;
-}
-
-.trend-point-panel-foot {
-  display: grid;
-  gap: 6px;
-  margin-top: 12px;
-}
-
-.trend-point-panel-foot .btn-ghost:disabled {
-  opacity: 0.55;
-  color: var(--muted);
-  border-color: var(--line-soft);
-}
-
-.trend-point-panel-foot small {
-  color: var(--muted);
-  font-family: var(--font-chat);
-  font-size: 0.68rem;
 }
 
 @media (max-width: 700px) {

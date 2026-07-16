@@ -38,6 +38,7 @@ describe("ChartPage profile form", () => {
     ).toHaveLength(7);
     expect(container.querySelector(".shell > .chart-section")).not.toBeNull();
     expect(container.querySelector(".shell > .chat-section")).not.toBeNull();
+    expect(container.querySelector(".shell > .trend-section")).not.toBeNull();
   });
 
   it("keeps closed selects transparent and native options dark", () => {
