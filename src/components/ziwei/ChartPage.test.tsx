@@ -39,6 +39,11 @@ describe("ChartPage profile form", () => {
     expect(container.querySelector(".shell > .chart-section")).not.toBeNull();
     expect(container.querySelector(".shell > .chat-section")).not.toBeNull();
     expect(container.querySelector(".shell > .trend-section")).not.toBeNull();
+    // Header "Lá số 12 cung" đã bỏ — Copy/TXT/Ảnh nằm trên thanh nhập liệu.
+    expect(screen.queryByRole("heading", { name: "Lá số 12 cung" })).not.toBeInTheDocument();
+    expect(container.querySelector(".chart-workspace > .panel-head")).toBeNull();
+    expect(container.querySelector(".profile-chart-actions")).not.toBeNull();
+    expect(screen.getByLabelText("Sao chép văn bản")).toBeInTheDocument();
   });
 
   it("keeps closed selects transparent and native options dark", () => {

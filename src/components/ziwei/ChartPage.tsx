@@ -595,46 +595,48 @@ export function ChartPage() {
                     Sao lưu
                   </label>
                   </div>
+
+                  <div
+                    className="chart-actions profile-chart-actions"
+                    role="group"
+                    aria-label="Xuất lá số"
+                  >
+                    <button
+                      type="button"
+                      className="btn-ghost"
+                      onClick={copyChart}
+                      title="Sao chép văn bản"
+                      aria-label="Sao chép văn bản"
+                    >
+                      {copyLabel}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn-ghost"
+                      onClick={downloadText}
+                      title="Tải file .txt"
+                      aria-label="Tải file .txt"
+                    >
+                      ⭳ TXT
+                    </button>
+                    <button
+                      type="button"
+                      className="btn-ghost"
+                      onClick={downloadImage}
+                      disabled={imageState === "working"}
+                      title="Tải ảnh PNG"
+                      aria-label="Tải ảnh PNG"
+                    >
+                      {imageLabel}
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
           </aside>
 
-          <section className="chart-section">
+          <section className="chart-section" aria-label="Lá số 12 cung">
             <div className="chart-panel chart-workspace">
-              <div className="panel-head">
-                <h2>Lá số 12 cung</h2>
-                <div className="chart-actions" style={{ flexWrap: 'nowrap' }}>
-                  <button
-                    type="button"
-                    className="btn-ghost"
-                    onClick={copyChart}
-                    title="Sao chép văn bản"
-                    aria-label="Sao chép văn bản"
-                  >
-                    {copyLabel}
-                  </button>
-                  <button
-                    type="button"
-                    className="btn-ghost"
-                    onClick={downloadText}
-                    title="Tải file .txt"
-                    aria-label="Tải file .txt"
-                  >
-                    ⭳ TXT
-                  </button>
-                  <button
-                    type="button"
-                    className="btn-ghost"
-                    onClick={downloadImage}
-                    disabled={imageState === "working"}
-                    title="Tải ảnh PNG"
-                    aria-label="Tải ảnh PNG"
-                  >
-                    {imageLabel}
-                  </button>
-                </div>
-              </div>
               <div
                 className="mobile-chart-switch"
                 role="group"
