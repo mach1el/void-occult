@@ -42,9 +42,9 @@ interface Position {
 }
 
 const WIDTH = 720;
-const HEIGHT = 992;
+const HEIGHT = 896;
 const CELL_WIDTH = 180;
-const CELL_HEIGHT = 248;
+const CELL_HEIGHT = 224;
 const MAX_STARS_PER_COLUMN = 10;
 const BOUNDARY_VOID_STARS = new Set(["Tuần", "Triệt"]);
 
@@ -53,14 +53,14 @@ const POSITIONS: Record<string, Position> = {
   Ngọ: { x: 180, y: 0 },
   Mùi: { x: 360, y: 0 },
   Thân: { x: 540, y: 0 },
-  Thìn: { x: 0, y: 248 },
-  Dậu: { x: 540, y: 248 },
-  Mão: { x: 0, y: 496 },
-  Tuất: { x: 540, y: 496 },
-  Dần: { x: 0, y: 744 },
-  Sửu: { x: 180, y: 744 },
-  Tý: { x: 360, y: 744 },
-  Hợi: { x: 540, y: 744 },
+  Thìn: { x: 0, y: 224 },
+  Dậu: { x: 540, y: 224 },
+  Mão: { x: 0, y: 448 },
+  Tuất: { x: 540, y: 448 },
+  Dần: { x: 0, y: 672 },
+  Sửu: { x: 180, y: 672 },
+  Tý: { x: 360, y: 672 },
+  Hợi: { x: 540, y: 672 },
 };
 
 const TAM_HOP: Record<string, string[]> = {
@@ -415,7 +415,7 @@ function Palace({
               )
               .join(" · ")}
           </title>
-          <text x="90" y="226" textAnchor="middle">
+          <text x="90" y="202" textAnchor="middle">
             {phiFlows.slice(0, 4).map((flow, index) => (
               <tspan
                 key={`${flow.mutagen}-${flow.starName}`}
@@ -429,16 +429,16 @@ function Palace({
         </g>
       )}
 
-      <text x="9" y="239" className="compact-palace-footer">
+      <text x="9" y="215" className="compact-palace-footer">
         {flowMonth?.branch || ""}
       </text>
-      <text x="90" y="239" textAnchor="middle" className="compact-palace-footer">
+      <text x="90" y="215" textAnchor="middle" className="compact-palace-footer">
         {palace.changSheng || ""}
       </text>
       {flowMonth && (
         <text
           x="170"
-          y="239"
+          y="215"
           textAnchor="end"
           className="compact-flow-month"
         >
@@ -449,6 +449,7 @@ function Palace({
           T{flowMonth.month}
         </text>
       )}
+
 
       <rect
         width={CELL_WIDTH}
