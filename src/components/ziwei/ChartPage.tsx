@@ -193,7 +193,7 @@ export function ChartPage() {
     relationshipStatus: "",
     annualYear: String(new Date().getFullYear()),
     timezone: "7",
-    flowBase: "tieu-han",
+    flowBase: "luu-nien",
     showMutagens: true,
     showPhi: false,
     showAnnual: true,
