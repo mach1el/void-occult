@@ -31,6 +31,7 @@ import { AiChat } from "./AiChat";
 import { CompactChart } from "./CompactChart";
 import { MobileChart } from "./MobileChart";
 import { TrendChart } from "./TrendChart";
+import { TrendPointPanel } from "./TrendPointPanel";
 
 const HOUR_BRANCHES = [
   "Tý",
@@ -696,6 +697,10 @@ export function ChartPage() {
                   currentLabel="Năm nay"
                   selectedLabel={selectedTrendPoint?.label ?? null}
                   onSelectPoint={setSelectedTrendPoint}
+                />
+                <TrendPointPanel
+                  point={selectedTrendPoint}
+                  onClose={() => setSelectedTrendPoint(null)}
                 />
               </div>
             </div>
