@@ -173,8 +173,13 @@
     max-width: none;
   }
 
+  .shell .compact-chart-svg {
+    width: 100%;
+    max-height: calc(100vh - 120px);
+  }
+
   .compact-chart-stage {
-    place-items: start stretch;
+    place-items: start center;
   }
 }
 
