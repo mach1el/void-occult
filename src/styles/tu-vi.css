@@ -572,12 +572,12 @@ body{
 }
 .shell{
   display:grid;
-  /* Lá số trần 1280px; chat cùng hàng kéo dài theo. */
-  grid-template-columns:minmax(780px,1280px) minmax(400px,1fr);
+  /* Cột lá số ôm đúng bề rộng chart; chat 1fr phần còn lại — tránh lệch phải. */
+  grid-template-columns:max-content minmax(400px,1fr);
   grid-template-rows:auto auto auto;
   gap:16px;
   align-items:stretch;
-  justify-content:center;
+  justify-content:stretch;
   margin-top:16px;
 }
 .shell > aside{
@@ -591,7 +591,7 @@ body{
 .shell > .chart-section{
   grid-column:1;
   grid-row:2;
-  min-width:0;
+  min-width:min-content;
   align-self:stretch;
   display:flex;
   flex-direction:column;
