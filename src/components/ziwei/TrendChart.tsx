@@ -131,6 +131,28 @@ export function TrendChart({
         </div>
       </header>
 
+      <p className="trend-chart-disclaimer">
+        Biểu đồ xu hướng — mô hình tham khảo, không phải định mệnh.
+      </p>
+
+      <details className="trend-chart-method">
+        <summary>Xem cách tính</summary>
+        <div className="trend-chart-method-body">
+          <p>
+            <strong>Tài lộc</strong> đo cơ hội từ Lưu/ĐV Hóa Lộc·Quyền·Khoa, cát
+            tinh hội và chính tinh miếu/vượng tại cung trọng.
+          </p>
+          <p>
+            <strong>Thách thức</strong> đo rủi ro từ Hóa Kỵ, sát tinh, chính tinh
+            hãm, Tuần/Triệt và hung tinh vòng Thái Tuế — độc lập, không trừ Tài lộc.
+          </p>
+          <p>
+            Bấm một mốc trên đường cong để mở bài làm chi tiết (breakdown) của
+            engine.
+          </p>
+        </div>
+      </details>
+
       <svg
         className="trend-chart-svg"
         viewBox={`0 0 ${width} ${height}`}

@@ -50,6 +50,54 @@
   accent-color: var(--jade);
 }
 
+.trend-chart-disclaimer {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-family: var(--font-chat);
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.trend-chart-method {
+  margin: 0 0 10px;
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  background: rgb(9 7 20 / 40%);
+  color: var(--ash);
+  font-family: var(--font-chat);
+}
+
+.trend-chart-method summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 8px 10px;
+  color: var(--amber-soft);
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+.trend-chart-method summary::-webkit-details-marker {
+  display: none;
+}
+
+.trend-chart-method-body {
+  display: grid;
+  gap: 6px;
+  padding: 0 10px 10px;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.trend-chart-method-body p {
+  margin: 0;
+}
+
+.trend-chart-method-body strong {
+  color: var(--paper);
+  font-weight: 650;
+}
+
 .trend-chart-svg {
   display: block;
   width: 100%;
