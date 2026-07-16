@@ -74,16 +74,19 @@ describe("ChartPage profile form", () => {
   });
 
   it("keeps desktop chart compact-fit in view (not full-bleed, not collapsed)", () => {
-    // Gọn fit view: cột max-content ôm chart (trần 1280), chat 1fr — không lệch phải.
+    // Trần cột 1280px + fit viewport; chart width 100% cột (không max-content/intrinsic 880).
     expect(chartCss).toMatch(/\.wrap\{[^}]*width:min\(2100px,100%\)/);
     expect(chartCss).toMatch(
-      /\.shell\{[^}]*grid-template-columns:max-content\s+minmax\(400px,1fr\)/,
+      /\.shell\{[^}]*grid-template-columns:minmax\(780px,1280px\)\s+minmax\(400px,1fr\)/,
     );
     expect(compactChartCss).toMatch(
-      /grid-template-columns:\s*max-content\s+minmax\(400px,\s*1fr\)/,
+      /grid-template-columns:\s*minmax\(780px,\s*1280px\)\s+minmax\(400px,\s*1fr\)/,
     );
     expect(compactChartCss).toMatch(
-      /\.shell\s+\.compact-chart-capture\s*\{[^}]*min\(100%,\s*1280px,\s*calc\(\(100svh\s*-\s*120px\)\s*\*\s*880\s*\/\s*896\)\)/,
+      /\.shell\s+\.compact-chart-capture\s*\{[^}]*width:\s*100%/,
+    );
+    expect(compactChartCss).toMatch(
+      /\.shell\s+\.compact-chart-capture\s*\{[^}]*max-width:\s*min\(1280px,\s*calc\(\(100svh\s*-\s*120px\)\s*\*\s*880\s*\/\s*896\)\)/,
     );
     expect(compactChartCss).toMatch(
       /\.shell\s+\.compact-chart-capture\s*\{[^}]*margin-inline:\s*0/,

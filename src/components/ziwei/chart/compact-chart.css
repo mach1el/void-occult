@@ -22,9 +22,8 @@
     width: 100%;
     max-width: 2100px;
     margin-inline: auto;
-    /* Cột lá số = đúng bề rộng chart (trần 1280); chat chiếm phần còn lại — không
-       để chart margin:auto trong cột rộng hơn (gây lệch phải). */
-    grid-template-columns: max-content minmax(400px, 1fr);
+    /* Cột lá số trần 1280px; chat 1fr. Chart canh trái trong cột (không margin auto). */
+    grid-template-columns: minmax(780px, 1280px) minmax(400px, 1fr);
     grid-template-rows: auto auto;
     gap: 16px;
     align-items: stretch;
@@ -114,7 +113,7 @@
     align-self: stretch;
     display: flex;
     flex-direction: column;
-    min-width: min-content;
+    min-width: 0;
     min-height: 0;
   }
 
@@ -168,10 +167,11 @@
     padding: 12px;
   }
 
-  /* Gọn fit view: trần 1280px × tỷ lệ viewBox; canh trái cột (không margin auto). */
+  /* Trần 1280px × fit viewport; canh trái cột — width:100% để lấp đầy cột, không bị
+     thu về intrinsic 880px của SVG attribute. */
   .shell .compact-chart-capture {
-    width: min(100%, 1280px, calc((100svh - 120px) * 880 / 896));
-    max-width: 100%;
+    width: 100%;
+    max-width: min(1280px, calc((100svh - 120px) * 880 / 896));
     margin-inline: 0;
   }
 
@@ -185,6 +185,7 @@
 
   .compact-chart-stage {
     place-items: start start;
+    width: 100%;
   }
 }
 
