@@ -3,9 +3,13 @@
  * Đại vận · Lưu niên · độ vững 12 cung.
  */
 
-import type { ChartData } from "@/types/chart";
+import type { ChartData, ChartEngine, MutagenRecord } from "@/types/chart";
 import { getEngine } from "../chart";
-import { baseStarName, isStrongBrightness } from "../star-classification";
+import {
+  baseStarName,
+  isAnnualStar,
+  isStrongBrightness,
+} from "../star-classification";
 import { CAT_SET, SAT_SET } from "./star-sets";
 import { SCORING_WEIGHTS, type ScoringWeights } from "./weights";
 import { scoreFortuneFrame } from "./frame";
@@ -44,16 +48,24 @@ export function getDaiVanTrend(
     const fortune = palace.majorFortune!;
     // Tứ Hóa gốc / ĐV: truyền cả bảng — scorer chỉ giữ record rơi vào khung
     // tam phương tứ chính của cung đại vận (không chỉ đồng cung hạn).
-    const scored = scoreFortuneFrame(chart, palace, weights, [
-      {
-        label: "ĐV",
-        records: fortune.active ? chart.majorMutagens : [],
-      },
-      {
-        label: "Gốc",
-        records: chart.natalMutagens,
-      },
-    ]);
+    const scored = scoreFortuneFrame(
+      chart,
+      palace,
+      weights,
+      [
+        {
+          label: "ĐV",
+          records: fortune.active ? chart.majorMutagens : [],
+        },
+        {
+          label: "Gốc",
+          records: chart.natalMutagens,
+        },
+      ],
+      // Đại vận đo bằng tam phương tứ chính của cung đại hạn — chính tinh +
+      // Tứ Hóa gốc/ĐV, KHÔNG lấy sao lưu niên (sao lưu chỉ thuộc lưu niên).
+      { includeAnnual: false },
+    );
 
     return {
       label: `${fortune.start}-${fortune.end}`,
@@ -66,52 +78,104 @@ export function getDaiVanTrend(
 }
 
 /**
- * Xu hướng Lưu niên ±span quanh centerYear.
- * Cung hạn = annualPalace (hoặc taiTuePalace) của lá năm đó.
+ * Lưu nguyệt Tứ Hóa của một tháng: theo Thiên Can của tháng đó (entry.stem),
+ * KHÔNG phải Tứ Hóa năm. Sao đích là chính tinh / phụ tinh gốc — tìm cung an
+ * sao đó trên lá số. Bảng Tứ Hóa lấy từ engine vì khác nhau giữa các phái
+ * (vd Canh: Nam phái Khoa Thái Âm, Trung Châu Khoa Thiên Phủ).
+ */
+function monthlyMutagenRecords(
+  chart: ChartData,
+  engine: ChartEngine,
+  stem: string | undefined,
+): MutagenRecord[] {
+  if (!stem) return [];
+  return engine.tuHoaTargets(stem).map(({ mutagen, starName }) => {
+    const palace =
+      chart.palaces.find((palace) =>
+        (palace.stars ?? []).some((star) => star.name === starName),
+      ) ?? null;
+    return { mutagen, starName, palace };
+  });
+}
+
+/**
+ * Xu hướng Lưu niên: 12 tháng âm trong năm xem.
+ * Cung hạn = cung nguyệt hạn của từng tháng (monthlyPalaces).
+ * Mỗi tháng dùng Tứ Hóa RIÊNG của tháng đó (lưu nguyệt, theo can tháng), xếp
+ * lớp cùng Tứ Hóa năm (lưu niên) và Tứ Hóa gốc.
  */
 export function getLuuNienTrend(
   chart: ChartData,
-  centerYear: number,
-  span: number,
   opts: LuuNienTrendOptions,
+  asOf: Date = new Date(),
 ): TrendPoint[] {
-  const engine = getEngine(opts.school);
-  if (!engine) return [];
-
   const weights = opts.weights ?? SCORING_WEIGHTS;
+  const months = chart.monthlyPalaces ?? [];
+  if (!months.length) return [];
+
+  const engine = getEngine(opts.school);
+  const currentMonth = resolveCurrentFlowMonth(chart, months, opts, asOf);
   const points: TrendPoint[] = [];
 
-  for (let year = centerYear - span; year <= centerYear + span; year += 1) {
-    const yearChart =
-      year === chart.annualYear
-        ? chart
-        : engine.calculate({
-            ...opts.birthInput,
-            annualYear: String(year),
-          });
-
-    const focus =
-      yearChart.annualPalace ??
-      yearChart.taiTuePalace ??
-      yearChart.palaces.find((palace) => palace.isMenh) ??
-      yearChart.palaces[0];
+  for (const entry of months) {
+    const focus = entry.palace;
     if (!focus) continue;
 
-    const scored = scoreFortuneFrame(yearChart, focus, weights, [
-      { label: "Lưu", records: yearChart.annualMutagens },
-      { label: "Gốc", records: yearChart.natalMutagens },
-    ]);
+    // Tứ Hóa RIÊNG của tháng (lưu nguyệt, theo can tháng) — trước đây mọi
+    // tháng đều dùng Tứ Hóa năm nên "sai tháng"; nay mỗi tháng có tín hiệu
+    // riêng, xếp lớp cùng Tứ Hóa năm và gốc.
+    const monthMutagens = engine
+      ? monthlyMutagenRecords(chart, engine, entry.stem)
+      : [];
 
+    const scored = scoreFortuneFrame(
+      chart,
+      focus,
+      weights,
+      [
+        { label: "Lưu nguyệt", records: monthMutagens },
+        { label: "Lưu niên", records: chart.annualMutagens },
+        { label: "Gốc", records: chart.natalMutagens },
+      ],
+      // Lưu niên tháng: sao lưu niên chính là tín hiệu của năm/tháng đang xem.
+      { includeAnnual: true },
+    );
+
+    const monthLabel = entry.label ?? `Th.${entry.month}`;
     points.push({
-      label: `${year} · ${yearChart.nominalAge}t`,
+      label: monthLabel,
       cat: scored.cat,
       hung: scored.hung,
-      isCurrent: year === chart.annualYear,
+      isCurrent: entry.month === currentMonth,
       breakdown: scored.breakdown,
     });
   }
 
   return points;
+}
+
+function resolveCurrentFlowMonth(
+  chart: ChartData,
+  months: NonNullable<ChartData["monthlyPalaces"]>,
+  opts: LuuNienTrendOptions,
+  asOf: Date,
+): number | null {
+  if (chart.annualYear !== asOf.getFullYear()) return null;
+  const engine = getEngine(opts.school);
+  if (!engine) return null;
+
+  const timeZone = Number(opts.birthInput.timezone) || 7;
+  const lunar = engine.solarToLunar(
+    asOf.getDate(),
+    asOf.getMonth() + 1,
+    asOf.getFullYear(),
+    timeZone,
+  );
+  const exact = months.find((entry) => entry.month === lunar.month);
+  if (exact) return exact.month;
+  const fallback =
+    months[Math.min(Math.max(lunar.month - 1, 0), months.length - 1)];
+  return fallback?.month ?? null;
 }
 
 const PALACE_SHORT: Record<string, string> = {
@@ -135,6 +199,10 @@ export function shortPalaceName(name: string): string {
 
 /**
  * Độ vững tĩnh 12 cung (radar). Dùng chung scoring-weights.
+ *
+ * Đây là sơ đồ đánh giá TỔNG THỂ 12 cung theo lá số gốc — KHÔNG tính sao
+ * lưu niên (source "annual" / "annual-mutagen"). Sao lưu chỉ phản ánh một
+ * năm cụ thể, không thuộc bản chất tĩnh của cung.
  */
 export function getPalaceStrengths(
   chart: ChartData,
@@ -156,7 +224,9 @@ export function getPalaceStrengths(
         reason: "Điểm nền độ vững cung",
       },
     ];
-    const majors = (palace.stars ?? []).filter((star) => star.layer === "major");
+    // Chỉ sao gốc — bỏ sao lưu niên (radar là đánh giá tổng thể tĩnh).
+    const stars = (palace.stars ?? []).filter((star) => !isAnnualStar(star));
+    const majors = stars.filter((star) => star.layer === "major");
 
     if (majors.length === 0) {
       lines.push({
@@ -172,7 +242,7 @@ export function getPalaceStrengths(
       });
     }
 
-    for (const star of palace.stars ?? []) {
+    for (const star of stars) {
       const base = baseStarName(star.name);
 
       if (star.layer === "major") {

@@ -24,6 +24,7 @@ describe("detectPairRules", () => {
         { palace: di, role: "xung" },
       ],
       SCORING_WEIGHTS,
+      true,
     );
 
     const longKy = hits.find((hit) => hit.id === "longKy");
@@ -47,6 +48,7 @@ describe("detectPairRules", () => {
     const hits = detectPairRules(
       [{ palace: menh, role: "focus" }],
       SCORING_WEIGHTS,
+      true,
     );
     expect(hits.some((hit) => hit.id === "vuThamMo")).toBe(true);
   });
@@ -65,6 +67,7 @@ describe("detectPairRules", () => {
     const hits = detectPairRules(
       [{ palace: menh, role: "focus" }],
       SCORING_WEIGHTS,
+      true,
     );
     expect(hits.some((hit) => hit.id === "locMa")).toBe(true);
   });
@@ -95,6 +98,7 @@ describe("detectPairRules", () => {
         { palace: di, role: "xung" },
       ],
       SCORING_WEIGHTS,
+      true,
     );
     expect(hits.some((hit) => hit.id === "phiHo")).toBe(true);
     expect(hits.some((hit) => hit.id === "daoHong")).toBe(true);
@@ -126,6 +130,7 @@ describe("detectPairRules", () => {
         { palace: di, role: "xung" },
       ],
       SCORING_WEIGHTS,
+      true,
     );
     expect(hits.some((hit) => hit.id === "thaiToa")).toBe(true);
     expect(hits.some((hit) => hit.id === "quangQuy")).toBe(true);

@@ -143,6 +143,14 @@ export interface ChartEngine {
   calculate(input: BirthInput): ChartData;
   getData(): ChartData | null;
   elementForStar(name: string): string;
+  solarToLunar(
+    day: number,
+    month: number,
+    year: number,
+    timeZone: number,
+  ): { day: number; month: number; year: number; leap: number };
+  /** Bảng Tứ Hóa của một Thiên Can (theo phái). Dùng cho lưu nguyệt Tứ Hóa. */
+  tuHoaTargets(stem: string): Array<{ mutagen: string; starName: string }>;
 }
 
 export interface ChartDto {

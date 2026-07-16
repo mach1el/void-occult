@@ -27,12 +27,12 @@
 @media (min-width: 1360px) {
   .shell {
     width: 100%;
-    max-width: 1920px;
+    max-width: 2240px;
     margin-inline: auto;
-    grid-template-columns: minmax(720px, 900px) minmax(420px, 1fr);
+    grid-template-columns: minmax(720px, 1040px) minmax(420px, 1fr);
     grid-template-rows: auto auto;
     gap: 16px;
-    align-items: start;
+    align-items: stretch;
     justify-content: center;
   }
 
@@ -116,13 +116,13 @@
   .shell > .chart-section {
     grid-column: 1;
     grid-row: 2;
-    align-self: start;
+    align-self: stretch;
   }
 
   .shell > .chat-section {
     grid-column: 2;
     grid-row: 2;
-    align-self: start;
+    align-self: stretch;
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -138,16 +138,20 @@
   .chat-section .ai-chat {
     display: flex;
     flex-direction: column;
+    flex: 1;
+    min-height: 0;
   }
 
   .chat-section .ai-chat-panel {
-    height: auto;
-    min-height: 420px;
-    max-height: min(72vh, 720px);
+    flex: 1;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
   }
 
   .chat-section .ai-chat-msgs {
-    min-height: 180px;
+    flex: 1 1 0;
+    min-height: 0;
     max-height: none;
     overflow: auto;
   }
@@ -162,12 +166,15 @@
     padding: 12px;
   }
 
-  .compact-chart-capture {
-    max-width: 960px;
+  /* Specificity bump: base `.compact-chart-capture` (min(100%,900px)) sits
+     later in the file, nên phải đặc tả hơn để lá số scale full cột đã mở rộng. */
+  .shell .compact-chart-capture {
+    width: 100%;
+    max-width: none;
   }
 
   .compact-chart-stage {
-    place-items: start;
+    place-items: start stretch;
   }
 }
 

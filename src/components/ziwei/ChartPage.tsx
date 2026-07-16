@@ -9,8 +9,8 @@ import {
 } from "react";
 import { toBlob } from "html-to-image";
 import chartCss from "@/styles/tu-vi.css?raw";
-import compactChartCss from "./compact-chart.css?raw";
-import mobileChartCss from "./mobile-chart.css?raw";
+import compactChartCss from "./chart/compact-chart.css?raw";
+import mobileChartCss from "./chart/mobile-chart.css?raw";
 import {
   buildChartText,
   getEngine,
@@ -27,12 +27,12 @@ import type {
   School,
   UserContext,
 } from "@/types/chart";
-import { AiChat } from "./AiChat";
-import { CompactChart } from "./CompactChart";
-import { MobileChart } from "./MobileChart";
-import { PalaceRadar } from "./PalaceRadar";
-import { TrendChart } from "./TrendChart";
-import { TrendPointPanel } from "./TrendPointPanel";
+import { AiChat } from "./ai-chat/AiChat";
+import { CompactChart } from "./chart/CompactChart";
+import { MobileChart } from "./chart/MobileChart";
+import { PalaceRadar } from "./trend/PalaceRadar";
+import { TrendChart } from "./trend/TrendChart";
+import { TrendPointPanel } from "./trend/TrendPointPanel";
 
 const HOUR_BRANCHES = [
   "Tý",
@@ -193,7 +193,7 @@ export function ChartPage() {
     relationshipStatus: "",
     annualYear: String(new Date().getFullYear()),
     timezone: "7",
-    flowBase: "dai-van",
+    flowBase: "luu-nien",
     showMutagens: true,
     showPhi: false,
     showAnnual: true,
@@ -225,7 +225,7 @@ export function ChartPage() {
   const luuNienTrend = useMemo(
     () =>
       chartData
-        ? getLuuNienTrend(chartData, chartData.annualYear, 10, {
+        ? getLuuNienTrend(chartData, {
             school,
             birthInput,
           })
@@ -546,7 +546,6 @@ export function ChartPage() {
                   >
                     <option value="luu-nien">Lưu Niên</option>
                     <option value="tieu-han">Tiểu Hạn</option>
-                    <option value="dai-van">Lưu Niên Đại Vận</option>
                   </select>
                   </label>
 
@@ -702,7 +701,7 @@ export function ChartPage() {
               <TrendChart
                 title="Xu hướng Lưu niên"
                 points={luuNienTrend}
-                currentLabel="Năm nay"
+                currentLabel="Tháng nay"
                 selectedLabel={selectedTrendPoint?.label ?? null}
                 onSelectPoint={setSelectedTrendPoint}
               />

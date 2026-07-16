@@ -33,6 +33,15 @@
  *   GiaiThan Tam Thai Bát Tọa; Kabala Quang Quý Phụ Cáo Thai Tọa
  * - Vòng Trường Sinh (Sinh–Vượng–Mộ vs Suy–Bệnh–Tử–Tuyệt):
  *   tuvicaimenh; TuviGLOBAL luận Tràng Sinh
+ * - Cự Môn (ám tinh chủ) + Hóa Kỵ đồng cung "ám thượng gia ám":
+ *   cohoc.vn "Sao Cự Môn — Minh Tranh Ám Đấu"; horos.vn "Sao Cự Môn — Ám
+ *   Tinh Trong Tử Vi"; hocvienlyso.org "Hoá Kỵ – Cự Môn"
+ * - Khốc–Hư giao hội (cặp cố định xung chiếu nhau, mất mát/u uất):
+ *   tracuutuvi.com "Sao Lưu Thiên Hư"; lyso.vn bộ sao cách cục đồng cung
+ * - Thiên Sứ (cố định Tật Ách) / Thiên Thương (cố định Nô Bộc): 2 sao hung
+ *   engine đã an sẵn (addFixedPalaceStars) nhưng chưa từng được scorer đọc
+ *   tới — rà lại toàn bộ sao do engine sinh ra đối chiếu với star-sets.ts
+ *   mới phát hiện, không phải nghiên cứu nguồn ngoài.
  *
  * 14 chính + Xương/Khúc + Hỏa/Linh: KHÔNG nhân zoneFactor thêm (đã có
  * brightness theo chi trong engine). Chỉ pair/bonus cách cục.
@@ -164,6 +173,10 @@ export interface ScoringWeights {
   luuHaHung: number;
   /** Đẩu Quân. */
   dauQuanHung: number;
+  /** Thiên Sứ (cố định tại Tật Ách). */
+  thienSuHung: number;
+  /** Thiên Thương (cố định tại Nô Bộc). */
+  thienThuongHung: number;
   /** Thái Tuế / Tử Phù (áp lực vòng tuổi). */
   taiTuePressHung: number;
   /** Thiếu Dương / Thiếu Âm / Trực Phù (nhẹ cát). */
@@ -181,19 +194,32 @@ export interface ScoringWeights {
   thaiToaPairCat: number;
   /** Cát Ân Quang ↔ Thiên Quý. */
   quangQuyPairCat: number;
+
+  /** Hung Cự Môn (ám tinh chủ) ↔ Hóa Kỵ — "ám thượng gia ám". */
+  cuKyHung: number;
+  /** Hung Thiên Khốc ↔ Thiên Hư giao hội (cặp cố định xung chiếu). */
+  khocHuHung: number;
 }
 
 /**
  * Draft mặc định — chờ thầy duyệt.
  * Cát ≈ lục cát + Lộc/Quyền/Khoa + miếu/vượng + pair quý.
  * Hung ≈ lục sát + Kỵ + hãm + Tuần/Triệt + Thái Tuế hung − relief Long–Kỵ.
+ *
+ * hoaLoc/hoaQuyen/hoaKhoa/lucCat/majorMieuVuong đã hạ ×0.65 (từ
+ * 18/14/12/7/11) so với bản gốc — đo trên 2736 khung (96 lá số × 12 mốc
+ * Đại vận): raw của riêng 3 nhóm "core" này (Tứ Hóa + lục cát + miếu/vượng)
+ * đã đủ đẩy Cát dính trần 100 ở 44.6% số mốc kể cả sau khi phase 2/3 (phụ
+ * tinh/tạp) đã siết theo focus-cung-hạn/cluster ở trên. Hệ số 0.65 chọn vì
+ * đưa phân phối Cát khớp với Hung (đã fix): mean 77.6 so với 76.0, median
+ * 79 so với 78, trần 17.6% so với 18.6% — không phải số tròn đoán bừa.
  */
 export const SCORING_WEIGHTS: ScoringWeights = {
-  hoaLoc: 18,
-  hoaQuyen: 14,
-  hoaKhoa: 12,
-  lucCat: 7,
-  majorMieuVuong: 11,
+  hoaLoc: 12,
+  hoaQuyen: 9,
+  hoaKhoa: 8,
+  lucCat: 5,
+  majorMieuVuong: 7,
   sanFangFactor: 0.55,
 
   hoaKy: 20,
@@ -252,6 +278,8 @@ export const SCORING_WEIGHTS: ScoringWeights = {
   thienTaiThoCat: 4,
   luuHaHung: 5,
   dauQuanHung: 5,
+  thienSuHung: 5,
+  thienThuongHung: 5,
   taiTuePressHung: 5,
   taiTueSoftCat: 4,
   truongSinhCat: 7,
@@ -261,4 +289,7 @@ export const SCORING_WEIGHTS: ScoringWeights = {
 
   thaiToaPairCat: 6,
   quangQuyPairCat: 6,
+
+  cuKyHung: 12,
+  khocHuHung: 6,
 };

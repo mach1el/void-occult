@@ -38,9 +38,11 @@ describe("getDaiVanTrend", () => {
   it("đổi trọng số → điểm đổi", () => {
     const chart = makeChart();
     const baseline = getDaiVanTrend(chart);
+    // Đại vận không tính sao lưu niên; Hóa Lộc của makeChart là annual-mutagen
+    // (thuộc lưu niên), nên boost lục cát — Tả Phụ/Văn Khúc thực có trong khung.
     const boosted: ScoringWeights = {
       ...SCORING_WEIGHTS,
-      hoaLoc: SCORING_WEIGHTS.hoaLoc + 40,
+      lucCat: SCORING_WEIGHTS.lucCat + 40,
     };
     const next = getDaiVanTrend(chart, boosted);
     expect(next).not.toEqual(baseline);
@@ -48,19 +50,35 @@ describe("getDaiVanTrend", () => {
 });
 
 describe("getLuuNienTrend", () => {
-  it("tất định quanh năm xem; đúng một isCurrent", () => {
+  it("tất định theo 12 tháng âm; đúng một isCurrent khi xem năm hiện tại", () => {
     const chart = calculateNamPhai(birthInput);
-    const first = getLuuNienTrend(chart, chart.annualYear, 2, {
+    const asOf = new Date(chart.annualYear, 5, 15);
+    const first = getLuuNienTrend(chart, {
       school: "nam-phai",
       birthInput,
-    });
-    const second = getLuuNienTrend(chart, chart.annualYear, 2, {
+    }, asOf);
+    const second = getLuuNienTrend(chart, {
       school: "nam-phai",
       birthInput,
-    });
+    }, asOf);
     expect(first).toEqual(second);
-    expect(first).toHaveLength(5);
+    expect(first).toHaveLength(12);
     expect(first.filter((point) => point.isCurrent)).toHaveLength(1);
+    expect(first[0]?.label).toBe("Giêng");
+  });
+
+  it("không đánh dấu isCurrent khi xem năm khác năm hiện tại", () => {
+    const current = calculateNamPhai(birthInput);
+    const chart = calculateNamPhai({
+      ...birthInput,
+      annualYear: String(current.annualYear - 3),
+    });
+    const points = getLuuNienTrend(chart, {
+      school: "nam-phai",
+      birthInput,
+    });
+    expect(points).toHaveLength(12);
+    expect(points.filter((point) => point.isCurrent)).toHaveLength(0);
   });
 });
 

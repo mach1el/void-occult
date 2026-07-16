@@ -274,7 +274,12 @@ function leapMonthOffset(a11: number, timeZone: number): number {
   return i - 1;
 }
 
-function solarToLunar(day: number, month: number, year: number, timeZone: number): { day: number; month: number; year: number; leap: number } {
+export function tuHoaTargets(stem: string): Array<{ mutagen: string; starName: string }> {
+  const table = TU_HOA[stem] ?? {};
+  return Object.entries(table).map(([mutagen, starName]) => ({ mutagen, starName }));
+}
+
+export function solarToLunar(day: number, month: number, year: number, timeZone: number): { day: number; month: number; year: number; leap: number } {
   const dayNumber = jdFromDate(day, month, year);
   const k = Math.floor((dayNumber - 2415021.076998695) / 29.530588853);
   let monthStart = newMoonDay(k + 1, timeZone);

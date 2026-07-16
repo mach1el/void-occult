@@ -6,7 +6,7 @@ describe("frame scoring (via getDaiVanTrend)", () => {
   it("Hóa Kỵ ở vùng mộ hung thấp hơn ở vùng mã", () => {
     const ky = {
       name: "Hóa Kỵ",
-      source: "annual-mutagen" as const,
+      source: "natal-mutagen" as const,
       mutagen: "Kỵ",
     };
     const mo = getDaiVanTrend(minimalFortune("Thìn", [ky]))[0]!;
@@ -32,7 +32,7 @@ describe("frame scoring (via getDaiVanTrend)", () => {
       name: "Thiên Di",
       majorFortune: { order: 2, active: false, start: 20, end: 29 },
       stars: [
-        { name: "Hóa Kỵ", source: "annual-mutagen", mutagen: "Kỵ" },
+        { name: "Hóa Kỵ", source: "natal-mutagen", mutagen: "Kỵ" },
       ],
     });
     const withPair = getDaiVanTrend(

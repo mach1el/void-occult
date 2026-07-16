@@ -241,10 +241,11 @@ function visibleStars(
 
 function compactName(star: ChartStar): string {
   let name = star.name;
+  // Tứ Hóa ghi RÕ loại: "Hóa Kỵ" (gốc) / "L.Hóa Kỵ" (lưu) — không rút gọn
+  // phần "Hóa" (tránh H.Kỵ/L.H.Kỵ khó đọc, dễ tưởng thiếu sao). Mọi sao lưu
+  // niên (kể cả lưu Tứ Hóa) giữ tiền tố "L." cho đồng bộ với sao lưu khác.
   if (isAnnualStar(star)) {
-    name = name.replace(/^Lưu Hóa\s+/, "L.H.").replace(/^Lưu\s+/, "L.");
-  } else {
-    name = name.replace(/^Hóa\s+/, "H.");
+    name = name.replace(/^Lưu\s+/, "L.");
   }
   const characters = Array.from(name);
   if (characters.length > 14) name = `${characters.slice(0, 13).join("")}…`;

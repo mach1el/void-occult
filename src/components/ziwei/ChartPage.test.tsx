@@ -13,11 +13,11 @@ const globalStylesCss = readFileSync(
   "utf8",
 );
 const compactChartCss = readFileSync(
-  resolve(process.cwd(), "src/components/ziwei/compact-chart.css"),
+  resolve(process.cwd(), "src/components/ziwei/chart/compact-chart.css"),
   "utf8",
 );
 const mobileChartCss = readFileSync(
-  resolve(process.cwd(), "src/components/ziwei/mobile-chart.css"),
+  resolve(process.cwd(), "src/components/ziwei/chart/mobile-chart.css"),
   "utf8",
 );
 

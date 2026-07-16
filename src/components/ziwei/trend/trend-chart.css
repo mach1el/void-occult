@@ -4,9 +4,15 @@
 
 .trend-charts {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
   margin-top: 0;
   padding: 0 4px 12px;
+}
+
+.trend-charts > .palace-radar,
+.trend-charts > .trend-point-panel {
+  grid-column: 1 / -1;
 }
 
 .trend-chart {
@@ -50,8 +56,12 @@
   cursor: pointer;
 }
 
-.trend-chart-toggle input {
-  accent-color: var(--jade);
+.trend-chart-toggle.is-cat input {
+  accent-color: var(--violet);
+}
+
+.trend-chart-toggle.is-hung input {
+  accent-color: var(--cyan);
 }
 
 .trend-chart-disclaimer {
@@ -119,34 +129,30 @@
   font-family: var(--font-chat);
 }
 
-.trend-area.is-cat {
-  fill: color-mix(in srgb, var(--jade) 28%, transparent);
+.trend-bar {
+  transition: fill-opacity 0.15s;
 }
 
-.trend-area.is-hung {
-  fill: color-mix(in srgb, #e06b65 24%, transparent);
+.trend-bar.is-cat {
+  fill: var(--violet);
 }
 
-.trend-line.is-cat {
-  stroke: var(--jade);
-  stroke-width: 2.2;
+.trend-bar.is-hung {
+  fill: var(--cyan);
 }
 
-.trend-line.is-hung {
-  stroke: #e06b65;
-  stroke-width: 2.2;
+/* Bên mạnh hơn tại mỗi mốc tô đậm, bên yếu hơn tô nhạt. */
+.trend-bar.is-strong {
+  fill-opacity: 0.95;
 }
 
-.trend-dot.is-cat {
-  fill: var(--jade);
-  stroke: var(--void);
-  stroke-width: 1;
+.trend-bar.is-weak {
+  fill-opacity: 0.38;
 }
 
-.trend-dot.is-hung {
-  fill: #e06b65;
-  stroke: var(--void);
-  stroke-width: 1;
+.trend-bar.is-selected {
+  fill-opacity: 1;
+  filter: drop-shadow(0 0 4px rgb(214 174 85 / 55%));
 }
 
 .trend-current line {
@@ -251,11 +257,11 @@
 }
 
 .trend-breakdown.is-cat h4 {
-  color: var(--jade);
+  color: var(--violet);
 }
 
 .trend-breakdown.is-hung h4 {
-  color: #e06b65;
+  color: var(--cyan);
 }
 
 .trend-breakdown ul {
@@ -297,6 +303,12 @@
   color: var(--muted);
   font-family: var(--font-chat);
   font-size: 0.76rem;
+}
+
+@media (max-width: 900px) {
+  .trend-charts {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 700px) {

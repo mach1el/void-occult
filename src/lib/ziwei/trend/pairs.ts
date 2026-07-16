@@ -4,7 +4,7 @@
  */
 
 import type { ChartPalace, ChartStar } from "@/types/chart";
-import { baseStarName } from "../star-classification";
+import { baseStarName, isAnnualStar } from "../star-classification";
 import {
   geometryLabel,
   getBranchZone,
@@ -37,7 +37,9 @@ export interface PairHit {
     | "daoHong"
     | "daoSat"
     | "thaiToa"
-    | "quangQuy";
+    | "quangQuy"
+    | "cuKy"
+    | "khocHu";
   geometry: PairGeometry;
   factor: number;
   label: string;
@@ -57,10 +59,11 @@ interface StarLoc {
   star: ChartStar;
 }
 
-function collectStars(frame: FrameRow[]): StarLoc[] {
+function collectStars(frame: FrameRow[], includeAnnual: boolean): StarLoc[] {
   const out: StarLoc[] = [];
   for (const { palace, role } of frame) {
     for (const star of palace.stars ?? []) {
+      if (!includeAnnual && isAnnualStar(star)) continue;
       out.push({
         base: baseStarName(star.name),
         name: star.name,
@@ -121,8 +124,9 @@ const GEO_PREF_STRONG: PairGeometry[] = ["dong", "xung"];
 export function detectPairRules(
   frame: FrameRow[],
   weights: ScoringWeights,
+  includeAnnual: boolean,
 ): PairHit[] {
-  const stars = collectStars(frame);
+  const stars = collectStars(frame, includeAnnual);
   const hits: PairHit[] = [];
 
   const longs = stars.filter((s) => s.base === "Thanh Long");
@@ -148,6 +152,23 @@ export function detectPairRules(
       catPoints: Math.round(weights.longKyCat * factor),
       hungPoints: 0,
       kyReliefRatio: weights.longKyHungRelief * factor,
+      hungRelief: 0,
+    });
+  }
+
+  // Cự Kỵ: Cự Môn (ám tinh chủ) + Hóa Kỵ — "ám thượng gia ám", tăng thị phi/khẩu thiệt.
+  const cuMon = stars.filter((s) => s.base === "Cự Môn");
+  const cuKy = bestPair(cuMon, kys, GEO_PREF);
+  if (cuKy) {
+    const factor = pairGeometryFactor(cuKy.geometry, weights.sanFangFactor);
+    hits.push({
+      id: "cuKy",
+      geometry: cuKy.geometry,
+      factor,
+      label: `Cự Môn–Hóa Kỵ ${geometryLabel(cuKy.geometry)} (${cuKy.a.palaceName}↔${cuKy.b.palaceName}) — ám thượng gia ám`,
+      catPoints: 0,
+      hungPoints: Math.round(weights.cuKyHung * factor),
+      kyReliefRatio: 0,
       hungRelief: 0,
     });
   }
@@ -255,6 +276,24 @@ export function detectPairRules(
       label: `Đào–Hồng/Hỷ ${geometryLabel(daoPair.geometry)} (${daoPair.a.palaceName}↔${daoPair.b.palaceName})`,
       catPoints: Math.round(weights.daoHongCat * factor),
       hungPoints: 0,
+      kyReliefRatio: 0,
+      hungRelief: 0,
+    });
+  }
+
+  // Khốc–Hư: cặp cố định xung chiếu nhau — giao hội nhấn thêm mất mát/u uất.
+  const khoc = stars.filter((s) => s.base === "Thiên Khốc");
+  const hu = stars.filter((s) => s.base === "Thiên Hư");
+  const khocHu = bestPair(khoc, hu, GEO_PREF_STRONG);
+  if (khocHu) {
+    const factor = pairGeometryFactor(khocHu.geometry, weights.sanFangFactor);
+    hits.push({
+      id: "khocHu",
+      geometry: khocHu.geometry,
+      factor,
+      label: `Thiên Khốc–Thiên Hư ${geometryLabel(khocHu.geometry)} (${khocHu.a.palaceName}↔${khocHu.b.palaceName})`,
+      catPoints: 0,
+      hungPoints: Math.round(weights.khocHuHung * factor),
       kyReliefRatio: 0,
       hungRelief: 0,
     });
