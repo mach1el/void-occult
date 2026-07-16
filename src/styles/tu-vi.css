@@ -90,7 +90,7 @@ body::after{
 }
 a{color:inherit}
 .wrap{
-  width:min(2048px,100%);
+  width:100%;
   min-height:100vh;
   margin:0 auto;
   padding:0 clamp(8px,1.2vw,24px);
@@ -555,10 +555,11 @@ body{
   display:none;
 }
 .wrap{
-  /* Trần cứng — tránh màn QHD/ultrawide (2560+) scale lá số/chat theo full
-     viewport không giới hạn (hồi quy a77b039). */
-  width:min(2048px,100%);
-  padding:0 clamp(12px,2vw,34px);
+  /* Dùng gần full bề ngang màn hình lớn — lá số scale theo viewport
+     (xem .compact-chart-capture), không để gutter QHD lãng phí. */
+  width:100%;
+  max-width:none;
+  padding:0 clamp(12px,1.4vw,28px);
 }
 .topbar{
   min-height:48px;
@@ -572,9 +573,8 @@ body{
 }
 .shell{
   display:grid;
-  /* Cột lá số có trần 1040px — SVG bên trong scale theo cột này, không theo
-     full màn. Chat nhận phần còn lại với sàn 420px. */
-  grid-template-columns:minmax(720px,1040px) minmax(420px,1fr);
+  /* Cột lá số rộng hơn chat; trần thật nằm ở capture theo 100svh. */
+  grid-template-columns:minmax(0,1.35fr) minmax(360px,.65fr);
   grid-template-rows:auto auto auto;
   gap:16px;
   align-items:stretch;

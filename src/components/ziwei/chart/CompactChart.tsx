@@ -837,6 +837,8 @@ export function CompactChart({
           className="compact-chart-svg"
           xmlns="http://www.w3.org/2000/svg"
           viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+          width={WIDTH}
+          height={HEIGHT}
           role="img"
           aria-label={`Lá số Tử Vi ${SCHOOL_LABEL[school]}`}
           preserveAspectRatio="xMidYMid meet"

@@ -27,9 +27,11 @@
 @media (min-width: 1360px) {
   .shell {
     width: 100%;
-    max-width: 2048px;
+    max-width: none;
     margin-inline: auto;
-    grid-template-columns: minmax(720px, 1040px) minmax(420px, 1fr);
+    /* Cột lá số chiếm phần lớn; chat hẹp hơn. Trần kích thước lá số
+       nằm ở .compact-chart-capture (theo viewport), không kẹt cứng 1040px. */
+    grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.65fr);
     grid-template-rows: auto auto;
     gap: 16px;
     align-items: stretch;
@@ -166,20 +168,22 @@
     padding: 12px;
   }
 
-  /* Scale theo cột lá số (đã có trần 1040px). width:auto + max-height để
-     vừa vừa bề ngang cột vừa vừa chiều cao viewport — không méo tỷ lệ
-     (width:100% + max-height sẽ kéo méo SVG). */
+  /* Scale theo CHIỀU CAO viewport (không kẹt trần 1040px cứng).
+     Công thức: bề ngang = min(cột, chiều cao khả dụng × tỷ lệ viewBox 880/896).
+     SVG width:100% trong khung đó — có width/height attribute nên không collapse,
+     không méo tỷ lệ. */
   .shell .compact-chart-capture {
-    width: fit-content;
+    width: min(100%, calc((100svh - 148px) * 880 / 896));
     max-width: 100%;
     margin-inline: auto;
   }
 
   .shell .compact-chart-svg {
-    width: auto;
+    display: block;
+    width: 100%;
     max-width: 100%;
     height: auto;
-    max-height: min(calc(100svh - 96px), 980px);
+    max-height: none;
   }
 
   .compact-chart-stage {
