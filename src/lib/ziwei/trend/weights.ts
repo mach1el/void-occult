@@ -268,7 +268,7 @@ export const SCORING_WEIGHTS: ScoringWeights = {
   thanhLongMoBonus: 8,
   taiTueHungMaFactor: 1.15,
 
-  longKyCat: 12,
+  longKyCat: 10,
   longKyHungRelief: 0.55,
   longHaCat: 8,
   locMaCat: 14,
