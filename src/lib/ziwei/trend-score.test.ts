@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { BirthInput, ChartData, ChartPalace } from "@/types/chart";
 import { calculate as calculateNamPhai } from "./engine-nam-phai";
 import { SCORING_WEIGHTS, type ScoringWeights } from "./scoring-weights";
-import { getDaiVanTrend, getLuuNienTrend } from "./trend-score";
+import { getDaiVanTrend, getLuuNienTrend, getPalaceStrengths } from "./trend-score";
 
 function palace(partial: Partial<ChartPalace> & Pick<ChartPalace, "index" | "branch" | "name">): ChartPalace {
   return partial;
@@ -194,5 +194,92 @@ describe("getLuuNienTrend", () => {
       expect(taiSum).toBe(point.taiLoc);
       expect(thachSum).toBe(point.thachThuc);
     }
+  });
+});
+
+describe("getPalaceStrengths", () => {
+  it("trả đúng 12 cung, tất định, breakdown khớp điểm", () => {
+    const chart = calculateNamPhai(birthInput);
+    const first = getPalaceStrengths(chart);
+    const second = getPalaceStrengths(chart);
+
+    expect(first).toEqual(second);
+    expect(first).toHaveLength(12);
+    expect(first[0]?.palace).toBe("Mệnh");
+
+    for (const item of first) {
+      const sum = item.breakdown.reduce((total, line) => total + line.points, 0);
+      expect(sum).toBe(item.score);
+      expect(item.score).toBeGreaterThanOrEqual(0);
+      expect(item.score).toBeLessThanOrEqual(100);
+    }
+  });
+
+  it("cung miếu + cát vững hơn cung sát/hãm; đổi weight đổi cả radar lẫn trend", () => {
+    const chart = makeChart({
+      palaces: [
+        palace({
+          index: 0,
+          branch: "Mùi",
+          name: "Mệnh",
+          isMenh: true,
+          majorFortune: { active: true, start: 25, end: 34 },
+          stars: [
+            { name: "Tử Vi", layer: "major", brightness: "Miếu" },
+            { name: "Tả Phụ", layer: "helper" },
+            { name: "Hữu Bật", layer: "helper" },
+          ],
+        }),
+        palace({
+          index: 1,
+          branch: "Ngọ",
+          name: "Phụ Mẫu",
+          stars: [
+            { name: "Kình Dương", layer: "tough" },
+            { name: "Đà La", layer: "tough" },
+          ],
+        }),
+        ...Array.from({ length: 10 }, (_, offset) =>
+          palace({
+            index: offset + 2,
+            branch: ["Tỵ", "Thìn", "Mão", "Dần", "Sửu", "Tý", "Hợi", "Tuất", "Dậu", "Thân"][
+              offset
+            ]!,
+            name: [
+              "Phúc Đức",
+              "Điền Trạch",
+              "Quan Lộc",
+              "Nô Bộc",
+              "Thiên Di",
+              "Tật Ách",
+              "Tài Bạch",
+              "Tử Tức",
+              "Phu Thê",
+              "Huynh Đệ",
+            ][offset]!,
+            stars: [],
+          }),
+        ),
+      ],
+      menhIndex: 0,
+      thanIndex: 1,
+      voidMarkers: [],
+    });
+
+    const strengths = getPalaceStrengths(chart);
+    const menh = strengths.find((item) => item.palace === "Mệnh");
+    const weak = strengths.find((item) => item.palace === "Phụ Mẫu");
+    expect(menh!.score).toBeGreaterThan(weak!.score);
+
+    const baselineTrend = getDaiVanTrend(chart);
+    const baselineRadar = getPalaceStrengths(chart);
+    const boosted: ScoringWeights = {
+      ...SCORING_WEIGHTS,
+      beneficMeet: SCORING_WEIGHTS.beneficMeet + 20,
+    };
+    const nextTrend = getDaiVanTrend(chart, boosted);
+    const nextRadar = getPalaceStrengths(chart, boosted);
+    expect(nextTrend).not.toEqual(baselineTrend);
+    expect(nextRadar).not.toEqual(baselineRadar);
   });
 });

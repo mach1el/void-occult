@@ -30,6 +30,7 @@ import type {
 import { AiChat } from "./AiChat";
 import { CompactChart } from "./CompactChart";
 import { MobileChart } from "./MobileChart";
+import { PalaceRadar } from "./PalaceRadar";
 import { TrendChart } from "./TrendChart";
 import { TrendPointPanel } from "./TrendPointPanel";
 
@@ -702,6 +703,7 @@ export function ChartPage() {
                   point={selectedTrendPoint}
                   onClose={() => setSelectedTrendPoint(null)}
                 />
+                {chartData ? <PalaceRadar chart={chartData} compact /> : null}
               </div>
             </div>
           </section>

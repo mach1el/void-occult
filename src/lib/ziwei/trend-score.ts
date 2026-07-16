@@ -466,3 +466,152 @@ export function getLuuNienTrend(
 
   return points;
 }
+
+/** Độ vững tĩnh của một cung (0–100). Không phải nhãn “tốt/xấu”. */
+export interface PalaceStrength {
+  palace: string;
+  score: number;
+  breakdown: ScoreLine[];
+}
+
+const PALACE_SHORT: Record<string, string> = {
+  Mệnh: "Mệnh",
+  "Phụ Mẫu": "P.Mẫu",
+  "Phúc Đức": "P.Đức",
+  "Điền Trạch": "Đ.Trạch",
+  "Quan Lộc": "Q.Lộc",
+  "Nô Bộc": "N.Bộc",
+  "Thiên Di": "T.Di",
+  "Tật Ách": "T.Ách",
+  "Tài Bạch": "T.Bạch",
+  "Tử Tức": "T.Tức",
+  "Phu Thê": "P.Thê",
+  "Huynh Đệ": "H.Đệ",
+};
+
+export function shortPalaceName(name: string): string {
+  return PALACE_SHORT[name] ?? name;
+}
+
+/**
+ * Độ vững tĩnh từng cung bản mệnh (radar). Dùng chung scoring-weights.
+ * Score là độ vững cấu trúc cung — không phải nhãn tốt/xấu vận hạn.
+ * Thứ tự: bắt đầu từ Mệnh, đi theo index cung trên địa bàn.
+ */
+export function getPalaceStrengths(
+  chart: ChartData,
+  weights: ScoringWeights = SCORING_WEIGHTS,
+): PalaceStrength[] {
+  const voids = voidBranches(chart);
+  const menhIndex = chart.menhIndex;
+  const ordered = [...chart.palaces].sort((a, b) => {
+    const aOffset = (a.index - menhIndex + 12) % 12;
+    const bOffset = (b.index - menhIndex + 12) % 12;
+    return aOffset - bOffset;
+  });
+
+  return ordered.map((palace) => {
+    const lines: ScoreLine[] = [
+      {
+        source: "Nền",
+        points: weights.palaceBase,
+        reason: "Điểm nền độ vững cung",
+      },
+    ];
+    const majors = (palace.stars ?? []).filter((star) => star.layer === "major");
+
+    if (majors.length === 0) {
+      lines.push({
+        source: "Vô chính diệu",
+        points: -weights.palaceEmptyMajor,
+        reason: `${palace.name} không có chính tinh thủ cung`,
+      });
+    } else {
+      lines.push({
+        source: "Có chính tinh",
+        points: weights.palaceHasMajor,
+        reason: `${palace.name} có ${majors.length} chính tinh`,
+      });
+    }
+
+    for (const star of palace.stars ?? []) {
+      const base = baseStarName(star.name);
+
+      if (star.layer === "major") {
+        if (isStrongBrightness(star.brightness)) {
+          lines.push({
+            source: star.name,
+            points: weights.majorMieuVuong,
+            reason: `${star.name} ${star.brightness}`,
+          });
+        } else if (star.brightness === "Hãm") {
+          lines.push({
+            source: star.name,
+            points: -weights.majorHam,
+            reason: `${star.name} Hãm địa`,
+          });
+        }
+      }
+
+      if (CAT_SET.has(base)) {
+        lines.push({
+          source: star.name,
+          points: weights.beneficMeet,
+          reason: `Cát tinh ${star.name}`,
+        });
+      }
+
+      if (SAT_SET.has(base)) {
+        lines.push({
+          source: star.name,
+          points: -weights.maleficMeet,
+          reason: `Sát tinh ${star.name}`,
+        });
+      }
+
+      if (isMutagenStar(star)) {
+        const kind = mutagenKind(star);
+        if (kind === "Lộc") {
+          lines.push({
+            source: star.name,
+            points: Math.round(weights.mutagenLocKeyPalace * 0.7),
+            reason: `${star.name} tăng độ vững`,
+          });
+        } else if (kind === "Quyền") {
+          lines.push({
+            source: star.name,
+            points: Math.round(weights.mutagenQuyenKeyPalace * 0.7),
+            reason: `${star.name} tăng độ vững`,
+          });
+        } else if (kind === "Khoa") {
+          lines.push({
+            source: star.name,
+            points: Math.round(weights.mutagenKhoaKeyPalace * 0.7),
+            reason: `${star.name} tăng độ vững`,
+          });
+        } else if (kind === "Kỵ") {
+          lines.push({
+            source: star.name,
+            points: -Math.round(weights.mutagenKyKeyOrXung * 0.7),
+            reason: `${star.name} giảm độ vững`,
+          });
+        }
+      }
+    }
+
+    if (voids.has(palace.branch)) {
+      lines.push({
+        source: "Tuần/Triệt",
+        points: -weights.voidOnFocus,
+        reason: `Tuần/Triệt án ngữ ${palace.branch}`,
+      });
+    }
+
+    const { score, lines: finalLines } = finalizeLayer(lines);
+    return {
+      palace: palace.name,
+      score,
+      breakdown: finalLines,
+    };
+  });
+}

@@ -1,0 +1,148 @@
+.palace-radar {
+  border: 1px solid var(--line-soft);
+  border-radius: 16px;
+  background: linear-gradient(160deg, rgba(27, 23, 52, 0.88), rgba(9, 7, 20, 0.92));
+  padding: 12px;
+}
+
+.palace-radar-head h3 {
+  margin: 0 0 4px;
+  color: var(--paper);
+  font-family: var(--font-chat);
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+.palace-radar-disclaimer {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-family: var(--font-chat);
+  font-size: 0.68rem;
+}
+
+.palace-radar-stage {
+  display: grid;
+  place-items: center;
+}
+
+.palace-radar-svg {
+  width: min(100%, 380px);
+  height: auto;
+  overflow: visible;
+}
+
+.palace-radar-grid,
+.palace-radar-axis {
+  fill: none;
+  stroke: rgb(104 88 148 / 28%);
+  stroke-width: 1;
+}
+
+.palace-radar-polygon {
+  fill: color-mix(in srgb, var(--jade) 18%, transparent);
+  stroke: var(--amber-soft);
+  stroke-width: 2;
+}
+
+.palace-radar-dot {
+  fill: var(--jade);
+  stroke: var(--void);
+  stroke-width: 1;
+  cursor: pointer;
+}
+
+.palace-radar-dot.is-menh {
+  fill: var(--amber-soft);
+}
+
+.palace-radar-dot.is-than {
+  stroke: var(--jade);
+  stroke-width: 2;
+}
+
+.palace-radar-label {
+  fill: var(--ash);
+  font-family: var(--font-chat);
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.palace-radar-label.is-menh {
+  fill: var(--amber-soft);
+  font-weight: 700;
+}
+
+.palace-radar-label.is-than {
+  fill: var(--jade);
+  font-weight: 700;
+}
+
+.palace-radar-panel {
+  margin-top: 10px;
+  border: 1px solid var(--line-soft);
+  border-radius: 12px;
+  padding: 10px;
+  background: rgb(9 7 20 / 45%);
+}
+
+.palace-radar-panel header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.palace-radar-panel h4 {
+  margin: 0;
+  color: var(--paper);
+  font-family: var(--font-chat);
+}
+
+.palace-radar-panel p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-family: var(--font-chat);
+  font-size: 0.78rem;
+}
+
+.palace-radar-panel strong {
+  color: var(--amber-soft);
+}
+
+.palace-radar-breakdown {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 7px;
+}
+
+.palace-radar-breakdown li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 8px;
+  font-family: var(--font-chat);
+}
+
+.palace-radar-breakdown span {
+  color: var(--paper);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.palace-radar-breakdown strong {
+  color: var(--amber-soft);
+  font-size: 0.76rem;
+}
+
+.palace-radar-breakdown small {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 0.66rem;
+}
+
+@media (max-width: 700px) {
+  .palace-radar-label {
+    font-size: 8px;
+  }
+}
