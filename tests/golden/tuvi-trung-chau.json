@@ -152,7 +152,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -243,7 +243,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -365,7 +365,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -490,7 +490,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Mão"
               }
             ],
@@ -597,7 +597,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -693,7 +693,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -782,7 +782,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -859,7 +859,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Mùi"
               }
             ],
@@ -955,7 +955,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -1071,7 +1071,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Dậu"
               }
             ],
@@ -1154,7 +1154,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -1237,7 +1237,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -2167,7 +2167,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Thân"
               }
             ],
@@ -2244,7 +2244,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Mùi"
               }
             ],
@@ -2353,7 +2353,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Ngọ"
               }
             ],
@@ -2474,7 +2474,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Tỵ"
               }
             ],
@@ -2588,7 +2588,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -2703,7 +2703,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Mão"
               }
             ],
@@ -2822,7 +2822,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Dần"
               }
             ],
@@ -2937,7 +2937,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Sửu"
               }
             ],
@@ -3027,7 +3027,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Tý"
               }
             ],
@@ -3105,7 +3105,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Hợi"
               }
             ],
@@ -3188,7 +3188,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -3271,7 +3271,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -4205,7 +4205,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Ất",
+                "stem": "Canh",
                 "branch": "Thân"
               }
             ],
@@ -4301,7 +4301,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Bính",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -4433,7 +4433,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Đinh",
+                "stem": "Nhâm",
                 "branch": "Tuất"
               }
             ],
@@ -4543,7 +4543,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Mậu",
+                "stem": "Quý",
                 "branch": "Hợi"
               }
             ],
@@ -4651,7 +4651,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Kỷ",
+                "stem": "Giáp",
                 "branch": "Tý"
               }
             ],
@@ -4734,7 +4734,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Canh",
+                "stem": "Ất",
                 "branch": "Sửu"
               }
             ],
@@ -4847,7 +4847,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Tân",
+                "stem": "Bính",
                 "branch": "Dần"
               }
             ],
@@ -4912,7 +4912,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Canh",
+                "stem": "Đinh",
                 "branch": "Mão"
               }
             ],
@@ -5014,7 +5014,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Tân",
+                "stem": "Mậu",
                 "branch": "Thìn"
               }
             ],
@@ -5117,7 +5117,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Nhâm",
+                "stem": "Kỷ",
                 "branch": "Tỵ"
               }
             ],
@@ -5206,7 +5206,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Quý",
+                "stem": "Canh",
                 "branch": "Ngọ"
               }
             ],
@@ -5305,7 +5305,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Giáp",
+                "stem": "Tân",
                 "branch": "Mùi"
               }
             ],
@@ -6233,7 +6233,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Thìn"
               }
             ],
@@ -6314,7 +6314,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Mão"
               }
             ],
@@ -6436,7 +6436,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -6568,7 +6568,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Sửu"
               }
             ],
@@ -6663,7 +6663,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Tý"
               }
             ],
@@ -6766,7 +6766,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Hợi"
               }
             ],
@@ -6892,7 +6892,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Tuất"
               }
             ],
@@ -6981,7 +6981,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Dậu"
               }
             ],
@@ -7064,7 +7064,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -7141,7 +7141,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Mùi"
               }
             ],
@@ -7250,7 +7250,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Ngọ"
               }
             ],
@@ -7339,7 +7339,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Tỵ"
               }
             ],
@@ -8268,7 +8268,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Thìn"
               }
             ],
@@ -8359,7 +8359,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Tỵ"
               }
             ],
@@ -8468,7 +8468,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Ngọ"
               }
             ],
@@ -8587,7 +8587,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Mùi"
               }
             ],
@@ -8694,7 +8694,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Thân"
               }
             ],
@@ -8791,7 +8791,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Dậu"
               }
             ],
@@ -8906,7 +8906,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Tuất"
               }
             ],
@@ -9008,7 +9008,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Hợi"
               }
             ],
@@ -9091,7 +9091,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Tý"
               }
             ],
@@ -9199,7 +9199,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Sửu"
               }
             ],
@@ -9289,7 +9289,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Dần"
               }
             ],
@@ -9373,7 +9373,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Mão"
               }
             ],
@@ -10296,7 +10296,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -10399,7 +10399,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -10514,7 +10514,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Tuất"
               }
             ],
@@ -10639,7 +10639,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Dậu"
               }
             ],
@@ -10741,7 +10741,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Thân"
               }
             ],
@@ -10830,7 +10830,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Mùi"
               }
             ],
@@ -10945,7 +10945,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -11016,7 +11016,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Tỵ"
               }
             ],
@@ -11112,7 +11112,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Thìn"
               }
             ],
@@ -11202,7 +11202,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Mão"
               }
             ],
@@ -11304,7 +11304,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Dần"
               }
             ],
@@ -11407,7 +11407,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -12356,7 +12356,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -12447,7 +12447,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -12562,7 +12562,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -12675,7 +12675,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Mão"
               }
             ],
@@ -12790,7 +12790,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -12879,7 +12879,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -12992,7 +12992,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -13075,7 +13075,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Mùi"
               }
             ],
@@ -13165,7 +13165,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -13281,7 +13281,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Dậu"
               }
             ],
@@ -13370,7 +13370,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -13441,7 +13441,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -14388,7 +14388,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Thân"
               }
             ],
@@ -14478,7 +14478,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Mùi"
               }
             ],
@@ -14598,7 +14598,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Ngọ"
               }
             ],
@@ -14707,7 +14707,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Tỵ"
               }
             ],
@@ -14809,7 +14809,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -14904,7 +14904,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Mão"
               }
             ],
@@ -15005,7 +15005,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Dần"
               }
             ],
@@ -15088,7 +15088,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Sửu"
               }
             ],
@@ -15197,7 +15197,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Tý"
               }
             ],
@@ -15299,7 +15299,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Hợi"
               }
             ],
@@ -15370,7 +15370,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -15475,7 +15475,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -16429,7 +16429,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Thân"
               }
             ],
@@ -16513,7 +16513,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -16636,7 +16636,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Tuất"
               }
             ],
@@ -16755,7 +16755,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Hợi"
               }
             ],
@@ -16876,7 +16876,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Tý"
               }
             ],
@@ -16959,7 +16959,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Sửu"
               }
             ],
@@ -17060,7 +17060,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Dần"
               }
             ],
@@ -17156,7 +17156,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Mão"
               }
             ],
@@ -17252,7 +17252,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Thìn"
               }
             ],
@@ -17336,7 +17336,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Tỵ"
               }
             ],
@@ -17414,7 +17414,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Ngọ"
               }
             ],
@@ -17509,7 +17509,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Mùi"
               }
             ],
@@ -18463,7 +18463,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Thìn"
               }
             ],
@@ -18566,7 +18566,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Mão"
               }
             ],
@@ -18668,7 +18668,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -18788,7 +18788,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Sửu"
               }
             ],
@@ -18897,7 +18897,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Tý"
               }
             ],
@@ -18993,7 +18993,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Hợi"
               }
             ],
@@ -19114,7 +19114,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Tuất"
               }
             ],
@@ -19191,7 +19191,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Dậu"
               }
             ],
@@ -19287,7 +19287,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -19370,7 +19370,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Mùi"
               }
             ],
@@ -19453,7 +19453,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Ngọ"
               }
             ],
@@ -19543,7 +19543,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Tỵ"
               }
             ],
@@ -20504,7 +20504,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Ất",
+                "stem": "Canh",
                 "branch": "Thìn"
               }
             ],
@@ -20601,7 +20601,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Bính",
+                "stem": "Tân",
                 "branch": "Tỵ"
               }
             ],
@@ -20735,7 +20735,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Đinh",
+                "stem": "Nhâm",
                 "branch": "Ngọ"
               }
             ],
@@ -20848,7 +20848,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Mậu",
+                "stem": "Quý",
                 "branch": "Mùi"
               }
             ],
@@ -20950,7 +20950,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Kỷ",
+                "stem": "Giáp",
                 "branch": "Thân"
               }
             ],
@@ -21046,7 +21046,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Canh",
+                "stem": "Ất",
                 "branch": "Dậu"
               }
             ],
@@ -21135,7 +21135,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Tân",
+                "stem": "Bính",
                 "branch": "Tuất"
               }
             ],
@@ -21206,7 +21206,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Canh",
+                "stem": "Đinh",
                 "branch": "Hợi"
               }
             ],
@@ -21296,7 +21296,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Tân",
+                "stem": "Mậu",
                 "branch": "Tý"
               }
             ],
@@ -21399,7 +21399,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Nhâm",
+                "stem": "Kỷ",
                 "branch": "Sửu"
               }
             ],
@@ -21500,7 +21500,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Quý",
+                "stem": "Canh",
                 "branch": "Dần"
               }
             ],
@@ -21577,7 +21577,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Giáp",
+                "stem": "Tân",
                 "branch": "Mão"
               }
             ],
@@ -22530,7 +22530,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -22614,7 +22614,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -22723,7 +22723,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Tuất"
               }
             ],
@@ -22862,7 +22862,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Dậu"
               }
             ],
@@ -22958,7 +22958,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Thân"
               }
             ],
@@ -23035,7 +23035,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Mùi"
               }
             ],
@@ -23149,7 +23149,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -23244,7 +23244,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Tỵ"
               }
             ],
@@ -23348,7 +23348,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Thìn"
               }
             ],
@@ -23419,7 +23419,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Mão"
               }
             ],
@@ -23496,7 +23496,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Dần"
               }
             ],
@@ -23611,7 +23611,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -24590,7 +24590,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Kỷ",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -24682,7 +24682,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Canh",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -24790,7 +24790,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Tân",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -24885,7 +24885,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Canh",
+                "stem": "Quý",
                 "branch": "Mão"
               }
             ],
@@ -24994,7 +24994,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Tân",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -25078,7 +25078,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Nhâm",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -25191,7 +25191,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Quý",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -25274,7 +25274,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Giáp",
+                "stem": "Đinh",
                 "branch": "Mùi"
               }
             ],
@@ -25401,7 +25401,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Ất",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -25497,7 +25497,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Bính",
+                "stem": "Kỷ",
                 "branch": "Dậu"
               }
             ],
@@ -25586,7 +25586,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Đinh",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -25645,7 +25645,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Mậu",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -26607,7 +26607,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Mậu",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -26703,7 +26703,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Kỷ",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -26798,7 +26798,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Canh",
+                "stem": "Nhâm",
                 "branch": "Thân"
               }
             ],
@@ -26899,7 +26899,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Tân",
+                "stem": "Quý",
                 "branch": "Mùi"
               }
             ],
@@ -26995,7 +26995,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Ngọ"
               }
             ],
@@ -27091,7 +27091,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -27192,7 +27192,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Nhâm",
+                "stem": "Bính",
                 "branch": "Thìn"
               }
             ],
@@ -27294,7 +27294,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Quý",
+                "stem": "Đinh",
                 "branch": "Mão"
               }
             ],
@@ -27409,7 +27409,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Giáp",
+                "stem": "Mậu",
                 "branch": "Dần"
               }
             ],
@@ -27505,7 +27505,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Ất",
+                "stem": "Kỷ",
                 "branch": "Sửu"
               }
             ],
@@ -27607,7 +27607,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -27679,7 +27679,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -28627,7 +28627,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Đinh",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -28698,7 +28698,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Mậu",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -28845,7 +28845,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Kỷ",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -28947,7 +28947,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Canh",
+                "stem": "Quý",
                 "branch": "Mão"
               }
             ],
@@ -29036,7 +29036,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Tân",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -29107,7 +29107,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Canh",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -29233,7 +29233,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Tân",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -29335,7 +29335,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Nhâm",
+                "stem": "Đinh",
                 "branch": "Mùi"
               }
             ],
@@ -29424,7 +29424,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Quý",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -29501,7 +29501,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Giáp",
+                "stem": "Kỷ",
                 "branch": "Dậu"
               }
             ],
@@ -29642,7 +29642,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Ất",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -29713,7 +29713,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Bính",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -30659,7 +30659,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -30736,7 +30736,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -30865,7 +30865,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Thân"
               }
             ],
@@ -30985,7 +30985,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Mùi"
               }
             ],
@@ -31062,7 +31062,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Ngọ"
               }
             ],
@@ -31152,7 +31152,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -31265,7 +31265,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Thìn"
               }
             ],
@@ -31374,7 +31374,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Mão"
               }
             ],
@@ -31457,7 +31457,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Dần"
               }
             ],
@@ -31541,7 +31541,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Sửu"
               }
             ],
@@ -31663,7 +31663,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -31747,7 +31747,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -32740,7 +32740,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Ất",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -32837,7 +32837,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Bính",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -32938,7 +32938,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Đinh",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -33027,7 +33027,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Mậu",
+                "stem": "Quý",
                 "branch": "Mão"
               }
             ],
@@ -33155,7 +33155,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Kỷ",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -33245,7 +33245,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Canh",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -33352,7 +33352,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Tân",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -33435,7 +33435,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Canh",
+                "stem": "Đinh",
                 "branch": "Mùi"
               }
             ],
@@ -33543,7 +33543,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Tân",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -33621,7 +33621,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Nhâm",
+                "stem": "Kỷ",
                 "branch": "Dậu"
               }
             ],
@@ -33716,7 +33716,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Quý",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -33781,7 +33781,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Giáp",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -34762,7 +34762,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -34871,7 +34871,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -34972,7 +34972,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Bính",
+                "stem": "Nhâm",
                 "branch": "Thân"
               }
             ],
@@ -35080,7 +35080,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Đinh",
+                "stem": "Quý",
                 "branch": "Mùi"
               }
             ],
@@ -35176,7 +35176,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Mậu",
+                "stem": "Giáp",
                 "branch": "Ngọ"
               }
             ],
@@ -35272,7 +35272,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Kỷ",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -35373,7 +35373,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Thìn"
               }
             ],
@@ -35469,7 +35469,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Mão"
               }
             ],
@@ -35572,7 +35572,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Canh",
+                "stem": "Mậu",
                 "branch": "Dần"
               }
             ],
@@ -35655,7 +35655,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Tân",
+                "stem": "Kỷ",
                 "branch": "Sửu"
               }
             ],
@@ -35744,7 +35744,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Nhâm",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -35815,7 +35815,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Quý",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -36774,7 +36774,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Quý",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -36871,7 +36871,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Giáp",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -36997,7 +36997,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Ất",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -37119,7 +37119,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Bính",
+                "stem": "Quý",
                 "branch": "Mão"
               }
             ],
@@ -37217,7 +37217,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Đinh",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -37282,7 +37282,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Mậu",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -37407,7 +37407,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Kỷ",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -37484,7 +37484,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Canh",
+                "stem": "Đinh",
                 "branch": "Mùi"
               }
             ],
@@ -37592,7 +37592,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Tân",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -37676,7 +37676,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Canh",
+                "stem": "Kỷ",
                 "branch": "Dậu"
               }
             ],
@@ -37777,7 +37777,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Tân",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -37849,7 +37849,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Nhâm",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -38789,7 +38789,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Nhâm",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -38898,7 +38898,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Quý",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -39005,7 +39005,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Giáp",
+                "stem": "Nhâm",
                 "branch": "Thân"
               }
             ],
@@ -39127,7 +39127,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Ất",
+                "stem": "Quý",
                 "branch": "Mùi"
               }
             ],
@@ -39223,7 +39223,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Bính",
+                "stem": "Giáp",
                 "branch": "Ngọ"
               }
             ],
@@ -39294,7 +39294,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Đinh",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -39401,7 +39401,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Mậu",
+                "stem": "Bính",
                 "branch": "Thìn"
               }
             ],
@@ -39490,7 +39490,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Kỷ",
+                "stem": "Đinh",
                 "branch": "Mão"
               }
             ],
@@ -39592,7 +39592,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Canh",
+                "stem": "Mậu",
                 "branch": "Dần"
               }
             ],
@@ -39690,7 +39690,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Tân",
+                "stem": "Kỷ",
                 "branch": "Sửu"
               }
             ],
@@ -40869,7 +40869,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Tân",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -40952,7 +40952,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Nhâm",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -41060,7 +41060,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Quý",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -41150,7 +41150,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Giáp",
+                "stem": "Quý",
                 "branch": "Mão"
               }
             ],
@@ -41265,7 +41265,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Ất",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -41355,7 +41355,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Bính",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -41456,7 +41456,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Đinh",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -41539,7 +41539,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Mậu",
+                "stem": "Đinh",
                 "branch": "Mùi"
               }
             ],
@@ -41653,7 +41653,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Kỷ",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -41737,7 +41737,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Canh",
+                "stem": "Kỷ",
                 "branch": "Dậu"
               }
             ],
@@ -41852,7 +41852,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Tân",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -41917,7 +41917,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Canh",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -44911,7 +44911,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Tân",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -45008,7 +45008,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Canh",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -45116,7 +45116,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Tân",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -45219,7 +45219,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Nhâm",
+                "stem": "Quý",
                 "branch": "Mão"
               }
             ],
@@ -45315,7 +45315,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Quý",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -45386,7 +45386,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Giáp",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -45511,7 +45511,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Ất",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -45594,7 +45594,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Bính",
+                "stem": "Đinh",
                 "branch": "Mùi"
               }
             ],
@@ -45702,7 +45702,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Đinh",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -45780,7 +45780,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Mậu",
+                "stem": "Kỷ",
                 "branch": "Dậu"
               }
             ],
@@ -45907,7 +45907,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Kỷ",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -45985,7 +45985,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Canh",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -47136,7 +47136,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Canh",
+                "stem": "Nhâm",
                 "branch": "Thân"
               }
             ],
@@ -47253,7 +47253,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Tân",
+                "stem": "Quý",
                 "branch": "Mùi"
               }
             ],
@@ -47350,7 +47350,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Nhâm",
+                "stem": "Giáp",
                 "branch": "Ngọ"
               }
             ],
@@ -47427,7 +47427,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Quý",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -47540,7 +47540,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Giáp",
+                "stem": "Bính",
                 "branch": "Thìn"
               }
             ],
@@ -47635,7 +47635,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Ất",
+                "stem": "Đinh",
                 "branch": "Mão"
               }
             ],
@@ -47743,7 +47743,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Bính",
+                "stem": "Mậu",
                 "branch": "Dần"
               }
             ],
@@ -47840,7 +47840,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Đinh",
+                "stem": "Kỷ",
                 "branch": "Sửu"
               }
             ],
@@ -47935,7 +47935,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Mậu",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -48019,7 +48019,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Kỷ",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -48973,7 +48973,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Kỷ",
+                "stem": "Canh",
                 "branch": "Thìn"
               }
             ],
@@ -49050,7 +49050,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Canh",
+                "stem": "Tân",
                 "branch": "Tỵ"
               }
             ],
@@ -49145,7 +49145,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Tân",
+                "stem": "Nhâm",
                 "branch": "Ngọ"
               }
             ],
@@ -49258,7 +49258,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Canh",
+                "stem": "Quý",
                 "branch": "Mùi"
               }
             ],
@@ -49379,7 +49379,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Tân",
+                "stem": "Giáp",
                 "branch": "Thân"
               }
             ],
@@ -49470,7 +49470,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Nhâm",
+                "stem": "Ất",
                 "branch": "Dậu"
               }
             ],
@@ -49565,7 +49565,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Quý",
+                "stem": "Bính",
                 "branch": "Tuất"
               }
             ],
@@ -49648,7 +49648,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Giáp",
+                "stem": "Đinh",
                 "branch": "Hợi"
               }
             ],
@@ -49765,7 +49765,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Ất",
+                "stem": "Mậu",
                 "branch": "Tý"
               }
             ],
@@ -49874,7 +49874,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Bính",
+                "stem": "Kỷ",
                 "branch": "Sửu"
               }
             ],
@@ -49976,7 +49976,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Đinh",
+                "stem": "Canh",
                 "branch": "Dần"
               }
             ],
@@ -50053,7 +50053,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Mậu",
+                "stem": "Tân",
                 "branch": "Mão"
               }
             ],
@@ -50999,7 +50999,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Tân",
+                "stem": "Canh",
                 "branch": "Thân"
               }
             ],
@@ -51096,7 +51096,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Canh",
+                "stem": "Tân",
                 "branch": "Mùi"
               }
             ],
@@ -51210,7 +51210,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Tân",
+                "stem": "Nhâm",
                 "branch": "Ngọ"
               }
             ],
@@ -51311,7 +51311,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Nhâm",
+                "stem": "Quý",
                 "branch": "Tỵ"
               }
             ],
@@ -51412,7 +51412,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Quý",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -51495,7 +51495,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Giáp",
+                "stem": "Ất",
                 "branch": "Mão"
               }
             ],
@@ -51585,7 +51585,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Ất",
+                "stem": "Bính",
                 "branch": "Dần"
               }
             ],
@@ -51680,7 +51680,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Bính",
+                "stem": "Đinh",
                 "branch": "Sửu"
               }
             ],
@@ -51795,7 +51795,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Đinh",
+                "stem": "Mậu",
                 "branch": "Tý"
               }
             ],
@@ -51905,7 +51905,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Mậu",
+                "stem": "Kỷ",
                 "branch": "Hợi"
               }
             ],
@@ -51996,7 +51996,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Kỷ",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -52087,7 +52087,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Canh",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -53033,7 +53033,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Tân",
+                "stem": "Canh",
                 "branch": "Thìn"
               }
             ],
@@ -53137,7 +53137,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Nhâm",
+                "stem": "Tân",
                 "branch": "Tỵ"
               }
             ],
@@ -53256,7 +53256,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Quý",
+                "stem": "Nhâm",
                 "branch": "Ngọ"
               }
             ],
@@ -53351,7 +53351,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Giáp",
+                "stem": "Quý",
                 "branch": "Mùi"
               }
             ],
@@ -53458,7 +53458,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Ất",
+                "stem": "Giáp",
                 "branch": "Thân"
               }
             ],
@@ -53550,7 +53550,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Bính",
+                "stem": "Ất",
                 "branch": "Dậu"
               }
             ],
@@ -53640,7 +53640,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Đinh",
+                "stem": "Bính",
                 "branch": "Tuất"
               }
             ],
@@ -53737,7 +53737,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Mậu",
+                "stem": "Đinh",
                 "branch": "Hợi"
               }
             ],
@@ -53839,7 +53839,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Kỷ",
+                "stem": "Mậu",
                 "branch": "Tý"
               }
             ],
@@ -53954,7 +53954,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Canh",
+                "stem": "Kỷ",
                 "branch": "Sửu"
               }
             ],
@@ -54044,7 +54044,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Tân",
+                "stem": "Canh",
                 "branch": "Dần"
               }
             ],
@@ -54121,7 +54121,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Canh",
+                "stem": "Tân",
                 "branch": "Mão"
               }
             ],
@@ -55055,7 +55055,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Thân"
               }
             ],
@@ -55191,7 +55191,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Mùi"
               }
             ],
@@ -55298,7 +55298,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Bính",
+                "stem": "Nhâm",
                 "branch": "Ngọ"
               }
             ],
@@ -55405,7 +55405,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Đinh",
+                "stem": "Quý",
                 "branch": "Tỵ"
               }
             ],
@@ -55495,7 +55495,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Mậu",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -55592,7 +55592,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Kỷ",
+                "stem": "Ất",
                 "branch": "Mão"
               }
             ],
@@ -55701,7 +55701,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Dần"
               }
             ],
@@ -55802,7 +55802,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Sửu"
               }
             ],
@@ -55917,7 +55917,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Canh",
+                "stem": "Mậu",
                 "branch": "Tý"
               }
             ],
@@ -56006,7 +56006,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Tân",
+                "stem": "Kỷ",
                 "branch": "Hợi"
               }
             ],
@@ -56084,7 +56084,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Nhâm",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -56155,7 +56155,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Quý",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -57128,7 +57128,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Tân",
+                "stem": "Canh",
                 "branch": "Thân"
               }
             ],
@@ -57225,7 +57225,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Canh",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -57308,7 +57308,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Tân",
+                "stem": "Nhâm",
                 "branch": "Tuất"
               }
             ],
@@ -57398,7 +57398,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Nhâm",
+                "stem": "Quý",
                 "branch": "Hợi"
               }
             ],
@@ -57519,7 +57519,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Quý",
+                "stem": "Giáp",
                 "branch": "Tý"
               }
             ],
@@ -57616,7 +57616,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Giáp",
+                "stem": "Ất",
                 "branch": "Sửu"
               }
             ],
@@ -57705,7 +57705,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Ất",
+                "stem": "Bính",
                 "branch": "Dần"
               }
             ],
@@ -57794,7 +57794,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Bính",
+                "stem": "Đinh",
                 "branch": "Mão"
               }
             ],
@@ -57915,7 +57915,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Đinh",
+                "stem": "Mậu",
                 "branch": "Thìn"
               }
             ],
@@ -58029,7 +58029,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Mậu",
+                "stem": "Kỷ",
                 "branch": "Tỵ"
               }
             ],
@@ -58106,7 +58106,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Kỷ",
+                "stem": "Canh",
                 "branch": "Ngọ"
               }
             ],
@@ -58189,7 +58189,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Canh",
+                "stem": "Tân",
                 "branch": "Mùi"
               }
             ],
@@ -59137,7 +59137,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Ất",
+                "stem": "Canh",
                 "branch": "Thìn"
               }
             ],
@@ -59241,7 +59241,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Bính",
+                "stem": "Tân",
                 "branch": "Tỵ"
               }
             ],
@@ -59348,7 +59348,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Đinh",
+                "stem": "Nhâm",
                 "branch": "Ngọ"
               }
             ],
@@ -59449,7 +59449,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Mậu",
+                "stem": "Quý",
                 "branch": "Mùi"
               }
             ],
@@ -59569,7 +59569,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Kỷ",
+                "stem": "Giáp",
                 "branch": "Thân"
               }
             ],
@@ -59634,7 +59634,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Canh",
+                "stem": "Ất",
                 "branch": "Dậu"
               }
             ],
@@ -59749,7 +59749,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Tân",
+                "stem": "Bính",
                 "branch": "Tuất"
               }
             ],
@@ -59826,7 +59826,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Canh",
+                "stem": "Đinh",
                 "branch": "Hợi"
               }
             ],
@@ -59905,7 +59905,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Tân",
+                "stem": "Mậu",
                 "branch": "Tý"
               }
             ],
@@ -60007,7 +60007,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Nhâm",
+                "stem": "Kỷ",
                 "branch": "Sửu"
               }
             ],
@@ -60120,7 +60120,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Quý",
+                "stem": "Canh",
                 "branch": "Dần"
               }
             ],
@@ -60223,7 +60223,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Giáp",
+                "stem": "Tân",
                 "branch": "Mão"
               }
             ],
@@ -61157,7 +61157,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -61228,7 +61228,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -61329,7 +61329,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Tuất"
               }
             ],
@@ -61457,7 +61457,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Dậu"
               }
             ],
@@ -61547,7 +61547,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Thân"
               }
             ],
@@ -61636,7 +61636,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Mùi"
               }
             ],
@@ -61783,7 +61783,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -61903,7 +61903,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Tỵ"
               }
             ],
@@ -61999,7 +61999,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Thìn"
               }
             ],
@@ -62064,7 +62064,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Mão"
               }
             ],
@@ -62143,7 +62143,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Dần"
               }
             ],
@@ -62257,7 +62257,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -63203,7 +63203,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Thân"
               }
             ],
@@ -63274,7 +63274,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -63369,7 +63369,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Tuất"
               }
             ],
@@ -63476,7 +63476,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Hợi"
               }
             ],
@@ -63599,7 +63599,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Tý"
               }
             ],
@@ -63676,7 +63676,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Sửu"
               }
             ],
@@ -63809,7 +63809,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Dần"
               }
             ],
@@ -63936,7 +63936,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Mão"
               }
             ],
@@ -64026,7 +64026,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Thìn"
               }
             ],
@@ -64104,7 +64104,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Tỵ"
               }
             ],
@@ -64176,7 +64176,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Ngọ"
               }
             ],
@@ -64291,7 +64291,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Mùi"
               }
             ],
@@ -65250,7 +65250,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Ất",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -65341,7 +65341,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Bính",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -65449,7 +65449,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Đinh",
+                "stem": "Nhâm",
                 "branch": "Thân"
               }
             ],
@@ -65552,7 +65552,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Mậu",
+                "stem": "Quý",
                 "branch": "Mùi"
               }
             ],
@@ -65673,7 +65673,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Kỷ",
+                "stem": "Giáp",
                 "branch": "Ngọ"
               }
             ],
@@ -65738,7 +65738,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Canh",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -65864,7 +65864,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Tân",
+                "stem": "Bính",
                 "branch": "Thìn"
               }
             ],
@@ -65953,7 +65953,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Canh",
+                "stem": "Đinh",
                 "branch": "Mão"
               }
             ],
@@ -66049,7 +66049,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Tân",
+                "stem": "Mậu",
                 "branch": "Dần"
               }
             ],
@@ -66145,7 +66145,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Nhâm",
+                "stem": "Kỷ",
                 "branch": "Sửu"
               }
             ],
@@ -66247,7 +66247,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Quý",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -66325,7 +66325,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Giáp",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -67259,7 +67259,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Thìn"
               }
             ],
@@ -67318,7 +67318,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Tỵ"
               }
             ],
@@ -67451,7 +67451,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Ngọ"
               }
             ],
@@ -67559,7 +67559,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Mùi"
               }
             ],
@@ -67668,7 +67668,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Thân"
               }
             ],
@@ -67770,7 +67770,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Dậu"
               }
             ],
@@ -67905,7 +67905,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Tuất"
               }
             ],
@@ -68019,7 +68019,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Hợi"
               }
             ],
@@ -68121,7 +68121,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Tý"
               }
             ],
@@ -68192,7 +68192,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Sửu"
               }
             ],
@@ -68263,7 +68263,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Dần"
               }
             ],
@@ -68359,7 +68359,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Mão"
               }
             ],
@@ -69312,7 +69312,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Thân"
               }
             ],
@@ -69390,7 +69390,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Mùi"
               }
             ],
@@ -69503,7 +69503,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Ngọ"
               }
             ],
@@ -69618,7 +69618,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Tỵ"
               }
             ],
@@ -69726,7 +69726,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -69803,7 +69803,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Mão"
               }
             ],
@@ -69917,7 +69917,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Dần"
               }
             ],
@@ -70018,7 +70018,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Sửu"
               }
             ],
@@ -70134,7 +70134,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Tý"
               }
             ],
@@ -70212,7 +70212,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Hợi"
               }
             ],
@@ -70290,7 +70290,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -70393,7 +70393,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -71345,7 +71345,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Thân"
               }
             ],
@@ -71410,7 +71410,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -71513,7 +71513,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Bính",
+                "stem": "Nhâm",
                 "branch": "Tuất"
               }
             ],
@@ -71628,7 +71628,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Đinh",
+                "stem": "Quý",
                 "branch": "Hợi"
               }
             ],
@@ -71730,7 +71730,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Mậu",
+                "stem": "Giáp",
                 "branch": "Tý"
               }
             ],
@@ -71846,7 +71846,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Kỷ",
+                "stem": "Ất",
                 "branch": "Sửu"
               }
             ],
@@ -71972,7 +71972,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Dần"
               }
             ],
@@ -72086,7 +72086,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Mão"
               }
             ],
@@ -72163,7 +72163,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Canh",
+                "stem": "Mậu",
                 "branch": "Thìn"
               }
             ],
@@ -72273,7 +72273,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Tân",
+                "stem": "Kỷ",
                 "branch": "Tỵ"
               }
             ],
@@ -72344,7 +72344,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Nhâm",
+                "stem": "Canh",
                 "branch": "Ngọ"
               }
             ],
@@ -72427,7 +72427,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Quý",
+                "stem": "Tân",
                 "branch": "Mùi"
               }
             ],
@@ -73392,7 +73392,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Quý",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -73470,7 +73470,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Giáp",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],
@@ -73578,7 +73578,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Ất",
+                "stem": "Nhâm",
                 "branch": "Thân"
               }
             ],
@@ -73667,7 +73667,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Bính",
+                "stem": "Quý",
                 "branch": "Mùi"
               }
             ],
@@ -73793,7 +73793,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Đinh",
+                "stem": "Giáp",
                 "branch": "Ngọ"
               }
             ],
@@ -73911,7 +73911,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Mậu",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -74012,7 +74012,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Kỷ",
+                "stem": "Bính",
                 "branch": "Thìn"
               }
             ],
@@ -74107,7 +74107,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Canh",
+                "stem": "Đinh",
                 "branch": "Mão"
               }
             ],
@@ -74215,7 +74215,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Tân",
+                "stem": "Mậu",
                 "branch": "Dần"
               }
             ],
@@ -74318,7 +74318,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Canh",
+                "stem": "Kỷ",
                 "branch": "Sửu"
               }
             ],
@@ -74390,7 +74390,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Tân",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -74461,7 +74461,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Nhâm",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -77399,7 +77399,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Mậu",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -77496,7 +77496,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Kỷ",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -77598,7 +77598,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Canh",
+                "stem": "Nhâm",
                 "branch": "Tuất"
               }
             ],
@@ -77705,7 +77705,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Tân",
+                "stem": "Quý",
                 "branch": "Dậu"
               }
             ],
@@ -77806,7 +77806,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Thân"
               }
             ],
@@ -77928,7 +77928,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Mùi"
               }
             ],
@@ -78011,7 +78011,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Nhâm",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -78094,7 +78094,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Quý",
+                "stem": "Đinh",
                 "branch": "Tỵ"
               }
             ],
@@ -78190,7 +78190,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Giáp",
+                "stem": "Mậu",
                 "branch": "Thìn"
               }
             ],
@@ -78292,7 +78292,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Ất",
+                "stem": "Kỷ",
                 "branch": "Mão"
               }
             ],
@@ -78369,7 +78369,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Dần"
               }
             ],
@@ -78465,7 +78465,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -79432,7 +79432,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Canh",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -79535,7 +79535,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Tân",
+                "stem": "Kỷ",
                 "branch": "Dậu"
               }
             ],
@@ -79631,7 +79631,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Nhâm",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -79733,7 +79733,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Quý",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -79816,7 +79816,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Giáp",
+                "stem": "Nhâm",
                 "branch": "Tý"
               }
             ],
@@ -79936,7 +79936,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Ất",
+                "stem": "Quý",
                 "branch": "Sửu"
               }
             ],
@@ -80013,7 +80013,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Bính",
+                "stem": "Giáp",
                 "branch": "Dần"
               }
             ],
@@ -80096,7 +80096,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Đinh",
+                "stem": "Ất",
                 "branch": "Mão"
               }
             ],
@@ -80192,7 +80192,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Mậu",
+                "stem": "Bính",
                 "branch": "Thìn"
               }
             ],
@@ -80301,7 +80301,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Kỷ",
+                "stem": "Đinh",
                 "branch": "Tỵ"
               }
             ],
@@ -81451,7 +81451,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -81534,7 +81534,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -81618,7 +81618,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Mậu",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -81721,7 +81721,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Kỷ",
+                "stem": "Quý",
                 "branch": "Mão"
               }
             ],
@@ -81798,7 +81798,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -81887,7 +81887,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -82003,7 +82003,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -82112,7 +82112,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Mùi"
               }
             ],
@@ -82214,7 +82214,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Nhâm",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -82340,7 +82340,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Quý",
+                "stem": "Kỷ",
                 "branch": "Dậu"
               }
             ],
@@ -82430,7 +82430,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -82533,7 +82533,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -85519,7 +85519,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Giáp",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -85602,7 +85602,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Ất",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -85686,7 +85686,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Bính",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -85789,7 +85789,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Đinh",
+                "stem": "Quý",
                 "branch": "Mão"
               }
             ],
@@ -85866,7 +85866,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Mậu",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -85955,7 +85955,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Kỷ",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -86071,7 +86071,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Canh",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -86180,7 +86180,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Tân",
+                "stem": "Đinh",
                 "branch": "Mùi"
               }
             ],
@@ -86282,7 +86282,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Canh",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -86408,7 +86408,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Tân",
+                "stem": "Kỷ",
                 "branch": "Dậu"
               }
             ],
@@ -86498,7 +86498,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Nhâm",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -86601,7 +86601,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Quý",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -87560,7 +87560,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Đinh",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -87637,7 +87637,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Mậu",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -87727,7 +87727,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Kỷ",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -87817,7 +87817,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Canh",
+                "stem": "Quý",
                 "branch": "Mão"
               }
             ],
@@ -87912,7 +87912,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Tân",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -88026,7 +88026,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Canh",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -88115,7 +88115,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Tân",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -88236,7 +88236,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Nhâm",
+                "stem": "Đinh",
                 "branch": "Mùi"
               }
             ],
@@ -88339,7 +88339,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Quý",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -88442,7 +88442,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Giáp",
+                "stem": "Kỷ",
                 "branch": "Dậu"
               }
             ],
@@ -88539,7 +88539,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Ất",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -88635,7 +88635,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Bính",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -89608,7 +89608,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Đinh",
+                "stem": "Canh",
                 "branch": "Thìn"
               }
             ],
@@ -89693,7 +89693,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Mậu",
+                "stem": "Tân",
                 "branch": "Mão"
               }
             ],
@@ -89776,7 +89776,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Kỷ",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -89859,7 +89859,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Canh",
+                "stem": "Quý",
                 "branch": "Sửu"
               }
             ],
@@ -89961,7 +89961,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Tân",
+                "stem": "Giáp",
                 "branch": "Tý"
               }
             ],
@@ -90075,7 +90075,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Canh",
+                "stem": "Ất",
                 "branch": "Hợi"
               }
             ],
@@ -90164,7 +90164,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Tân",
+                "stem": "Bính",
                 "branch": "Tuất"
               }
             ],
@@ -90278,7 +90278,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Nhâm",
+                "stem": "Đinh",
                 "branch": "Dậu"
               }
             ],
@@ -90381,7 +90381,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Quý",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -90483,7 +90483,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Giáp",
+                "stem": "Kỷ",
                 "branch": "Mùi"
               }
             ],
@@ -90573,7 +90573,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Ất",
+                "stem": "Canh",
                 "branch": "Ngọ"
               }
             ],
@@ -90669,7 +90669,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Bính",
+                "stem": "Tân",
                 "branch": "Tỵ"
               }
             ],
@@ -91628,7 +91628,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Đinh",
+                "stem": "Canh",
                 "branch": "Tý"
               }
             ],
@@ -91705,7 +91705,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Mậu",
+                "stem": "Tân",
                 "branch": "Sửu"
               }
             ],
@@ -91795,7 +91795,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Kỷ",
+                "stem": "Nhâm",
                 "branch": "Dần"
               }
             ],
@@ -91885,7 +91885,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Canh",
+                "stem": "Quý",
                 "branch": "Mão"
               }
             ],
@@ -91980,7 +91980,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Tân",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -92094,7 +92094,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Canh",
+                "stem": "Ất",
                 "branch": "Tỵ"
               }
             ],
@@ -92183,7 +92183,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Tân",
+                "stem": "Bính",
                 "branch": "Ngọ"
               }
             ],
@@ -92304,7 +92304,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Nhâm",
+                "stem": "Đinh",
                 "branch": "Mùi"
               }
             ],
@@ -92407,7 +92407,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Quý",
+                "stem": "Mậu",
                 "branch": "Thân"
               }
             ],
@@ -92510,7 +92510,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Giáp",
+                "stem": "Kỷ",
                 "branch": "Dậu"
               }
             ],
@@ -92607,7 +92607,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Ất",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -92703,7 +92703,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Bính",
+                "stem": "Tân",
                 "branch": "Hợi"
               }
             ],
@@ -93619,7 +93619,7 @@
                 "palace": {
                   "$ref": "$.palaces[0]"
                 },
-                "stem": "Mậu",
+                "stem": "Canh",
                 "branch": "Thân"
               }
             ],
@@ -93729,7 +93729,7 @@
                 "palace": {
                   "$ref": "$.palaces[1]"
                 },
-                "stem": "Kỷ",
+                "stem": "Tân",
                 "branch": "Mùi"
               }
             ],
@@ -93831,7 +93831,7 @@
                 "palace": {
                   "$ref": "$.palaces[2]"
                 },
-                "stem": "Canh",
+                "stem": "Nhâm",
                 "branch": "Ngọ"
               }
             ],
@@ -93927,7 +93927,7 @@
                 "palace": {
                   "$ref": "$.palaces[3]"
                 },
-                "stem": "Tân",
+                "stem": "Quý",
                 "branch": "Tỵ"
               }
             ],
@@ -94060,7 +94060,7 @@
                 "palace": {
                   "$ref": "$.palaces[4]"
                 },
-                "stem": "Canh",
+                "stem": "Giáp",
                 "branch": "Thìn"
               }
             ],
@@ -94181,7 +94181,7 @@
                 "palace": {
                   "$ref": "$.palaces[5]"
                 },
-                "stem": "Tân",
+                "stem": "Ất",
                 "branch": "Mão"
               }
             ],
@@ -94307,7 +94307,7 @@
                 "palace": {
                   "$ref": "$.palaces[6]"
                 },
-                "stem": "Nhâm",
+                "stem": "Bính",
                 "branch": "Dần"
               }
             ],
@@ -94397,7 +94397,7 @@
                 "palace": {
                   "$ref": "$.palaces[7]"
                 },
-                "stem": "Quý",
+                "stem": "Đinh",
                 "branch": "Sửu"
               }
             ],
@@ -94480,7 +94480,7 @@
                 "palace": {
                   "$ref": "$.palaces[8]"
                 },
-                "stem": "Giáp",
+                "stem": "Mậu",
                 "branch": "Tý"
               }
             ],
@@ -94576,7 +94576,7 @@
                 "palace": {
                   "$ref": "$.palaces[9]"
                 },
-                "stem": "Ất",
+                "stem": "Kỷ",
                 "branch": "Hợi"
               }
             ],
@@ -94666,7 +94666,7 @@
                 "palace": {
                   "$ref": "$.palaces[10]"
                 },
-                "stem": "Bính",
+                "stem": "Canh",
                 "branch": "Tuất"
               }
             ],
@@ -94737,7 +94737,7 @@
                 "palace": {
                   "$ref": "$.palaces[11]"
                 },
-                "stem": "Đinh",
+                "stem": "Tân",
                 "branch": "Dậu"
               }
             ],

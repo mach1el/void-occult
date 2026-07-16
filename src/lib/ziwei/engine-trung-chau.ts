@@ -686,12 +686,13 @@ function assignAnnualFlow(palaces: Palace[], annualBranch: string, birthMonth: n
   const monthStartPalace = palaces[fix(monthStartIndex)]!;
   monthStartPalace.isMonthStart = true;
 
-  const yearStemIndex = STEMS.indexOf(annualStem);
   const months: FlowMonthEntry[] = Array.from({length:12}, (_, offset) => {
     const palace = palaces[fix(monthStartIndex + offset)]!;
     const month = offset + 1;
-    const mStemIndex = ((yearStemIndex % 5) * 2 + 2 + offset) % 10;
-    const stem = STEMS[mStemIndex] ?? "";
+    // Tứ hóa lưu nguyệt (can tháng) đi theo cung mà tháng đó an vị (tháng nào cung nấy),
+    // dựa trên Can của năm Lưu niên.
+    const stem = getPalaceStem(annualStem, palace.index);
+    // Chi ở chân cung là vòng chi Tiểu Hạn động, không phải chi tháng
     const branch = palace.smallLimitBranch || palace.branch;
     const item: FlowMonthEntry = {month, label: MONTH_NAMES[offset] ?? "", palace, stem, branch};
     palace.flowMonths!.push(item);
