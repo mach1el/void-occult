@@ -27,9 +27,9 @@
 @media (min-width: 1360px) {
   .shell {
     width: 100%;
-    max-width: 2240px;
+    max-width: 1960px;
     margin-inline: auto;
-    grid-template-columns: minmax(720px, 1040px) minmax(420px, 1fr);
+    grid-template-columns: minmax(860px, 980px) minmax(620px, 1fr);
     grid-template-rows: auto auto;
     gap: 16px;
     align-items: stretch;
@@ -169,13 +169,15 @@
   /* Specificity bump: base `.compact-chart-capture` (min(100%,900px)) sits
      later in the file, nên phải đặc tả hơn để lá số scale full cột đã mở rộng. */
   .shell .compact-chart-capture {
-    width: 100%;
-    max-width: none;
+    width: fit-content;
+    max-width: 100%;
   }
 
   .shell .compact-chart-svg {
-    width: 100%;
-    max-height: calc(100vh - 120px);
+    width: auto;
+    max-width: 100%;
+    height: min(calc(100svh - 88px), 900px);
+    max-height: none;
   }
 
   .compact-chart-stage {

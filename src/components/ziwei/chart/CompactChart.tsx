@@ -41,26 +41,28 @@ interface Position {
   y: number;
 }
 
-const WIDTH = 720;
 const HEIGHT = 896;
-const CELL_WIDTH = 180;
+const CELL_WIDTH = 220;
 const CELL_HEIGHT = 224;
+const WIDTH = CELL_WIDTH * 4;
+const CENTER_WIDTH = CELL_WIDTH * 2;
+const CENTER_HEIGHT = CELL_HEIGHT * 2;
 const MAX_STARS_PER_COLUMN = 10;
 const BOUNDARY_VOID_STARS = new Set(["Tuần", "Triệt"]);
 
 const POSITIONS: Record<string, Position> = {
   Tỵ: { x: 0, y: 0 },
-  Ngọ: { x: 180, y: 0 },
-  Mùi: { x: 360, y: 0 },
-  Thân: { x: 540, y: 0 },
-  Thìn: { x: 0, y: 224 },
-  Dậu: { x: 540, y: 224 },
-  Mão: { x: 0, y: 448 },
-  Tuất: { x: 540, y: 448 },
-  Dần: { x: 0, y: 672 },
-  Sửu: { x: 180, y: 672 },
-  Tý: { x: 360, y: 672 },
-  Hợi: { x: 540, y: 672 },
+  Ngọ: { x: CELL_WIDTH, y: 0 },
+  Mùi: { x: CELL_WIDTH * 2, y: 0 },
+  Thân: { x: CELL_WIDTH * 3, y: 0 },
+  Thìn: { x: 0, y: CELL_HEIGHT },
+  Dậu: { x: CELL_WIDTH * 3, y: CELL_HEIGHT },
+  Mão: { x: 0, y: CELL_HEIGHT * 2 },
+  Tuất: { x: CELL_WIDTH * 3, y: CELL_HEIGHT * 2 },
+  Dần: { x: 0, y: CELL_HEIGHT * 3 },
+  Sửu: { x: CELL_WIDTH, y: CELL_HEIGHT * 3 },
+  Tý: { x: CELL_WIDTH * 2, y: CELL_HEIGHT * 3 },
+  Hợi: { x: CELL_WIDTH * 3, y: CELL_HEIGHT * 3 },
 };
 
 const TAM_HOP: Record<string, string[]> = {
@@ -320,6 +322,9 @@ function Palace({
   const marks = [palace.isThan ? "Thân" : ""].filter(Boolean);
   const flowMonth = showAnnual ? palace.flowMonths?.[0] : undefined;
   const minorStartY = (stars.major.length > 1 ? (marks.length ? 68 : 56) : (marks.length ? 51 : 40)) + 16;
+  const centerX = CELL_WIDTH / 2;
+  const endX = CELL_WIDTH - 10;
+  const maleficX = centerX + 10;
 
   function keyDown(event: KeyboardEvent<SVGGElement>) {
     if (event.key === "Enter" || event.key === " ") {
@@ -353,21 +358,21 @@ function Palace({
       <text x="9" y="18" className="compact-palace-stem">
         {STEM_ABBREVIATIONS[palace.stem ?? ""] ?? palace.stem} {palace.branch}
       </text>
-      <text x="90" y="18" textAnchor="middle" className="compact-palace-name">
+      <text x={centerX} y="18" textAnchor="middle" className="compact-palace-name">
         {palace.name.toUpperCase()}
       </text>
-      <text x="170" y="18" textAnchor="end" className="compact-palace-age">
+      <text x={endX} y="18" textAnchor="end" className="compact-palace-age">
         {fortune ? fortune.start : ""}
       </text>
       {marks.length > 0 && (
-        <text x="90" y="33" textAnchor="middle" className="compact-palace-mark">
+        <text x={centerX} y="33" textAnchor="middle" className="compact-palace-mark">
           {marks.join(" · ")}
         </text>
       )}
       {stars.major.length ? (
         stars.major.slice(0, 2).map((star, index) => (
           <text
-            x="90"
+            x={centerX}
             y={marks.length ? 51 + index * 17 : 39 + index * 17}
             textAnchor="middle"
             className={`compact-major-star${starTierClass(star)}`}
@@ -381,7 +386,7 @@ function Palace({
         ))
       ) : (
         <text
-          x="90"
+          x={centerX}
           y={marks.length ? 51 : 40}
           textAnchor="middle"
           className="compact-empty-major"
@@ -393,7 +398,7 @@ function Palace({
       {columns.map((column, columnIndex) =>
         column.map((star, rowIndex) => (
           <text
-            x={columnIndex === 0 ? 9 : 94}
+            x={columnIndex === 0 ? 9 : maleficX}
             y={minorStartY + rowIndex * 13}
             className={`compact-minor-star${starTierClass(star)}`}
             fill={starColor(star, school)}
@@ -415,7 +420,7 @@ function Palace({
               )
               .join(" · ")}
           </title>
-          <text x="90" y="202" textAnchor="middle">
+          <text x={centerX} y="202" textAnchor="middle">
             {phiFlows.slice(0, 4).map((flow, index) => (
               <tspan
                 key={`${flow.mutagen}-${flow.starName}`}
@@ -432,12 +437,12 @@ function Palace({
       <text x="9" y="215" className="compact-palace-footer">
         {flowMonth?.branch || ""}
       </text>
-      <text x="90" y="215" textAnchor="middle" className="compact-palace-footer">
+      <text x={centerX} y="215" textAnchor="middle" className="compact-palace-footer">
         {palace.changSheng || ""}
       </text>
       {flowMonth && (
         <text
-          x="170"
+          x={endX}
           y="215"
           textAnchor="end"
           className="compact-flow-month"
@@ -598,36 +603,36 @@ function Center({
   ];
 
   return (
-    <g transform="translate(180 248)" className="compact-center">
-      <rect width="360" height="496" className="compact-center-bg" />
-      <text x="180" y="52" textAnchor="middle" className="compact-center-kicker">
+    <g transform={`translate(${CELL_WIDTH} ${CELL_HEIGHT})`} className="compact-center">
+      <rect width={CENTER_WIDTH} height={CENTER_HEIGHT} className="compact-center-bg" />
+      <text x={CENTER_WIDTH / 2} y="52" textAnchor="middle" className="compact-center-kicker">
         VOID OCCULT · {SCHOOL_LABEL[school].toUpperCase()}
       </text>
-      <text x="180" y="84" textAnchor="middle" className="compact-center-title">
+      <text x={CENTER_WIDTH / 2} y="84" textAnchor="middle" className="compact-center-title">
         {profileName ? profileName.toUpperCase() : "VÔ DANH"}
       </text>
-      <text x="180" y="111" textAnchor="middle" className="compact-center-year">
+      <text x={CENTER_WIDTH / 2} y="111" textAnchor="middle" className="compact-center-year">
         {data.yearStem} {data.yearBranch} · {data.yearPolarity}{" "}
         {gender === "male" ? "Nam Mệnh" : "Nữ Mệnh"}
       </text>
-      <text x="180" y="250" textAnchor="middle" className="compact-center-seal">
+      <text x={CENTER_WIDTH / 2} y="250" textAnchor="middle" className="compact-center-seal">
         紫微
       </text>
       <line
-        x1="180"
+        x1={CENTER_WIDTH / 2}
         y1="127"
-        x2="180"
+        x2={CENTER_WIDTH / 2}
         y2="198"
         className="compact-center-divider"
       />
       {pillars.map(([label, value, pillar], index) => {
         const column = index % 2;
         const row = Math.floor(index / 2);
-        const x = column === 0 ? 38 : 198;
+        const x = column === 0 ? 46 : CELL_WIDTH + 30;
         const y = 148 + row * 34;
         return (
           <g className="compact-center-pillar-cell" key={label}>
-            <line x1={x} y1={y + 10} x2={x + 124} y2={y + 10} />
+            <line x1={x} y1={y + 10} x2={x + 154} y2={y + 10} />
             <text x={x} y={y} className="compact-center-label">
               {label}
             </text>
@@ -641,20 +646,20 @@ function Center({
         );
       })}
       <line
-        x1="180"
+        x1={CENTER_WIDTH / 2}
         y1="217"
-        x2="180"
+        x2={CENTER_WIDTH / 2}
         y2="363"
         className="compact-center-divider"
       />
       {details.map(([label, value], index) => {
         const column = index % 2;
         const row = Math.floor(index / 2);
-        const x = column === 0 ? 38 : 198;
+        const x = column === 0 ? 46 : CELL_WIDTH + 30;
         const y = 238 + row * 40;
         return (
           <g className="compact-center-detail-cell" key={label}>
-            <line x1={x} y1={y + 18} x2={x + 124} y2={y + 18} />
+            <line x1={x} y1={y + 18} x2={x + 154} y2={y + 18} />
             <text x={x} y={y} className="compact-center-label">
               {label}
             </text>
