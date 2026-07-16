@@ -97,3 +97,49 @@ export function geometryLabel(geometry: PairGeometry): string {
   if (geometry === "xung") return "xung chiếu";
   return "tam hợp";
 }
+
+export function getBranchElement(branch: string): string {
+  if (["Dần", "Mão"].includes(branch)) return "Mộc";
+  if (["Tỵ", "Ngọ"].includes(branch)) return "Hỏa";
+  if (["Thân", "Dậu"].includes(branch)) return "Kim";
+  if (["Hợi", "Tý"].includes(branch)) return "Thủy";
+  return "Thổ"; // Thìn, Tuất, Sửu, Mùi
+}
+
+export function getElementRelationFactor(subject: string, object: string): number {
+  if (subject === object) return 1.1; // Bình hòa, có trợ lực nhẹ
+  
+  const generates: Record<string, string> = {
+    Kim: "Thủy",
+    Thủy: "Mộc",
+    Mộc: "Hỏa",
+    Hỏa: "Thổ",
+    Thổ: "Kim",
+  };
+  
+  const controls: Record<string, string> = {
+    Kim: "Mộc",
+    Mộc: "Thổ",
+    Thổ: "Thủy",
+    Thủy: "Hỏa",
+    Hỏa: "Kim",
+  };
+
+  if (generates[subject] === object) return 1.0; // Sinh xuất: bình thường
+  if (generates[object] === subject) return 1.2; // Sinh nhập: rất tốt
+  
+  if (controls[subject] === object) return 0.9; // Khắc xuất: vất vả
+  if (controls[object] === subject) return 0.7; // Khắc nhập: xấu
+
+  return 1.0;
+}
+
+export function extractBaseElement(napAm: string): string {
+  if (!napAm) return "Thổ"; // Default
+  if (napAm.includes("Kim")) return "Kim";
+  if (napAm.includes("Mộc")) return "Mộc";
+  if (napAm.includes("Thủy")) return "Thủy";
+  if (napAm.includes("Hỏa")) return "Hỏa";
+  if (napAm.includes("Thổ")) return "Thổ";
+  return "Thổ";
+}

@@ -39,7 +39,14 @@ export interface PairHit {
     | "thaiToa"
     | "quangQuy"
     | "cuKy"
-    | "khocHu";
+    | "khocHu"
+    | "thamHoa"
+    | "tamKy"
+    | "xuongKhucCuLiem"
+    | "xuongKhucNhatNguyet"
+    | "tuPhuVuTuong"
+    | "satPhaTham"
+    | "coNguyetDongLuong";
   geometry: PairGeometry;
   factor: number;
   label: string;
@@ -140,6 +147,121 @@ export function detectPairRules(
   const mas = stars.filter((s) => s.base === "Thiên Mã" || s.name.includes("Thiên Mã"));
   const vu = stars.filter((s) => s.base === "Vũ Khúc");
   const tham = stars.filter((s) => s.base === "Tham Lang");
+
+  const hoaLinh = stars.filter((s) => s.base === "Hỏa Tinh" || s.base === "Linh Tinh");
+  const thamHoa = bestPair(tham, hoaLinh, GEO_PREF);
+  if (thamHoa) {
+    const factor = pairGeometryFactor(thamHoa.geometry, weights.sanFangFactor);
+    hits.push({
+      id: "thamHoa",
+      geometry: thamHoa.geometry,
+      factor,
+      label: `Tham Hỏa/Linh ${geometryLabel(thamHoa.geometry)} (${thamHoa.a.palaceName}↔${thamHoa.b.palaceName})`,
+      catPoints: Math.round(weights.thamHoaCat * factor),
+      hungPoints: 0,
+      kyReliefRatio: 0,
+      hungRelief: Math.round(weights.lucSat * weights.thamHoaHungReliefRatio * factor),
+    });
+  }
+
+  const xuongKhuc = stars.filter((s) => s.base === "Văn Xương" || s.base === "Văn Khúc");
+  const cuLiem = stars.filter((s) => s.base === "Cự Môn" || s.base === "Liêm Trinh");
+  const xuongKhucCuLiem = bestPair(xuongKhuc, cuLiem, GEO_PREF);
+  if (xuongKhucCuLiem) {
+    const factor = pairGeometryFactor(xuongKhucCuLiem.geometry, weights.sanFangFactor);
+    hits.push({
+      id: "xuongKhucCuLiem",
+      geometry: xuongKhucCuLiem.geometry,
+      factor,
+      label: `Xương Khúc + Cự/Liêm ${geometryLabel(xuongKhucCuLiem.geometry)} (${xuongKhucCuLiem.a.palaceName}↔${xuongKhucCuLiem.b.palaceName})`,
+      catPoints: 0,
+      hungPoints: Math.round(weights.xuongKhucCuLiemHung * factor),
+      kyReliefRatio: 0,
+      hungRelief: 0,
+    });
+  }
+
+  const nhatNguyet = stars.filter((s) => s.base === "Thái Dương" || s.base === "Thái Âm");
+  const xuongKhucNhatNguyet = bestPair(xuongKhuc, nhatNguyet, GEO_PREF);
+  if (xuongKhucNhatNguyet) {
+    const factor = pairGeometryFactor(xuongKhucNhatNguyet.geometry, weights.sanFangFactor);
+    hits.push({
+      id: "xuongKhucNhatNguyet",
+      geometry: xuongKhucNhatNguyet.geometry,
+      factor,
+      label: `Xương Khúc + Nhật/Nguyệt ${geometryLabel(xuongKhucNhatNguyet.geometry)} (${xuongKhucNhatNguyet.a.palaceName}↔${xuongKhucNhatNguyet.b.palaceName})`,
+      catPoints: Math.round(weights.xuongKhucNhatNguyetCat * factor),
+      hungPoints: 0,
+      kyReliefRatio: 0,
+      hungRelief: 0,
+    });
+  }
+
+  const quyens = stars.filter((s) => s.base === "Hóa Quyền" || (s.star.mutagen && s.star.mutagen.includes("Quyền")));
+  const khoas = stars.filter((s) => s.base === "Hóa Khoa" || (s.star.mutagen && s.star.mutagen.includes("Khoa")));
+  if (locStars.length > 0 && quyens.length > 0 && khoas.length > 0) {
+    hits.push({
+      id: "tamKy",
+      geometry: "tam-hop",
+      factor: 1,
+      label: `Tam Kỳ Gia Hội (Lộc Quyền Khoa)`,
+      catPoints: weights.tamKyCat,
+      hungPoints: 0,
+      kyReliefRatio: 0,
+      hungRelief: 0,
+    });
+  }
+
+  // Tử Phủ Vũ Tướng
+  const tuVi = stars.filter((s) => s.base === "Tử Vi");
+  const thienPhu = stars.filter((s) => s.base === "Thiên Phủ");
+  const thienTuong = stars.filter((s) => s.base === "Thiên Tướng");
+  if (tuVi.length && thienPhu.length && vu.length && thienTuong.length) {
+    hits.push({
+      id: "tuPhuVuTuong",
+      geometry: "tam-hop",
+      factor: 1,
+      label: `Tử Phủ Vũ Tướng hội tụ`,
+      catPoints: weights.tuPhuVuTuongCat,
+      hungPoints: 0,
+      kyReliefRatio: 0,
+      hungRelief: 0,
+    });
+  }
+
+  // Sát Phá Tham
+  const thatSat = stars.filter((s) => s.base === "Thất Sát");
+  const phaQuan = stars.filter((s) => s.base === "Phá Quân");
+  if (thatSat.length && phaQuan.length && tham.length) {
+    hits.push({
+      id: "satPhaTham",
+      geometry: "tam-hop",
+      factor: 1,
+      label: `Sát Phá Tham hội tụ`,
+      catPoints: weights.satPhaThamCat,
+      hungPoints: 0,
+      kyReliefRatio: 0,
+      hungRelief: 0,
+    });
+  }
+
+  // Cơ Nguyệt Đồng Lương
+  const thienCo = stars.filter((s) => s.base === "Thiên Cơ");
+  const thaiAm = stars.filter((s) => s.base === "Thái Âm");
+  const thienDong = stars.filter((s) => s.base === "Thiên Đồng");
+  const thienLuong = stars.filter((s) => s.base === "Thiên Lương");
+  if (thienCo.length && thaiAm.length && thienDong.length && thienLuong.length) {
+    hits.push({
+      id: "coNguyetDongLuong",
+      geometry: "tam-hop",
+      factor: 1,
+      label: `Cơ Nguyệt Đồng Lương hội tụ`,
+      catPoints: weights.coNguyetDongLuongCat,
+      hungPoints: 0,
+      kyReliefRatio: 0,
+      hungRelief: 0,
+    });
+  }
 
   const longKy = bestPair(longs, kys, GEO_PREF);
   if (longKy) {

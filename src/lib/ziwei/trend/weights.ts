@@ -199,6 +199,32 @@ export interface ScoringWeights {
   cuKyHung: number;
   /** Hung Thiên Khốc ↔ Thiên Hư giao hội (cặp cố định xung chiếu). */
   khocHuHung: number;
+
+  /** Cát Tham Hỏa/Linh tương phùng. */
+  thamHoaCat: number;
+  /** Giảm hung của Hỏa/Linh khi thành cách Tham Hỏa/Linh. */
+  thamHoaHungReliefRatio: number;
+
+  /** Cát Tam Kỳ Gia Hội (Lộc Quyền Khoa). */
+  tamKyCat: number;
+
+  /** Hung Xương Khúc + Cự Môn / Liêm Trinh. */
+  xuongKhucCuLiemHung: number;
+
+  /** Cát Xương Khúc + Thái Dương / Thái Âm. */
+  xuongKhucNhatNguyetCat: number;
+
+  /** Bonus khi sao động ở Tứ Mã (Dần, Thân, Tỵ, Hợi). */
+  majorDongMaBonus: number;
+  /** Bonus khi tài tinh ở Tứ Mộ (Thìn, Tuất, Sửu, Mùi). */
+  majorTaiMoBonus: number;
+
+  /** Cát Tử Phủ Vũ Tướng (Cách cục lớn). */
+  tuPhuVuTuongCat: number;
+  /** Cát Sát Phá Tham. */
+  satPhaThamCat: number;
+  /** Cát Cơ Nguyệt Đồng Lương. */
+  coNguyetDongLuongCat: number;
 }
 
 /**
@@ -292,4 +318,20 @@ export const SCORING_WEIGHTS: ScoringWeights = {
 
   cuKyHung: 12,
   khocHuHung: 6,
+
+  thamHoaCat: 16,
+  thamHoaHungReliefRatio: 0.6,
+
+  tamKyCat: 18,
+
+  xuongKhucCuLiemHung: 12,
+
+  xuongKhucNhatNguyetCat: 12,
+
+  majorDongMaBonus: 5,
+  majorTaiMoBonus: 8,
+
+  tuPhuVuTuongCat: 20,
+  satPhaThamCat: 18,
+  coNguyetDongLuongCat: 16,
 };

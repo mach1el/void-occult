@@ -12,6 +12,9 @@ import {
   TAM_HOP,
   XUNG_CHIEU,
   zoneLabel,
+  extractBaseElement,
+  getBranchElement,
+  getElementRelationFactor,
 } from "./zones";
 import { detectPairRules } from "./pairs";
 import {
@@ -249,13 +252,23 @@ export function scoreFortuneFrame(
   const loose: LooseCandidate[] = [];
   const voids = voidBranches(chart);
   const frame = sanFangSiZheng(chart, focus);
+
+  let focusIsVCD = false;
+  const focusRow = frame.find((f) => f.role === "focus");
+  if (focusRow) {
+    const focusMajors = (focusRow.palace.stars ?? []).filter(
+      (s) => s.layer === "major" && (includeAnnual || !isAnnualStar(s)),
+    );
+    focusIsVCD = focusMajors.length === 0;
+  }
+
   let kyInFrame = false;
   let satInFrame = 0;
   let satOnFocus = 0;
   let kyHungPoints = 0;
 
   for (const { palace, role } of frame) {
-    const factor = roleFactor(role, weights);
+    const baseFactor = roleFactor(role, weights);
     const where = roleLabel(role, palace);
     const stars = (palace.stars ?? []).filter(
       (star) => includeAnnual || !isAnnualStar(star),
@@ -270,27 +283,27 @@ export function scoreFortuneFrame(
           const z = tuHoaCatZoneFactor(palace.branch, weights);
           cat.push({
             source: star.name,
-            points: scalePoints(weights.hoaLoc, factor * z),
+            points: scalePoints(weights.hoaLoc, baseFactor * z),
             reason: `${star.name} tại ${where}${zoneNote(palace.branch)}`,
           });
         } else if (kind === "Quyền") {
           const z = tuHoaCatZoneFactor(palace.branch, weights);
           cat.push({
             source: star.name,
-            points: scalePoints(weights.hoaQuyen, factor * z),
+            points: scalePoints(weights.hoaQuyen, baseFactor * z),
             reason: `${star.name} tại ${where}${zoneNote(palace.branch)}`,
           });
         } else if (kind === "Khoa") {
           const z = tuHoaCatZoneFactor(palace.branch, weights);
           cat.push({
             source: star.name,
-            points: scalePoints(weights.hoaKhoa, factor * z),
+            points: scalePoints(weights.hoaKhoa, baseFactor * z),
             reason: `${star.name} tại ${where}${zoneNote(palace.branch)}`,
           });
         } else if (kind === "Kỵ") {
           kyInFrame = true;
           const z = hoaKyZoneFactor(palace.branch, weights);
-          const points = scalePoints(weights.hoaKy, factor * z);
+          const points = scalePoints(weights.hoaKy, baseFactor * z);
           kyHungPoints += points;
           hung.push({
             source: star.name,
@@ -303,7 +316,7 @@ export function scoreFortuneFrame(
       if (CAT_SET.has(base)) {
         cat.push({
           source: star.name,
-          points: scalePoints(weights.lucCat, factor),
+          points: scalePoints(weights.lucCat, baseFactor),
           reason: `Cát tinh ${star.name} hội ${where}`,
         });
       }
@@ -311,7 +324,7 @@ export function scoreFortuneFrame(
       if (base === "Thanh Long" && isMoBranch(palace.branch)) {
         cat.push({
           source: star.name,
-          points: scalePoints(weights.thanhLongMoBonus, factor),
+          points: scalePoints(weights.thanhLongMoBonus, baseFactor),
           reason: `Thanh Long đắc ${zoneLabel("mo")} tại ${where}`,
         });
       }
@@ -323,7 +336,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.bacSiCat, factor),
+            points: scalePoints(weights.bacSiCat, baseFactor),
             reason: `Bác Sĩ cát ${star.name} tại ${where}`,
           },
         });
@@ -336,7 +349,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.phiLiemHung, factor),
+            points: scalePoints(weights.phiLiemHung, baseFactor),
             reason: `Phi Liêm (động/thị phi) tại ${where}`,
           },
         });
@@ -349,7 +362,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.bacSiHung, factor),
+            points: scalePoints(weights.bacSiHung, baseFactor),
             reason: `Bác Sĩ hung ${star.name} tại ${where}`,
           },
         });
@@ -364,14 +377,14 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.songHaoHung, factor * z),
+            points: scalePoints(weights.songHaoHung, baseFactor * z),
             reason: `Song Hao ${star.name} tại ${where}${dac ? " · đắc (giảm hung)" : ""}`,
           },
         });
         if (dac) {
           cat.push({
             source: star.name,
-            points: scalePoints(weights.songHaoDacCat, factor),
+            points: scalePoints(weights.songHaoDacCat, baseFactor),
             reason: `Song Hao đắc ${palace.branch} (Chúng Thủy / luân chuyển) tại ${where}`,
           });
         }
@@ -384,7 +397,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.daoHongHyCat, factor),
+            points: scalePoints(weights.daoHongHyCat, baseFactor),
             reason: `Đào/Hồng/Hỷ ${star.name} tại ${where}`,
           },
         });
@@ -397,7 +410,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.coQuaHung, factor),
+            points: scalePoints(weights.coQuaHung, baseFactor),
             reason: `Cô Quả ${star.name} tại ${where}${zoneNote(palace.branch)}`,
           },
         });
@@ -410,7 +423,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.ducCat, factor),
+            points: scalePoints(weights.ducCat, baseFactor),
             reason: `Đức tinh ${star.name} tại ${where}`,
           },
         });
@@ -424,7 +437,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.hinhRieuHung, factor * z),
+            points: scalePoints(weights.hinhRieuHung, baseFactor * z),
             reason: `Hình/Riêu ${star.name} tại ${where}${zoneNote(palace.branch)}`,
           },
         });
@@ -438,7 +451,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.hoaCaiCat, factor * z),
+            points: scalePoints(weights.hoaCaiCat, baseFactor * z),
             reason: `Hoa Cái tại ${where}${zoneNote(palace.branch)}`,
           },
         });
@@ -451,7 +464,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.phaToaiHung, factor),
+            points: scalePoints(weights.phaToaiHung, baseFactor),
             reason: `Phá/La Võng/Kiếp ${star.name} tại ${where}`,
           },
         });
@@ -464,7 +477,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.thaiToaCat, factor),
+            points: scalePoints(weights.thaiToaCat, baseFactor),
             reason: `Thai Tọa ${star.name} tại ${where}`,
           },
         });
@@ -477,7 +490,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.quangQuyCat, factor),
+            points: scalePoints(weights.quangQuyCat, baseFactor),
             reason: `Quang Quý ${star.name} tại ${where}`,
           },
         });
@@ -490,7 +503,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.phuCaoCat, factor),
+            points: scalePoints(weights.phuCaoCat, baseFactor),
             reason: `Phụ Cáo ${star.name} tại ${where}`,
           },
         });
@@ -503,7 +516,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.quanAnCat, factor),
+            points: scalePoints(weights.quanAnCat, baseFactor),
             reason: `Quan Ấn/Phù/Trù ${star.name} tại ${where}`,
           },
         });
@@ -516,7 +529,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.giaiCat, factor),
+            points: scalePoints(weights.giaiCat, baseFactor),
             reason: `Giải tinh ${star.name} tại ${where}`,
           },
         });
@@ -529,7 +542,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.longPhuongCat, factor),
+            points: scalePoints(weights.longPhuongCat, baseFactor),
             reason: `Long Phượng ${star.name} tại ${where}`,
           },
         });
@@ -542,7 +555,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.thienTaiThoCat, factor),
+            points: scalePoints(weights.thienTaiThoCat, baseFactor),
             reason: `${star.name} tại ${where}`,
           },
         });
@@ -555,7 +568,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.luuHaHung, factor),
+            points: scalePoints(weights.luuHaHung, baseFactor),
             reason: `Lưu Hà tại ${where}`,
           },
         });
@@ -568,7 +581,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.dauQuanHung, factor),
+            points: scalePoints(weights.dauQuanHung, baseFactor),
             reason: `Đẩu Quân tại ${where}`,
           },
         });
@@ -581,7 +594,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.thienSuHung, factor),
+            points: scalePoints(weights.thienSuHung, baseFactor),
             reason: `Thiên Sứ (bệnh tật) tại ${where}`,
           },
         });
@@ -594,7 +607,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.thienThuongHung, factor),
+            points: scalePoints(weights.thienThuongHung, baseFactor),
             reason: `Thiên Thương (tổn hại) tại ${where}`,
           },
         });
@@ -607,7 +620,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.taiTuePressHung, factor),
+            points: scalePoints(weights.taiTuePressHung, baseFactor),
             reason: `Thái Tuế áp ${star.name} tại ${where}`,
           },
         });
@@ -620,7 +633,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.taiTueSoftCat, factor),
+            points: scalePoints(weights.taiTueSoftCat, baseFactor),
             reason: `Thái Tuế mềm ${star.name} tại ${where}`,
           },
         });
@@ -632,7 +645,7 @@ export function scoreFortuneFrame(
         const z = satZoneFactor(base, palace.branch, weights);
         hung.push({
           source: star.name,
-          points: scalePoints(weights.lucSat, factor * z),
+          points: scalePoints(weights.lucSat, baseFactor * z),
           reason: `Sát tinh ${star.name} hội ${where}${zoneNote(palace.branch)}`,
         });
       }
@@ -645,24 +658,54 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: star.name,
-            points: scalePoints(weights.taiTueHung, factor * z),
+            points: scalePoints(weights.taiTueHung, baseFactor * z),
             reason: `Thái Tuế hung ${star.name} tại ${where}${zoneNote(palace.branch)}`,
           },
         });
       }
 
       if (star.layer === "major") {
+        let majorFactor = baseFactor;
+        let brightnessReason = `Chính tinh ${star.name} ${star.brightness} tại ${where}`;
+
+        if (focusIsVCD && role === "xung") {
+          majorFactor = 0.8;
+          brightnessReason = `Mượn chính tinh ${star.name} ${star.brightness} từ ${where}`;
+        }
+
+        let basePoints = 0;
+
         if (isStrongBrightness(star.brightness)) {
+          basePoints = scalePoints(weights.majorMieuVuong, majorFactor);
           cat.push({
             source: star.name,
-            points: scalePoints(weights.majorMieuVuong, factor),
-            reason: `Chính tinh ${star.name} ${star.brightness} tại ${where}`,
+            points: basePoints,
+            reason: brightnessReason,
           });
         } else if (star.brightness === "Hãm") {
+          basePoints = scalePoints(weights.majorHam, majorFactor);
           hung.push({
             source: star.name,
-            points: scalePoints(weights.majorHam, factor),
-            reason: `Chính tinh ${star.name} Hãm tại ${where}`,
+            points: basePoints,
+            reason: brightnessReason,
+          });
+        }
+
+        // Tứ Mã: sao động tăng hệ số
+        if (isMaBranch(palace.branch) && ["Thiên Cơ", "Thái Dương", "Phá Quân"].includes(base)) {
+          cat.push({
+            source: star.name,
+            points: scalePoints(weights.majorDongMaBonus, majorFactor),
+            reason: `Sao động ${star.name} đắc lực tại Tứ Mã (${palace.branch})`,
+          });
+        }
+
+        // Tứ Mộ: tài tinh thành khố
+        if (isMoBranch(palace.branch) && ["Vũ Khúc", "Thiên Phủ", "Thái Âm"].includes(base)) {
+          cat.push({
+            source: star.name,
+            points: scalePoints(weights.majorTaiMoBonus, majorFactor),
+            reason: `Tài tinh ${star.name} nhập mộ thành khố tại ${palace.branch}`,
           });
         }
       }
@@ -671,7 +714,7 @@ export function scoreFortuneFrame(
     if (voids.has(palace.branch)) {
       hung.push({
         source: "Tuần/Triệt",
-        points: scalePoints(weights.tuanTriet, factor),
+        points: scalePoints(weights.tuanTriet, baseFactor),
         reason: `Tuần/Triệt án ngữ ${where} (${palace.branch})`,
       });
     }
@@ -685,7 +728,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: `Trường Sinh·${cs}`,
-            points: scalePoints(weights.truongSinhCat, factor),
+            points: scalePoints(weights.truongSinhCat, baseFactor),
             reason: `${cs} tại ${where}`,
           },
         });
@@ -696,7 +739,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: `Trường Sinh·${cs}`,
-            points: scalePoints(weights.mocDucHung, factor),
+            points: scalePoints(weights.mocDucHung, baseFactor),
             reason: `Mộc Dục (bại địa) tại ${where}`,
           },
         });
@@ -707,7 +750,7 @@ export function scoreFortuneFrame(
           isFocus: role === "focus",
           line: {
             source: `Trường Sinh·${cs}`,
-            points: scalePoints(weights.truongSinhSuyHung, factor),
+            points: scalePoints(weights.truongSinhSuyHung, baseFactor),
             reason: `${cs} tại ${where}`,
           },
         });
@@ -830,12 +873,51 @@ export function scoreFortuneFrame(
     }
   }
 
-  const catLayer = finalizeLayer([...cat, ...resolveLoose(loose, "cat")]);
-  const hungLayer = finalizeLayer([...hung, ...resolveLoose(loose, "hung")]);
+  const rawCatLayer = finalizeLayer([...cat, ...resolveLoose(loose, "cat")]);
+  const rawHungLayer = finalizeLayer([...hung, ...resolveLoose(loose, "hung")]);
+
+  let finalCatScore = rawCatLayer.score;
+  let finalHungScore = rawHungLayer.score;
+  const finalCatLines = [...rawCatLayer.lines];
+  const finalHungLines = [...rawHungLayer.lines];
+
+  // Sinh/Khắc Ngũ Hành: Đại Vận vs Mệnh Chủ
+  if (!includeAnnual) { // Chỉ áp dụng Đại Vận, vì Lưu Niên có tính chất khác
+    const menhBaseElement = extractBaseElement(chart.menhElement);
+    const palaceElement = getBranchElement(focus.branch);
+    const elementMultiplier = getElementRelationFactor(palaceElement, menhBaseElement);
+    
+    if (elementMultiplier !== 1.0) {
+      const newCat = Math.round(finalCatScore * elementMultiplier);
+      const catDiff = newCat - finalCatScore;
+      finalCatScore = newCat;
+      
+      const hungMultiplier = 2 - elementMultiplier; // Cát sinh -> Hung giảm
+      const newHung = Math.round(finalHungScore * hungMultiplier);
+      const hungDiff = newHung - finalHungScore;
+      finalHungScore = newHung;
+      
+      if (catDiff !== 0) {
+        finalCatLines.push({
+          source: "Ngũ Hành Vận",
+          points: catDiff,
+          reason: `Ngũ hành Vận (${palaceElement}) tác động Mệnh (${menhBaseElement}): x${elementMultiplier}`,
+        });
+      }
+      if (hungDiff !== 0) {
+        finalHungLines.push({
+          source: "Ngũ Hành Vận",
+          points: hungDiff,
+          reason: `Ngũ hành Vận (${palaceElement}) tác động Mệnh (${menhBaseElement}): x${Math.round(hungMultiplier * 10) / 10}`,
+        });
+      }
+    }
+  }
+
   return {
-    cat: catLayer.score,
-    hung: hungLayer.score,
-    breakdown: { cat: catLayer.lines, hung: hungLayer.lines },
+    cat: finalCatScore,
+    hung: finalHungScore,
+    breakdown: { cat: finalCatLines, hung: finalHungLines },
   };
 }
 
