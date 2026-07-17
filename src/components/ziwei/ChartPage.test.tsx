@@ -210,6 +210,9 @@ describe("ChartPage profile form", () => {
       /\.trend-radars\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/,
     );
     expect(trendChartCss).toMatch(
+      /\.trend-radars\s*\{[^}]*align-items:\s*start/,
+    );
+    expect(trendChartCss).toMatch(
       /@media\s*\(\s*max-width:\s*900px\s*\)[\s\S]*?\.trend-radars\s*\{[^}]*grid-template-columns:\s*1fr/,
     );
   });

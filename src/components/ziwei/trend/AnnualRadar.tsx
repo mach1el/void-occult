@@ -136,7 +136,11 @@ export function AnnualRadar({ chart, school, compact = false }: AnnualRadarProps
                 cx={entry.point.x}
                 cy={entry.point.y}
                 r={3.5}
-                onClick={() => setSelected(entry.item)}
+                onClick={() =>
+                  setSelected((current) =>
+                    current?.axis === entry.item.axis ? null : entry.item,
+                  )
+                }
               />
               <text
                 className="annual-radar-label"
@@ -144,7 +148,11 @@ export function AnnualRadar({ chart, school, compact = false }: AnnualRadarProps
                 y={entry.label.y}
                 textAnchor="middle"
                 dominantBaseline="middle"
-                onClick={() => setSelected(entry.item)}
+                onClick={() =>
+                  setSelected((current) =>
+                    current?.axis === entry.item.axis ? null : entry.item,
+                  )
+                }
               >
                 {entry.item.axis}
                 <tspan x={entry.label.x} dy="1.1em">

@@ -6,6 +6,7 @@ import type {
   ChartStar,
   School,
 } from "@/types/chart";
+import { getNayinByStemBranch } from "@/lib/bazi/nayin";
 import { getEngine, SCHOOL_LABEL } from "@/lib/ziwei/chart";
 import {
   compareNatalBeforeAnnual,
@@ -248,9 +249,7 @@ export function MobileChart({
         <div className="mobile-summary-grid">
           <div>
             <small>Mệnh</small>
-            <b>
-              {data.menhBranch} · {data.menhElement}
-            </b>
+            <b>{getNayinByStemBranch(data.yearStem, data.yearBranch)}</b>
           </div>
           <div>
             <small>Thân</small>

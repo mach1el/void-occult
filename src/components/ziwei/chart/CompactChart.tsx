@@ -8,6 +8,7 @@ import {
   type KeyboardEvent,
   type RefObject,
 } from "react";
+import { getNayinByStemBranch } from "@/lib/bazi/nayin";
 import { getEngine, SCHOOL_LABEL } from "@/lib/ziwei/chart";
 import compactChartCss from "./compact-chart.css?raw";
 import {
@@ -652,7 +653,7 @@ function Center({
   ];
   const details = [
     ["Giới tính", gender === "male" ? "Nam" : "Nữ"],
-    ["Mệnh", `${data.menhBranch} · ${data.menhElement}`],
+    ["Mệnh", getNayinByStemBranch(data.yearStem, data.yearBranch)],
     ["Thân cư", than?.name ?? "—"],
     ["Cục", data.cuc.name],
     ["Mệnh–Cục", data.cucMenhRelation.label],
