@@ -41,12 +41,15 @@ interface Position {
   y: number;
 }
 
-const HEIGHT = 896;
 const CELL_WIDTH = 220;
-const CELL_HEIGHT = 224;
+/** Cao hơn tỉ lệ gần-vuông (224) — mobile không bị rút ngắn khi width:100%. */
+const CELL_HEIGHT = 248;
 const WIDTH = CELL_WIDTH * 4;
+const HEIGHT = CELL_HEIGHT * 4;
 const CENTER_WIDTH = CELL_WIDTH * 2;
 const CENTER_HEIGHT = CELL_HEIGHT * 2;
+const PALACE_FOOTER_Y = CELL_HEIGHT - 9;
+const PALACE_PHI_Y = CELL_HEIGHT - 22;
 const MAX_STARS_PER_COLUMN = 10;
 const BOUNDARY_VOID_STARS = new Set(["Tuần", "Triệt"]);
 
@@ -420,7 +423,7 @@ function Palace({
               )
               .join(" · ")}
           </title>
-          <text x={centerX} y="202" textAnchor="middle">
+          <text x={centerX} y={PALACE_PHI_Y} textAnchor="middle">
             {phiFlows.slice(0, 4).map((flow, index) => (
               <tspan
                 key={`${flow.mutagen}-${flow.starName}`}
@@ -434,16 +437,16 @@ function Palace({
         </g>
       )}
 
-      <text x="9" y="215" className="compact-palace-footer">
+      <text x="9" y={PALACE_FOOTER_Y} className="compact-palace-footer">
         {flowMonth?.branch || ""}
       </text>
-      <text x={centerX} y="215" textAnchor="middle" className="compact-palace-footer">
+      <text x={centerX} y={PALACE_FOOTER_Y} textAnchor="middle" className="compact-palace-footer">
         {palace.changSheng || ""}
       </text>
       {flowMonth && (
         <text
           x={endX}
-          y="215"
+          y={PALACE_FOOTER_Y}
           textAnchor="end"
           className="compact-flow-month"
         >

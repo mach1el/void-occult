@@ -24,7 +24,7 @@
     margin-inline: auto;
     /* Cột 1 = đúng bề rộng fit của lá số (không rộng hơn chart → hết khoảng trống
        trước chat). Chat 1fr giãn full phần còn lại. */
-    --ziwei-chart-fit: min(1280px, calc((100svh - 80px) * 880 / 896));
+    --ziwei-chart-fit: min(1280px, calc((100svh - 80px) * 880 / 992));
     grid-template-columns: minmax(780px, var(--ziwei-chart-fit)) minmax(400px, 1fr);
     grid-template-rows: auto auto;
     gap: 16px;

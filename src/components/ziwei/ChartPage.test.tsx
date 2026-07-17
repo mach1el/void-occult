@@ -96,13 +96,13 @@ describe("ChartPage profile form", () => {
     // Cột 1 = --ziwei-chart-fit; chat 1fr — không khoảng trống giữa chart và chat.
     expect(chartCss).toMatch(/\.wrap\{[^}]*width:min\(2100px,100%\)/);
     expect(chartCss).toMatch(
-      /\.shell\{[^}]*--ziwei-chart-fit:\s*min\(1280px,\s*calc\(\(100svh\s*-\s*80px\)\s*\*\s*880\s*\/\s*896\)\)/,
+      /\.shell\{[^}]*--ziwei-chart-fit:\s*min\(1280px,\s*calc\(\(100svh\s*-\s*80px\)\s*\*\s*880\s*\/\s*992\)\)/,
     );
     expect(chartCss).toMatch(
       /\.shell\{[^}]*grid-template-columns:minmax\(780px,var\(--ziwei-chart-fit\)\)\s+minmax\(400px,1fr\)/,
     );
     expect(compactChartCss).toMatch(
-      /--ziwei-chart-fit:\s*min\(1280px,\s*calc\(\(100svh\s*-\s*80px\)\s*\*\s*880\s*\/\s*896\)\)/,
+      /--ziwei-chart-fit:\s*min\(1280px,\s*calc\(\(100svh\s*-\s*80px\)\s*\*\s*880\s*\/\s*992\)\)/,
     );
     expect(compactChartCss).toMatch(
       /grid-template-columns:\s*minmax\(780px,\s*var\(--ziwei-chart-fit\)\)\s+minmax\(400px,\s*1fr\)/,

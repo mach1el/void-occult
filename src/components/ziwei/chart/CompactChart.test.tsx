@@ -1,6 +1,19 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { expect, test } from "vitest";
 import { starColor } from "./CompactChart";
 import type { ChartStar } from "@/types/chart";
+
+const compactChartSource = readFileSync(
+  resolve(process.cwd(), "src/components/ziwei/chart/CompactChart.tsx"),
+  "utf8",
+);
+
+test("lá số compact giữ ô cung cao 248 (không rút về tỉ lệ gần vuông)", () => {
+  expect(compactChartSource).toMatch(/const CELL_HEIGHT = 248/);
+  expect(compactChartSource).toMatch(/const HEIGHT = CELL_HEIGHT \* 4/);
+  expect(compactChartSource).not.toMatch(/const CELL_HEIGHT = 224/);
+});
 
 test("Vũ Khúc (Kim) và Tử Vi (Thổ) nhận màu ngũ hành khác nhau", () => {
   const kimStar: ChartStar = { name: "Vũ Khúc", layer: "major" };

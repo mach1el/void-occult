@@ -573,7 +573,7 @@ body{
 .shell{
   display:grid;
   /* Cột lá số = --ziwei-chart-fit; chat 1fr giãn sát chart, hết khoảng trống giữa. */
-  --ziwei-chart-fit:min(1280px, calc((100svh - 80px) * 880 / 896));
+  --ziwei-chart-fit:min(1280px, calc((100svh - 80px) * 880 / 992));
   grid-template-columns:minmax(780px,var(--ziwei-chart-fit)) minmax(400px,1fr);
   grid-template-rows:auto auto auto;
   gap:16px;
