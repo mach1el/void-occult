@@ -17,7 +17,7 @@ describe("frame scoring (via getDaiVanTrend)", () => {
     );
   });
 
-  it("Thanh Long xung Hóa Kỵ: có cát cách + giảm hung Kỵ", () => {
+  it("Thanh Long xung Hóa Kỵ: có cát cách, không trừ hung (Cát/Hung độc lập)", () => {
     const menh = palace({
       index: 0,
       branch: "Thìn",
@@ -52,7 +52,127 @@ describe("frame scoring (via getDaiVanTrend)", () => {
       withPair.breakdown.cat.some((line) => line.source.includes("longKy")),
     ).toBe(true);
     expect(
+      withPair.breakdown.hung.every(
+        (line) =>
+          line.points >= 0 ||
+          line.source === "Ngũ Hành Vận" ||
+          line.source === "Chuẩn hóa",
+      ),
+    ).toBe(true);
+    expect(
       withPair.breakdown.hung.some((line) => line.source.includes("hóa giải")),
+    ).toBe(false);
+  });
+
+  it("Sát Phá Tham Hãm + Kỵ → Combo Hung, không cộng Cát SPT", () => {
+    const focus = palace({
+      index: 0,
+      branch: "Mão",
+      name: "Điền Trạch",
+      majorFortune: { order: 1, active: true, start: 35, end: 44 },
+      stars: [
+        { name: "Tham Lang", layer: "major", brightness: "Hãm" },
+        { name: "Bạch Hổ", layer: "harm" },
+      ],
+    });
+    const hop1 = palace({
+      index: 4,
+      branch: "Hợi",
+      name: "Tật Ách",
+      stars: [{ name: "Phá Quân", layer: "major", brightness: "Hãm" }],
+    });
+    const hop2 = palace({
+      index: 8,
+      branch: "Mùi",
+      name: "Quan Lộc",
+      stars: [
+        { name: "Thất Sát", layer: "major", brightness: "Đắc" },
+        { name: "Hóa Kỵ", source: "natal-mutagen", mutagen: "Kỵ" },
+      ],
+    });
+    const point = getDaiVanTrend(
+      makeChart({
+        palaces: [focus, hop1, hop2],
+        menhBranch: "Mùi",
+        menhElement: "Lộ Bàng Thổ",
+        menhIndex: 0,
+        majorFortunePalace: focus,
+        annualPalace: focus,
+        voidMarkers: [],
+        annualMutagens: [],
+        natalMutagens: [],
+      }),
+    )[0]!;
+
+    expect(
+      point.breakdown.hung.some((line) => line.source.includes("satPhaThamHung")),
+    ).toBe(true);
+    expect(
+      point.breakdown.cat.some((line) => line.source.includes("satPhaTham")),
+    ).toBe(false);
+  });
+
+  it("Ngũ hành Cung khắc Mệnh: Cát ×0.75, Hung ×1.25 trên raw rồi clamp", () => {
+    const focus = palace({
+      index: 0,
+      branch: "Mão", // Mộc
+      name: "Điền Trạch",
+      majorFortune: { order: 1, active: true, start: 35, end: 44 },
+      stars: [
+        { name: "Tả Phụ", layer: "helper" },
+        { name: "Tham Lang", layer: "major", brightness: "Hãm" },
+      ],
+    });
+    const point = getDaiVanTrend(
+      makeChart({
+        palaces: [focus],
+        menhBranch: "Mùi",
+        menhElement: "Lộ Bàng Thổ",
+        menhIndex: 0,
+        majorFortunePalace: focus,
+        annualPalace: focus,
+        voidMarkers: [],
+        annualMutagens: [],
+        natalMutagens: [],
+      }),
+    )[0]!;
+
+    const catMul = point.breakdown.cat.find((line) => line.source === "Ngũ Hành Vận");
+    const hungMul = point.breakdown.hung.find((line) => line.source === "Ngũ Hành Vận");
+    expect(catMul?.reason).toContain("×0.75");
+    expect(hungMul?.reason).toContain("×1.25");
+    expect(point.breakdown.hung.every((line) => line.points >= 0 || line.source === "Ngũ Hành Vận" || line.source === "Chuẩn hóa")).toBe(true);
+  });
+
+  it("Chính tinh Đắc vào Cát; Mộ Trường Sinh vào Hung", () => {
+    const focus = palace({
+      index: 0,
+      branch: "Ngọ",
+      name: "Mệnh",
+      isMenh: true,
+      changSheng: "Mộ",
+      majorFortune: { order: 1, active: true, start: 10, end: 19 },
+      stars: [{ name: "Thiên Tướng", layer: "major", brightness: "Đắc" }],
+    });
+    const point = getDaiVanTrend(
+      makeChart({
+        palaces: [focus],
+        menhBranch: "Ngọ",
+        menhIndex: 0,
+        majorFortunePalace: focus,
+        annualPalace: focus,
+        voidMarkers: [],
+        annualMutagens: [],
+        natalMutagens: [],
+      }),
+    )[0]!;
+    expect(
+      point.breakdown.cat.some(
+        (line) => line.source.includes("Thiên Tướng") && line.points > 0,
+      ),
+    ).toBe(true);
+    expect(
+      point.breakdown.hung.some((line) => line.source.includes("Mộ")),
     ).toBe(true);
   });
 

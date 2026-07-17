@@ -31,10 +31,10 @@ describe("detectPairRules", () => {
     expect(longKy).toBeDefined();
     expect(longKy!.geometry).toBe("xung");
     expect(longKy!.catPoints).toBeGreaterThan(0);
-    expect(longKy!.kyReliefRatio).toBeGreaterThan(0);
+    expect(longKy!.kyReliefRatio).toBe(0);
   });
 
-  it("Tham + Hỏa đồng cung không phá cách → cộng Cát, Hỏa được relief", () => {
+  it("Tham + Hỏa đồng cung không phá cách → cộng Cát, không trừ hung", () => {
     const menh = {
       index: 0,
       branch: "Mùi",
@@ -49,11 +49,10 @@ describe("detectPairRules", () => {
     const thamHoa = hits.find((hit) => hit.id === "thamHoa");
     expect(thamHoa).toBeDefined();
     expect(thamHoa!.catPoints).toBeGreaterThan(0);
-    // hungRelief phải ÂM: cách thành thì sát tinh Hỏa/Linh bớt hung.
-    expect(thamHoa!.hungRelief).toBeLessThan(0);
+    expect(thamHoa!.hungRelief).toBe(0);
   });
 
-  it("Tham + Linh tam hợp → có cát × sanFangFactor", () => {
+  it("Tham + Linh tam hợp → có cát × tamHopFactor", () => {
     const menh = {
       index: 0,
       branch: "Mùi",
@@ -77,7 +76,9 @@ describe("detectPairRules", () => {
     );
     const thamHoa = hits.find((hit) => hit.id === "thamHoa");
     expect(thamHoa).toBeDefined();
-    expect(thamHoa!.catPoints).toBe(Math.round(SCORING_WEIGHTS.thamHoaCat * SCORING_WEIGHTS.sanFangFactor));
+    expect(thamHoa!.catPoints).toBe(
+      Math.round(SCORING_WEIGHTS.thamHoaCat * SCORING_WEIGHTS.tamHopFactor),
+    );
   });
 
   it("Tham + Hỏa + Hóa Kỵ trong khung → KHÔNG cộng cát, phá cách", () => {

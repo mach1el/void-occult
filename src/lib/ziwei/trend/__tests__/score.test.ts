@@ -31,17 +31,44 @@ describe("getDaiVanTrend", () => {
     expect(risky!.hung).toBeGreaterThan(current!.hung);
   });
 
-  it("đổi trọng số → điểm đổi", () => {
-    const chart = makeChart();
-    const baseline = getDaiVanTrend(chart);
-    // Đại vận không tính sao lưu niên; Hóa Lộc của makeChart là annual-mutagen
-    // (thuộc lưu niên), nên boost lục cát — Tả Phụ/Văn Khúc thực có trong khung.
-    const boosted: ScoringWeights = {
-      ...SCORING_WEIGHTS,
-      lucCat: SCORING_WEIGHTS.lucCat + 40,
-    };
-    const next = getDaiVanTrend(chart, boosted);
-    expect(next).not.toEqual(baseline);
+  it("nghiệm thu ĐV 35–44 (nữ Tân Mùi 1991): SPT Hãm→Hung, Khắc Nhập, Hung áp đảo Cát", () => {
+    const chart = calculateNamPhai({
+      solarDate: "1991-09-21",
+      birthHour: "Dậu",
+      gender: "female",
+      timezone: "7",
+      annualYear: "2026",
+      flowBase: "luu-nien",
+    });
+    const point = getDaiVanTrend(chart).find((item) => item.label === "35-44");
+    expect(point).toBeDefined();
+
+    expect(
+      point!.breakdown.hung.some((line) => line.source.includes("satPhaThamHung")),
+    ).toBe(true);
+    expect(
+      point!.breakdown.cat.some((line) => line.source === "Cách satPhaTham"),
+    ).toBe(false);
+    expect(
+      point!.breakdown.cat.some(
+        (line) => line.source === "Ngũ Hành Vận" && line.reason.includes("×0.75"),
+      ),
+    ).toBe(true);
+    expect(
+      point!.breakdown.hung.some(
+        (line) => line.source === "Ngũ Hành Vận" && line.reason.includes("×1.25"),
+      ),
+    ).toBe(true);
+    expect(point!.hung).toBeGreaterThan(point!.cat);
+    // Tay thầy ~35/73 (có tính Lưu Hóa Kỵ); Đại vận loại sao lưu → khoảng này.
+    expect(point!.cat).toBeGreaterThanOrEqual(18);
+    expect(point!.cat).toBeLessThanOrEqual(40);
+    expect(point!.hung).toBeGreaterThanOrEqual(65);
+    expect(point!.hung).toBeLessThanOrEqual(90);
+    expect(point!.breakdown.hung.every((line) => {
+      if (line.source === "Ngũ Hành Vận" || line.source === "Chuẩn hóa") return true;
+      return line.points >= 0;
+    })).toBe(true);
   });
 });
 
