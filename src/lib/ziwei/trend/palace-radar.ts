@@ -1,20 +1,19 @@
 /**
  * Engine radar "vận khí" 12 cung — mô hình định lượng v2 (tất định, không LLM).
  *
- *   E_i = T_i × [ Σ(B_k · M_pos,k · M_nh,k) + P_TrườngSinh + P_ĐịaChi + Combo_i ]
+ *   E_i = T_i × [ Σ(B_k · M_pos,k) + P_TrườngSinh + P_ĐịaChi + Combo_i ]
  *   S_i = 0.5·E_i + 0.25·E_(i+6) + 0.125·(E_(i+4) + E_(i+8))
  *
  * Điểm nền B lấy từ `star-scores.ts` (bảng Tier của thầy, đã sửa tên khớp
- * engine). Ngũ hành của sao lấy từ `engine.elementForStar()` — nguồn duy nhất.
+ * engine). KHÔNG còn hệ số Ngũ Hành Bản Mệnh (M_nh) — thầy chốt bỏ
+ * 2026-07-18: trả lại 100% sức mạnh sao theo đúng độ sáng Miếu/Vượng/Đắc/Hãm
+ * và Combo Cách Cục, không chiết khấu theo quan hệ Ngũ Hành sao–Mệnh nữa.
  *
  * ── Khác spec v2, đã báo và thầy chốt ──
  * - **Chuẩn hóa**: dùng thang TUYỆT ĐỐI (mốc cố định, calibrate từ phân phối
  *   thật) thay cho min-max. Min-max là thang tương đối (cung yếu nhất luôn =10
  *   dù lá số toàn cung tốt), không so được giữa các lá số, và chia 0 khi 12
  *   cung bằng điểm.
- * - **M_nh phân cực**: spec cho 1.2/0.9/0.7 áp thẳng lên B *có dấu* → với sát
- *   tinh (B<0) bảng chạy ngược ý ("Sao khắc Mệnh → tăng hung" nhưng ×0.7 lại
- *   BỚT hung). Ở đây tách hệ số theo cực tính của sao.
  *
  * ── Chỗ spec chưa phủ, đã chốt luật tất định ──
  * - B chọn theo độ sáng: Miếu/Vượng/Đắc → cột `dac`; Hãm → `ham`; còn lại →
@@ -27,7 +26,6 @@
  */
 
 import type { ChartData, ChartPalace, ChartStar, School } from "@/types/chart";
-import { getEngine } from "../chart";
 import { baseStarName, isAnnualStar } from "../star-classification";
 import { isMaBranch, isMoBranch, TAM_HOP, XUNG_CHIEU } from "./zones";
 import { findStarScore, type StarScoreRow } from "./star-scores";
@@ -74,19 +72,6 @@ export interface RadarWeights {
    */
   mPosMieu: number;
   mPosVuong: number;
-
-  /**
-   * Ngũ hành (spec Phần II.2) — áp ĐỒNG NHẤT cho mọi sao, KHÔNG phân biệt
-   * cát/hung. Đây là hệ số "sao có phát huy được ở bản mệnh này không", không
-   * phải nhãn tốt/xấu. Chính tinh hãm địa (điểm âm) vẫn là chính tinh — không
-   * được coi như sát tinh.
-   *
-   * Chỉ áp cho Tier 1 (chính tinh) + Tier 2 (phụ tinh cấp 1); Tier 3/4 giữ
-   * nguyên điểm gốc CSV.
-   */
-  mThuan: number;
-  mMenhKhacSao: number;
-  mSaoKhacMenh: number;
 
   /**
    * Tuần/Triệt (Phần V) — phân loại cung theo độ sáng chính tinh:
@@ -150,10 +135,6 @@ export const RADAR_WEIGHTS: RadarWeights = {
   mPosMieu: 1.2,
   mPosVuong: 1.1,
 
-  mThuan: 1.2,
-  mMenhKhacSao: 0.9,
-  mSaoKhacMenh: 0.7,
-
   tNone: 1,
   tStrongMajor: 0.6,
   tBinhMajor: 0.5,
@@ -201,14 +182,6 @@ export const RADAR_WEIGHTS: RadarWeights = {
   normMax: 27,
 };
 
-/** Vòng sinh/khắc ngũ hành — phổ quát, không phụ thuộc phái. */
-const GENERATES: Record<string, string> = {
-  Mộc: "Hỏa", Hỏa: "Thổ", Thổ: "Kim", Kim: "Thủy", Thủy: "Mộc",
-};
-const CONTROLS: Record<string, string> = {
-  Mộc: "Thổ", Thổ: "Thủy", Thủy: "Hỏa", Hỏa: "Kim", Kim: "Mộc",
-};
-
 function brightnessOf(star: ChartStar, branch: string): Brightness | null {
   const base = baseStarName(star.name);
   // Lục sát: bảng hard-code của thầy là nguồn DUY NHẤT (không đọc engine).
@@ -250,33 +223,6 @@ function baseFinal(
 
 function isSatTinh(base: string): boolean {
   return SAT_TINH.has(base);
-}
-
-/**
- * Hệ số Ngũ Hành M_nh — spec Phần II.2, áp ĐỒNG NHẤT cho mọi sao.
- *
- * KHÔNG key theo dấu điểm: chính tinh hãm địa có điểm âm nhưng vẫn là chính
- * tinh (Thái Âm hãm = mất ánh sáng, KHÔNG phải sát tinh) — key theo dấu sẽ
- * cho cùng một quan hệ ngũ hành hai hệ số khác nhau.
- */
-function elementMultiplier(
-  starElement: string,
-  menhElement: string,
-  w: RadarWeights,
-): { m: number; note: string } {
-  if (!starElement || !menhElement) return { m: 1, note: "" };
-  const thuan =
-    starElement === menhElement ||
-    GENERATES[starElement] === menhElement ||
-    GENERATES[menhElement] === starElement;
-  if (thuan) return { m: w.mThuan, note: "thuận mệnh" };
-  if (CONTROLS[menhElement] === starElement) {
-    return { m: w.mMenhKhacSao, note: "mệnh khắc sao (khắc xuất)" };
-  }
-  if (CONTROLS[starElement] === menhElement) {
-    return { m: w.mSaoKhacMenh, note: "sao khắc mệnh (khắc nhập)" };
-  }
-  return { m: 1, note: "" };
 }
 
 function voidTypesByBranch(chart: ChartData): Map<string, Set<string>> {
@@ -472,15 +418,12 @@ interface EnergyResult {
 }
 
 function palaceEnergy(
-  chart: ChartData,
   palace: ChartPalace,
   byBranch: Map<string, ChartPalace>,
   voids: Map<string, Set<string>>,
-  elementForStar: (name: string) => string,
   w: RadarWeights,
 ): EnergyResult {
   const lines: ScoreLine[] = [];
-  const menhElement = chart.menhElement ?? "";
   const branch = palace.branch;
   // Radar = đánh giá tổng thể tĩnh → chỉ sao gốc, bỏ sao lưu niên.
   const own = (palace.stars ?? []).filter((s) => !isAnnualStar(s));
@@ -506,8 +449,8 @@ function palaceEnergy(
     }
   }
 
-  // Σ (B_final · M_nh) — `points` là đóng góp NGUYÊN BẢN vào nội lực cung,
-  // KHÔNG nhân trọng số tam phương tứ chính (dòng rollup lo việc đó).
+  // Σ B_final — `points` là đóng góp NGUYÊN BẢN vào nội lực cung, KHÔNG nhân
+  // trọng số tam phương tứ chính (dòng rollup lo việc đó).
   let sum = 0;
   for (const c of ctx) {
     const row = findStarScore(c.star.name);
@@ -515,22 +458,13 @@ function palaceEnergy(
     const bright = brightnessOf(c.star, branch);
     const { value: b, mPos } = baseFinal(row, bright, w);
     if (b === 0) continue;
-    // Ngũ hành CHỈ áp cho Tier 1 (chính tinh) và Tier 2 (phụ tinh cấp 1);
-    // Tier 3/4 giữ nguyên điểm gốc CSV.
-    const useNguHanh = row.tier <= 2;
-    const element = useNguHanh ? elementForStar(c.base) || "" : "";
-    const { m: mNh, note } = useNguHanh
-      ? elementMultiplier(element, menhElement, w)
-      : { m: 1, note: "" };
-    const value = b * mNh * c.scale;
+    const value = b * c.scale;
     sum += value;
     lines.push({
       source: c.star.name,
       points: round1(value),
       reason:
-        `B${b >= 0 ? "+" : ""}${round1(b)}` +
-        `${bright ? ` ${bright}${mPos !== 1 ? `×${mPos}` : ""}` : ""}` +
-        `${element ? ` · ${element}` : ""}${note ? ` ${note}×${mNh}` : ""}` +
+        `${bright ?? "Bình"}${mPos !== 1 ? ` ×${mPos}` : ""}` +
         `${c.from ? ` (mượn ${c.from}×${w.vcdBorrow})` : ""}`,
     });
   }
@@ -669,9 +603,6 @@ export function getPalaceStrengths(
   options: PalaceRadarOptions = {},
 ): PalaceStrength[] {
   const w = options.weights ?? RADAR_WEIGHTS;
-  const elementForStar =
-    (options.school ? getEngine(options.school)?.elementForStar : undefined) ??
-    (() => "");
 
   const byBranch = new Map<string, ChartPalace>();
   for (const palace of chart.palaces) byBranch.set(palace.branch, palace);
@@ -679,10 +610,7 @@ export function getPalaceStrengths(
 
   const energies = new Map<string, EnergyResult>();
   for (const palace of chart.palaces) {
-    energies.set(
-      palace.branch,
-      palaceEnergy(chart, palace, byBranch, voids, elementForStar, w),
-    );
+    energies.set(palace.branch, palaceEnergy(palace, byBranch, voids, w));
   }
   const energyOf = (branch: string | undefined) =>
     (branch && energies.get(branch)?.energy) || 0;

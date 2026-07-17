@@ -85,7 +85,7 @@ describe("getPalaceStrengths (radar vận khí)", () => {
     const chart = calculateNamPhai(birthInput);
     const boosted: RadarWeights = {
       ...RADAR_WEIGHTS,
-      mThuan: RADAR_WEIGHTS.mThuan + 1,
+      mPosMieu: RADAR_WEIGHTS.mPosMieu + 1,
     };
     expect(
       getPalaceStrengths(chart, { school: "nam-phai", weights: boosted }),
@@ -163,41 +163,14 @@ describe("getPalaceStrengths (radar vận khí)", () => {
     expect(env(mk([], []))).toContain("×0.7");
   });
 
-  it("M_nh đồng nhất: cùng quan hệ ngũ hành → cùng hệ số, dù sao cát hay hãm", () => {
-    // Regression: trước đây hệ số key theo DẤU điểm nên Thái Âm (chính tinh
-    // Thủy, hãm → điểm âm) bị gán "mệnh chế được sát ×0.7", trong khi sao Thủy
-    // điểm dương lại ×0.9 — cùng quan hệ mà ra hai hệ số.
-    // Cả hai đều Tier ≤2 để cùng chịu ngũ hành.
+  it("Không còn hệ số Ngũ Hành Bản Mệnh — điểm sao chỉ theo CSV × độ sáng", () => {
+    // Thầy chốt bỏ M_nh 2026-07-18: Thái Âm hãm (Tier 1) và Hữu Bật (Tier 2)
+    // dù menhElement khắc/sinh gì cũng không còn hệ số ngũ hành trong reason.
     const chart = {
       ...twelvePalaceChart(
         [
-          { name: "Thái Âm", layer: "major", brightness: "Hãm" }, // Tier 1, Thủy, âm
-          { name: "Hữu Bật", layer: "helper" }, // Tier 2, Thủy, dương
-        ],
-        [],
-      ),
-      menhElement: "Thổ", // Thổ khắc Thủy → cả hai đều là "mệnh khắc sao"
-    };
-    const menh = getPalaceStrengths(chart, { school: "nam-phai" }).find(
-      (i) => i.palace === "Mệnh",
-    )!;
-    const thaiAm = menh.detail.find((l) => l.source === "Thái Âm")!;
-    const huuBat = menh.detail.find((l) => l.source === "Hữu Bật")!;
-
-    expect(thaiAm.reason).toContain("mệnh khắc sao (khắc xuất)×0.9");
-    expect(huuBat.reason).toContain("mệnh khắc sao (khắc xuất)×0.9");
-    // Chính tinh hãm KHÔNG được gán nhãn sát tinh.
-    expect(thaiAm.reason).not.toContain("sát");
-  });
-
-  it("Ngũ hành CHỈ áp Tier 1 & 2 — Tier 3/4 giữ nguyên điểm gốc", () => {
-    const chart = {
-      ...twelvePalaceChart(
-        [
-          { name: "Thái Âm", layer: "major", brightness: "Hãm" }, // Tier 1 Thủy
-          { name: "Thiên Việt", layer: "helper" }, // Tier 2 Hỏa
-          { name: "Thiên Hỷ", layer: "romance" }, // Tier 3 Thủy
-          { name: "Long Đức", layer: "helper" }, // Tier 4 Thủy
+          { name: "Thái Âm", layer: "major", brightness: "Hãm" },
+          { name: "Hữu Bật", layer: "helper" },
         ],
         [],
       ),
@@ -206,16 +179,13 @@ describe("getPalaceStrengths (radar vận khí)", () => {
     const menh = getPalaceStrengths(chart, { school: "nam-phai" }).find(
       (i) => i.palace === "Mệnh",
     )!;
-    const line = (n: string) => menh.detail.find((l) => l.source === n)!;
+    const thaiAm = menh.detail.find((l) => l.source === "Thái Âm")!;
+    const huuBat = menh.detail.find((l) => l.source === "Hữu Bật")!;
 
-    // Tier 1 & 2 → CÓ ngũ hành
-    expect(line("Thái Âm").reason).toContain("×0.9");
-    expect(line("Thiên Việt").reason).toContain("×1.2");
-    // Tier 3 & 4 → KHÔNG ngũ hành, giữ nguyên điểm CSV
-    expect(line("Thiên Hỷ").reason).not.toContain("×");
-    expect(line("Thiên Hỷ").points).toBe(2.5);
-    expect(line("Long Đức").reason).not.toContain("×");
-    expect(line("Long Đức").points).toBe(1.5);
+    for (const label of ["thuận mệnh", "mệnh khắc sao", "sao khắc mệnh"]) {
+      expect(thaiAm.reason).not.toContain(label);
+      expect(huuBat.reason).not.toContain(label);
+    }
   });
 
   it("Tuần/Triệt: Miếu→0.6 · Bình→0.5 · Hãm→0.35", () => {
