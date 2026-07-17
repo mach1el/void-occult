@@ -28,7 +28,8 @@ function twelvePalaceChart(
     menhIndex: 0,
     thanIndex: 1,
     annualYear: 2026,
-    smallLimitPalace: palace({ index: 4, branch: "Mão", name: "Quan Lộc" }),
+    smallLimitPalace: null,
+    taiTuePalace: null,
     voidMarkers: [],
     natalMutagens: [],
     annualMutagens: [],
@@ -82,7 +83,7 @@ describe("getAnnualAxisStrengths", () => {
       expect(item.score).toBeGreaterThanOrEqual(0);
       expect(item.score).toBeLessThanOrEqual(100);
       expect(item.year).toBe(2026);
-      expect(item.smallLimitPalace).toBe("Quan Lộc");
+      expect(item.smallLimitPalace).toBeNull();
     }
     spy.mockRestore();
   });
@@ -140,7 +141,8 @@ describe("getAnnualAxisStrengths", () => {
     const taiLoc = getAnnualAxisStrengths(chart, { school: "nam-phai" }).find(
       (a) => a.axis === "Tài lộc",
     )!;
-    expect(taiLoc.score).toBe(62);
+    // Hóa Lộc hành Mộc khắc nhập Mệnh Thổ: +12 ×0.7 = +8.4.
+    expect(taiLoc.score).toBe(58);
     expect(taiLoc.breakdown.some((line) => line.source === "Lưu Hóa Lộc")).toBe(true);
     spy.mockRestore();
   });
@@ -170,8 +172,8 @@ describe("getAnnualAxisStrengths", () => {
     const taiLoc = getAnnualAxisStrengths(chart, { school: "nam-phai" }).find(
       (a) => a.axis === "Tài lộc",
     )!;
-    // base 50 +12 −15 = 47, Trading Guard ×0.6 → 28
-    expect(taiLoc.score).toBe(28);
+    // Lộc chính: +12×0.7; Kỵ đối: −15×0.9×0.5, rồi Trading Guard ×0.6.
+    expect(taiLoc.score).toBe(31);
     expect(taiLoc.breakdown.some((line) => line.source === "Trading Guard")).toBe(true);
     spy.mockRestore();
   });
@@ -235,8 +237,115 @@ describe("getAnnualAxisStrengths", () => {
     const congViec = getAnnualAxisStrengths(chart, { school: "nam-phai" }).find(
       (a) => a.axis === "Công việc",
     )!;
-    expect(congViec.score).toBe(75);
+    // Mã +6, Quyền hành Mộc ×0.7 = +7, Career Boost +15.
+    expect(congViec.score).toBe(78);
     expect(congViec.breakdown.some((line) => line.source === "Career Boost")).toBe(true);
+    spy.mockRestore();
+  });
+
+  it("đối cung chỉ hưởng 0.5 điểm sao Lưu", () => {
+    const spy = mockPalaceScores({
+      Mệnh: 50,
+      "Phụ Mẫu": 50,
+      "Phúc Đức": 50,
+      "Điền Trạch": 50,
+      "Quan Lộc": 50,
+      "Nô Bộc": 50,
+      "Thiên Di": 50,
+      "Tật Ách": 50,
+      "Tài Bạch": 50,
+      "Tử Tức": 50,
+      "Phu Thê": 50,
+      "Huynh Đệ": 50,
+    });
+    const chart = twelvePalaceChart(
+      {},
+      {
+        "Phúc Đức": [
+          { name: "Lưu Thiên Khôi", layer: "helper", source: "annual" },
+        ],
+      },
+    );
+    const taiLoc = getAnnualAxisStrengths(chart, { school: "nam-phai" }).find(
+      (axis) => axis.axis === "Tài lộc",
+    )!;
+    expect(taiLoc.score).toBe(53);
+    expect(
+      taiLoc.breakdown.find((line) => line.source === "Lưu Thiên Khôi"),
+    ).toMatchObject({ points: 3 });
+    spy.mockRestore();
+  });
+
+  it("kích hoạt Tiểu Hạn/Lưu Thái Tuế +10 tại cung chính, +5 ở tam hợp", () => {
+    const spy = mockPalaceScores({
+      Mệnh: 50,
+      "Phụ Mẫu": 50,
+      "Phúc Đức": 50,
+      "Điền Trạch": 50,
+      "Quan Lộc": 50,
+      "Nô Bộc": 50,
+      "Thiên Di": 50,
+      "Tật Ách": 50,
+      "Tài Bạch": 50,
+      "Tử Tức": 50,
+      "Phu Thê": 50,
+      "Huynh Đệ": 50,
+    });
+    const exact = twelvePalaceChart({
+      smallLimitPalace: palace({ index: 8, branch: "Hợi", name: "Tài Bạch" }),
+    });
+    const tamHop = twelvePalaceChart({
+      taiTuePalace: palace({ index: 4, branch: "Mão", name: "Quan Lộc" }),
+    });
+    expect(
+      getAnnualAxisStrengths(exact, { school: "nam-phai" }).find(
+        (axis) => axis.axis === "Tài lộc",
+      )?.score,
+    ).toBe(60);
+    expect(
+      getAnnualAxisStrengths(tamHop, { school: "nam-phai" }).find(
+        (axis) => axis.axis === "Tài lộc",
+      )?.score,
+    ).toBe(55);
+    spy.mockRestore();
+  });
+
+  it("Đào Hoa Sát đổi điểm Đào/Hồng/Hỷ từ +8 thành −10", () => {
+    const spy = mockPalaceScores({
+      Mệnh: 50,
+      "Phụ Mẫu": 50,
+      "Phúc Đức": 50,
+      "Điền Trạch": 50,
+      "Quan Lộc": 50,
+      "Nô Bộc": 50,
+      "Thiên Di": 50,
+      "Tật Ách": 50,
+      "Tài Bạch": 50,
+      "Tử Tức": 50,
+      "Phu Thê": 50,
+      "Huynh Đệ": 50,
+    });
+    const chart = twelvePalaceChart(
+      {},
+      {
+        "Phu Thê": [
+          { name: "Lưu Đào Hoa", layer: "romance", source: "annual" },
+          {
+            name: "Lưu Hóa Kỵ",
+            layer: "soft",
+            source: "annual-mutagen",
+            mutagen: "Kỵ",
+          },
+        ],
+      },
+    );
+    const love = getAnnualAxisStrengths(chart, { school: "nam-phai" }).find(
+      (axis) => axis.axis === "Tình duyên",
+    )!;
+    expect(love.score).toBe(27);
+    expect(
+      love.breakdown.some((line) => line.source === "Đào Hoa Sát"),
+    ).toBe(true);
     spy.mockRestore();
   });
 

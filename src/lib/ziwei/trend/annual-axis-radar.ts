@@ -6,10 +6,11 @@
  */
 
 import type { ChartData, ChartPalace, ChartStar, School } from "@/types/chart";
-import { isAnnualStar } from "../star-classification";
+import { getEngine } from "../chart";
+import { baseStarName, isAnnualStar } from "../star-classification";
 import { getPalaceStrengths } from "./palace-radar";
 import type { AnnualAxisName, AnnualAxisStrength, ScoreLine } from "./types";
-import { XUNG_CHIEU } from "./zones";
+import { TAM_HOP, XUNG_CHIEU } from "./zones";
 
 export type { AnnualAxisName, AnnualAxisStrength };
 
@@ -95,19 +96,52 @@ const ANNUAL_STAR_POINTS: Record<string, number> = {
   "Lưu Hóa Kỵ": -15,
   "Lưu Kình Dương": -8,
   "Lưu Đà La": -8,
-  "Lưu Tang Môn": -6,
-  "Lưu Bạch Hổ": -6,
-  "Lưu Thiên Khốc": -6,
-  "Lưu Thiên Hư": -6,
+  "Lưu Tang Môn": -8,
+  "Lưu Bạch Hổ": -8,
+  "Lưu Thiên Khốc": -5,
+  "Lưu Thiên Hư": -5,
+  "Lưu Đại Hao": -5,
+  "Lưu Thiên Khôi": 6,
+  "Lưu Thiên Việt": 6,
+  "Lưu Tả Phù": 6,
+  "Lưu Hữu Bật": 6,
+  "Lưu Đào Hoa": 8,
+  "Lưu Hồng Loan": 8,
+  "Lưu Thiên Hỷ": 8,
 };
 
 const LOC_STARS = new Set(["Lưu Hóa Lộc", "Lưu Lộc Tồn"]);
+const ELEMENTAL_STARS = new Set([
+  "Lưu Lộc Tồn",
+  "Lưu Hóa Lộc",
+  "Lưu Hóa Quyền",
+  "Lưu Hóa Khoa",
+  "Lưu Hóa Kỵ",
+]);
 const KY_KHONG_KIEP_STARS = new Set([
   "Lưu Hóa Kỵ",
   "Lưu Địa Không",
   "Lưu Địa Kiếp",
 ]);
 const QUYEN_LOC_STARS = new Set(["Lưu Hóa Quyền", "Lưu Hóa Lộc", "Lưu Lộc Tồn"]);
+const MA_BROKEN_STARS = new Set(["Lưu Hóa Kỵ", "Lưu Đà La"]);
+const LOVE_STARS = new Set(["Lưu Đào Hoa", "Lưu Hồng Loan", "Lưu Thiên Hỷ"]);
+const LOVE_DRAMA_STARS = new Set(["Lưu Hóa Kỵ", "Lưu Đà La", "Lưu Địa Kiếp"]);
+
+const GENERATES: Record<string, string> = {
+  Mộc: "Hỏa",
+  Hỏa: "Thổ",
+  Thổ: "Kim",
+  Kim: "Thủy",
+  Thủy: "Mộc",
+};
+const CONTROLS: Record<string, string> = {
+  Mộc: "Thổ",
+  Thổ: "Thủy",
+  Thủy: "Hỏa",
+  Hỏa: "Kim",
+  Kim: "Mộc",
+};
 
 export interface AnnualAxisRadarOptions {
   school: School;
@@ -152,25 +186,111 @@ function scoreAnnualStar(star: ChartStar): number | null {
   return ANNUAL_STAR_POINTS[star.name] ?? null;
 }
 
+function elementMultiplier(
+  starElement: string,
+  menhElement: string,
+): { multiplier: number; note: string } {
+  if (!starElement || !menhElement) return { multiplier: 1, note: "" };
+  if (
+    starElement === menhElement ||
+    GENERATES[starElement] === menhElement ||
+    GENERATES[menhElement] === starElement
+  ) {
+    return { multiplier: 1.2, note: "sinh/đồng hành" };
+  }
+  if (CONTROLS[menhElement] === starElement) {
+    return { multiplier: 0.9, note: "mệnh khắc sao" };
+  }
+  if (CONTROLS[starElement] === menhElement) {
+    return { multiplier: 0.7, note: "sao khắc mệnh" };
+  }
+  return { multiplier: 1, note: "" };
+}
+
+function hasVoidMarker(chart: ChartData, palace: ChartPalace): boolean {
+  return (chart.voidMarkers ?? []).some(
+    (marker) =>
+      (marker.type === "Tuần" || marker.type === "Triệt") &&
+      marker.branches.includes(palace.branch),
+  );
+}
+
 function collectDynamicLines(
-  scanPalaces: ChartPalace[],
+  chart: ChartData,
+  mainPalace: ChartPalace,
+  opposite: ChartPalace | undefined,
+  elementForStar: (name: string) => string,
 ): { points: number; lines: ScoreLine[] } {
   const lines: ScoreLine[] = [];
   let points = 0;
-  for (const palace of scanPalaces) {
+  const scanPalaces: Array<{ palace: ChartPalace; geometry: number }> = [
+    { palace: mainPalace, geometry: 1 },
+    ...(opposite ? [{ palace: opposite, geometry: 0.5 }] : []),
+  ];
+  const scanned = scanPalaces.map(({ palace }) => palace);
+  const maHasBadStar = hasAnnualStar(scanned, MA_BROKEN_STARS);
+
+  for (const { palace, geometry } of scanPalaces) {
     for (const star of palace.stars ?? []) {
       if (!isAnnualStar(star)) continue;
-      const delta = scoreAnnualStar(star);
-      if (delta == null) continue;
+      const maBroken = maHasBadStar || hasVoidMarker(chart, palace);
+      const baseDelta =
+        star.name === "Lưu Thiên Mã"
+          ? maBroken
+            ? -6
+            : 6
+          : scoreAnnualStar(star);
+      if (baseDelta == null) continue;
+      const elemental = ELEMENTAL_STARS.has(star.name)
+        ? elementMultiplier(elementForStar(baseStarName(star.name)), chart.menhElement)
+        : { multiplier: 1, note: "" };
+      const delta = baseDelta * elemental.multiplier * geometry;
       points += delta;
       lines.push({
         source: star.name,
-        points: delta,
-        reason: `Sao lưu tại ${palace.name}`,
+        points: Math.round(delta * 10) / 10,
+        reason: [
+          `Sao lưu tại ${palace.name}`,
+          geometry === 0.5 ? "đối cung ×0.5" : "",
+          elemental.note ? `${elemental.note} ×${elemental.multiplier}` : "",
+          star.name === "Lưu Thiên Mã" && maBroken
+            ? "gặp Kỵ/Đà/Tuần/Triệt"
+            : "",
+        ]
+          .filter(Boolean)
+          .join(" · "),
       });
     }
   }
   return { points, lines };
+}
+
+function activationLine(
+  chart: ChartData,
+  main: ChartPalace,
+): ScoreLine | null {
+  const activators = [chart.smallLimitPalace, chart.taiTuePalace].filter(
+    (palace): palace is ChartPalace => palace != null,
+  );
+  const exact = activators.some((palace) => palace.branch === main.branch);
+  const tamHop = activators.some((palace) =>
+    (TAM_HOP[main.branch] ?? []).includes(palace.branch),
+  );
+  if (!exact && !tamHop) return null;
+
+  const mainHasKy = (main.stars ?? []).some(
+    (star) => isAnnualStar(star) && star.name === "Lưu Hóa Kỵ",
+  );
+  const points = exact ? (mainHasKy ? 0 : 10) : 5;
+  return {
+    source: "Kích hoạt năm",
+    points,
+    reason: exact
+      ? mainHasKy
+        ? "Tiểu Hạn/Lưu Thái Tuế trùng cung chính (+10) gặp Lưu Hóa Kỵ (−10)"
+        : "Tiểu Hạn/Lưu Thái Tuế trùng cung chính"
+      : "Tiểu Hạn/Lưu Thái Tuế tam hợp cung chính",
+  };
 }
 
 export function getAnnualAxisStrengths(
@@ -181,15 +301,16 @@ export function getAnnualAxisStrengths(
   const scoreMap = new Map(palaceStrengths.map((item) => [item.palace, item.score]));
   const year = chart.annualYear;
   const smallLimitPalace = chart.smallLimitPalace?.name ?? null;
+  const elementForStar =
+    getEngine(school)?.elementForStar ?? (() => "");
 
   const draft = AXIS_CONFIGS.map((config) => {
     const base = computeBase(config.weights, scoreMap);
     const main = palaceByName(chart, config.mainPalace);
-    const scanPalaces = main
-      ? [main, oppositePalace(chart, main)].filter(
-          (palace): palace is ChartPalace => palace != null,
-        )
-      : [];
+    const opposite = main ? oppositePalace(chart, main) : undefined;
+    const scanPalaces = [main, opposite].filter(
+      (palace): palace is ChartPalace => palace != null,
+    );
 
     const baseLines: ScoreLine[] = config.weights.map(([palace, weight]) => ({
       source: palace,
@@ -197,8 +318,11 @@ export function getAnnualAxisStrengths(
       reason: `Nền ${Math.round(weight * 100)}%`,
     }));
 
-    const dynamic = collectDynamicLines(scanPalaces);
-    const raw = base + dynamic.points;
+    const dynamic = main
+      ? collectDynamicLines(chart, main, opposite, elementForStar)
+      : { points: 0, lines: [] };
+    const activation = main ? activationLine(chart, main) : null;
+    const raw = base + dynamic.points + (activation?.points ?? 0);
 
     return {
       axis: config.axis,
@@ -207,22 +331,21 @@ export function getAnnualAxisStrengths(
       breakdown: [
         ...baseLines,
         ...dynamic.lines,
+        ...(activation ? [activation] : []),
       ],
       config,
+      scanPalaces,
     };
   });
 
   const byAxis = new Map(draft.map((item) => [item.axis, item]));
 
   // Trading guard — trục Tài lộc
-  const taiLocPalaces = (AXIS_CONFIGS.find((c) => c.axis === "Tài lộc")?.domainPalaces ?? [])
-    .map((name) => palaceByName(chart, name))
-    .filter((palace): palace is ChartPalace => palace != null);
   const taiLoc = byAxis.get("Tài lộc");
   if (
     taiLoc &&
-    hasAnnualStar(taiLocPalaces, LOC_STARS) &&
-    hasAnnualStar(taiLocPalaces, KY_KHONG_KIEP_STARS)
+    hasAnnualStar(taiLoc.scanPalaces, LOC_STARS) &&
+    hasAnnualStar(taiLoc.scanPalaces, KY_KHONG_KIEP_STARS)
   ) {
     const before = taiLoc.raw;
     taiLoc.raw *= 0.6;
@@ -234,17 +357,17 @@ export function getAnnualAxisStrengths(
   }
 
   // Family/Health — Tang + Bạch Hổ trên Gia đạo hoặc Tình duyên → Sức khỏe −10
-  const familyPalaces = ["Gia đạo", "Tình duyên"].flatMap((axis) => {
-    const config = AXIS_CONFIGS.find((c) => c.axis === axis);
-    if (!config) return [];
-    return config.domainPalaces
-      .map((name) => palaceByName(chart, name))
-      .filter((palace): palace is ChartPalace => palace != null);
-  });
-  const hasTang = hasAnnualStar(familyPalaces, new Set(["Lưu Tang Môn"]));
-  const hasHo = hasAnnualStar(familyPalaces, new Set(["Lưu Bạch Hổ"]));
+  const familyTriggered = (["Gia đạo", "Tình duyên"] as AnnualAxisName[]).some(
+    (axis) => {
+      const palaces = byAxis.get(axis)?.scanPalaces ?? [];
+      return (
+        hasAnnualStar(palaces, new Set(["Lưu Tang Môn"])) &&
+        hasAnnualStar(palaces, new Set(["Lưu Bạch Hổ"]))
+      );
+    },
+  );
   const sucKhoe = byAxis.get("Sức khỏe");
-  if (sucKhoe && hasTang && hasHo) {
+  if (sucKhoe && familyTriggered) {
     sucKhoe.raw -= 10;
     sucKhoe.breakdown.push({
       source: "Family/Health Guard",
@@ -254,20 +377,41 @@ export function getAnnualAxisStrengths(
   }
 
   // Career boost — Thiên Mã tại Quan Lộc/Thiên Di gặp Quyền/Lộc
-  const careerPalaces = ["Quan Lộc", "Thiên Di"]
-    .map((name) => palaceByName(chart, name))
-    .filter((palace): palace is ChartPalace => palace != null);
   const congViec = byAxis.get("Công việc");
   if (
     congViec &&
-    hasAnnualStar(careerPalaces, new Set(["Lưu Thiên Mã"])) &&
-    hasAnnualStar(careerPalaces, QUYEN_LOC_STARS)
+    hasAnnualStar(congViec.scanPalaces, new Set(["Lưu Thiên Mã"])) &&
+    hasAnnualStar(congViec.scanPalaces, QUYEN_LOC_STARS)
   ) {
     congViec.raw += 15;
     congViec.breakdown.push({
       source: "Career Boost",
       points: 15,
       reason: "Lưu Thiên Mã tại Quan Lộc/Thiên Di gặp Lưu Quyền/Lộc",
+    });
+  }
+
+  // Đào Hoa Sát — điểm +8 của từng Đào/Hồng/Hỷ đổi thành −10.
+  const tinhDuyen = byAxis.get("Tình duyên");
+  if (
+    tinhDuyen &&
+    hasAnnualStar(tinhDuyen.scanPalaces, LOVE_STARS) &&
+    hasAnnualStar(tinhDuyen.scanPalaces, LOVE_DRAMA_STARS)
+  ) {
+    let reversal = 0;
+    for (const palace of tinhDuyen.scanPalaces) {
+      const geometry =
+        palace.name === tinhDuyen.config.mainPalace ? 1 : 0.5;
+      const count = (palace.stars ?? []).filter(
+        (star) => isAnnualStar(star) && LOVE_STARS.has(star.name),
+      ).length;
+      reversal += count * -18 * geometry;
+    }
+    tinhDuyen.raw += reversal;
+    tinhDuyen.breakdown.push({
+      source: "Đào Hoa Sát",
+      points: reversal,
+      reason: "Đào/Hồng/Hỷ gặp Kỵ/Đà/Địa Kiếp: mỗi điểm +8 đổi thành −10",
     });
   }
 

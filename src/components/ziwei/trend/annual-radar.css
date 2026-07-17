@@ -44,6 +44,13 @@
   stroke-width: 2;
 }
 
+.annual-radar-base-polygon {
+  fill: color-mix(in srgb, var(--ash) 5%, transparent);
+  stroke: color-mix(in srgb, var(--ash) 55%, transparent);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
 .annual-radar-dot {
   fill: var(--mutagen-quyen);
   stroke: var(--void);

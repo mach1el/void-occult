@@ -47,6 +47,7 @@ export function AnnualRadar({ chart, school, compact = false }: AnnualRadarProps
       const angle = index * angleStep;
       const rad = ((angle - 90) * Math.PI) / 180;
       const r = radius * (item.score / 100);
+      const baseR = radius * (item.base / 100);
       return {
         item,
         angle,
@@ -57,6 +58,10 @@ export function AnnualRadar({ chart, school, compact = false }: AnnualRadarProps
         point: {
           x: center + r * Math.cos(rad),
           y: center + r * Math.sin(rad),
+        },
+        basePoint: {
+          x: center + baseR * Math.cos(rad),
+          y: center + baseR * Math.sin(rad),
         },
         label: {
           x: center + (radius + 24) * Math.cos(rad),
@@ -69,6 +74,12 @@ export function AnnualRadar({ chart, school, compact = false }: AnnualRadarProps
   const polygon = geometry
     .map((entry, index) => `${index === 0 ? "M" : "L"} ${entry.point.x},${entry.point.y}`)
     .join(" ") + " Z";
+  const basePolygon = geometry
+    .map(
+      (entry, index) =>
+        `${index === 0 ? "M" : "L"} ${entry.basePoint.x},${entry.basePoint.y}`,
+    )
+    .join(" ") + " Z";
 
   const year = chart.annualYear;
   const smallLimit = chart.smallLimitPalace?.name;
@@ -79,8 +90,9 @@ export function AnnualRadar({ chart, school, compact = false }: AnnualRadarProps
         <h3>Vận hạn 6 trục · {year}</h3>
         <p className="annual-radar-disclaimer">
           Điểm nền từ khí vận 12 cung (trọng số domain), cộng sao Lưu trên cung
-          chính và đối cung, có guardrails Trading / Gia đạo–Sức khỏe / Công việc.
-          Thang 0–100 — mô hình tham khảo, không phải định mệnh.
+          chính và đối cung, kích hoạt hạn và guardrails liên trục. Nét đứt là
+          nền gốc; nét sáng là vận khí năm. Thang 0–100 — mô hình tham khảo,
+          không phải định mệnh.
           {smallLimit ? ` Tiểu Hạn: ${smallLimit}.` : ""}
         </p>
       </header>
@@ -114,6 +126,7 @@ export function AnnualRadar({ chart, school, compact = false }: AnnualRadarProps
             />
           ))}
 
+          <path className="annual-radar-base-polygon" d={basePolygon} />
           <path className="annual-radar-polygon" d={polygon} />
 
           {geometry.map((entry) => (
