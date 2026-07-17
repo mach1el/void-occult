@@ -151,6 +151,8 @@ export interface ChartEngine {
   ): { day: number; month: number; year: number; leap: number };
   /** Bảng Tứ Hóa của một Thiên Can (theo phái). Dùng cho lưu nguyệt Tứ Hóa. */
   tuHoaTargets(stem: string): Array<{ mutagen: string; starName: string }>;
+  /** Vị trí Lộc Tồn theo Thiên Can (bảng cố định, dùng chung 2 phái). Dùng cho Nguyệt Lộc Tồn/Kình/Đà. */
+  locTonIndex(stem: string): number;
 }
 
 export interface ChartDto {
