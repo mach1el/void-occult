@@ -1,0 +1,123 @@
+id,star_name,tier,element,default_point,dac_dia_point,ham_dia_point,star_group,is_good,notes
+T1_01,Tử Vi,1,Thổ,2.0,6.0,-5.0,Chính Tinh Cát,2,"spec v1: Đắc+6 (Miếu=x1.2->7.2, Vượng=x1.1->6.6) / Bình+2 / Hãm-5"
+T1_02,Thiên Cơ,1,Mộc,2.0,6.0,-5.0,Chính Tinh Cát,2,"spec v1: Đắc+6 (Miếu=x1.2->7.2, Vượng=x1.1->6.6) / Bình+2 / Hãm-5"
+T1_03,Thái Dương,1,Hỏa,2.0,6.0,-5.0,Chính Tinh Cát,2,"spec v1: Đắc+6 (Miếu=x1.2->7.2, Vượng=x1.1->6.6) / Bình+2 / Hãm-5"
+T1_04,Vũ Khúc,1,Kim,2.0,6.0,-5.0,Chính Tinh Cát,2,"spec v1: Đắc+6 (Miếu=x1.2->7.2, Vượng=x1.1->6.6) / Bình+2 / Hãm-5"
+T1_05,Thiên Đồng,1,Thủy,2.0,6.0,-5.0,Chính Tinh Cát,2,"spec v1: Đắc+6 (Miếu=x1.2->7.2, Vượng=x1.1->6.6) / Bình+2 / Hãm-5"
+T1_06,Thiên Phủ,1,Thổ,2.0,6.0,-5.0,Chính Tinh Cát,2,"spec v1: Đắc+6 (Miếu=x1.2->7.2, Vượng=x1.1->6.6) / Bình+2 / Hãm-5"
+T1_07,Thái Âm,1,Thủy,2.0,6.0,-5.0,Chính Tinh Cát,2,"spec v1: Đắc+6 (Miếu=x1.2->7.2, Vượng=x1.1->6.6) / Bình+2 / Hãm-5"
+T1_08,Thiên Tướng,1,Thủy,2.0,6.0,-5.0,Chính Tinh Cát,2,"spec v1: Đắc+6 (Miếu=x1.2->7.2, Vượng=x1.1->6.6) / Bình+2 / Hãm-5"
+T1_09,Thiên Lương,1,Thổ,2.0,6.0,-5.0,Chính Tinh Cát,2,"spec v1: Đắc+6 (Miếu=x1.2->7.2, Vượng=x1.1->6.6) / Bình+2 / Hãm-5"
+T1_10,Liêm Trinh,1,Hỏa,-2.0,1.0,-8.0,Chính Tinh Sát/Phá,2,"spec v1: Đắc+1 (Miếu=x1.2->1.2, Vượng=x1.1->1.1) / Bình-2 / Hãm-8"
+T1_11,Tham Lang,1,Mộc,-2.0,1.0,-8.0,Chính Tinh Sát/Phá,2,"spec v1: Đắc+1 (Miếu=x1.2->1.2, Vượng=x1.1->1.1) / Bình-2 / Hãm-8"
+T1_12,Cự Môn,1,Thủy,-2.0,1.0,-8.0,Chính Tinh Sát/Phá,2,"spec v1: Đắc+1 (Miếu=x1.2->1.2, Vượng=x1.1->1.1) / Bình-2 / Hãm-8"
+T1_13,Thất Sát,1,Kim,-2.0,1.0,-8.0,Chính Tinh Sát/Phá,2,"spec v1: Đắc+1 (Miếu=x1.2->1.2, Vượng=x1.1->1.1) / Bình-2 / Hãm-8"
+T1_14,Phá Quân,1,Thủy,-2.0,1.0,-8.0,Chính Tinh Sát/Phá,2,"spec v1: Đắc+1 (Miếu=x1.2->1.2, Vượng=x1.1->1.1) / Bình-2 / Hãm-8"
+T2_01,Hóa Lộc,2,Mộc,6.0,6.0,6.0,Tứ Hóa,1,Cực tốt cho Tài Lộc / Công Việc
+T2_02,Hóa Quyền,2,Mộc,5.0,5.0,5.0,Tứ Hóa,1,Tốt cho Công Việc / Quyền lực
+T2_03,Hóa Khoa,2,Thủy,4.0,4.0,4.0,Tứ Hóa,1,Đệ nhất giải cứu tai ương
+T2_04,Hóa Kỵ,2,Thủy,-6.0,-6.0,-6.0,Tứ Hóa,0,Gây thị phi / bế tắc / hao tài
+T2_05,Lộc Tồn,2,Thổ,6.0,6.0,6.0,Lộc Mã,1,Kho lộc thiên ban
+T2_06,Thiên Mã,2,Hỏa,4.0,4.0,-3.0,Lộc Mã,2,Đắc địa hoặc Hợp hành: +4; Gặp Kỵ/Đà/Hãm: -3
+T2_07,Tả Phụ,2,Thổ,4.0,4.0,4.0,Lục Cát Tinh,1,Trợ lực mạnh / tăng quân số
+T2_08,Hữu Bật,2,Thủy,4.0,4.0,4.0,Lục Cát Tinh,1,Trợ lực / quý nhân giúp đỡ
+T2_09,Thiên Khôi,2,Hỏa,4.0,4.0,4.0,Lục Cát Tinh,1,Quý nhân nâng đỡ / đỗ đạt
+T2_10,Thiên Việt,2,Hỏa,4.0,4.0,4.0,Lục Cát Tinh,1,Quý nhân giải cứu / cơ hội lớn
+T2_11,Văn Xương,2,Kim,4.0,4.0,-2.0,Lục Cát Tinh,2,Đắc hoặc Miếu: +4; Hãm địa: -2
+T2_12,Văn Khúc,2,Thủy,4.0,4.0,-2.0,Lục Cát Tinh,2,Đắc hoặc Miếu: +4; Hãm địa: -2
+T2_13,Kình Dương,2,Kim,-6.0,2.0,-6.0,Lục Sát Tinh,2,Đắc địa: +2 (Phát bạo); Hãm: -6 (Mổ xẻ / Hình thương)
+T2_14,Đà La,2,Kim,-6.0,2.0,-6.0,Lục Sát Tinh,2,Đắc địa: +2; Hãm: -6 (Trì trệ / ám hại)
+T2_15,Hỏa Tinh,2,Hỏa,-5.0,2.0,-5.0,Lục Sát Tinh,2,Đắc địa: +2 (Nhanh chóng); Hãm: -5
+T2_16,Linh Tinh,2,Hỏa,-5.0,2.0,-5.0,Lục Sát Tinh,2,Đắc địa: +2; Hãm: -5
+T2_17,Địa Không,2,Hỏa,-6.0,2.0,-6.0,Lục Sát Tinh,2,Đắc địa: +2 (Hoạch phát); Hãm: -6 (Hoạch phá / Mất trắng)
+T2_18,Địa Kiếp,2,Hỏa,-6.0,2.0,-6.0,Lục Sát Tinh,2,Đắc địa: +2; Hãm: -6 (Cướp đoạt / tai họa)
+T3_01,Ân Quang,3,Mộc,2.5,2.5,2.5,Quý Nhân,1,Gia tăng phúc đức / cứu giải
+T3_02,Thiên Quý,3,Thổ,2.5,2.5,2.5,Quý Nhân,1,May mắn / được che chở
+T3_03,Thiên Quan,3,Hỏa,2.5,2.5,2.5,Giải Thần,1,Cứu giải tai ương / bệnh tật
+T3_04,Thiên Phúc,3,Thổ,2.5,2.5,2.5,Giải Thần,1,Phúc lộc / quý nhân ban phước
+T3_05,Giải Thần,3,Mộc,2.0,2.0,2.0,Giải Thần,1,Hóa giải hạn xấu / thị phi
+T3_06,Thiên Thọ,3,Thổ,2.0,2.0,2.0,Giải Thần,1,Tăng tuổi thọ / sức khỏe
+T3_07,Đào Hoa,3,Mộc,3.0,3.0,-2.0,Duyên Đào,2,Đơn thuần: +3; Gặp Sát tinh (Kiếp/Kỵ): -2 (Đào hoa sát)
+T3_08,Hồng Loan,3,Thủy,3.0,3.0,-1.5,Duyên Đào,2,May mắn tình cảm; Gặp Sát tinh: -1.5
+T3_09,Thiên Hỷ,3,Thủy,2.5,2.5,2.5,Duyên Đào,1,Tin vui / hỷ sự / cưới hỏi
+T3_10,Long Trì,3,Thủy,3.0,3.0,3.0,Tứ Linh,1,Thanh lịch / may mắn / nhà cửa đẹp
+T3_11,Phượng Các,3,Thổ,3.0,3.0,3.0,Tứ Linh,1,Thăng tiến / danh giá
+T3_12,Hoa Cái,3,Kim,2.0,2.0,-1.5,Tứ Linh,2,Quyền uy / rực rỡ; Gặp Kỵ/Xấu: -1.5 (Kiêu ngạo / Cô độc)
+T3_13,Quốc Ấn,3,Thổ,2.5,2.5,2.5,Binh Hình,1,Bằng cấp / ấn tín / chức vụ
+T3_14,Tướng Quân,3,Mộc,2.0,2.0,2.0,Binh Hình,1,Uy quyền / lãnh đạo
+T3_15,Thiên Trù,3,Thổ,2.0,2.0,2.0,Tạp Cát,1,Lộc ăn uống / tài lộc nhỏ
+T3_16,Tam Thai,3,Thổ,2.0,2.0,2.0,Tạp Cát,1,Hỗ trợ địa vị / bình an
+T3_17,Bát Tọa,3,Mộc,2.0,2.0,2.0,Tạp Cát,1,Hỗ trợ địa vị / vững chãi
+T3_18,Thái Tuế,3,Hỏa,-2.0,-2.0,-2.0,Vòng Thái Tuế,0,Thị phi / tranh chấp pháp lý / tính chính danh
+T3_19,Tang Môn,3,Mộc,-3.0,-3.0,-3.0,Vòng Thái Tuế,0,Buồn phiền / tang chế / ốm đau
+T3_20,Bạch Hổ,3,Kim,-3.0,2.0,-3.0,Vòng Thái Tuế,2,Hãm: -3 (Máu huyết/tai nạn); Đắc (Dần/Tuất): +2 (Uy dũng)
+T3_21,Tuế Phá,3,Hỏa,-2.5,-2.5,-2.5,Vòng Thái Tuế,0,Phá hoại / chống đối / hao tài
+T3_22,Điếu Khách,3,Hỏa,-2.0,-2.0,-2.0,Vòng Thái Tuế,0,Chuyện buồn / cờ bạc / ăn chơi
+T3_23,Quan Phù,3,Hỏa,-2.0,-2.0,-2.0,Vòng Thái Tuế,0,Kiện tụng / rắc rối giấy tờ
+T3_24,Bác Sĩ,3,Thủy,2.0,2.0,2.0,Vòng Lộc Tồn,1,Thông minh / sức khỏe tốt
+T3_25,Lực Sĩ,3,Hỏa,1.5,1.5,-1.5,Vòng Lộc Tồn,2,Bình thường: +1.5; Gặp Kỵ: -1.5 (Bất mãn / công dã tràng)
+T3_26,Thanh Long,3,Thủy,2.5,2.5,2.5,Vòng Lộc Tồn,1,May mắn / hóa giải (Rất tốt nếu gặp Lưu Hà)
+T3_27,Phục Binh,3,Hỏa,-2.0,-2.0,-2.0,Vòng Lộc Tồn,0,Lừa gạt / tiểu nhân ám hại / mất trộm
+T3_28,Bệnh Phù,3,Thổ,-2.0,-2.0,-2.0,Vòng Lộc Tồn,0,Bệnh tật lặt vặt / suy nhược
+T3_29,Thiên Hình,3,Hỏa,-3.0,2.0,-3.0,Tạp Hung,2,Đắc địa: +2 (Chính trực / luật pháp); Hãm: -3 (Hình tù / mổ xẻ)
+T3_30,Thiên Riêu,3,Thủy,-3.0,1.5,-3.0,Tạp Hung,2,Đắc địa: +1.5 (Nghệ thuật); Hãm: -3 (Chơi bời / sắc dục)
+T3_31,Thiên Không,3,Hỏa,-2.5,-2.5,-2.5,Tạp Hung,0,Khôn ngoan nhưng dễ gãy đổ / hư không
+T3_32,Kiếp Sát,3,Hỏa,-2.5,-2.5,-2.5,Tạp Hung,0,Tai nạn bất ngờ / dao kéo
+T3_33,Đại Hao,3,Hỏa,-2.5,1.5,-2.5,Tạp Hung,2,Hãm: -2.5 (Phá tài lớn); Đắc (Mão/Dậu): +1.5 (Đầu tư lớn)
+T3_34,Tiểu Hao,3,Hỏa,-1.5,1.0,-1.5,Tạp Hung,2,Hãm: -1.5 (Hao lặt vặt); Đắc: +1.0 (Luân chuyển vốn)
+T3_35,Thiên Khốc,3,Thủy,-2.0,1.5,-2.0,Tạp Hung,2,Hãm: -2.0 (Nước mắt / buồn); Đắc (Tý/Ngọ): +1.5 (Vang danh)
+T3_36,Thiên Hư,3,Thủy,-2.0,1.0,-2.0,Tạp Hung,2,Hãm: -2.0 (Hư hại / yếu ớt); Đắc (Tý/Ngọ): +1.0
+T3_37,Cô Thần,3,Thổ,-2.0,-2.0,-2.0,Tạp Hung,0,Cô độc / lạnh lùng (Tốt cho giữ tiền ở Tài/Điền)
+T3_38,Quả Tú,3,Thổ,-2.0,-2.0,-2.0,Tạp Hung,0,Cô đơn / xa cách người thân
+T3_39,Thiên La,3,Thổ,-2.0,-2.0,-2.0,Tạp Hung,0,Lưới trời (Cố định ở cung Thìn) - Gây gò bó
+T3_40,Địa Võng,3,Thổ,-2.0,-2.0,-2.0,Tạp Hung,0,Lưới đất (Cố định ở cung Tuất) - Gây bế tắc
+T4_01,Tràng Sinh,4,Thủy,3.0,3.0,3.0,Vòng Trường Sinh,1,Khởi nguồn sinh lực / dồi dào / thọ trường
+T4_02,Mộc Dục,4,Thủy,-1.0,-1.0,-1.0,Vòng Trường Sinh,0,Đào hoa / thay đổi / dễ sai lầm
+T4_03,Quan Đới,4,Kim,2.0,2.0,2.0,Vòng Trường Sinh,1,Phát triển / chức vị / công danh
+T4_04,Lâm Quan,4,Kim,2.0,2.0,2.0,Vòng Trường Sinh,1,Thịnh vượng / tự lập / tài lộc
+T4_05,Đế Vượng,4,Kim,3.0,3.0,3.0,Vòng Trường Sinh,1,Đỉnh cao năng lượng / cực thịnh
+T4_06,Suy,4,Thủy,-1.0,-1.0,-1.0,Vòng Trường Sinh,0,Bắt đầu đi xuống / mệt mỏi / thoái trào
+T4_07,Bệnh,4,Hỏa,-1.5,-1.5,-1.5,Vòng Trường Sinh,0,Ốm đau / suy nhược / thiếu sinh khí
+T4_08,Tử,4,Hỏa,-2.0,-2.0,-2.0,Vòng Trường Sinh,0,Đóng băng / bế tắc / kết thúc
+T4_09,Mộ,4,Thổ,-1.0,2.0,-1.0,Vòng Trường Sinh,2,Bình thường: -1 (U mê); Ở Tài/Điền/Gặp Lộc: +2 (Kho tàng)
+T4_10,Tuyệt,4,Thổ,-3.0,2.0,-3.0,Vòng Trường Sinh,2,Cực suy: -3; Tuyệt xứ phùng sinh (Gặp Lộc/Cát): +2
+T4_11,Thai,4,Thổ,1.0,1.0,1.0,Vòng Trường Sinh,1,Ý tưởng mới / nuôi dưỡng / ngây thơ
+T4_12,Dưỡng,4,Mộc,1.5,1.5,1.5,Vòng Trường Sinh,1,Chăm sóc / chuẩn bị / bình an
+T4_13,Long Đức,4,Thủy,1.5,1.5,1.5,Vòng Thái Tuế,1,Ôn hòa / hóa giải nhỏ
+T4_14,Phúc Đức,4,Thổ,1.5,1.5,1.5,Vòng Thái Tuế,1,May mắn nhỏ / từ thiện
+T4_15,Thiên Đức,4,Hỏa,1.5,1.5,1.5,Tạp Cát,1,Hóa giải tai ương nhỏ
+T4_16,Nguyệt Đức,4,Hỏa,1.5,1.5,1.5,Tạp Cát,1,Hóa giải tai ương nhỏ
+T4_17,Thiên Tài,4,Thổ,1.0,1.0,-1.0,Tạp Diệu,2,Ngân hàng nghiệp: Che mờ sao sáng / giảm họa sao xấu
+T4_18,Thiên Giải,4,Mộc,1.5,1.5,1.5,Tạp Diệu,1,Hóa giải tai ách nhỏ / bình an
+T4_19,Thiên Thương,4,Thổ,-1.5,-1.5,-1.5,Tạp Hung,0,Cản trở / buồn phiền (Cố định cung Nô Bộc)
+T4_20,Thiên Sứ,4,Thủy,-1.5,-1.5,-1.5,Tạp Hung,0,Bệnh tật / hao tốn (Cố định cung Tật Ách)
+T4_21,Phá Toái,4,Hỏa,-1.5,-1.5,-1.5,Tạp Hung,0,Gãy đổ / ngang bướng / cản trở việc
+T4_22,Đẩu Quân,4,Hỏa,-1.0,-1.0,-1.0,Tạp Hung,0,Khắt khe / cô độc (Tốt cho giữ của ở Tài/Điền)
+T4_23,Âm Sát,4,Thổ,-2.0,-2.0,-2.0,Tạp Hung,0,Tiểu nhân ngầm / khuất tất / tâm linh xấu
+T4_24,Lưu Hà,4,Thủy,-1.5,1.5,-1.5,Tạp Hung,2,Thủy tai / nói nhiều; Gặp Thanh Long: +1.5 (Rồng vùng vẫy)
+T4_25,Trực Phù,4,Thổ,-1.0,-1.0,-1.0,Vòng Thái Tuế,0,Gây trở ngại nhỏ / trì trệ / thiệt thòi
+X_01,Thiếu Dương,3,Hỏa,1.5,1.5,1.5,Vòng Thái Tuế,1,"ĐỀ XUẤT: cát nhẹ, ngang Long Đức"
+X_02,Thiếu Âm,3,Thủy,1.5,1.5,1.5,Vòng Thái Tuế,1,ĐỀ XUẤT: cát nhẹ
+X_03,Tử Phù,3,Hỏa,-2.0,-2.0,-2.0,Vòng Thái Tuế,0,"ĐỀ XUẤT: hung nhẹ, ngang Thái Tuế"
+X_04,Hỷ Thần,3,Hỏa,2.0,2.0,2.0,Vòng Lộc Tồn,1,"ĐỀ XUẤT: cát, ngang Bác Sĩ"
+X_05,Tấu Thư,3,Kim,1.5,1.5,1.5,Vòng Lộc Tồn,1,ĐỀ XUẤT: cát nhẹ
+X_06,Phi Liêm,3,Hỏa,-1.5,-1.5,-1.5,Vòng Lộc Tồn,0,ĐỀ XUẤT: hung nhẹ (động/thị phi)
+X_07,Quan Phủ,3,Hỏa,-2.0,-2.0,-2.0,Vòng Lộc Tồn,0,ĐỀ XUẤT: KHÁC Quan Phù (vòng Thái Tuế)
+X_08,Thai Phụ,3,Kim,2.0,2.0,2.0,Tạp Cát,1,"ĐỀ XUẤT: quý tinh nhẹ, cặp Phong Cáo"
+X_09,Phong Cáo,3,Thổ,2.0,2.0,2.0,Tạp Cát,1,"ĐỀ XUẤT: quý tinh nhẹ, cặp Thai Phụ"
+X_10,Thiên Y,3,Thủy,1.5,1.5,1.5,Giải Thần,1,ĐỀ XUẤT: y/giải
+X_11,Địa Giải,3,Thổ,1.5,1.5,1.5,Giải Thần,1,ĐỀ XUẤT: giải tinh
+X_12,Nguyệt Giải,3,Thổ,1.5,1.5,1.5,Giải Thần,1,ĐỀ XUẤT: giải tinh
+X_13,Thiên Nguyệt,4,Thổ,-1.5,-1.5,-1.5,Tạp Hung,0,ĐỀ XUẤT: bệnh tật
+X_14,Thiên Vu,4,Mộc,1.0,1.0,1.0,Tạp Diệu,1,ĐỀ XUẤT: cát rất nhẹ
+X_15,Đường Phù,3,Mộc,2.0,2.0,2.0,Binh Hình,1,ĐỀ XUẤT: đi cặp Quốc Ấn
+X_16,Tướng Tinh,4,Kim,1.5,1.5,1.5,Vòng Tướng Tinh,1,ĐỀ XUẤT
+X_17,Phàn An,4,Thổ,1.0,1.0,1.0,Vòng Tướng Tinh,1,ĐỀ XUẤT
+X_18,Tuế Dịch,4,Hỏa,1.0,1.0,1.0,Vòng Tướng Tinh,1,ĐỀ XUẤT: dịch mã
+X_19,Tức Thần,4,Thủy,-1.0,-1.0,-1.0,Vòng Tướng Tinh,0,ĐỀ XUẤT
+X_20,Hàm Trì,4,Thủy,-1.5,-1.5,-1.5,Vòng Tướng Tinh,0,ĐỀ XUẤT: đào hoa sát
+X_21,Nguyệt Sát,4,Thổ,-1.0,-1.0,-1.0,Vòng Tướng Tinh,0,ĐỀ XUẤT
+X_22,Vong Thần,4,Thủy,-1.5,-1.5,-1.5,Vòng Tướng Tinh,0,ĐỀ XUẤT
+X_23,Tai Sát,4,Hỏa,-2.0,-2.0,-2.0,Vòng Tướng Tinh,0,ĐỀ XUẤT
+X_24,Thiên Sát,4,Hỏa,-1.5,-1.5,-1.5,Vòng Tướng Tinh,0,ĐỀ XUẤT
+X_25,Chỉ Bối,4,Thổ,-1.0,-1.0,-1.0,Vòng Tướng Tinh,0,ĐỀ XUẤT

@@ -146,3 +146,30 @@
     font-size: 8px;
   }
 }
+
+.palace-radar-subhead {
+  margin: 10px 0 6px;
+  color: var(--muted);
+  font-family: var(--font-chat);
+  font-size: 0.66rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.palace-radar-subhead:first-of-type {
+  margin-top: 2px;
+}
+
+.palace-radar-total {
+  margin: 10px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--line-soft);
+  color: var(--ash);
+  font-family: var(--font-chat);
+  font-size: 0.78rem;
+}
+
+.palace-radar-total strong {
+  color: var(--amber-soft);
+}

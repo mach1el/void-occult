@@ -692,7 +692,9 @@ export function ChartPage() {
 
           <section className="trend-section" aria-label="Xu hướng và độ vững 12 cung">
             <div className="trend-charts">
-              {chartData ? <PalaceRadar chart={chartData} compact /> : null}
+              {chartData ? (
+                <PalaceRadar chart={chartData} school={school} compact />
+              ) : null}
               <TrendChart
                 title="Xu hướng Đại vận"
                 points={daiVanTrend}

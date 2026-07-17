@@ -24,8 +24,16 @@ export interface TrendPoint {
 
 export interface PalaceStrength {
   palace: string;
-  /** Độ vững tĩnh 0–100 — không phải nhãn tốt/xấu vận hạn. */
+  /** Vận khí cung 0–100 (thang tuyệt đối) — mô hình tham khảo, không phải định mệnh. */
   score: number;
+  /** Điểm thô trước chuẩn hóa — đúng bằng tổng `breakdown`. */
+  raw: number;
+  /**
+   * Chi tiết từng sao của BẢN CUNG: đóng góp nguyên bản vào nội lực cung (đã
+   * nhân độ sáng + ngũ hành), CHƯA nhân trọng số tam phương tứ chính.
+   */
+  detail: ScoreLine[];
+  /** Rollup tam phương tứ chính: bản cung · đối cung · tam hợp. Tổng = `raw`. */
   breakdown: ScoreLine[];
 }
 

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import type { ChartData } from "@/types/chart";
+import type { ChartData, School } from "@/types/chart";
 import {
   getPalaceStrengths,
   shortPalaceName,
@@ -10,6 +10,8 @@ import "./palace-radar.css";
 
 interface PalaceRadarProps {
   chart: ChartData;
+  /** Cần cho hệ số Ngũ Hành — bảng hành của sao khác nhau giữa hai phái. */
+  school: School;
   compact?: boolean;
 }
 
@@ -29,8 +31,11 @@ function Breakdown({ lines }: { lines: ScoreLine[] }) {
   );
 }
 
-export function PalaceRadar({ chart, compact = false }: PalaceRadarProps) {
-  const strengths = useMemo(() => getPalaceStrengths(chart), [chart]);
+export function PalaceRadar({ chart, school, compact = false }: PalaceRadarProps) {
+  const strengths = useMemo(
+    () => getPalaceStrengths(chart, { school }),
+    [chart, school],
+  );
   const [selected, setSelected] = useState<PalaceStrength | null>(null);
 
   const size = compact ? 300 : 360;
@@ -74,7 +79,10 @@ export function PalaceRadar({ chart, compact = false }: PalaceRadarProps) {
       <header className="palace-radar-head">
         <h3>Khí vận 12 cung</h3>
         <p className="palace-radar-disclaimer">
-          Độ vững tĩnh của cung — mô hình tham khảo, không phải định mệnh.
+          Vận khí cung theo Tam Phương Tứ Chính (bản cung 50% · xung chiếu 25% ·
+          tam hợp 25%), có hệ số Ngũ Hành với bản mệnh và Tuần/Triệt. Thang
+          tuyệt đối 0–100: ~45 là trung bình, &gt;60 là tốt — mô hình tham khảo,
+          không phải định mệnh.
         </p>
       </header>
 
@@ -83,9 +91,8 @@ export function PalaceRadar({ chart, compact = false }: PalaceRadarProps) {
           className="palace-radar-svg"
           viewBox={`0 0 ${size} ${size}`}
           role="img"
-          aria-label="Radar độ vững 12 cung bản mệnh"
+          aria-label="Radar vận khí 12 cung theo tam phương tứ chính"
         >
-          <title>Radar khí vận 12 cung</title>
           {[0.33, 0.66, 1].map((level) => {
             const ring = geometry
               .map((entry, index) => {
@@ -150,7 +157,7 @@ export function PalaceRadar({ chart, compact = false }: PalaceRadarProps) {
             <div>
               <h4>{selected.palace}</h4>
               <p>
-                Độ vững <strong>{selected.score}</strong>
+                Vận khí <strong>{selected.score}</strong>
                 {selected.palace === menhName ? " · Mệnh" : ""}
                 {selected.palace === thanName ? " · Thân" : ""}
               </p>
@@ -159,7 +166,19 @@ export function PalaceRadar({ chart, compact = false }: PalaceRadarProps) {
               Đóng
             </button>
           </header>
+
+          <h5 className="palace-radar-subhead">
+            Sao trong cung — nội lực gốc (chưa nhân trọng số)
+          </h5>
+          <Breakdown lines={selected.detail} />
+
+          <h5 className="palace-radar-subhead">Tam phương tứ chính</h5>
           <Breakdown lines={selected.breakdown} />
+
+          <p className="palace-radar-total">
+            Điểm thô <strong>{selected.raw}</strong> → chuẩn hóa thang 0–100 ={" "}
+            <strong>{selected.score}</strong>
+          </p>
         </aside>
       )}
     </section>

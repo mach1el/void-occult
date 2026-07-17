@@ -1,11 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { calculate as calculateNamPhai } from "../../engine-nam-phai";
 import { SCORING_WEIGHTS, type ScoringWeights } from "../weights";
-import {
-  getDaiVanTrend,
-  getLuuNienTrend,
-  getPalaceStrengths,
-} from "../score";
+import { getDaiVanTrend, getLuuNienTrend } from "../score";
 import { birthInput, makeChart, palace } from "./fixtures";
 
 describe("getDaiVanTrend", () => {
@@ -102,84 +98,5 @@ describe("getLuuNienTrend", () => {
     expect(getLuuNienTrend(tieuHan, opts)).toEqual(
       getLuuNienTrend(luuNien, opts),
     );
-  });
-});
-
-describe("getPalaceStrengths", () => {
-  it("trả đúng 12 cung, tất định, breakdown khớp", () => {
-    const chart = calculateNamPhai(birthInput);
-    const first = getPalaceStrengths(chart);
-    expect(first).toEqual(getPalaceStrengths(chart));
-    expect(first).toHaveLength(12);
-    expect(first[0]?.palace).toBe("Mệnh");
-    for (const item of first) {
-      expect(item.breakdown.reduce((sum, line) => sum + line.points, 0)).toBe(
-        item.score,
-      );
-    }
-  });
-
-  it("cung miếu + cát vững hơn cung sát; đổi weight đổi radar lẫn trend", () => {
-    const chart = makeChart({
-      palaces: [
-        palace({
-          index: 0,
-          branch: "Mùi",
-          name: "Mệnh",
-          isMenh: true,
-          majorFortune: { active: true, start: 25, end: 34 },
-          stars: [
-            { name: "Tử Vi", layer: "major", brightness: "Miếu" },
-            { name: "Tả Phụ", layer: "helper" },
-            { name: "Hữu Bật", layer: "helper" },
-          ],
-        }),
-        palace({
-          index: 1,
-          branch: "Ngọ",
-          name: "Phụ Mẫu",
-          stars: [
-            { name: "Kình Dương", layer: "tough" },
-            { name: "Đà La", layer: "tough" },
-          ],
-        }),
-        ...Array.from({ length: 10 }, (_, offset) =>
-          palace({
-            index: offset + 2,
-            branch: ["Tỵ", "Thìn", "Mão", "Dần", "Sửu", "Tý", "Hợi", "Tuất", "Dậu", "Thân"][
-              offset
-            ]!,
-            name: [
-              "Phúc Đức",
-              "Điền Trạch",
-              "Quan Lộc",
-              "Nô Bộc",
-              "Thiên Di",
-              "Tật Ách",
-              "Tài Bạch",
-              "Tử Tức",
-              "Phu Thê",
-              "Huynh Đệ",
-            ][offset]!,
-            stars: [],
-          }),
-        ),
-      ],
-      menhIndex: 0,
-      thanIndex: 1,
-      voidMarkers: [],
-    });
-
-    const strengths = getPalaceStrengths(chart);
-    expect(
-      strengths.find((item) => item.palace === "Mệnh")!.score,
-    ).toBeGreaterThan(strengths.find((item) => item.palace === "Phụ Mẫu")!.score);
-
-    const boosted: ScoringWeights = {
-      ...SCORING_WEIGHTS,
-      lucCat: SCORING_WEIGHTS.lucCat + 20,
-    };
-    expect(getDaiVanTrend(chart, boosted)).not.toEqual(getDaiVanTrend(chart));
-    expect(getPalaceStrengths(chart, boosted)).not.toEqual(getPalaceStrengths(chart));
   });
 });

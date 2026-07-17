@@ -13,9 +13,11 @@ export type {
 export {
   getDaiVanTrend,
   getLuuNienTrend,
-  getPalaceStrengths,
   shortPalaceName,
 } from "./score";
+
+export type { PalaceRadarOptions, RadarWeights } from "./palace-radar";
+export { getPalaceStrengths, RADAR_WEIGHTS } from "./palace-radar";
 
 export type { ScoringWeights } from "./weights";
 export { SCORING_WEIGHTS } from "./weights";

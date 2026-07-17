@@ -164,7 +164,11 @@ export function detectPairRules(
         catPoints: Math.round(weights.thamHoaCat * factor),
         hungPoints: 0,
         kyReliefRatio: 0,
-        hungRelief: Math.round(weights.lucSat * weights.thamHoaHungReliefRatio * factor),
+        // hungRelief đẩy thẳng vào lớp Hung nên phải ÂM mới giảm hung (xem
+        // phiHo/binhHinh). Trong Hỏa/Linh Tham sát tinh đổi vai → bớt hung.
+        hungRelief: -Math.round(
+          weights.lucSat * weights.thamHoaHungReliefRatio * factor,
+        ),
       });
     }
   }

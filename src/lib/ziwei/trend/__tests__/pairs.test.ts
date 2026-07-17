@@ -49,7 +49,8 @@ describe("detectPairRules", () => {
     const thamHoa = hits.find((hit) => hit.id === "thamHoa");
     expect(thamHoa).toBeDefined();
     expect(thamHoa!.catPoints).toBeGreaterThan(0);
-    expect(thamHoa!.hungRelief).toBeGreaterThan(0);
+    // hungRelief phải ÂM: cách thành thì sát tinh Hỏa/Linh bớt hung.
+    expect(thamHoa!.hungRelief).toBeLessThan(0);
   });
 
   it("Tham + Linh tam hợp → có cát × sanFangFactor", () => {
