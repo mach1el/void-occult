@@ -92,43 +92,42 @@ describe("ChartPage profile form", () => {
     expect(mobileChartCss).toContain("background: var(--danger-soft)");
   });
 
-  it("keeps desktop chart compact-fit in view (not full-bleed, not collapsed)", () => {
-    // Cột 1 = --ziwei-chart-fit; chat 1fr — không khoảng trống giữa chart và chat.
+  it("keeps desktop page shell and compact chart fit under min-width 1201", () => {
     expect(chartCss).toMatch(/\.wrap\{[^}]*width:min\(2100px,100%\)/);
     expect(chartCss).toMatch(
-      /\.shell\{[^}]*--ziwei-chart-fit:\s*min\(1280px,\s*calc\(\(100svh\s*-\s*80px\)\s*\*\s*880\s*\/\s*992\)\)/,
+      /@media\s*\(\s*min-width:\s*1201px\s*\)[\s\S]*?\.shell\{[\s\S]*?--ziwei-chart-fit:\s*min\(1280px,\s*calc\(\(100svh\s*-\s*80px\)\s*\*\s*880\s*\/\s*992\)\)/,
     );
     expect(chartCss).toMatch(
-      /\.shell\{[^}]*grid-template-columns:minmax\(780px,var\(--ziwei-chart-fit\)\)\s+minmax\(400px,1fr\)/,
+      /@media\s*\(\s*min-width:\s*1201px\s*\)[\s\S]*?grid-template-columns:minmax\(780px,var\(--ziwei-chart-fit\)\)\s+minmax\(400px,1fr\)/,
     );
     expect(compactChartCss).toMatch(
-      /--ziwei-chart-fit:\s*min\(1280px,\s*calc\(\(100svh\s*-\s*80px\)\s*\*\s*880\s*\/\s*992\)\)/,
+      /@media\s*\(\s*min-width:\s*1201px\s*\)[\s\S]*?\.compact-chart-capture\s*\{[^}]*width:\s*100%/,
     );
     expect(compactChartCss).toMatch(
-      /grid-template-columns:\s*minmax\(780px,\s*var\(--ziwei-chart-fit\)\)\s+minmax\(400px,\s*1fr\)/,
+      /@media\s*\(\s*min-width:\s*1201px\s*\)[\s\S]*?\.compact-chart-capture\s*\{[^}]*max-width:\s*none/,
     );
     expect(compactChartCss).toMatch(
-      /\.shell\s+\.compact-chart-capture\s*\{[^}]*width:\s*100%/,
+      /@media\s*\(\s*min-width:\s*1201px\s*\)[\s\S]*?\.compact-chart-svg\s*\{[^}]*width:\s*100%/,
     );
-    expect(compactChartCss).toMatch(
-      /\.shell\s+\.compact-chart-capture\s*\{[^}]*max-width:\s*none/,
-    );
-    // SVG width:100% trong khung (có width/height attribute) — không collapse.
-    expect(compactChartCss).toMatch(
-      /\.shell\s+\.compact-chart-svg\s*\{[^}]*width:\s*100%/,
-    );
-    // Chat cùng hàng phải stretch full chiều cao lá số (không còn layout containment).
     expect(chartCss).not.toMatch(/\.chat-section\{[^}]*\bcontain\s*:/);
     expect(chartCss).toMatch(
-      /\.shell\s*>\s*\.chat-section\s*>\s*\.ai-chat\{[^}]*flex:\s*1\s+1\s+0/,
+      /@media\s*\(\s*min-width:\s*1201px\s*\)[\s\S]*?\.shell\s*>\s*\.chat-section\s*>\s*\.ai-chat\{[^}]*flex:\s*1\s+1\s+0/,
     );
     expect(chartCss).toMatch(
-      /\.shell\s*>\s*\.chat-section\s+\.ai-chat-panel\{[^}]*flex:\s*1\s+1\s+0/,
+      /@media\s*\(\s*min-width:\s*1201px\s*\)[\s\S]*?\.shell\s*>\s*\.chat-section\s+\.ai-chat-panel\{[^}]*flex:\s*1\s+1\s+0/,
     );
   });
 
+  it("keeps stylesheet ownership: page shell only in tu-vi.css", () => {
+    expect(compactChartCss).not.toMatch(/(^|[^\w-])\.shell(\s|>|,|\{)/);
+    expect(compactChartCss).not.toMatch(/\.chat-section/);
+    expect(compactChartCss).not.toMatch(/\.ai-chat-panel/);
+    expect(mobileChartCss).not.toMatch(/(^|[^\w-])\.shell(\s|>|,|\{)/);
+    expect(mobileChartCss).not.toMatch(/\.profile-form/);
+    expect(mobileChartCss).not.toMatch(/\.chart-panel\s+\.panel-head/);
+  });
+
   it("resets chat flex grow on stacked/mobile so chatbox does not collapse", () => {
-    // ≤1200px stack 1 cột: bỏ flex-grow desktop, giữ min-height theo viewport.
     expect(chartCss).toMatch(
       /@media\s*\(\s*max-width:\s*1200px\s*\)[\s\S]*?\.shell\s*>\s*\.chat-section\s*>\s*\.ai-chat[\s\S]*?flex:\s*none/,
     );

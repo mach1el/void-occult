@@ -4,10 +4,6 @@
 }
 
 @media (max-width: 960px) {
-  .chart-panel .panel-head {
-    align-items: flex-start;
-  }
-
   .mobile-chart-switch {
     display: grid;
     grid-template-columns: 1fr 1fr;
