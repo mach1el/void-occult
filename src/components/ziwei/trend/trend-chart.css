@@ -138,28 +138,35 @@
 }
 
 .trend-bar {
-  transition: fill-opacity 0.15s;
+  transition: fill-opacity 0.15s, stroke-opacity 0.15s;
+  stroke-width: 1.25;
+  stroke-linejoin: round;
 }
 
 .trend-bar.is-cat {
   fill: var(--violet);
+  stroke: rgb(176 148 255 / 88%);
 }
 
 .trend-bar.is-hung {
   fill: var(--cyan);
+  stroke: rgb(110 220 230 / 88%);
 }
 
-/* Bên mạnh hơn tại mỗi mốc tô đậm, bên yếu hơn tô nhạt. */
+/* Cùng cột: lớp cao hơn đậm (nền), lớp thấp hơn nhạt + viền rõ để đọc chồng. */
 .trend-bar.is-strong {
-  fill-opacity: 0.95;
+  fill-opacity: 0.92;
+  stroke-opacity: 0.55;
 }
 
 .trend-bar.is-weak {
-  fill-opacity: 0.38;
+  fill-opacity: 0.42;
+  stroke-opacity: 0.95;
 }
 
 .trend-bar.is-selected {
   fill-opacity: 1;
+  stroke-opacity: 1;
   filter: drop-shadow(0 0 4px rgb(214 174 85 / 55%));
 }
 
@@ -332,6 +339,14 @@
   .trend-chart-head {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .trend-bar {
+    stroke-width: 1.1;
+  }
+
+  .trend-bar.is-weak {
+    fill-opacity: 0.48;
   }
 
   .trend-point-panel-body {

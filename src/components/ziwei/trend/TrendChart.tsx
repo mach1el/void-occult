@@ -31,8 +31,8 @@ export function TrendChart({
     const toX = (index: number) => pad.left + index * slot + slot / 2;
     const toY = (value: number) => pad.top + (1 - value / 100) * plotH;
 
-    const barGap = 3;
-    const barW = Math.max(Math.min((slot - barGap - 6) / 2, 22), 3);
+    // Một cột / mốc: Cát và Hung chồng cùng x + width.
+    const barW = Math.max(Math.min(slot - 8, 28), 6);
 
     const labelStep =
       points.length > 16 ? 4 : points.length > 12 ? 2 : 1;
@@ -42,7 +42,6 @@ export function TrendChart({
       toY,
       baselineY: pad.top + plotH,
       slot,
-      barGap,
       barW,
       labelStep,
       currentIndex: points.findIndex((point) => point.isCurrent),
@@ -148,38 +147,55 @@ export function TrendChart({
 
         {points.map((point, index) => {
           const cx = geometry.toX(index);
-          const catX = cx - geometry.barGap / 2 - geometry.barW;
-          const hungX = cx + geometry.barGap / 2;
+          const barX = cx - geometry.barW / 2;
           const catY = geometry.toY(point.cat);
           const hungY = geometry.toY(point.hung);
           const active = selectedLabel === point.label;
-          // Bên mạnh hơn tô đậm, bên yếu hơn tô nhạt — chỉ so sánh khi cả hai
-          // lớp cùng hiển thị (ẩn 1 lớp thì lớp còn lại luôn đậm).
+          // Cùng cột: lớp cao hơn vẽ trước (đậm), lớp thấp hơn vẽ sau (nhạt + viền).
+          // Ẩn 1 lớp → lớp còn lại luôn đậm.
           const bothShown = showCat && showHung;
-          const catStrength = !bothShown || point.cat >= point.hung ? "is-strong" : "is-weak";
-          const hungStrength = !bothShown || point.hung >= point.cat ? "is-strong" : "is-weak";
+          const catStrong = !bothShown || point.cat >= point.hung;
+          const hungStrong = !bothShown || point.hung >= point.cat;
+          type LayerKey = "cat" | "hung";
+          const layers: Array<{
+            key: LayerKey;
+            value: number;
+            y: number;
+            strong: boolean;
+          }> = [];
+          if (showCat) {
+            layers.push({
+              key: "cat",
+              value: point.cat,
+              y: catY,
+              strong: catStrong,
+            });
+          }
+          if (showHung) {
+            layers.push({
+              key: "hung",
+              value: point.hung,
+              y: hungY,
+              strong: hungStrong,
+            });
+          }
+          layers.sort((a, b) => b.value - a.value);
+
           return (
-            <g key={`bar-${point.label}`}>
-              {showCat && (
+            <g key={`bar-${point.label}`} data-slot={point.label}>
+              {layers.map((layer) => (
                 <rect
-                  className={`trend-bar is-cat ${catStrength}${active ? " is-selected" : ""}`}
-                  x={catX}
-                  y={catY}
+                  key={`${point.label}-${layer.key}`}
+                  data-layer={layer.key}
+                  data-strength={layer.strong ? "strong" : "weak"}
+                  className={`trend-bar is-${layer.key} ${layer.strong ? "is-strong" : "is-weak"}${active ? " is-selected" : ""}`}
+                  x={barX}
+                  y={layer.y}
                   width={geometry.barW}
-                  height={Math.max(geometry.baselineY - catY, 0)}
+                  height={Math.max(geometry.baselineY - layer.y, 0)}
                   rx={2}
                 />
-              )}
-              {showHung && (
-                <rect
-                  className={`trend-bar is-hung ${hungStrength}${active ? " is-selected" : ""}`}
-                  x={hungX}
-                  y={hungY}
-                  width={geometry.barW}
-                  height={Math.max(geometry.baselineY - hungY, 0)}
-                  rx={2}
-                />
-              )}
+              ))}
             </g>
           );
         })}
