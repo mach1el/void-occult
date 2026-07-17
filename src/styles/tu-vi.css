@@ -567,7 +567,7 @@ body{
   display:grid;
   gap:16px;
   margin-top:16px;
-  --ziwei-chart-fit:min(1280px, calc((100svh - 80px) * 880 / 1200));
+  --ziwei-chart-fit:min(1280px, calc((100svh - 80px) * 880 / 992));
 }
 .shell > aside{
   position:static;
@@ -859,7 +859,7 @@ body{
     width:100%;
     max-width:2100px;
     margin-inline:auto;
-    --ziwei-chart-fit:min(1280px, calc((100svh - 80px) * 880 / 1200));
+    --ziwei-chart-fit:min(1280px, calc((100svh - 80px) * 880 / 992));
     grid-template-columns:minmax(780px,var(--ziwei-chart-fit)) minmax(400px,1fr);
     grid-template-rows:auto auto;
     gap:16px;

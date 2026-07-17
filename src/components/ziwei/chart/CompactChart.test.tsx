@@ -9,11 +9,13 @@ const compactChartSource = readFileSync(
   "utf8",
 );
 
-test("lá số compact giữ ô cung cao 300 (tỉ lệ portrait trên mobile)", () => {
-  expect(compactChartSource).toMatch(/const CELL_HEIGHT = 300/);
-  expect(compactChartSource).toMatch(/const HEIGHT = CELL_HEIGHT \* 4/);
+test("lá số compact: desktop 248, mobile/stack 300 (tách geometry)", () => {
+  expect(compactChartSource).toMatch(/const DESKTOP_CELL_HEIGHT = 248/);
+  expect(compactChartSource).toMatch(/const MOBILE_CELL_HEIGHT = 300/);
+  expect(compactChartSource).toMatch(/STACKED_LAYOUT_QUERY = "\(max-width: 1200px\)"/);
+  expect(compactChartSource).toMatch(/stacked \? MOBILE_GEOMETRY : DESKTOP_GEOMETRY/);
   expect(compactChartSource).not.toMatch(/const CELL_HEIGHT = 224/);
-  expect(compactChartSource).not.toMatch(/const CELL_HEIGHT = 248/);
+  expect(compactChartSource).not.toMatch(/const CELL_HEIGHT = 300/);
 });
 
 test("Vũ Khúc (Kim) và Tử Vi (Thổ) nhận màu ngũ hành khác nhau", () => {

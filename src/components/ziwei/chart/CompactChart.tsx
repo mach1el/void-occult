@@ -1,4 +1,6 @@
 import {
+  createContext,
+  useContext,
   useEffect,
   useMemo,
   useState,
@@ -41,35 +43,85 @@ interface Position {
   y: number;
 }
 
-const CELL_WIDTH = 220;
-/**
- * Ô cung cao 300 → viewBox 880×1200 (tỉ lệ ~1.36, gần bản cũ 720×992).
- * Với width:100% trên mobile, chiều cao ~ width×1.36 — hết bị “vuông thấp”.
- */
-const CELL_HEIGHT = 300;
-const WIDTH = CELL_WIDTH * 4;
-const HEIGHT = CELL_HEIGHT * 4;
-const CENTER_WIDTH = CELL_WIDTH * 2;
-const CENTER_HEIGHT = CELL_HEIGHT * 2;
-const PALACE_FOOTER_Y = CELL_HEIGHT - 9;
-const PALACE_PHI_Y = CELL_HEIGHT - 22;
+interface ChartGeometry {
+  cellWidth: number;
+  cellHeight: number;
+  width: number;
+  height: number;
+  centerWidth: number;
+  centerHeight: number;
+  palaceFooterY: number;
+  palacePhiY: number;
+  positions: Record<string, Position>;
+}
+
+/** Desktop: rộng 880, cao vừa viewport (992). */
+const DESKTOP_CELL_WIDTH = 220;
+const DESKTOP_CELL_HEIGHT = 248;
+/** Mobile/stack ≤1200: cùng bề rộng, cao hơn để width:100% không bị vuông thấp. */
+const MOBILE_CELL_WIDTH = 220;
+const MOBILE_CELL_HEIGHT = 300;
+/** Khớp page shell tu-vi.css — stack layout. */
+const STACKED_LAYOUT_QUERY = "(max-width: 1200px)";
+
+function createGeometry(cellWidth: number, cellHeight: number): ChartGeometry {
+  return {
+    cellWidth,
+    cellHeight,
+    width: cellWidth * 4,
+    height: cellHeight * 4,
+    centerWidth: cellWidth * 2,
+    centerHeight: cellHeight * 2,
+    palaceFooterY: cellHeight - 9,
+    palacePhiY: cellHeight - 22,
+    positions: {
+      Tỵ: { x: 0, y: 0 },
+      Ngọ: { x: cellWidth, y: 0 },
+      Mùi: { x: cellWidth * 2, y: 0 },
+      Thân: { x: cellWidth * 3, y: 0 },
+      Thìn: { x: 0, y: cellHeight },
+      Dậu: { x: cellWidth * 3, y: cellHeight },
+      Mão: { x: 0, y: cellHeight * 2 },
+      Tuất: { x: cellWidth * 3, y: cellHeight * 2 },
+      Dần: { x: 0, y: cellHeight * 3 },
+      Sửu: { x: cellWidth, y: cellHeight * 3 },
+      Tý: { x: cellWidth * 2, y: cellHeight * 3 },
+      Hợi: { x: cellWidth * 3, y: cellHeight * 3 },
+    },
+  };
+}
+
+const DESKTOP_GEOMETRY = createGeometry(DESKTOP_CELL_WIDTH, DESKTOP_CELL_HEIGHT);
+const MOBILE_GEOMETRY = createGeometry(MOBILE_CELL_WIDTH, MOBILE_CELL_HEIGHT);
+
+const ChartGeometryContext = createContext<ChartGeometry>(DESKTOP_GEOMETRY);
+
+function useChartGeometry(): ChartGeometry {
+  return useContext(ChartGeometryContext);
+}
+
+function useStackedLayout(): boolean {
+  const [stacked, setStacked] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+
+    const media = window.matchMedia(STACKED_LAYOUT_QUERY);
+    const sync = () => setStacked(media.matches);
+    sync();
+    if (media.addEventListener) {
+      media.addEventListener("change", sync);
+      return () => media.removeEventListener("change", sync);
+    }
+    media.addListener(sync);
+    return () => media.removeListener(sync);
+  }, []);
+
+  return stacked;
+}
+
 const MAX_STARS_PER_COLUMN = 10;
 const BOUNDARY_VOID_STARS = new Set(["Tuần", "Triệt"]);
-
-const POSITIONS: Record<string, Position> = {
-  Tỵ: { x: 0, y: 0 },
-  Ngọ: { x: CELL_WIDTH, y: 0 },
-  Mùi: { x: CELL_WIDTH * 2, y: 0 },
-  Thân: { x: CELL_WIDTH * 3, y: 0 },
-  Thìn: { x: 0, y: CELL_HEIGHT },
-  Dậu: { x: CELL_WIDTH * 3, y: CELL_HEIGHT },
-  Mão: { x: 0, y: CELL_HEIGHT * 2 },
-  Tuất: { x: CELL_WIDTH * 3, y: CELL_HEIGHT * 2 },
-  Dần: { x: 0, y: CELL_HEIGHT * 3 },
-  Sửu: { x: CELL_WIDTH, y: CELL_HEIGHT * 3 },
-  Tý: { x: CELL_WIDTH * 2, y: CELL_HEIGHT * 3 },
-  Hợi: { x: CELL_WIDTH * 3, y: CELL_HEIGHT * 3 },
-};
 
 const TAM_HOP: Record<string, string[]> = {
   Dần: ["Dần", "Ngọ", "Tuất"],
@@ -317,7 +369,14 @@ function Palace({
   onTrineLeave(): void;
   onSelect(palace: ChartPalace): void;
 }) {
-  const position = POSITIONS[palace.branch];
+  const {
+    cellWidth,
+    cellHeight,
+    palaceFooterY,
+    palacePhiY,
+    positions,
+  } = useChartGeometry();
+  const position = positions[palace.branch];
   if (!position) return null;
   const stars = visibleStars(palace, showAnnual, showMutagens);
   const columns = [
@@ -328,8 +387,8 @@ function Palace({
   const marks = [palace.isThan ? "Thân" : ""].filter(Boolean);
   const flowMonth = showAnnual ? palace.flowMonths?.[0] : undefined;
   const minorStartY = (stars.major.length > 1 ? (marks.length ? 68 : 56) : (marks.length ? 51 : 40)) + 16;
-  const centerX = CELL_WIDTH / 2;
-  const endX = CELL_WIDTH - 10;
+  const centerX = cellWidth / 2;
+  const endX = cellWidth - 10;
   const maleficX = centerX + 10;
 
   function keyDown(event: KeyboardEvent<SVGGElement>) {
@@ -356,8 +415,8 @@ function Palace({
       onBlur={onTrineLeave}
     >
       <rect
-        width={CELL_WIDTH}
-        height={CELL_HEIGHT}
+        width={cellWidth}
+        height={cellHeight}
         className="compact-palace-bg"
         pointerEvents="all"
       />
@@ -426,7 +485,7 @@ function Palace({
               )
               .join(" · ")}
           </title>
-          <text x={centerX} y={PALACE_PHI_Y} textAnchor="middle">
+          <text x={centerX} y={palacePhiY} textAnchor="middle">
             {phiFlows.slice(0, 4).map((flow, index) => (
               <tspan
                 key={`${flow.mutagen}-${flow.starName}`}
@@ -440,16 +499,16 @@ function Palace({
         </g>
       )}
 
-      <text x="9" y={PALACE_FOOTER_Y} className="compact-palace-footer">
+      <text x="9" y={palaceFooterY} className="compact-palace-footer">
         {flowMonth?.branch || ""}
       </text>
-      <text x={centerX} y={PALACE_FOOTER_Y} textAnchor="middle" className="compact-palace-footer">
+      <text x={centerX} y={palaceFooterY} textAnchor="middle" className="compact-palace-footer">
         {palace.changSheng || ""}
       </text>
       {flowMonth && (
         <text
           x={endX}
-          y={PALACE_FOOTER_Y}
+          y={palaceFooterY}
           textAnchor="end"
           className="compact-flow-month"
         >
@@ -463,27 +522,28 @@ function Palace({
 
 
       <rect
-        width={CELL_WIDTH}
-        height={CELL_HEIGHT}
+        width={cellWidth}
+        height={cellHeight}
         className="compact-palace-hit"
       />
     </g>
   );
 }
 
-function palaceCenter(branch: string): Position | null {
-  const position = POSITIONS[branch];
+function palaceCenter(branch: string, geo: ChartGeometry): Position | null {
+  const position = geo.positions[branch];
   return position
     ? {
-        x: position.x + CELL_WIDTH / 2,
-        y: position.y + CELL_HEIGHT / 2,
+        x: position.x + geo.cellWidth / 2,
+        y: position.y + geo.cellHeight / 2,
       }
     : null;
 }
 
 function RelationLines({ branch }: { branch: string | null }) {
+  const geo = useChartGeometry();
   if (!branch) return null;
-  const center = palaceCenter(branch);
+  const center = palaceCenter(branch, geo);
   if (!center) return null;
 
   const tamHop = (TAM_HOP[branch] ?? []).filter((b) => b !== branch);
@@ -491,7 +551,7 @@ function RelationLines({ branch }: { branch: string | null }) {
 
   const targets = [...tamHop, xungChieu]
     .filter((b): b is string => Boolean(b))
-    .map(palaceCenter)
+    .map((item) => palaceCenter(item, geo))
     .filter((point): point is Position => Boolean(point));
 
   const path = targets
@@ -510,6 +570,7 @@ function RelationLines({ branch }: { branch: string | null }) {
 }
 
 function VoidMarkers({ markers }: { markers: ChartVoidMarker[] }) {
+  const geo = useChartGeometry();
   const occupied = new Map<string, number>();
 
   return (
@@ -517,7 +578,7 @@ function VoidMarkers({ markers }: { markers: ChartVoidMarker[] }) {
       {markers.map((marker) => {
         const points = marker.branches
           .slice(0, 2)
-          .map(palaceCenter)
+          .map((branch) => palaceCenter(branch, geo))
           .filter((point): point is Position => Boolean(point));
         if (points.length !== 2) return null;
         const baseX = (points[0]!.x + points[1]!.x) / 2;
@@ -526,9 +587,9 @@ function VoidMarkers({ markers }: { markers: ChartVoidMarker[] }) {
         // Kabala đặt nhãn của hai cung nằm ngang ở đầu đường biên hướng vào
         // trung cung; với hai cung xếp dọc, nhãn nằm giữa đường biên ngang.
         const baseY = sameRow
-          ? middleY < HEIGHT / 2
-            ? CELL_HEIGHT
-            : HEIGHT - CELL_HEIGHT
+          ? middleY < geo.height / 2
+            ? geo.cellHeight
+            : geo.height - geo.cellHeight
           : middleY;
         const key = `${baseX}:${baseY}`;
         const overlap = occupied.get(key) ?? 0;
@@ -608,33 +669,35 @@ function Center({
     ["Tuổi mụ", `${data.nominalAge} tuổi`],
   ];
 
+  const { cellWidth, cellHeight, centerWidth, centerHeight } = useChartGeometry();
+
   return (
-    <g transform={`translate(${CELL_WIDTH} ${CELL_HEIGHT})`} className="compact-center">
-      <rect width={CENTER_WIDTH} height={CENTER_HEIGHT} className="compact-center-bg" />
-      <text x={CENTER_WIDTH / 2} y="52" textAnchor="middle" className="compact-center-kicker">
+    <g transform={`translate(${cellWidth} ${cellHeight})`} className="compact-center">
+      <rect width={centerWidth} height={centerHeight} className="compact-center-bg" />
+      <text x={centerWidth / 2} y="52" textAnchor="middle" className="compact-center-kicker">
         VOID OCCULT · {SCHOOL_LABEL[school].toUpperCase()}
       </text>
-      <text x={CENTER_WIDTH / 2} y="84" textAnchor="middle" className="compact-center-title">
+      <text x={centerWidth / 2} y="84" textAnchor="middle" className="compact-center-title">
         {profileName ? profileName.toUpperCase() : "VÔ DANH"}
       </text>
-      <text x={CENTER_WIDTH / 2} y="111" textAnchor="middle" className="compact-center-year">
+      <text x={centerWidth / 2} y="111" textAnchor="middle" className="compact-center-year">
         {data.yearStem} {data.yearBranch} · {data.yearPolarity}{" "}
         {gender === "male" ? "Nam Mệnh" : "Nữ Mệnh"}
       </text>
-      <text x={CENTER_WIDTH / 2} y="250" textAnchor="middle" className="compact-center-seal">
+      <text x={centerWidth / 2} y="250" textAnchor="middle" className="compact-center-seal">
         紫微
       </text>
       <line
-        x1={CENTER_WIDTH / 2}
+        x1={centerWidth / 2}
         y1="127"
-        x2={CENTER_WIDTH / 2}
+        x2={centerWidth / 2}
         y2="198"
         className="compact-center-divider"
       />
       {pillars.map(([label, value, pillar], index) => {
         const column = index % 2;
         const row = Math.floor(index / 2);
-        const x = column === 0 ? 46 : CELL_WIDTH + 30;
+        const x = column === 0 ? 46 : cellWidth + 30;
         const y = 148 + row * 34;
         return (
           <g className="compact-center-pillar-cell" key={label}>
@@ -652,16 +715,16 @@ function Center({
         );
       })}
       <line
-        x1={CENTER_WIDTH / 2}
+        x1={centerWidth / 2}
         y1="217"
-        x2={CENTER_WIDTH / 2}
+        x2={centerWidth / 2}
         y2="363"
         className="compact-center-divider"
       />
       {details.map(([label, value], index) => {
         const column = index % 2;
         const row = Math.floor(index / 2);
-        const x = column === 0 ? 46 : CELL_WIDTH + 30;
+        const x = column === 0 ? 46 : cellWidth + 30;
         const y = 238 + row * 40;
         return (
           <g className="compact-center-detail-cell" key={label}>
@@ -801,6 +864,8 @@ export function CompactChart({
   captureRef,
   profileName,
 }: CompactChartProps) {
+  const stacked = useStackedLayout();
+  const geometry = stacked ? MOBILE_GEOMETRY : DESKTOP_GEOMETRY;
   const [selectedPalace, setSelectedPalace] = useState<ChartPalace | null>(null);
   const [hoveredBranch, setHoveredBranch] = useState<string | null>(null);
   const canUseRelationLines = useDesktopTrineInteractions();
@@ -808,14 +873,14 @@ export function CompactChart({
     () =>
       data
         ? data.palaces
-            .filter((palace) => POSITIONS[palace.branch])
+            .filter((palace) => geometry.positions[palace.branch])
             .sort(
               (a, b) =>
-                POSITIONS[a.branch]!.y - POSITIONS[b.branch]!.y ||
-                POSITIONS[a.branch]!.x - POSITIONS[b.branch]!.x,
+                geometry.positions[a.branch]!.y - geometry.positions[b.branch]!.y ||
+                geometry.positions[a.branch]!.x - geometry.positions[b.branch]!.x,
             )
         : [],
-    [data],
+    [data, geometry],
   );
   const phiFlowsByPalace = useMemo(() => {
     const flows = new Map<number, ChartPhiFlow[]>();
@@ -837,21 +902,25 @@ export function CompactChart({
   }
 
   return (
-    <>
+    <ChartGeometryContext.Provider value={geometry}>
       <div className="compact-chart-capture" ref={captureRef}>
         <svg
           className="compact-chart-svg"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-          width={WIDTH}
-          height={HEIGHT}
+          viewBox={`0 0 ${geometry.width} ${geometry.height}`}
+          width={geometry.width}
+          height={geometry.height}
           role="img"
           aria-label={`Lá số Tử Vi ${SCHOOL_LABEL[school]}`}
           preserveAspectRatio="xMidYMid meet"
         >
           <style>{compactChartCss}</style>
           <title>Lá số Tử Vi {SCHOOL_LABEL[school]}</title>
-          <rect width={WIDTH} height={HEIGHT} className="compact-sheet-bg" />
+          <rect
+            width={geometry.width}
+            height={geometry.height}
+            className="compact-sheet-bg"
+          />
           {palaces.map((palace) => (
             <Palace
               palace={palace}
@@ -885,8 +954,8 @@ export function CompactChart({
           <rect
             x="1"
             y="1"
-            width={WIDTH - 2}
-            height={HEIGHT - 2}
+            width={geometry.width - 2}
+            height={geometry.height - 2}
             className="compact-sheet-outline"
             pointerEvents="none"
           />
@@ -901,6 +970,6 @@ export function CompactChart({
           onClose={() => setSelectedPalace(null)}
         />
       )}
-    </>
+    </ChartGeometryContext.Provider>
   );
 }
