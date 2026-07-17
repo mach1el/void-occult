@@ -9,6 +9,8 @@ export type {
   TrendPoint,
   PalaceStrength,
   LuuNienTrendOptions,
+  AnnualAxisName,
+  AnnualAxisStrength,
 } from "./types";
 export {
   getDaiVanTrend,
@@ -18,6 +20,12 @@ export {
 
 export type { PalaceRadarOptions, RadarWeights } from "./palace-radar";
 export { getPalaceStrengths, RADAR_WEIGHTS } from "./palace-radar";
+
+export type { AnnualAxisRadarOptions } from "./annual-axis-radar";
+export {
+  ANNUAL_AXIS_ORDER,
+  getAnnualAxisStrengths,
+} from "./annual-axis-radar";
 
 export type { ScoringWeights } from "./weights";
 export { SCORING_WEIGHTS } from "./weights";

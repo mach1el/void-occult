@@ -20,6 +20,14 @@ const mobileChartCss = readFileSync(
   resolve(process.cwd(), "src/components/ziwei/chart/mobile-chart.css"),
   "utf8",
 );
+const annualRadarCss = readFileSync(
+  resolve(process.cwd(), "src/components/ziwei/trend/annual-radar.css"),
+  "utf8",
+);
+const trendChartCss = readFileSync(
+  resolve(process.cwd(), "src/components/ziwei/trend/trend-chart.css"),
+  "utf8",
+);
 
 describe("ChartPage profile form", () => {
   it("exposes profile fields in a natural input sequence", () => {
@@ -189,5 +197,20 @@ describe("ChartPage profile form", () => {
     // token toàn cục khi trang Tử Vi mount (thứ tự cascade sẽ ưu tiên bản sau).
     expect(chartCss).not.toMatch(/--element-(kim|moc|thuy|hoa|tho)\s*:/);
     expect(chartCss).not.toMatch(/--mutagen-(loc|quyen|khoa|ky)\s*:/);
+  });
+
+  it("keeps annual radar stylesheet ownership and trend-radars layout in trend-chart.css", () => {
+    expect(annualRadarCss).not.toMatch(/(^|[^\w-])\.shell(\s|>|,|\{)/);
+    expect(annualRadarCss).not.toMatch(/\.trend-charts/);
+    expect(annualRadarCss).not.toMatch(/\.trend-radars/);
+    expect(trendChartCss).toMatch(
+      /\.trend-charts\s*>\s*\.trend-radars[\s\S]*grid-column:\s*1\s*\/\s*-1/,
+    );
+    expect(trendChartCss).toMatch(
+      /\.trend-radars\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/,
+    );
+    expect(trendChartCss).toMatch(
+      /@media\s*\(\s*max-width:\s*900px\s*\)[\s\S]*?\.trend-radars\s*\{[^}]*grid-template-columns:\s*1fr/,
+    );
   });
 });

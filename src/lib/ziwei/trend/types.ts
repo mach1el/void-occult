@@ -43,3 +43,23 @@ export interface LuuNienTrendOptions {
   weights?: ScoringWeights;
 }
 
+export type AnnualAxisName =
+  | "Sức khỏe"
+  | "Gia đạo"
+  | "Tài lộc"
+  | "Công việc"
+  | "Giao hữu"
+  | "Tình duyên";
+
+export interface AnnualAxisStrength {
+  axis: AnnualAxisName;
+  /** Điểm 0–100 sau clamp. */
+  score: number;
+  /** Điểm nền B_D từ trọng số cung. */
+  base: number;
+  breakdown: ScoreLine[];
+  year: number;
+  /** Tiểu Hạn — ngữ cảnh năm, không tự cộng điểm. */
+  smallLimitPalace?: string | null;
+}
+
