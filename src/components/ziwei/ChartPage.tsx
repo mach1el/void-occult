@@ -31,6 +31,7 @@ import { AiChat } from "./ai-chat/AiChat";
 import { CompactChart } from "./chart/CompactChart";
 import { MobileChart } from "./chart/MobileChart";
 import { PalaceRadar } from "./trend/PalaceRadar";
+import { AnnualRadar } from "./trend/AnnualRadar";
 import { TrendChart } from "./trend/TrendChart";
 import { TrendPointPanel } from "./trend/TrendPointPanel";
 
@@ -693,7 +694,10 @@ export function ChartPage() {
           <section className="trend-section" aria-label="Xu hướng và độ vững 12 cung">
             <div className="trend-charts">
               {chartData ? (
-                <PalaceRadar chart={chartData} school={school} compact />
+                <div className="trend-radars">
+                  <PalaceRadar chart={chartData} school={school} compact />
+                  <AnnualRadar chart={chartData} school={school} compact />
+                </div>
               ) : null}
               <TrendChart
                 title="Xu hướng Đại vận"

@@ -10,9 +10,16 @@
   padding: 0 4px 12px;
 }
 
-.trend-charts > .palace-radar,
+.trend-charts > .trend-radars,
 .trend-charts > .trend-point-panel {
   grid-column: 1 / -1;
+}
+
+.trend-radars {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 14px;
 }
 
 .trend-chart {
@@ -307,6 +314,10 @@
 
 @media (max-width: 900px) {
   .trend-charts {
+    grid-template-columns: 1fr;
+  }
+
+  .trend-radars {
     grid-template-columns: 1fr;
   }
 }

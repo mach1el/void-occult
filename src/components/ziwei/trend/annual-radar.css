@@ -1,0 +1,157 @@
+.annual-radar {
+  border: 1px solid var(--line-soft);
+  border-radius: 16px;
+  background: linear-gradient(160deg, rgba(27, 23, 52, 0.88), rgba(9, 7, 20, 0.92));
+  padding: 12px;
+}
+
+.annual-radar-head h3 {
+  margin: 0 0 4px;
+  color: var(--paper);
+  font-family: var(--font-chat);
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+.annual-radar-disclaimer {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-family: var(--font-chat);
+  font-size: 0.68rem;
+}
+
+.annual-radar-stage {
+  display: grid;
+  place-items: center;
+}
+
+.annual-radar-svg {
+  width: min(100%, 380px);
+  height: auto;
+  overflow: visible;
+}
+
+.annual-radar-grid,
+.annual-radar-axis {
+  fill: none;
+  stroke: rgb(104 88 148 / 28%);
+  stroke-width: 1;
+}
+
+.annual-radar-polygon {
+  fill: color-mix(in srgb, var(--mutagen-loc) 14%, transparent);
+  stroke: var(--mutagen-quyen);
+  stroke-width: 2;
+}
+
+.annual-radar-base-polygon {
+  fill: color-mix(in srgb, var(--ash) 5%, transparent);
+  stroke: color-mix(in srgb, var(--ash) 55%, transparent);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+.annual-radar-dot {
+  fill: var(--mutagen-quyen);
+  stroke: var(--void);
+  stroke-width: 1;
+  cursor: pointer;
+}
+
+.annual-radar-label {
+  fill: var(--ash);
+  font-family: var(--font-chat);
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.annual-radar-panel {
+  margin-top: 10px;
+  border: 1px solid var(--line-soft);
+  border-radius: 12px;
+  padding: 10px;
+  background: rgb(9 7 20 / 45%);
+}
+
+.annual-radar-panel header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.annual-radar-panel h4 {
+  margin: 0;
+  color: var(--paper);
+  font-family: var(--font-chat);
+}
+
+.annual-radar-panel p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-family: var(--font-chat);
+  font-size: 0.78rem;
+}
+
+.annual-radar-panel strong {
+  color: var(--amber-soft);
+}
+
+.annual-radar-base {
+  margin: 0 0 6px;
+  color: var(--ash);
+  font-family: var(--font-chat);
+  font-size: 0.78rem;
+}
+
+.annual-radar-base strong {
+  color: var(--amber-soft);
+}
+
+.annual-radar-breakdown {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 7px;
+}
+
+.annual-radar-breakdown li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 8px;
+  font-family: var(--font-chat);
+}
+
+.annual-radar-breakdown span {
+  color: var(--paper);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.annual-radar-breakdown strong {
+  color: var(--amber-soft);
+  font-size: 0.76rem;
+}
+
+.annual-radar-breakdown small {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 0.66rem;
+}
+
+.annual-radar-subhead {
+  margin: 6px 0;
+  color: var(--muted);
+  font-family: var(--font-chat);
+  font-size: 0.66rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 700px) {
+  .annual-radar-label {
+    font-size: 8px;
+  }
+}

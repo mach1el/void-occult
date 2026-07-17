@@ -41,7 +41,15 @@ export const NAYIN_MAP: Record<string, string> = {
   "Nhâm Tuất": "Đại Hải Thuỷ", "Quý Hợi": "Đại Hải Thuỷ"
 };
 
+/**
+ * Tử Vi dùng chính tả địa chi "Tỵ", còn module Can Chi dùng "Tị".
+ * Chuẩn hóa tại biên để toàn bộ app dùng chung một bảng Nạp Âm.
+ */
+export function getNayinByStemBranch(stem: string, branch: string): string {
+  const normalizedBranch = branch === "Tỵ" ? "Tị" : branch;
+  return NAYIN_MAP[`${stem} ${normalizedBranch}`] ?? "Unknown";
+}
+
 export function getNayin(pillar: Pillar): string {
-  const key = `${pillar.stem} ${pillar.branch}`;
-  return NAYIN_MAP[key] ?? "Unknown";
+  return getNayinByStemBranch(pillar.stem, pillar.branch);
 }

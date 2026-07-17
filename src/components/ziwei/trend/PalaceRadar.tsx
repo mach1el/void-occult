@@ -130,7 +130,11 @@ export function PalaceRadar({ chart, school, compact = false }: PalaceRadarProps
                   cx={entry.point.x}
                   cy={entry.point.y}
                   r={isMenh || isThan ? 4.5 : 3}
-                  onClick={() => setSelected(entry.item)}
+                  onClick={() =>
+                    setSelected((current) =>
+                      current?.palace === entry.item.palace ? null : entry.item,
+                    )
+                  }
                 />
                 <text
                   className={`palace-radar-label${isMenh ? " is-menh" : ""}${isThan ? " is-than" : ""}`}
@@ -138,7 +142,11 @@ export function PalaceRadar({ chart, school, compact = false }: PalaceRadarProps
                   y={entry.label.y}
                   textAnchor="middle"
                   dominantBaseline="middle"
-                  onClick={() => setSelected(entry.item)}
+                  onClick={() =>
+                    setSelected((current) =>
+                      current?.palace === entry.item.palace ? null : entry.item,
+                    )
+                  }
                 >
                   {label}
                   <tspan x={entry.label.x} dy="1.1em">
