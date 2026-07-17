@@ -6,7 +6,7 @@ import { AnnualRadar } from "./AnnualRadar";
 describe("AnnualRadar", () => {
   it("vẽ đồng thời lớp nền B_D và lớp vận khí năm", () => {
     const { container } = render(
-      <AnnualRadar chart={makeChart()} school="nam-phai" compact />,
+      <AnnualRadar chart={makeChart()} compact />,
     );
 
     expect(
@@ -18,7 +18,7 @@ describe("AnnualRadar", () => {
   });
 
   it("mở breakdown với B_D WYSIWYG = tổng các dòng nền đã làm tròn", () => {
-    render(<AnnualRadar chart={makeChart()} school="nam-phai" compact />);
+    render(<AnnualRadar chart={makeChart()} compact />);
 
     fireEvent.click(screen.getAllByText("Tài lộc")[0]!);
 
@@ -29,7 +29,7 @@ describe("AnnualRadar", () => {
   });
 
   it("bấm lại cùng trục để đóng breakdown", () => {
-    render(<AnnualRadar chart={makeChart()} school="nam-phai" compact />);
+    render(<AnnualRadar chart={makeChart()} compact />);
 
     fireEvent.click(screen.getAllByText("Tài lộc")[0]!);
     expect(screen.getByText("Điểm nền B_D")).toBeInTheDocument();

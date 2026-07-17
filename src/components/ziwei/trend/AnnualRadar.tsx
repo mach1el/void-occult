@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import type { ChartData, School } from "@/types/chart";
+import type { ChartData } from "@/types/chart";
 import {
   ANNUAL_AXIS_ORDER,
   formatUIBreakdown,
@@ -12,7 +12,6 @@ import "./annual-radar.css";
 
 interface AnnualRadarProps {
   chart: ChartData;
-  school: School;
   compact?: boolean;
 }
 
@@ -47,11 +46,8 @@ function selectedExplanation(selected: AnnualAxisStrength) {
   };
 }
 
-export function AnnualRadar({ chart, school, compact = false }: AnnualRadarProps) {
-  const strengths = useMemo(
-    () => getAnnualAxisStrengths(chart, { school }),
-    [chart, school],
-  );
+export function AnnualRadar({ chart, compact = false }: AnnualRadarProps) {
+  const strengths = useMemo(() => getAnnualAxisStrengths(chart), [chart]);
   const [selected, setSelected] = useState<AnnualAxisStrength | null>(null);
   const explanation = useMemo(
     () => (selected ? selectedExplanation(selected) : null),

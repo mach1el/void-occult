@@ -5,7 +5,7 @@
  * và đối cung của từng trục. Guardrails áp sau cộng sao, trước clamp.
  */
 
-import type { ChartData, ChartPalace, ChartStar, School } from "@/types/chart";
+import type { ChartData, ChartPalace, ChartStar } from "@/types/chart";
 import { isAnnualStar } from "../star-classification";
 import { getPalaceStrengths } from "./palace-radar";
 import type { AnnualAxisName, AnnualAxisStrength, ScoreLine } from "./types";
@@ -119,10 +119,6 @@ const QUYEN_LOC_STARS = new Set(["Lưu Hóa Quyền", "Lưu Hóa Lộc", "Lưu L
 const MA_BROKEN_STARS = new Set(["Lưu Hóa Kỵ", "Lưu Đà La"]);
 const LOVE_STARS = new Set(["Lưu Đào Hoa", "Lưu Hồng Loan", "Lưu Thiên Hỷ"]);
 const LOVE_DRAMA_STARS = new Set(["Lưu Hóa Kỵ", "Lưu Đà La", "Lưu Địa Kiếp"]);
-
-export interface AnnualAxisRadarOptions {
-  school: School;
-}
 
 function clampScore(value: number): number {
   return Math.max(0, Math.min(100, Math.round(value)));
@@ -246,9 +242,8 @@ function activationLine(
 
 export function getAnnualAxisStrengths(
   chart: ChartData,
-  { school }: AnnualAxisRadarOptions,
 ): AnnualAxisStrength[] {
-  const palaceStrengths = getPalaceStrengths(chart, { school });
+  const palaceStrengths = getPalaceStrengths(chart);
   const scoreMap = new Map(palaceStrengths.map((item) => [item.palace, item.score]));
   const year = chart.annualYear;
   const smallLimitPalace = chart.smallLimitPalace?.name ?? null;

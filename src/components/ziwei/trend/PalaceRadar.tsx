@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import type { ChartData, School } from "@/types/chart";
+import type { ChartData } from "@/types/chart";
 import {
   getPalaceStrengths,
   shortPalaceName,
@@ -10,8 +10,6 @@ import "./palace-radar.css";
 
 interface PalaceRadarProps {
   chart: ChartData;
-  /** Cần cho hệ số Ngũ Hành — bảng hành của sao khác nhau giữa hai phái. */
-  school: School;
   compact?: boolean;
 }
 
@@ -31,11 +29,8 @@ function Breakdown({ lines }: { lines: ScoreLine[] }) {
   );
 }
 
-export function PalaceRadar({ chart, school, compact = false }: PalaceRadarProps) {
-  const strengths = useMemo(
-    () => getPalaceStrengths(chart, { school }),
-    [chart, school],
-  );
+export function PalaceRadar({ chart, compact = false }: PalaceRadarProps) {
+  const strengths = useMemo(() => getPalaceStrengths(chart), [chart]);
   const [selected, setSelected] = useState<PalaceStrength | null>(null);
 
   const size = compact ? 300 : 360;

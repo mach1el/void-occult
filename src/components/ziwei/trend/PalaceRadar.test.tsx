@@ -5,7 +5,7 @@ import { PalaceRadar } from "./PalaceRadar";
 
 describe("PalaceRadar", () => {
   it("bấm lại cùng cung để đóng breakdown", () => {
-    render(<PalaceRadar chart={makeChart()} school="nam-phai" compact />);
+    render(<PalaceRadar chart={makeChart()} compact />);
 
     fireEvent.click(screen.getByText("Mệnh"));
     expect(screen.getByRole("heading", { name: "Mệnh" })).toBeInTheDocument();

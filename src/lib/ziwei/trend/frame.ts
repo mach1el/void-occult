@@ -4,12 +4,7 @@
  * Không còn hệ số Ngũ Hành Bản Mệnh (M_nh) — thầy chốt bỏ 2026-07-18.
  */
 
-import type {
-  ChartData,
-  ChartPalace,
-  MutagenRecord,
-  School,
-} from "@/types/chart";
+import type { ChartData, ChartPalace, MutagenRecord } from "@/types/chart";
 import { baseStarName, isAnnualStar } from "../star-classification";
 import {
   evaluateCombos,
@@ -190,8 +185,6 @@ function applyElementMultiplier(
 
 export interface FrameScoreOptions {
   includeAnnual: boolean;
-  /** Phái — lấy elementForStar. Mặc định nam-phai. */
-  school?: School;
 }
 
 export function scoreFortuneFrame(

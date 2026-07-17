@@ -25,7 +25,7 @@
  *   Miếu/Vượng/Đắc → 0.6, ngược lại → 0.35.
  */
 
-import type { ChartData, ChartPalace, ChartStar, School } from "@/types/chart";
+import type { ChartData, ChartPalace, ChartStar } from "@/types/chart";
 import { baseStarName, isAnnualStar } from "../star-classification";
 import { isMaBranch, isMoBranch, TAM_HOP, XUNG_CHIEU } from "./zones";
 import { findStarScore, type StarScoreRow } from "./star-scores";
@@ -575,7 +575,6 @@ function palaceEnergy(
 
 export interface PalaceRadarOptions {
   weights?: RadarWeights;
-  school?: School;
 }
 
 /**

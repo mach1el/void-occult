@@ -42,8 +42,8 @@ function twelvePalaceChart(
 describe("getPalaceStrengths (radar vận khí)", () => {
   it("trả đúng 12 cung, tất định, rollup khớp điểm thô, khởi từ Mệnh", () => {
     const chart = calculateNamPhai(birthInput);
-    const first = getPalaceStrengths(chart, { school: "nam-phai" });
-    expect(first).toEqual(getPalaceStrengths(chart, { school: "nam-phai" }));
+    const first = getPalaceStrengths(chart);
+    expect(first).toEqual(getPalaceStrengths(chart));
     expect(first).toHaveLength(12);
     expect(first[0]?.palace).toBe("Mệnh");
     for (const item of first) {
@@ -56,7 +56,7 @@ describe("getPalaceStrengths (radar vận khí)", () => {
 
   it("điểm nằm trong thang tuyệt đối 0–100", () => {
     const chart = calculateNamPhai(birthInput);
-    for (const item of getPalaceStrengths(chart, { school: "nam-phai" })) {
+    for (const item of getPalaceStrengths(chart)) {
       expect(item.score).toBeGreaterThanOrEqual(0);
       expect(item.score).toBeLessThanOrEqual(100);
     }
@@ -75,7 +75,7 @@ describe("getPalaceStrengths (radar vận khí)", () => {
         { name: "Đà La", layer: "tough" },
       ],
     );
-    const s = getPalaceStrengths(chart, { school: "nam-phai" });
+    const s = getPalaceStrengths(chart);
     expect(s.find((i) => i.palace === "Mệnh")!.score).toBeGreaterThan(
       s.find((i) => i.palace === "Phụ Mẫu")!.score,
     );
@@ -88,8 +88,8 @@ describe("getPalaceStrengths (radar vận khí)", () => {
       mPosMieu: RADAR_WEIGHTS.mPosMieu + 1,
     };
     expect(
-      getPalaceStrengths(chart, { school: "nam-phai", weights: boosted }),
-    ).not.toEqual(getPalaceStrengths(chart, { school: "nam-phai" }));
+      getPalaceStrengths(chart, { weights: boosted }),
+    ).not.toEqual(getPalaceStrengths(chart));
   });
 
   it("Tam Phương Tứ Chính: cung trống hưởng lây từ tam hợp/xung chiếu", () => {
@@ -102,10 +102,10 @@ describe("getPalaceStrengths (radar vận khí)", () => {
       { name: "Thiên Khôi", layer: "helper" },
     ];
 
-    const a = getPalaceStrengths(weak, { school: "nam-phai" }).find(
+    const a = getPalaceStrengths(weak).find(
       (i) => i.palace === "Mệnh",
     )!;
-    const b = getPalaceStrengths(strongTamHop, { school: "nam-phai" }).find(
+    const b = getPalaceStrengths(strongTamHop).find(
       (i) => i.palace === "Mệnh",
     )!;
     expect(b.score).toBeGreaterThan(a.score);
@@ -117,7 +117,7 @@ describe("getPalaceStrengths (radar vận khí)", () => {
     const thienDi = chart.palaces.find((p) => p.branch === "Sửu")!;
     thienDi.stars = [{ name: "Tử Vi", layer: "major", brightness: "Miếu" }];
 
-    const menh = getPalaceStrengths(chart, { school: "nam-phai" }).find(
+    const menh = getPalaceStrengths(chart).find(
       (i) => i.palace === "Mệnh",
     )!;
     expect(
@@ -137,11 +137,11 @@ describe("getPalaceStrengths (radar vận khí)", () => {
       return { ...c, voidMarkers: voids };
     };
     const env = (chart: ReturnType<typeof mk>) =>
-      getPalaceStrengths(chart, { school: "nam-phai" })
+      getPalaceStrengths(chart)
         .find((i) => i.palace === "Mệnh")!
         .detail.find((l) => l.source === "Hệ số môi trường")?.reason ?? "";
     const detail = (chart: ReturnType<typeof mk>) =>
-      getPalaceStrengths(chart, { school: "nam-phai" }).find(
+      getPalaceStrengths(chart).find(
         (i) => i.palace === "Mệnh",
       )!.detail;
 
@@ -176,7 +176,7 @@ describe("getPalaceStrengths (radar vận khí)", () => {
       ),
       menhElement: "Thổ",
     };
-    const menh = getPalaceStrengths(chart, { school: "nam-phai" }).find(
+    const menh = getPalaceStrengths(chart).find(
       (i) => i.palace === "Mệnh",
     )!;
     const thaiAm = menh.detail.find((l) => l.source === "Thái Âm")!;
@@ -197,7 +197,7 @@ describe("getPalaceStrengths (radar vận khí)", () => {
       return { ...c, voidMarkers: [{ type: "Tuần", branches: ["Mùi"] }] };
     };
     const note = (b: string) =>
-      getPalaceStrengths(mk(b), { school: "nam-phai" })
+      getPalaceStrengths(mk(b))
         .find((i) => i.palace === "Mệnh")!
         .detail.find((l) => l.source === "Hệ số môi trường")!.reason;
 
@@ -220,7 +220,7 @@ describe("getPalaceStrengths (radar vận khí)", () => {
       [],
     );
     const chart = { ...c, voidMarkers: [{ type: "Tuần", branches: ["Mùi"] }] };
-    const note = getPalaceStrengths(chart, { school: "nam-phai" })
+    const note = getPalaceStrengths(chart)
       .find((i) => i.palace === "Mệnh")!
       .detail.find((l) => l.source === "Hệ số môi trường")!.reason;
 
@@ -232,7 +232,7 @@ describe("getPalaceStrengths (radar vận khí)", () => {
   it("làm tròn đối xứng quanh 0", () => {
     // Math.round(-1.75*10)/10 = -1.7 (lệch), helper phải cho -1.8.
     const chart = calculateNamPhai(birthInput);
-    for (const item of getPalaceStrengths(chart, { school: "nam-phai" })) {
+    for (const item of getPalaceStrengths(chart)) {
       for (const line of [...item.detail, ...item.breakdown]) {
         expect(Math.abs(line.points * 10 - Math.round(line.points * 10))).toBeLessThan(1e-6);
       }

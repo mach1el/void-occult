@@ -67,8 +67,8 @@ describe("getAnnualAxisStrengths", () => {
       "Huynh Đệ": 50,
     });
     const chart = twelvePalaceChart();
-    const first = getAnnualAxisStrengths(chart, { school: "nam-phai" });
-    const second = getAnnualAxisStrengths(chart, { school: "nam-phai" });
+    const first = getAnnualAxisStrengths(chart);
+    const second = getAnnualAxisStrengths(chart);
     expect(first).toEqual(second);
     expect(first).toHaveLength(6);
     expect(first.map((item) => item.axis)).toEqual([
@@ -104,7 +104,7 @@ describe("getAnnualAxisStrengths", () => {
       "Huynh Đệ": 0,
     });
     const chart = twelvePalaceChart();
-    const axes = getAnnualAxisStrengths(chart, { school: "nam-phai" });
+    const axes = getAnnualAxisStrengths(chart);
     expect(axes.find((a) => a.axis === "Sức khỏe")?.base).toBeCloseTo(0.7 * 60 + 0.3 * 40, 5);
     expect(axes.find((a) => a.axis === "Gia đạo")?.base).toBeCloseTo(
       0.7 * 70 + 0.15 * 20 + 0.15 * 10,
@@ -138,7 +138,7 @@ describe("getAnnualAxisStrengths", () => {
         "Tài Bạch": [{ name: "Lưu Hóa Lộc", layer: "soft", source: "annual-mutagen", mutagen: "Lộc" }],
       },
     );
-    const taiLoc = getAnnualAxisStrengths(chart, { school: "nam-phai" }).find(
+    const taiLoc = getAnnualAxisStrengths(chart).find(
       (a) => a.axis === "Tài lộc",
     )!;
     // Nền 50 + Lưu Hóa Lộc tại cung chính +12 (không còn hệ số Ngũ Hành Bản Mệnh).
@@ -169,7 +169,7 @@ describe("getAnnualAxisStrengths", () => {
         "Phúc Đức": [{ name: "Lưu Hóa Kỵ", layer: "soft", source: "annual-mutagen", mutagen: "Kỵ" }],
       },
     );
-    const taiLoc = getAnnualAxisStrengths(chart, { school: "nam-phai" }).find(
+    const taiLoc = getAnnualAxisStrengths(chart).find(
       (a) => a.axis === "Tài lộc",
     )!;
     // Nền 50 + Lộc chính +12 + Kỵ đối −15×0.5 = 54.5, rồi Trading Guard ×0.6 ≈ 33.
@@ -202,7 +202,7 @@ describe("getAnnualAxisStrengths", () => {
         ],
       },
     );
-    const sucKhoe = getAnnualAxisStrengths(chart, { school: "nam-phai" }).find(
+    const sucKhoe = getAnnualAxisStrengths(chart).find(
       (a) => a.axis === "Sức khỏe",
     )!;
     expect(sucKhoe.score).toBe(40);
@@ -234,7 +234,7 @@ describe("getAnnualAxisStrengths", () => {
         ],
       },
     );
-    const congViec = getAnnualAxisStrengths(chart, { school: "nam-phai" }).find(
+    const congViec = getAnnualAxisStrengths(chart).find(
       (a) => a.axis === "Công việc",
     )!;
     // Nền 50 + Mã +6 + Quyền +10 + Career Boost +15 = 81.
@@ -266,7 +266,7 @@ describe("getAnnualAxisStrengths", () => {
         ],
       },
     );
-    const taiLoc = getAnnualAxisStrengths(chart, { school: "nam-phai" }).find(
+    const taiLoc = getAnnualAxisStrengths(chart).find(
       (axis) => axis.axis === "Tài lộc",
     )!;
     expect(taiLoc.score).toBe(53);
@@ -298,12 +298,12 @@ describe("getAnnualAxisStrengths", () => {
       taiTuePalace: palace({ index: 4, branch: "Mão", name: "Quan Lộc" }),
     });
     expect(
-      getAnnualAxisStrengths(exact, { school: "nam-phai" }).find(
+      getAnnualAxisStrengths(exact).find(
         (axis) => axis.axis === "Tài lộc",
       )?.score,
     ).toBe(60);
     expect(
-      getAnnualAxisStrengths(tamHop, { school: "nam-phai" }).find(
+      getAnnualAxisStrengths(tamHop).find(
         (axis) => axis.axis === "Tài lộc",
       )?.score,
     ).toBe(55);
@@ -339,7 +339,7 @@ describe("getAnnualAxisStrengths", () => {
         ],
       },
     );
-    const love = getAnnualAxisStrengths(chart, { school: "nam-phai" }).find(
+    const love = getAnnualAxisStrengths(chart).find(
       (axis) => axis.axis === "Tình duyên",
     )!;
     // Nền 50 + Đào Hoa +8 + Kỵ −15 = 43, rồi Đào Hoa Sát đổi Đào Hoa +8→−18 = 25.
@@ -373,14 +373,14 @@ describe("getAnnualAxisStrengths", () => {
       },
     );
     const yearOther = twelvePalaceChart({ annualYear: 2027 });
-    const plainTaiLoc = getAnnualAxisStrengths(plain, { school: "nam-phai" }).find(
+    const plainTaiLoc = getAnnualAxisStrengths(plain).find(
       (a) => a.axis === "Tài lộc",
     )!.score;
-    const boostedTaiLoc = getAnnualAxisStrengths(boosted, { school: "nam-phai" }).find(
+    const boostedTaiLoc = getAnnualAxisStrengths(boosted).find(
       (a) => a.axis === "Tài lộc",
     )!.score;
     expect(boostedTaiLoc).toBeGreaterThan(plainTaiLoc);
-    expect(getAnnualAxisStrengths(yearOther, { school: "nam-phai" })[0]?.year).toBe(2027);
+    expect(getAnnualAxisStrengths(yearOther)[0]?.year).toBe(2027);
     spy.mockRestore();
   });
 });

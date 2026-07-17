@@ -54,7 +54,6 @@ export type {
 export function getDaiVanTrend(
   chart: ChartData,
   weights: ScoringWeights = SCORING_WEIGHTS,
-  school: "nam-phai" | "trung-chau" = "nam-phai",
 ): TrendPoint[] {
   const fortunes = chart.palaces
     .filter((palace) => palace.majorFortune)
@@ -71,7 +70,7 @@ export function getDaiVanTrend(
       palace,
       weights,
       [{ label: "Gốc", records: chart.natalMutagens }],
-      { includeAnnual: false, school },
+      { includeAnnual: false },
     );
 
     return {

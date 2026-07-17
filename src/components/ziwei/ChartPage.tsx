@@ -221,8 +221,8 @@ export function ChartPage() {
   );
 
   const daiVanTrend = useMemo(
-    () => (chartData ? getDaiVanTrend(chartData, SCORING_WEIGHTS, school) : []),
-    [chartData, school],
+    () => (chartData ? getDaiVanTrend(chartData, SCORING_WEIGHTS) : []),
+    [chartData],
   );
   const luuNienTrend = useMemo(
     () =>
@@ -696,8 +696,8 @@ export function ChartPage() {
             <div className="trend-charts">
               {chartData ? (
                 <div className="trend-radars">
-                  <PalaceRadar chart={chartData} school={school} compact />
-                  <AnnualRadar chart={chartData} school={school} compact />
+                  <PalaceRadar chart={chartData} compact />
+                  <AnnualRadar chart={chartData} compact />
                 </div>
               ) : null}
               <TrendChart
