@@ -55,6 +55,35 @@ const LABELS: Record<string, string> = {
   "context.menh-than.same-palace": "Mệnh và Thân cùng một cung",
   "context.menh-void.than-reference":
     "Mệnh Vô chính diệu — tham chiếu cung Thân",
+  // V1.2 semantic — Tứ Hóa target-trait semantics (annotation-only).
+  "transform-target.loc.resource":
+    "Lộc rơi vào sao mang đặc tính nguồn lực — mở ra cơ hội tài nguyên",
+  "transform-target.loc.visibility":
+    "Lộc rơi vào sao mang đặc tính lộ diện — thuận lợi về sự chú ý, hiển lộ",
+  "transform-target.loc.communication":
+    "Lộc rơi vào sao mang đặc tính giao tiếp — thuận lợi biểu đạt, trao đổi",
+  "transform-target.quyen.authority":
+    "Quyền rơi vào sao mang đặc tính quyền hạn — tăng trách nhiệm, quyền kiểm soát",
+  "transform-target.quyen.planning":
+    "Quyền rơi vào sao mang đặc tính hoạch định — áp lực ra quyết định, chủ động thích nghi",
+  "transform-target.quyen.communication":
+    "Quyền rơi vào sao mang đặc tính giao tiếp — biểu đạt quyết đoán, kiểm soát tiếng nói",
+  "transform-target.khoa.learning":
+    "Khoa rơi vào sao mang đặc tính học tập — rõ ràng, có phương pháp, được ghi nhận",
+  "transform-target.khoa.protection":
+    "Khoa rơi vào sao mang đặc tính bảo hộ — bảo vệ danh tiếng, hỗ trợ có cấu trúc",
+  "transform-target.ky.communication":
+    "Kỵ rơi vào sao mang đặc tính giao tiếp — ma sát biểu đạt, áp lực văn thư",
+  "transform-target.ky.visibility":
+    "Kỵ rơi vào sao mang đặc tính lộ diện — áp lực danh tiếng, ma sát được chú ý",
+  "transform-target.ky.resource":
+    "Kỵ rơi vào sao mang đặc tính nguồn lực — ma sát phân bổ, áp lực tài chính",
+  "transform-target.ky.desire":
+    "Kỵ rơi vào sao mang đặc tính ham muốn — phức tạp trong gắn kết, ma sát quan hệ",
+  "transform-target.ky.planning":
+    "Kỵ rơi vào sao mang đặc tính hoạch định — cản trở kế hoạch, áp lực thích nghi",
+  "transform-target.ky.disruption":
+    "Kỵ rơi vào sao mang đặc tính đột phá — xung đột gia tăng, áp lực thay đổi",
 };
 
 const PALACE_DOMAIN: Record<string, string> = {

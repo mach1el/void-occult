@@ -354,6 +354,9 @@ function PalaceOverviewDetail({
     (a) => a.category === "minor-pair",
   );
   const pairAnnotationsByScope = groupByScope(minorPairAnnotations);
+  const transformTargetAnnotations = result.annotations.filter(
+    (a) => a.category === "transformation-target",
+  );
 
   return (
     <div className="palace-overview-detail">
@@ -466,6 +469,19 @@ function PalaceOverviewDetail({
               </ul>
             </div>
           ))}
+        </section>
+      ) : null}
+
+      {transformTargetAnnotations.length > 0 ? (
+        <section className="palace-overview-detail__section">
+          <h5>Tứ Hóa theo sao nhận Hóa</h5>
+          <ul>
+            {transformTargetAnnotations.map((a) => (
+              <li key={a.id}>
+                {a.label} — {renderExplanationKey(a.explanationKey, a.label)}
+              </li>
+            ))}
+          </ul>
         </section>
       ) : null}
 

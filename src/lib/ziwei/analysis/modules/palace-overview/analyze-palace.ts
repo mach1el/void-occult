@@ -14,6 +14,7 @@ import {
 import { evaluateStructuralRules } from "./evaluate-structural-rules";
 import { buildMenhThanAnnotations, resolveMenhThanStatus } from "./menh-than-annotations";
 import { buildMinorPairAnnotations } from "./minor-pair-annotations";
+import { buildTransformationTargetAnnotations } from "./transformation-target-annotations";
 import {
   bandForScore,
   computeEvidenceCompleteness,
@@ -138,6 +139,14 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
           frame,
           factsByPalace,
           knowledge: semanticKnowledge,
+          diagnostics: semanticDiagnostics,
+          focusPalaceIndex: palace.index,
+        }),
+        ...buildTransformationTargetAnnotations({
+          frame,
+          factsByPalace,
+          knowledge,
+          semanticKnowledge,
           diagnostics: semanticDiagnostics,
           focusPalaceIndex: palace.index,
         }),
