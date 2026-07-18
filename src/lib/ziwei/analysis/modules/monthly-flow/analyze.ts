@@ -34,6 +34,7 @@ import {
 } from "./resolve-annual-domain-map";
 import { resolveMonthContexts } from "./resolve-month-contexts";
 import type {
+  ExplicitLeapMonthContext,
   MonthlyCalculationProvider,
   MonthlyFlowAxisResult,
   MonthlyFlowEvidence,
@@ -241,6 +242,13 @@ function scoreMonth(
   const monthDiagnostics = emptyMonthlyFlowMonthDiagnostics();
   const monthKey = context.identity.monthKey;
 
+  monthDiagnostics.ambiguousTransformationTargets.push(
+    ...context.transformationDiagnostics.ambiguous,
+  );
+  monthDiagnostics.unresolvedTransformationTargets.push(
+    ...context.transformationDiagnostics.unresolved,
+  );
+
   const monthlyFrame = collectMonthlyFrame({
     chart,
     focusPalaceIndex: context.identity.focusPalaceIndex,
@@ -283,17 +291,18 @@ function scoreMonth(
     statuses.push(result.status);
   }
 
-  const allEvidence = ANNUAL_AXIS_DOMAINS.flatMap((d) => {
-    const a = axes[d];
-    return a.status === "available" ? a.evidence : [];
-  });
-
-  const monthStatus: MonthResult["status"] =
+  let monthStatus: MonthResult["status"] =
     statuses.every((s) => s === "available")
       ? "available"
       : statuses.every((s) => s === "unavailable")
         ? "unavailable"
         : "partial";
+
+  // Incomplete provider Tứ Hóa resolution keeps fully-resolved evidence but
+  // the month must not report available.
+  if (context.transformationsPartial && monthStatus === "available") {
+    monthStatus = "partial";
+  }
 
   foldMonthDiagnosticsIntoYear(monthDiagnostics, yearDiagnostics);
 
@@ -303,6 +312,38 @@ function scoreMonth(
     axes,
     diagnostics: dedupeMonthlyFlowMonthDiagnostics(monthDiagnostics),
   };
+}
+
+/**
+ * Year-level status.
+ *
+ * - available: all twelve regular months M01..M12 exist and every regular
+ *   month result is available (leap months, if any, do not block this);
+ * - partial: at least one month is scoreable (available or partial) but a
+ *   regular month is missing, duplicated, rejected, partial, or unavailable;
+ * - unavailable: no month is scoreable.
+ */
+export function resolveYearStatus(
+  months: readonly MonthResult[],
+  diagnostics: MonthlyFlowYearDiagnostics,
+): "available" | "partial" | "unavailable" {
+  const scoreable = months.filter((m) => m.status !== "unavailable");
+  if (scoreable.length === 0) return "unavailable";
+
+  const regular = months.filter((m) => !m.identity.isLeapMonth);
+  const regularMonths = new Set(regular.map((m) => m.identity.lunarMonth));
+  const hasAllTwelveRegular =
+    regular.length === 12 &&
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].every((m) => regularMonths.has(m));
+  const allRegularAvailable =
+    hasAllTwelveRegular && regular.every((m) => m.status === "available");
+  const incompleteRegularSet =
+    diagnostics.missingMonthlyEntries.length > 0 ||
+    diagnostics.duplicateMonthKeys.length > 0 ||
+    !hasAllTwelveRegular;
+
+  if (allRegularAvailable && !incompleteRegularSet) return "available";
+  return "partial";
 }
 
 /**
@@ -318,10 +359,15 @@ export function analyzeMonthlyFlow(
     school: ZiweiSchool;
     provider: MonthlyCalculationProvider;
     yearInCycle?: number;
-    explicitLeapContexts?: readonly {
-      lunarMonth: number;
-      focusPalaceIndex: number;
-    }[];
+    explicitLeapContexts?: readonly ExplicitLeapMonthContext[];
+    /**
+     * Temporary escape hatch for Nam Phái charts that lack
+     * `annualPalaceName`. A plain `ReadonlyMap<number, AnnualAxisDomain>`
+     * is **not** a production-ready Nam Phái six-axis adapter — it does
+     * not encode anchor weights, multi-anchor domains, or school-approved
+     * label provenance. Do not treat this parameter as shipping Nam Phái
+     * six-axis support.
+     */
     explicitAnnualDomainMap?: ReadonlyMap<number, AnnualAxisDomain>;
   },
 ): MonthlyFlowResult {
@@ -487,15 +533,7 @@ export function analyzeMonthlyFlow(
     }
   }
 
-  const monthStatuses = monthResults.map((m) => m.status);
-  const status: MonthlyFlowResult["status"] =
-    monthResults.length === 0
-      ? "unavailable"
-      : monthStatuses.every((s) => s === "available")
-        ? "available"
-        : monthStatuses.every((s) => s === "unavailable")
-          ? "unavailable"
-          : "partial";
+  const status = resolveYearStatus(monthResults, yearDiagnostics);
 
   return {
     module: "monthly-flow",

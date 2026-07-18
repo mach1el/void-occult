@@ -1,5 +1,5 @@
 import type { ChartData, ChartPalace, ChartStar } from "@/types/chart";
-import { canonicalStarName, isVoidStarName } from "../../facts";
+import { canonicalStarName, isMutagenMarkerName, isVoidStarName } from "../../facts";
 import type { PalaceOverviewKnowledgeV1 } from "../../knowledge";
 import type { AnnualAxisDomain } from "../../contracts/annual-axes";
 import type { AnnualDomainFrame } from "./collect-annual-domain-frames";
@@ -18,10 +18,21 @@ const NON_PHYSICAL_SOURCES = new Set([
   "major-mutagen",
 ]);
 
-function isEligibleNatalPhysicalStar(star: ChartStar): boolean {
+/**
+ * Physical natal stars only — shared by monthly star collection and
+ * monthly Tứ Hóa target resolution. Rejects annual moving stars,
+ * mutagen pseudo-stars, void/context markers, and Lưu-prefixed names
+ * (except the natal star "Lưu Hà").
+ */
+export function isEligibleNatalPhysicalStar(star: ChartStar): boolean {
   const source = star.source ?? "natal";
   if (isVoidStarName(star.name)) return false;
-  return !NON_PHYSICAL_SOURCES.has(source);
+  if (isMutagenMarkerName(star.name)) return false;
+  if (NON_PHYSICAL_SOURCES.has(source)) return false;
+  // Lưu-prefixed moving names canonicalize to natal spellings; never treat
+  // them as the natal physical target even if source were mis-tagged.
+  if (/^Lưu\s+/.test(star.name) && !star.name.startsWith("Lưu Hà")) return false;
+  return true;
 }
 
 interface StarKnowledgeMatch {

@@ -150,7 +150,7 @@ describe("analyzeMonthlyFlow — Nam Phái school", () => {
     expect(result.diagnostics.incompleteAnnualDomainLabels.length).toBeGreaterThan(0);
   });
 
-  it("with explicit annual-domain map, six-axis overlay becomes partially/available", () => {
+  it("with temporary explicit annual-domain map, axes can score — not production Nam Phái support", () => {
     const chart = calculateNamPhai(REGRESSION_BIRTH);
     const explicitAnnualDomainMap = new Map<number, AnnualAxisDomain>([
       [0, "health"],
@@ -172,7 +172,9 @@ describe("analyzeMonthlyFlow — Nam Phái school", () => {
       explicitAnnualDomainMap,
     });
     expect(result.months.length).toBeGreaterThan(0);
-    // At least some domain in at least some month should be available.
+    // Escape-hatch only: a bare index→domain map is not a shipping Nam Phái
+    // six-axis adapter (no anchor weights / provenance).
+    expect(result.capabilities.supportsSixAxisOverlayFromCurrentChart).toBe(false);
     const anyAvailable = result.months.some((m) =>
       ANNUAL_AXIS_DOMAINS.some((d) => m.axes[d].status === "available"),
     );

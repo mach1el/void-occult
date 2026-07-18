@@ -1,7 +1,9 @@
 import type { ChartData, FlowMonthEntry } from "@/types/chart";
 import type { ZiweiSchool } from "../../facts";
 import { canonicalStarName } from "../../facts";
+import { isEligibleNatalPhysicalStar } from "./collect-star-evidence";
 import type {
+  ExplicitLeapMonthContext,
   MonthlyCalculationProvider,
   MonthlyFlowMonthIdentity,
   MonthlyFlowYearDiagnostics,
@@ -122,8 +124,16 @@ function resolveMonthlyTransformations(
     }
 
     const canonical = canonicalStarName(target.starName);
+    // Exact target = natal physical star only (same eligibility as the
+    // monthly star collector). Annual Lưu-* stars, mutagen markers, and
+    // void/context records never count — even when canonicalStarName would
+    // collapse "Lưu Văn Xương" onto "Văn Xương".
     const palacesHoldingTarget = chart.palaces.filter((palace) =>
-      (palace.stars ?? []).some((star) => canonicalStarName(star.name) === canonical),
+      (palace.stars ?? []).some(
+        (star) =>
+          isEligibleNatalPhysicalStar(star) &&
+          canonicalStarName(star.name) === canonical,
+      ),
     );
 
     if (palacesHoldingTarget.length === 0) {
@@ -159,10 +169,13 @@ export interface ResolveMonthContextsInput {
   chart: ChartData;
   school: ZiweiSchool;
   provider: MonthlyCalculationProvider;
-  explicitLeapContexts?: readonly {
-    lunarMonth: number;
-    focusPalaceIndex: number;
-  }[];
+  /**
+   * Leap months are scored only when the caller supplies a fully explicit
+   * context — lunar month, focus palace, and calendar stem/branch. The
+   * scorer never calls `stemBranchForLunarMonth` for leap contexts and
+   * never infers leap calendar identity from the regular month number.
+   */
+  explicitLeapContexts?: readonly ExplicitLeapMonthContext[];
   diagnostics: MonthlyFlowYearDiagnostics;
 }
 
@@ -263,6 +276,10 @@ export function resolveMonthContexts(
       identity: attempt.identity,
       transformations,
       transformationsPartial: partial,
+      transformationDiagnostics: {
+        ambiguous: monthLocal.ambiguous,
+        unresolved: monthLocal.unresolved,
+      },
     });
   }
 
@@ -284,6 +301,23 @@ export function resolveMonthContexts(
         diagnostics.invalidMonthNumber.push(`leap:${leap.lunarMonth}`);
         continue;
       }
+      if (
+        typeof leap.calendarStem !== "string" ||
+        !leap.calendarStem ||
+        typeof leap.calendarBranch !== "string" ||
+        !leap.calendarBranch
+      ) {
+        diagnostics.missingCalendarStemBranch.push(
+          buildMonthKey(chart.annualYear, leap.lunarMonth, true),
+        );
+        continue;
+      }
+      if (!Number.isInteger(leap.focusPalaceIndex)) {
+        diagnostics.missingFocusPalace.push(
+          buildMonthKey(chart.annualYear, leap.lunarMonth, true),
+        );
+        continue;
+      }
       const palace = chart.palaces.find((p) => p.index === leap.focusPalaceIndex);
       if (!palace) {
         diagnostics.missingFocusPalace.push(
@@ -291,21 +325,16 @@ export function resolveMonthContexts(
         );
         continue;
       }
-      const provided = provider.stemBranchForLunarMonth(chart.annualStem, leap.lunarMonth);
-      if (!provided.stem || !provided.branch) {
-        diagnostics.missingCalendarStemBranch.push(
-          buildMonthKey(chart.annualYear, leap.lunarMonth, true),
-        );
-        continue;
-      }
+      // Leap calendar identity is caller-supplied only — never derived via
+      // stemBranchForLunarMonth(regularMonthNumber).
       const identity: MonthlyFlowMonthIdentity = {
         annualYear: chart.annualYear,
         lunarMonth: leap.lunarMonth,
         isLeapMonth: true,
         monthKey: buildMonthKey(chart.annualYear, leap.lunarMonth, true),
         focusPalaceIndex: leap.focusPalaceIndex,
-        calendarStem: provided.stem,
-        calendarBranch: provided.branch,
+        calendarStem: leap.calendarStem,
+        calendarBranch: leap.calendarBranch,
       };
       if (seenMonthKeys.has(identity.monthKey)) {
         diagnostics.duplicateMonthKeys.push(identity.monthKey);
@@ -327,6 +356,10 @@ export function resolveMonthContexts(
         identity,
         transformations,
         transformationsPartial: partial,
+        transformationDiagnostics: {
+          ambiguous: monthLocal.ambiguous,
+          unresolved: monthLocal.unresolved,
+        },
       });
     }
   }

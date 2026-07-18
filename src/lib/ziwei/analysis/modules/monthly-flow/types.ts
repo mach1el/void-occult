@@ -205,6 +205,23 @@ export interface ResolvedMonthlyFlowContext {
    * unresolvable/ambiguous and the month therefore lost some monthly-Tứ-Hóa
    * evidence. Numeric evidence is still limited to fully-resolved records. */
   transformationsPartial: boolean;
+  /** Per-target diagnostics retained on the month when partial. */
+  transformationDiagnostics: {
+    ambiguous: readonly string[];
+    unresolved: readonly string[];
+  };
+}
+
+/**
+ * Explicit leap-month input — calendar stem/branch must be supplied by the
+ * caller. The scorer never derives leap calendar identity from the regular
+ * month number via `stemBranchForLunarMonth`.
+ */
+export interface ExplicitLeapMonthContext {
+  lunarMonth: number;
+  focusPalaceIndex: number;
+  calendarStem: string;
+  calendarBranch: string;
 }
 
 export function emptyMonthlyFlowAxes(): MonthlyFlowAxes {

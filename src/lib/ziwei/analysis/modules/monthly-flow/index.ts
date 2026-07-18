@@ -1,5 +1,6 @@
 export type * from "./types";
-export { analyzeMonthlyFlow } from "./analyze";
+export { analyzeMonthlyFlow, resolveYearStatus } from "./analyze";
+export { isEligibleNatalPhysicalStar } from "./collect-star-evidence";
 export {
   emptyMonthlyFlowMonthDiagnostics,
   emptyMonthlyFlowYearDiagnostics,

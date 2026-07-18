@@ -43,7 +43,14 @@ describe("resolveMonthContexts — regular months 1..12", () => {
       chart,
       school: "trung-chau",
       provider: trungChauProvider(),
-      explicitLeapContexts: [{ lunarMonth: 3, focusPalaceIndex: focus }],
+      explicitLeapContexts: [
+        {
+          lunarMonth: 3,
+          focusPalaceIndex: focus,
+          calendarStem: "Bính",
+          calendarBranch: "Dần",
+        },
+      ],
       diagnostics,
     });
 
@@ -51,6 +58,11 @@ describe("resolveMonthContexts — regular months 1..12", () => {
     expect(keys.filter((k) => k === "2026-M03")).toHaveLength(1);
     expect(keys.filter((k) => k === "2026-LM03")).toHaveLength(1);
     expect(keys).toContain("2026-LM03");
+
+    const leap = contexts.find((c) => c.identity.monthKey === "2026-LM03");
+    expect(leap?.identity.calendarStem).toBe("Bính");
+    expect(leap?.identity.calendarBranch).toBe("Dần");
+    expect(leap?.identity.focusPalaceIndex).toBe(focus);
 
     const idx = keys.indexOf("2026-M03");
     const leapIdx = keys.indexOf("2026-LM03");
@@ -95,14 +107,54 @@ describe("resolveMonthContexts — regular months 1..12", () => {
       school: "trung-chau",
       provider: trungChauProvider(),
       explicitLeapContexts: [
-        { lunarMonth: 13, focusPalaceIndex: 0 },
-        { lunarMonth: 4, focusPalaceIndex: 999 },
+        { lunarMonth: 13, focusPalaceIndex: 0, calendarStem: "Giáp", calendarBranch: "Tý" },
+        { lunarMonth: 4, focusPalaceIndex: 999, calendarStem: "Ất", calendarBranch: "Sửu" },
+        {
+          lunarMonth: 5,
+          focusPalaceIndex: 0,
+          calendarStem: "",
+          calendarBranch: "Dần",
+        },
       ],
       diagnostics,
     });
     expect(contexts).toHaveLength(12);
     expect(diagnostics.invalidMonthNumber).toContain("leap:13");
     expect(diagnostics.missingFocusPalace.some((k) => k === "2026-LM04")).toBe(true);
+    expect(diagnostics.missingCalendarStemBranch.some((k) => k === "2026-LM05")).toBe(true);
+  });
+
+  it("does not call stemBranchForLunarMonth when resolving leap contexts", () => {
+    const chart = calculateTrungChau(REGRESSION_BIRTH);
+    const diagnostics = emptyMonthlyFlowYearDiagnostics();
+    const monthsAsked: number[] = [];
+    const provider = {
+      ...trungChauProvider(),
+      stemBranchForLunarMonth: (yearStem: string, lunarMonth: number) => {
+        monthsAsked.push(lunarMonth);
+        return trungChauProvider().stemBranchForLunarMonth(yearStem, lunarMonth);
+      },
+    };
+    const focus = chart.palaces[2]!.index;
+    const { contexts } = resolveMonthContexts({
+      chart,
+      school: "trung-chau",
+      provider,
+      explicitLeapContexts: [
+        {
+          lunarMonth: 2,
+          focusPalaceIndex: focus,
+          calendarStem: "Kỷ",
+          calendarBranch: "Mùi",
+        },
+      ],
+      diagnostics,
+    });
+    // Provider is used for the twelve regular months only — never for leap.
+    expect(monthsAsked).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+    const leap = contexts.find((c) => c.identity.isLeapMonth);
+    expect(leap?.identity.calendarStem).toBe("Kỷ");
+    expect(leap?.identity.calendarBranch).toBe("Mùi");
   });
 
   it("rejects provider whose school does not match", () => {
