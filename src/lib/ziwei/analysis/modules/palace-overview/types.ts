@@ -132,6 +132,23 @@ export type PalaceAnnotationCategory =
   | "transformation-target"
   | "domain-projection";
 
+export interface PalaceAnnotationMetadata {
+  scope?: "same-palace" | "opposite-link" | "trine-link" | "tp4c";
+  transformation?: "Lộc" | "Quyền" | "Khoa" | "Kỵ";
+  targetStar?: string;
+  targetTraits?: string[];
+  trait?: string;
+  palaceDomainId?: string;
+
+  /**
+   * Domain-projection provenance only.
+   * These fields are descriptive and must never affect scoring.
+   */
+  contributorStarNames?: string[];
+  contributorEvidenceIds?: string[];
+  contributorCount?: number;
+}
+
 export interface PalaceAnnotation {
   id: string;
   category: PalaceAnnotationCategory;
@@ -147,14 +164,7 @@ export interface PalaceAnnotation {
   sourceIds: string[];
   knowledgeStatus: "experimental" | "approved";
 
-  metadata?: {
-    scope?: "same-palace" | "opposite-link" | "trine-link" | "tp4c";
-    transformation?: "Lộc" | "Quyền" | "Khoa" | "Kỵ";
-    targetStar?: string;
-    targetTraits?: string[];
-    trait?: string;
-    palaceDomainId?: string;
-  };
+  metadata?: PalaceAnnotationMetadata;
 }
 
 export interface PalaceOverviewSemanticDiagnostics {

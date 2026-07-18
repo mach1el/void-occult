@@ -170,13 +170,13 @@ describe("trait-projection-annotations", () => {
     expect(ann.factIds).toContain("fact:A");
     expect(ann.factIds).toContain("fact:B");
     expect(ann.factIds).toContain("fact:C");
-    expect(ann.metadata?.contributorStarNames).toContain("Sao A");
-    expect(ann.metadata?.contributorStarNames).toContain("Sao B");
-    expect(ann.metadata?.contributorStarNames).toContain("Sao C");
-    expect(ann.metadata?.contributorEvidenceIds).toContain("ev:minorA");
-    expect(ann.metadata?.contributorEvidenceIds).toContain("ev:minorB");
-    expect(ann.metadata?.contributorEvidenceIds).toContain("ev:minorC");
-    expect(ann.metadata?.contributorCount).toBe(3);
+    expect(ann.metadata!.contributorStarNames!).toContain("Sao A");
+    expect(ann.metadata!.contributorStarNames!).toContain("Sao B");
+    expect(ann.metadata!.contributorStarNames!).toContain("Sao C");
+    expect(ann.metadata!.contributorEvidenceIds!).toContain("ev:minorA");
+    expect(ann.metadata!.contributorEvidenceIds!).toContain("ev:minorB");
+    expect(ann.metadata!.contributorEvidenceIds!).toContain("ev:minorC");
+    expect(ann.metadata!.contributorCount).toBe(3);
   });
 
   it("Same evidence repeated: preserves single contributor", () => {
@@ -193,11 +193,11 @@ describe("trait-projection-annotations", () => {
     
     expect(ann.factIds).toHaveLength(1);
     expect(ann.factIds[0]).toBe("fact:tu-vi");
-    expect(ann.metadata?.contributorEvidenceIds).toHaveLength(1);
-    expect(ann.metadata?.contributorEvidenceIds[0]).toBe("ev:tu-vi");
-    expect(ann.metadata?.contributorStarNames).toHaveLength(1);
-    expect(ann.metadata?.contributorStarNames[0]).toBe("Tử Vi");
-    expect(ann.metadata?.contributorCount).toBe(1);
+    expect(ann.metadata!.contributorEvidenceIds!).toHaveLength(1);
+    expect(ann.metadata!.contributorEvidenceIds![0]).toBe("ev:tu-vi");
+    expect(ann.metadata!.contributorStarNames!).toHaveLength(1);
+    expect(ann.metadata!.contributorStarNames![0]).toBe("Tử Vi");
+    expect(ann.metadata!.contributorCount).toBe(1);
   });
 
   it("Multiple traits from one star: produces multiple annotations", () => {

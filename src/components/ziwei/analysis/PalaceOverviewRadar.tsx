@@ -378,6 +378,35 @@ function subjectEvidenceFor(
   return allEvidence.find((e) => e.factIds.includes(factId));
 }
 
+function cloneProjectionAnnotation(
+  annotation: PalaceAnnotation,
+): PalaceAnnotation {
+  return {
+    ...annotation,
+    tags: [...annotation.tags],
+    factIds: [...annotation.factIds],
+    palaceIndexes: [...annotation.palaceIndexes],
+    palaceRoles: [...annotation.palaceRoles],
+    sourceIds: [...annotation.sourceIds],
+    metadata: annotation.metadata
+      ? {
+          ...annotation.metadata,
+          targetTraits: annotation.metadata.targetTraits
+            ? [...annotation.metadata.targetTraits]
+            : undefined,
+          contributorStarNames:
+            annotation.metadata.contributorStarNames
+              ? [...annotation.metadata.contributorStarNames]
+              : undefined,
+          contributorEvidenceIds:
+            annotation.metadata.contributorEvidenceIds
+              ? [...annotation.metadata.contributorEvidenceIds]
+              : undefined,
+        }
+      : undefined,
+  };
+}
+
 function DomainProjectionList({
   annotations,
   allEvidence,
@@ -396,7 +425,7 @@ function DomainProjectionList({
         .toLocaleLowerCase("vi");
       if (!seen.has(normalized)) {
         seen.add(normalized);
-        deduped.push({ ...a });
+        deduped.push(cloneProjectionAnnotation(a));
       } else {
         const existing = deduped.find(
           (d) =>

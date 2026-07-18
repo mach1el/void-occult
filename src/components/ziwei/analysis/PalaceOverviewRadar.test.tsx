@@ -1,9 +1,10 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi, afterEach } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import type { BirthInput } from "@/types/chart";
 import { PalaceOverviewRadar } from "./PalaceOverviewRadar";
+import * as overview from "@/lib/ziwei/analysis/modules/palace-overview";
 
 const REGRESSION: BirthInput = {
   solarDate: "1991-09-21",
@@ -26,6 +27,69 @@ const OTHER_CHART: BirthInput = {
 function renderRadar() {
   const chart = calculateNamPhai(REGRESSION);
   return render(<PalaceOverviewRadar chart={chart} school="nam-phai" />);
+}
+
+function clickRadarPoint(points: NodeListOf<Element>, index: number): void {
+  const point = points.item(index);
+  if (!point) {
+    throw new Error(`Expected radar point at index ${index}`);
+  }
+  fireEvent.click(point);
+}
+
+function getPalaceDetail(container: HTMLElement): HTMLElement {
+  const detail = container.querySelector<HTMLElement>(".palace-overview-detail");
+  if (!detail) {
+    throw new Error("Expected Palace Overview detail panel");
+  }
+  return detail;
+}
+
+function resultFixture(
+  palaceIndex: number,
+  score: number,
+  band: overview.PalaceOverviewBand,
+): overview.PalaceOverviewResult {
+  const PALACE_NAMES = ["Mệnh", "Phụ Mẫu", "Phúc Đức", "Điền Trạch", "Quan Lộc", "Nô Bộc", "Thiên Di", "Tật Ách", "Tài Bạch", "Tử Tức", "Phu Thê", "Huynh Đệ"];
+  return {
+    module: "palace-overview",
+    version: "1.0.0-experimental",
+    versions: {
+      contractVersion: "1",
+      engineVersion: "1",
+      knowledgeVersion: "1",
+    },
+    palaceIndex,
+    palaceName: PALACE_NAMES[palaceIndex] ?? `Test ${palaceIndex}`,
+    palaceBranch: "Tý",
+    score,
+    band,
+    axes: {
+      support: 0,
+      pressure: 0,
+      stability: 0,
+      activation: 0,
+    },
+    rawAxes: {
+      support: 0,
+      pressure: 0,
+      stability: 0,
+      activation: 0,
+    },
+    intensity: 0,
+    evidenceCompleteness: 100,
+    majorStars: [],
+    contextOnlyStars: [],
+    isVoidMajor: false,
+    topSupportDrivers: [],
+    topPressureDrivers: [],
+    allEvidence: [],
+    profileId: "test",
+    school: "nam-phai",
+    annotations: [],
+    isMenh: palaceIndex === 0,
+    isThan: false,
+  };
 }
 
 describe("PalaceOverviewRadar", () => {
@@ -177,65 +241,144 @@ describe("PalaceOverviewRadar", () => {
   });
 });
 
-import * as overview from "@/lib/ziwei/analysis/modules/palace-overview";
-import { vi } from "vitest";
 
-describe("PalaceOverviewRadar — Band Labels UI", () => {
+describe("PalaceOverviewRadar — Presentation Logic", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it("proves scores 0, 24, 40, and 49.9 display Cẩn trọng and 50 displays Cân bằng", () => {
-    // Mock analyzeAllPalaces for this test only
-    const spy = vi.spyOn(overview, "analyzeAllPalaces").mockReturnValue({
+    vi.spyOn(overview, "analyzeAllPalaces").mockReturnValue({
       knowledgeValid: true,
       semanticStatus: "available",
-      results: Array.from({ length: 12 }).map((_, i) => ({
-        palaceIndex: i,
-        palaceName: ["Mệnh", "Phụ Mẫu", "Phúc Đức", "Điền Trạch", "Quan Lộc"][i] || "Test",
-        palaceBranch: "Tý",
-        isMenh: i === 0,
-        isThan: false,
-        score: [0, 24, 40, 49.9, 50][i] ?? 0,
-        band: ["low", "low", "guarded", "guarded", "balanced"][i] ?? "low",
-        rawAxes: { support: 0, pressure: 0, stability: 0, activation: 0 },
-        allEvidence: [],
-        annotations: [],
-        topSupportDrivers: [],
-        topPressureDrivers: [],
-        contextOnlyStars: [],
-        evidenceCompleteness: 100,
-        profileId: "test",
-        school: "nam-phai",
-        versions: { contractVersion: "1", engineVersion: "1", knowledgeVersion: "1" }
-      }))
-    } as any);
+      results: Array.from({ length: 12 }).map((_, i) =>
+        resultFixture(
+          i,
+          [0, 24, 40, 49.9, 50][i] ?? 0,
+          (["low", "low", "guarded", "guarded", "balanced"][i] as overview.PalaceOverviewBand) ?? "low"
+        )
+      ),
+      diagnostics: {
+        unknownStars: [], duplicateFacts: [], unmappedTransformations: [], missingBrightness: [], contextOnlyFacts: [], ruleHits: []
+      },
+      semanticDiagnostics: overview.emptySemanticDiagnostics()
+    });
 
     const { container } = renderRadar();
     const points = container.querySelectorAll(".palace-overview-radar__point");
+    expect(points).toHaveLength(12);
 
-    // Click index 0 (Score 0, low)
-    fireEvent.click(points[0]);
-    let detail = container.querySelector(".palace-overview-detail") as HTMLElement;
-    expect(within(detail).getByText(/Cẩn trọng · Điểm 0/)).toBeInTheDocument();
+    clickRadarPoint(points, 0);
+    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Điểm 0/)).toBeInTheDocument();
 
-    // Click index 1 (Score 24, low)
-    fireEvent.click(points[1]);
-    detail = container.querySelector(".palace-overview-detail") as HTMLElement;
-    expect(within(detail).getByText(/Cẩn trọng · Điểm 24/)).toBeInTheDocument();
+    clickRadarPoint(points, 1);
+    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Điểm 24/)).toBeInTheDocument();
 
-    // Click index 2 (Score 40, guarded)
-    fireEvent.click(points[2]);
-    detail = container.querySelector(".palace-overview-detail") as HTMLElement;
-    expect(within(detail).getByText(/Cẩn trọng · Điểm 40/)).toBeInTheDocument();
+    clickRadarPoint(points, 2);
+    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Điểm 40/)).toBeInTheDocument();
 
-    // Click index 3 (Score 49.9, guarded)
-    fireEvent.click(points[3]);
-    detail = container.querySelector(".palace-overview-detail") as HTMLElement;
-    expect(within(detail).getByText(/Cẩn trọng · Điểm 49.9/)).toBeInTheDocument();
+    clickRadarPoint(points, 3);
+    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Điểm 49.9/)).toBeInTheDocument();
 
-    // Click index 4 (Score 50, balanced)
-    fireEvent.click(points[4]);
-    detail = container.querySelector(".palace-overview-detail") as HTMLElement;
-    expect(within(detail).getByText(/Cân bằng · Điểm 50/)).toBeInTheDocument();
+    clickRadarPoint(points, 4);
+    expect(within(getPalaceDetail(container)).getByText(/Cân bằng · Điểm 50/)).toBeInTheDocument();
+  });
 
-    spy.mockRestore();
+  it("DomainProjectionList dedup does not mutate the input annotations array or its items", () => {
+    const annotations: overview.PalaceAnnotation[] = [
+      {
+        id: "ann-1",
+        category: "domain-projection",
+        label: "Lãnh đạo trong công việc",
+        explanationKey: "test",
+        tags: ["leadership"],
+        factIds: ["fact:A"],
+        palaceIndexes: [0],
+        palaceRoles: ["focus"],
+        sourceIds: ["src:1"],
+        knowledgeStatus: "approved",
+        metadata: {
+          trait: "leadership",
+          palaceDomainId: "career",
+          contributorStarNames: ["Sao A"],
+          contributorEvidenceIds: ["ev:A"],
+          contributorCount: 1,
+        },
+      },
+      {
+        id: "ann-2",
+        category: "domain-projection",
+        label: "Lãnh đạo trong công việc",
+        explanationKey: "test",
+        tags: ["leadership"],
+        factIds: ["fact:B"],
+        palaceIndexes: [0],
+        palaceRoles: ["focus"],
+        sourceIds: ["src:2"],
+        knowledgeStatus: "approved",
+        metadata: {
+          trait: "leadership",
+          palaceDomainId: "career",
+          contributorStarNames: ["Sao B"],
+          contributorEvidenceIds: ["ev:B"],
+          contributorCount: 1,
+        },
+      },
+    ];
+
+    const before = structuredClone(annotations);
+
+    const fixture = resultFixture(0, 50, "balanced");
+    fixture.annotations = annotations;
+    fixture.allEvidence = [
+      {
+        id: "ev-A",
+        category: "major-star",
+        label: "Sao A",
+        explanationKey: "ev",
+        axes: { support: 0, pressure: 0, stability: 0, activation: 0 },
+        factIds: ["fact:A"],
+        palaceRole: "focus",
+        palaceName: "Mệnh",
+        palaceBranch: "Tý",
+        sourceIds: ["src-A"],
+        knowledgeStatus: "approved",
+      },
+      {
+        id: "ev-B",
+        category: "major-star",
+        label: "Sao B",
+        explanationKey: "ev",
+        axes: { support: 0, pressure: 0, stability: 0, activation: 0 },
+        factIds: ["fact:B"],
+        palaceRole: "focus",
+        palaceName: "Mệnh",
+        palaceBranch: "Tý",
+        sourceIds: ["src-B"],
+        knowledgeStatus: "approved",
+      },
+    ];
+
+    vi.spyOn(overview, "analyzeAllPalaces").mockReturnValue({
+      knowledgeValid: true,
+      semanticStatus: "available",
+      results: Array.from({ length: 12 }).map((_, i) => (i === 0 ? fixture : resultFixture(i, 0, "low"))),
+      diagnostics: {
+        unknownStars: [], duplicateFacts: [], unmappedTransformations: [], missingBrightness: [], contextOnlyFacts: [], ruleHits: []
+      },
+      semanticDiagnostics: overview.emptySemanticDiagnostics()
+    });
+
+    const { container } = renderRadar();
+    const points = container.querySelectorAll(".palace-overview-radar__point");
+    clickRadarPoint(points, 0);
+
+    const detail = getPalaceDetail(container);
+    // Rendered output contains one visible sentence
+    const items = within(detail).getAllByText("Lãnh đạo trong công việc");
+    expect(items).toHaveLength(1);
+
+    expect(annotations).toEqual(before);
   });
 });
 
