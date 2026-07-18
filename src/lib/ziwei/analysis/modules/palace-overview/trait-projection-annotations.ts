@@ -70,59 +70,97 @@ export function buildTraitProjectionAnnotations(input: {
 
   if (!palaceEntry) return out;
 
-  const seen = new Set<string>();
   const subjects = subjectsForProjection(allEvidence);
+
+  // Aggregate by trait + domainId
+  const aggregatedMap = new Map<string, {
+    trait: string;
+    label: string;
+    explanationKey: string;
+    factIds: string[];
+    sourceIds: string[];
+    contributorStarNames: string[];
+    contributorEvidenceIds: string[];
+  }>();
 
   for (const subject of subjects) {
     const subjectFactId = subject.factIds[0] ?? subject.id;
-    // Dedup by canonical star identity, not fact id — a star with more than
-    // one evidence object referencing the same physical presence must still
-    // only ever project one trait sentence per palace.
-    const subjectIdentity = subject.starName ?? subjectFactId;
     const traits = traitsForSubject(subject, knowledge);
 
     for (const trait of traits) {
-      const dedupKey = `${trait}:${focusPalaceName}:${subjectIdentity}`;
-      if (seen.has(dedupKey)) continue;
+      const projectionKey = `${trait}:${palaceEntry.domainId}`;
+      let agg = aggregatedMap.get(projectionKey);
 
-      const override = catalog.overrides.find(
-        (o) => o.trait === trait && o.palace === focusPalaceName,
-      );
-      let label: string | null = null;
-      let explanationKey: string | null = null;
-      if (override) {
-        label = override.label;
-        explanationKey = `projection.${override.id}`;
-      } else {
-        const traitLabel = traitLabelByTrait.get(trait);
-        if (traitLabel) {
-          label = catalog.composition.fallbackTemplate
-            .replace("{traitLabel}", traitLabel)
-            .replace("{palaceLabel}", palaceEntry.label);
-          explanationKey = `projection.fallback.${trait}`;
+      if (!agg) {
+        const override = catalog.overrides.find(
+          (o) => o.trait === trait && o.palace === focusPalaceName,
+        );
+        let label: string | null = null;
+        let explanationKey: string | null = null;
+        if (override) {
+          label = override.label;
+          explanationKey = `projection.${override.id}`;
+        } else {
+          const traitLabel = traitLabelByTrait.get(trait);
+          if (traitLabel) {
+            label = catalog.composition.fallbackTemplate
+              .replace("{traitLabel}", traitLabel)
+              .replace("{palaceLabel}", palaceEntry.label);
+            explanationKey = `projection.fallback.${trait}`;
+          }
         }
+
+        if (!label || !explanationKey) {
+          if (!diagnostics.unknownProjectionTraits.includes(trait)) {
+            diagnostics.unknownProjectionTraits.push(trait);
+          }
+          continue;
+        }
+
+        agg = {
+          trait,
+          label,
+          explanationKey,
+          factIds: [],
+          sourceIds: [...catalog.sourceIds],
+          contributorStarNames: [],
+          contributorEvidenceIds: [],
+        };
+        aggregatedMap.set(projectionKey, agg);
       }
 
-      if (!label || !explanationKey) {
-        diagnostics.unknownProjectionTraits.push(trait);
-        continue;
+      if (!agg.factIds.includes(subjectFactId)) {
+        agg.factIds.push(subjectFactId);
       }
-      seen.add(dedupKey);
-
-      out.push({
-        id: `ann:domain-projection:${focusPalaceIndex}:${dedupKey}`,
-        category: "domain-projection",
-        label,
-        explanationKey,
-        tags: [],
-        factIds: [subjectFactId],
-        palaceIndexes: [focusPalaceIndex],
-        palaceRoles: ["focus"],
-        sourceIds: catalog.sourceIds,
-        knowledgeStatus,
-        metadata: { trait, palaceDomainId: palaceEntry.domainId },
-      });
+      if (subject.starName && !agg.contributorStarNames.includes(subject.starName)) {
+        agg.contributorStarNames.push(subject.starName);
+      }
+      if (!agg.contributorEvidenceIds.includes(subject.id)) {
+        agg.contributorEvidenceIds.push(subject.id);
+      }
     }
+  }
+
+  for (const agg of aggregatedMap.values()) {
+    out.push({
+      id: `ann:domain-projection:${focusPalaceIndex}:${agg.trait}`,
+      category: "domain-projection",
+      label: agg.label,
+      explanationKey: agg.explanationKey,
+      tags: [],
+      factIds: agg.factIds,
+      palaceIndexes: [focusPalaceIndex],
+      palaceRoles: ["focus"],
+      sourceIds: agg.sourceIds,
+      knowledgeStatus,
+      metadata: {
+        trait: agg.trait,
+        palaceDomainId: palaceEntry.domainId,
+        contributorStarNames: agg.contributorStarNames,
+        contributorEvidenceIds: agg.contributorEvidenceIds,
+        contributorCount: agg.contributorEvidenceIds.length,
+      },
+    });
   }
 
   return out;

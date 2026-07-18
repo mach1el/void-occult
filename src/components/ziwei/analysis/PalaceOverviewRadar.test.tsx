@@ -177,6 +177,68 @@ describe("PalaceOverviewRadar", () => {
   });
 });
 
+import * as overview from "@/lib/ziwei/analysis/modules/palace-overview";
+import { vi } from "vitest";
+
+describe("PalaceOverviewRadar — Band Labels UI", () => {
+  it("proves scores 0, 24, 40, and 49.9 display Cẩn trọng and 50 displays Cân bằng", () => {
+    // Mock analyzeAllPalaces for this test only
+    const spy = vi.spyOn(overview, "analyzeAllPalaces").mockReturnValue({
+      knowledgeValid: true,
+      semanticStatus: "available",
+      results: Array.from({ length: 12 }).map((_, i) => ({
+        palaceIndex: i,
+        palaceName: ["Mệnh", "Phụ Mẫu", "Phúc Đức", "Điền Trạch", "Quan Lộc"][i] || "Test",
+        palaceBranch: "Tý",
+        isMenh: i === 0,
+        isThan: false,
+        score: [0, 24, 40, 49.9, 50][i] ?? 0,
+        band: ["low", "low", "guarded", "guarded", "balanced"][i] ?? "low",
+        rawAxes: { support: 0, pressure: 0, stability: 0, activation: 0 },
+        allEvidence: [],
+        annotations: [],
+        topSupportDrivers: [],
+        topPressureDrivers: [],
+        contextOnlyStars: [],
+        evidenceCompleteness: 100,
+        profileId: "test",
+        school: "nam-phai",
+        versions: { contractVersion: "1", engineVersion: "1", knowledgeVersion: "1" }
+      }))
+    } as any);
+
+    const { container } = renderRadar();
+    const points = container.querySelectorAll(".palace-overview-radar__point");
+
+    // Click index 0 (Score 0, low)
+    fireEvent.click(points[0]);
+    let detail = container.querySelector(".palace-overview-detail") as HTMLElement;
+    expect(within(detail).getByText(/Cẩn trọng · Điểm 0/)).toBeInTheDocument();
+
+    // Click index 1 (Score 24, low)
+    fireEvent.click(points[1]);
+    detail = container.querySelector(".palace-overview-detail") as HTMLElement;
+    expect(within(detail).getByText(/Cẩn trọng · Điểm 24/)).toBeInTheDocument();
+
+    // Click index 2 (Score 40, guarded)
+    fireEvent.click(points[2]);
+    detail = container.querySelector(".palace-overview-detail") as HTMLElement;
+    expect(within(detail).getByText(/Cẩn trọng · Điểm 40/)).toBeInTheDocument();
+
+    // Click index 3 (Score 49.9, guarded)
+    fireEvent.click(points[3]);
+    detail = container.querySelector(".palace-overview-detail") as HTMLElement;
+    expect(within(detail).getByText(/Cẩn trọng · Điểm 49.9/)).toBeInTheDocument();
+
+    // Click index 4 (Score 50, balanced)
+    fireEvent.click(points[4]);
+    detail = container.querySelector(".palace-overview-detail") as HTMLElement;
+    expect(within(detail).getByText(/Cân bằng · Điểm 50/)).toBeInTheDocument();
+
+    spy.mockRestore();
+  });
+});
+
 describe("PalaceOverviewRadar — V1.2.1 stale-selection regression (PR #81 review thread)", () => {
   it("selecting a palace then changing the chart clears the stale result instead of showing old data", () => {
     const chartA = calculateNamPhai(REGRESSION);

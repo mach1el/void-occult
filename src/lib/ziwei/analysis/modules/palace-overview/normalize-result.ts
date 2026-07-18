@@ -50,9 +50,9 @@ export function computeIntensity(
 
 export function bandForScore(score: number): PalaceOverviewBand {
   if (score <= 24) return "low";
-  if (score <= 39) return "guarded";
-  if (score <= 59) return "balanced";
-  if (score <= 74) return "supportive";
+  if (score < 50) return "guarded";
+  if (score < 60) return "balanced";
+  if (score < 75) return "supportive";
   return "strong";
 }
 

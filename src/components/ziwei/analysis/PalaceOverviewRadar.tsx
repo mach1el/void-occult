@@ -37,8 +37,8 @@ const PALACE_SHORT_LABEL: Record<string, string> = {
 };
 
 const BAND_LABEL: Record<PalaceOverviewBand, string> = {
-  low: "Yếu",
-  guarded: "Cần thận trọng",
+  low: "Cẩn trọng",
+  guarded: "Cẩn trọng",
   balanced: "Cân bằng",
   supportive: "Thuận lợi",
   strong: "Mạnh",
@@ -385,11 +385,54 @@ function DomainProjectionList({
   annotations: PalaceAnnotation[];
   allEvidence: PalaceEvidence[];
 }) {
-  const majorTransform = annotations.filter((a) => {
+  const dedupedAnnotations = useMemo(() => {
+    const seen = new Set<string>();
+    const deduped: PalaceAnnotation[] = [];
+    for (const a of annotations) {
+      const normalized = a.label
+        .normalize("NFC")
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLocaleLowerCase("vi");
+      if (!seen.has(normalized)) {
+        seen.add(normalized);
+        deduped.push({ ...a });
+      } else {
+        const existing = deduped.find(
+          (d) =>
+            d.label.normalize("NFC").trim().replace(/\s+/g, " ").toLocaleLowerCase("vi") ===
+            normalized
+        );
+        if (existing) {
+          existing.factIds = [...new Set([...existing.factIds, ...a.factIds])];
+          existing.sourceIds = [...new Set([...existing.sourceIds, ...a.sourceIds])];
+          if (existing.metadata && a.metadata) {
+            existing.metadata.contributorStarNames = [
+              ...new Set([
+                ...(existing.metadata.contributorStarNames || []),
+                ...(a.metadata.contributorStarNames || []),
+              ]),
+            ];
+            existing.metadata.contributorEvidenceIds = [
+              ...new Set([
+                ...(existing.metadata.contributorEvidenceIds || []),
+                ...(a.metadata.contributorEvidenceIds || []),
+              ]),
+            ];
+            existing.metadata.contributorCount =
+              existing.metadata.contributorEvidenceIds?.length || 0;
+          }
+        }
+      }
+    }
+    return deduped;
+  }, [annotations]);
+
+  const majorTransform = dedupedAnnotations.filter((a) => {
     const subject = subjectEvidenceFor(a, allEvidence);
     return subject?.category === "major-star" || subject?.category === "transformation";
   });
-  const minor = [...annotations]
+  const minor = [...dedupedAnnotations]
     .filter((a) => subjectEvidenceFor(a, allEvidence)?.category === "minor-star-family")
     .sort(
       (a, b) =>

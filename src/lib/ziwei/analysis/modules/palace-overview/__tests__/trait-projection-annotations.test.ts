@@ -138,8 +138,50 @@ describe("trait-projection-annotations", () => {
     expect(JSON.stringify(evidence.axes)).toBe(before);
   });
 
-  it("deduplicates by trait+palace+subject fact", () => {
+  it("Different stars, same trait: aggregates contributors into one annotation", () => {
+    const minorA = baseEvidence({
+      id: "ev:minorA",
+      category: "minor-star-family",
+      starName: "Sao A",
+      traitTags: ["mentorship"],
+      factIds: ["fact:A"],
+    });
+    const minorB = baseEvidence({
+      id: "ev:minorB",
+      category: "minor-star-family",
+      starName: "Sao B",
+      traitTags: ["mentorship"],
+      factIds: ["fact:B"],
+    });
+    const minorC = baseEvidence({
+      id: "ev:minorC",
+      category: "minor-star-family",
+      starName: "Sao C",
+      traitTags: ["mentorship"],
+      factIds: ["fact:C"],
+    });
+
+    const { out } = project([minorA, minorB, minorC]);
+    const mentorshipHits = out.filter((a) => a.metadata?.trait === "mentorship");
+    
+    expect(mentorshipHits).toHaveLength(1);
+    const ann = mentorshipHits[0]!;
+    
+    expect(ann.factIds).toContain("fact:A");
+    expect(ann.factIds).toContain("fact:B");
+    expect(ann.factIds).toContain("fact:C");
+    expect(ann.metadata?.contributorStarNames).toContain("Sao A");
+    expect(ann.metadata?.contributorStarNames).toContain("Sao B");
+    expect(ann.metadata?.contributorStarNames).toContain("Sao C");
+    expect(ann.metadata?.contributorEvidenceIds).toContain("ev:minorA");
+    expect(ann.metadata?.contributorEvidenceIds).toContain("ev:minorB");
+    expect(ann.metadata?.contributorEvidenceIds).toContain("ev:minorC");
+    expect(ann.metadata?.contributorCount).toBe(3);
+  });
+
+  it("Same evidence repeated: preserves single contributor", () => {
     const evidence = baseEvidence({
+      id: "ev:tu-vi",
       category: "major-star",
       starName: "Tử Vi",
       factIds: ["fact:tu-vi"],
@@ -147,22 +189,28 @@ describe("trait-projection-annotations", () => {
     const { out } = project([evidence, evidence]);
     const authorityHits = out.filter((a) => a.metadata?.trait === "authority");
     expect(authorityHits).toHaveLength(1);
+    const ann = authorityHits[0]!;
+    
+    expect(ann.factIds).toHaveLength(1);
+    expect(ann.factIds[0]).toBe("fact:tu-vi");
+    expect(ann.metadata?.contributorEvidenceIds).toHaveLength(1);
+    expect(ann.metadata?.contributorEvidenceIds[0]).toBe("ev:tu-vi");
+    expect(ann.metadata?.contributorStarNames).toHaveLength(1);
+    expect(ann.metadata?.contributorStarNames[0]).toBe("Tử Vi");
+    expect(ann.metadata?.contributorCount).toBe(1);
   });
 
-  it("V1.2.1: dedup key is canonical star identity, not fact id — two different fact ids for the same star still project once", () => {
-    const evidenceA = baseEvidence({
+  it("Multiple traits from one star: produces multiple annotations", () => {
+    // Tử Vi has two traits: "authority" and "protection"
+    const evidence = baseEvidence({
       category: "major-star",
       starName: "Tử Vi",
-      factIds: ["fact:tu-vi-a"],
+      factIds: ["fact:tu-vi"],
     });
-    const evidenceB = baseEvidence({
-      category: "major-star",
-      starName: "Tử Vi",
-      factIds: ["fact:tu-vi-b"],
-    });
-    const { out } = project([evidenceA, evidenceB]);
-    const authorityHits = out.filter((a) => a.metadata?.trait === "authority");
-    expect(authorityHits).toHaveLength(1);
+    const { out } = project([evidence]);
+    
+    expect(out.some((a) => a.metadata?.trait === "authority")).toBe(true);
+    expect(out.some((a) => a.metadata?.trait === "protection")).toBe(true);
   });
 
   it("V1.2.1: a major star targeted by 2 Tứ Hóa records no longer triple-projects the same trait", () => {
