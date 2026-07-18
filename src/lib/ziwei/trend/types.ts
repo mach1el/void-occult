@@ -3,10 +3,44 @@
 import type { BirthInput, ChartPalace, School } from "@/types/chart";
 import type { ScoringWeights } from "./weights";
 
+/** Nhóm tín hiệu breakdown — UI phân nhóm theo field này, không parse reason. */
+export type ScoreSignalCategory =
+  | "major-star"
+  | "minor-star"
+  | "mutagen"
+  | "void"
+  | "chang-sheng"
+  | "guardrail"
+  | "normalization"
+  | "other";
+
+/** Vai trò cung trong khung TP4C. */
+export type ScorePalaceRole = "focus" | "xung" | "tam-hop";
+
+/** Tầng nguồn tín hiệu (Tứ Hóa / kỹ thuật). */
+export type ScoreLayer = "natal" | "annual" | "monthly" | "technical";
+
 export interface ScoreLine {
   source: string;
   points: number;
   reason: string;
+  /** Metadata optional — Lưu Nguyệt luôn set; Đại vận/radar có thể thiếu. */
+  category?: ScoreSignalCategory;
+  palaceRole?: ScorePalaceRole;
+  palaceName?: string;
+  palaceBranch?: string;
+  starTier?: 1 | 2 | 3 | 4;
+  brightness?: string;
+  layer?: ScoreLayer;
+  transform?: "Lộc" | "Quyền" | "Khoa" | "Kỵ";
+  targetStar?: string;
+}
+
+/** Cung trong TP4C không có chính tinh (Vô chính diệu) — chỉ context UI. */
+export interface VoidMajorPalaceInfo {
+  palaceRole: ScorePalaceRole;
+  palaceName: string;
+  palaceBranch: string;
 }
 
 export interface TrendPoint {
@@ -16,6 +50,16 @@ export interface TrendPoint {
   /** Điểm Hung — thang 0–100, độc lập với cat. */
   hung: number;
   isCurrent: boolean;
+  /** Số tháng âm 1–12 — chỉ Lưu Nguyệt. */
+  monthNumber?: number;
+  calendarStem?: string;
+  calendarBranch?: string;
+  focusPalaceName?: string;
+  focusPalaceBranch?: string;
+  /** Ngữ cảnh chính tinh / VCD trong TP4C — không cộng điểm. */
+  majorStarContext?: {
+    voidMajorPalaces: VoidMajorPalaceInfo[];
+  };
   breakdown: {
     cat: ScoreLine[];
     hung: ScoreLine[];

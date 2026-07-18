@@ -165,6 +165,12 @@ export function getLuuNienTrend(
       cat: scored.cat,
       hung: scored.hung,
       isCurrent: entry.month === currentMonth,
+      monthNumber: entry.month,
+      calendarStem: entry.calendarStem,
+      calendarBranch: entry.calendarBranch,
+      focusPalaceName: entry.focusPalace.name,
+      focusPalaceBranch: entry.focusPalace.branch,
+      majorStarContext: scored.majorStarContext,
       breakdown: scored.breakdown,
     });
   }

@@ -245,12 +245,44 @@
   font-size: 0.8rem;
 }
 
+.trend-point-focus {
+  margin: 4px 0 0;
+  color: var(--ash);
+  font-family: var(--font-chat);
+  font-size: 0.78rem;
+}
+
 .trend-point-scores strong {
   color: var(--amber-soft);
 }
 
 .trend-point-current {
   color: var(--jade);
+}
+
+.trend-void-callout {
+  margin: 0 0 10px;
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: rgb(9 7 20 / 35%);
+  color: var(--muted);
+  font-family: var(--font-chat);
+  font-size: 0.72rem;
+}
+
+.trend-void-callout-title {
+  margin: 0 0 4px;
+  color: var(--ash);
+  font-weight: 650;
+}
+
+.trend-void-callout ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
 }
 
 .trend-point-panel-body {
@@ -276,11 +308,37 @@
 }
 
 .trend-breakdown.is-cat h4 {
-  color: var(--trend-cat);
+  color: var(--trend-cat, var(--violet));
 }
 
 .trend-breakdown.is-hung h4 {
-  color: var(--trend-hung);
+  color: var(--trend-hung, var(--cyan));
+}
+
+.trend-breakdown-group {
+  margin: 0 0 10px;
+}
+
+.trend-breakdown-group:last-child {
+  margin-bottom: 0;
+}
+
+.trend-breakdown-group h5 {
+  margin: 0 0 6px;
+  color: var(--ash);
+  font-family: var(--font-chat);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.trend-breakdown-group.is-major-focus h5 {
+  color: var(--paper);
+}
+
+.trend-breakdown-group.is-technical {
+  opacity: 0.72;
 }
 
 .trend-breakdown ul {
@@ -299,9 +357,30 @@
 }
 
 .trend-breakdown-source {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
   color: var(--paper);
   font-size: 0.78rem;
   font-weight: 600;
+}
+
+.trend-breakdown-badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.trend-breakdown-badge {
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  padding: 0 6px;
+  color: var(--muted);
+  font-size: 0.58rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .trend-breakdown-points {

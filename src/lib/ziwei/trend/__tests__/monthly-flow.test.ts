@@ -5,6 +5,7 @@ import { calculate as calculateTrungChau } from "../../engine-trung-chau";
 import { getEngine } from "../../chart";
 import { findDauQuanPalace } from "../util";
 import { scoreLuuNguyetFrame } from "../monthly-flow";
+import { getLuuNienTrend } from "../score";
 import type { MonthlyFocusEntry } from "../types";
 import { makeChart, palace } from "./fixtures";
 
@@ -569,5 +570,259 @@ describe("scoreLuuNguyetFrame — WYSIWYG (§9.10)", () => {
     expect(
       scored.breakdown.hung.reduce((sum, l) => sum + l.points, 0),
     ).toBe(scored.hung);
+  });
+});
+
+describe("scoreLuuNguyetFrame — metadata ScoreLine (semantic UI)", () => {
+  it("tier 1 focus/xung/tam-hop → major-star; tier khác → minor-star", () => {
+    // Tý focus · Ngọ xung · Thìn+Thân tam hợp
+    const palaces = emptyPalaces({
+      [BRANCHES.indexOf("Tý")]: [
+        { name: "Thái Dương", layer: "major", brightness: "Hãm" },
+        { name: "Văn Xương", layer: "soft", brightness: "Đắc" },
+      ],
+      [BRANCHES.indexOf("Ngọ")]: [
+        { name: "Thiên Lương", layer: "major", brightness: "Miếu" },
+      ],
+      [BRANCHES.indexOf("Thìn")]: [
+        { name: "Cự Môn", layer: "major", brightness: "Hãm" },
+      ],
+    });
+    for (const p of palaces) {
+      if (p.branch === "Tý") p.name = "Mệnh";
+      if (p.branch === "Ngọ") p.name = "Thiên Di";
+      if (p.branch === "Thìn") p.name = "Quan Lộc";
+      if (p.branch === "Thân") p.name = "Tài Bạch";
+    }
+    const focus = palaces[BRANCHES.indexOf("Tý")]!;
+    const scored = scoreLuuNguyetFrame(
+      buildChart({ palaces, annualBranch: "Sửu" }),
+      engine,
+      entryFor(focus, "Giáp", "Ngọ"),
+    );
+    const all = [...scored.breakdown.cat, ...scored.breakdown.hung];
+    const duong = all.find((l) => l.source === "Thái Dương")!;
+    expect(duong.category).toBe("major-star");
+    expect(duong.palaceRole).toBe("focus");
+    expect(duong.starTier).toBe(1);
+
+    const luong = all.find((l) => l.source === "Thiên Lương")!;
+    expect(luong.category).toBe("major-star");
+    expect(luong.palaceRole).toBe("xung");
+
+    const cu = all.find((l) => l.source === "Cự Môn")!;
+    expect(cu.category).toBe("major-star");
+    expect(cu.palaceRole).toBe("tam-hop");
+
+    const xuong = all.find((l) => l.source === "Văn Xương")!;
+    expect(xuong.category).toBe("minor-star");
+    expect(xuong.starTier).toBeGreaterThan(1);
+
+    expect(scored.majorStarContext?.voidMajorPalaces).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          palaceRole: "tam-hop",
+          palaceName: "Tài Bạch",
+          palaceBranch: "Thân",
+        }),
+      ]),
+    );
+  });
+
+  it("Tứ Hóa / Tuần / Trường Sinh có category đúng", () => {
+    const focusIndex = BRANCHES.indexOf("Mùi");
+    const palaces = emptyPalaces({
+      [focusIndex]: [
+        { name: "Thái Dương", layer: "major", brightness: "Bình" },
+      ],
+    });
+    palaces[focusIndex]!.changSheng = "Bệnh";
+    const focus = palaces[focusIndex]!;
+    const scored = scoreLuuNguyetFrame(
+      makeChart({
+        palaces,
+        annualBranch: "Sửu",
+        natalMutagens: [
+          { mutagen: "Kỵ", starName: "Thái Dương", palace: focus },
+        ],
+        annualMutagens: [],
+        voidMarkers: [{ type: "Tuần", branches: ["Mùi"] }],
+      }),
+      engine,
+      entryFor(focus, "Giáp", "Ngọ"),
+    );
+    const all = [...scored.breakdown.cat, ...scored.breakdown.hung];
+    const nguyetKy = all.find((l) => l.source === "Lưu nguyệt Hóa Kỵ");
+    expect(nguyetKy).toMatchObject({
+      category: "mutagen",
+      layer: "monthly",
+      transform: "Kỵ",
+      targetStar: "Thái Dương",
+    });
+
+    const gocKy = all.find((l) => l.source === "Gốc Hóa Kỵ");
+    expect(gocKy).toMatchObject({
+      category: "mutagen",
+      layer: "natal",
+      transform: "Kỵ",
+      targetStar: "Thái Dương",
+    });
+
+    expect(all.some((l) => l.source === "Tuần" && l.category === "void")).toBe(
+      true,
+    );
+    expect(
+      all.some(
+        (l) =>
+          l.source.startsWith("Trường Sinh") && l.category === "chang-sheng",
+      ),
+    ).toBe(true);
+  });
+
+  it("Kỵ Trùng Kỵ / Xung Thái Tuế → guardrail; Chuẩn hóa → normalization", () => {
+    const focusIndex = BRANCHES.indexOf("Mùi");
+    const palaces = emptyPalaces({
+      [focusIndex]: [{ name: "Thái Dương", layer: "major", brightness: "Bình" }],
+    });
+    const focus = palaces[focusIndex]!;
+    // Giáp → Dương Kỵ; natal Kỵ cùng cung → Trùng Kỵ; calendarBranch Tý xung Ngọ năm.
+    const scored = scoreLuuNguyetFrame(
+      buildChart({
+        palaces,
+        annualBranch: "Ngọ",
+        natalMutagens: [
+          { mutagen: "Kỵ", starName: "Thái Dương", palace: focus },
+        ],
+      }),
+      engine,
+      entryFor(focus, "Giáp", "Tý"),
+    );
+    const hung = scored.breakdown.hung;
+    expect(
+      hung.some((l) => l.source === "Kỵ Trùng Kỵ" && l.category === "guardrail"),
+    ).toBe(true);
+    expect(
+      hung.some(
+        (l) => l.source === "Xung Thái Tuế" && l.category === "guardrail",
+      ),
+    ).toBe(true);
+  });
+});
+
+describe("regression semantic — tháng 5 & 3 lá số thầy", () => {
+  it("tháng 5: Giáp Ngọ · Mệnh/Tý · chính tinh + VCD + Tứ Hóa", () => {
+    const chart = calculateNamPhai(REGRESSION_INPUT);
+    const points = getLuuNienTrend(chart, {
+      school: "nam-phai",
+      birthInput: REGRESSION_INPUT,
+    });
+    const p = points.find((x) => x.monthNumber === 5)!;
+    expect(p.calendarStem).toBe("Giáp");
+    expect(p.calendarBranch).toBe("Ngọ");
+    expect(p.focusPalaceName).toBe("Mệnh");
+    expect(p.focusPalaceBranch).toBe("Tý");
+
+    const all = [...p.breakdown.cat, ...p.breakdown.hung];
+    const duong = all.find((l) => l.source === "Thái Dương")!;
+    expect(duong).toMatchObject({
+      category: "major-star",
+      palaceRole: "focus",
+      palaceName: "Mệnh",
+      palaceBranch: "Tý",
+      brightness: "Hãm",
+      points: 5,
+    });
+    expect(p.breakdown.hung).toContainEqual(duong);
+
+    const luong = all.find((l) => l.source === "Thiên Lương")!;
+    expect(luong).toMatchObject({
+      category: "major-star",
+      palaceRole: "xung",
+      palaceName: "Thiên Di",
+      palaceBranch: "Ngọ",
+      brightness: "Miếu",
+      points: 3.6,
+    });
+    expect(p.breakdown.cat).toContainEqual(luong);
+
+    const cu = all.find((l) => l.source === "Cự Môn")!;
+    expect(cu).toMatchObject({
+      category: "major-star",
+      palaceRole: "tam-hop",
+      palaceName: "Quan Lộc",
+      palaceBranch: "Thìn",
+      brightness: "Hãm",
+      points: 2.4,
+    });
+
+    expect(p.majorStarContext?.voidMajorPalaces).toEqual([
+      {
+        palaceRole: "tam-hop",
+        palaceName: "Tài Bạch",
+        palaceBranch: "Thân",
+      },
+    ]);
+
+    const ky = all.find((l) => l.source === "Lưu nguyệt Hóa Kỵ")!;
+    expect(ky).toMatchObject({
+      category: "mutagen",
+      layer: "monthly",
+      transform: "Kỵ",
+      targetStar: "Thái Dương",
+      points: 15,
+    });
+    const quyen = all.find((l) => l.source === "Gốc Hóa Quyền")!;
+    expect(quyen).toMatchObject({
+      category: "mutagen",
+      layer: "natal",
+      transform: "Quyền",
+      targetStar: "Thái Dương",
+      points: 8,
+    });
+  });
+
+  it("tháng 3: Nhâm Thìn · Phu Thê/Tuất · 5 chính tinh", () => {
+    const chart = calculateNamPhai(REGRESSION_INPUT);
+    const points = getLuuNienTrend(chart, {
+      school: "nam-phai",
+      birthInput: REGRESSION_INPUT,
+    });
+    const p = points.find((x) => x.monthNumber === 3)!;
+    expect(p.calendarStem).toBe("Nhâm");
+    expect(p.calendarBranch).toBe("Thìn");
+    expect(p.focusPalaceName).toBe("Phu Thê");
+    expect(p.focusPalaceBranch).toBe("Tuất");
+
+    const all = [...p.breakdown.cat, ...p.breakdown.hung];
+    expect(all.find((l) => l.source === "Thiên Đồng")).toMatchObject({
+      palaceRole: "focus",
+      palaceName: "Phu Thê",
+      brightness: "Hãm",
+      points: 5,
+    });
+    expect(all.find((l) => l.source === "Cự Môn")).toMatchObject({
+      palaceRole: "xung",
+      palaceName: "Quan Lộc",
+      brightness: "Hãm",
+      points: 4,
+    });
+    expect(all.find((l) => l.source === "Thiên Cơ")).toMatchObject({
+      palaceRole: "tam-hop",
+      palaceName: "Phúc Đức",
+      brightness: "Đắc",
+      points: 1.8,
+    });
+    expect(all.find((l) => l.source === "Thái Âm")).toMatchObject({
+      palaceRole: "tam-hop",
+      palaceName: "Phúc Đức",
+      brightness: "Hãm",
+      points: 1.5,
+    });
+    expect(all.find((l) => l.source === "Thiên Lương")).toMatchObject({
+      palaceRole: "tam-hop",
+      palaceName: "Thiên Di",
+      brightness: "Miếu",
+      points: 2.2,
+    });
   });
 });

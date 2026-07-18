@@ -38,6 +38,8 @@ export function finalizeLayer(
           source: "Chuẩn hóa",
           points: score - raw,
           reason: `Clamp về thang 0–100 (thô ${raw})`,
+          category: "normalization",
+          layer: "technical",
         },
       ],
     };

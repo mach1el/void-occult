@@ -16,7 +16,13 @@ import type { ChartData, ChartEngine, ChartPalace, MutagenRecord } from "@/types
 import { isAnnualStar } from "../star-classification";
 import { palaceHasSalvation } from "./combo-eval";
 import { computeStarEnergy, routeStarEnergy } from "./star-energy";
-import type { MonthlyFocusEntry, ScoreLine, TrendPoint } from "./types";
+import type {
+  MonthlyFocusEntry,
+  ScoreLayer,
+  ScoreLine,
+  TrendPoint,
+  VoidMajorPalaceInfo,
+} from "./types";
 import { roundTo1Decimal } from "./ui-breakdown";
 import { finalizeLayer, isMutagenStar, voidBranches } from "./util";
 import { TAM_HOP, XUNG_CHIEU } from "./zones";
@@ -27,6 +33,22 @@ interface MonthFrameRow {
   palace: ChartPalace;
   role: MonthRole;
   weight: number;
+}
+
+function mutagenScoreLayer(
+  label: "Lưu nguyệt" | "Lưu niên" | "Gốc",
+): ScoreLayer {
+  if (label === "Lưu nguyệt") return "monthly";
+  if (label === "Lưu niên") return "annual";
+  return "natal";
+}
+
+function palaceMeta(role: MonthRole, palace: ChartPalace) {
+  return {
+    palaceRole: role,
+    palaceName: palace.name,
+    palaceBranch: palace.branch,
+  } as const;
 }
 
 const MONTH_ROLE_WEIGHT: Record<MonthRole, number> = {
@@ -171,7 +193,7 @@ export function scoreLuuNguyetFrame(
   chart: ChartData,
   engine: ChartEngine,
   monthEntry: MonthlyFocusEntry,
-): Pick<TrendPoint, "cat" | "hung" | "breakdown"> {
+): Pick<TrendPoint, "cat" | "hung" | "breakdown" | "majorStarContext"> {
   const focus = monthEntry.focusPalace;
   const cat: ScoreLine[] = [];
   const hung: ScoreLine[] = [];
@@ -180,11 +202,23 @@ export function scoreLuuNguyetFrame(
   const frameByIndex = new Map(frame.map((row) => [row.palace.index, row]));
   const hits: LocKyHit[] = [];
 
+  const voidMajorPalaces: VoidMajorPalaceInfo[] = frame
+    .filter(
+      (row) =>
+        !(row.palace.stars ?? []).some((star) => star.layer === "major"),
+    )
+    .map((row) => ({
+      palaceRole: row.role,
+      palaceName: row.palace.name,
+      palaceBranch: row.palace.branch,
+    }));
+
   // ── Bước A: quét sao gốc trong khung (chính tinh/phụ tinh + Tuần/Triệt +
   // Trường Sinh) — đây là "C_gốc_cung", giống mọi tầng vì cấu hình sao gốc
   // của một cung không đổi theo tháng/năm/đại vận. ──
   for (const { palace, role, weight: wCung } of frame) {
     const where = roleLabel(role, palace);
+    const place = palaceMeta(role, palace);
 
     for (const star of palace.stars ?? []) {
       if (isAnnualStar(star)) continue; // sao lưu niên không thuộc gốc cung
@@ -209,6 +243,11 @@ export function scoreLuuNguyetFrame(
         source: star.name,
         points,
         reason: `${brightLabel} · base tại ${where}`,
+        category: energy.row.tier === 1 ? "major-star" : "minor-star",
+        ...place,
+        starTier: energy.row.tier,
+        brightness: energy.bright ?? undefined,
+        layer: "natal",
       };
       if (routed.layer === "cat") cat.push(line);
       else hung.push(line);
@@ -223,6 +262,9 @@ export function scoreLuuNguyetFrame(
           source: type,
           points: scale(6, wCung),
           reason: `${type} án ngữ ${where} (${palace.branch})`,
+          category: "void",
+          ...place,
+          layer: "natal",
         });
       }
     }
@@ -246,6 +288,9 @@ export function scoreLuuNguyetFrame(
           source: `Trường Sinh·${cs}`,
           points: scale(pts, wCung),
           reason: `${cs} tại ${where}`,
+          category: "chang-sheng",
+          ...place,
+          layer: "natal",
         };
         if (layer === "cat") cat.push(line);
         else hung.push(line);
@@ -282,6 +327,11 @@ export function scoreLuuNguyetFrame(
         source: `${layer} Hóa ${kind}`,
         points,
         reason: `${layer} Hóa ${kind}→${record.starName} tại ${where}`,
+        category: "mutagen",
+        ...palaceMeta(hit.role, palace),
+        layer: mutagenScoreLayer(layer),
+        transform: kind,
+        targetStar: record.starName,
       };
       if (kind === "Kỵ") hung.push(line);
       else cat.push(line);
@@ -306,6 +356,9 @@ export function scoreLuuNguyetFrame(
         source: "Nguyệt Lộc Tồn",
         points,
         reason: `Nguyệt Lộc Tồn tại ${roleLabel(locHit.role, locHit.palace)}`,
+        category: "minor-star",
+        ...palaceMeta(locHit.role, locHit.palace),
+        layer: "monthly",
       });
       hits.push({
         layer: "Lưu nguyệt",
@@ -319,6 +372,9 @@ export function scoreLuuNguyetFrame(
         source: "Nguyệt Kình Dương",
         points: scale(NGUYET_KINH_DA_POINTS, kinhHit.weight),
         reason: `Nguyệt Kình Dương tại ${roleLabel(kinhHit.role, kinhHit.palace)}`,
+        category: "minor-star",
+        ...palaceMeta(kinhHit.role, kinhHit.palace),
+        layer: "monthly",
       });
     }
     const daHit = frameByIndex.get(daIndex);
@@ -327,6 +383,9 @@ export function scoreLuuNguyetFrame(
         source: "Nguyệt Đà La",
         points: scale(NGUYET_KINH_DA_POINTS, daHit.weight),
         reason: `Nguyệt Đà La tại ${roleLabel(daHit.role, daHit.palace)}`,
+        category: "minor-star",
+        ...palaceMeta(daHit.role, daHit.palace),
+        layer: "monthly",
       });
     }
   }
@@ -372,6 +431,11 @@ export function scoreLuuNguyetFrame(
     otherLoc.some((o) => o.palaceIndex === n.palaceIndex),
   );
 
+  const guardrailMeta = {
+    category: "guardrail" as const,
+    layer: "technical" as const,
+  };
+
   let hungLines = hung;
   if (kyTrungKy) {
     hungLines = [
@@ -380,6 +444,7 @@ export function scoreLuuNguyetFrame(
         source: "Kỵ Trùng Kỵ",
         points: KY_TRUNG_KY_BONUS,
         reason: "Nguyệt Hóa Kỵ ngộ Lưu Kỵ năm/Kỵ gốc cùng cung — báo động đỏ",
+        ...guardrailMeta,
       },
     ];
     const raw = roundTo1Decimal(
@@ -397,6 +462,7 @@ export function scoreLuuNguyetFrame(
       source: "Kỵ Trùng Kỵ",
       points: 0,
       reason: `Nhân toàn cột Hung ×${TRUNG_MULTIPLIER} (thô ${raw} → ${target})`,
+      ...guardrailMeta,
     });
   }
 
@@ -408,6 +474,7 @@ export function scoreLuuNguyetFrame(
         source: "Lộc Trùng Lộc",
         points: LOC_TRUNG_LOC_BONUS,
         reason: "Nguyệt Lộc ngộ Lưu Lộc năm/Lộc gốc cùng cung — cơ hội bùng nổ",
+        ...guardrailMeta,
       },
     ];
     const raw = roundTo1Decimal(
@@ -425,6 +492,7 @@ export function scoreLuuNguyetFrame(
       source: "Lộc Trùng Lộc",
       points: 0,
       reason: `Nhân toàn cột Cát ×${TRUNG_MULTIPLIER} (thô ${raw} → ${target})`,
+      ...guardrailMeta,
     });
   }
 
@@ -440,6 +508,7 @@ export function scoreLuuNguyetFrame(
         source: "Xung Thái Tuế",
         points: XUNG_THAI_TUE_BONUS,
         reason: `Chi tháng ${monthEntry.calendarBranch} xung chi năm ${chart.annualBranch} — tháng động`,
+        ...guardrailMeta,
       },
     ];
   }
@@ -451,5 +520,6 @@ export function scoreLuuNguyetFrame(
     cat: catFinal.score,
     hung: hungFinal.score,
     breakdown: { cat: catFinal.lines, hung: hungFinal.lines },
+    majorStarContext: { voidMajorPalaces },
   };
 }
