@@ -84,6 +84,12 @@ describe("analyzeMajorFortune — domain resolution (Trung Châu chart)", () => 
     expect(result.diagnostics.missingCalculationPolicyProfile.length).toBeGreaterThan(0);
   });
 
+  it("does not falsely report Palace Overview star source IDs as missing", () => {
+    const chart = calculateTrungChau(REGRESSION);
+    const result = analyzeMajorFortune(chart, { school: "trung-chau" });
+    expect(result.diagnostics.missingSourceIds).toEqual([]);
+  });
+
   it("module source tree never reads Palace Overview's normalized 12-palace score", () => {
     const root = join(process.cwd(), "src/lib/ziwei/analysis/modules/major-fortune");
     const files = [
@@ -135,6 +141,12 @@ describe("analyzeMajorFortune — school profiles", () => {
     expect(result.overall.evidence.some((e) => e.category === "transformation")).toBe(false);
     expect(result.capabilities.supportsMajorFortuneTransformations).toBe(false);
     expect(result.capabilities.supportsTwelveDomainOverlay).toBe(false);
+  });
+
+  it("Nam Phái: does not falsely report Palace Overview star source IDs as missing", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const result = analyzeMajorFortune(chart, { school: "nam-phai" });
+    expect(result.diagnostics.missingSourceIds).toEqual([]);
   });
 
   it("preserves static school capabilities when globally unavailable (no active decade)", () => {

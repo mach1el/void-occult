@@ -13,6 +13,7 @@ import { collectStarEvidence } from "./collect-star-evidence";
 import { collectTransformationEvidence } from "./collect-transformation-evidence";
 import { collectStructuralEvidence } from "./collect-structural-evidence";
 import { detectDisabledInteractionHits } from "./detect-disabled-interactions";
+import { auditEvidenceSources } from "./audit-evidence-sources";
 import { aggregateMajorFortuneEvidence } from "./aggregate";
 import { normalizeMajorFortuneAxes, sumWeightedAxes } from "./normalize";
 import { dedupeMajorFortuneDiagnostics, emptyMajorFortuneDiagnostics } from "./diagnostics";
@@ -89,25 +90,6 @@ function resolvePeriodPhase(
   return phase ? { phaseId: phase.phaseId } : null;
 }
 
-function auditEvidenceSources(
-  evidence: MajorFortuneEvidence[],
-  knowledge: DeepReadonly<MajorFortuneScoringKnowledgeV0> | MajorFortuneScoringKnowledgeV0,
-  diagnostics: MajorFortuneDiagnostics,
-): void {
-  const known = new Set(knowledge.sourceRegistry.sources.map((s) => s.sourceId));
-  for (const item of evidence) {
-    if (item.sourceIds.length === 0) {
-      diagnostics.missingSourceIds.push(`${item.id}:empty`);
-      continue;
-    }
-    for (const sourceId of item.sourceIds) {
-      if (!known.has(sourceId)) {
-        diagnostics.missingSourceIds.push(`${item.id}:${sourceId}`);
-      }
-    }
-  }
-}
-
 function scoreFrame(
   chart: ChartData,
   frame: MajorFortuneFrame,
@@ -135,7 +117,7 @@ function scoreFrame(
     mfKnowledge.scoringProfile,
     diagnostics,
   );
-  auditEvidenceSources(evidence, mfKnowledge, diagnostics);
+  auditEvidenceSources(evidence, mfKnowledge, numericKnowledge, diagnostics);
 
   const rawAxes = sumWeightedAxes(evidence);
   const normalized = normalizeMajorFortuneAxes(rawAxes, mfKnowledge.scoringProfile);
