@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "monthly-flow-scoring-pack.schema.json",
+  "title": "Monthly Flow Scoring V0 Pack",
+  "type": "object",
+  "$defs": {
+    "axes": {
+      "type": "object",
+      "required": [
+        "support",
+        "pressure",
+        "stability",
+        "activation"
+      ],
+      "properties": {
+        "support": {
+          "type": "number"
+        },
+        "pressure": {
+          "type": "number"
+        },
+        "stability": {
+          "type": "number"
+        },
+        "activation": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "domain": {
+      "enum": [
+        "health",
+        "family",
+        "wealth",
+        "career",
+        "social",
+        "romance"
+      ]
+    },
+    "school": {
+      "enum": [
+        "nam-phai",
+        "trung-chau"
+      ]
+    },
+    "monthStatus": {
+      "enum": [
+        "available",
+        "partial",
+        "unavailable"
+      ]
+    },
+    "monthKey": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-(?:M|LM)(?:0[1-9]|1[0-2])$"
+    }
+  }
+}

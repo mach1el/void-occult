@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "monthly-flow-domain-definitions-v0",
+  "status": "experimental",
+  "domainSource": {
+    "catalogId": "annual-axis-definitions-v0",
+    "path": "src/lib/ziwei/analysis/knowledge/annual-axes/annual-axis-definitions.v0.json",
+    "reuse": [
+      "domain IDs",
+      "labels",
+      "anchor definitions",
+      "anchor weights"
+    ],
+    "forbiddenReuse": [
+      "scores",
+      "bands",
+      "normalized axes",
+      "top drivers"
+    ]
+  },
+  "domains": [
+    {
+      "domain": "health",
+      "labelVi": "Sức khỏe"
+    },
+    {
+      "domain": "family",
+      "labelVi": "Gia đạo"
+    },
+    {
+      "domain": "wealth",
+      "labelVi": "Tài lộc"
+    },
+    {
+      "domain": "career",
+      "labelVi": "Công việc"
+    },
+    {
+      "domain": "social",
+      "labelVi": "Giao hữu"
+    },
+    {
+      "domain": "romance",
+      "labelVi": "Tình duyên"
+    }
+  ],
+  "annualDomainFrame": {
+    "focusOffset": 0,
+    "oppositeOffset": 6,
+    "trineOffsets": [
+      4,
+      8
+    ],
+    "modulo": 12
+  },
+  "monthlyActivationFrame": {
+    "focusOffset": 0,
+    "oppositeOffset": 6,
+    "trineOffsets": [
+      4,
+      8
+    ],
+    "modulo": 12
+  },
+  "intersectionPolicy": {
+    "mode": "physical-palace-intersection",
+    "starEvidenceRequiresIntersection": true,
+    "monthlyTransformationRequiresDomainFrame": true,
+    "monthlyTransformationRequiresFocusIntersection": false,
+    "contextTransformationRequiresFocusIntersection": true,
+    "geometryWeightCombiner": "geometric_mean",
+    "expression": "sqrt(domainFrameRoleWeight * monthlyFrameRoleWeight)"
+  },
+  "availability": {
+    "requiresCompleteAnnualDomainMap": true,
+    "missingMapBehavior": "all_axes_unavailable",
+    "natalPalaceNameFallbackAllowed": false
+  }
+}

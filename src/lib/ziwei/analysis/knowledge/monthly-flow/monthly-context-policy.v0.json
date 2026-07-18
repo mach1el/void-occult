@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "monthly-flow-context-policy-v0",
+  "status": "experimental",
+  "rules": [
+    {
+      "context": "natal-stars",
+      "mode": "monthly_focus_intersection_only",
+      "numericCategory": "monthly-focus-star",
+      "notes": "Reuse canonical natal star knowledge once; do not add the same star again as Major Fortune star context."
+    },
+    {
+      "context": "annual-stars",
+      "mode": "physical_fact_in_domain_and_monthly_frames",
+      "numericCategory": "annual-star-context"
+    },
+    {
+      "context": "annual-transformations",
+      "mode": "exact_target_in_domain_and_monthly_frames",
+      "numericCategory": "annual-transformation-context"
+    },
+    {
+      "context": "major-transformations",
+      "mode": "exact_target_in_domain_and_monthly_frames",
+      "numericCategory": "major-transformation-context",
+      "schoolCapabilityRequired": true
+    },
+    {
+      "context": "major-active-palace",
+      "mode": "activation_only_when_active_palace_intersects_domain_and_monthly_frames",
+      "numericCategory": "major-active-palace-context",
+      "polarity": "activation_only"
+    }
+  ],
+  "forbiddenInputs": [
+    "PalaceOverviewResult.score",
+    "AnnualAxisResult.score",
+    "MajorFortuneAxisResult.score",
+    "normalizedAxes from another scoring module",
+    "topDrivers from another scoring module",
+    "interpretation annotations"
+  ],
+  "crossLayerRule": {
+    "onePhysicalFactOneNumericContributionPerMonthAxis": true,
+    "exactSamePhysicalFactWinner": "highest_base_weight",
+    "differentTransformationLayersRemainDistinct": true
+  }
+}

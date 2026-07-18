@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "monthly-flow-moving-stars-v0",
+  "status": "research_required",
+  "defaultEnabled": false,
+  "records": [
+    {
+      "markerId": "monthly-loc-ton",
+      "enabled": false,
+      "resolverCapability": "ChartEngine.locTonIndex",
+      "candidateAxes": null,
+      "ruleId": "RULE-MONTHLY-LOC-TON-CANDIDATE",
+      "sourceRefs": []
+    },
+    {
+      "markerId": "monthly-kinh-duong",
+      "enabled": false,
+      "resolverCapability": "Calculation Core only",
+      "candidateAxes": null,
+      "ruleId": "RULE-MONTHLY-KINH-CANDIDATE",
+      "sourceRefs": []
+    },
+    {
+      "markerId": "monthly-da-la",
+      "enabled": false,
+      "resolverCapability": "Calculation Core only",
+      "candidateAxes": null,
+      "ruleId": "RULE-MONTHLY-DA-CANDIDATE",
+      "sourceRefs": []
+    }
+  ],
+  "notes": "The V0 scorer must not call locTonIndex or derive Kình/Đà."
+}

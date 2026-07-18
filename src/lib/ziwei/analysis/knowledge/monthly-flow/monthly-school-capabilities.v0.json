@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "monthly-flow-school-capabilities-v0",
+  "status": "experimental",
+  "profiles": {
+    "nam-phai": {
+      "supportsMonthlyFocus": true,
+      "supportsCalendarStemBranch": true,
+      "supportsMonthlyTransformations": true,
+      "supportsSixAxisOverlayFromCurrentChart": false,
+      "sixAxisRequirement": "explicit complete annual-domain map from approved adapter",
+      "monthlyTransformationProviderRequirement": "Nam Phái Calculation Core provider",
+      "supportsLeapMonth": "explicit_resolved_context_only"
+    },
+    "trung-chau": {
+      "supportsMonthlyFocus": true,
+      "supportsCalendarStemBranch": true,
+      "supportsMonthlyTransformations": true,
+      "supportsSixAxisOverlayFromCurrentChart": true,
+      "sixAxisRequirement": "exactly twelve unique annualPalaceName labels",
+      "monthlyTransformationProviderRequirement": "Trung Châu Calculation Core provider",
+      "supportsLeapMonth": "explicit_resolved_context_only"
+    }
+  },
+  "mismatchBehavior": "exclude_input_and_emit_diagnostic",
+  "crossSchoolProviderAllowed": false
+}

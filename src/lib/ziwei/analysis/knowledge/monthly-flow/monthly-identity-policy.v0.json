@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "monthly-flow-identity-policy-v0",
+  "status": "experimental",
+  "monthIdentity": {
+    "requiredFields": [
+      "annualYear",
+      "lunarMonth",
+      "isLeapMonth",
+      "monthKey",
+      "focusPalaceIndex",
+      "calendarStem",
+      "calendarBranch"
+    ],
+    "regularMonthKeyFormat": "YYYY-M01..YYYY-M12",
+    "leapMonthKeyFormat": "YYYY-LM01..YYYY-LM12",
+    "lunarMonthRange": [
+      1,
+      12
+    ],
+    "monthKeyMustBeUnique": true
+  },
+  "coordinateIndependence": {
+    "focusPalaceSource": "FlowMonthEntry.palace or explicit resolved context",
+    "calendarStemBranchSource": "FlowMonthEntry.stem/branch or injected Calculation Core provider",
+    "inferCalendarFromFocusPalace": false,
+    "inferFocusPalaceFromCalendarBranch": false
+  },
+  "regularYear": {
+    "expectedRegularMonthCount": 12,
+    "missingRegularMonthBehavior": "partial_year",
+    "duplicateRegularMonthBehavior": "reject_duplicate"
+  },
+  "leapMonth": {
+    "mode": "explicit_context_only",
+    "mayProduceThirteenthResult": true,
+    "inferFromChartLunarLeapOnly": false,
+    "missingSchoolPolicyBehavior": "diagnostic_and_unavailable_leap_month"
+  },
+  "ordering": {
+    "sortBy": [
+      "lunarMonth",
+      "isLeapMonth"
+    ],
+    "regularBeforeLeapOfSameNumber": true,
+    "inputOrderAffectsOutput": false
+  }
+}

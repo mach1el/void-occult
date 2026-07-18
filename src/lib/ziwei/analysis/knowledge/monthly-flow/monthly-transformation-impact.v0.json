@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "monthly-flow-transformation-impact-v0",
+  "status": "experimental",
+  "applicationMode": "exact_target_star_and_physical_palace",
+  "records": [
+    {
+      "mutagen": "Lộc",
+      "axes": {
+        "support": 1.0,
+        "pressure": 0,
+        "stability": 0.1,
+        "activation": 0.7
+      },
+      "stackingGroup": "monthly-transformation",
+      "ruleId": "RULE-MONTHLY-MUTAGEN-LOC-V0"
+    },
+    {
+      "mutagen": "Quyền",
+      "axes": {
+        "support": 0.35,
+        "pressure": 0.25,
+        "stability": 0,
+        "activation": 1.0
+      },
+      "stackingGroup": "monthly-transformation",
+      "ruleId": "RULE-MONTHLY-MUTAGEN-QUYEN-V0"
+    },
+    {
+      "mutagen": "Khoa",
+      "axes": {
+        "support": 0.75,
+        "pressure": 0,
+        "stability": 0.8,
+        "activation": 0.4
+      },
+      "stackingGroup": "monthly-transformation",
+      "ruleId": "RULE-MONTHLY-MUTAGEN-KHOA-V0"
+    },
+    {
+      "mutagen": "Kỵ",
+      "axes": {
+        "support": 0,
+        "pressure": 1.0,
+        "stability": -0.75,
+        "activation": 0.8
+      },
+      "stackingGroup": "monthly-transformation",
+      "ruleId": "RULE-MONTHLY-MUTAGEN-KY-V0"
+    }
+  ],
+  "consistency": {
+    "baseVectorsMatch": [
+      "annual-mutagen-impact-v0",
+      "major-fortune-transformation-impact-v0"
+    ],
+    "layerStrengthComesFromScoringProfile": true
+  }
+}

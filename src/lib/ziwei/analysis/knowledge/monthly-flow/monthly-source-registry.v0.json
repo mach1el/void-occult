@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "0.1.0",
+  "registryId": "monthly-flow-source-registry-v0",
+  "status": "incomplete",
+  "sources": [
+    {
+      "sourceId": "SRC-MONTHLY-CORE-001",
+      "title": "ApexVoid ChartData and ChartEngine monthly contracts",
+      "sourceType": "internal_calculation_contract",
+      "location": "src/types/chart.ts",
+      "allowedUsage": [
+        "FlowMonthEntry shape",
+        "coordinate separation",
+        "monthly stem-branch provider",
+        "monthly Tứ Hóa provider"
+      ],
+      "prohibitedUsage": [
+        "numeric scoring authority"
+      ]
+    },
+    {
+      "sourceId": "SRC-MONTHLY-ENG-001",
+      "title": "ApexVoid Monthly Flow Scoring Engineering Model V0",
+      "sourceType": "internal_architecture",
+      "allowedUsage": [
+        "formula_design",
+        "synthetic_calibration",
+        "implementation_contract"
+      ],
+      "prohibitedUsage": [
+        "claim_as_classical_numeric_doctrine"
+      ],
+      "claims": [
+        {
+          "claimId": "CLM-MONTHLY-ENG-001",
+          "description": "Monthly activation is independent from positive or negative quality."
+        },
+        {
+          "claimId": "CLM-MONTHLY-ENG-002",
+          "description": "Monthly scores use physical facts rather than previous module scores."
+        },
+        {
+          "claimId": "CLM-MONTHLY-ENG-003",
+          "description": "Focus-palace geometry and calendar stem/branch are independent inputs."
+        }
+      ]
+    },
+    {
+      "sourceId": "SRC-MONTHLY-WTZ-001",
+      "title": "王亭之談星：四化通論",
+      "author": "王亭之",
+      "sourceType": "school_material_republication",
+      "url": "https://www.shenpowang.com/ziwei/wangtingzhi/d244946.html",
+      "researchClaim": "Flow year, month, day and hour layers each use their own heavenly stem for transformations.",
+      "allowedUsage": [
+        "monthly transformation layer structure"
+      ],
+      "prohibitedUsage": [
+        "numeric coefficient authority"
+      ]
+    },
+    {
+      "sourceId": "SRC-MONTHLY-DJ-001",
+      "title": "紫微斗数流月怎么起？",
+      "author": "杨易德",
+      "sourceType": "modern_secondary_exposition",
+      "url": "https://www.yangyide.net/ziwei/4194.html",
+      "researchClaim": "The annual Dòu Jūn determines the first lunar-month focus palace and later months move one palace in sequence.",
+      "allowedUsage": [
+        "calculation architecture cross-check",
+        "fixture design"
+      ],
+      "prohibitedUsage": [
+        "primary doctrine authority",
+        "numeric coefficient authority"
+      ]
+    },
+    {
+      "sourceId": "SRC-MONTHLY-LEAP-001",
+      "title": "王亭之談星（03）— 閏月",
+      "author": "王亭之",
+      "sourceType": "school_material_republication",
+      "url": "https://www.xuanmen.com.cn/archives/1105.html",
+      "researchClaim": "Leap-month handling is disputed; the cited school practice splits the leap month by halves.",
+      "allowedUsage": [
+        "documenting policy disagreement"
+      ],
+      "prohibitedUsage": [
+        "universal leap-month default",
+        "numeric coefficient authority"
+      ]
+    }
+  ],
+  "researchQueue": [
+    {
+      "researchId": "RQ-MONTHLY-001",
+      "priority": "P0",
+      "topic": "monthly focus calculation",
+      "question": "Verify primary locators for each school's Dòu Jūn and monthly focus rules."
+    },
+    {
+      "researchId": "RQ-MONTHLY-002",
+      "priority": "P0",
+      "topic": "monthly transformation tables",
+      "question": "Verify each provider uses the correct school table for every stem."
+    },
+    {
+      "researchId": "RQ-MONTHLY-003",
+      "priority": "P1",
+      "topic": "leap month",
+      "question": "Keep explicit school policies instead of one universal default."
+    },
+    {
+      "researchId": "RQ-MONTHLY-004",
+      "priority": "P1",
+      "topic": "calendar relations",
+      "question": "Determine whether relations add evidence beyond resolved transformations."
+    },
+    {
+      "researchId": "RQ-MONTHLY-005",
+      "priority": "P1",
+      "topic": "interaction modifiers",
+      "question": "Collect source-backed exact-target interactions before enabling modifiers."
+    }
+  ]
+}

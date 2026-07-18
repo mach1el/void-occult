@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "monthly-flow-focus-markers-v0",
+  "status": "experimental",
+  "polarityRule": "activation_only",
+  "records": [
+    {
+      "markerId": "monthly-focus-palace",
+      "frameRole": "focus",
+      "axes": {
+        "support": 0,
+        "pressure": 0,
+        "stability": 0,
+        "activation": 1.0
+      },
+      "ruleId": "RULE-MONTHLY-FOCUS-V0"
+    },
+    {
+      "markerId": "monthly-opposite-palace",
+      "frameRole": "opposite",
+      "axes": {
+        "support": 0,
+        "pressure": 0,
+        "stability": 0,
+        "activation": 0.55
+      },
+      "ruleId": "RULE-MONTHLY-OPPOSITE-V0"
+    },
+    {
+      "markerId": "monthly-trine-palace",
+      "frameRole": "trine",
+      "axes": {
+        "support": 0,
+        "pressure": 0,
+        "stability": 0,
+        "activation": 0.45
+      },
+      "ruleId": "RULE-MONTHLY-TRINE-V0"
+    }
+  ],
+  "constraints": {
+    "oneFocusMarkerPerMonth": true,
+    "twoTrineMarkersPerMonth": true,
+    "oneOppositeMarkerPerMonth": true,
+    "markerMayChangeSupportOrPressure": false
+  }
+}

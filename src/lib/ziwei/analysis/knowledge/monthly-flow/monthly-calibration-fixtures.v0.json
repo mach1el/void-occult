@@ -1,0 +1,363 @@
+{
+  "schemaVersion": "0.1.0",
+  "fixtureSetId": "monthly-flow-calibration-v0",
+  "status": "synthetic_golden",
+  "formulaProfileId": "monthly-flow-scoring-experimental-v0",
+  "formulaCases": [
+    {
+      "fixtureId": "MONTHLY-CAL-001",
+      "label": "neutral",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 0,
+        "stability": 0,
+        "activation": 0
+      },
+      "expected": {
+        "score": 50.0,
+        "intensity": 0,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.0,
+          "pressure": 0.0,
+          "stability": 0.0,
+          "activation": 0.0
+        }
+      }
+    },
+    {
+      "fixtureId": "MONTHLY-CAL-002",
+      "label": "activation-only",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 0,
+        "stability": 0,
+        "activation": 3
+      },
+      "expected": {
+        "score": 50.0,
+        "intensity": 70,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.0,
+          "pressure": 0.0,
+          "stability": 0.0,
+          "activation": 0.698806
+        }
+      }
+    },
+    {
+      "fixtureId": "MONTHLY-CAL-003",
+      "label": "light-support-low-activation",
+      "rawAxes": {
+        "support": 1,
+        "pressure": 0,
+        "stability": 0.2,
+        "activation": 0.5
+      },
+      "expected": {
+        "score": 53.7,
+        "intensity": 18,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.283469,
+          "pressure": 0.0,
+          "stability": 0.066568,
+          "activation": 0.181269
+        }
+      }
+    },
+    {
+      "fixtureId": "MONTHLY-CAL-004",
+      "label": "moderate-support",
+      "rawAxes": {
+        "support": 2,
+        "pressure": 0,
+        "stability": 0.5,
+        "activation": 2
+      },
+      "expected": {
+        "score": 61.7,
+        "intensity": 55,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.486583,
+          "pressure": 0.0,
+          "stability": 0.16514,
+          "activation": 0.550671
+        }
+      }
+    },
+    {
+      "fixtureId": "MONTHLY-CAL-005",
+      "label": "strong-support",
+      "rawAxes": {
+        "support": 5,
+        "pressure": 0,
+        "stability": 1,
+        "activation": 4
+      },
+      "expected": {
+        "score": 73.6,
+        "intensity": 80,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.811124,
+          "pressure": 0.0,
+          "stability": 0.321513,
+          "activation": 0.798103
+        }
+      }
+    },
+    {
+      "fixtureId": "MONTHLY-CAL-006",
+      "label": "moderate-pressure",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 2,
+        "stability": -0.5,
+        "activation": 2
+      },
+      "expected": {
+        "score": 38.3,
+        "intensity": 55,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.0,
+          "pressure": 0.486583,
+          "stability": -0.16514,
+          "activation": 0.550671
+        }
+      }
+    },
+    {
+      "fixtureId": "MONTHLY-CAL-007",
+      "label": "strong-pressure",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 5,
+        "stability": -1,
+        "activation": 4
+      },
+      "expected": {
+        "score": 26.4,
+        "intensity": 80,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.0,
+          "pressure": 0.811124,
+          "stability": -0.321513,
+          "activation": 0.798103
+        }
+      }
+    },
+    {
+      "fixtureId": "MONTHLY-CAL-008",
+      "label": "high-conflict",
+      "rawAxes": {
+        "support": 4,
+        "pressure": 4,
+        "stability": 0,
+        "activation": 5
+      },
+      "expected": {
+        "score": 50.0,
+        "intensity": 86,
+        "conflict": 64,
+        "normalizedAxes": {
+          "support": 0.736403,
+          "pressure": 0.736403,
+          "stability": 0.0,
+          "activation": 0.864665
+        }
+      }
+    },
+    {
+      "fixtureId": "MONTHLY-CAL-009",
+      "label": "support-with-instability",
+      "rawAxes": {
+        "support": 3,
+        "pressure": 0.5,
+        "stability": -2,
+        "activation": 3
+      },
+      "expected": {
+        "score": 58.0,
+        "intensity": 70,
+        "conflict": 11,
+        "normalizedAxes": {
+          "support": 0.632121,
+          "pressure": 0.153518,
+          "stability": -0.582783,
+          "activation": 0.698806
+        }
+      }
+    },
+    {
+      "fixtureId": "MONTHLY-CAL-010",
+      "label": "pressure-with-stability",
+      "rawAxes": {
+        "support": 0.5,
+        "pressure": 3,
+        "stability": 2,
+        "activation": 3
+      },
+      "expected": {
+        "score": 42.0,
+        "intensity": 70,
+        "conflict": 11,
+        "normalizedAxes": {
+          "support": 0.153518,
+          "pressure": 0.632121,
+          "stability": 0.582783,
+          "activation": 0.698806
+        }
+      }
+    },
+    {
+      "fixtureId": "MONTHLY-CAL-011",
+      "label": "monthly-loc-only",
+      "rawAxes": {
+        "support": 1,
+        "pressure": 0,
+        "stability": 0.1,
+        "activation": 0.7
+      },
+      "expected": {
+        "score": 54.0,
+        "intensity": 24,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.283469,
+          "pressure": 0.0,
+          "stability": 0.033321,
+          "activation": 0.244216
+        }
+      }
+    },
+    {
+      "fixtureId": "MONTHLY-CAL-012",
+      "label": "monthly-ky-only",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 1,
+        "stability": -0.75,
+        "activation": 0.8
+      },
+      "expected": {
+        "score": 44.8,
+        "intensity": 27,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.0,
+          "pressure": 0.283469,
+          "stability": -0.244919,
+          "activation": 0.273851
+        }
+      }
+    },
+    {
+      "fixtureId": "MONTHLY-CAL-013",
+      "label": "khoa-plus-ky-no-interaction",
+      "rawAxes": {
+        "support": 0.75,
+        "pressure": 1,
+        "stability": 0.05,
+        "activation": 1.2
+      },
+      "expected": {
+        "score": 49.0,
+        "intensity": 38,
+        "conflict": 8,
+        "normalizedAxes": {
+          "support": 0.221199,
+          "pressure": 0.283469,
+          "stability": 0.016665,
+          "activation": 0.381217
+        }
+      }
+    }
+  ],
+  "behavioralFixtures": [
+    {
+      "fixtureId": "MONTHLY-BEH-001",
+      "description": "Same focus with a different calendar stem preserves geometry and changes only calendar-derived transformation evidence."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-002",
+      "description": "Same calendar stem with a different focus preserves the transformation target table and changes geometry."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-003",
+      "description": "Twelve complete regular contexts produce twelve ordered month results."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-004",
+      "description": "An explicit leap-month context may produce a thirteenth result with a unique leap key."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-005",
+      "description": "Missing focus makes only that month unavailable with null axis scores."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-006",
+      "description": "Missing transformation provider produces partial capability without fabricated transformations."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-007",
+      "description": "Missing complete annual-domain map makes all six axes unavailable."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-008",
+      "description": "Natal palace names never substitute for annual domain labels."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-009",
+      "description": "Monthly transformation requires exact canonical star and physical palace."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-010",
+      "description": "Monthly transformation outside monthly TP4C but inside the domain frame is allowed."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-011",
+      "description": "Annual and Major context transformations require both-frame intersection."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-012",
+      "description": "The same natal star reached through multiple anchors is counted once."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-013",
+      "description": "Disabled interactions and calendar relations add zero numeric evidence."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-014",
+      "description": "Monthly Lộc Tồn/Kình/Đà remain disabled and locTonIndex is never called."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-015",
+      "description": "No previous normalized score is read."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-016",
+      "description": "Input month order does not affect sorted output."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-017",
+      "description": "Circular FlowMonthEntry.palace references are read without serialization or mutation."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-018",
+      "description": "Identical inputs and versions produce byte-stable output."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-019",
+      "description": "Activation-only evidence leaves score exactly 50."
+    },
+    {
+      "fixtureId": "MONTHLY-BEH-020",
+      "description": "High support and pressure produce a high conflict metric."
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "monthly-flow-calendar-relations-v0",
+  "status": "research_required",
+  "defaultEnabled": false,
+  "records": [
+    {
+      "ruleId": "RULE-MONTHLY-BRANCH-CLASH-CANDIDATE",
+      "relation": "branch-clash",
+      "enabled": false,
+      "candidateAxesDelta": null,
+      "sourceRefs": [],
+      "notes": "No numeric branch-clash evidence in V0."
+    },
+    {
+      "ruleId": "RULE-MONTHLY-BRANCH-COMBINE-CANDIDATE",
+      "relation": "branch-combine",
+      "enabled": false,
+      "candidateAxesDelta": null,
+      "sourceRefs": [],
+      "notes": "No numeric branch-combination evidence in V0."
+    },
+    {
+      "ruleId": "RULE-MONTHLY-STEM-COMBINE-CANDIDATE",
+      "relation": "stem-combine",
+      "enabled": false,
+      "candidateAxesDelta": null,
+      "sourceRefs": [],
+      "notes": "Calendar stem drives monthly Tứ Hóa only; no extra relation score in V0."
+    }
+  ]
+}
