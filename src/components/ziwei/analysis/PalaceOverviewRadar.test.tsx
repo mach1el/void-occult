@@ -26,19 +26,49 @@ describe("PalaceOverviewRadar", () => {
     expect(container.textContent).not.toMatch(/palace-overview-v1/);
   });
 
-  it("opens the detail panel on click and shows evidence groups A-G", () => {
+  it("opens the detail panel on click; groups A-G live inside the collapsed full-evidence details, closed by default", () => {
     const { container } = renderRadar();
     const point = container.querySelector(".palace-overview-radar__point")!;
     fireEvent.click(point);
 
     const detail = container.querySelector(".palace-overview-detail")!;
     expect(detail).not.toBeNull();
-    const headings = within(detail as HTMLElement)
+
+    const fullEvidence = container.querySelector(
+      ".palace-overview-detail__full-evidence",
+    ) as HTMLDetailsElement;
+    expect(fullEvidence).not.toBeNull();
+    expect(fullEvidence.open).toBe(false);
+
+    const headingsInside = within(fullEvidence)
       .getAllByRole("heading", { level: 5 })
       .map((h) => h.textContent);
     for (const prefix of ["A.", "B.", "C.", "D.", "E.", "F.", "G."]) {
-      expect(headings.some((h) => h?.startsWith(prefix))).toBe(true);
+      expect(headingsInside.some((h) => h?.startsWith(prefix))).toBe(true);
     }
+
+    // Letter-prefixed headings must not also appear as default-visible
+    // section headings outside the collapsed block.
+    const allHeadings = within(detail as HTMLElement)
+      .getAllByRole("heading", { level: 5 })
+      .map((h) => h.textContent);
+    const outsideHeadings = allHeadings.filter((h) => !headingsInside.includes(h));
+    for (const prefix of ["A.", "B.", "C.", "D.", "E.", "F.", "G."]) {
+      expect(outsideHeadings.some((h) => h?.startsWith(prefix))).toBe(false);
+    }
+  });
+
+  it("full-evidence details opens on click", () => {
+    const { container } = renderRadar();
+    const point = container.querySelector(".palace-overview-radar__point")!;
+    fireEvent.click(point);
+
+    const summary = screen.getByText("Xem toàn bộ bằng chứng");
+    fireEvent.click(summary);
+    const fullEvidence = container.querySelector(
+      ".palace-overview-detail__full-evidence",
+    ) as HTMLDetailsElement;
+    expect(fullEvidence.open).toBe(true);
   });
 
   it("opens the detail panel via keyboard (Enter) on a focused radar point", () => {
@@ -66,7 +96,7 @@ describe("PalaceOverviewRadar", () => {
     expect(tooltip.textContent).not.toMatch(/\b(low|guarded|balanced|supportive|strong)\b/);
   });
 
-  it("V1.2: the first radar point is always Mệnh (pinned to 12 o'clock) and shows the Mệnh–Thân section", () => {
+  it("V1.2: the first radar point is always Mệnh (pinned to 12 o'clock) and shows the Mệnh badge", () => {
     const { container } = renderRadar();
     const point = container.querySelector(".palace-overview-radar__point")!;
     fireEvent.click(point);
@@ -74,8 +104,16 @@ describe("PalaceOverviewRadar", () => {
     const detail = container.querySelector(".palace-overview-detail")!;
     expect(within(detail as HTMLElement).getByText("Chi tiết · Mệnh")).toBeInTheDocument();
     expect(within(detail as HTMLElement).getByText("Mệnh")).toBeInTheDocument();
-    const menhThanSection = screen.getByText("Mệnh–Thân").closest("section")!;
-    expect(within(menhThanSection).getByText("Cung an Mệnh của lá số")).toBeInTheDocument();
+  });
+
+  it("V1.2.1: basic Cung Mệnh/Cung Thân rows are badge-only, not repeated as list rows", () => {
+    const { container } = renderRadar();
+    const point = container.querySelector(".palace-overview-radar__point")!;
+    fireEvent.click(point);
+
+    const detail = container.querySelector(".palace-overview-detail")!;
+    expect(within(detail as HTMLElement).queryByText("Cung an Mệnh của lá số")).toBeNull();
+    expect(within(detail as HTMLElement).queryByText("Cung an Thân — trọng tâm biểu hiện")).toBeNull();
   });
 
   it("V1.2: semantic sections (Liên kết phụ tinh / Tứ Hóa theo sao nhận Hóa / Biểu hiện tại cung) render separately from groups A-G", () => {

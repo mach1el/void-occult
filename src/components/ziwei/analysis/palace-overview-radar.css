@@ -196,7 +196,7 @@
 }
 
 .palace-overview-detail__meta-details summary,
-.palace-overview-detail__context-only summary {
+.palace-overview-detail__full-evidence summary {
   cursor: pointer;
   font-size: 0.8rem;
   letter-spacing: 0.04em;

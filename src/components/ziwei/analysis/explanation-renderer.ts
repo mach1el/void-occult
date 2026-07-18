@@ -139,3 +139,22 @@ export function formatContribution(axes: PalaceEvidenceAxes): string {
   }
   return parts.length ? parts.join(", ") : "—";
 }
+
+const AXIS_LABEL_BY_KEY: Record<"support" | "pressure", string> = {
+  support: "hỗ trợ",
+  pressure: "áp lực",
+};
+
+/**
+ * V1.2.1 — single-axis contribution for the independent support/pressure
+ * minor-star rows (a star can appear in both sections; each row must only
+ * show the axis relevant to that section, not all four).
+ */
+export function formatAxisContribution(
+  axis: "support" | "pressure",
+  value: number,
+): string {
+  if (Math.abs(value) < 0.05) return "—";
+  const sign = value > 0 ? "+" : "−";
+  return `${sign}${Math.abs(value).toFixed(1)} ${AXIS_LABEL_BY_KEY[axis]}`;
+}

@@ -9,6 +9,7 @@ import {
   type PalaceOverviewResult,
 } from "@/lib/ziwei/analysis/modules/palace-overview";
 import {
+  formatAxisContribution,
   formatContribution,
   palaceDomainHint,
   renderExplanationKey,
@@ -412,9 +413,10 @@ function DomainProjectionList({
         <button
           type="button"
           className="palace-overview-detail__expand"
+          aria-expanded={expanded}
           onClick={() => setExpanded((v) => !v)}
         >
-          {expanded ? "Thu gọn" : `Xem thêm (+${minor.length - 3})`}
+          {expanded ? "Thu gọn" : `Xem thêm sao phụ (+${minor.length - 3})`}
         </button>
       ) : null}
     </>
@@ -427,6 +429,23 @@ function EvidenceLine({ e }: { e: PalaceEvidence }) {
   return (
     <li key={e.id}>
       {e.label} ({formatContribution(e.axes)}) —{" "}
+      {renderExplanationKey(e.explanationKey, e.label)}
+    </li>
+  );
+}
+
+/** V1.2.1 — compact minor-star row showing only the one relevant axis
+ * (support OR pressure), never all four, per the independent grouping. */
+function MinorAxisLine({
+  e,
+  axis,
+}: {
+  e: PalaceEvidence;
+  axis: "support" | "pressure";
+}) {
+  return (
+    <li key={e.id}>
+      {e.label} · {formatAxisContribution(axis, e.axes[axis])} —{" "}
       {renderExplanationKey(e.explanationKey, e.label)}
     </li>
   );
@@ -448,6 +467,7 @@ function DriverList({ drivers }: { drivers: PalaceEvidence[] }) {
         <button
           type="button"
           className="palace-overview-detail__expand"
+          aria-expanded={expanded}
           onClick={() => setExpanded((v) => !v)}
         >
           {expanded ? "Thu gọn" : `Xem thêm (+${drivers.length - 3})`}
@@ -469,13 +489,25 @@ function PalaceOverviewDetail({
   const groupA = result.allEvidence.filter((e) => classifyGroup(e) === "A");
   const groupB = result.allEvidence.filter((e) => classifyGroup(e) === "B");
   const groupC = result.allEvidence.filter((e) => classifyGroup(e) === "C");
-  const groupD = result.allEvidence.filter((e) => classifyGroup(e) === "D");
-  const groupE = result.allEvidence.filter((e) => classifyGroup(e) === "E");
   const groupF = result.allEvidence.filter((e) => classifyGroup(e) === "F");
   const groupG = result.allEvidence.filter((e) => classifyGroup(e) === "G");
+  const voidEnvironment = groupF.filter((e) => e.category === "void-environment");
+  const supportMinors = result.allEvidence.filter(
+    (e) => e.category === "minor-star-family" && e.axes.support > 0,
+  );
+  const pressureMinors = result.allEvidence.filter(
+    (e) => e.category === "minor-star-family" && e.axes.pressure > 0,
+  );
 
   const menhThanAnnotations = result.annotations.filter(
     (a) => a.category === "menh-than",
+  );
+  // Basic "Cung Mệnh"/"Cung Thân" are already fully represented by the
+  // header badges — this section only needs the special cases.
+  const specialMenhThanAnnotations = menhThanAnnotations.filter(
+    (a) =>
+      a.explanationKey === "context.menh-than.same-palace" ||
+      a.explanationKey === "context.menh-void.than-reference",
   );
   const minorPairAnnotations = result.annotations.filter(
     (a) => a.category === "minor-pair",
@@ -487,6 +519,7 @@ function PalaceOverviewDetail({
   const domainProjectionAnnotations = result.annotations.filter(
     (a) => a.category === "domain-projection",
   );
+  const transformTargetGroups = groupTransformTargetAnnotations(transformTargetAnnotations);
 
   return (
     <div className="palace-overview-detail">
@@ -503,167 +536,199 @@ function PalaceOverviewDetail({
         {BAND_LABEL[result.band]} · Điểm {result.score}
       </p>
 
-      {menhThanAnnotations.length > 0 ? (
-        <section className="palace-overview-detail__section">
-          <h5>Mệnh–Thân</h5>
-          <ul>
-            {menhThanAnnotations.map((a) => (
-              <li key={a.id}>{renderExplanationKey(a.explanationKey, a.label)}</li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-
       <section className="palace-overview-detail__section">
-        <h5>A. Chính tinh tại cung</h5>
+        <h5>Cấu trúc lõi</h5>
         <ul>
           {groupA.length === 0 ? <li>—</li> : groupA.map((e) => <EvidenceLine key={e.id} e={e} />)}
         </ul>
+        <p className="palace-overview-detail__meta">
+          Tứ Hóa gốc:{" "}
+          {groupC.length === 0 ? "—" : groupC.map((e) => e.label).join(", ")}
+        </p>
+        {voidEnvironment.length > 0 ? (
+          <ul>
+            {voidEnvironment.map((e) => (
+              <li key={e.id}>{renderExplanationKey(e.explanationKey, e.label)}</li>
+            ))}
+          </ul>
+        ) : null}
       </section>
 
       <section className="palace-overview-detail__section">
-        <h5>B. Chính tinh hội chiếu</h5>
-        <ul>
-          {groupB.length === 0 ? <li>—</li> : groupB.map((e) => <EvidenceLine key={e.id} e={e} />)}
-        </ul>
-      </section>
-
-      <section className="palace-overview-detail__section">
-        <h5>C. Tứ Hóa gốc</h5>
-        <ul>
-          {groupC.length === 0 ? <li>—</li> : groupC.map((e) => <EvidenceLine key={e.id} e={e} />)}
-        </ul>
-      </section>
-
-      <section className="palace-overview-detail__section">
-        <h5>D. Phụ tinh hỗ trợ</h5>
-        {groupD.length === 0 ? (
-          <ul><li>—</li></ul>
-        ) : (
-          groupByFamilyLabel(groupD).map(([label, items]) => (
-            <div key={label} className="palace-overview-detail__family-group">
-              <p className="palace-overview-detail__family-label">{label}</p>
-              <ul>
-                {items.map((e) => <EvidenceLine key={e.id} e={e} />)}
-              </ul>
-            </div>
-          ))
-        )}
-      </section>
-
-      <section className="palace-overview-detail__section">
-        <h5>E. Phụ tinh áp lực</h5>
-        {groupE.length === 0 ? (
-          <ul><li>—</li></ul>
-        ) : (
-          groupByFamilyLabel(groupE).map(([label, items]) => (
-            <div key={label} className="palace-overview-detail__family-group">
-              <p className="palace-overview-detail__family-label">{label}</p>
-              <ul>
-                {items.map((e) => <EvidenceLine key={e.id} e={e} />)}
-              </ul>
-            </div>
-          ))
-        )}
-      </section>
-
-      <section className="palace-overview-detail__section">
-        <h5>F. Trường Sinh / môi trường</h5>
-        <ul>
-          {groupF.length === 0 ? <li>—</li> : groupF.map((e) => <EvidenceLine key={e.id} e={e} />)}
-        </ul>
-      </section>
-
-      <section className="palace-overview-detail__section">
-        <h5>G. Cách cục</h5>
-        <ul>
-          {groupG.length === 0 ? <li>—</li> : groupG.map((e) => <EvidenceLine key={e.id} e={e} />)}
-        </ul>
-      </section>
-
-      {minorPairAnnotations.length > 0 ? (
-        <section className="palace-overview-detail__section">
-          <h5>Liên kết phụ tinh</h5>
-          <p className="palace-overview-detail__semantic-note">
-            Ngữ nghĩa cấu trúc, chưa cộng điểm V1.2.
-          </p>
-          {pairAnnotationsByScope.map(([scope, items]) => (
-            <div key={scope} className="palace-overview-detail__family-group">
-              <p className="palace-overview-detail__family-label">
-                {SCOPE_LABEL[scope] ?? scope}
-              </p>
-              <ul>
-                {items.map((a) => (
-                  <li key={a.id}>{a.label}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </section>
-      ) : null}
-
-      {transformTargetAnnotations.length > 0 ? (
-        <section className="palace-overview-detail__section">
-          <h5>Tứ Hóa theo sao nhận Hóa</h5>
-          {groupTransformTargetAnnotations(transformTargetAnnotations).map((group) => (
-            <div key={group.key} className="palace-overview-detail__family-group">
-              <p className="palace-overview-detail__family-label">{group.label}</p>
-              <ul>
-                {group.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </section>
-      ) : null}
-
-      {domainProjectionAnnotations.length > 0 ? (
-        <section className="palace-overview-detail__section">
-          <h5>Biểu hiện tại cung</h5>
-          <DomainProjectionList
-            annotations={domainProjectionAnnotations}
-            allEvidence={result.allEvidence}
-          />
-        </section>
-      ) : null}
-
-      <section className="palace-overview-detail__section">
-        <h5>Top hỗ trợ</h5>
+        <h5>Hỗ trợ nổi bật</h5>
         <DriverList drivers={result.topSupportDrivers} />
       </section>
 
       <section className="palace-overview-detail__section">
-        <h5>Top áp lực</h5>
+        <h5>Áp lực nổi bật</h5>
         <DriverList drivers={result.topPressureDrivers} />
       </section>
 
-      {result.contextOnlyStars.length > 0 ? (
-        <details className="palace-overview-detail__section palace-overview-detail__context-only">
-          <summary>H. Sao ngữ cảnh chưa chấm điểm</summary>
+      {semanticStatus === "available" ? (
+        <>
+          {specialMenhThanAnnotations.length > 0 ? (
+            <section className="palace-overview-detail__section">
+              <h5>Mệnh–Thân</h5>
+              <ul>
+                {specialMenhThanAnnotations.map((a) => (
+                  <li key={a.id}>{renderExplanationKey(a.explanationKey, a.label)}</li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+
+          {minorPairAnnotations.length > 0 ? (
+            <section className="palace-overview-detail__section">
+              <h5>Liên kết phụ tinh</h5>
+              <p className="palace-overview-detail__semantic-note">
+                Ngữ nghĩa cấu trúc, chưa cộng điểm V1.2.
+              </p>
+              {pairAnnotationsByScope.map(([scope, items]) => (
+                <div key={scope} className="palace-overview-detail__family-group">
+                  <p className="palace-overview-detail__family-label">
+                    {SCOPE_LABEL[scope] ?? scope}
+                  </p>
+                  <ul>
+                    {items.map((a) => (
+                      <li key={a.id}>{a.label}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </section>
+          ) : null}
+
+          {transformTargetGroups.length > 0 ? (
+            <section className="palace-overview-detail__section">
+              <h5>Tứ Hóa theo sao nhận Hóa</h5>
+              {transformTargetGroups.map((group) => (
+                <div key={group.key} className="palace-overview-detail__family-group">
+                  <p className="palace-overview-detail__family-label">{group.label}</p>
+                  <ul>
+                    {group.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </section>
+          ) : null}
+
+          {domainProjectionAnnotations.length > 0 ? (
+            <section className="palace-overview-detail__section">
+              <h5>Biểu hiện tại cung</h5>
+              <DomainProjectionList
+                annotations={domainProjectionAnnotations}
+                allEvidence={result.allEvidence}
+              />
+            </section>
+          ) : null}
+        </>
+      ) : (
+        <p className="palace-overview-detail__semantic-note">
+          Không thể tải phần diễn giải ngữ nghĩa. Điểm cấu trúc vẫn được giữ
+          nguyên.
+        </p>
+      )}
+
+      <details className="palace-overview-detail__section palace-overview-detail__full-evidence">
+        <summary>Xem toàn bộ bằng chứng</summary>
+
+        <section className="palace-overview-detail__section">
+          <h5>A. Chính tinh tại cung</h5>
           <ul>
-            {result.contextOnlyStars.map((s, i) => (
-              <li key={`${s.name}-${s.role}-${i}`}>
-                {s.name} · {s.role}
-              </li>
-            ))}
+            {groupA.length === 0 ? <li>—</li> : groupA.map((e) => <EvidenceLine key={e.id} e={e} />)}
           </ul>
-        </details>
-      ) : null}
+        </section>
+
+        <section className="palace-overview-detail__section">
+          <h5>B. Chính tinh hội chiếu</h5>
+          <ul>
+            {groupB.length === 0 ? <li>—</li> : groupB.map((e) => <EvidenceLine key={e.id} e={e} />)}
+          </ul>
+        </section>
+
+        <section className="palace-overview-detail__section">
+          <h5>C. Tứ Hóa gốc</h5>
+          <ul>
+            {groupC.length === 0 ? <li>—</li> : groupC.map((e) => <EvidenceLine key={e.id} e={e} />)}
+          </ul>
+        </section>
+
+        <section className="palace-overview-detail__section">
+          <h5>D. Phụ tinh hỗ trợ</h5>
+          {supportMinors.length === 0 ? (
+            <ul><li>—</li></ul>
+          ) : (
+            groupByFamilyLabel(supportMinors).map(([label, items]) => (
+              <div key={label} className="palace-overview-detail__family-group">
+                <p className="palace-overview-detail__family-label">{label}</p>
+                <ul>
+                  {items.map((e) => <MinorAxisLine key={e.id} e={e} axis="support" />)}
+                </ul>
+              </div>
+            ))
+          )}
+        </section>
+
+        <section className="palace-overview-detail__section">
+          <h5>E. Phụ tinh áp lực</h5>
+          {pressureMinors.length === 0 ? (
+            <ul><li>—</li></ul>
+          ) : (
+            groupByFamilyLabel(pressureMinors).map(([label, items]) => (
+              <div key={label} className="palace-overview-detail__family-group">
+                <p className="palace-overview-detail__family-label">{label}</p>
+                <ul>
+                  {items.map((e) => <MinorAxisLine key={e.id} e={e} axis="pressure" />)}
+                </ul>
+              </div>
+            ))
+          )}
+        </section>
+
+        <section className="palace-overview-detail__section">
+          <h5>F. Trường Sinh / môi trường</h5>
+          <ul>
+            {groupF.length === 0 ? <li>—</li> : groupF.map((e) => <EvidenceLine key={e.id} e={e} />)}
+          </ul>
+        </section>
+
+        <section className="palace-overview-detail__section">
+          <h5>G. Cách cục</h5>
+          <ul>
+            {groupG.length === 0 ? <li>—</li> : groupG.map((e) => <EvidenceLine key={e.id} e={e} />)}
+          </ul>
+        </section>
+
+        {result.contextOnlyStars.length > 0 ? (
+          <section className="palace-overview-detail__section">
+            <h5>H. Sao ngữ cảnh chưa chấm điểm</h5>
+            <ul>
+              {result.contextOnlyStars.map((s, i) => (
+                <li key={`${s.name}-${s.role}-${i}`}>
+                  {s.name} · {s.role}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+      </details>
 
       <details className="palace-overview-detail__section palace-overview-detail__meta-details">
         <summary>Thông tin mô hình</summary>
         <p className="palace-overview-detail__meta">
-          Band {result.band} · completeness {result.evidenceCompleteness} ·{" "}
-          {result.profileId} · {result.school}
+          Mức đánh giá {BAND_LABEL[result.band]} · Độ đầy đủ dữ liệu{" "}
+          {result.evidenceCompleteness} · {result.profileId} · {result.school}
         </p>
         <p className="palace-overview-detail__meta">
-          contract {result.versions.contractVersion} · engine{" "}
+          Phiên bản contract {result.versions.contractVersion} · engine{" "}
           {result.versions.engineVersion} · knowledge{" "}
           {result.versions.knowledgeVersion}
         </p>
         <p className="palace-overview-detail__meta">
-          semantic: {semanticStatus === "available" ? "available" : "unavailable"}
+          Trạng thái semantic:{" "}
+          {semanticStatus === "available" ? "Có sẵn" : "Không khả dụng"}
         </p>
       </details>
 
