@@ -13,8 +13,9 @@ export interface MenhThanStatus {
 
 /**
  * isMenh/isThan per prompt §4: Calculation-Core fields only, never
- * recomputed. Numeric index is the SSOT; a disagreeing marker field is a
- * dev diagnostic, not a hard failure.
+ * recomputed. Numeric index is the SSOT — a disagreeing marker field only
+ * ever feeds a dev diagnostic, it must never influence the returned status
+ * (a bad flag could otherwise mark more than one palace as Mệnh/Thân).
  */
 export function resolveMenhThanStatus(
   chart: ChartData,
@@ -30,8 +31,8 @@ export function resolveMenhThanStatus(
   if (isThanByIndex !== isThanByFlag) diagnostics.thanIndexMismatch = true;
 
   return {
-    isMenh: isMenhByIndex || isMenhByFlag,
-    isThan: isThanByIndex || isThanByFlag,
+    isMenh: isMenhByIndex,
+    isThan: isThanByIndex,
   };
 }
 
