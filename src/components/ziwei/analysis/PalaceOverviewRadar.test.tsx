@@ -65,4 +65,66 @@ describe("PalaceOverviewRadar", () => {
     const tooltip = container.querySelector(".palace-overview-radar__tooltip")!;
     expect(tooltip.textContent).not.toMatch(/\b(low|guarded|balanced|supportive|strong)\b/);
   });
+
+  it("V1.2: the first radar point is always Mệnh (pinned to 12 o'clock) and shows the Mệnh–Thân section", () => {
+    const { container } = renderRadar();
+    const point = container.querySelector(".palace-overview-radar__point")!;
+    fireEvent.click(point);
+
+    const detail = container.querySelector(".palace-overview-detail")!;
+    expect(within(detail as HTMLElement).getByText("Chi tiết · Mệnh")).toBeInTheDocument();
+    expect(within(detail as HTMLElement).getByText("Mệnh")).toBeInTheDocument();
+    const menhThanSection = screen.getByText("Mệnh–Thân").closest("section")!;
+    expect(within(menhThanSection).getByText("Cung an Mệnh của lá số")).toBeInTheDocument();
+  });
+
+  it("V1.2: semantic sections (Liên kết phụ tinh / Tứ Hóa theo sao nhận Hóa / Biểu hiện tại cung) render separately from groups A-G", () => {
+    const { container } = renderRadar();
+    const points = container.querySelectorAll(".palace-overview-radar__point");
+
+    const seenSections = new Set<string>();
+    for (const point of points) {
+      fireEvent.click(point);
+      const detail = container.querySelector(".palace-overview-detail") as HTMLElement;
+      const headings = within(detail)
+        .getAllByRole("heading", { level: 5 })
+        .map((h) => h.textContent);
+      for (const label of [
+        "Liên kết phụ tinh",
+        "Tứ Hóa theo sao nhận Hóa",
+        "Biểu hiện tại cung",
+      ]) {
+        if (headings.includes(label)) seenSections.add(label);
+      }
+      // Structural separation: none of the A-G group headings duplicate the
+      // semantic section labels.
+      for (const g of ["A.", "B.", "C.", "D.", "E.", "F.", "G."]) {
+        expect(headings.some((h) => h === g)).toBe(false); // headings include the group title text too
+      }
+      fireEvent.click(point); // close before opening the next one
+    }
+
+    expect(seenSections.has("Liên kết phụ tinh")).toBe(true);
+    expect(seenSections.has("Tứ Hóa theo sao nhận Hóa")).toBe(true);
+    expect(seenSections.has("Biểu hiện tại cung")).toBe(true);
+  });
+
+  it("V1.2: 'Liên kết phụ tinh' carries the not-yet-scored caption", () => {
+    const { container } = renderRadar();
+    const points = container.querySelectorAll(".palace-overview-radar__point");
+    let found = false;
+    for (const point of points) {
+      fireEvent.click(point);
+      const detail = container.querySelector(".palace-overview-detail") as HTMLElement;
+      if (within(detail).queryByText("Liên kết phụ tinh")) {
+        expect(
+          within(detail).getByText("Ngữ nghĩa cấu trúc, chưa cộng điểm V1.2."),
+        ).toBeInTheDocument();
+        found = true;
+        break;
+      }
+      fireEvent.click(point);
+    }
+    expect(found).toBe(true);
+  });
 });
