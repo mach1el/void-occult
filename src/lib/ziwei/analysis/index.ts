@@ -1,6 +1,5 @@
 /**
- * Zi Wei Analysis — Phase 0 skeleton.
- * Calculation Core (engines) is separate; no scores here yet.
+ * Zi Wei Analysis — Calculation Core is separate; modules interpret natal facts.
  */
 
 export type {
@@ -29,3 +28,6 @@ export { MAJOR_FORTUNE_MODULE } from "./contracts/major-fortune";
 
 export type { MonthlyFlowContract } from "./contracts/monthly-flow";
 export { MONTHLY_FLOW_MODULE } from "./contracts/monthly-flow";
+
+export * from "./facts";
+export * from "./frame";
