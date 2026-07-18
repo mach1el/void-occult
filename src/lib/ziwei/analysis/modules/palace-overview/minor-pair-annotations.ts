@@ -29,7 +29,6 @@ function resolveScope(
   rule: MinorStructuralPairRule,
   frame: StaticFrame,
   factsByPalace: Map<number, NatalZiweiFact[]>,
-  diagnostics: PalaceOverviewSemanticDiagnostics,
 ): ResolvedScope | null {
   const usedFactIds = new Set<string>();
   const resolved: ResolvedParticipant[] = [];
@@ -50,7 +49,9 @@ function resolveScope(
       }
     }
     if (!found) {
-      diagnostics.unresolvedPairParticipants.push(`${rule.id}:${participantName}`);
+      // A participant simply not present in this palace's TP4C frame is a
+      // normal, expected non-match (most rule × palace combinations miss) —
+      // not an integrity problem, so it must not be recorded as a diagnostic.
       return null;
     }
     usedFactIds.add(found.fact.id);
@@ -70,6 +71,7 @@ function resolveScope(
   ) {
     scope = "opposite-link";
   } else if (
+    roles.has("focus") &&
     roles.has("trine") &&
     [...roles].every((r) => r === "focus" || r === "trine")
   ) {
@@ -95,14 +97,14 @@ export function buildMinorPairAnnotations(input: {
   diagnostics: PalaceOverviewSemanticDiagnostics;
   focusPalaceIndex: number;
 }): PalaceAnnotation[] {
-  const { frame, factsByPalace, knowledge, diagnostics, focusPalaceIndex } = input;
+  const { frame, factsByPalace, knowledge, focusPalaceIndex } = input;
   const catalog = knowledge.minorStructuralPairs;
   const knowledgeStatus =
     catalog.status === "approved" ? "approved" : "experimental";
   const out: PalaceAnnotation[] = [];
 
   for (const rule of catalog.rules) {
-    const resolved = resolveScope(rule, frame, factsByPalace, diagnostics);
+    const resolved = resolveScope(rule, frame, factsByPalace);
     if (!resolved) continue;
 
     out.push({
