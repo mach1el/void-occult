@@ -12,20 +12,13 @@
  *   346-350) — giữ lại toàn bộ để làm nền cho Kỵ Trùng Kỵ / Lộc Trùng Lộc.
  */
 
-import type {
-  ChartData,
-  ChartEngine,
-  ChartPalace,
-  FlowMonthEntry,
-  MutagenRecord,
-} from "@/types/chart";
+import type { ChartData, ChartEngine, ChartPalace, MutagenRecord } from "@/types/chart";
 import { isAnnualStar } from "../star-classification";
 import { palaceHasSalvation } from "./combo-eval";
 import { computeStarEnergy, routeStarEnergy } from "./star-energy";
-import { findStarScore } from "./star-scores";
-import type { ScoreLine, TrendPoint } from "./types";
+import type { MonthlyFocusEntry, ScoreLine, TrendPoint } from "./types";
 import { roundTo1Decimal } from "./ui-breakdown";
-import { finalizeLayer, voidBranches } from "./util";
+import { finalizeLayer, isMutagenStar, voidBranches } from "./util";
 import { TAM_HOP, XUNG_CHIEU } from "./zones";
 
 type MonthRole = "focus" | "tam-hop" | "xung";
@@ -144,14 +137,11 @@ function mutagenKindOf(mutagen: string): MutagenKind | null {
   return null;
 }
 
-const MUTAGEN_SCORE_NAME: Record<MutagenKind, string> = {
-  Lộc: "Hóa Lộc",
-  Quyền: "Hóa Quyền",
-  Khoa: "Hóa Khoa",
-  Kỵ: "Hóa Kỵ",
-};
-
-const MUTAGEN_FALLBACK_POINTS: Record<MutagenKind, number> = {
+/**
+ * SSOT điểm Tứ Hóa Lưu Nguyệt — spec chốt, KHÔNG tra `star-scores.csv`.
+ * CSV vẫn là SSOT cho sao nền (Bước A); Tứ Hóa tháng dùng đúng bảng này.
+ */
+const MONTHLY_MUTAGEN_POINTS: Record<MutagenKind, number> = {
   Lộc: 10,
   Quyền: 8,
   Khoa: 6,
@@ -180,9 +170,9 @@ interface LocKyHit {
 export function scoreLuuNguyetFrame(
   chart: ChartData,
   engine: ChartEngine,
-  monthEntry: FlowMonthEntry,
+  monthEntry: MonthlyFocusEntry,
 ): Pick<TrendPoint, "cat" | "hung" | "breakdown"> {
-  const focus = monthEntry.palace;
+  const focus = monthEntry.focusPalace;
   const cat: ScoreLine[] = [];
   const hung: ScoreLine[] = [];
   const voids = voidBranches(chart);
@@ -198,6 +188,11 @@ export function scoreLuuNguyetFrame(
 
     for (const star of palace.stars ?? []) {
       if (isAnnualStar(star)) continue; // sao lưu niên không thuộc gốc cung
+      // Marker Tứ Hóa (Hóa Lộc/Quyền/Khoa/Kỵ gắn trên palace.stars bởi
+      // addMutagenStars) KHÔNG phải sao nền — SSOT chấm Tứ Hóa là Bước B,
+      // chấm ở đây sẽ double-count (§7). Chính tinh nhận Tứ Hóa (vd Thái
+      // Dương) vẫn được chấm bình thường vì bản thân nó không phải marker.
+      if (isMutagenStar(star)) continue;
       const energy = computeStarEnergy(star);
       if (!energy) continue;
       const routed = routeStarEnergy(energy);
@@ -265,7 +260,7 @@ export function scoreLuuNguyetFrame(
   }> = [
     {
       layer: "Lưu nguyệt",
-      records: monthlyMutagenRecords(chart, engine, monthEntry.stem),
+      records: monthlyMutagenRecords(chart, engine, monthEntry.calendarStem),
     },
     { layer: "Lưu niên", records: chart.annualMutagens ?? [] },
     { layer: "Gốc", records: chart.natalMutagens ?? [] },
@@ -281,14 +276,7 @@ export function scoreLuuNguyetFrame(
       const kind = mutagenKindOf(record.mutagen);
       if (!kind) continue;
 
-      const row = findStarScore(MUTAGEN_SCORE_NAME[kind]);
-      const basePts = row
-        ? kind === "Kỵ"
-          ? Math.abs(row.ham || row.base)
-          : Math.abs(row.dac || row.base)
-        : MUTAGEN_FALLBACK_POINTS[kind];
-
-      const points = scale(basePts, hit.weight);
+      const points = scale(MONTHLY_MUTAGEN_POINTS[kind], hit.weight);
       const where = roleLabel(hit.role, palace);
       const line: ScoreLine = {
         source: `${layer} Hóa ${kind}`,
@@ -306,8 +294,8 @@ export function scoreLuuNguyetFrame(
 
   // Nguyệt Lộc Tồn / Kình Dương / Đà La — tính động theo can tháng, KHÔNG ghi
   // vào chart.palaces (ranh giới AGENTS §5: tính toán tách khỏi hiển thị).
-  if (monthEntry.stem) {
-    const locIndex = engine.locTonIndex(monthEntry.stem);
+  if (monthEntry.calendarStem) {
+    const locIndex = engine.locTonIndex(monthEntry.calendarStem);
     const kinhIndex = (locIndex + 1 + 12) % 12;
     const daIndex = (locIndex - 1 + 12) % 12;
 
@@ -440,18 +428,18 @@ export function scoreLuuNguyetFrame(
     });
   }
 
-  // 4) Xung Thái Tuế — chi tháng xung chi năm.
+  // 4) Xung Thái Tuế — chi LỊCH tháng xung chi năm (KHÔNG dùng chi cung).
   if (
-    monthEntry.branch &&
+    monthEntry.calendarBranch &&
     chart.annualBranch &&
-    XUNG_CHIEU[monthEntry.branch] === chart.annualBranch
+    XUNG_CHIEU[monthEntry.calendarBranch] === chart.annualBranch
   ) {
     hungLines = [
       ...hungLines,
       {
         source: "Xung Thái Tuế",
         points: XUNG_THAI_TUE_BONUS,
-        reason: `Chi tháng ${monthEntry.branch} xung chi năm ${chart.annualBranch} — tháng động`,
+        reason: `Chi tháng ${monthEntry.calendarBranch} xung chi năm ${chart.annualBranch} — tháng động`,
       },
     ];
   }
