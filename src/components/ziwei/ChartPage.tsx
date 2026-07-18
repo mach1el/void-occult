@@ -663,6 +663,14 @@ export function ChartPage() {
               </div>
 
             </div>
+            <div className="palace-overview-slot">
+              {chartData &&
+              getAnalysisStatus("palace-overview").status === "available" ? (
+                <PalaceOverviewRadar chart={chartData} school={school} />
+              ) : (
+                <ZiweiAnalysisRebuilding module="palace-overview" />
+              )}
+            </div>
           </section>
 
           <AiChat getContext={context} />
@@ -672,12 +680,6 @@ export function ChartPage() {
             aria-label="Module vận khí"
           >
             <div className="trend-analysis-grid">
-              {chartData &&
-              getAnalysisStatus("palace-overview").status === "available" ? (
-                <PalaceOverviewRadar chart={chartData} school={school} />
-              ) : (
-                <ZiweiAnalysisRebuilding module="palace-overview" />
-              )}
               <ZiweiAnalysisRebuilding module="annual-axes" />
               <ZiweiAnalysisRebuilding module="major-fortune" />
               <ZiweiAnalysisRebuilding module="monthly-flow" />

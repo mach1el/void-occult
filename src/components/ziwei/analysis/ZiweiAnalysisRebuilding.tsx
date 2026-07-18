@@ -3,7 +3,7 @@ import { getAnalysisStatus } from "@/lib/ziwei/analysis";
 import "./analysis-rebuilding.css";
 
 const TITLES: Record<ZiweiAnalysisModule, string> = {
-  "palace-overview": "Khí vận 12 cung",
+  "palace-overview": "Cấu trúc 12 cung",
   "annual-axes": "Sáu trục khí vận năm",
   "major-fortune": "Xu hướng Đại vận",
   "monthly-flow": "Xu hướng Lưu Nguyệt",

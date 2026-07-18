@@ -597,6 +597,9 @@ body{
   height:auto;
   min-height:0;
 }
+.shell > .chart-section > .palace-overview-slot{
+  margin-top:16px;
+}
 .panel-head{
   min-height:58px;
   padding:12px 18px;
