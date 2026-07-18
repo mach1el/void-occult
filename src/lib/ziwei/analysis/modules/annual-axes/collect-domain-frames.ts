@@ -7,6 +7,11 @@ export interface AnnualFrameNode {
   palaceIndex: number;
   palaceName: string;
   palaceBranch: string;
+  /** This node's own resolved annual label — distinct from the frame's
+   * `anchorPalaceName` for opposite/trine roles. Null only if the physical
+   * palace genuinely has no annual label (never backfilled from
+   * `palaceName`). */
+  annualPalaceName: string | null;
   role: AnnualAxisFrameRole;
 }
 
@@ -25,6 +30,7 @@ function toFrameNode(
     palaceIndex: palace.index,
     palaceName: palace.name,
     palaceBranch: palace.branch,
+    annualPalaceName: palace.annualPalaceName ?? null,
     role,
   };
 }

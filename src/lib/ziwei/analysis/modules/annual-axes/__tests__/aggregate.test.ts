@@ -13,6 +13,7 @@ function makeEvidence(overrides: Partial<AnnualAxisEvidence>): AnnualAxisEvidenc
     ruleId: "RULE-TEST",
     targetPalaceIndex: 0,
     targetPalaceName: "Mệnh",
+    targetAnnualPalaceName: "Mệnh",
     frameRole: "focus",
     anchorPalaceName: "Mệnh",
     stackingGroup: "test-group",

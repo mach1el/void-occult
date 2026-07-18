@@ -29,7 +29,15 @@ describe("collectMutagenEvidence", () => {
     {
       anchorPalaceName: "Tật Ách",
       domainAnchorWeight: 0.7,
-      nodes: [{ palaceIndex: 7, palaceName: "Tật Ách", palaceBranch: "b7", role: "focus" }],
+      nodes: [
+        {
+          palaceIndex: 7,
+          palaceName: "Tật Ách",
+          palaceBranch: "b7",
+          annualPalaceName: "Tật Ách",
+          role: "focus",
+        },
+      ],
     },
   ];
 

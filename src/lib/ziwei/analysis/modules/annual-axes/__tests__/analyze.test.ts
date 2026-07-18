@@ -56,6 +56,7 @@ describe("analyzeAnnualAxes — domain resolution (Trung Châu chart, real annua
     const result = analyzeAnnualAxes(chart, { school: "trung-chau" });
 
     let total = 0;
+    let sawDistinctAnchorAndTarget = false;
     for (const domain of ANNUAL_AXIS_DOMAINS) {
       for (const e of result.axes[domain].evidence) {
         total += 1;
@@ -63,9 +64,17 @@ describe("analyzeAnnualAxes — domain resolution (Trung Châu chart, real annua
         expect(e.ruleId).toBeTruthy();
         expect(e.sourceIds.length).toBeGreaterThan(0);
         expect(e.factIds.length).toBeGreaterThan(0);
+        expect(e.targetAnnualPalaceName).toBeTruthy();
+        if (e.frameRole !== "focus" && e.targetAnnualPalaceName !== e.anchorPalaceName) {
+          sawDistinctAnchorAndTarget = true;
+        }
       }
     }
     expect(total).toBeGreaterThan(0);
+    // Regression guard for the anchorPalaceName provenance bug: on a real
+    // chart, at least one opposite/trine evidence item must carry a
+    // targetAnnualPalaceName different from its anchor's label.
+    expect(sawDistinctAnchorAndTarget).toBe(true);
   });
 
   it("module source tree never reads Palace Overview's normalized 12-palace score", () => {

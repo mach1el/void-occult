@@ -29,6 +29,7 @@ interface MarkerHit {
   palace: ChartPalace;
   node: AnnualFrameNode;
   anchorWeight: number;
+  anchorPalaceName: string;
 }
 
 /**
@@ -71,6 +72,7 @@ export function collectFocalEvidence(input: CollectFocalEvidenceInput): AnnualAx
           palace,
           node,
           anchorWeight: frame.domainAnchorWeight,
+          anchorPalaceName: frame.anchorPalaceName,
         });
         hitsByPalace.set(palace.index, hits);
       }
@@ -88,8 +90,9 @@ export function collectFocalEvidence(input: CollectFocalEvidenceInput): AnnualAx
           ruleId: hit.ruleId,
           targetPalaceIndex: hit.palace.index,
           targetPalaceName: hit.palace.name,
+          targetAnnualPalaceName: hit.node.annualPalaceName,
           frameRole: hit.node.role,
-          anchorPalaceName: hit.node.palaceName,
+          anchorPalaceName: hit.anchorPalaceName,
           stackingGroup: "focal-marker",
           rawAxes: { ...hit.axes },
           effectiveWeight: hit.anchorWeight,
@@ -120,8 +123,9 @@ export function collectFocalEvidence(input: CollectFocalEvidenceInput): AnnualAx
         ruleId: convergence.ruleId,
         targetPalaceIndex: first.palace.index,
         targetPalaceName: first.palace.name,
+        targetAnnualPalaceName: first.node.annualPalaceName,
         frameRole: first.node.role,
-        anchorPalaceName: first.node.palaceName,
+        anchorPalaceName: first.anchorPalaceName,
         stackingGroup: "focal-marker",
         rawAxes: { ...convergence.axes },
         effectiveWeight: first.anchorWeight,

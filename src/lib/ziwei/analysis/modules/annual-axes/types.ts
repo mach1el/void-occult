@@ -30,6 +30,11 @@ export interface AnnualAxisEvidence {
   ruleId: string;
   targetPalaceIndex: number;
   targetPalaceName: string;
+  /** The target palace's own resolved annual label — distinct from
+   * `anchorPalaceName` (the anchor's label), since opposite/trine nodes
+   * carry a different annual label than their anchor. Null only if the
+   * physical palace genuinely has no annual label. */
+  targetAnnualPalaceName: string | null;
   frameRole: AnnualAxisFrameRole;
   /** Annual label of the anchor palace whose frame collected this evidence. */
   anchorPalaceName: string;

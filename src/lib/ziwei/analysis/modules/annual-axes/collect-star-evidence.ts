@@ -119,12 +119,14 @@ function pushStarEvidence(
     palace: ChartPalace;
     node: AnnualFrameNode;
     anchorWeight: number;
+    anchorPalaceName: string;
     numericKnowledge: PalaceOverviewKnowledgeV1;
     annualKnowledge: AnnualAxesKnowledgeV0;
     diagnostics: AnnualAxesDiagnostics;
   },
 ) {
-  const { domain, layer, star, palace, node, anchorWeight, numericKnowledge, annualKnowledge, diagnostics } = params;
+  const { domain, layer, star, palace, node, anchorWeight, anchorPalaceName, numericKnowledge, annualKnowledge, diagnostics } =
+    params;
   const canonical = canonicalStarName(star.name);
   const match = resolveStarKnowledge(canonical, star.brightness, numericKnowledge);
   if (!match) {
@@ -147,8 +149,9 @@ function pushStarEvidence(
     ruleId,
     targetPalaceIndex: palace.index,
     targetPalaceName: palace.name,
+    targetAnnualPalaceName: node.annualPalaceName,
     frameRole: node.role,
-    anchorPalaceName: node.palaceName,
+    anchorPalaceName,
     stackingGroup,
     rawAxes: axes,
     effectiveWeight: anchorWeight,
@@ -182,6 +185,7 @@ export function collectStarEvidence(input: CollectStarEvidenceInput): AnnualAxis
           palace,
           node,
           anchorWeight: frame.domainAnchorWeight,
+          anchorPalaceName: frame.anchorPalaceName,
           numericKnowledge,
           annualKnowledge,
           diagnostics,
@@ -201,6 +205,7 @@ export function collectStarEvidence(input: CollectStarEvidenceInput): AnnualAxis
             palace,
             node,
             anchorWeight: frame.domainAnchorWeight,
+            anchorPalaceName: frame.anchorPalaceName,
             numericKnowledge,
             annualKnowledge,
             diagnostics,
@@ -219,6 +224,7 @@ export function collectStarEvidence(input: CollectStarEvidenceInput): AnnualAxis
           palace,
           node,
           anchorWeight: frame.domainAnchorWeight,
+          anchorPalaceName: frame.anchorPalaceName,
           numericKnowledge,
           annualKnowledge,
           diagnostics,

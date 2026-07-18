@@ -58,6 +58,14 @@ describe("collectDomainAnchorFrames", () => {
       [11, "trine"],
       [3, "trine"],
     ]);
+    // Each node carries its OWN annual label, not the anchor's — opposite
+    // and trine nodes must not read back "Tật Ách" (the anchor's label).
+    expect(tatAch?.nodes.map((n) => n.annualPalaceName)).toEqual([
+      "Tật Ách",
+      "Phụ Mẫu",
+      "Huynh Đệ",
+      "Điền Trạch",
+    ]);
 
     expect(menh?.domainAnchorWeight).toBe(0.3);
     expect(menh?.nodes.map((n) => [n.palaceIndex, n.role])).toEqual([
@@ -65,6 +73,12 @@ describe("collectDomainAnchorFrames", () => {
       [6, "opposite"],
       [4, "trine"],
       [8, "trine"],
+    ]);
+    expect(menh?.nodes.map((n) => n.annualPalaceName)).toEqual([
+      "Mệnh",
+      "Thiên Di",
+      "Quan Lộc",
+      "Tài Bạch",
     ]);
 
     expect(diagnostics.missingAnnualPalaceNames).toHaveLength(0);
@@ -95,6 +109,30 @@ describe("collectDomainAnchorFrames", () => {
     expect(diagnostics.missingAnnualPalaceNames).toEqual([
       "health:Tật Ách",
       "health:Mệnh",
+    ]);
+  });
+
+  it("never backfills a node's missing annual label from its natal palace.name", () => {
+    const chart = buildSyntheticChart();
+    // Anchor itself resolves, but its opposite/trine palaces lack an
+    // annual label (partially-populated annual structure).
+    chart.palaces.forEach((p) => {
+      if (p.index !== 7) p.annualPalaceName = undefined;
+    });
+    const diagnostics = emptyAnnualAxesDiagnostics();
+
+    const frames = collectDomainAnchorFrames(
+      chart,
+      { domain: "health", anchors: [{ annualPalaceName: "Tật Ách", weight: 1.0 }] },
+      diagnostics,
+    );
+
+    expect(frames).toHaveLength(1);
+    expect(frames[0]?.nodes.map((n) => n.annualPalaceName)).toEqual([
+      "Tật Ách",
+      null,
+      null,
+      null,
     ]);
   });
 });

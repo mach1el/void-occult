@@ -21,6 +21,7 @@ function buildFrame(taiTue: boolean, smallLimit: boolean, lndv: boolean): {
     index: 7,
     branch: "Mùi",
     name: "Tật Ách",
+    annualPalaceName: "Tật Ách",
     isTaiTuePalace: taiTue,
     isSmallLimitPalace: smallLimit,
     isLuuNienDaiVan: lndv,
@@ -30,11 +31,69 @@ function buildFrame(taiTue: boolean, smallLimit: boolean, lndv: boolean): {
     {
       anchorPalaceName: "Tật Ách",
       domainAnchorWeight: 0.7,
-      nodes: [{ palaceIndex: 7, palaceName: "Tật Ách", palaceBranch: "Mùi", role: "focus" }],
+      nodes: [
+        {
+          palaceIndex: 7,
+          palaceName: "Tật Ách",
+          palaceBranch: "Mùi",
+          annualPalaceName: "Tật Ách",
+          role: "focus",
+        },
+      ],
     },
   ];
   return { chart, frames };
 }
+
+describe("collectFocalEvidence — anchor vs. target annual label provenance", () => {
+  const loaded = loadAnnualAxesKnowledgeV0();
+  if (!loaded.ok) throw new Error("annual axes knowledge failed to load");
+  const { knowledge } = loaded;
+
+  it("keeps anchorPalaceName (the anchor's label) distinct from targetAnnualPalaceName (the hit node's own label)", () => {
+    const focusPalace: ChartPalace = {
+      index: 7,
+      branch: "Mùi",
+      name: "NATAL-Tật-Ách",
+      annualPalaceName: "Tật Ách",
+    };
+    const oppositePalace: ChartPalace = {
+      index: 1,
+      branch: "Sửu",
+      name: "NATAL-Phụ-Mẫu",
+      annualPalaceName: "Phụ Mẫu",
+      isTaiTuePalace: true,
+    };
+    const chart = { palaces: [focusPalace, oppositePalace] } as unknown as ChartData;
+    const frames: AnnualDomainAnchorFrame[] = [
+      {
+        anchorPalaceName: "Tật Ách",
+        domainAnchorWeight: 0.7,
+        nodes: [
+          { palaceIndex: 7, palaceName: focusPalace.name, palaceBranch: "Mùi", annualPalaceName: "Tật Ách", role: "focus" },
+          { palaceIndex: 1, palaceName: oppositePalace.name, palaceBranch: "Sửu", annualPalaceName: "Phụ Mẫu", role: "opposite" },
+        ],
+      },
+    ];
+    const diagnostics = emptyAnnualAxesDiagnostics();
+
+    const evidence = collectFocalEvidence({
+      chart,
+      domain: "health",
+      frames,
+      school: "nam-phai",
+      annualKnowledge: knowledge,
+      diagnostics,
+    });
+
+    const hit = evidence.find((e) => e.physicalFactId.includes("annual-tai-tue"));
+    expect(hit).toBeDefined();
+    expect(hit?.anchorPalaceName).toBe("Tật Ách");
+    expect(hit?.targetAnnualPalaceName).toBe("Phụ Mẫu");
+    expect(hit?.targetPalaceName).toBe("NATAL-Phụ-Mẫu");
+    expect(hit?.anchorPalaceName).not.toBe(hit?.targetAnnualPalaceName);
+  });
+});
 
 describe("collectFocalEvidence — school profiles", () => {
   const loaded = loadAnnualAxesKnowledgeV0();
