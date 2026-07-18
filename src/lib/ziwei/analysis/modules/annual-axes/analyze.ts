@@ -11,7 +11,6 @@ import { aggregateDomainEvidence } from "./aggregate";
 import { sumWeightedAxes, normalizeAnnualAxes } from "./normalize";
 import { dedupeAnnualAxesDiagnostics, emptyAnnualAxesDiagnostics } from "./diagnostics";
 import {
-  emptyAnnualAxes,
   type AnnualAxesDiagnostics,
   type AnnualAxesResult,
   type AnnualAxisEvidence,
@@ -32,29 +31,36 @@ function topDrivers(
     .slice(0, TOP_DRIVER_COUNT);
 }
 
-function unavailableAxisResult(domain: AnnualAxisDomain): AnnualAxisResult {
-  const zero = emptyAnnualAxes();
+function unavailableAxisResult(domain: AnnualAxisDomain, reasonCodes: string[]): AnnualAxisResult {
   return {
     domain,
-    score: 0,
-    band: "guarded",
-    rawAxes: zero,
-    normalizedAxes: zero,
-    intensity: 0,
-    conflict: 0,
+    status: "unavailable",
+    score: null,
+    band: null,
     evidence: [],
-    topSupportDrivers: [],
-    topPressureDrivers: [],
+    reasonCodes,
   };
 }
 
-function unavailableResult(
+/** Derives the module-level status from each domain's own availability —
+ * all available → available; all unavailable → unavailable; any mix →
+ * partial. Exported for direct unit testing without forcing a real
+ * mixed-availability chart end-to-end. */
+export function resolveModuleStatus(
+  domainStatuses: Array<"available" | "unavailable">,
+): "available" | "partial" | "unavailable" {
+  if (domainStatuses.every((s) => s === "available")) return "available";
+  if (domainStatuses.every((s) => s === "unavailable")) return "unavailable";
+  return "partial";
+}
+
+function invalidKnowledgeResult(
   school: ZiweiSchool,
   annualYear: number,
   diagnostics: AnnualAxesDiagnostics,
 ): AnnualAxesResult {
   const axes = {} as Record<AnnualAxisDomain, AnnualAxisResult>;
-  for (const domain of ANNUAL_AXIS_DOMAINS) axes[domain] = unavailableAxisResult(domain);
+  for (const domain of ANNUAL_AXIS_DOMAINS) axes[domain] = unavailableAxisResult(domain, ["invalid-knowledge"]);
 
   return {
     module: "annual-axes",
@@ -88,7 +94,7 @@ export function analyzeAnnualAxes(chart: ChartData, options: { school: ZiweiScho
     diagnostics.invalidKnowledge.push(
       ...annualKnowledgeResult.issues.map((issue) => `${issue.path}: ${issue.message}`),
     );
-    return unavailableResult(school, chart.annualYear, diagnostics);
+    return invalidKnowledgeResult(school, chart.annualYear, diagnostics);
   }
   const annualKnowledge = annualKnowledgeResult.knowledge;
 
@@ -97,13 +103,15 @@ export function analyzeAnnualAxes(chart: ChartData, options: { school: ZiweiScho
     diagnostics.invalidKnowledge.push(
       ...numericKnowledgeResult.issues.map((issue) => `${issue.path}: ${issue.message}`),
     );
-    return unavailableResult(school, chart.annualYear, diagnostics);
+    return invalidKnowledgeResult(school, chart.annualYear, diagnostics);
   }
   const numericKnowledge = numericKnowledgeResult.knowledge;
 
   if (!hasAnnualStructure(chart)) {
     diagnostics.missingRequiredAnnualFacts.push("chart:annual-structure");
-    return unavailableResult(school, chart.annualYear, diagnostics);
+    // No early return — every domain below will naturally resolve zero
+    // frames and go unavailable, and the module status falls out of the
+    // generic per-domain aggregation at the end.
   }
 
   const axes = {} as Record<AnnualAxisDomain, AnnualAxisResult>;
@@ -114,7 +122,7 @@ export function analyzeAnnualAxes(chart: ChartData, options: { school: ZiweiScho
 
     if (frames.length === 0) {
       diagnostics.missingRequiredAnnualFacts.push(domain);
-      axes[domain] = unavailableAxisResult(domain);
+      axes[domain] = unavailableAxisResult(domain, ["missing-required-annual-facts"]);
       continue;
     }
 
@@ -130,6 +138,7 @@ export function analyzeAnnualAxes(chart: ChartData, options: { school: ZiweiScho
 
     axes[domain] = {
       domain,
+      status: "available",
       score: normalized.score,
       band: normalized.band,
       rawAxes,
@@ -142,6 +151,10 @@ export function analyzeAnnualAxes(chart: ChartData, options: { school: ZiweiScho
     };
   }
 
+  const moduleStatus = resolveModuleStatus(
+    ANNUAL_AXIS_DOMAINS.map((domain) => axes[domain].status),
+  );
+
   return {
     module: "annual-axes",
     annualYear: chart.annualYear,
@@ -151,7 +164,7 @@ export function analyzeAnnualAxes(chart: ChartData, options: { school: ZiweiScho
       engineVersion: ENGINE_VERSION,
       knowledgeVersion: `${annualKnowledge.scoringProfile.profileId}@${annualKnowledge.scoringProfile.schemaVersion}`,
     },
-    status: "available",
+    status: moduleStatus,
     axes,
     diagnostics: dedupeAnnualAxesDiagnostics(diagnostics),
   };

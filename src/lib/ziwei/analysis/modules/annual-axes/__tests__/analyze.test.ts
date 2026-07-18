@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import { ANNUAL_AXIS_DOMAINS } from "../../../contracts/annual-axes";
-import { analyzeAnnualAxes } from "../analyze";
+import { analyzeAnnualAxes, resolveModuleStatus } from "../analyze";
 
 const REGRESSION = {
   solarDate: "1991-09-21",
@@ -104,19 +104,23 @@ describe("analyzeAnnualAxes — domain resolution (Trung Châu chart, real annua
 });
 
 describe("analyzeAnnualAxes — Nam Phái missing annual structure", () => {
-  it("reports diagnostics and a non-neutral sentinel result rather than fabricating a score", () => {
+  it("reports diagnostics and a discriminated unavailable result rather than fabricating a score", () => {
     const chart = calculateNamPhai(REGRESSION);
     expect(chart.palaces.every((p) => p.annualPalaceName === undefined)).toBe(true);
 
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
 
+    expect(result.status).toBe("unavailable");
     for (const domain of ANNUAL_AXIS_DOMAINS) {
       const axis = result.axes[domain];
+      expect(axis.status).toBe("unavailable");
+      if (axis.status !== "unavailable") continue;
+      // null/null is the discriminated sentinel — never a real number/band
+      // that could be mistaken for a computed result.
+      expect(axis.score).toBeNull();
+      expect(axis.band).toBeNull();
       expect(axis.evidence).toHaveLength(0);
-      // 0/guarded is a deliberate non-neutral sentinel — 50/balanced would
-      // read as a real, computed "no strong signal either way" result.
-      expect(axis.score).toBe(0);
-      expect(axis.band).toBe("guarded");
+      expect(axis.reasonCodes.length).toBeGreaterThan(0);
     }
     expect(result.diagnostics.missingRequiredAnnualFacts.length).toBeGreaterThan(0);
     expect(result.diagnostics.missingAnnualPalaceNames.length).toBeGreaterThan(0);
@@ -167,5 +171,20 @@ describe("analyzeAnnualAxes — temporal behavior", () => {
     const a = analyzeAnnualAxes(calculateTrungChau(REGRESSION), { school: "trung-chau" });
     const b = analyzeAnnualAxes(calculateTrungChau(REGRESSION), { school: "trung-chau" });
     expect(a).toEqual(b);
+  });
+});
+
+describe("resolveModuleStatus", () => {
+  it("is available only when every domain is available", () => {
+    expect(resolveModuleStatus(["available", "available", "available"])).toBe("available");
+  });
+
+  it("is unavailable only when every domain is unavailable", () => {
+    expect(resolveModuleStatus(["unavailable", "unavailable"])).toBe("unavailable");
+  });
+
+  it("is partial for any mix of available and unavailable domains", () => {
+    expect(resolveModuleStatus(["available", "unavailable"])).toBe("partial");
+    expect(resolveModuleStatus(["unavailable", "available", "available"])).toBe("partial");
   });
 });
