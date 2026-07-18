@@ -64,7 +64,14 @@ export type PalaceOverviewBand =
 
 export interface PalaceOverviewResult {
   module: "palace-overview";
+  /** @deprecated use versions.contractVersion instead. */
   version: "1.0.0-experimental";
+  /** V1.2 — separate contract/engine/knowledge version identifiers (§8). */
+  versions: {
+    contractVersion: string;
+    engineVersion: string;
+    knowledgeVersion: string;
+  };
   palaceIndex: number;
   palaceName: string;
   palaceBranch: string;

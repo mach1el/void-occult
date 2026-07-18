@@ -121,3 +121,27 @@ export function loadPalaceOverviewSemanticKnowledgeV1(): LoadSemanticKnowledgeRe
 export function resetPalaceOverviewSemanticKnowledgeCache(): void {
   semanticCached = null;
 }
+
+/**
+ * Contract/engine/knowledge version identifiers, per prompt §8. Read
+ * unconditionally from version-manifest.json — these are build-time
+ * identifiers of what this codebase implements, not gated behind semantic
+ * knowledge validating successfully (a broken semantic catalog elsewhere
+ * must not blank out version reporting).
+ */
+export function getPalaceOverviewVersions(): {
+  contractVersion: string;
+  engineVersion: string;
+  knowledgeVersion: string;
+} {
+  const manifest = versionManifest as unknown as {
+    contractVersion: string;
+    engineVersion: string;
+    knowledgeVersion: string;
+  };
+  return {
+    contractVersion: manifest.contractVersion,
+    engineVersion: manifest.engineVersion,
+    knowledgeVersion: manifest.knowledgeVersion,
+  };
+}

@@ -255,6 +255,7 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
       {selected ? (
         <PalaceOverviewDetail
           result={selected}
+          semanticStatus={analysis.semanticStatus}
           onClose={() => setSelected(null)}
         />
       ) : null}
@@ -393,9 +394,11 @@ function DriverList({ drivers }: { drivers: PalaceEvidence[] }) {
 
 function PalaceOverviewDetail({
   result,
+  semanticStatus,
   onClose,
 }: {
   result: PalaceOverviewResult;
+  semanticStatus: "available" | "unavailable";
   onClose: () => void;
 }) {
   const groupA = result.allEvidence.filter((e) => classifyGroup(e) === "A");
@@ -584,7 +587,15 @@ function PalaceOverviewDetail({
         <summary>Thông tin mô hình</summary>
         <p className="palace-overview-detail__meta">
           Band {result.band} · completeness {result.evidenceCompleteness} ·{" "}
-          {result.profileId} · {result.version} · {result.school}
+          {result.profileId} · {result.school}
+        </p>
+        <p className="palace-overview-detail__meta">
+          contract {result.versions.contractVersion} · engine{" "}
+          {result.versions.engineVersion} · knowledge{" "}
+          {result.versions.knowledgeVersion}
+        </p>
+        <p className="palace-overview-detail__meta">
+          semantic: {semanticStatus === "available" ? "available" : "unavailable"}
         </p>
       </details>
 

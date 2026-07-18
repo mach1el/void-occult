@@ -1,8 +1,9 @@
 import type { NatalZiweiFact, ZiweiBrightness, ZiweiSchool } from "../../facts";
 import { buildStaticFrame, type StaticFrame } from "../../frame";
-import type {
-  PalaceOverviewKnowledgeV1,
-  PalaceOverviewSemanticKnowledgeV1,
+import {
+  getPalaceOverviewVersions,
+  type PalaceOverviewKnowledgeV1,
+  type PalaceOverviewSemanticKnowledgeV1,
 } from "../../knowledge";
 import type { ChartData } from "@/types/chart";
 import { aggregateEvidence, topDrivers } from "./aggregate-evidence";
@@ -165,6 +166,7 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
   return {
     module: "palace-overview",
     version: "1.0.0-experimental",
+    versions: getPalaceOverviewVersions(),
     palaceIndex: palace.index,
     palaceName: palace.name,
     palaceBranch: palace.branch,
