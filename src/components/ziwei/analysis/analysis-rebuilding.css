@@ -1,0 +1,31 @@
+.ziwei-analysis-rebuilding {
+  border: 1px solid color-mix(in srgb, var(--ink, #1a1520) 18%, transparent);
+  border-radius: 0;
+  padding: 1rem 1.1rem;
+  background: color-mix(in srgb, var(--paper, #f7f2ea) 92%, #c4b5a0);
+}
+
+.ziwei-analysis-rebuilding__title {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.ziwei-analysis-rebuilding__body {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  opacity: 0.9;
+}
+
+.trend-analysis-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 900px) {
+  .trend-analysis-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
