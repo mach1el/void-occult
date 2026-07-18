@@ -6,6 +6,3 @@ dist/
 *.tsbuildinfo
 __pycache__/
 *.pyc
-
-# Experimental calibration audit artifact
-src/lib/ziwei/knowledge/experimental/nam-phai-monthly-v2/calibration-last-run.tsv

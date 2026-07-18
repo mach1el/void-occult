@@ -91,6 +91,58 @@ describe("getDaiVanTrend", () => {
     expect(labels1991).toContain("35-44");
     expect(labels1991.some((l) => l.startsWith("2-"))).toBe(false);
   });
+
+  it("cùng BirthInput + cùng đại vận, chỉ đổi annualYear → điểm Đại vận giữ nguyên", () => {
+    const base = {
+      solarDate: "1991-09-21",
+      birthHour: "Dậu",
+      gender: "female" as const,
+      timezone: "7",
+      flowBase: "luu-nien",
+    };
+    const chartA = calculateNamPhai({ ...base, annualYear: "2026" });
+    const chartB = calculateNamPhai({ ...base, annualYear: "2030" });
+
+    // Cùng cung ĐV đang active (tuổi danh theo năm xem có thể lệch nhãn active,
+    // nhưng dải tuổi/cung an ĐV theo cục phải khớp).
+    expect(chartA.majorFortunePalace?.index).toBe(
+      chartB.majorFortunePalace?.index,
+    );
+    expect(chartA.majorFortunePalace?.branch).toBe(
+      chartB.majorFortunePalace?.branch,
+    );
+
+    const dvA = getDaiVanTrend(chartA);
+    const dvB = getDaiVanTrend(chartB);
+    expect(dvA.map((p) => ({ label: p.label, cat: p.cat, hung: p.hung }))).toEqual(
+      dvB.map((p) => ({ label: p.label, cat: p.cat, hung: p.hung })),
+    );
+
+    // Lưu nguyệt được phép đổi theo năm xem (Can Chi tháng / Lưu Đẩu Quân…).
+    const lnA = getLuuNienTrend(chartA, {
+      school: "nam-phai",
+      birthInput: { ...base, annualYear: "2026" },
+    });
+    const lnB = getLuuNienTrend(chartB, {
+      school: "nam-phai",
+      birthInput: { ...base, annualYear: "2030" },
+    });
+    expect(
+      lnA.map((p) => ({
+        m: p.monthNumber,
+        cat: p.cat,
+        hung: p.hung,
+        stem: p.calendarStem,
+      })),
+    ).not.toEqual(
+      lnB.map((p) => ({
+        m: p.monthNumber,
+        cat: p.cat,
+        hung: p.hung,
+        stem: p.calendarStem,
+      })),
+    );
+  });
 });
 
 describe("getLuuNienTrend", () => {

@@ -18,49 +18,7 @@ export type ScoreSignalCategory =
 export type ScorePalaceRole = "focus" | "xung" | "tam-hop";
 
 /** Tầng nguồn tín hiệu (Tứ Hóa / kỹ thuật). */
-export type ScoreLayer =
-  | "natal"
-  | "annual"
-  | "monthly"
-  | "majorFortune"
-  | "technical";
-
-/** Profile chấm điểm Lưu Nguyệt — default legacy giữ nguyên output. */
-export type ScoringProfileId =
-  | "legacy-v1"
-  | "nam-phai-monthly-v2-experimental";
-
-/** Multi-axis experimental (raw + soft-sat). */
-export interface TrendAxes {
-  raw: {
-    benefit: number;
-    risk: number;
-    activation: number;
-    conflict: number;
-    stability: number;
-  };
-  normalized: {
-    benefit: number;
-    risk: number;
-    activation: number;
-    conflict: number;
-    stability: number;
-    confidence: number;
-  };
-}
-
-/** Subtotal buckets — experimental profile only. */
-export interface TrendSubtotals {
-  majorStars: { benefit: number; risk: number };
-  mutagens: { benefit: number; risk: number };
-  minorStarsBeforeCap: { benefit: number; risk: number };
-  minorStarsAfterCap: { benefit: number; risk: number };
-  voidChangSheng: { benefit: number; risk: number };
-  interactions: { benefit: number; risk: number };
-  majorFortuneContext: { benefit: number; risk: number };
-  /** Soft-sat path never invents a normalization ScoreLine — always 0. */
-  normalization: { benefit: number; risk: number };
-}
+export type ScoreLayer = "natal" | "annual" | "monthly" | "technical";
 
 export interface ScoreLine {
   source: string;
@@ -102,13 +60,6 @@ export interface TrendPoint {
   majorStarContext?: {
     voidMajorPalaces: VoidMajorPalaceInfo[];
   };
-  /**
-   * Multi-axis experimental — chỉ khi scoringProfile =
-   * nam-phai-monthly-v2-experimental. `cat`/`hung` = normalized benefit/risk.
-   */
-  axes?: TrendAxes;
-  /** Subtotal buckets — experimental only. */
-  subtotals?: TrendSubtotals;
   breakdown: {
     cat: ScoreLine[];
     hung: ScoreLine[];
@@ -157,8 +108,6 @@ export interface LuuNienTrendOptions {
   school: School;
   birthInput: BirthInput;
   weights?: ScoringWeights;
-  /** Default `legacy-v1` — không đổi output production. */
-  scoringProfile?: ScoringProfileId;
 }
 
 export type AnnualAxisName =
