@@ -6,6 +6,10 @@
 
 export type {
   ScoreLine,
+  ScoreSignalCategory,
+  ScorePalaceRole,
+  ScoreLayer,
+  VoidMajorPalaceInfo,
   TrendPoint,
   PalaceStrength,
   LuuNienTrendOptions,

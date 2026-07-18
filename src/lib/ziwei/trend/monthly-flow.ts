@@ -12,20 +12,19 @@
  *   346-350) — giữ lại toàn bộ để làm nền cho Kỵ Trùng Kỵ / Lộc Trùng Lộc.
  */
 
-import type {
-  ChartData,
-  ChartEngine,
-  ChartPalace,
-  FlowMonthEntry,
-  MutagenRecord,
-} from "@/types/chart";
+import type { ChartData, ChartEngine, ChartPalace, MutagenRecord } from "@/types/chart";
 import { isAnnualStar } from "../star-classification";
 import { palaceHasSalvation } from "./combo-eval";
 import { computeStarEnergy, routeStarEnergy } from "./star-energy";
-import { findStarScore } from "./star-scores";
-import type { ScoreLine, TrendPoint } from "./types";
+import type {
+  MonthlyFocusEntry,
+  ScoreLayer,
+  ScoreLine,
+  TrendPoint,
+  VoidMajorPalaceInfo,
+} from "./types";
 import { roundTo1Decimal } from "./ui-breakdown";
-import { finalizeLayer, voidBranches } from "./util";
+import { finalizeLayer, isMutagenStar, voidBranches } from "./util";
 import { TAM_HOP, XUNG_CHIEU } from "./zones";
 
 type MonthRole = "focus" | "tam-hop" | "xung";
@@ -34,6 +33,22 @@ interface MonthFrameRow {
   palace: ChartPalace;
   role: MonthRole;
   weight: number;
+}
+
+function mutagenScoreLayer(
+  label: "Lưu nguyệt" | "Lưu niên" | "Gốc",
+): ScoreLayer {
+  if (label === "Lưu nguyệt") return "monthly";
+  if (label === "Lưu niên") return "annual";
+  return "natal";
+}
+
+function palaceMeta(role: MonthRole, palace: ChartPalace) {
+  return {
+    palaceRole: role,
+    palaceName: palace.name,
+    palaceBranch: palace.branch,
+  } as const;
 }
 
 const MONTH_ROLE_WEIGHT: Record<MonthRole, number> = {
@@ -144,14 +159,11 @@ function mutagenKindOf(mutagen: string): MutagenKind | null {
   return null;
 }
 
-const MUTAGEN_SCORE_NAME: Record<MutagenKind, string> = {
-  Lộc: "Hóa Lộc",
-  Quyền: "Hóa Quyền",
-  Khoa: "Hóa Khoa",
-  Kỵ: "Hóa Kỵ",
-};
-
-const MUTAGEN_FALLBACK_POINTS: Record<MutagenKind, number> = {
+/**
+ * SSOT điểm Tứ Hóa Lưu Nguyệt — spec chốt, KHÔNG tra `star-scores.csv`.
+ * CSV vẫn là SSOT cho sao nền (Bước A); Tứ Hóa tháng dùng đúng bảng này.
+ */
+const MONTHLY_MUTAGEN_POINTS: Record<MutagenKind, number> = {
   Lộc: 10,
   Quyền: 8,
   Khoa: 6,
@@ -180,9 +192,9 @@ interface LocKyHit {
 export function scoreLuuNguyetFrame(
   chart: ChartData,
   engine: ChartEngine,
-  monthEntry: FlowMonthEntry,
-): Pick<TrendPoint, "cat" | "hung" | "breakdown"> {
-  const focus = monthEntry.palace;
+  monthEntry: MonthlyFocusEntry,
+): Pick<TrendPoint, "cat" | "hung" | "breakdown" | "majorStarContext"> {
+  const focus = monthEntry.focusPalace;
   const cat: ScoreLine[] = [];
   const hung: ScoreLine[] = [];
   const voids = voidBranches(chart);
@@ -190,14 +202,31 @@ export function scoreLuuNguyetFrame(
   const frameByIndex = new Map(frame.map((row) => [row.palace.index, row]));
   const hits: LocKyHit[] = [];
 
+  const voidMajorPalaces: VoidMajorPalaceInfo[] = frame
+    .filter(
+      (row) =>
+        !(row.palace.stars ?? []).some((star) => star.layer === "major"),
+    )
+    .map((row) => ({
+      palaceRole: row.role,
+      palaceName: row.palace.name,
+      palaceBranch: row.palace.branch,
+    }));
+
   // ── Bước A: quét sao gốc trong khung (chính tinh/phụ tinh + Tuần/Triệt +
   // Trường Sinh) — đây là "C_gốc_cung", giống mọi tầng vì cấu hình sao gốc
   // của một cung không đổi theo tháng/năm/đại vận. ──
   for (const { palace, role, weight: wCung } of frame) {
     const where = roleLabel(role, palace);
+    const place = palaceMeta(role, palace);
 
     for (const star of palace.stars ?? []) {
       if (isAnnualStar(star)) continue; // sao lưu niên không thuộc gốc cung
+      // Marker Tứ Hóa (Hóa Lộc/Quyền/Khoa/Kỵ gắn trên palace.stars bởi
+      // addMutagenStars) KHÔNG phải sao nền — SSOT chấm Tứ Hóa là Bước B,
+      // chấm ở đây sẽ double-count (§7). Chính tinh nhận Tứ Hóa (vd Thái
+      // Dương) vẫn được chấm bình thường vì bản thân nó không phải marker.
+      if (isMutagenStar(star)) continue;
       const energy = computeStarEnergy(star);
       if (!energy) continue;
       const routed = routeStarEnergy(energy);
@@ -214,6 +243,11 @@ export function scoreLuuNguyetFrame(
         source: star.name,
         points,
         reason: `${brightLabel} · base tại ${where}`,
+        category: energy.row.tier === 1 ? "major-star" : "minor-star",
+        ...place,
+        starTier: energy.row.tier,
+        brightness: energy.bright ?? undefined,
+        layer: "natal",
       };
       if (routed.layer === "cat") cat.push(line);
       else hung.push(line);
@@ -228,6 +262,9 @@ export function scoreLuuNguyetFrame(
           source: type,
           points: scale(6, wCung),
           reason: `${type} án ngữ ${where} (${palace.branch})`,
+          category: "void",
+          ...place,
+          layer: "natal",
         });
       }
     }
@@ -251,6 +288,9 @@ export function scoreLuuNguyetFrame(
           source: `Trường Sinh·${cs}`,
           points: scale(pts, wCung),
           reason: `${cs} tại ${where}`,
+          category: "chang-sheng",
+          ...place,
+          layer: "natal",
         };
         if (layer === "cat") cat.push(line);
         else hung.push(line);
@@ -265,7 +305,7 @@ export function scoreLuuNguyetFrame(
   }> = [
     {
       layer: "Lưu nguyệt",
-      records: monthlyMutagenRecords(chart, engine, monthEntry.stem),
+      records: monthlyMutagenRecords(chart, engine, monthEntry.calendarStem),
     },
     { layer: "Lưu niên", records: chart.annualMutagens ?? [] },
     { layer: "Gốc", records: chart.natalMutagens ?? [] },
@@ -281,19 +321,17 @@ export function scoreLuuNguyetFrame(
       const kind = mutagenKindOf(record.mutagen);
       if (!kind) continue;
 
-      const row = findStarScore(MUTAGEN_SCORE_NAME[kind]);
-      const basePts = row
-        ? kind === "Kỵ"
-          ? Math.abs(row.ham || row.base)
-          : Math.abs(row.dac || row.base)
-        : MUTAGEN_FALLBACK_POINTS[kind];
-
-      const points = scale(basePts, hit.weight);
+      const points = scale(MONTHLY_MUTAGEN_POINTS[kind], hit.weight);
       const where = roleLabel(hit.role, palace);
       const line: ScoreLine = {
         source: `${layer} Hóa ${kind}`,
         points,
         reason: `${layer} Hóa ${kind}→${record.starName} tại ${where}`,
+        category: "mutagen",
+        ...palaceMeta(hit.role, palace),
+        layer: mutagenScoreLayer(layer),
+        transform: kind,
+        targetStar: record.starName,
       };
       if (kind === "Kỵ") hung.push(line);
       else cat.push(line);
@@ -306,8 +344,8 @@ export function scoreLuuNguyetFrame(
 
   // Nguyệt Lộc Tồn / Kình Dương / Đà La — tính động theo can tháng, KHÔNG ghi
   // vào chart.palaces (ranh giới AGENTS §5: tính toán tách khỏi hiển thị).
-  if (monthEntry.stem) {
-    const locIndex = engine.locTonIndex(monthEntry.stem);
+  if (monthEntry.calendarStem) {
+    const locIndex = engine.locTonIndex(monthEntry.calendarStem);
     const kinhIndex = (locIndex + 1 + 12) % 12;
     const daIndex = (locIndex - 1 + 12) % 12;
 
@@ -318,6 +356,9 @@ export function scoreLuuNguyetFrame(
         source: "Nguyệt Lộc Tồn",
         points,
         reason: `Nguyệt Lộc Tồn tại ${roleLabel(locHit.role, locHit.palace)}`,
+        category: "minor-star",
+        ...palaceMeta(locHit.role, locHit.palace),
+        layer: "monthly",
       });
       hits.push({
         layer: "Lưu nguyệt",
@@ -331,6 +372,9 @@ export function scoreLuuNguyetFrame(
         source: "Nguyệt Kình Dương",
         points: scale(NGUYET_KINH_DA_POINTS, kinhHit.weight),
         reason: `Nguyệt Kình Dương tại ${roleLabel(kinhHit.role, kinhHit.palace)}`,
+        category: "minor-star",
+        ...palaceMeta(kinhHit.role, kinhHit.palace),
+        layer: "monthly",
       });
     }
     const daHit = frameByIndex.get(daIndex);
@@ -339,6 +383,9 @@ export function scoreLuuNguyetFrame(
         source: "Nguyệt Đà La",
         points: scale(NGUYET_KINH_DA_POINTS, daHit.weight),
         reason: `Nguyệt Đà La tại ${roleLabel(daHit.role, daHit.palace)}`,
+        category: "minor-star",
+        ...palaceMeta(daHit.role, daHit.palace),
+        layer: "monthly",
       });
     }
   }
@@ -384,6 +431,11 @@ export function scoreLuuNguyetFrame(
     otherLoc.some((o) => o.palaceIndex === n.palaceIndex),
   );
 
+  const guardrailMeta = {
+    category: "guardrail" as const,
+    layer: "technical" as const,
+  };
+
   let hungLines = hung;
   if (kyTrungKy) {
     hungLines = [
@@ -392,6 +444,7 @@ export function scoreLuuNguyetFrame(
         source: "Kỵ Trùng Kỵ",
         points: KY_TRUNG_KY_BONUS,
         reason: "Nguyệt Hóa Kỵ ngộ Lưu Kỵ năm/Kỵ gốc cùng cung — báo động đỏ",
+        ...guardrailMeta,
       },
     ];
     const raw = roundTo1Decimal(
@@ -409,6 +462,7 @@ export function scoreLuuNguyetFrame(
       source: "Kỵ Trùng Kỵ",
       points: 0,
       reason: `Nhân toàn cột Hung ×${TRUNG_MULTIPLIER} (thô ${raw} → ${target})`,
+      ...guardrailMeta,
     });
   }
 
@@ -420,6 +474,7 @@ export function scoreLuuNguyetFrame(
         source: "Lộc Trùng Lộc",
         points: LOC_TRUNG_LOC_BONUS,
         reason: "Nguyệt Lộc ngộ Lưu Lộc năm/Lộc gốc cùng cung — cơ hội bùng nổ",
+        ...guardrailMeta,
       },
     ];
     const raw = roundTo1Decimal(
@@ -437,21 +492,23 @@ export function scoreLuuNguyetFrame(
       source: "Lộc Trùng Lộc",
       points: 0,
       reason: `Nhân toàn cột Cát ×${TRUNG_MULTIPLIER} (thô ${raw} → ${target})`,
+      ...guardrailMeta,
     });
   }
 
-  // 4) Xung Thái Tuế — chi tháng xung chi năm.
+  // 4) Xung Thái Tuế — chi LỊCH tháng xung chi năm (KHÔNG dùng chi cung).
   if (
-    monthEntry.branch &&
+    monthEntry.calendarBranch &&
     chart.annualBranch &&
-    XUNG_CHIEU[monthEntry.branch] === chart.annualBranch
+    XUNG_CHIEU[monthEntry.calendarBranch] === chart.annualBranch
   ) {
     hungLines = [
       ...hungLines,
       {
         source: "Xung Thái Tuế",
         points: XUNG_THAI_TUE_BONUS,
-        reason: `Chi tháng ${monthEntry.branch} xung chi năm ${chart.annualBranch} — tháng động`,
+        reason: `Chi tháng ${monthEntry.calendarBranch} xung chi năm ${chart.annualBranch} — tháng động`,
+        ...guardrailMeta,
       },
     ];
   }
@@ -463,5 +520,6 @@ export function scoreLuuNguyetFrame(
     cat: catFinal.score,
     hung: hungFinal.score,
     breakdown: { cat: catFinal.lines, hung: hungFinal.lines },
+    majorStarContext: { voidMajorPalaces },
   };
 }

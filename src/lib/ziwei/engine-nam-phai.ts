@@ -186,7 +186,7 @@ function stemBranchForYear(year: number): { stem: string; branch: string } {
   };
 }
 
-function stemBranchForLunarMonth(yearStem: string, lunarMonth: number): { stem: string; branch: string } {
+export function stemBranchForLunarMonth(yearStem: string, lunarMonth: number): { stem: string; branch: string } {
   const tigerStem = TIGER_RULE[yearStem] ?? "";
   return {
     stem: STEMS[fix(STEMS.indexOf(tigerStem) + lunarMonth - 1, 10)] ?? "",

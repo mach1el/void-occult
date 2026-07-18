@@ -3,7 +3,7 @@
  * Đại vận · Lưu niên · độ vững 12 cung.
  */
 
-import type { ChartData, FlowMonthEntry } from "@/types/chart";
+import type { ChartData, ChartEngine } from "@/types/chart";
 import { getEngine } from "../chart";
 import {
   baseStarName,
@@ -16,6 +16,7 @@ import { scoreFortuneFrame } from "./frame";
 import { scoreLuuNguyetFrame } from "./monthly-flow";
 import type {
   LuuNienTrendOptions,
+  MonthlyFocusEntry,
   PalaceStrength,
   ScoreLine,
   TrendPoint,
@@ -25,7 +26,6 @@ import {
   findDauQuanPalace,
   isMutagenStar,
   mutagenKind,
-  palaceStemForYear,
   voidBranches,
 } from "./util";
 
@@ -85,13 +85,32 @@ export function getDaiVanTrend(
 
 /**
  * 12 khung lưu nguyệt cho biểu đồ Lưu niên — luôn theo công thức Lưu niên:
- * Tháng Giêng khởi tại cung Lưu Đẩu Quân, các tháng kế tiếp đếm thuận;
- * can Tứ Hóa tháng theo cung an vị (không phụ thuộc flowBase an trên lá số).
+ * Tháng Giêng khởi tại cung Lưu Đẩu Quân, các tháng kế tiếp đếm thuận.
+ *
+ * `calendarStem`/`calendarBranch` lấy từ `engine.stemBranchForLunarMonth`
+ * (Ngũ Hổ Độn theo can năm xem + số tháng âm) — ĐỘC LẬP với cung Lưu Nguyệt
+ * Mệnh (`focusPalace`). Không được suy Can Chi tháng từ cung an vị.
  */
-function buildLuuNienScoreMonths(chart: ChartData): FlowMonthEntry[] {
-  const fallback = chart.monthlyPalaces ?? [];
+function buildLuuNienScoreMonths(
+  chart: ChartData,
+  engine: ChartEngine,
+): MonthlyFocusEntry[] {
   const startPalace = findDauQuanPalace(chart);
-  if (!startPalace || !chart.palaces.length) return fallback;
+  if (!startPalace || !chart.palaces.length) {
+    return (chart.monthlyPalaces ?? []).map((entry) => {
+      const { stem, branch } = engine.stemBranchForLunarMonth(
+        chart.annualStem,
+        entry.month,
+      );
+      return {
+        month: entry.month,
+        label: entry.label,
+        focusPalace: entry.palace,
+        calendarStem: stem,
+        calendarBranch: branch,
+      };
+    });
+  }
 
   return Array.from({ length: 12 }, (_, offset) => {
     const palaceIndex = (startPalace.index + offset) % 12;
@@ -99,12 +118,16 @@ function buildLuuNienScoreMonths(chart: ChartData): FlowMonthEntry[] {
       chart.palaces.find((item) => item.index === palaceIndex) ??
       chart.palaces[palaceIndex]!;
     const month = offset + 1;
+    const { stem, branch } = engine.stemBranchForLunarMonth(
+      chart.annualStem,
+      month,
+    );
     return {
       month,
       label: LUUN_NIEN_MONTH_LABELS[offset] ?? `Th.${month}`,
-      palace,
-      stem: palaceStemForYear(chart.annualStem, palace.index),
-      branch: palace.branch,
+      focusPalace: palace,
+      calendarStem: stem,
+      calendarBranch: branch,
     };
   });
 }
@@ -122,17 +145,17 @@ export function getLuuNienTrend(
   opts: LuuNienTrendOptions,
   asOf: Date = new Date(),
 ): TrendPoint[] {
-  const months = buildLuuNienScoreMonths(chart);
-  if (!months.length) return [];
-
   const engine = getEngine(opts.school);
   if (!engine) return [];
+
+  const months = buildLuuNienScoreMonths(chart, engine);
+  if (!months.length) return [];
 
   const currentMonth = resolveCurrentFlowMonth(chart, months, opts, asOf);
   const points: TrendPoint[] = [];
 
   for (const entry of months) {
-    if (!entry.palace) continue;
+    if (!entry.focusPalace) continue;
 
     const scored = scoreLuuNguyetFrame(chart, engine, entry);
 
@@ -142,6 +165,12 @@ export function getLuuNienTrend(
       cat: scored.cat,
       hung: scored.hung,
       isCurrent: entry.month === currentMonth,
+      monthNumber: entry.month,
+      calendarStem: entry.calendarStem,
+      calendarBranch: entry.calendarBranch,
+      focusPalaceName: entry.focusPalace.name,
+      focusPalaceBranch: entry.focusPalace.branch,
+      majorStarContext: scored.majorStarContext,
       breakdown: scored.breakdown,
     });
   }
@@ -151,7 +180,7 @@ export function getLuuNienTrend(
 
 function resolveCurrentFlowMonth(
   chart: ChartData,
-  months: NonNullable<ChartData["monthlyPalaces"]>,
+  months: MonthlyFocusEntry[],
   opts: LuuNienTrendOptions,
   asOf: Date,
 ): number | null {

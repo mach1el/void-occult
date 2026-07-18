@@ -153,6 +153,15 @@ export interface ChartEngine {
   tuHoaTargets(stem: string): Array<{ mutagen: string; starName: string }>;
   /** Vị trí Lộc Tồn theo Thiên Can (bảng cố định, dùng chung 2 phái). Dùng cho Nguyệt Lộc Tồn/Kình/Đà. */
   locTonIndex(stem: string): number;
+  /**
+   * Can Chi lịch của MỘT tháng âm lịch cụ thể theo can năm (Ngũ Hổ Độn) — SSOT
+   * cho Lưu Nguyệt `calendarStem`/`calendarBranch`. Độc lập tuyệt đối với cung
+   * Lưu Nguyệt Mệnh (focus palace) — KHÔNG được suy Can Chi tháng từ cung.
+   */
+  stemBranchForLunarMonth(
+    yearStem: string,
+    lunarMonth: number,
+  ): { stem: string; branch: string };
 }
 
 export interface ChartDto {

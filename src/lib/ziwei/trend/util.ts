@@ -3,43 +3,6 @@
 import type { ChartData, ChartPalace, ChartStar } from "@/types/chart";
 import type { ScoreLine } from "./types";
 
-const STEMS = [
-  "Giáp",
-  "Ất",
-  "Bính",
-  "Đinh",
-  "Mậu",
-  "Kỷ",
-  "Canh",
-  "Tân",
-  "Nhâm",
-  "Quý",
-] as const;
-
-const TIGER_RULE: Record<string, (typeof STEMS)[number]> = {
-  Giáp: "Bính",
-  Kỷ: "Bính",
-  Ất: "Mậu",
-  Canh: "Mậu",
-  Bính: "Canh",
-  Tân: "Canh",
-  Đinh: "Nhâm",
-  Nhâm: "Nhâm",
-  Mậu: "Giáp",
-  Quý: "Giáp",
-};
-
-/** Can của cung theo năm Lưu niên (tháng nào cung nấy). */
-export function palaceStemForYear(
-  yearStem: string,
-  palaceIndex: number,
-): string {
-  const start = TIGER_RULE[yearStem];
-  if (!start) return "";
-  const startIdx = STEMS.indexOf(start);
-  return STEMS[(startIdx + palaceIndex) % 10] ?? "";
-}
-
 export function findDauQuanPalace(chart: ChartData): ChartPalace | null {
   for (const palace of chart.palaces) {
     if (
@@ -75,6 +38,8 @@ export function finalizeLayer(
           source: "Chuẩn hóa",
           points: score - raw,
           reason: `Clamp về thang 0–100 (thô ${raw})`,
+          category: "normalization",
+          layer: "technical",
         },
       ],
     };
