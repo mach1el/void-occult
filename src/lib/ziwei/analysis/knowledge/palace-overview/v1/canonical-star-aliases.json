@@ -1,0 +1,29 @@
+{
+  "id": "palace-overview-star-aliases-v1-1",
+  "version": "1.1.0-experimental",
+  "status": "experimental",
+  "schoolProfiles": [
+    "nam-phai-v1",
+    "trung-chau-v1"
+  ],
+  "sourceIds": [
+    "src-calculation-core"
+  ],
+  "confidence": 0.9,
+  "effectiveFrom": "2026-07-18",
+  "notes": "Canonical spelling aliases only; not astrology rules.",
+  "aliases": [
+    {
+      "alias": "Tả Phù",
+      "canonical": "Tả Phụ"
+    },
+    {
+      "alias": "Hỉ Thần",
+      "canonical": "Hỷ Thần"
+    },
+    {
+      "alias": "Trường Sinh",
+      "canonical": "Tràng Sinh"
+    }
+  ]
+}

@@ -81,17 +81,87 @@ export interface TransformationsCatalog extends KnowledgeRecordMeta {
 
 export interface MinorFamilyRecord {
   id: string;
-  starNames: string[];
+  label: string;
   axes: AxisSeed;
-  hoaLinhBrightness?: {
-    miếuVượngĐắc: { pressureFactor: number; activationFactor: number };
-    hãm: { pressureFactor: number; activationFactor: number };
-  };
+  diminishingGroup: string;
+  notes?: string;
 }
 
 export interface MinorStarFamiliesCatalog extends KnowledgeRecordMeta {
   families: MinorFamilyRecord[];
-  neutralStarNames: string[];
+}
+
+export type MinorStarScoringMode = "direct" | "context-only";
+
+export type MinorBrightnessPolicy =
+  | "none"
+  | "hoa-linh"
+  | "literary-if-present";
+
+export interface MinorStarRecord {
+  id: string;
+  version: string;
+  status: KnowledgeStatus;
+
+  name: string;
+  canonicalName: string;
+  familyId: string;
+  scoringMode: MinorStarScoringMode;
+
+  schoolProfiles: SchoolProfileId[];
+  sourceIds: string[];
+  confidence: number;
+  effectiveFrom: string;
+
+  brightnessPolicy: MinorBrightnessPolicy;
+  traitTags: string[];
+  explanationKey: string;
+
+  axesOverride?: AxisSeed;
+  notes?: string;
+}
+
+export interface MinorStarsCatalog extends KnowledgeRecordMeta {
+  stars: MinorStarRecord[];
+}
+
+export interface StarAliasRecord {
+  alias: string;
+  canonical: string;
+}
+
+export interface StarAliasesCatalog extends KnowledgeRecordMeta {
+  aliases: StarAliasRecord[];
+}
+
+export interface MinorStateModifierPolicy {
+  supportFactor: number;
+  pressureFactor: number;
+  stabilityDelta: number;
+  activationFactor: number;
+}
+
+export interface MinorStateModifiersCatalog extends KnowledgeRecordMeta {
+  policies: {
+    none: { description: string };
+    "hoa-linh": Record<string, MinorStateModifierPolicy>;
+    "literary-if-present": Record<string, MinorStateModifierPolicy>;
+  };
+}
+
+export interface SchoolStarCoverageCatalog extends KnowledgeRecordMeta {
+  staticMinorStars: {
+    shared: string[];
+    trungChauOnly: string[];
+    namPhaiOnly: string[];
+  };
+  excludedFromStaticScoring: {
+    transformMarkers: string[];
+    voidMarkers: string[];
+    annualExamples: string[];
+    changShengSeparate: string[];
+  };
+  specialCases: Array<{ name: string; policy: string; reason: string }>;
 }
 
 export interface VoidEnvironmentCatalog extends KnowledgeRecordMeta {
@@ -149,6 +219,10 @@ export interface PalaceOverviewKnowledgeV1 {
   majorStars: MajorStarsCatalog;
   transformations: TransformationsCatalog;
   minorFamilies: MinorStarFamiliesCatalog;
+  minorStars: MinorStarsCatalog;
+  minorStateModifiers: MinorStateModifiersCatalog;
+  starAliases: StarAliasesCatalog;
+  schoolCoverage: SchoolStarCoverageCatalog;
   voidEnvironment: VoidEnvironmentCatalog;
   changSheng: ChangShengCatalog;
   structuralRules: StructuralRulesCatalog;

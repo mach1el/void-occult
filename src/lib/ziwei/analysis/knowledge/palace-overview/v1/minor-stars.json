@@ -1,0 +1,2539 @@
+{
+  "id": "palace-overview-minor-stars-v1-1",
+  "version": "1.1.0-experimental",
+  "status": "experimental",
+  "schoolProfiles": [
+    "nam-phai-v1",
+    "trung-chau-v1"
+  ],
+  "sourceIds": [
+    "src-calculation-core",
+    "src-minor-catalog-v1-1-heuristic"
+  ],
+  "confidence": 0.5,
+  "effectiveFrom": "2026-07-18",
+  "notes": "Complete target catalog for all known static minor stars emitted by the two calculation engines. Integration tests must prove runtime coverage.",
+  "stars": [
+    {
+      "id": "minor-star-ta-phu",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Tả Phụ",
+      "canonicalName": "Tả Phụ",
+      "familyId": "strong-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "mentorship",
+        "coordination"
+      ],
+      "explanationKey": "minor.strong-support.ta-phu",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-huu-bat",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Hữu Bật",
+      "canonicalName": "Hữu Bật",
+      "familyId": "strong-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "mentorship",
+        "coordination"
+      ],
+      "explanationKey": "minor.strong-support.huu-bat",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-khoi",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Khôi",
+      "canonicalName": "Thiên Khôi",
+      "familyId": "strong-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "mentorship",
+        "coordination"
+      ],
+      "explanationKey": "minor.strong-support.thien-khoi",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-viet",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Việt",
+      "canonicalName": "Thiên Việt",
+      "familyId": "strong-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "mentorship",
+        "coordination"
+      ],
+      "explanationKey": "minor.strong-support.thien-viet",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-an-quang",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Ân Quang",
+      "canonicalName": "Ân Quang",
+      "familyId": "strong-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "mentorship",
+        "coordination"
+      ],
+      "explanationKey": "minor.strong-support.an-quang",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-quy",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Quý",
+      "canonicalName": "Thiên Quý",
+      "familyId": "strong-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "mentorship",
+        "coordination"
+      ],
+      "explanationKey": "minor.strong-support.thien-quy",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-quan",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Quan",
+      "canonicalName": "Thiên Quan",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.thien-quan",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-phuc",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Phúc",
+      "canonicalName": "Thiên Phúc",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.thien-phuc",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-duc",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Đức",
+      "canonicalName": "Thiên Đức",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.thien-duc",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-nguyet-duc",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Nguyệt Đức",
+      "canonicalName": "Nguyệt Đức",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.nguyet-duc",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-long-duc",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Long Đức",
+      "canonicalName": "Long Đức",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.long-duc",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-phuc-duc",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Phúc Đức",
+      "canonicalName": "Phúc Đức",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.phuc-duc",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-giai",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Giải",
+      "canonicalName": "Thiên Giải",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.thien-giai",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-dia-giai",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Địa Giải",
+      "canonicalName": "Địa Giải",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.dia-giai",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-giai-than",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Giải Thần",
+      "canonicalName": "Giải Thần",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.giai-than",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-long-tri",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Long Trì",
+      "canonicalName": "Long Trì",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.long-tri",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-phuong-cac",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Phượng Các",
+      "canonicalName": "Phượng Các",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.phuong-cac",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thai-phu",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thai Phụ",
+      "canonicalName": "Thai Phụ",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.thai-phu",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-phong-cao",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Phong Cáo",
+      "canonicalName": "Phong Cáo",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.phong-cao",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-quoc-an",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Quốc Ấn",
+      "canonicalName": "Quốc Ấn",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.quoc-an",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-duong-phu",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Đường Phù",
+      "canonicalName": "Đường Phù",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.duong-phu",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-y",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Y",
+      "canonicalName": "Thiên Y",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.thien-y",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-nguyet-giai",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Nguyệt Giải",
+      "canonicalName": "Nguyệt Giải",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.35,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "support",
+        "resolution",
+        "recognition"
+      ],
+      "explanationKey": "minor.standard-support.nguyet-giai",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-van-xuong",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Văn Xương",
+      "canonicalName": "Văn Xương",
+      "familyId": "academic-literary",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "literary-if-present",
+      "traitTags": [
+        "learning",
+        "documentation",
+        "expression"
+      ],
+      "explanationKey": "minor.academic-literary.van-xuong",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-van-khuc",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Văn Khúc",
+      "canonicalName": "Văn Khúc",
+      "familyId": "academic-literary",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "literary-if-present",
+      "traitTags": [
+        "learning",
+        "documentation",
+        "expression"
+      ],
+      "explanationKey": "minor.academic-literary.van-khuc",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-tam-thai",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Tam Thai",
+      "canonicalName": "Tam Thai",
+      "familyId": "academic-literary",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "learning",
+        "documentation",
+        "expression"
+      ],
+      "explanationKey": "minor.academic-literary.tam-thai",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-bat-toa",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Bát Tọa",
+      "canonicalName": "Bát Tọa",
+      "familyId": "academic-literary",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "learning",
+        "documentation",
+        "expression"
+      ],
+      "explanationKey": "minor.academic-literary.bat-toa",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-tau-thu",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Tấu Thư",
+      "canonicalName": "Tấu Thư",
+      "familyId": "academic-literary",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "learning",
+        "documentation",
+        "expression"
+      ],
+      "explanationKey": "minor.academic-literary.tau-thu",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-loc-ton",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Lộc Tồn",
+      "canonicalName": "Lộc Tồn",
+      "familyId": "wealth-resource",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "resource",
+        "accumulation",
+        "maintenance"
+      ],
+      "explanationKey": "minor.wealth-resource.loc-ton",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-tru",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Trù",
+      "canonicalName": "Thiên Trù",
+      "familyId": "wealth-resource",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "resource",
+        "accumulation",
+        "maintenance"
+      ],
+      "explanationKey": "minor.wealth-resource.thien-tru",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-tai",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Tài",
+      "canonicalName": "Thiên Tài",
+      "familyId": "wealth-resource",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "resource",
+        "accumulation",
+        "maintenance"
+      ],
+      "explanationKey": "minor.wealth-resource.thien-tai",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-tho",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Thọ",
+      "canonicalName": "Thiên Thọ",
+      "familyId": "wealth-resource",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "resource",
+        "accumulation",
+        "maintenance"
+      ],
+      "explanationKey": "minor.wealth-resource.thien-tho",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-bac-si",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Bác Sĩ",
+      "canonicalName": "Bác Sĩ",
+      "familyId": "soft-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "minor-support",
+        "readiness"
+      ],
+      "explanationKey": "minor.soft-support.bac-si",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thieu-duong",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiếu Dương",
+      "canonicalName": "Thiếu Dương",
+      "familyId": "soft-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "minor-support",
+        "readiness"
+      ],
+      "explanationKey": "minor.soft-support.thieu-duong",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thieu-am",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiếu Âm",
+      "canonicalName": "Thiếu Âm",
+      "familyId": "soft-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "minor-support",
+        "readiness"
+      ],
+      "explanationKey": "minor.soft-support.thieu-am",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-hy-than",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Hỷ Thần",
+      "canonicalName": "Hỷ Thần",
+      "familyId": "soft-support",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "minor-support",
+        "readiness"
+      ],
+      "explanationKey": "minor.soft-support.hy-than",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-luc-si",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Lực Sĩ",
+      "canonicalName": "Lực Sĩ",
+      "familyId": "authority-action",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "organization",
+        "decisiveness",
+        "execution"
+      ],
+      "explanationKey": "minor.authority-action.luc-si",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-tuong-quan",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Tướng Quân",
+      "canonicalName": "Tướng Quân",
+      "familyId": "authority-action",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "organization",
+        "decisiveness",
+        "execution"
+      ],
+      "explanationKey": "minor.authority-action.tuong-quan",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-tuong-tinh",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Tướng Tinh",
+      "canonicalName": "Tướng Tinh",
+      "familyId": "authority-action",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.35,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "organization",
+        "decisiveness",
+        "execution"
+      ],
+      "explanationKey": "minor.authority-action.tuong-tinh",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-ma",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Mã",
+      "canonicalName": "Thiên Mã",
+      "familyId": "movement-action",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "movement",
+        "change",
+        "execution"
+      ],
+      "explanationKey": "minor.movement-action.thien-ma",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant.",
+      "axesOverride": {
+        "support": 0.3,
+        "pressure": 0.2,
+        "stability": -0.3,
+        "activation": 1.3
+      }
+    },
+    {
+      "id": "minor-star-thanh-long",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thanh Long",
+      "canonicalName": "Thanh Long",
+      "familyId": "movement-action",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "movement",
+        "change",
+        "execution"
+      ],
+      "explanationKey": "minor.movement-action.thanh-long",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant.",
+      "axesOverride": {
+        "support": 0.6,
+        "pressure": 0.0,
+        "stability": 0.1,
+        "activation": 0.8
+      }
+    },
+    {
+      "id": "minor-star-tue-dich",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Tuế Dịch",
+      "canonicalName": "Tuế Dịch",
+      "familyId": "movement-action",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.35,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "movement",
+        "change",
+        "execution"
+      ],
+      "explanationKey": "minor.movement-action.tue-dich",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-phi-liem",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Phi Liêm",
+      "canonicalName": "Phi Liêm",
+      "familyId": "movement-action",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "movement",
+        "change",
+        "execution"
+      ],
+      "explanationKey": "minor.movement-action.phi-liem",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant.",
+      "axesOverride": {
+        "support": 0.1,
+        "pressure": 0.6,
+        "stability": -0.3,
+        "activation": 0.8
+      }
+    },
+    {
+      "id": "minor-star-dao-hoa",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Đào Hoa",
+      "canonicalName": "Đào Hoa",
+      "familyId": "joy-social",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "connection",
+        "visibility",
+        "positive-affect"
+      ],
+      "explanationKey": "minor.joy-social.dao-hoa",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant.",
+      "axesOverride": {
+        "support": 0.3,
+        "pressure": 0.2,
+        "stability": -0.1,
+        "activation": 0.7
+      }
+    },
+    {
+      "id": "minor-star-hong-loan",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Hồng Loan",
+      "canonicalName": "Hồng Loan",
+      "familyId": "joy-social",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "connection",
+        "visibility",
+        "positive-affect"
+      ],
+      "explanationKey": "minor.joy-social.hong-loan",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant.",
+      "axesOverride": {
+        "support": 0.6,
+        "pressure": 0.1,
+        "stability": 0.1,
+        "activation": 0.6
+      }
+    },
+    {
+      "id": "minor-star-thien-hy",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Hỷ",
+      "canonicalName": "Thiên Hỷ",
+      "familyId": "joy-social",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "connection",
+        "visibility",
+        "positive-affect"
+      ],
+      "explanationKey": "minor.joy-social.thien-hy",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant.",
+      "axesOverride": {
+        "support": 0.6,
+        "pressure": 0.1,
+        "stability": 0.1,
+        "activation": 0.6
+      }
+    },
+    {
+      "id": "minor-star-thien-rieu",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Riêu",
+      "canonicalName": "Thiên Riêu",
+      "familyId": "attraction-visibility",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "attraction",
+        "visibility",
+        "variability"
+      ],
+      "explanationKey": "minor.attraction-visibility.thien-rieu",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant.",
+      "axesOverride": {
+        "support": 0.2,
+        "pressure": 0.5,
+        "stability": -0.2,
+        "activation": 0.7
+      }
+    },
+    {
+      "id": "minor-star-ham-tri",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Hàm Trì",
+      "canonicalName": "Hàm Trì",
+      "familyId": "attraction-visibility",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.35,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "attraction",
+        "visibility",
+        "variability"
+      ],
+      "explanationKey": "minor.attraction-visibility.ham-tri",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant.",
+      "axesOverride": {
+        "support": 0.2,
+        "pressure": 0.4,
+        "stability": -0.2,
+        "activation": 0.7
+      }
+    },
+    {
+      "id": "minor-star-hoa-cai",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Hoa Cái",
+      "canonicalName": "Hoa Cái",
+      "familyId": "symbolic-prestige",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "prestige",
+        "symbolic",
+        "reflection"
+      ],
+      "explanationKey": "minor.symbolic-prestige.hoa-cai",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant.",
+      "axesOverride": {
+        "support": 0.5,
+        "pressure": 0.1,
+        "stability": 0.3,
+        "activation": 0.3
+      }
+    },
+    {
+      "id": "minor-star-thien-vu",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Vu",
+      "canonicalName": "Thiên Vu",
+      "familyId": "symbolic-prestige",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "prestige",
+        "symbolic",
+        "reflection"
+      ],
+      "explanationKey": "minor.symbolic-prestige.thien-vu",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-kinh-duong",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Kình Dương",
+      "canonicalName": "Kình Dương",
+      "familyId": "major-malefic",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "pressure",
+        "disruption",
+        "activation"
+      ],
+      "explanationKey": "minor.major-malefic.kinh-duong",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-da-la",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Đà La",
+      "canonicalName": "Đà La",
+      "familyId": "major-malefic",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "pressure",
+        "disruption",
+        "activation"
+      ],
+      "explanationKey": "minor.major-malefic.da-la",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-hoa-tinh",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Hỏa Tinh",
+      "canonicalName": "Hỏa Tinh",
+      "familyId": "major-malefic",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "hoa-linh",
+      "traitTags": [
+        "pressure",
+        "disruption",
+        "activation"
+      ],
+      "explanationKey": "minor.major-malefic.hoa-tinh",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-linh-tinh",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Linh Tinh",
+      "canonicalName": "Linh Tinh",
+      "familyId": "major-malefic",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "hoa-linh",
+      "traitTags": [
+        "pressure",
+        "disruption",
+        "activation"
+      ],
+      "explanationKey": "minor.major-malefic.linh-tinh",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-dia-khong",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Địa Không",
+      "canonicalName": "Địa Không",
+      "familyId": "major-malefic",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "pressure",
+        "disruption",
+        "activation"
+      ],
+      "explanationKey": "minor.major-malefic.dia-khong",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-dia-kiep",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Địa Kiếp",
+      "canonicalName": "Địa Kiếp",
+      "familyId": "major-malefic",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.6,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "pressure",
+        "disruption",
+        "activation"
+      ],
+      "explanationKey": "minor.major-malefic.dia-kiep",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-hinh",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Hình",
+      "canonicalName": "Thiên Hình",
+      "familyId": "strong-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "constraint",
+        "pressure",
+        "disruption"
+      ],
+      "explanationKey": "minor.strong-pressure.thien-hinh",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-la",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên La",
+      "canonicalName": "Thiên La",
+      "familyId": "strong-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "constraint",
+        "pressure",
+        "disruption"
+      ],
+      "explanationKey": "minor.strong-pressure.thien-la",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-dia-vong",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Địa Võng",
+      "canonicalName": "Địa Võng",
+      "familyId": "strong-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "constraint",
+        "pressure",
+        "disruption"
+      ],
+      "explanationKey": "minor.strong-pressure.dia-vong",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-bach-ho",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Bạch Hổ",
+      "canonicalName": "Bạch Hổ",
+      "familyId": "strong-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "constraint",
+        "pressure",
+        "disruption"
+      ],
+      "explanationKey": "minor.strong-pressure.bach-ho",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-tang-mon",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Tang Môn",
+      "canonicalName": "Tang Môn",
+      "familyId": "strong-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "constraint",
+        "pressure",
+        "disruption"
+      ],
+      "explanationKey": "minor.strong-pressure.tang-mon",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-kiep-sat",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Kiếp Sát",
+      "canonicalName": "Kiếp Sát",
+      "familyId": "strong-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "constraint",
+        "pressure",
+        "disruption"
+      ],
+      "explanationKey": "minor.strong-pressure.kiep-sat",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-khong",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Không",
+      "canonicalName": "Thiên Không",
+      "familyId": "strong-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "constraint",
+        "pressure",
+        "disruption"
+      ],
+      "explanationKey": "minor.strong-pressure.thien-khong",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-khoc",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Khốc",
+      "canonicalName": "Thiên Khốc",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "friction",
+        "noise",
+        "pressure"
+      ],
+      "explanationKey": "minor.standard-pressure.thien-khoc",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-hu",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Hư",
+      "canonicalName": "Thiên Hư",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "friction",
+        "noise",
+        "pressure"
+      ],
+      "explanationKey": "minor.standard-pressure.thien-hu",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-pha-toai",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Phá Toái",
+      "canonicalName": "Phá Toái",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "friction",
+        "noise",
+        "pressure"
+      ],
+      "explanationKey": "minor.standard-pressure.pha-toai",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-luu-ha",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Lưu Hà",
+      "canonicalName": "Lưu Hà",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "friction",
+        "noise",
+        "pressure"
+      ],
+      "explanationKey": "minor.standard-pressure.luu-ha",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-tu-phu",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Tử Phù",
+      "canonicalName": "Tử Phù",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "friction",
+        "noise",
+        "pressure"
+      ],
+      "explanationKey": "minor.standard-pressure.tu-phu",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-tue-pha",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Tuế Phá",
+      "canonicalName": "Tuế Phá",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "friction",
+        "noise",
+        "pressure"
+      ],
+      "explanationKey": "minor.standard-pressure.tue-pha",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-truc-phu",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Trực Phù",
+      "canonicalName": "Trực Phù",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "friction",
+        "noise",
+        "pressure"
+      ],
+      "explanationKey": "minor.standard-pressure.truc-phu",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-dieu-khach",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Điếu Khách",
+      "canonicalName": "Điếu Khách",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "friction",
+        "noise",
+        "pressure"
+      ],
+      "explanationKey": "minor.standard-pressure.dieu-khach",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-vong-than",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Vong Thần",
+      "canonicalName": "Vong Thần",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.35,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "friction",
+        "noise",
+        "pressure"
+      ],
+      "explanationKey": "minor.standard-pressure.vong-than",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-chi-boi",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Chỉ Bối",
+      "canonicalName": "Chỉ Bối",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.35,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "friction",
+        "noise",
+        "pressure"
+      ],
+      "explanationKey": "minor.standard-pressure.chi-boi",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-am-sat",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Âm Sát",
+      "canonicalName": "Âm Sát",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.35,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "friction",
+        "noise",
+        "pressure"
+      ],
+      "explanationKey": "minor.standard-pressure.am-sat",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thien-sat",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Sát",
+      "canonicalName": "Thiên Sát",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.35,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "friction",
+        "noise",
+        "pressure"
+      ],
+      "explanationKey": "minor.standard-pressure.thien-sat",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-tai-sat",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Tai Sát",
+      "canonicalName": "Tai Sát",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.35,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "friction",
+        "noise",
+        "pressure"
+      ],
+      "explanationKey": "minor.standard-pressure.tai-sat",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-nguyet-sat",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Nguyệt Sát",
+      "canonicalName": "Nguyệt Sát",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.35,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "friction",
+        "noise",
+        "pressure"
+      ],
+      "explanationKey": "minor.standard-pressure.nguyet-sat",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-dai-hao",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Đại Hao",
+      "canonicalName": "Đại Hao",
+      "familyId": "resource-dispersion",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "dispersion",
+        "turnover",
+        "resource-pressure"
+      ],
+      "explanationKey": "minor.resource-dispersion.dai-hao",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-tieu-hao",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Tiểu Hao",
+      "canonicalName": "Tiểu Hao",
+      "familyId": "resource-dispersion",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "dispersion",
+        "turnover",
+        "resource-pressure"
+      ],
+      "explanationKey": "minor.resource-dispersion.tieu-hao",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-co-than",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Cô Thần",
+      "canonicalName": "Cô Thần",
+      "familyId": "isolation-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "distance",
+        "independence",
+        "reduced-linkage"
+      ],
+      "explanationKey": "minor.isolation-pressure.co-than",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-qua-tu",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Quả Tú",
+      "canonicalName": "Quả Tú",
+      "familyId": "isolation-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "distance",
+        "independence",
+        "reduced-linkage"
+      ],
+      "explanationKey": "minor.isolation-pressure.qua-tu",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-quan-phu",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Quan Phù",
+      "canonicalName": "Quan Phù",
+      "familyId": "administrative-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "rules",
+        "debate",
+        "procedure"
+      ],
+      "explanationKey": "minor.administrative-pressure.quan-phu",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-quan-phu-2",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Quan Phủ",
+      "canonicalName": "Quan Phủ",
+      "familyId": "administrative-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "rules",
+        "debate",
+        "procedure"
+      ],
+      "explanationKey": "minor.administrative-pressure.quan-phu",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-thai-tue",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thái Tuế",
+      "canonicalName": "Thái Tuế",
+      "familyId": "administrative-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "rules",
+        "debate",
+        "procedure"
+      ],
+      "explanationKey": "minor.administrative-pressure.thai-tue",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant.",
+      "axesOverride": {
+        "support": 0.0,
+        "pressure": 1.0,
+        "stability": -0.2,
+        "activation": 1.0
+      }
+    },
+    {
+      "id": "minor-star-phuc-binh",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Phục Binh",
+      "canonicalName": "Phục Binh",
+      "familyId": "administrative-pressure",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "rules",
+        "debate",
+        "procedure"
+      ],
+      "explanationKey": "minor.administrative-pressure.phuc-binh",
+      "notes": "Experimental Palace Overview seed; not a classical numeric constant."
+    },
+    {
+      "id": "minor-star-benh-phu",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Bệnh Phù",
+      "canonicalName": "Bệnh Phù",
+      "familyId": "strain-context",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "maintenance",
+        "strain",
+        "recovery-demand"
+      ],
+      "explanationKey": "minor.strain-context.benh-phu",
+      "notes": "Represents maintenance/strain context only; never use for medical diagnosis."
+    },
+    {
+      "id": "minor-star-thien-thuong",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Thương",
+      "canonicalName": "Thiên Thương",
+      "familyId": "strain-context",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "maintenance",
+        "strain",
+        "recovery-demand"
+      ],
+      "explanationKey": "minor.strain-context.thien-thuong",
+      "notes": "Pressure context only; never use for medical diagnosis or event prediction."
+    },
+    {
+      "id": "minor-star-thien-su",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Sứ",
+      "canonicalName": "Thiên Sứ",
+      "familyId": "strain-context",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "maintenance",
+        "strain",
+        "recovery-demand"
+      ],
+      "explanationKey": "minor.strain-context.thien-su",
+      "notes": "Pressure context only; never use for medical diagnosis or event prediction."
+    },
+    {
+      "id": "minor-star-thien-nguyet",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Thiên Nguyệt",
+      "canonicalName": "Thiên Nguyệt",
+      "familyId": "strain-context",
+      "scoringMode": "direct",
+      "schoolProfiles": [
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.35,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "maintenance",
+        "strain",
+        "recovery-demand"
+      ],
+      "explanationKey": "minor.strain-context.thien-nguyet",
+      "notes": "Trung Châu strain context; never use for medical diagnosis."
+    },
+    {
+      "id": "minor-star-dau-quan",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Đẩu Quân",
+      "canonicalName": "Đẩu Quân",
+      "familyId": "context-only",
+      "scoringMode": "context-only",
+      "schoolProfiles": [
+        "nam-phai-v1",
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "context"
+      ],
+      "explanationKey": "minor.context-only.dau-quan",
+      "notes": "Static natal marker is catalogued but context-only in Palace Overview V1.1."
+    },
+    {
+      "id": "minor-star-phan-an",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Phàn An",
+      "canonicalName": "Phàn An",
+      "familyId": "context-only",
+      "scoringMode": "context-only",
+      "schoolProfiles": [
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.35,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "context"
+      ],
+      "explanationKey": "minor.context-only.phan-an",
+      "notes": "Trung Châu context star; no direct score until a structural rule is approved."
+    },
+    {
+      "id": "minor-star-tuc-than",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "name": "Tức Thần",
+      "canonicalName": "Tức Thần",
+      "familyId": "context-only",
+      "scoringMode": "context-only",
+      "schoolProfiles": [
+        "trung-chau-v1"
+      ],
+      "sourceIds": [
+        "src-calculation-core",
+        "src-minor-catalog-v1-1-heuristic"
+      ],
+      "confidence": 0.35,
+      "effectiveFrom": "2026-07-18",
+      "brightnessPolicy": "none",
+      "traitTags": [
+        "context"
+      ],
+      "explanationKey": "minor.context-only.tuc-than",
+      "notes": "Trung Châu context star; no direct score until a structural rule is approved."
+    }
+  ]
+}

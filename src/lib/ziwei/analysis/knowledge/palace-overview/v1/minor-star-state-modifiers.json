@@ -1,0 +1,85 @@
+{
+  "id": "palace-overview-minor-state-modifiers-v1-1",
+  "version": "1.1.0-experimental",
+  "status": "experimental",
+  "schoolProfiles": [
+    "nam-phai-v1",
+    "trung-chau-v1"
+  ],
+  "sourceIds": [
+    "src-calculation-core",
+    "src-minor-catalog-v1-1-heuristic"
+  ],
+  "confidence": 0.5,
+  "effectiveFrom": "2026-07-18",
+  "notes": "Only apply when Calculation Core provides brightness. Do not infer missing brightness from branch in this module.",
+  "policies": {
+    "none": {
+      "description": "No brightness modifier."
+    },
+    "hoa-linh": {
+      "Miếu": {
+        "supportFactor": 1.0,
+        "pressureFactor": 0.85,
+        "stabilityDelta": 0.1,
+        "activationFactor": 1.15
+      },
+      "Vượng": {
+        "supportFactor": 1.0,
+        "pressureFactor": 0.88,
+        "stabilityDelta": 0.1,
+        "activationFactor": 1.1
+      },
+      "Đắc": {
+        "supportFactor": 1.0,
+        "pressureFactor": 0.9,
+        "stabilityDelta": 0.0,
+        "activationFactor": 1.08
+      },
+      "Bình": {
+        "supportFactor": 1.0,
+        "pressureFactor": 1.0,
+        "stabilityDelta": 0.0,
+        "activationFactor": 1.0
+      },
+      "Hãm": {
+        "supportFactor": 1.0,
+        "pressureFactor": 1.2,
+        "stabilityDelta": -0.2,
+        "activationFactor": 1.1
+      }
+    },
+    "literary-if-present": {
+      "Miếu": {
+        "supportFactor": 1.15,
+        "pressureFactor": 0.9,
+        "stabilityDelta": 0.3,
+        "activationFactor": 1.05
+      },
+      "Vượng": {
+        "supportFactor": 1.1,
+        "pressureFactor": 0.92,
+        "stabilityDelta": 0.2,
+        "activationFactor": 1.03
+      },
+      "Đắc": {
+        "supportFactor": 1.05,
+        "pressureFactor": 0.95,
+        "stabilityDelta": 0.1,
+        "activationFactor": 1.0
+      },
+      "Bình": {
+        "supportFactor": 1.0,
+        "pressureFactor": 1.0,
+        "stabilityDelta": 0.0,
+        "activationFactor": 1.0
+      },
+      "Hãm": {
+        "supportFactor": 0.75,
+        "pressureFactor": 1.25,
+        "stabilityDelta": -0.4,
+        "activationFactor": 1.05
+      }
+    }
+  }
+}

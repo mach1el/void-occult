@@ -34,6 +34,18 @@
       "effectiveFrom": "2026-07-18",
       "title": "Palace Overview Engine V1 specification",
       "kind": "spec"
+    },
+    {
+      "id": "src-minor-catalog-v1-1-heuristic",
+      "version": "1.1.0-experimental",
+      "status": "experimental",
+      "schoolProfiles": ["nam-phai-v1", "trung-chau-v1"],
+      "sourceIds": ["src-minor-catalog-v1-1-heuristic"],
+      "confidence": 0.5,
+      "effectiveFrom": "2026-07-18",
+      "title": "Palace Overview V1.1 complete minor-star heuristic catalog",
+      "kind": "heuristic-seed",
+      "notes": "Axis values are engineering calibration seeds, not numeric constants from classical texts."
     }
   ]
 }

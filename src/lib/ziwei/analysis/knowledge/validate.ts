@@ -2,9 +2,23 @@ import type {
   AxisSeed,
   KnowledgeRecordMeta,
   KnowledgeStatus,
+  MinorBrightnessPolicy,
+  MinorFamilyRecord,
+  MinorStarScoringMode,
   PalaceOverviewKnowledgeV1,
   PalaceOverviewProfile,
 } from "./schema";
+
+const SCORING_MODES: ReadonlySet<MinorStarScoringMode> = new Set([
+  "direct",
+  "context-only",
+]);
+
+const BRIGHTNESS_POLICIES: ReadonlySet<MinorBrightnessPolicy> = new Set([
+  "none",
+  "hoa-linh",
+  "literary-if-present",
+]);
 
 const ALLOWED_LOAD: ReadonlySet<KnowledgeStatus> = new Set([
   "approved",
@@ -100,6 +114,117 @@ function validateProfile(
   }
 }
 
+function validateMinorStars(
+  knowledge: PalaceOverviewKnowledgeV1,
+  familyById: Map<string, MinorFamilyRecord>,
+  issues: KnowledgeValidationIssue[],
+): void {
+  const sourceIds = new Set(knowledge.sources.sources.map((s) => s.id));
+  const seenStarIds = new Set<string>();
+  const seenNames = new Set<string>();
+  const seenCanonicalNames = new Set<string>();
+  const stateModifierPolicyKeys = new Set(
+    Object.keys(knowledge.minorStateModifiers.policies),
+  );
+
+  const excludedNames = new Set([
+    ...knowledge.schoolCoverage.excludedFromStaticScoring.transformMarkers,
+    ...knowledge.schoolCoverage.excludedFromStaticScoring.voidMarkers,
+    ...knowledge.schoolCoverage.excludedFromStaticScoring.annualExamples,
+    ...knowledge.schoolCoverage.excludedFromStaticScoring.changShengSeparate,
+  ]);
+  const specialCaseNames = new Set(
+    knowledge.schoolCoverage.specialCases.map((c) => c.name),
+  );
+
+  for (const star of knowledge.minorStars.stars) {
+    const path = `minorStars.${star.id}`;
+
+    if (seenStarIds.has(star.id)) {
+      issues.push({ path, message: `duplicate minor-star record id: ${star.id}` });
+    }
+    seenStarIds.add(star.id);
+
+    if (seenNames.has(star.name)) {
+      issues.push({ path, message: `duplicate minor-star name: ${star.name}` });
+    }
+    seenNames.add(star.name);
+
+    if (seenCanonicalNames.has(star.canonicalName)) {
+      issues.push({
+        path,
+        message: `canonical star assigned more than once: ${star.canonicalName}`,
+      });
+    }
+    seenCanonicalNames.add(star.canonicalName);
+
+    const family = familyById.get(star.familyId);
+    if (!family) {
+      issues.push({ path, message: `missing family: ${star.familyId}` });
+    }
+
+    const scoringMode = star.scoringMode as MinorStarScoringMode;
+    if (!SCORING_MODES.has(scoringMode)) {
+      issues.push({ path, message: `invalid scoringMode: ${star.scoringMode}` });
+    }
+
+    const brightnessPolicy = star.brightnessPolicy as MinorBrightnessPolicy;
+    if (!BRIGHTNESS_POLICIES.has(brightnessPolicy)) {
+      issues.push({
+        path,
+        message: `invalid brightnessPolicy: ${star.brightnessPolicy}`,
+      });
+    } else if (!stateModifierPolicyKeys.has(brightnessPolicy)) {
+      issues.push({
+        path,
+        message: `unknown state modifier policy: ${brightnessPolicy}`,
+      });
+    }
+
+    if (scoringMode === "context-only") {
+      const axes = star.axesOverride;
+      if (
+        axes &&
+        (axes.support !== 0 ||
+          axes.pressure !== 0 ||
+          axes.stability !== 0 ||
+          axes.activation !== 0)
+      ) {
+        issues.push({
+          path,
+          message: "context-only record must not have non-zero axesOverride",
+        });
+      }
+    }
+
+    if (scoringMode === "direct" && family?.id === "context-only") {
+      issues.push({
+        path,
+        message: "direct record cannot use a context-only family",
+      });
+    }
+
+    if (star.axesOverride) validateAxes(star.axesOverride, path, issues);
+
+    for (const id of star.sourceIds) {
+      if (!sourceIds.has(id)) {
+        issues.push({ path, message: `unsupported source id: ${id}` });
+      }
+    }
+
+    if (!star.schoolProfiles.length) {
+      issues.push({ path, message: "record absent from all school profiles" });
+    }
+
+    if (excludedNames.has(star.name) && !specialCaseNames.has(star.name)) {
+      issues.push({
+        path,
+        message: `star present in exclusion list without explicit special case: ${star.name}`,
+      });
+    }
+  }
+}
+
 export function validatePalaceOverviewKnowledge(
   knowledge: PalaceOverviewKnowledgeV1,
 ): KnowledgeValidationResult {
@@ -111,6 +236,10 @@ export function validatePalaceOverviewKnowledge(
     { path: "majorStars", meta: knowledge.majorStars },
     { path: "transformations", meta: knowledge.transformations },
     { path: "minorFamilies", meta: knowledge.minorFamilies },
+    { path: "minorStars", meta: knowledge.minorStars },
+    { path: "minorStateModifiers", meta: knowledge.minorStateModifiers },
+    { path: "starAliases", meta: knowledge.starAliases },
+    { path: "schoolCoverage", meta: knowledge.schoolCoverage },
     { path: "voidEnvironment", meta: knowledge.voidEnvironment },
     { path: "changSheng", meta: knowledge.changSheng },
     { path: "structuralRules", meta: knowledge.structuralRules },
@@ -136,19 +265,27 @@ export function validatePalaceOverviewKnowledge(
     validateAxes(star.axes, `majorStars.${star.name}`, issues);
   }
 
-  const familyStars = new Set<string>();
+  const familyById = new Map(
+    knowledge.minorFamilies.families.map((f) => [f.id, f]),
+  );
+  const diminishingGroups = new Set<string>();
   for (const family of knowledge.minorFamilies.families) {
-    for (const name of family.starNames) {
-      if (familyStars.has(name)) {
-        issues.push({
-          path: `minorFamilies.${family.id}`,
-          message: `duplicate star across families: ${name}`,
-        });
-      }
-      familyStars.add(name);
-    }
     validateAxes(family.axes, `minorFamilies.${family.id}`, issues);
+    if (!family.diminishingGroup) {
+      issues.push({
+        path: `minorFamilies.${family.id}`,
+        message: "family missing diminishingGroup",
+      });
+    } else if (diminishingGroups.has(family.diminishingGroup)) {
+      issues.push({
+        path: `minorFamilies.${family.id}`,
+        message: `diminishingGroup not unique: ${family.diminishingGroup}`,
+      });
+    }
+    diminishingGroups.add(family.diminishingGroup);
   }
+
+  validateMinorStars(knowledge, familyById, issues);
 
   for (const rule of knowledge.structuralRules.rules) {
     if (!rule.participants.length) {
@@ -180,6 +317,10 @@ export function assertLoadableCatalogs(
     ["majorStars", knowledge.majorStars.status],
     ["transformations", knowledge.transformations.status],
     ["minorFamilies", knowledge.minorFamilies.status],
+    ["minorStars", knowledge.minorStars.status],
+    ["minorStateModifiers", knowledge.minorStateModifiers.status],
+    ["starAliases", knowledge.starAliases.status],
+    ["schoolCoverage", knowledge.schoolCoverage.status],
     ["voidEnvironment", knowledge.voidEnvironment.status],
     ["changSheng", knowledge.changSheng.status],
     ["structuralRules", knowledge.structuralRules.status],

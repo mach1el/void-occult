@@ -1,112 +1,233 @@
 {
-  "id": "palace-overview-minor-star-families-v1",
-  "version": "1.0.0-experimental",
+  "id": "palace-overview-minor-families-v1-1",
+  "version": "1.1.0-experimental",
   "status": "experimental",
-  "schoolProfiles": ["nam-phai-v1", "trung-chau-v1"],
-  "sourceIds": ["src-heuristic-palace-overview-v1"],
-  "confidence": 0.5,
+  "schoolProfiles": [
+    "nam-phai-v1",
+    "trung-chau-v1"
+  ],
+  "sourceIds": [
+    "src-minor-catalog-v1-1-heuristic"
+  ],
+  "confidence": 0.55,
   "effectiveFrom": "2026-07-18",
-  "notes": "Family-based minor seeds with diminishing returns; neutral names score 0.",
+  "notes": "Family seeds only. Star membership lives in minor-stars.json.",
   "families": [
     {
       "id": "strong-support",
-      "starNames": [
-        "Tả Phụ",
-        "Hữu Bật",
-        "Thiên Khôi",
-        "Thiên Việt",
-        "Ân Quang",
-        "Thiên Quý"
-      ],
-      "axes": { "support": 1.4, "pressure": 0, "stability": 0.4, "activation": 0.2 }
+      "label": "Phụ tá và quý nhân mạnh",
+      "axes": {
+        "support": 1.4,
+        "pressure": 0.0,
+        "stability": 0.4,
+        "activation": 0.2
+      },
+      "diminishingGroup": "support-strong",
+      "notes": "Cát trợ rõ nhưng vẫn chịu diminishing returns trong cùng family."
     },
     {
       "id": "standard-support",
-      "starNames": [
-        "Thiên Quan",
-        "Thiên Phúc",
-        "Thiên Đức",
-        "Nguyệt Đức",
-        "Long Đức",
-        "Phúc Đức",
-        "Thiên Giải",
-        "Địa Giải",
-        "Giải Thần",
-        "Long Trì",
-        "Phượng Các",
-        "Thai Phụ",
-        "Phong Cáo",
-        "Quốc Ấn",
-        "Đường Phù"
-      ],
-      "axes": { "support": 0.8, "pressure": 0, "stability": 0.3, "activation": 0.1 }
+      "label": "Hỗ trợ, giải trợ và danh vị",
+      "axes": {
+        "support": 0.8,
+        "pressure": 0.0,
+        "stability": 0.3,
+        "activation": 0.1
+      },
+      "diminishingGroup": "support-standard",
+      "notes": "Tín hiệu hỗ trợ nhẹ; không được dùng để xóa pressure evidence."
     },
     {
       "id": "academic-literary",
-      "starNames": ["Văn Xương", "Văn Khúc", "Tam Thai", "Bát Tọa", "Tấu Thư"],
-      "axes": { "support": 1.0, "pressure": 0, "stability": 0.3, "activation": 0.3 }
+      "label": "Học thuật, văn thư và biểu đạt",
+      "axes": {
+        "support": 1.0,
+        "pressure": 0.0,
+        "stability": 0.3,
+        "activation": 0.3
+      },
+      "diminishingGroup": "academic-literary",
+      "notes": "Xương/Khúc có state modifier riêng khi Calculation Core cung cấp brightness."
     },
     {
       "id": "wealth-resource",
-      "starNames": ["Lộc Tồn", "Thiên Trù", "Thiên Tài", "Thiên Thọ"],
-      "axes": { "support": 1.2, "pressure": 0, "stability": 0.4, "activation": 0.2 }
+      "label": "Nguồn lực và tích lũy",
+      "axes": {
+        "support": 1.2,
+        "pressure": 0.0,
+        "stability": 0.4,
+        "activation": 0.2
+      },
+      "diminishingGroup": "wealth-resource",
+      "notes": "Không đồng nghĩa với sự kiện tài chính chắc chắn."
+    },
+    {
+      "id": "soft-support",
+      "label": "Hỗ trợ nhẹ",
+      "axes": {
+        "support": 0.5,
+        "pressure": 0.0,
+        "stability": 0.2,
+        "activation": 0.2
+      },
+      "diminishingGroup": "support-soft",
+      "notes": "Chỉ sửa sắc thái; không được lấn át chính tinh hoặc Tứ Hóa."
+    },
+    {
+      "id": "authority-action",
+      "label": "Quyết đoán, tổ chức và hành động",
+      "axes": {
+        "support": 0.5,
+        "pressure": 0.2,
+        "stability": 0.1,
+        "activation": 0.9
+      },
+      "diminishingGroup": "authority-action",
+      "notes": "Activation-first; không coi là thuần Cát."
     },
     {
       "id": "movement-action",
-      "starNames": ["Thiên Mã", "Tướng Quân", "Lực Sĩ", "Thanh Long", "Hỷ Thần"],
-      "axes": { "support": 0.4, "pressure": 0.2, "stability": -0.2, "activation": 1.1 }
+      "label": "Di chuyển và nhịp hành động",
+      "axes": {
+        "support": 0.3,
+        "pressure": 0.3,
+        "stability": -0.2,
+        "activation": 1.0
+      },
+      "diminishingGroup": "movement-action",
+      "notes": "Activation-first; tác động tốt/xấu cần structural rules ở version sau."
     },
     {
-      "id": "romance-visibility",
-      "starNames": ["Đào Hoa", "Hồng Loan", "Thiên Hỷ", "Thiên Riêu", "Hoa Cái"],
-      "axes": { "support": 0.4, "pressure": 0.2, "stability": -0.1, "activation": 0.8 }
+      "id": "joy-social",
+      "label": "Hỷ khí và khả năng kết nối",
+      "axes": {
+        "support": 0.5,
+        "pressure": 0.1,
+        "stability": 0.1,
+        "activation": 0.6
+      },
+      "diminishingGroup": "joy-social",
+      "notes": "Không dùng để dự đoán quan hệ hay sự kiện riêng tư."
+    },
+    {
+      "id": "attraction-visibility",
+      "label": "Sức hút và độ lộ diện",
+      "axes": {
+        "support": 0.3,
+        "pressure": 0.3,
+        "stability": -0.1,
+        "activation": 0.7
+      },
+      "diminishingGroup": "attraction-visibility",
+      "notes": "Chỉ biểu đạt social visibility/attraction; không dùng diễn giải nhạy cảm."
+    },
+    {
+      "id": "symbolic-prestige",
+      "label": "Biểu tượng, danh dự và khuynh hướng tinh thần",
+      "axes": {
+        "support": 0.5,
+        "pressure": 0.1,
+        "stability": 0.3,
+        "activation": 0.4
+      },
+      "diminishingGroup": "symbolic-prestige",
+      "notes": "Hoa Cái được tách khỏi romance family."
     },
     {
       "id": "major-malefic",
-      "starNames": [
-        "Kình Dương",
-        "Đà La",
-        "Hỏa Tinh",
-        "Linh Tinh",
-        "Địa Không",
-        "Địa Kiếp"
-      ],
-      "axes": { "support": 0, "pressure": 1.8, "stability": -0.8, "activation": 0.7 },
-      "hoaLinhBrightness": {
-        "miếuVượngĐắc": { "pressureFactor": 0.85, "activationFactor": 1.15 },
-        "hãm": { "pressureFactor": 1.2, "activationFactor": 1.1 }
-      }
+      "label": "Lục sát và áp lực mạnh",
+      "axes": {
+        "support": 0.0,
+        "pressure": 1.8,
+        "stability": -0.8,
+        "activation": 0.7
+      },
+      "diminishingGroup": "major-malefic",
+      "notes": "Đắc địa không biến thành thuần Cát; chỉ có state modifier cho Hỏa/Linh trong V1.1."
+    },
+    {
+      "id": "strong-pressure",
+      "label": "Áp lực cấu trúc mạnh",
+      "axes": {
+        "support": 0.0,
+        "pressure": 1.2,
+        "stability": -0.5,
+        "activation": 0.5
+      },
+      "diminishingGroup": "pressure-strong",
+      "notes": "Không suy diễn thành sự kiện tai họa cụ thể."
     },
     {
       "id": "standard-pressure",
-      "starNames": [
-        "Thiên Hình",
-        "Thiên La",
-        "Địa Võng",
-        "Bạch Hổ",
-        "Tang Môn",
-        "Thiên Khốc",
-        "Thiên Hư",
-        "Cô Thần",
-        "Quả Tú",
-        "Đại Hao",
-        "Tiểu Hao",
-        "Quan Phù",
-        "Quan Phủ",
-        "Phục Binh",
-        "Kiếp Sát",
-        "Phá Toái",
-        "Thiên Không",
-        "Tử Phù",
-        "Tuế Phá",
-        "Trực Phù",
-        "Phi Liêm",
-        "Lưu Hà",
-        "Thiên Thương",
-        "Thiên Sứ"
-      ],
-      "axes": { "support": 0, "pressure": 0.8, "stability": -0.3, "activation": 0.3 }
+      "label": "Trở lực và nhiễu động",
+      "axes": {
+        "support": 0.0,
+        "pressure": 0.8,
+        "stability": -0.3,
+        "activation": 0.3
+      },
+      "diminishingGroup": "pressure-standard",
+      "notes": "Tín hiệu pressure nhẹ/trung bình."
+    },
+    {
+      "id": "resource-dispersion",
+      "label": "Hao tán và luân chuyển nguồn lực",
+      "axes": {
+        "support": 0.0,
+        "pressure": 1.0,
+        "stability": -0.3,
+        "activation": 0.5
+      },
+      "diminishingGroup": "resource-dispersion",
+      "notes": "Không tự động đồng nghĩa mất tiền; domain projection sẽ xử lý sau."
+    },
+    {
+      "id": "isolation-pressure",
+      "label": "Tách biệt và giảm liên kết",
+      "axes": {
+        "support": 0.0,
+        "pressure": 0.7,
+        "stability": -0.5,
+        "activation": 0.2
+      },
+      "diminishingGroup": "isolation-pressure",
+      "notes": "Không dùng để khẳng định tình trạng quan hệ."
+    },
+    {
+      "id": "administrative-pressure",
+      "label": "Quy định, tranh luận và áp lực thủ tục",
+      "axes": {
+        "support": 0.0,
+        "pressure": 0.7,
+        "stability": -0.2,
+        "activation": 0.5
+      },
+      "diminishingGroup": "administrative-pressure",
+      "notes": "Không khẳng định kiện tụng hay sự kiện pháp lý."
+    },
+    {
+      "id": "strain-context",
+      "label": "Sức bền và áp lực duy trì",
+      "axes": {
+        "support": 0.0,
+        "pressure": 0.6,
+        "stability": -0.4,
+        "activation": 0.2
+      },
+      "diminishingGroup": "strain-context",
+      "notes": "Không dùng cho chẩn đoán sức khỏe hoặc dự đoán y tế."
+    },
+    {
+      "id": "context-only",
+      "label": "Ngữ cảnh chưa chấm trực tiếp",
+      "axes": {
+        "support": 0.0,
+        "pressure": 0.0,
+        "stability": 0.0,
+        "activation": 0.0
+      },
+      "diminishingGroup": "context-only",
+      "notes": "Được nhận diện đầy đủ nhưng không tác động score cho đến khi có rule được duyệt."
     }
-  ],
-  "neutralStarNames": []
+  ]
 }
