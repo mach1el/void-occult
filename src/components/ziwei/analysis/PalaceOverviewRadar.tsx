@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { ChartData, School } from "@/types/chart";
 import {
   absEffect,
@@ -91,8 +91,28 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
     [chart, school],
   );
   const results = analysis.results;
-  const [selected, setSelected] = useState<PalaceOverviewResult | null>(null);
-  const [hovered, setHovered] = useState<PalaceOverviewResult | null>(null);
+  // V1.2.1: store only the selection key, never the analysis object itself —
+  // a stale PalaceOverviewResult would otherwise keep showing the previous
+  // chart/school's scores until the user manually reselected (see PR #81
+  // review thread). Deriving from `results` each render means a chart/school
+  // change can never leave stale data on screen.
+  const [selectedPalaceIndex, setSelectedPalaceIndex] = useState<number | null>(null);
+  const [hoveredPalaceIndex, setHoveredPalaceIndex] = useState<number | null>(null);
+  const pointRefs = useRef(new Map<number, SVGGElement>());
+
+  useEffect(() => {
+    setSelectedPalaceIndex(null);
+    setHoveredPalaceIndex(null);
+  }, [chart, school]);
+
+  const selected =
+    selectedPalaceIndex == null
+      ? null
+      : (results.find((r) => r.palaceIndex === selectedPalaceIndex) ?? null);
+  const hovered =
+    hoveredPalaceIndex == null
+      ? null
+      : (results.find((r) => r.palaceIndex === hoveredPalaceIndex) ?? null);
 
   const ordered = useMemo(() => {
     if (!analysis.knowledgeValid || results.length === 0) return [];
@@ -118,8 +138,8 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
   const active = selected ?? hovered;
   const scores = ordered.map((r) => r.score);
 
-  function togglePalace(result: PalaceOverviewResult) {
-    setSelected((cur) => (cur?.palaceIndex === result.palaceIndex ? null : result));
+  function togglePalace(palaceIndex: number) {
+    setSelectedPalaceIndex((cur) => (cur === palaceIndex ? null : palaceIndex));
   }
 
   return (
@@ -181,20 +201,24 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
               return (
                 <g
                   key={result.palaceIndex}
+                  ref={(el) => {
+                    if (el) pointRefs.current.set(result.palaceIndex, el);
+                    else pointRefs.current.delete(result.palaceIndex);
+                  }}
                   className={`palace-overview-radar__point${isActive ? " is-active" : ""}`}
                   tabIndex={0}
                   role="button"
-                  aria-pressed={selected?.palaceIndex === result.palaceIndex}
+                  aria-pressed={selectedPalaceIndex === result.palaceIndex}
                   aria-label={`${result.palaceName} · ${result.palaceBranch}${menhThanSuffix(result)} — điểm ${result.score}, ${BAND_LABEL[result.band]}`}
-                  onMouseEnter={() => setHovered(result)}
-                  onMouseLeave={() => setHovered(null)}
-                  onFocus={() => setHovered(result)}
-                  onBlur={() => setHovered(null)}
-                  onClick={() => togglePalace(result)}
+                  onMouseEnter={() => setHoveredPalaceIndex(result.palaceIndex)}
+                  onMouseLeave={() => setHoveredPalaceIndex(null)}
+                  onFocus={() => setHoveredPalaceIndex(result.palaceIndex)}
+                  onBlur={() => setHoveredPalaceIndex(null)}
+                  onClick={() => togglePalace(result.palaceIndex)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
-                      togglePalace(result);
+                      togglePalace(result.palaceIndex);
                     }
                   }}
                 >
@@ -256,7 +280,11 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
         <PalaceOverviewDetail
           result={selected}
           semanticStatus={analysis.semanticStatus}
-          onClose={() => setSelected(null)}
+          onClose={() => {
+            const palaceIndex = selectedPalaceIndex;
+            setSelectedPalaceIndex(null);
+            if (palaceIndex != null) pointRefs.current.get(palaceIndex)?.focus();
+          }}
         />
       ) : null}
     </div>
