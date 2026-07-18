@@ -74,6 +74,7 @@ export function analyzeAllPalaces(
     diagnostics.unmappedTransformations.push(
       ...localDiag.unmappedTransformations,
     );
+    diagnostics.contextOnlyFacts.push(...localDiag.contextOnlyFacts);
     diagnostics.ruleHits.push(...localDiag.ruleHits);
   }
 
@@ -83,6 +84,7 @@ export function analyzeAllPalaces(
   diagnostics.unmappedTransformations = [
     ...new Set(diagnostics.unmappedTransformations),
   ];
+  diagnostics.contextOnlyFacts = [...new Set(diagnostics.contextOnlyFacts)];
   diagnostics.duplicateFacts = [...new Set(diagnostics.duplicateFacts)];
 
   return {

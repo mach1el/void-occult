@@ -94,6 +94,23 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
       }));
   });
 
+  const contextOnlyByName = new Map(
+    knowledge.minorStars.stars
+      .filter((s) => s.scoringMode === "context-only")
+      .map((s) => [s.canonicalName, s] as const),
+  );
+  const contextOnlyStars = frame.nodes.flatMap((node) => {
+    const facts = factsByPalace.get(node.palaceIndex) ?? [];
+    return facts
+      .filter(
+        (f) =>
+          f.kind === "star" &&
+          f.canonicalStarName &&
+          contextOnlyByName.has(f.canonicalStarName),
+      )
+      .map((f) => ({ name: f.canonicalStarName!, role: node.role }));
+  });
+
   return {
     module: "palace-overview",
     version: "1.0.0-experimental",
@@ -107,6 +124,7 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
     intensity,
     evidenceCompleteness,
     majorStars,
+    contextOnlyStars,
     isVoidMajor,
     topSupportDrivers: topDrivers(allEvidence, "support", 3),
     topPressureDrivers: topDrivers(allEvidence, "pressure", 3),

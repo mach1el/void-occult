@@ -62,6 +62,8 @@ export interface PalaceOverviewResult {
     brightness: ZiweiBrightness;
     role: StaticFrameRole;
   }>;
+  /** Known static stars with scoringMode "context-only" — informational only, never scored. */
+  contextOnlyStars: Array<{ name: string; role: StaticFrameRole }>;
   isVoidMajor: boolean;
   topSupportDrivers: PalaceEvidence[];
   topPressureDrivers: PalaceEvidence[];
@@ -75,6 +77,8 @@ export interface PalaceOverviewDiagnostics {
   duplicateFacts: string[];
   unmappedTransformations: string[];
   missingBrightness: string[];
+  /** factIds of static stars resolved to a context-only catalog record. */
+  contextOnlyFacts: string[];
   ruleHits: Array<{
     palaceName: string;
     ruleId: string;

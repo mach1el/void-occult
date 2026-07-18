@@ -1,6 +1,6 @@
 {
   "id": "palace-overview-v1",
-  "version": "1.0.0-experimental",
+  "version": "1.1.0-experimental",
   "status": "experimental",
   "schoolProfiles": ["nam-phai-v1", "trung-chau-v1"],
   "sourceIds": ["src-heuristic-palace-overview-v1", "src-palace-overview-v1-spec"],

@@ -317,6 +317,19 @@ function PalaceOverviewDetail({
         </ul>
       </section>
 
+      {result.contextOnlyStars.length > 0 ? (
+        <details className="palace-overview-detail__section palace-overview-detail__context-only">
+          <summary>Known context stars (chưa chấm điểm)</summary>
+          <ul>
+            {result.contextOnlyStars.map((s, i) => (
+              <li key={`${s.name}-${s.role}-${i}`}>
+                {s.name} · {s.role}
+              </li>
+            ))}
+          </ul>
+        </details>
+      ) : null}
+
       <button type="button" className="palace-overview-detail__close" onClick={onClose}>
         Đóng
       </button>

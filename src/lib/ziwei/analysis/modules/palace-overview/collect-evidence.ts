@@ -1,7 +1,12 @@
-import type { NatalZiweiFact, ZiweiBrightness } from "../../facts";
+import type { NatalZiweiFact, ZiweiBrightness, ZiweiSchool } from "../../facts";
 import type { StaticFrame, StaticFrameNode } from "../../frame";
 import type { PalaceOverviewKnowledgeV1 } from "../../knowledge";
-import type { AxisSeed } from "../../knowledge/schema";
+import type {
+  AxisSeed,
+  MinorStarRecord,
+  MinorStateModifierPolicy,
+  SchoolProfileId,
+} from "../../knowledge/schema";
 import {
   absEffect,
   emptyAxes,
@@ -11,8 +16,10 @@ import {
   type PalaceOverviewDiagnostics,
 } from "./types";
 
-const GOOD_BRIGHTNESS = new Set(["Miếu", "Vượng", "Đắc"]);
-const HOA_LINH = new Set(["Hỏa Tinh", "Linh Tinh"]);
+/** Bridge Calculation-Core school id to knowledge-catalog school profile id. */
+function schoolProfileId(school: ZiweiSchool): SchoolProfileId {
+  return school === "nam-phai" ? "nam-phai-v1" : "trung-chau-v1";
+}
 
 export interface CollectEvidenceContext {
   frame: StaticFrame;
@@ -50,6 +57,18 @@ function applyBrightness(
     pressure: axes.pressure * mod.pressureFactor,
     stability: axes.stability + mod.stabilityDelta,
     activation: axes.activation * mod.activationFactor,
+  };
+}
+
+function applyMinorStateModifier(
+  axes: PalaceEvidenceAxes,
+  policy: MinorStateModifierPolicy,
+): PalaceEvidenceAxes {
+  return {
+    support: axes.support * policy.supportFactor,
+    pressure: axes.pressure * policy.pressureFactor,
+    stability: axes.stability + policy.stabilityDelta,
+    activation: axes.activation * policy.activationFactor,
   };
 }
 
@@ -251,6 +270,11 @@ function collectTransformationEvidence(
   return out;
 }
 
+/**
+ * Resolve minor-star evidence through the per-star catalog (V1.1). Family
+ * `starNames` is gone — per-star records are the single membership SSOT.
+ * See integration-prompt.md "Evidence collection" for the 6-step contract.
+ */
 function collectMinorFamilyEvidence(
   ctx: CollectEvidenceContext,
 ): PalaceEvidence[] {
@@ -258,70 +282,76 @@ function collectMinorFamilyEvidence(
   const status = knowledgeStatus(knowledge);
   const profile = knowledge.profile;
   const out: PalaceEvidence[] = [];
-  const neutral = new Set(knowledge.minorFamilies.neutralStarNames);
+
+  const recordByCanonicalName = new Map(
+    knowledge.minorStars.stars.map((s) => [s.canonicalName, s]),
+  );
+  const familyById = new Map(
+    knowledge.minorFamilies.families.map((f) => [f.id, f]),
+  );
 
   type Contributor = {
     fact: NatalZiweiFact;
     node: StaticFrameNode;
-    familyId: string;
+    record: MinorStarRecord;
     axes: PalaceEvidenceAxes;
   };
 
-  for (const family of knowledge.minorFamilies.families) {
-    const nameSet = new Set(family.starNames);
-    const contributors: Contributor[] = [];
+  const groups = new Map<string, Contributor[]>();
 
-    for (const node of frame.nodes) {
-      for (const fact of nodeFacts(ctx, node)) {
-        if (fact.kind !== "star" || fact.starClass === "major") continue;
-        const name = fact.canonicalStarName;
-        if (!name) continue;
-        if (neutral.has(name)) continue;
-        if (!nameSet.has(name)) {
-          continue;
-        }
+  for (const node of frame.nodes) {
+    for (const fact of nodeFacts(ctx, node)) {
+      if (fact.kind !== "star" || fact.starClass === "major") continue;
+      const name = fact.canonicalStarName;
+      if (!name) continue;
 
-        let axes = axesFromSeed(family.axes);
-        if (
-          family.id === "major-malefic" &&
-          HOA_LINH.has(name) &&
-          family.hoaLinhBrightness &&
-          fact.brightness
-        ) {
-          const hl = family.hoaLinhBrightness;
-          if (GOOD_BRIGHTNESS.has(fact.brightness)) {
-            axes = {
-              ...axes,
-              pressure: axes.pressure * hl.miếuVượngĐắc.pressureFactor,
-              activation: axes.activation * hl.miếuVượngĐắc.activationFactor,
-            };
-          } else if (fact.brightness === "Hãm") {
-            axes = {
-              ...axes,
-              pressure: axes.pressure * hl.hãm.pressureFactor,
-              activation: axes.activation * hl.hãm.activationFactor,
-            };
-          }
-        }
-
-        // Academic: apply major brightness table only when brightness present
-        if (
-          family.id === "academic-literary" &&
-          (name === "Văn Xương" || name === "Văn Khúc") &&
-          fact.brightness
-        ) {
-          axes = applyBrightness(axes, fact.brightness, knowledge);
-        }
-
-        axes = multiplyAxes(axes, node.geometryWeight);
-        contributors.push({ fact, node, familyId: family.id, axes });
+      const record = recordByCanonicalName.get(name);
+      if (!record) {
+        diagnostics.unknownStars.push(name);
+        continue;
       }
+
+      // School isolation: a record known to the catalog but not scoped to
+      // this school is silently ignored here — Calculation Core should not
+      // emit it for this school in the first place (§ School isolation).
+      if (!record.schoolProfiles.includes(schoolProfileId(fact.school))) {
+        continue;
+      }
+
+      if (record.scoringMode === "context-only") {
+        diagnostics.contextOnlyFacts.push(fact.id);
+        continue;
+      }
+
+      const family = familyById.get(record.familyId);
+      if (!family) {
+        diagnostics.unknownStars.push(name);
+        continue;
+      }
+
+      let axes = axesFromSeed(record.axesOverride ?? family.axes);
+
+      if (record.brightnessPolicy !== "none" && fact.brightness) {
+        const policy =
+          knowledge.minorStateModifiers.policies[record.brightnessPolicy][
+            fact.brightness
+          ];
+        if (policy) axes = applyMinorStateModifier(axes, policy);
+      }
+
+      axes = multiplyAxes(axes, node.geometryWeight);
+
+      const list = groups.get(family.diminishingGroup) ?? [];
+      list.push({ fact, node, record, axes });
+      groups.set(family.diminishingGroup, list);
     }
+  }
 
+  const max = profile.familyMaxContributors;
+  const factors = profile.familyDiminishingReturns;
+
+  for (const contributors of groups.values()) {
     contributors.sort((a, b) => absEffect(b.axes) - absEffect(a.axes));
-    const max = profile.familyMaxContributors;
-    const factors = profile.familyDiminishingReturns;
-
     contributors.forEach((c, index) => {
       if (index >= max) return;
       const factor = factors[index] ?? 0;
@@ -329,7 +359,7 @@ function collectMinorFamilyEvidence(
       const axes = multiplyAxes(c.axes, factor);
       const name = c.fact.canonicalStarName!;
       out.push({
-        id: `ev:minor:${c.familyId}:${c.node.palaceIndex}:${name}`,
+        id: `ev:minor:${c.record.familyId}:${c.node.palaceIndex}:${name}`,
         category: "minor-star-family",
         factIds: [c.fact.id],
         palaceRole: c.node.role,
@@ -337,8 +367,8 @@ function collectMinorFamilyEvidence(
         palaceBranch: c.node.palaceBranch,
         axes,
         label: name,
-        explanationKey: `minor.${c.familyId}`,
-        sourceIds: knowledge.minorFamilies.sourceIds,
+        explanationKey: c.record.explanationKey,
+        sourceIds: knowledge.minorStars.sourceIds,
         knowledgeStatus: status,
       });
     });
@@ -480,33 +510,15 @@ export function collectPalaceEvidence(
     ...collectChangShengEvidence(ctx),
   ];
 
-  noteUnknownStars(ctx);
   const evidence = applyLocalVoidAttenuation(ctx, base);
   return { evidence, isVoidMajor, borrowedFactIds };
-}
-
-function noteUnknownStars(ctx: CollectEvidenceContext): void {
-  const { knowledge, diagnostics, frame } = ctx;
-  const known = new Set([
-    ...knowledge.majorStars.stars.map((s) => s.name),
-    ...knowledge.minorFamilies.families.flatMap((f) => f.starNames),
-    ...knowledge.minorFamilies.neutralStarNames,
-  ]);
-  for (const node of frame.nodes) {
-    for (const fact of nodeFacts(ctx, node)) {
-      if (fact.kind !== "star" || !fact.canonicalStarName) continue;
-      if (fact.starClass === "major") continue;
-      if (!known.has(fact.canonicalStarName)) {
-        diagnostics.unknownStars.push(fact.canonicalStarName);
-      }
-    }
-  }
 }
 
 export function emptyDiagnostics(): PalaceOverviewDiagnostics {
   return {
     unknownStars: [],
     duplicateFacts: [],
+    contextOnlyFacts: [],
     unmappedTransformations: [],
     missingBrightness: [],
     ruleHits: [],
