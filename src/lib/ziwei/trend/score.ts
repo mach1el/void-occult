@@ -3,7 +3,7 @@
  * Đại vận · Lưu niên · độ vững 12 cung.
  */
 
-import type { ChartData, ChartEngine } from "@/types/chart";
+import type { ChartData, ChartEngine, School } from "@/types/chart";
 import { getEngine } from "../chart";
 import {
   baseStarName,
@@ -14,11 +14,17 @@ import { CAT_SET, SAT_SET } from "./star-sets";
 import { SCORING_WEIGHTS, type ScoringWeights } from "./weights";
 import { scoreFortuneFrame } from "./frame";
 import { scoreLuuNguyetFrame } from "./monthly-flow";
+import {
+  scoreFortuneFrameV2,
+  scoreLuuNguyetFrameV2,
+} from "./monthly-flow-v2";
+import { isExperimentalMonthlyProfile } from "./profile/nam-phai-monthly-v2";
 import type {
   LuuNienTrendOptions,
   MonthlyFocusEntry,
   PalaceStrength,
   ScoreLine,
+  ScoringProfileId,
   TrendPoint,
 } from "./types";
 import {
@@ -54,6 +60,7 @@ export type {
 export function getDaiVanTrend(
   chart: ChartData,
   weights: ScoringWeights = SCORING_WEIGHTS,
+  opts?: { scoringProfile?: ScoringProfileId; school?: School },
 ): TrendPoint[] {
   const fortunes = chart.palaces
     .filter((palace) => palace.majorFortune)
@@ -62,8 +69,26 @@ export function getDaiVanTrend(
         (a.majorFortune?.start ?? 0) - (b.majorFortune?.start ?? 0),
     );
 
+  const experimental = isExperimentalMonthlyProfile(opts?.scoringProfile);
+  const engine = experimental
+    ? getEngine(opts?.school ?? "nam-phai")
+    : null;
+
   return fortunes.map((palace) => {
     const fortune = palace.majorFortune!;
+
+    if (experimental && engine) {
+      const scored = scoreFortuneFrameV2(chart, engine, palace);
+      return {
+        label: `${fortune.start}-${fortune.end}`,
+        cat: scored.cat,
+        hung: scored.hung,
+        isCurrent: Boolean(fortune.active),
+        axes: scored.axes,
+        breakdown: scored.breakdown,
+      };
+    }
+
     // Spec 6 bước: Tứ Hóa GỐC only — không lấy sao lưu / ĐV mutagen.
     const scored = scoreFortuneFrame(
       chart,
@@ -157,22 +182,39 @@ export function getLuuNienTrend(
   for (const entry of months) {
     if (!entry.focusPalace) continue;
 
-    const scored = scoreLuuNguyetFrame(chart, engine, entry);
-
     const monthLabel = entry.label ?? `Th.${entry.month}`;
-    points.push({
-      label: monthLabel,
-      cat: scored.cat,
-      hung: scored.hung,
-      isCurrent: entry.month === currentMonth,
-      monthNumber: entry.month,
-      calendarStem: entry.calendarStem,
-      calendarBranch: entry.calendarBranch,
-      focusPalaceName: entry.focusPalace.name,
-      focusPalaceBranch: entry.focusPalace.branch,
-      majorStarContext: scored.majorStarContext,
-      breakdown: scored.breakdown,
-    });
+    if (isExperimentalMonthlyProfile(opts.scoringProfile)) {
+      const scored = scoreLuuNguyetFrameV2(chart, engine, entry);
+      points.push({
+        label: monthLabel,
+        cat: scored.cat,
+        hung: scored.hung,
+        isCurrent: entry.month === currentMonth,
+        monthNumber: entry.month,
+        calendarStem: entry.calendarStem,
+        calendarBranch: entry.calendarBranch,
+        focusPalaceName: entry.focusPalace.name,
+        focusPalaceBranch: entry.focusPalace.branch,
+        majorStarContext: scored.majorStarContext,
+        axes: scored.axes,
+        breakdown: scored.breakdown,
+      });
+    } else {
+      const scored = scoreLuuNguyetFrame(chart, engine, entry);
+      points.push({
+        label: monthLabel,
+        cat: scored.cat,
+        hung: scored.hung,
+        isCurrent: entry.month === currentMonth,
+        monthNumber: entry.month,
+        calendarStem: entry.calendarStem,
+        calendarBranch: entry.calendarBranch,
+        focusPalaceName: entry.focusPalace.name,
+        focusPalaceBranch: entry.focusPalace.branch,
+        majorStarContext: scored.majorStarContext,
+        breakdown: scored.breakdown,
+      });
+    }
   }
 
   return points;

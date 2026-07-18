@@ -18,7 +18,36 @@ export type ScoreSignalCategory =
 export type ScorePalaceRole = "focus" | "xung" | "tam-hop";
 
 /** Tầng nguồn tín hiệu (Tứ Hóa / kỹ thuật). */
-export type ScoreLayer = "natal" | "annual" | "monthly" | "technical";
+export type ScoreLayer =
+  | "natal"
+  | "annual"
+  | "monthly"
+  | "majorFortune"
+  | "technical";
+
+/** Profile chấm điểm Lưu Nguyệt — default legacy giữ nguyên output. */
+export type ScoringProfileId =
+  | "legacy-v1"
+  | "nam-phai-monthly-v2-experimental";
+
+/** Multi-axis experimental (raw + soft-sat). */
+export interface TrendAxes {
+  raw: {
+    benefit: number;
+    risk: number;
+    activation: number;
+    conflict: number;
+    stability: number;
+  };
+  normalized: {
+    benefit: number;
+    risk: number;
+    activation: number;
+    conflict: number;
+    stability: number;
+    confidence: number;
+  };
+}
 
 export interface ScoreLine {
   source: string;
@@ -60,6 +89,11 @@ export interface TrendPoint {
   majorStarContext?: {
     voidMajorPalaces: VoidMajorPalaceInfo[];
   };
+  /**
+   * Multi-axis experimental — chỉ khi scoringProfile =
+   * nam-phai-monthly-v2-experimental. `cat`/`hung` = normalized benefit/risk.
+   */
+  axes?: TrendAxes;
   breakdown: {
     cat: ScoreLine[];
     hung: ScoreLine[];
@@ -108,6 +142,8 @@ export interface LuuNienTrendOptions {
   school: School;
   birthInput: BirthInput;
   weights?: ScoringWeights;
+  /** Default `legacy-v1` — không đổi output production. */
+  scoringProfile?: ScoringProfileId;
 }
 
 export type AnnualAxisName =

@@ -1,0 +1,281 @@
+{
+  "version": "0.1.0",
+  "status": "experimental",
+  "rules": [
+    {
+      "id": "FRAME_SAT_PHA_THAM",
+      "name": "Sát Phá Tham frame",
+      "scope": "san-fang-si-zheng",
+      "requiresAllStars": [
+        "Thất Sát",
+        "Phá Quân",
+        "Tham Lang"
+      ],
+      "effects": [
+        {
+          "axis": "activation",
+          "delta": 18
+        }
+      ],
+      "conditionalEffects": [
+        {
+          "when": {
+            "brightCountAtLeast": 2,
+            "allowedBrightness": [
+              "Miếu",
+              "Vượng",
+              "Đắc"
+            ],
+            "hasAnyTransform": [
+              "Lộc",
+              "Quyền",
+              "Khoa"
+            ]
+          },
+          "effects": [
+            {
+              "axis": "benefit",
+              "delta": 10
+            }
+          ]
+        },
+        {
+          "when": {
+            "afflictedMajorCountAtLeast": 2,
+            "afflictions": [
+              "Hãm",
+              "Kỵ",
+              "lục-sát-same-palace"
+            ]
+          },
+          "effects": [
+            {
+              "axis": "risk",
+              "delta": 12
+            },
+            {
+              "axis": "conflict",
+              "delta": 8
+            }
+          ]
+        }
+      ],
+      "notes": "Never classify Sát Phá Tham as purely auspicious or purely inauspicious. Its primary semantic is change/activation."
+    },
+    {
+      "id": "FRAME_CO_NGUYET_DONG_LUONG",
+      "name": "Cơ Nguyệt Đồng Lương frame",
+      "scope": "san-fang-si-zheng",
+      "requiresAllStars": [
+        "Thiên Cơ",
+        "Thái Âm",
+        "Thiên Đồng",
+        "Thiên Lương"
+      ],
+      "effects": [
+        {
+          "axis": "activation",
+          "delta": 12
+        }
+      ],
+      "conditionalEffects": [
+        {
+          "when": {
+            "brightCountAtLeast": 3,
+            "allowedBrightness": [
+              "Miếu",
+              "Vượng",
+              "Đắc"
+            ]
+          },
+          "effects": [
+            {
+              "axis": "benefit",
+              "delta": 10
+            },
+            {
+              "axis": "stability",
+              "delta": 8
+            }
+          ]
+        },
+        {
+          "when": {
+            "afflictedMajorCountAtLeast": 2,
+            "afflictions": [
+              "Hãm",
+              "Kỵ"
+            ]
+          },
+          "effects": [
+            {
+              "axis": "risk",
+              "delta": 8
+            },
+            {
+              "axis": "conflict",
+              "delta": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FRAME_TU_PHU_VU_TUONG",
+      "name": "Tử Phủ Vũ Tướng support frame",
+      "scope": "san-fang-si-zheng",
+      "requiresAtLeastStars": {
+        "count": 3,
+        "from": [
+          "Tử Vi",
+          "Thiên Phủ",
+          "Vũ Khúc",
+          "Thiên Tướng"
+        ]
+      },
+      "effects": [
+        {
+          "axis": "activation",
+          "delta": 10
+        }
+      ],
+      "conditionalEffects": [
+        {
+          "when": {
+            "brightCountAtLeast": 2,
+            "allowedBrightness": [
+              "Miếu",
+              "Vượng",
+              "Đắc"
+            ]
+          },
+          "effects": [
+            {
+              "axis": "benefit",
+              "delta": 12
+            },
+            {
+              "axis": "stability",
+              "delta": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FOCUS_VOID_MAJOR_BORROW_OPPOSITE",
+      "name": "Vô chính diệu borrows opposite palace",
+      "scope": "focus-palace",
+      "when": {
+        "focusHasNoMajorStar": true,
+        "oppositeHasMajorStar": true
+      },
+      "effects": [
+        {
+          "operation": "borrowMajorStarSignals",
+          "fromRole": "xung",
+          "factor": 0.65
+        },
+        {
+          "axis": "stability",
+          "delta": -8
+        },
+        {
+          "axis": "activation",
+          "delta": 5
+        }
+      ],
+      "notes": "Do not add a standalone bad score merely because the focus palace is empty."
+    },
+    {
+      "id": "SAME_STAR_LOC_KY_CROSS_LAYER",
+      "name": "Same star receives Lộc and Kỵ across layers",
+      "scope": "same-star",
+      "when": {
+        "hasTransformsAcrossLayers": [
+          "Lộc",
+          "Kỵ"
+        ]
+      },
+      "effects": [
+        {
+          "axis": "activation",
+          "delta": 16
+        },
+        {
+          "axis": "conflict",
+          "delta": 18
+        },
+        {
+          "axis": "risk",
+          "delta": 6
+        }
+      ]
+    },
+    {
+      "id": "SAME_STAR_QUYEN_KY_CROSS_LAYER",
+      "name": "Same star receives Quyền and Kỵ across layers",
+      "scope": "same-star",
+      "when": {
+        "hasTransformsAcrossLayers": [
+          "Quyền",
+          "Kỵ"
+        ]
+      },
+      "effects": [
+        {
+          "axis": "activation",
+          "delta": 18
+        },
+        {
+          "axis": "conflict",
+          "delta": 15
+        },
+        {
+          "axis": "risk",
+          "delta": 8
+        }
+      ]
+    },
+    {
+      "id": "SAME_STAR_LOC_QUYEN_CROSS_LAYER",
+      "name": "Same star receives Lộc and Quyền across layers",
+      "scope": "same-star",
+      "when": {
+        "hasTransformsAcrossLayers": [
+          "Lộc",
+          "Quyền"
+        ]
+      },
+      "effects": [
+        {
+          "axis": "activation",
+          "delta": 14
+        },
+        {
+          "axis": "benefit",
+          "delta": 8
+        }
+      ]
+    },
+    {
+      "id": "MONTH_REACTIVATES_MAJOR_FORTUNE_PALACE",
+      "name": "Monthly focus equals active major-fortune palace",
+      "scope": "monthly-context",
+      "when": {
+        "monthlyFocusEqualsActiveMajorFortunePalace": true
+      },
+      "effects": [
+        {
+          "axis": "activation",
+          "delta": 20
+        },
+        {
+          "operation": "applyLinkedSignalFactors",
+          "benefitFactor": 1.1,
+          "riskFactor": 1.15
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "version": "0.1.0",
+  "chart": {
+    "id": "female-tan-mui-1991-regression",
+    "input": {
+      "solarDate": "1991-09-21",
+      "birthHour": "Dậu",
+      "gender": "female",
+      "timezone": "7",
+      "annualYear": "2026",
+      "flowBase": "luu-nien",
+      "school": "nam-phai"
+    },
+    "expectedNatalFacts": {
+      "menh": {
+        "palace": "Mệnh",
+        "branch": "Tý",
+        "majorStars": [
+          "Thái Dương"
+        ]
+      },
+      "activeMajorFortune": {
+        "ageRange": "35-44",
+        "palace": "Điền Trạch",
+        "branch": "Mão",
+        "majorStars": [
+          "Tử Vi",
+          "Tham Lang"
+        ]
+      }
+    }
+  },
+  "targets": [
+    {
+      "id": "major-35-44",
+      "scope": "majorFortune",
+      "expectedRanges": {
+        "benefit": [
+          35,
+          45
+        ],
+        "risk": [
+          60,
+          70
+        ],
+        "activation": [
+          80,
+          90
+        ],
+        "conflict": [
+          70,
+          80
+        ]
+      }
+    },
+    {
+      "id": "month-5-giap-ngo",
+      "scope": "monthly",
+      "month": 5,
+      "expectedContext": {
+        "focusPalace": "Mệnh",
+        "focusBranch": "Tý",
+        "calendarStem": "Giáp",
+        "calendarBranch": "Ngọ"
+      },
+      "expectedRanges": {
+        "benefit": [
+          40,
+          50
+        ],
+        "risk": [
+          55,
+          65
+        ],
+        "activation": [
+          80,
+          90
+        ],
+        "conflict": [
+          70,
+          80
+        ]
+      }
+    },
+    {
+      "id": "month-7-binh-than",
+      "scope": "monthly",
+      "month": 7,
+      "expectedRanges": {
+        "benefit": [
+          75,
+          85
+        ],
+        "risk": [
+          40,
+          50
+        ],
+        "activation": [
+          70,
+          85
+        ],
+        "conflict": [
+          45,
+          60
+        ]
+      }
+    },
+    {
+      "id": "month-8-dinh-dau",
+      "scope": "monthly",
+      "month": 8,
+      "expectedContext": {
+        "focusPalace": "Điền Trạch",
+        "focusBranch": "Mão"
+      },
+      "expectedRanges": {
+        "benefit": [
+          40,
+          55
+        ],
+        "risk": [
+          55,
+          70
+        ],
+        "activation": [
+          85,
+          95
+        ],
+        "conflict": [
+          65,
+          80
+        ]
+      }
+    },
+    {
+      "id": "month-9-mau-tuat",
+      "scope": "monthly",
+      "month": 9,
+      "expectedRanges": {
+        "benefit": [
+          40,
+          50
+        ],
+        "risk": [
+          50,
+          65
+        ],
+        "activation": [
+          65,
+          80
+        ],
+        "conflict": [
+          55,
+          70
+        ]
+      }
+    },
+    {
+      "id": "month-10-ky-hoi",
+      "scope": "monthly",
+      "month": 10,
+      "expectedRanges": {
+        "benefit": [
+          70,
+          80
+        ],
+        "risk": [
+          45,
+          55
+        ],
+        "activation": [
+          65,
+          80
+        ],
+        "conflict": [
+          45,
+          60
+        ]
+      }
+    },
+    {
+      "id": "month-12-tan-suu",
+      "scope": "monthly",
+      "month": 12,
+      "expectedContext": {
+        "focusPalace": "Tật Ách",
+        "focusBranch": "Mùi"
+      },
+      "expectedRanges": {
+        "benefit": [
+          45,
+          60
+        ],
+        "risk": [
+          60,
+          75
+        ],
+        "activation": [
+          88,
+          98
+        ],
+        "conflict": [
+          75,
+          90
+        ]
+      }
+    }
+  ],
+  "invariants": [
+    "Regression targets are calibration ranges, not classical truths.",
+    "Do not hard-code month number, palace name, or chart id.",
+    "Every target must be explained by reusable rule hits.",
+    "Benefit and risk remain independent.",
+    "Raw and normalized values are both exposed.",
+    "Minor stars cannot dominate the main-star frame."
+  ]
+}
