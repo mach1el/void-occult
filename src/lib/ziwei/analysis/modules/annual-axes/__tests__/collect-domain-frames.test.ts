@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { ChartData, ChartPalace } from "@/types/chart";
 import { collectDomainAnchorFrames } from "../collect-domain-frames";
+import type { ResolvedDomainAnchor } from "../resolvers/types";
 import { emptyAnnualAxesDiagnostics } from "../types";
 
 const FORWARD_NAMES = [
@@ -31,20 +32,28 @@ function buildSyntheticChart(): ChartData {
   return { palaces } as unknown as ChartData;
 }
 
+function anchor(
+  annualPalaceName: string,
+  palaceIndex: number,
+  weight: number,
+): ResolvedDomainAnchor {
+  return {
+    annualPalaceName,
+    palaceIndex,
+    weight,
+    provenance: "trung-chau-annual-palace-name",
+  };
+}
+
 describe("collectDomainAnchorFrames", () => {
-  it("resolves focus/opposite/trine by annual palace label, never by natal palace.name", () => {
+  it("builds TP4C nodes from pre-resolved anchors (school-agnostic geometry)", () => {
     const chart = buildSyntheticChart();
     const diagnostics = emptyAnnualAxesDiagnostics();
 
     const frames = collectDomainAnchorFrames(
       chart,
-      {
-        domain: "health",
-        anchors: [
-          { annualPalaceName: "Tật Ách", weight: 0.7 },
-          { annualPalaceName: "Mệnh", weight: 0.3 },
-        ],
-      },
+      "health",
+      [anchor("Tật Ách", 7, 0.7), anchor("Mệnh", 0, 0.3)],
       diagnostics,
     );
 
@@ -52,6 +61,7 @@ describe("collectDomainAnchorFrames", () => {
 
     const [tatAch, menh] = frames;
     expect(tatAch?.domainAnchorWeight).toBe(0.7);
+    expect(tatAch?.anchorProvenance).toBe("trung-chau-annual-palace-name");
     expect(tatAch?.nodes.map((n) => [n.palaceIndex, n.role])).toEqual([
       [7, "focus"],
       [1, "opposite"],
@@ -84,31 +94,23 @@ describe("collectDomainAnchorFrames", () => {
     expect(diagnostics.missingAnnualPalaceNames).toHaveLength(0);
   });
 
-  it("skips an anchor whose annual palace label is not present and logs a diagnostic", () => {
+  it("skips an anchor whose palace index no longer exists in the chart", () => {
     const chart = buildSyntheticChart();
-    // Remove the annual label entirely — simulates a Nam Phái chart where
-    // annualPalaceName is never populated.
-    chart.palaces.forEach((p) => {
-      p.annualPalaceName = undefined;
-    });
+    // Remove one palace to simulate an incomplete chart; the pre-resolved
+    // anchor still points at that index, so the frame must be skipped.
+    chart.palaces = chart.palaces.filter((p) => p.index !== 7);
     const diagnostics = emptyAnnualAxesDiagnostics();
 
     const frames = collectDomainAnchorFrames(
       chart,
-      {
-        domain: "health",
-        anchors: [
-          { annualPalaceName: "Tật Ách", weight: 0.7 },
-          { annualPalaceName: "Mệnh", weight: 0.3 },
-        ],
-      },
+      "health",
+      [anchor("Tật Ách", 7, 0.7), anchor("Mệnh", 0, 0.3)],
       diagnostics,
     );
 
-    expect(frames).toHaveLength(0);
+    expect(frames.map((f) => f.anchorPalaceName)).toEqual(["Mệnh"]);
     expect(diagnostics.missingAnnualPalaceNames).toEqual([
-      "health:Tật Ách",
-      "health:Mệnh",
+      "health:Tật Ách:missing-index-7",
     ]);
   });
 
@@ -123,7 +125,8 @@ describe("collectDomainAnchorFrames", () => {
 
     const frames = collectDomainAnchorFrames(
       chart,
-      { domain: "health", anchors: [{ annualPalaceName: "Tật Ách", weight: 1.0 }] },
+      "health",
+      [anchor("Tật Ách", 7, 1.0)],
       diagnostics,
     );
 

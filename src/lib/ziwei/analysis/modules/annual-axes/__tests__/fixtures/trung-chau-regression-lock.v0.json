@@ -1,0 +1,183 @@
+{
+  "fixtureId": "AA-TC-REGRESSION-1991-09-21-2026",
+  "school": "trung-chau",
+  "birth": {
+    "solarDate": "1991-09-21",
+    "birthHour": "Dậu",
+    "gender": "female",
+    "timezone": "7",
+    "annualYear": "2026",
+    "flowBase": "luu-nien"
+  },
+  "status": "available",
+  "domains": {
+    "health": {
+      "score": 63.2,
+      "band": "supportive",
+      "intensity": 86,
+      "conflict": 65,
+      "rawAxes": {
+        "support": 6.70656286042509,
+        "pressure": 4.331346833651104,
+        "stability": 3.4428828269931113,
+        "activation": 5.841068417144134
+      },
+      "normalizedAxes": {
+        "support": 0.8930635935528222,
+        "pressure": 0.7639666753742154,
+        "stability": 0.8169666301912125,
+        "activation": 0.8573017196980703
+      },
+      "topSupportDriverIds": [
+        "ann-axis:health:natal-activated:star:star:11:Thiên Phủ:focus",
+        "ann-axis:health:annual:star:star:7:Thiên Việt:trine",
+        "ann-axis:health:annual:star:star:3:Lộc Tồn:trine"
+      ],
+      "topPressureDriverIds": [
+        "ann-axis:health:natal-activated:star:star:5:Liêm Trinh:opposite",
+        "ann-axis:health:natal-activated:star:star:5:Thất Sát:opposite",
+        "ann-axis:health:annual:star:star:4:Kình Dương:focus"
+      ]
+    },
+    "family": {
+      "score": 60.2,
+      "band": "supportive",
+      "intensity": 88,
+      "conflict": 69,
+      "rawAxes": {
+        "support": 5.8215190905294465,
+        "pressure": 4.6681304415170946,
+        "stability": 2.601185645220921,
+        "activation": 6.276331291263755
+      },
+      "normalizedAxes": {
+        "support": 0.856368798238656,
+        "pressure": 0.7890308744258618,
+        "stability": 0.6998782702306785,
+        "activation": 0.8765736220242681
+      },
+      "topSupportDriverIds": [
+        "ann-axis:family:major-fortune:star:star:1:Tử Vi:opposite",
+        "ann-axis:family:major-fortune:star:star:1:Tham Lang:opposite",
+        "ann-axis:family:annual:star:star:7:Thiên Việt:focus"
+      ],
+      "topPressureDriverIds": [
+        "ann-axis:family:major-fortune:star:star:1:Tham Lang:opposite",
+        "ann-axis:family:natal-activated:star:star:1:Tham Lang:opposite",
+        "ann-axis:family:annual:star:star:2:Đà La:trine"
+      ]
+    },
+    "wealth": {
+      "score": 60.3,
+      "band": "supportive",
+      "intensity": 91,
+      "conflict": 74,
+      "rawAxes": {
+        "support": 6.524460018870369,
+        "pressure": 5.131692573235833,
+        "stability": 2.54940740430733,
+        "activation": 7.195106825813882
+      },
+      "normalizedAxes": {
+        "support": 0.8863713957357509,
+        "pressure": 0.8192362214690737,
+        "stability": 0.6909662605412314,
+        "activation": 0.9091339597250976
+      },
+      "topSupportDriverIds": [
+        "ann-axis:wealth:natal-activated:star:star:0:Thiên Cơ:focus",
+        "ann-axis:wealth:natal-activated:star:star:4:Thiên Lương:trine",
+        "ann-axis:wealth:natal-activated:star:star:0:Thái Âm:focus"
+      ],
+      "topPressureDriverIds": [
+        "ann-axis:wealth:annual:star:star:4:Kình Dương:trine",
+        "ann-axis:wealth:natal-activated:star:star:0:Thái Âm:focus",
+        "ann-axis:wealth:natal-activated:star:star:0:Thiên Cơ:focus"
+      ]
+    },
+    "career": {
+      "score": 56.7,
+      "band": "balanced",
+      "intensity": 90,
+      "conflict": 76,
+      "rawAxes": {
+        "support": 5.669202122609566,
+        "pressure": 5.710090115196665,
+        "stability": 2.0089408834043696,
+        "activation": 6.7627636849309445
+      },
+      "normalizedAxes": {
+        "support": 0.8488880068933118,
+        "pressure": 0.8509335906106796,
+        "stability": 0.5847476064716006,
+        "activation": 0.8950482503564254
+      },
+      "topSupportDriverIds": [
+        "ann-axis:career:natal-activated:star:star:8:Thiên Đồng:focus",
+        "ann-axis:career:annual:mutagen:mutagen:8:Lộc:Thiên Đồng:focus",
+        "ann-axis:career:natal-activated:star:star:4:Thiên Lương:trine"
+      ],
+      "topPressureDriverIds": [
+        "ann-axis:career:annual:star:star:2:Đà La:opposite",
+        "ann-axis:career:natal-activated:star:star:2:Cự Môn:opposite",
+        "ann-axis:career:natal-activated:star:star:8:Thiên Đồng:focus"
+      ]
+    },
+    "social": {
+      "score": 60.4,
+      "band": "supportive",
+      "intensity": 94,
+      "conflict": 84,
+      "rawAxes": {
+        "support": 7.214252127337479,
+        "pressure": 6.576575007067872,
+        "stability": 3.4182314834126957,
+        "activation": 8.445133424377392
+      },
+      "normalizedAxes": {
+        "support": 0.9097119992196535,
+        "pressure": 0.8883282672587995,
+        "stability": 0.8142154944303732,
+        "activation": 0.9400979454505763
+      },
+      "topSupportDriverIds": [
+        "ann-axis:social:major-fortune:star:star:1:Tử Vi:trine",
+        "ann-axis:social:annual:star:star:9:Thiên Khôi:focus",
+        "ann-axis:social:natal-activated:star:star:9:Vũ Khúc:focus"
+      ],
+      "topPressureDriverIds": [
+        "ann-axis:social:natal-activated:star:star:9:Phá Quân:focus",
+        "ann-axis:social:major-fortune:star:star:1:Tham Lang:trine",
+        "ann-axis:social:natal-activated:star:star:9:Vũ Khúc:focus"
+      ]
+    },
+    "romance": {
+      "score": 48.3,
+      "band": "guarded",
+      "intensity": 84,
+      "conflict": 59,
+      "rawAxes": {
+        "support": 3.649955270100787,
+        "pressure": 4.965652994868413,
+        "stability": 0.4549115459135753,
+        "activation": 5.410152184823301
+      },
+      "normalizedAxes": {
+        "support": 0.7037796739258659,
+        "pressure": 0.8089495338120043,
+        "stability": 0.15048553303101633,
+        "activation": 0.8352595479756747
+      },
+      "topSupportDriverIds": [
+        "ann-axis:romance:natal-activated:star:star:2:Cự Môn:focus",
+        "ann-axis:romance:annual:mutagen:mutagen:8:Lộc:Thiên Đồng:opposite",
+        "ann-axis:romance:annual:star:star:6:Văn Xương:trine"
+      ],
+      "topPressureDriverIds": [
+        "ann-axis:romance:natal-activated:star:star:2:Cự Môn:focus",
+        "ann-axis:romance:annual:star:star:2:Đà La:focus",
+        "ann-axis:romance:natal-activated:star:star:8:Thiên Đồng:opposite"
+      ]
+    }
+  }
+}

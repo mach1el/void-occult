@@ -19,9 +19,9 @@ const REGRESSION = {
 // `palace.annualPalaceName` (see engine-trung-chau.ts — "trùng bài" annual
 // relabeling is a Trung Châu-specific concept, per the comment above
 // `majorPalaceName`/`annualPalaceName` in src/types/chart.ts). Nam Phái's
-// engine never sets this field, so a Nam Phái-computed chart is exactly the
-// "missing annual structure" case the mission requires us to diagnose
-// rather than infer — covered separately below.
+// engine never sets this field. Under V0.2 Nam Phái resolves domains
+// against natal `palace.name` via its own resolver — Nam Phái coverage is
+// asserted in the dedicated block below rather than via the shared TC block.
 describe("analyzeAnnualAxes — domain resolution (Trung Châu chart, real annual structure)", () => {
   it("returns an available result covering all six domains with bounded scores and non-empty evidence", () => {
     const chart = calculateTrungChau(REGRESSION);
@@ -112,38 +112,54 @@ describe("analyzeAnnualAxes — domain resolution (Trung Châu chart, real annua
   });
 });
 
-describe("analyzeAnnualAxes — Nam Phái missing annual structure", () => {
-  it("reports diagnostics and a discriminated unavailable result rather than fabricating a score", () => {
+describe("analyzeAnnualAxes — Nam Phái natal-name resolver", () => {
+  it("resolves domains against natal palace.name and produces available axes", () => {
     const chart = calculateNamPhai(REGRESSION);
+    // Nam Phái never sets annualPalaceName — the whole point of the V0.2
+    // resolver is to bypass this field and match natal names directly.
     expect(chart.palaces.every((p) => p.annualPalaceName === undefined)).toBe(true);
 
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
 
-    expect(result.status).toBe("unavailable");
-    for (const domain of ANNUAL_AXIS_DOMAINS) {
+    // At least one domain must score; some may still be unavailable if a
+    // natal name is missing on this specific chart, but the module status
+    // must not be "unavailable" (that regression is what V0.2 fixed).
+    expect(result.status).not.toBe("unavailable");
+    expect(result.capabilities.domainAnchorCoordinate).toBe("natal-palace-name");
+    expect(result.capabilities.domainAnchorProvenance).toBe("nam-phai-natal-domain-anchor");
+    expect(result.capabilities.primaryAnnualFocus).toBe("small-limit");
+    expect(result.capabilities.supportsDomainScoring).toBe(true);
+
+    const availableDomains = ANNUAL_AXIS_DOMAINS.filter(
+      (d) => result.axes[d].status === "available",
+    );
+    expect(availableDomains.length).toBeGreaterThan(0);
+
+    for (const domain of availableDomains) {
       const axis = result.axes[domain];
-      expect(axis.status).toBe("unavailable");
-      if (axis.status !== "unavailable") continue;
-      // null/null is the discriminated sentinel — never a real number/band
-      // that could be mistaken for a computed result.
-      expect(axis.score).toBeNull();
-      expect(axis.band).toBeNull();
-      expect(axis.evidence).toHaveLength(0);
-      expect(axis.reasonCodes.length).toBeGreaterThan(0);
+      if (axis.status !== "available") continue;
+      expect(axis.score).toBeGreaterThanOrEqual(0);
+      expect(axis.score).toBeLessThanOrEqual(100);
+      expect(axis.evidence.length).toBeGreaterThan(0);
+      // Every collected evidence must reference an anchor palace that
+      // Nam Phái resolved via natal palace.name.
+      for (const e of axis.evidence) {
+        expect(typeof e.anchorPalaceName).toBe("string");
+      }
     }
-    expect(result.diagnostics.missingRequiredAnnualFacts.length).toBeGreaterThan(0);
-    expect(result.diagnostics.missingAnnualPalaceNames.length).toBeGreaterThan(0);
+
+    // Ambiguity/missing diagnostics must be empty for a well-formed
+    // Nam Phái chart.
+    expect(result.diagnostics.ambiguousDomainAnchor).toHaveLength(0);
+    expect(result.diagnostics.duplicateNatalPalaceNames).toHaveLength(0);
   });
 });
 
-// Trung Châu's own engine never sets `isSmallLimitPalace` at all (Tiểu Hạn
-// is a Nam Phái-specific concept — confirmed by direct inspection), so on a
-// real Trung Châu chart this is a vacuous-but-valid regression guard. The
-// forbidden-marker diagnostic path itself (and the Nam Phái enabled path)
-// are exercised precisely with a synthetic fixture in
-// collect-focal-evidence.test.ts, since no chart produced by either engine
-// today satisfies both "resolvable annual domain frames" (Trung Châu-only)
-// and "isSmallLimitPalace populated" (Nam Phái-only) at once.
+// Under V0.2 Nam Phái *does* resolve domain frames (natal-name resolver)
+// AND both engines set `isSmallLimitPalace`, so Nam Phái legitimately
+// exercises the small-limit focal marker path end-to-end. This test
+// pair guards the school-forbidden marker: Trung Châu must never emit
+// small-limit evidence, regardless of chart shape.
 describe("analyzeAnnualAxes — school-specific focal markers", () => {
   it("Trung Châu never emits small-limit evidence", () => {
     const chart = calculateTrungChau(REGRESSION);

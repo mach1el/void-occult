@@ -30,6 +30,7 @@ function buildFrame(taiTue: boolean, smallLimit: boolean, lndv: boolean): {
   const frames: AnnualDomainAnchorFrame[] = [
     {
       anchorPalaceName: "Tật Ách",
+      anchorProvenance: "trung-chau-annual-palace-name",
       domainAnchorWeight: 0.7,
       nodes: [
         {
@@ -68,6 +69,7 @@ describe("collectFocalEvidence — anchor vs. target annual label provenance", (
     const frames: AnnualDomainAnchorFrame[] = [
       {
         anchorPalaceName: "Tật Ách",
+        anchorProvenance: "trung-chau-annual-palace-name",
         domainAnchorWeight: 0.7,
         nodes: [
           { palaceIndex: 7, palaceName: focusPalace.name, palaceBranch: "Mùi", annualPalaceName: "Tật Ách", role: "focus" },

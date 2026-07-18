@@ -18,5 +18,13 @@ export function dedupeAnnualAxesDiagnostics(diagnostics: AnnualAxesDiagnostics):
     disabledInteractionHits: dedupeSorted(diagnostics.disabledInteractionHits),
     missingSourceIds: dedupeSorted(diagnostics.missingSourceIds),
     missingRequiredAnnualFacts: dedupeSorted(diagnostics.missingRequiredAnnualFacts),
+    incompleteChartPalaces: dedupeSorted(diagnostics.incompleteChartPalaces),
+    duplicateNatalPalaceNames: dedupeSorted(diagnostics.duplicateNatalPalaceNames),
+    missingDomainAnchor: dedupeSorted(diagnostics.missingDomainAnchor),
+    ambiguousDomainAnchor: dedupeSorted(diagnostics.ambiguousDomainAnchor),
+    missingSmallLimitPalace: dedupeSorted(diagnostics.missingSmallLimitPalace),
+    invalidAnnualFocusPalace: dedupeSorted(diagnostics.invalidAnnualFocusPalace),
+    missingAnnualFocusFrameNodes: dedupeSorted(diagnostics.missingAnnualFocusFrameNodes),
+    unsupportedSchoolPolicy: dedupeSorted(diagnostics.unsupportedSchoolPolicy),
   };
 }

@@ -12,3 +12,15 @@ export {
 export { collectStarEvidence } from "./collect-star-evidence";
 export { collectMutagenEvidence } from "./collect-mutagen-evidence";
 export { collectFocalEvidence } from "./collect-focal-evidence";
+export {
+  namPhaiDomainResolver,
+  trungChauDomainResolver,
+  selectResolver,
+  resolveAnnualFocus,
+} from "./resolvers";
+export type {
+  AnnualAxisDomainResolver,
+  ResolvedAnnualDomainAnchors,
+  ResolvedDomainAnchor,
+  ResolvedAnnualFocus,
+} from "./resolvers/types";

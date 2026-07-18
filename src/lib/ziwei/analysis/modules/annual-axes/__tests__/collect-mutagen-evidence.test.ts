@@ -28,6 +28,7 @@ describe("collectMutagenEvidence", () => {
   const frames: AnnualDomainAnchorFrame[] = [
     {
       anchorPalaceName: "Tật Ách",
+      anchorProvenance: "trung-chau-annual-palace-name",
       domainAnchorWeight: 0.7,
       nodes: [
         {

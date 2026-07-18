@@ -16,6 +16,7 @@ export type AnnualAxisEvidenceCategory =
   | "star"
   | "mutagen"
   | "focal-marker"
+  | "annual-focus"
   | "interaction";
 
 export type AnnualAxisFrameRole = "focus" | "opposite" | "trine";
@@ -85,6 +86,51 @@ export interface AnnualAxesDiagnostics {
   disabledInteractionHits: string[];
   missingSourceIds: string[];
   missingRequiredAnnualFacts: string[];
+  /** V0.2 — chart palace list not exactly 12, or labels are missing for
+   * the school's required coordinate (e.g. Trung Châu chart without
+   * annual labels). */
+  incompleteChartPalaces: string[];
+  /** V0.2 — Nam Phái specific: two natal palaces share the same
+   * `palace.name` (should never happen on a well-formed chart). */
+  duplicateNatalPalaceNames: string[];
+  /** V0.2 — a domain anchor label from axis definitions did not match
+   * any palace via the school's resolver. */
+  missingDomainAnchor: string[];
+  /** V0.2 — multiple palaces matched the same anchor label. */
+  ambiguousDomainAnchor: string[];
+  /** V0.2 — Nam Phái: `chart.smallLimitPalace` is missing. */
+  missingSmallLimitPalace: string[];
+  /** V0.2 — annual focus palace could not be resolved (Nam Phái or Trung
+   * Châu). */
+  invalidAnnualFocusPalace: string[];
+  /** V0.2 — annual focus frame could not build any TP4C nodes. */
+  missingAnnualFocusFrameNodes: string[];
+  /** V0.2 — school policy missing/invalid for the requested school. */
+  unsupportedSchoolPolicy: string[];
+}
+
+/** V0.2 — per-domain and module-level capabilities exposed to the UI.
+ * `supportsAnnualFocus` reflects whether an activation-overlay frame was
+ * actually built for this chart (i.e. the school's required focus palace
+ * resolved). `supportsDomainScoring` mirrors the module-level status —
+ * true iff at least one domain is available. */
+export interface AnnualAxesCapabilities {
+  supportsDomainScoring: boolean;
+  supportsAnnualFocus: boolean;
+  domainAnchorCoordinate: "natal-palace-name" | "annual-palace-name";
+  domainAnchorProvenance: string;
+  primaryAnnualFocus: "small-limit" | "annual-menh";
+}
+
+/** V0.2 — public summary of the annual-focus overlay. Never mutated by
+ * downstream code; the UI reads it verbatim to render the focus header. */
+export interface AnnualFocusSummary {
+  mode: "small-limit" | "annual-menh";
+  palaceIndex: number;
+  palaceName: string;
+  palaceBranch: string;
+  annualPalaceName: string | null;
+  frameBranches: string[];
 }
 
 export interface AnnualAxesResult {
@@ -99,6 +145,8 @@ export interface AnnualAxesResult {
   status: "available" | "partial" | "unavailable";
   axes: Record<AnnualAxisDomain, AnnualAxisResult>;
   diagnostics: AnnualAxesDiagnostics;
+  capabilities: AnnualAxesCapabilities;
+  annualFocus: AnnualFocusSummary | null;
 }
 
 export function emptyAnnualAxes(): AnnualAxisRawAxes {
@@ -150,5 +198,13 @@ export function emptyAnnualAxesDiagnostics(): AnnualAxesDiagnostics {
     disabledInteractionHits: [],
     missingSourceIds: [],
     missingRequiredAnnualFacts: [],
+    incompleteChartPalaces: [],
+    duplicateNatalPalaceNames: [],
+    missingDomainAnchor: [],
+    ambiguousDomainAnchor: [],
+    missingSmallLimitPalace: [],
+    invalidAnnualFocusPalace: [],
+    missingAnnualFocusFrameNodes: [],
+    unsupportedSchoolPolicy: [],
   };
 }

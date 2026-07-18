@@ -3,6 +3,7 @@ import {
   validateAnnualAxesKnowledge,
   type AnnualKnowledgeValidationIssue,
 } from "./validate";
+import { deepFreeze } from "./deep-freeze";
 
 import axisDefinitions from "./annual-axis-definitions.v0.json";
 import scoringProfile from "./annual-scoring-profile.v0.json";
@@ -12,6 +13,7 @@ import mutagenImpact from "./annual-mutagen-impact.v0.json";
 import starOverrides from "./annual-star-overrides.v0.json";
 import sourceRegistry from "./annual-source-registry.v0.json";
 import calibrationFixtures from "./annual-calibration-fixtures.v0.json";
+import schoolDomainPolicy from "./annual-school-domain-policy.v0.2.json";
 
 export type LoadAnnualAxesKnowledgeResult =
   | { ok: true; knowledge: AnnualAxesKnowledgeV0 }
@@ -31,10 +33,12 @@ function buildKnowledge(): AnnualAxesKnowledgeV0 {
     sourceRegistry: sourceRegistry as unknown as AnnualAxesKnowledgeV0["sourceRegistry"],
     calibrationFixtures:
       calibrationFixtures as unknown as AnnualAxesKnowledgeV0["calibrationFixtures"],
+    schoolDomainPolicy:
+      schoolDomainPolicy as unknown as AnnualAxesKnowledgeV0["schoolDomainPolicy"],
   };
 }
 
-/** Load Annual Axes V0 knowledge once; validate in all environments. */
+/** Load Annual Axes V0 knowledge once; validate then deep-freeze. */
 export function loadAnnualAxesKnowledgeV0(): LoadAnnualAxesKnowledgeResult {
   if (cached) return cached;
 
@@ -42,7 +46,7 @@ export function loadAnnualAxesKnowledgeV0(): LoadAnnualAxesKnowledgeResult {
   const validation = validateAnnualAxesKnowledge(knowledge);
 
   cached = validation.ok
-    ? { ok: true, knowledge }
+    ? { ok: true, knowledge: deepFreeze(knowledge) }
     : { ok: false, issues: validation.issues };
   return cached;
 }
