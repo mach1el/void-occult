@@ -1,0 +1,151 @@
+{
+  "id": "palace-overview-expert-benchmark-seed-v1-2",
+  "version": "1.2.0-experimental",
+  "status": "experimental",
+  "schoolProfiles": [
+    "nam-phai-v1",
+    "trung-chau-v1"
+  ],
+  "effectiveFrom": "2026-07-18",
+  "notes": "Seed case only. Add 20–30 expert-reviewed charts before calibration.",
+  "cases": [
+    {
+      "caseId": "female-1991-09-21-dau",
+      "input": {
+        "solarDate": "1991-09-21",
+        "birthHour": "Dậu",
+        "gender": "female",
+        "timezone": "7",
+        "annualYear": "2026",
+        "flowBase": "luu-nien"
+      },
+      "schools": [
+        "nam-phai",
+        "trung-chau"
+      ],
+      "labels": [
+        {
+          "palaceName": "Mệnh",
+          "support": null,
+          "pressure": null,
+          "stability": null,
+          "activation": null,
+          "notes": null,
+          "reviewer": null,
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "palaceName": "Phụ Mẫu",
+          "support": null,
+          "pressure": null,
+          "stability": null,
+          "activation": null,
+          "notes": null,
+          "reviewer": null,
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "palaceName": "Phúc Đức",
+          "support": null,
+          "pressure": null,
+          "stability": null,
+          "activation": null,
+          "notes": null,
+          "reviewer": null,
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "palaceName": "Điền Trạch",
+          "support": null,
+          "pressure": null,
+          "stability": null,
+          "activation": null,
+          "notes": null,
+          "reviewer": null,
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "palaceName": "Quan Lộc",
+          "support": null,
+          "pressure": null,
+          "stability": null,
+          "activation": null,
+          "notes": null,
+          "reviewer": null,
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "palaceName": "Nô Bộc",
+          "support": null,
+          "pressure": null,
+          "stability": null,
+          "activation": null,
+          "notes": null,
+          "reviewer": null,
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "palaceName": "Thiên Di",
+          "support": null,
+          "pressure": null,
+          "stability": null,
+          "activation": null,
+          "notes": null,
+          "reviewer": null,
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "palaceName": "Tật Ách",
+          "support": null,
+          "pressure": null,
+          "stability": null,
+          "activation": null,
+          "notes": null,
+          "reviewer": null,
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "palaceName": "Tài Bạch",
+          "support": null,
+          "pressure": null,
+          "stability": null,
+          "activation": null,
+          "notes": null,
+          "reviewer": null,
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "palaceName": "Tử Tức",
+          "support": null,
+          "pressure": null,
+          "stability": null,
+          "activation": null,
+          "notes": null,
+          "reviewer": null,
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "palaceName": "Phu Thê",
+          "support": null,
+          "pressure": null,
+          "stability": null,
+          "activation": null,
+          "notes": null,
+          "reviewer": null,
+          "reviewStatus": "unreviewed"
+        },
+        {
+          "palaceName": "Huynh Đệ",
+          "support": null,
+          "pressure": null,
+          "stability": null,
+          "activation": null,
+          "notes": null,
+          "reviewer": null,
+          "reviewStatus": "unreviewed"
+        }
+      ],
+      "pairwiseComparisons": []
+    }
+  ]
+}

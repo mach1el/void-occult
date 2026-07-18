@@ -25,6 +25,13 @@ export { buildMinorPairAnnotations } from "./minor-pair-annotations";
 export { buildTransformationTargetAnnotations } from "./transformation-target-annotations";
 export { buildTraitProjectionAnnotations } from "./trait-projection-annotations";
 export {
+  listBenchmarkCaseIds,
+  runBenchmarkCase,
+  type BenchmarkCaseRun,
+  type BenchmarkPalaceResult,
+  type BenchmarkSchoolRun,
+} from "./benchmark";
+export {
   applyLocalVoidAttenuation,
   collectPalaceEvidence,
   emptyDiagnostics,

@@ -1,0 +1,50 @@
+{
+  "id": "palace-overview-expert-benchmark-schema-v1-2",
+  "version": "1.2.0-experimental",
+  "status": "experimental",
+  "schoolProfiles": [
+    "nam-phai-v1",
+    "trung-chau-v1"
+  ],
+  "effectiveFrom": "2026-07-18",
+  "notes": "Expert labels are ordinal and comparative; no exact score target is required.",
+  "axisLabels": {
+    "support": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "pressure": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "stability": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "activation": [
+      "low",
+      "medium",
+      "high"
+    ]
+  },
+  "palaceLabelSchema": {
+    "palaceName": "string",
+    "support": "low|medium|high|null",
+    "pressure": "low|medium|high|null",
+    "stability": "low|medium|high|null",
+    "activation": "low|medium|high|null",
+    "notes": "string|null",
+    "reviewer": "string|null",
+    "reviewStatus": "unreviewed|reviewed|disputed"
+  },
+  "pairwiseComparisonSchema": {
+    "leftPalace": "string",
+    "axis": "support|pressure|stability|activation",
+    "relation": "greater|less|similar",
+    "rightPalace": "string",
+    "notes": "string|null"
+  }
+}
