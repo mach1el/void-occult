@@ -1,4 +1,33 @@
+import type { PalaceEvidenceAxes } from "@/lib/ziwei/analysis/modules/palace-overview";
+
 /** Map explanationKey → Vietnamese copy (no free-form reason parsing). */
+
+/**
+ * Family id → label, copied verbatim from
+ * knowledge/palace-overview/v1/minor-star-families.json (18 families).
+ * Used as a deterministic fallback for the 91 per-star minor explanation
+ * keys (shape `minor.<familyId>.<slug>`) instead of hardcoding all 92.
+ */
+const MINOR_FAMILY_LABELS: Record<string, string> = {
+  "strong-support": "Phụ tá và quý nhân mạnh",
+  "standard-support": "Hỗ trợ, giải trợ và danh vị",
+  "academic-literary": "Học thuật, văn thư và biểu đạt",
+  "wealth-resource": "Nguồn lực và tích lũy",
+  "soft-support": "Hỗ trợ nhẹ",
+  "authority-action": "Quyết đoán, tổ chức và hành động",
+  "movement-action": "Di chuyển và nhịp hành động",
+  "joy-social": "Hỷ khí và khả năng kết nối",
+  "attraction-visibility": "Sức hút và độ lộ diện",
+  "symbolic-prestige": "Biểu tượng, danh dự và khuynh hướng tinh thần",
+  "major-malefic": "Lục sát và áp lực mạnh",
+  "strong-pressure": "Áp lực cấu trúc mạnh",
+  "standard-pressure": "Trở lực và nhiễu động",
+  "resource-dispersion": "Hao tán và luân chuyển nguồn lực",
+  "isolation-pressure": "Tách biệt và giảm liên kết",
+  "administrative-pressure": "Quy định, tranh luận và áp lực thủ tục",
+  "strain-context": "Sức bền và áp lực duy trì",
+  "context-only": "Ngữ cảnh chưa chấm trực tiếp",
+};
 
 const LABELS: Record<string, string> = {
   "major.borrowed-from-opposite": "Chính tinh mượn từ đối cung (VCD)",
@@ -45,9 +74,33 @@ export function renderExplanationKey(key: string, fallbackLabel: string): string
   if (key.startsWith("chang-sheng.")) {
     return `Trường Sinh · ${key.slice("chang-sheng.".length)}`;
   }
+  if (key.startsWith("minor.")) {
+    const familyId = key.slice("minor.".length).split(".")[0];
+    const familyLabel = familyId ? MINOR_FAMILY_LABELS[familyId] : undefined;
+    return familyLabel ? `${fallbackLabel} · ${familyLabel}` : fallbackLabel;
+  }
   return fallbackLabel;
 }
 
 export function palaceDomainHint(palaceName: string): string | null {
   return PALACE_DOMAIN[palaceName] ?? null;
+}
+
+const AXIS_LABELS: Array<[keyof PalaceEvidenceAxes, string]> = [
+  ["support", "hỗ trợ"],
+  ["pressure", "áp lực"],
+  ["stability", "ổn định"],
+  ["activation", "kích hoạt"],
+];
+
+/** Localized, compact summary of an evidence/palace's axis contribution. */
+export function formatContribution(axes: PalaceEvidenceAxes): string {
+  const parts: string[] = [];
+  for (const [key, label] of AXIS_LABELS) {
+    const value = axes[key];
+    if (Math.abs(value) < 0.05) continue;
+    const sign = value > 0 ? "+" : "−";
+    parts.push(`${sign}${Math.abs(value).toFixed(1)} ${label}`);
+  }
+  return parts.length ? parts.join(", ") : "—";
 }

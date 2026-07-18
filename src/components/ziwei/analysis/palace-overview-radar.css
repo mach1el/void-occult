@@ -64,8 +64,18 @@
   cursor: pointer;
 }
 
-.palace-overview-radar__point.is-active circle {
+.palace-overview-radar__point:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.palace-overview-radar__point.is-active circle:last-of-type {
   stroke-width: 2.5;
+}
+
+.palace-overview-radar__tooltip-summary {
+  margin: 0.35rem 0 0;
+  font-variant-numeric: tabular-nums;
 }
 
 .palace-overview-radar__tooltip {
@@ -105,9 +115,15 @@
 }
 
 .palace-overview-detail__meta {
-  margin: 0 0 0.65rem;
+  margin: 0;
   font-size: 0.8rem;
   opacity: 0.8;
+}
+
+.palace-overview-detail__band {
+  margin: 0 0 0.65rem;
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .palace-overview-detail__section {
@@ -129,6 +145,30 @@
   line-height: 1.4;
 }
 
+.palace-overview-detail__family-group {
+  margin: 0.4rem 0;
+}
+
+.palace-overview-detail__family-label {
+  margin: 0 0 0.15rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.palace-overview-detail__meta-details summary,
+.palace-overview-detail__context-only summary {
+  cursor: pointer;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.palace-overview-detail__expand,
 .palace-overview-detail__close {
   margin-top: 0.65rem;
   font: inherit;
@@ -137,4 +177,6 @@
   border: 1px solid color-mix(in srgb, var(--ink, #1a1520) 28%, transparent);
   padding: 0.25rem 0.55rem;
   cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
 }
