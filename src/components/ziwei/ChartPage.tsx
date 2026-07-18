@@ -16,12 +16,6 @@ import {
   getEngine,
   serializeChart,
 } from "@/lib/ziwei/chart";
-import {
-  getDaiVanTrend,
-  getLuuNienTrend,
-  SCORING_WEIGHTS,
-  type TrendPoint,
-} from "@/lib/ziwei/trend";
 import type {
   BirthInput,
   ChartData,
@@ -31,10 +25,6 @@ import type {
 import { AiChat } from "./ai-chat/AiChat";
 import { CompactChart } from "./chart/CompactChart";
 import { MobileChart } from "./chart/MobileChart";
-import { PalaceRadar } from "./trend/PalaceRadar";
-import { AnnualRadar } from "./trend/AnnualRadar";
-import { TrendChart } from "./trend/TrendChart";
-import { TrendPointPanel } from "./trend/TrendPointPanel";
 
 const HOUR_BRANCHES = [
   "Tý",
@@ -204,9 +194,6 @@ export function ChartPage() {
   const [mobileMode, setMobileMode] = useState<MobileChartMode>("compact");
   const [copyState, setCopyState] = useState<Notice>("idle");
   const [imageState, setImageState] = useState<Notice>("idle");
-  const [selectedTrendPoint, setSelectedTrendPoint] = useState<TrendPoint | null>(
-    null,
-  );
   const compactChartRef = useRef<HTMLDivElement>(null);
   const birthInput = useMemo(
     () => buildBirthInput(form),
@@ -218,21 +205,6 @@ export function ChartPage() {
       form.solarDate,
       form.timezone,
     ],
-  );
-
-  const daiVanTrend = useMemo(
-    () => (chartData ? getDaiVanTrend(chartData, SCORING_WEIGHTS) : []),
-    [chartData],
-  );
-  const luuNienTrend = useMemo(
-    () =>
-      chartData
-        ? getLuuNienTrend(chartData, {
-            school,
-            birthInput,
-          })
-        : [],
-    [birthInput, chartData, school],
   );
 
   useEffect(() => {
@@ -692,32 +664,15 @@ export function ChartPage() {
 
           <AiChat getContext={context} />
 
-          <section className="trend-section" aria-label="Xu hướng và độ vững 12 cung">
-            <div className="trend-charts">
-              {chartData ? (
-                <div className="trend-radars">
-                  <PalaceRadar chart={chartData} compact />
-                  <AnnualRadar chart={chartData} compact />
-                </div>
-              ) : null}
-              <TrendChart
-                title="Xu hướng Đại vận"
-                points={daiVanTrend}
-                currentLabel="Chính vận"
-                selectedLabel={selectedTrendPoint?.label ?? null}
-                onSelectPoint={setSelectedTrendPoint}
-              />
-              <TrendChart
-                title="Xu hướng Lưu niên"
-                points={luuNienTrend}
-                currentLabel="Tháng nay"
-                selectedLabel={selectedTrendPoint?.label ?? null}
-                onSelectPoint={setSelectedTrendPoint}
-              />
-              <TrendPointPanel
-                point={selectedTrendPoint}
-                onClose={() => setSelectedTrendPoint(null)}
-              />
+          <section
+            className="trend-section"
+            aria-label="Module vận khí đang tái cấu trúc"
+          >
+            <div className="trend-analysis-grid" role="status" aria-live="polite">
+              <p>
+                Module vận khí đang được tái cấu trúc. Lá số và dữ liệu an sao
+                không bị ảnh hưởng.
+              </p>
             </div>
           </section>
         </main>
