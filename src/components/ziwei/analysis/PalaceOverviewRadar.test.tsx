@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
+import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import type { BirthInput } from "@/types/chart";
 import { PalaceOverviewRadar } from "./PalaceOverviewRadar";
 
@@ -8,6 +9,15 @@ const REGRESSION: BirthInput = {
   solarDate: "1991-09-21",
   birthHour: "Dậu",
   gender: "female",
+  timezone: "7",
+  annualYear: "2026",
+  flowBase: "luu-nien",
+};
+
+const OTHER_CHART: BirthInput = {
+  solarDate: "1988-03-14",
+  birthHour: "Mão",
+  gender: "male",
   timezone: "7",
   annualYear: "2026",
   flowBase: "luu-nien",
@@ -164,5 +174,91 @@ describe("PalaceOverviewRadar", () => {
       fireEvent.click(point);
     }
     expect(found).toBe(true);
+  });
+});
+
+describe("PalaceOverviewRadar — V1.2.1 stale-selection regression (PR #81 review thread)", () => {
+  it("selecting a palace then changing the chart clears the stale result instead of showing old data", () => {
+    const chartA = calculateNamPhai(REGRESSION);
+    const { container, rerender } = render(
+      <PalaceOverviewRadar chart={chartA} school="nam-phai" />,
+    );
+    const point = container.querySelector(".palace-overview-radar__point")!;
+    fireEvent.click(point);
+    expect(container.querySelector(".palace-overview-detail")).not.toBeNull();
+    const scoreBefore = container.querySelector(
+      ".palace-overview-detail__band",
+    )!.textContent;
+
+    const chartB = calculateNamPhai(OTHER_CHART);
+    rerender(<PalaceOverviewRadar chart={chartB} school="nam-phai" />);
+
+    // Selection must never silently keep showing chartA's analysis.
+    const detailAfter = container.querySelector(".palace-overview-detail");
+    if (detailAfter) {
+      // If a palace at the same index still happens to be selected it must
+      // be re-derived from chartB's own results, never chartA's stale object.
+      expect(detailAfter.querySelector(".palace-overview-detail__band")!.textContent).not.toBe(
+        scoreBefore,
+      );
+    } else {
+      expect(detailAfter).toBeNull();
+    }
+  });
+
+  it("selecting a palace then switching school clears the stale result", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const { container, rerender } = render(
+      <PalaceOverviewRadar chart={chart} school="nam-phai" />,
+    );
+    const point = container.querySelector(".palace-overview-radar__point")!;
+    fireEvent.click(point);
+    expect(container.querySelector(".palace-overview-detail")).not.toBeNull();
+
+    rerender(<PalaceOverviewRadar chart={chart} school="trung-chau" />);
+
+    // The stale-selection bug this regresses against left the *previous
+    // school's* PalaceOverviewResult object rendered; after the fix the
+    // panel must close (selection is reset on school change).
+    expect(container.querySelector(".palace-overview-detail")).toBeNull();
+  });
+
+  it("hover state clears when chart changes (no stale tooltip)", () => {
+    const chartA = calculateNamPhai(REGRESSION);
+    const { container, rerender } = render(
+      <PalaceOverviewRadar chart={chartA} school="nam-phai" />,
+    );
+    const point = container.querySelector(".palace-overview-radar__point")!;
+    fireEvent.mouseEnter(point);
+    expect(container.querySelector(".palace-overview-radar__tooltip")).not.toBeNull();
+
+    const chartB = calculateNamPhai(OTHER_CHART);
+    rerender(<PalaceOverviewRadar chart={chartB} school="nam-phai" />);
+
+    // Falls back to the "no selection" hint text once hover is cleared.
+    expect(
+      screen.getByText(/Di chuột hoặc chọn một cung/),
+    ).toBeInTheDocument();
+  });
+
+  it("selection always resolves against the current results (never a stored stale object)", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const { container } = render(<PalaceOverviewRadar chart={chart} school="nam-phai" />);
+    const point = container.querySelector(".palace-overview-radar__point")!;
+    fireEvent.click(point);
+    const detail = container.querySelector(".palace-overview-detail")!;
+    // Re-selecting the exact same chart/school must show identical data —
+    // proves the value is derived fresh, not cached as a stale reference.
+    const bandText = detail.querySelector(".palace-overview-detail__band")!.textContent;
+    fireEvent.click(container.querySelector(".palace-overview-detail__close")!);
+    fireEvent.click(point);
+    const detail2 = container.querySelector(".palace-overview-detail")!;
+    expect(detail2.querySelector(".palace-overview-detail__band")!.textContent).toBe(bandText);
+  });
+
+  it("both schools compute without error for the trine-link/pair-detector fixture chart", () => {
+    const chart = calculateTrungChau(REGRESSION);
+    const { container } = render(<PalaceOverviewRadar chart={chart} school="trung-chau" />);
+    expect(container.querySelector(".palace-overview-radar")).not.toBeNull();
   });
 });

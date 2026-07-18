@@ -148,4 +148,51 @@ describe("trait-projection-annotations", () => {
     const authorityHits = out.filter((a) => a.metadata?.trait === "authority");
     expect(authorityHits).toHaveLength(1);
   });
+
+  it("V1.2.1: dedup key is canonical star identity, not fact id — two different fact ids for the same star still project once", () => {
+    const evidenceA = baseEvidence({
+      category: "major-star",
+      starName: "Tử Vi",
+      factIds: ["fact:tu-vi-a"],
+    });
+    const evidenceB = baseEvidence({
+      category: "major-star",
+      starName: "Tử Vi",
+      factIds: ["fact:tu-vi-b"],
+    });
+    const { out } = project([evidenceA, evidenceB]);
+    const authorityHits = out.filter((a) => a.metadata?.trait === "authority");
+    expect(authorityHits).toHaveLength(1);
+  });
+
+  it("V1.2.1: a major star targeted by 2 Tứ Hóa records no longer triple-projects the same trait", () => {
+    // Before the fix, transformation evidence targeting a focus major star
+    // was itself a projection subject — so Thiên Cơ (traits
+    // planning/adaptability) receiving both Hóa Lộc and Hóa Kỵ would
+    // project "planning"/"adaptability" 3x (once for the star, once per
+    // transform). Transformation evidence must no longer be a subject.
+    const majorEvidence = baseEvidence({
+      category: "major-star",
+      starName: "Thiên Cơ",
+      factIds: ["fact:thien-co"],
+    });
+    const transformLoc = baseEvidence({
+      category: "transformation",
+      starName: "Thiên Cơ",
+      factIds: ["fact:transform-loc"],
+      explanationKey: "transform.Lộc",
+    });
+    const transformKy = baseEvidence({
+      category: "transformation",
+      starName: "Thiên Cơ",
+      factIds: ["fact:transform-ky"],
+      explanationKey: "transform.Kỵ",
+    });
+    const { out } = project([majorEvidence, transformLoc, transformKy]);
+    const planningHits = out.filter((a) => a.metadata?.trait === "planning");
+    expect(planningHits).toHaveLength(1);
+    // The transformation facts themselves must never appear as a subject's factId.
+    expect(out.every((a) => !a.factIds.includes("fact:transform-loc"))).toBe(true);
+    expect(out.every((a) => !a.factIds.includes("fact:transform-ky"))).toBe(true);
+  });
 });

@@ -118,6 +118,27 @@ describe("minor-pair-annotations — scope priority", () => {
     expect(out.some((a) => a.explanationKey === "pair.pair-ta-huu")).toBe(false);
   });
 
+  it("V1.2.1: two trine palaces without a focus participant fall to tp4c, not trine-link", () => {
+    const out = pairAnnotationsFor([
+      fact("f1", 4, "Tả Phụ"),
+      fact("f2", 8, "Hữu Bật"),
+    ]);
+    const hit = out.find((a) => a.explanationKey === "pair.pair-ta-huu");
+    expect(hit?.metadata?.scope).toBe("tp4c");
+  });
+
+  it("V1.2.1: a normal missing-participant miss writes no diagnostic (it's expected non-match behavior, not an integrity issue)", () => {
+    const diagnostics = emptySemanticDiagnostics();
+    buildMinorPairAnnotations({
+      frame: FRAME,
+      factsByPalace: factsByPalaceOf([fact("f1", 0, "Tả Phụ")]),
+      knowledge,
+      diagnostics,
+      focusPalaceIndex: 0,
+    });
+    expect(diagnostics.unresolvedPairParticipants).toEqual([]);
+  });
+
   it("one hit per rule per focus palace", () => {
     const out = pairAnnotationsFor([
       fact("f1", 0, "Tả Phụ"),

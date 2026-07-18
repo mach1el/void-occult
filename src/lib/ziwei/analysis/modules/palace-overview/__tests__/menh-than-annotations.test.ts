@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
-import { analyzeAllPalaces } from "@/lib/ziwei/analysis/modules/palace-overview";
+import {
+  analyzeAllPalaces,
+  emptySemanticDiagnostics,
+  resolveMenhThanStatus,
+} from "@/lib/ziwei/analysis/modules/palace-overview";
 import type { BirthInput, School } from "@/types/chart";
 
 const REGRESSION: BirthInput = {
@@ -75,6 +79,31 @@ describe("menh-than annotations", () => {
     } else {
       expect(voidRef).toBeUndefined();
     }
+  });
+
+  it("V1.2.1: numeric index is the SSOT — a disagreeing marker flag never flips isMenh/isThan, only sets the diagnostic", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const menhPalace = chart.palaces.find((p) => p.index === chart.menhIndex)!;
+    const someOtherPalace = chart.palaces.find((p) => p.index !== chart.menhIndex)!;
+
+    // A bad flag falsely claiming Mệnh on a non-Mệnh palace must not make
+    // isMenh true for it, and must not un-set isMenh on the real one.
+    const diagnostics = emptySemanticDiagnostics();
+    const badFlagPalace = { ...someOtherPalace, isMenh: true };
+    const status = resolveMenhThanStatus(chart, badFlagPalace, diagnostics);
+    expect(status.isMenh).toBe(false);
+    expect(diagnostics.menhIndexMismatch).toBe(true);
+
+    const diagnosticsReal = emptySemanticDiagnostics();
+    const realMenhWithBadFlag = { ...menhPalace, isMenh: false };
+    const statusReal = resolveMenhThanStatus(chart, realMenhWithBadFlag, diagnosticsReal);
+    expect(statusReal.isMenh).toBe(true);
+    expect(diagnosticsReal.menhIndexMismatch).toBe(true);
+
+    // Agreeing flags never set the mismatch diagnostic.
+    const diagnosticsOk = emptySemanticDiagnostics();
+    resolveMenhThanStatus(chart, menhPalace, diagnosticsOk);
+    expect(diagnosticsOk.menhIndexMismatch).toBe(false);
   });
 
   it("annotations never enter allEvidence and carry no axes", () => {
