@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "0.1.0",
+  "sampleCount": 18,
+  "exactTotalMatches": 18,
+  "mismatches": [],
+  "palaceValueCount": 207,
+  "quarterGridValueCount": 170,
+  "quarterGridShare": 0.821256,
+  "minPalaceScore": -4.5,
+  "maxPalaceScore": 3.5,
+  "meanPalaceScore": 0.174686,
+  "medianPalaceScore": 0.32,
+  "interpretation": [
+    "In all 18 manually transcribed Huyền Khí summaries, the displayed total equals the sum of the twelve palace scores after treating unlisted palaces as zero.",
+    "Most values lie on a 0.25 grid, while residual values such as 0.18, 0.23, 0.31 and -0.34 show that the public output is not a pure quarter-step lookup table.",
+    "This validates an additive output contract, not the hidden palace-scoring formula."
+  ]
+}

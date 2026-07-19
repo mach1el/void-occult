@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "0.1.0",
+  "reportId": "huyen-khi-research-report-v0-1",
+  "generatedAt": "2026-07-19T15:05:45.034Z",
+  "seedValidation": {
+    "recordCount": 18,
+    "exactCount": 18,
+    "validationIssueCount": 0,
+    "validationIssues": []
+  },
+  "parsing": {
+    "parsedCount": 18,
+    "unparsedSampleIds": []
+  },
+  "solarDateResolution": {
+    "unique": 0,
+    "ambiguous": 18,
+    "unresolved": 0,
+    "resolvedFactSnapshotCount": 0,
+    "note": "A stem-branch year (e.g. Giáp Tuất) repeats every 60 years; without an absolute year the lunar->solar mapping is genuinely ambiguous. Chart-fact snapshots are only built for unambiguous resolutions."
+  },
+  "scoreAlphabet": {
+    "sampleCount": 18,
+    "palaceValueCount": 207,
+    "quarterGridValueCount": 170,
+    "quarterGridShare": 0.821256,
+    "minPalaceScore": -4.5,
+    "maxPalaceScore": 3.5,
+    "meanPalaceScore": 0.174686,
+    "medianPalaceScore": 0.32,
+    "residualModuloQuarterHistogram": {
+      "0.00": 170,
+      "0.09": 2,
+      "0.18": 1,
+      "0.07": 2,
+      "0.20": 3,
+      "0.11": 1,
+      "0.02": 3,
+      "0.12": 2,
+      "0.06": 5,
+      "0.08": 1,
+      "0.03": 2,
+      "0.23": 2,
+      "0.24": 3,
+      "0.04": 1,
+      "0.17": 2,
+      "0.15": 1,
+      "0.13": 1,
+      "0.16": 2,
+      "0.21": 1,
+      "0.14": 1,
+      "0.22": 1
+    },
+    "rangeByPalace": {
+      "Mệnh": {
+        "min": -1.81,
+        "max": 2.75,
+        "count": 18
+      },
+      "Phụ Mẫu": {
+        "min": -1.75,
+        "max": 2.5,
+        "count": 18
+      },
+      "Phúc Đức": {
+        "min": -3.25,
+        "max": 2,
+        "count": 18
+      },
+      "Điền Trạch": {
+        "min": -2,
+        "max": 2,
+        "count": 18
+      },
+      "Quan Lộc": {
+        "min": -2,
+        "max": 1.5,
+        "count": 18
+      },
+      "Nô Bộc": {
+        "min": -4,
+        "max": 3,
+        "count": 18
+      },
+      "Thiên Di": {
+        "min": -3.75,
+        "max": 2.25,
+        "count": 18
+      },
+      "Tật Ách": {
+        "min": -2.25,
+        "max": 2.75,
+        "count": 18
+      },
+      "Tài Bạch": {
+        "min": -2,
+        "max": 2.75,
+        "count": 18
+      },
+      "Tử Tức": {
+        "min": -4.5,
+        "max": 3.5,
+        "count": 18
+      },
+      "Phu Thê": {
+        "min": -2,
+        "max": 2.75,
+        "count": 18
+      },
+      "Huynh Đệ": {
+        "min": -2.5,
+        "max": 2.25,
+        "count": 18
+      }
+    }
+  },
+  "corpusManifest": {
+    "generatedFromRecordCount": 18,
+    "positiveTotalCount": 11,
+    "negativeTotalCount": 7,
+    "nearZeroTotalCount": 0,
+    "phases": [
+      {
+        "phase": "A",
+        "name": "Manual gold corpus",
+        "targetCharts": 60,
+        "currentCharts": 18,
+        "completionRate": 0.3,
+        "requirements": [
+          "20 positive-total",
+          "20 negative-total",
+          "20 near-zero-total",
+          "all five Cục",
+          "both genders",
+          "all 12 hours",
+          "manual double-entry validation"
+        ]
+      },
+      {
+        "phase": "B",
+        "name": "Controlled calendar corpus",
+        "targetCharts": 240,
+        "currentCharts": 0,
+        "completionRate": 0,
+        "requirements": [
+          "20 dates × 12 hours",
+          "same date controls year/month/day while hour changes",
+          "capture Mệnh score, total and all palace scores where available"
+        ]
+      },
+      {
+        "phase": "C",
+        "name": "Broad discovery corpus",
+        "targetCharts": 2000,
+        "currentCharts": 0,
+        "completionRate": 0,
+        "requirements": [
+          "stratify by Cục, Mệnh branch, major-star configuration, VCD, Tuần/Triệt and Tứ Hóa",
+          "hold out complete birth-year groups"
+        ]
+      },
+      {
+        "phase": "D",
+        "name": "Expert-reviewed benchmark",
+        "targetCharts": 200,
+        "currentCharts": 0,
+        "completionRate": 0,
+        "requirements": [
+          "independent expert labels for rule explanations",
+          "no source-output access during final evaluation"
+        ]
+      }
+    ]
+  },
+  "matchedPairs": {
+    "pairCount": 0,
+    "pairs": [],
+    "note": "Matched over parsed birth-title facts only (no resolved chart structure yet available in V0.1)."
+  },
+  "baselineModels": [
+    {
+      "modelId": "model-0-null-baseline",
+      "description": "Predicts each palace name's training-set mean for every observation.",
+      "inSampleMae": 1.199856,
+      "inSampleRmse": 1.489025,
+      "observationCount": 216,
+      "caveats": [
+        "N=18 seed records — far below the quality-gates.v0.1.json unseen-holdout requirement; this is an in-sample demonstration that the tooling works, not a promotion-eligible evaluation."
+      ]
+    },
+    {
+      "modelId": "model-1-coarse-lookup-placeholder",
+      "description": "Placeholder for the prompt's Model 1 (palace name + Cục + Mệnh branch + major-star configuration + brightness). Only palace name is available without resolved chart facts, so this is numerically identical to Model 0 in V0.1 — not yet a real second rung on the model ladder.",
+      "inSampleMae": 1.199856,
+      "inSampleRmse": 1.489025,
+      "observationCount": 216,
+      "caveats": [
+        "N=18 seed records — far below the quality-gates.v0.1.json unseen-holdout requirement; this is an in-sample demonstration that the tooling works, not a promotion-eligible evaluation.",
+        "Cannot yet condition on Cục/Mệnh branch/major-star configuration — no seed record has a resolved chart-fact snapshot."
+      ]
+    }
+  ]
+}

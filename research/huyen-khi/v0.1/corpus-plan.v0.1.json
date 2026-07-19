@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "0.1.0",
+  "phases": [
+    {
+      "phase": "A",
+      "name": "Manual gold corpus",
+      "targetCharts": 60,
+      "requirements": [
+        "20 positive-total",
+        "20 negative-total",
+        "20 near-zero-total",
+        "all five Cục",
+        "both genders",
+        "all 12 hours",
+        "manual double-entry validation"
+      ]
+    },
+    {
+      "phase": "B",
+      "name": "Controlled calendar corpus",
+      "targetCharts": 240,
+      "requirements": [
+        "20 dates × 12 hours",
+        "same date controls year/month/day while hour changes",
+        "capture Mệnh score, total and all palace scores where available"
+      ]
+    },
+    {
+      "phase": "C",
+      "name": "Broad discovery corpus",
+      "targetCharts": 2000,
+      "requirements": [
+        "stratify by Cục, Mệnh branch, major-star configuration, VCD, Tuần/Triệt and Tứ Hóa",
+        "hold out complete birth-year groups"
+      ]
+    },
+    {
+      "phase": "D",
+      "name": "Expert-reviewed benchmark",
+      "targetCharts": 200,
+      "requirements": [
+        "independent expert labels for rule explanations",
+        "no source-output access during final evaluation"
+      ]
+    }
+  ]
+}

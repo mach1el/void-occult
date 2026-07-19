@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "0.1.0",
+  "researchGates": {
+    "extractorExactTotalValidationRateMin": 1.0,
+    "manualDoubleEntryAgreementMin": 1.0,
+    "metricNamespaceCollisionCountMax": 0,
+    "trainingTestSourceUrlOverlapMax": 0,
+    "runtimeSourceSiteDependencyCountMax": 0
+  },
+  "modelPromotionGates": {
+    "unseenPalaceMaeMax": 0.05,
+    "unseenPalaceExactWithin001RateMin": 0.9,
+    "unseenWholeChartTotalMaeMax": 0.05,
+    "wholeChartAdditivityViolationCountMax": 0,
+    "coefficientWithoutRuleProvenanceCountMax": 0,
+    "notes": "These are promotion gates for a candidate reverse-spec, not proof that it reproduces the proprietary formula."
+  },
+  "productionGate": "No production scorer until the owner explicitly approves a versioned reverse-spec and its unseen benchmark."
+}

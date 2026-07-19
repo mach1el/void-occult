@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "0.1.0",
+  "terms": [
+    {
+      "term": "Huyền Khí",
+      "namespace": "huyen-khi",
+      "publicSurface": "Phổ biến / public chart pages",
+      "known": "Per-palace score and whole-chart total; used for strength/weakness and transformation capacity.",
+      "unknown": "Exact formula and complete factor list.",
+      "mustNotAliasTo": [
+        "xí-hoa",
+        "đẩu-minh"
+      ]
+    },
+    {
+      "term": "Xí Hoa",
+      "namespace": "xi-hoa",
+      "publicSurface": "Bắc Phái pages",
+      "known": "Separately named per-palace and whole-chart metric, presented with Phi Hóa/Thất Tinh context.",
+      "unknown": "Exact relationship to Huyền Khí.",
+      "mustNotAliasTo": [
+        "huyền-khí",
+        "đẩu-minh"
+      ]
+    },
+    {
+      "term": "Đẩu Minh",
+      "namespace": "dau-minh",
+      "publicSurface": "Tổng hợp pages",
+      "known": "Displayed for palaces and stars alongside Hỉ/Kị/Nhàn and Cung Khí.",
+      "unknown": "Exact relationship to Huyền Khí and Xí Hoa.",
+      "mustNotAliasTo": [
+        "huyền-khí",
+        "xí-hoa"
+      ]
+    },
+    {
+      "term": "Cung Khí",
+      "namespace": "cung-khi",
+      "publicSurface": "Tổng hợp/Bắc Phái pages",
+      "known": "Public output uses 20% stem, 50% branch, 30% nạp âm element mixture and Hỉ/Kị/Nhàn labels.",
+      "unknown": "How this mixture enters Huyền Khí.",
+      "mustNotAliasTo": [
+        "huyền-khí"
+      ]
+    }
+  ]
+}
