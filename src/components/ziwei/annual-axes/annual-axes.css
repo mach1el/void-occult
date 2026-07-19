@@ -1,0 +1,184 @@
+/*
+ * Annual Axes V0.2 — visual language mirrors PalaceOverviewRadar so the
+ * two cards read as siblings in the analysis grid. Same layout contract:
+ * header + radar | tooltip (+ optional detail).
+ */
+.annual-axes-section {
+  display: grid;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem 1rem;
+  overflow: visible;
+  color: var(--ash, #d4ccdf);
+  border: 1px solid var(--line-soft, rgba(104, 88, 148, 0.38));
+  border-radius: 22px;
+  background: linear-gradient(150deg, rgba(27, 23, 52, 0.82), rgba(9, 7, 20, 0.76));
+  box-shadow:
+    0 28px 64px -34px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(22px) saturate(130%);
+  -webkit-backdrop-filter: blur(22px) saturate(130%);
+}
+
+.annual-axes-section__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.75rem;
+}
+
+.annual-axes-section__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  color: var(--amber-soft, #f6e0a4);
+}
+
+.annual-axes-section__badge {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--line-soft, rgba(104, 88, 148, 0.38));
+  padding: 0.12rem 0.4rem;
+}
+
+.annual-axes-section__year {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.85;
+  font-size: 0.9rem;
+}
+
+.annual-axes-section__body {
+  display: grid;
+  gap: 1rem;
+  overflow: visible;
+}
+
+@media (min-width: 900px) {
+  .annual-axes-section__body {
+    grid-template-columns: minmax(240px, 320px) 1fr;
+    align-items: start;
+  }
+}
+
+.annual-axes-section__tooltip {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line-soft, rgba(104, 88, 148, 0.38));
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+}
+
+.annual-axes-section__tooltip-title {
+  font-family: var(--font-display, "Noto Serif Display", "Noto Serif", serif);
+  font-weight: 650;
+  color: var(--amber-soft, #f6e0a4);
+}
+
+.annual-axes-section__tooltip-summary {
+  margin: 0.35rem 0 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.annual-axes-radar {
+  position: relative;
+  width: min(100%, 320px);
+  margin-inline: auto;
+  overflow: visible;
+}
+
+.annual-axes-radar__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.annual-axes-radar__point {
+  cursor: pointer;
+}
+
+.annual-axes-radar__point:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.annual-axes-radar__point.is-active circle:last-of-type {
+  stroke-width: 2.5;
+}
+
+.annual-axes-radar__label {
+  fill: var(--amber-soft, #f6e0a4);
+  /* Same compact face as palace-radar / star-minor labels — fits full axis
+   * names (Tình duyên, Giao hữu) without clipping the card edge. */
+  font-family: var(--font-stars-minor, "Be Vietnam Pro", system-ui, sans-serif);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0;
+  paint-order: stroke;
+  stroke: rgba(9, 7, 20, 0.75);
+  stroke-width: 2.75px;
+  stroke-linejoin: round;
+}
+
+.annual-axes-radar__label.is-active {
+  fill: var(--amber, #e2bc5f);
+  font-weight: 700;
+}
+
+.annual-axis-detail {
+  margin-top: 0.25rem;
+  padding: 0.75rem 0.85rem;
+  border-top: 1px solid var(--line-soft, rgba(104, 88, 148, 0.38));
+}
+
+.annual-axis-detail__title {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+  color: var(--amber-soft, #f6e0a4);
+}
+
+.annual-axis-detail__band {
+  margin: 0 0 0.65rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.annual-axis-detail__section {
+  margin: 0.55rem 0 0;
+}
+
+.annual-axis-detail__section h5 {
+  margin: 0 0 0.25rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.annual-axis-detail__section ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.annual-axis-detail__close {
+  margin-top: 0.65rem;
+  font: inherit;
+  font-size: 0.82rem;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--line-soft, rgba(104, 88, 148, 0.38));
+  border-radius: 8px;
+  padding: 0.25rem 0.55rem;
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.annual-axis-detail__section p {
+  text-wrap: pretty;
+}

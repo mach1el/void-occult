@@ -1,0 +1,284 @@
+{
+  "schemaVersion": "0.4.1",
+  "catalogId": "annual-domain-affinity-v0-4-1",
+  "status": "experimental",
+  "requiresCalibration": true,
+  "fallbackPolicy": {
+    "unmappedStar": "context-only",
+    "unmappedStarFamily": "context-only",
+    "unmappedTransformation": "invalid-knowledge",
+    "unmappedMovingMarker": "context-only"
+  },
+  "records": [
+    {
+      "id": "AFF-TF-LOC",
+      "subject": { "kind": "transformation", "transformation": "Lộc" },
+      "affinities": {
+        "health": 0.15,
+        "family": 0.25,
+        "wealth": 1.0,
+        "career": 0.45,
+        "social": 0.2,
+        "romance": 0.25
+      },
+      "rationale": "Hóa Lộc is the classical prosperity/abundance transformation — dominant for wealth, secondary for career (income-generating activity), weak elsewhere.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-TF-QUYEN",
+      "subject": { "kind": "transformation", "transformation": "Quyền" },
+      "affinities": {
+        "health": 0.15,
+        "family": 0.2,
+        "wealth": 0.45,
+        "career": 1.0,
+        "social": 0.35,
+        "romance": 0.2
+      },
+      "rationale": "Hóa Quyền is the authority/control transformation — dominant for career (positional power), secondary for wealth (leverage over resources).",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-TF-KHOA",
+      "subject": { "kind": "transformation", "transformation": "Khoa" },
+      "affinities": {
+        "health": 0.2,
+        "family": 0.25,
+        "wealth": 0.35,
+        "career": 0.55,
+        "social": 0.45,
+        "romance": 0.3
+      },
+      "rationale": "Hóa Khoa is the reputation/recognition transformation — strongest for career (public standing) and social (goodwill), moderate elsewhere.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-TF-KY",
+      "subject": { "kind": "transformation", "transformation": "Kỵ" },
+      "affinities": {
+        "health": 0.55,
+        "family": 0.35,
+        "wealth": 0.55,
+        "career": 0.7,
+        "social": 0.4,
+        "romance": 0.65
+      },
+      "rationale": "Hóa Kỵ is the obstruction/entanglement transformation — broadly disruptive; strongest observed pressure on career, romance, wealth, health.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-TU-VI",
+      "subject": { "kind": "star", "canonicalStarName": "Tử Vi" },
+      "affinities": {
+        "health": 0.2,
+        "family": 0.4,
+        "wealth": 0.45,
+        "career": 0.85,
+        "social": 0.4,
+        "romance": 0.0
+      },
+      "rationale": "Tử Vi is the solitary-sovereign archetype — strong for career/authority and household headship (family), but classically weak as a spousal/romance indicator; zeroed for romance rather than left at a token low value.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THIEN-PHU",
+      "subject": { "kind": "star", "canonicalStarName": "Thiên Phủ" },
+      "affinities": {
+        "health": 0.3,
+        "family": 0.55,
+        "wealth": 0.8,
+        "career": 0.5,
+        "social": 0.35,
+        "romance": 0.0
+      },
+      "rationale": "Thiên Phủ is the treasury/storehouse archetype — dominant for wealth and family stability (provisioning), no direct romance signification.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THAI-AM",
+      "subject": { "kind": "star", "canonicalStarName": "Thái Âm" },
+      "affinities": {
+        "health": 0.35,
+        "family": 0.55,
+        "wealth": 0.7,
+        "career": 0.0,
+        "social": 0.25,
+        "romance": 0.55
+      },
+      "rationale": "Thái Âm (Moon) governs domestic/emotional life and household wealth — strong family/wealth/romance, no direct career signification (a moving/managing star, not a positional-authority one).",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THAI-DUONG",
+      "subject": { "kind": "star", "canonicalStarName": "Thái Dương" },
+      "affinities": {
+        "health": 0.4,
+        "family": 0.45,
+        "wealth": 0.0,
+        "career": 0.75,
+        "social": 0.55,
+        "romance": 0.35
+      },
+      "rationale": "Thái Dương (Sun) governs public visibility and career standing — strong career/social, no direct wealth-accumulation signification (wealth belongs to Vũ Khúc/Thái Âm in this framework).",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THIEN-CO",
+      "subject": { "kind": "star", "canonicalStarName": "Thiên Cơ" },
+      "affinities": {
+        "health": 0.45,
+        "family": 0.35,
+        "wealth": 0.0,
+        "career": 0.55,
+        "social": 0.4,
+        "romance": 0.3
+      },
+      "rationale": "Thiên Cơ is the strategy/intellect \"moving star\" — governs planning and adaptability (career, health-as-nervous-vitality), no direct wealth-accumulation signification.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THIEN-DONG",
+      "subject": { "kind": "star", "canonicalStarName": "Thiên Đồng" },
+      "affinities": {
+        "health": 0.55,
+        "family": 0.45,
+        "wealth": 0.0,
+        "career": 0.3,
+        "social": 0.35,
+        "romance": 0.4
+      },
+      "rationale": "Thiên Đồng is the contentment/blessing star — strong for health/wellbeing and family harmony, classically a weak-ambition star with no wealth-accumulation signification.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-VU-KHUC",
+      "subject": { "kind": "star", "canonicalStarName": "Vũ Khúc" },
+      "affinities": {
+        "health": 0.25,
+        "family": 0.3,
+        "wealth": 0.9,
+        "career": 0.7,
+        "social": 0.3,
+        "romance": 0.0
+      },
+      "rationale": "Vũ Khúc is the military/finance star — dominant for wealth and career; classically associated with marital solitude (\"widow star\"), zeroed for romance.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THIEN-LUONG",
+      "subject": { "kind": "star", "canonicalStarName": "Thiên Lương" },
+      "affinities": {
+        "health": 0.55,
+        "family": 0.5,
+        "wealth": 0.0,
+        "career": 0.4,
+        "social": 0.35,
+        "romance": 0.3
+      },
+      "rationale": "Thiên Lương is the elder/longevity-protection star — strong for health and family stewardship, no wealth-accumulation signification.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THAT-SAT",
+      "subject": { "kind": "star", "canonicalStarName": "Thất Sát" },
+      "affinities": {
+        "health": 0.45,
+        "family": 0.0,
+        "wealth": 0.4,
+        "career": 0.85,
+        "social": 0.35,
+        "romance": 0.3
+      },
+      "rationale": "Thất Sát is the decisive-general/action star — strong for career and physical vitality (health); classically linked to family distance/separation, zeroed for family.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-PHA-QUAN",
+      "subject": { "kind": "star", "canonicalStarName": "Phá Quân" },
+      "affinities": {
+        "health": 0.4,
+        "family": 0.0,
+        "wealth": 0.45,
+        "career": 0.55,
+        "social": 0.4,
+        "romance": 0.45
+      },
+      "rationale": "Phá Quân is the upheaval/change star — career/wealth swings from disruption, but classically breaks domestic stability, zeroed for family.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THAM-LANG",
+      "subject": { "kind": "star", "canonicalStarName": "Tham Lang" },
+      "affinities": {
+        "health": 0.0,
+        "family": 0.3,
+        "wealth": 0.7,
+        "career": 0.4,
+        "social": 0.55,
+        "romance": 0.85
+      },
+      "rationale": "Tham Lang is the desire/ambition star — dominant for romance and social charisma; classically linked to excess undermining physical health, zeroed for health.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-CU-MON",
+      "subject": { "kind": "star", "canonicalStarName": "Cự Môn" },
+      "affinities": {
+        "health": 0.35,
+        "family": 0.4,
+        "wealth": 0.0,
+        "career": 0.55,
+        "social": 0.7,
+        "romance": 0.45
+      },
+      "rationale": "Cự Môn is the dispute/verbal star — dominant for social friction and communication-driven career effects; a conflict star rather than a wealth-accumulation one, zeroed for wealth.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-LIEM-TRINH",
+      "subject": { "kind": "star", "canonicalStarName": "Liêm Trinh" },
+      "affinities": {
+        "health": 0.0,
+        "family": 0.35,
+        "wealth": 0.45,
+        "career": 0.65,
+        "social": 0.4,
+        "romance": 0.7
+      },
+      "rationale": "Liêm Trinh is the discipline/entanglement star — strong for career and romance complexity; no direct health signification, zeroed.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THIEN-TUONG",
+      "subject": { "kind": "star", "canonicalStarName": "Thiên Tướng" },
+      "affinities": {
+        "health": 0.3,
+        "family": 0.4,
+        "wealth": 0.0,
+        "career": 0.75,
+        "social": 0.55,
+        "romance": 0.35
+      },
+      "rationale": "Thiên Tướng is the supportive-minister star — strong for career (assistance/execution) and social standing; a support role rather than a wealth-accumulation one, zeroed for wealth.",
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    }
+  ]
+}

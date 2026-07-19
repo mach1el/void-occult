@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "0.4.2",
+  "policyId": "annual-evidence-fanout-policy-v0-4-2",
+  "maxNumericDomainsPerPalace": 2,
+  "maxSecondaryOwnershipWeight": 0.4,
+  "unmappedPalaceBehavior": "invalid-knowledge"
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "0.2.0",
+  "catalogId": "annual-axis-school-domain-policy-v0-2",
+  "status": "experimental",
+  "profiles": {
+    "nam-phai": {
+      "domainAnchorCoordinate": "natal-palace-name",
+      "domainAnchorProvenance": "nam-phai-natal-domain-anchor",
+      "primaryAnnualFocus": "small-limit",
+      "secondaryMarkers": ["tai-tue", "annual-palace", "major-fortune-palace"]
+    },
+    "trung-chau": {
+      "domainAnchorCoordinate": "annual-palace-name",
+      "domainAnchorProvenance": "trung-chau-annual-palace-name",
+      "primaryAnnualFocus": "annual-menh",
+      "secondaryMarkers": ["tai-tue"]
+    }
+  }
+}

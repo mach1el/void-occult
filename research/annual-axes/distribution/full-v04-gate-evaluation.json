@@ -1,0 +1,180 @@
+{
+  "profileId": "annual-axes-v0.4",
+  "school": "nam-phai",
+  "chartCount": 100,
+  "yearsPerChart": 12,
+  "resultCount": 1200,
+  "allSixAbove50Rate": 0.4791666666666667,
+  "allSixAbove60Rate": 0,
+  "exactDuplicateVectorRate": 0.01,
+  "meanSD": 0.7343305764224647,
+  "medianRange": 1.8999999999999986,
+  "p10Range": 1.1999999999999957,
+  "medianPerDomainTwelveYearRange": {
+    "health": 1.9000000000000021,
+    "family": 2,
+    "wealth": 1.8000000000000043,
+    "career": 2,
+    "social": 1.8500000000000014,
+    "romance": 1.6499999999999986
+  },
+  "medianAdjacentYearAbsoluteDelta": {
+    "health": 0.5999999999999943,
+    "family": 0.5,
+    "wealth": 0.5,
+    "career": 0.3999999999999986,
+    "social": 0.5,
+    "romance": 0.3999999999999986
+  },
+  "headSensitivity": 0.73,
+  "nearDuplicateVectorRate": 1,
+  "medianNearestNeighborDistance": 0.355871792987411,
+  "unavailableRate": 0,
+  "partialRate": 0,
+  "scoreSummaryByDomain": {
+    "health": {
+      "min": 48.3,
+      "max": 53.8,
+      "mean": 50.88008333333332,
+      "median": 50.9,
+      "p10": 49.7,
+      "p90": 52.1,
+      "standardDeviation": 0.9499633422832461
+    },
+    "family": {
+      "min": 48.5,
+      "max": 54.2,
+      "mean": 51.47066666666661,
+      "median": 51.6,
+      "p10": 50.1,
+      "p90": 52.71000000000002,
+      "standardDeviation": 1.0054013703417801
+    },
+    "wealth": {
+      "min": 48.8,
+      "max": 56.1,
+      "mean": 51.400083333333356,
+      "median": 51.3,
+      "p10": 50.2,
+      "p90": 52.8,
+      "standardDeviation": 1.0487492020479527
+    },
+    "career": {
+      "min": 47.7,
+      "max": 54.7,
+      "mean": 50.87383333333326,
+      "median": 50.9,
+      "p10": 49.6,
+      "p90": 52.1,
+      "standardDeviation": 1.004052824282924
+    },
+    "social": {
+      "min": 48.6,
+      "max": 53.7,
+      "mean": 51.02825000000001,
+      "median": 51.1,
+      "p10": 49.8,
+      "p90": 52.1,
+      "standardDeviation": 0.8893083428188329
+    },
+    "romance": {
+      "min": 47.5,
+      "max": 54.9,
+      "mean": 50.400250000000014,
+      "median": 50.4,
+      "p10": 49,
+      "p90": 51.8,
+      "standardDeviation": 1.1395863950544398
+    }
+  },
+  "interAxisCorrelation": {
+    "health|family": 0.7175680216046483,
+    "health|wealth": 0.35870291064195003,
+    "health|career": 0.35360856317677786,
+    "health|social": 0.5993569399277549,
+    "health|romance": 0.25021342605746366,
+    "family|wealth": 0.5276069000235838,
+    "family|career": 0.4371411273717168,
+    "family|social": 0.7319170380236147,
+    "family|romance": 0.6161836550655313,
+    "wealth|career": 0.8121305645165141,
+    "wealth|social": 0.5220312216561472,
+    "wealth|romance": 0.7223442429361484,
+    "career|social": 0.5949708294417168,
+    "career|romance": 0.697388038223564,
+    "social|romance": 0.5785125038188819
+  },
+  "gatesPassed": false,
+  "gateResults": [
+    {
+      "gateId": "allSixAbove60RateMax",
+      "passed": true,
+      "observed": 0,
+      "threshold": 0.35,
+      "comparator": "<="
+    },
+    {
+      "gateId": "exactDuplicateVectorRateMax",
+      "passed": true,
+      "observed": 0.01,
+      "threshold": 0.01,
+      "comparator": "<="
+    },
+    {
+      "gateId": "nearDuplicateVectorRateMax",
+      "passed": false,
+      "observed": 1,
+      "threshold": 0.05,
+      "comparator": "<="
+    },
+    {
+      "gateId": "meanIntraYearAxisStandardDeviationMin",
+      "passed": false,
+      "observed": 0.7343305764224647,
+      "threshold": 4,
+      "comparator": ">="
+    },
+    {
+      "gateId": "medianIntraYearAxisRangeMin",
+      "passed": false,
+      "observed": 1.8999999999999986,
+      "threshold": 10,
+      "comparator": ">="
+    },
+    {
+      "gateId": "medianPerDomainTwelveYearRangeMin",
+      "passed": false,
+      "observed": 1.6499999999999986,
+      "threshold": 8,
+      "comparator": ">="
+    },
+    {
+      "gateId": "medianAdjacentYearAbsoluteDeltaMin",
+      "passed": false,
+      "observed": 0.3999999999999986,
+      "threshold": 1.5,
+      "comparator": ">="
+    },
+    {
+      "gateId": "annualHeadMoveSensitivityRateMin",
+      "passed": true,
+      "observed": 0.73,
+      "threshold": 0.7,
+      "comparator": ">="
+    },
+    {
+      "gateId": "absoluteInterAxisCorrelationMax",
+      "passed": true,
+      "observed": 0.8121305645165141,
+      "threshold": 0.9,
+      "comparator": "<="
+    },
+    {
+      "gateId": "unavailableRateMax",
+      "passed": true,
+      "observed": 0,
+      "threshold": 0.02,
+      "comparator": "<="
+    }
+  ]
+}

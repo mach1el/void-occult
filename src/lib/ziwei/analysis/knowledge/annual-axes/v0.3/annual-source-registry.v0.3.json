@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "0.3.0",
+  "registryId": "annual-axes-source-registry-v0-3",
+  "status": "incomplete",
+  "sources": [
+    {
+      "sourceId": "SRC-AA-NP-PRIMARY-001",
+      "title": "Tử Vi Đẩu Số Tân Biên",
+      "author": "Vân Đằng Thái Thứ Lang",
+      "edition": "Sài Gòn, 1956",
+      "sourceType": "primary_nam_phai_text",
+      "url": "https://pdfcoffee.com/tu-vi-dau-so-tan-bien-van-dang-thai-thu-lang-pdf-free.html",
+      "locators": [
+        {
+          "printedPage": 248,
+          "section": "Phương pháp luận đoán vận hạn",
+          "claimIds": [
+            "CLM-AA-NP-001",
+            "CLM-AA-NP-002",
+            "CLM-AA-NP-003"
+          ]
+        },
+        {
+          "printedPage": 249,
+          "section": "Liên hệ giữa đại hạn và tiểu hạn",
+          "claimIds": [
+            "CLM-AA-NP-004"
+          ]
+        },
+        {
+          "printedPages": "253-254",
+          "section": "Ảnh hưởng của những sao nhập hạn",
+          "claimIds": [
+            "CLM-AA-NP-005"
+          ]
+        }
+      ],
+      "allowedUsage": [
+        "structural doctrine",
+        "layer separation",
+        "fixture design"
+      ],
+      "prohibitedUsage": [
+        "numeric coefficient authority"
+      ]
+    },
+    {
+      "sourceId": "SRC-AA-CORE-001",
+      "title": "ApexVoid Annual Flow Calculation Core",
+      "sourceType": "internal_calculation_contract",
+      "location": "src/lib/ziwei/annual-flow.ts and engine-nam-phai.ts",
+      "allowedUsage": [
+        "resolved annual-head palace",
+        "resolved Tam Hợp small-limit palace",
+        "resolved Tai Tue palace",
+        "resolved decade palace"
+      ],
+      "prohibitedUsage": [
+        "doctrine authority",
+        "numeric scoring authority"
+      ]
+    },
+    {
+      "sourceId": "SRC-AA-ENG-003",
+      "title": "ApexVoid Annual Axes V0.3 Engineering Model",
+      "sourceType": "internal_architecture",
+      "allowedUsage": [
+        "numeric hypothesis",
+        "calibration",
+        "implementation contract"
+      ],
+      "prohibitedUsage": [
+        "claim as classical formula"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claimId": "CLM-AA-NP-001",
+      "sourceId": "SRC-AA-NP-PRIMARY-001",
+      "summary": "A limit is evaluated through the entered palace, its main star, the native element and stars joining the limit.",
+      "confidence": "conditional-primary-extract"
+    },
+    {
+      "claimId": "CLM-AA-NP-002",
+      "sourceId": "SRC-AA-NP-PRIMARY-001",
+      "summary": "The life field represented by the entered limit palace deserves special attention during that period.",
+      "confidence": "conditional-primary-extract"
+    },
+    {
+      "claimId": "CLM-AA-NP-003",
+      "sourceId": "SRC-AA-NP-PRIMARY-001",
+      "summary": "Decade, one-year moving limit, annual small limit and moving stars are separate inputs to annual judgment.",
+      "confidence": "conditional-primary-extract"
+    },
+    {
+      "claimId": "CLM-AA-NP-004",
+      "sourceId": "SRC-AA-NP-PRIMARY-001",
+      "summary": "The quality of the decade moderates the quality of the one-year limit.",
+      "confidence": "conditional-primary-extract"
+    },
+    {
+      "claimId": "CLM-AA-NP-005",
+      "sourceId": "SRC-AA-NP-PRIMARY-001",
+      "summary": "Stars entering a one-year limit express their effects within that year, with timing differences by star class.",
+      "confidence": "conditional-primary-extract"
+    },
+    {
+      "claimId": "CLM-AA-ENG-301",
+      "sourceId": "SRC-AA-ENG-003",
+      "summary": "Annual head/local routing and every numeric coefficient are experimental engineering hypotheses.",
+      "confidence": "experimental"
+    }
+  ]
+}

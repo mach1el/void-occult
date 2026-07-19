@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "0.4.0",
+  "profileId": "annual-channel-profile-v0-4",
+  "status": "experimental",
+  "requiresCalibration": true,
+  "channelWeights": {
+    "globalAnnualClimate": 0.1,
+    "routedHeadImpact": 0.35,
+    "directDomainImpact": 0.45,
+    "majorFortuneBackground": 0.1
+  },
+  "routing": {
+    "headFrameRoleWeights": {
+      "focus": 1.0,
+      "opposite": 0.8,
+      "trine": 0.7,
+      "outside": 0.0
+    },
+    "exponent": 1.25,
+    "min": 0.0,
+    "max": 1.0,
+    "floor": 0.0
+  },
+  "pathCombination": {
+    "policy": "strongest-plus-discounted-rest",
+    "restDiscount": 0.35,
+    "maxPathsCounted": 3
+  },
+  "globalEligibility": {
+    "annualMovingStarMarkerIds": [],
+    "notes": "Empty = no star is treated as global by default; Tứ Hóa are never global."
+  }
+}

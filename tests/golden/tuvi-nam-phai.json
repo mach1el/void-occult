@@ -1402,6 +1402,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[6]"
         },
@@ -3671,6 +3674,9 @@
         "smallLimitDirection": "nghịch",
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[3]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[6]"
@@ -5942,6 +5948,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[11]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[7]"
         },
@@ -8211,6 +8220,9 @@
         "smallLimitDirection": "nghịch",
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[1]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[6]"
@@ -10482,6 +10494,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[0]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[6]"
         },
@@ -12751,6 +12766,9 @@
         "smallLimitDirection": "nghịch",
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[2]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[6]"
@@ -15022,6 +15040,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[1]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[6]"
         },
@@ -17290,6 +17311,9 @@
         },
         "smallLimitDirection": "nghịch",
         "taiTuePalace": {
+          "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
           "$ref": "$.palaces[4]"
         },
         "monthStartPalace": {
@@ -19562,6 +19586,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[6]"
         },
@@ -21832,6 +21859,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[5]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[6]"
         },
@@ -24100,6 +24130,9 @@
         },
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
+          "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
           "$ref": "$.palaces[4]"
         },
         "monthStartPalace": {
@@ -26372,6 +26405,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[6]"
         },
@@ -28641,6 +28677,9 @@
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[1]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[3]"
@@ -30912,6 +30951,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[0]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[4]"
         },
@@ -33181,6 +33223,9 @@
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[0]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[5]"
@@ -35452,6 +35497,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[6]"
         },
@@ -37721,6 +37769,9 @@
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[7]"
@@ -39992,6 +40043,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[8]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[8]"
         },
@@ -42260,6 +42314,9 @@
         },
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
+          "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
           "$ref": "$.palaces[4]"
         },
         "monthStartPalace": {
@@ -44532,6 +44589,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[10]"
         },
@@ -46801,6 +46861,9 @@
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[3]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[11]"
@@ -49072,6 +49135,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[6]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[0]"
         },
@@ -51341,6 +51407,9 @@
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[2]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[1]"
@@ -53612,6 +53681,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[3]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[2]"
         },
@@ -55881,6 +55953,9 @@
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[8]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[3]"
@@ -58152,6 +58227,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[1]"
         },
@@ -60421,6 +60499,9 @@
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[6]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[11]"
@@ -62692,6 +62773,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[10]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[8]"
         },
@@ -64962,6 +65046,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[3]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[1]"
         },
@@ -67230,6 +67317,9 @@
         },
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
+          "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
           "$ref": "$.palaces[4]"
         },
         "monthStartPalace": {
@@ -69502,6 +69592,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[6]"
         },
@@ -71770,6 +71863,9 @@
         },
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
+          "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
           "$ref": "$.palaces[4]"
         },
         "monthStartPalace": {
@@ -74042,6 +74138,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[2]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[7]"
         },
@@ -76310,6 +76409,9 @@
         },
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
+          "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
           "$ref": "$.palaces[4]"
         },
         "monthStartPalace": {
@@ -78582,6 +78684,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[6]"
         },
@@ -80851,6 +80956,9 @@
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[3]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[8]"
@@ -83122,6 +83230,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[9]"
         },
@@ -85389,6 +85500,9 @@
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
           "$ref": "$.palaces[0]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[8]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[0]"
@@ -87660,6 +87774,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[11]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[4]"
         },
@@ -89929,6 +90046,9 @@
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
           "$ref": "$.palaces[10]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[3]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[10]"
@@ -92200,6 +92320,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[6]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[6]"
         },
@@ -94469,6 +94592,9 @@
         "smallLimitDirection": "nghịch",
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[2]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[0]"
@@ -96740,6 +96866,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[6]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[8]"
         },
@@ -99009,6 +99138,9 @@
         "smallLimitDirection": "thuận",
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
         },
         "monthStartPalace": {
           "$ref": "$.palaces[5]"
@@ -101280,6 +101412,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[1]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[5]"
         },
@@ -103550,6 +103685,9 @@
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
+        },
         "monthStartPalace": {
           "$ref": "$.palaces[5]"
         },
@@ -105818,6 +105956,9 @@
         },
         "smallLimitDirection": "nghịch",
         "taiTuePalace": {
+          "$ref": "$.palaces[4]"
+        },
+        "annualHeadPalace": {
           "$ref": "$.palaces[4]"
         },
         "monthStartPalace": {

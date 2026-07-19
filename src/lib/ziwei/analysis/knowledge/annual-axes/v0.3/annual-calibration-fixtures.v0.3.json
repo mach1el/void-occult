@@ -1,0 +1,342 @@
+{
+  "schemaVersion": "0.3.0",
+  "fixtureSetId": "annual-axes-head-centric-calibration-v0-3",
+  "status": "synthetic_golden",
+  "formulaProfileId": "annual-axes-nam-phai-head-centric-v0-3",
+  "formulaCases": [
+    {
+      "fixtureId": "AA03-CAL-001",
+      "label": "neutral",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 0,
+        "stability": 0,
+        "activation": 0
+      },
+      "expected": {
+        "score": 50.0,
+        "intensity": 0,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.0,
+          "pressure": 0.0,
+          "stability": 0.0,
+          "activation": 0.0
+        }
+      }
+    },
+    {
+      "fixtureId": "AA03-CAL-002",
+      "label": "head-routing-activation-only",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 0,
+        "stability": 0,
+        "activation": 1.2
+      },
+      "expected": {
+        "score": 50.0,
+        "intensity": 33,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.0,
+          "pressure": 0.0,
+          "stability": 0.0,
+          "activation": 0.32968
+        }
+      }
+    },
+    {
+      "fixtureId": "AA03-CAL-003",
+      "label": "moderate-support",
+      "rawAxes": {
+        "support": 2,
+        "pressure": 0,
+        "stability": 0.5,
+        "activation": 2
+      },
+      "expected": {
+        "score": 62.1,
+        "intensity": 49,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.486583,
+          "pressure": 0.0,
+          "stability": 0.16514,
+          "activation": 0.486583
+        }
+      }
+    },
+    {
+      "fixtureId": "AA03-CAL-004",
+      "label": "strong-support",
+      "rawAxes": {
+        "support": 5,
+        "pressure": 0,
+        "stability": 1,
+        "activation": 4
+      },
+      "expected": {
+        "score": 74.4,
+        "intensity": 74,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.811124,
+          "pressure": 0.0,
+          "stability": 0.321513,
+          "activation": 0.736403
+        }
+      }
+    },
+    {
+      "fixtureId": "AA03-CAL-005",
+      "label": "moderate-pressure",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 2,
+        "stability": -0.5,
+        "activation": 2
+      },
+      "expected": {
+        "score": 37.9,
+        "intensity": 49,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.0,
+          "pressure": 0.486583,
+          "stability": -0.16514,
+          "activation": 0.486583
+        }
+      }
+    },
+    {
+      "fixtureId": "AA03-CAL-006",
+      "label": "strong-pressure",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 5,
+        "stability": -1,
+        "activation": 4
+      },
+      "expected": {
+        "score": 25.6,
+        "intensity": 74,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.0,
+          "pressure": 0.811124,
+          "stability": -0.321513,
+          "activation": 0.736403
+        }
+      }
+    },
+    {
+      "fixtureId": "AA03-CAL-007",
+      "label": "high-conflict",
+      "rawAxes": {
+        "support": 4,
+        "pressure": 4,
+        "stability": 0,
+        "activation": 5
+      },
+      "expected": {
+        "score": 50.0,
+        "intensity": 81,
+        "conflict": 60,
+        "normalizedAxes": {
+          "support": 0.736403,
+          "pressure": 0.736403,
+          "stability": 0.0,
+          "activation": 0.811124
+        }
+      }
+    },
+    {
+      "fixtureId": "AA03-CAL-008",
+      "label": "balanced-with-stability",
+      "rawAxes": {
+        "support": 2,
+        "pressure": 2,
+        "stability": 2,
+        "activation": 3
+      },
+      "expected": {
+        "score": 54.7,
+        "intensity": 63,
+        "conflict": 31,
+        "normalizedAxes": {
+          "support": 0.486583,
+          "pressure": 0.486583,
+          "stability": 0.582783,
+          "activation": 0.632121
+        }
+      }
+    },
+    {
+      "fixtureId": "AA03-CAL-009",
+      "label": "annual-loc-like",
+      "rawAxes": {
+        "support": 1,
+        "pressure": 0,
+        "stability": 0.1,
+        "activation": 0.7
+      },
+      "expected": {
+        "score": 54.5,
+        "intensity": 21,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.283469,
+          "pressure": 0.0,
+          "stability": 0.033321,
+          "activation": 0.20811
+        }
+      }
+    },
+    {
+      "fixtureId": "AA03-CAL-010",
+      "label": "annual-ky-like",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 1,
+        "stability": -0.75,
+        "activation": 0.8
+      },
+      "expected": {
+        "score": 44.3,
+        "intensity": 23,
+        "conflict": 0,
+        "normalizedAxes": {
+          "support": 0.0,
+          "pressure": 0.283469,
+          "stability": -0.244919,
+          "activation": 0.234072
+        }
+      }
+    }
+  ],
+  "routingFixtures": [
+    {
+      "fixtureId": "AA03-ROUTE-DAU-TU-TUC",
+      "description": "Synthetic Nam Phái annual head at Dậu / Tử Tức; opposite Mão / Điền Trạch; trines Sửu / Phụ Mẫu and Tỵ / Nô Bộc.",
+      "headFrame": {
+        "focus": {
+          "branch": "Dậu",
+          "natalPalaceName": "Tử Tức"
+        },
+        "opposite": {
+          "branch": "Mão",
+          "natalPalaceName": "Điền Trạch"
+        },
+        "trines": [
+          {
+            "branch": "Sửu",
+            "natalPalaceName": "Phụ Mẫu"
+          },
+          {
+            "branch": "Tỵ",
+            "natalPalaceName": "Nô Bộc"
+          }
+        ]
+      },
+      "expectedDomains": [
+        {
+          "domain": "health",
+          "routing": 0.0,
+          "headShare": 0.55,
+          "localShare": 0.45
+        },
+        {
+          "domain": "family",
+          "routing": 0.53,
+          "headShare": 0.6825,
+          "localShare": 0.3175
+        },
+        {
+          "domain": "wealth",
+          "routing": 0.12,
+          "headShare": 0.58,
+          "localShare": 0.42
+        },
+        {
+          "domain": "career",
+          "routing": 0.07,
+          "headShare": 0.5675,
+          "localShare": 0.4325
+        },
+        {
+          "domain": "social",
+          "routing": 0.35,
+          "headShare": 0.6375,
+          "localShare": 0.3625
+        },
+        {
+          "domain": "romance",
+          "routing": 0.1,
+          "headShare": 0.575,
+          "localShare": 0.425
+        }
+      ]
+    }
+  ],
+  "behavioralFixtures": [
+    {
+      "fixtureId": "AA03-BEH-001",
+      "description": "Annual head is resolved from annualHeadPalace / unique isLuuNienDaiVan, never from smallLimitPalace.",
+      "expected": {
+        "primaryField": "annualHeadPalace"
+      }
+    },
+    {
+      "fixtureId": "AA03-BEH-002",
+      "description": "Changing only smallLimitPalace does not change annual head identity.",
+      "expected": {
+        "annualHeadUnchanged": true
+      }
+    },
+    {
+      "fixtureId": "AA03-BEH-003",
+      "description": "Changing annual head changes routing and at least one axis intensity.",
+      "expected": {
+        "routingChanged": true
+      }
+    },
+    {
+      "fixtureId": "AA03-BEH-004",
+      "description": "Annual-head structural evidence changes activation only.",
+      "expected": {
+        "supportDelta": 0,
+        "pressureDelta": 0,
+        "stabilityDelta": 0
+      }
+    },
+    {
+      "fixtureId": "AA03-BEH-005",
+      "description": "A physical star in both head and local frames produces one evidence item using convex channel blend.",
+      "expected": {
+        "numericEvidenceCount": 1
+      }
+    },
+    {
+      "fixtureId": "AA03-BEH-006",
+      "description": "Trung Châu V0.2 locked numeric result remains byte-identical.",
+      "expected": {
+        "byteIdentical": true
+      }
+    },
+    {
+      "fixtureId": "AA03-BEH-007",
+      "description": "No previous Palace Overview, Major Fortune or Monthly Flow score is read.",
+      "expected": {
+        "previousScoreReadCount": 0
+      }
+    },
+    {
+      "fixtureId": "AA03-BEH-008",
+      "description": "Activation-only annual head leaves quality score exactly neutral.",
+      "expected": {
+        "score": 50.0
+      }
+    }
+  ]
+}

@@ -908,6 +908,8 @@ function buildChartData(input: BirthInput): ChartData {
     const target = palaces[luuNienDaiVanIndex];
     if (target) target.isLuuNienDaiVan = true;
   }
+  const annualHeadPalace =
+    luuNienDaiVanIndex != null ? palaces[luuNienDaiVanIndex] ?? null : null;
 
   const flowBase = (input.flowBase || "luu-nien") as AnnualViewMode;
   const adjustedMonth = adjustedLunarMonth(month, day, lunar.leap);
@@ -978,6 +980,7 @@ function buildChartData(input: BirthInput): ChartData {
     cucMenhRelation, cuc, starts, direction, directionSign, yearPolarity,
     palaces, majorFortunePalace, annualPalace:taiTuePalace,
     smallLimitPalace:null, smallLimitStartPalace:null, smallLimitDirection:"",
+    annualHeadPalace,
     taiTuePalace, monthStartPalace:annualFlow.monthStartPalace,
     monthlyPalaces:annualFlow.months, annualMonthSeed:annualFlow.adjustedMonth,
     natalMutagens, majorMutagens, annualMutagens, annualStars, phiFlows, voidMarkers, starCount

@@ -20,6 +20,12 @@ interface CollectFocalEvidenceInput {
   school: ZiweiSchool;
   annualKnowledge: AnnualAxesKnowledgeV0;
   diagnostics: AnnualAxesDiagnostics;
+  /** V0.2 — when the school's primary annual focus is `small-limit`
+   * (Nam Phái), suppress the small-limit focal-marker collection here so
+   * the annual-focus overlay in `collect-annual-focus-evidence` is the
+   * sole owner of that palace's activation contribution. Prevents
+   * double-counting the Tiểu Hạn palace's activation. */
+  suppressSmallLimitFocal?: boolean;
 }
 
 interface MarkerHit {
@@ -40,12 +46,13 @@ interface MarkerHit {
  * IDs resolve to the exact same physical palace.
  */
 export function collectFocalEvidence(input: CollectFocalEvidenceInput): AnnualAxisEvidence[] {
-  const { chart, domain, frames, school, annualKnowledge, diagnostics } = input;
+  const { chart, domain, frames, school, annualKnowledge, diagnostics, suppressSmallLimitFocal } = input;
   const out: AnnualAxisEvidence[] = [];
 
   const schoolProfile = annualKnowledge.scoringProfile.schoolProfiles[school];
   const enabled = new Set(schoolProfile?.enabledFocalMarkers ?? []);
   const forbidden = new Set(schoolProfile?.forbiddenFocalMarkers ?? []);
+  if (suppressSmallLimitFocal) enabled.delete("small-limit");
 
   for (const frame of frames) {
     const hitsByPalace = new Map<number, MarkerHit[]>();

@@ -1,6 +1,7 @@
 import type { ChartData, ChartPalace } from "@/types/chart";
 import type { AnnualAxisDomain } from "../../contracts/annual-axes";
 import type { AnnualAxisDefinitionsCatalog } from "../../knowledge/annual-axes";
+import type { ResolvedDomainAnchor } from "./resolvers/types";
 import type { AnnualAxesDiagnostics, AnnualAxisFrameRole } from "./types";
 
 export interface AnnualFrameNode {
@@ -16,8 +17,14 @@ export interface AnnualFrameNode {
 }
 
 export interface AnnualDomainAnchorFrame {
-  /** The annual-palace label this anchor is defined against (never natal palace.name). */
+  /** The axis-definition label this anchor is defined against. For Nam
+   * Phái this equals the anchor palace's natal `palace.name`; for Trung
+   * Châu it equals the anchor palace's `annualPalaceName`. Never a
+   * different-school fallback. */
   anchorPalaceName: string;
+  /** Which resolver produced this anchor — `nam-phai-natal-domain-anchor`
+   * or `trung-chau-annual-palace-name`. */
+  anchorProvenance: string;
   domainAnchorWeight: number;
   nodes: AnnualFrameNode[];
 }
@@ -36,38 +43,36 @@ function toFrameNode(
 }
 
 /**
- * Resolve one domain's anchor frames. Anchors are matched against
- * `palace.annualPalaceName` — the already-resolved annual label — never
- * against natal `palace.name`. Missing annual structure produces a
- * diagnostic and that anchor is skipped (not silently substituted).
+ * Build TP4C frames for one domain from *pre-resolved* anchors (produced
+ * by a school-specific `AnnualAxisDomainResolver`). Frame geometry
+ * (opposite = index+6 mod 12, trines = index+4, index+8 mod 12) is
+ * identical for both schools — the only school-specific step is anchor
+ * resolution, which happens upstream.
  *
- * Frame geometry per the mission spec: opposite = index+6 mod 12,
- * trines = index+4 and index+8 mod 12. Pure index arithmetic — equivalent
- * to the Palace Overview frame geometry helper given this codebase's fixed
- * branch↔index correspondence, but implemented literally per spec rather
- * than reusing the natal-facing helper (which takes a branch string).
+ * Missing physical palaces at any TP4C offset raise a diagnostic and skip
+ * that node; the anchor itself always exists (the resolver guarantees a
+ * concrete `palaceIndex`).
  */
 export function collectDomainAnchorFrames(
   chart: ChartData,
-  domainDefinition: { domain: AnnualAxisDomain; anchors: Array<{ annualPalaceName: string; weight: number }> },
+  domain: AnnualAxisDomain,
+  resolvedAnchors: ResolvedDomainAnchor[],
   diagnostics: AnnualAxesDiagnostics,
 ): AnnualDomainAnchorFrame[] {
   const frames: AnnualDomainAnchorFrame[] = [];
 
-  for (const anchor of domainDefinition.anchors) {
-    const anchorPalace = chart.palaces.find(
-      (p) => p.annualPalaceName === anchor.annualPalaceName,
-    );
+  for (const anchor of resolvedAnchors) {
+    const anchorPalace = chart.palaces.find((p) => p.index === anchor.palaceIndex);
     if (!anchorPalace) {
       diagnostics.missingAnnualPalaceNames.push(
-        `${domainDefinition.domain}:${anchor.annualPalaceName}`,
+        `${domain}:${anchor.annualPalaceName}:missing-index-${anchor.palaceIndex}`,
       );
       continue;
     }
 
-    const oppositeIndex = (anchorPalace.index + 6) % 12;
-    const trineIndexA = (anchorPalace.index + 4) % 12;
-    const trineIndexB = (anchorPalace.index + 8) % 12;
+    const oppositeIndex = (anchor.palaceIndex + 6) % 12;
+    const trineIndexA = (anchor.palaceIndex + 4) % 12;
+    const trineIndexB = (anchor.palaceIndex + 8) % 12;
 
     const nodes: AnnualFrameNode[] = [toFrameNode(anchorPalace, "focus")];
     const opposite = chart.palaces.find((p) => p.index === oppositeIndex);
@@ -79,6 +84,7 @@ export function collectDomainAnchorFrames(
 
     frames.push({
       anchorPalaceName: anchor.annualPalaceName,
+      anchorProvenance: anchor.provenance,
       domainAnchorWeight: anchor.weight,
       nodes,
     });
@@ -90,14 +96,14 @@ export function collectDomainAnchorFrames(
 export function collectAllDomainFrames(
   chart: ChartData,
   axisDefinitions: AnnualAxisDefinitionsCatalog,
+  anchorsByDomain: Map<AnnualAxisDomain, ResolvedDomainAnchor[]>,
   diagnostics: AnnualAxesDiagnostics,
 ): Map<AnnualAxisDomain, AnnualDomainAnchorFrame[]> {
   const map = new Map<AnnualAxisDomain, AnnualDomainAnchorFrame[]>();
   for (const domainDefinition of axisDefinitions.domains) {
-    map.set(
-      domainDefinition.domain,
-      collectDomainAnchorFrames(chart, domainDefinition, diagnostics),
-    );
+    const domain = domainDefinition.domain as AnnualAxisDomain;
+    const resolved = anchorsByDomain.get(domain) ?? [];
+    map.set(domain, collectDomainAnchorFrames(chart, domain, resolved, diagnostics));
   }
   return map;
 }

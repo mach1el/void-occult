@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "0.3.0",
+  "profileId": "annual-routing-head-centric-v0-3",
+  "status": "experimental",
+  "requiresCalibration": true,
+  "headFrameRoleWeights": {
+    "focus": 1.0,
+    "opposite": 0.8,
+    "trine": 0.7,
+    "outside": 0.0
+  },
+  "localDomainFrameRoleWeights": {
+    "focus": 1.0,
+    "opposite": 0.75,
+    "trine": 0.65,
+    "outside": 0.0
+  },
+  "routing": {
+    "expression": "sum(anchorWeight * headRelationWeight(anchorPhysicalPalace))",
+    "min": 0.0,
+    "max": 1.0,
+    "duplicateAnchorBehavior": "reject_invalid_catalog"
+  },
+  "channelBlend": {
+    "headShareFloor": 0.55,
+    "headShareRange": 0.25,
+    "headShareExpression": "headShareFloor + headShareRange * routing",
+    "localShareExpression": "1 - headShare",
+    "combinedPhysicalFactGeometryExpression": "headShare * headChannelWeight + localShare * localChannelWeight",
+    "samePhysicalFactBehavior": "one_evidence_item_convex_channel_blend"
+  },
+  "structuralActivation": {
+    "baseRaw": 0.8,
+    "routingRangeRaw": 0.7,
+    "expression": "baseRaw + routingRangeRaw * routing",
+    "axesAffected": [
+      "activation"
+    ],
+    "supportDelta": 0.0,
+    "pressureDelta": 0.0,
+    "stabilityDelta": 0.0
+  }
+}

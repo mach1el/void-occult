@@ -9,3 +9,4 @@ export {
   type AnnualKnowledgeValidationIssue,
   type AnnualKnowledgeValidationResult,
 } from "./validate";
+export { deepFreeze } from "./deep-freeze";

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "0.3.0",
+  "catalogId": "annual-head-policy-v0-3",
+  "status": "experimental",
+  "terminology": {
+    "productLabelVi": "Lưu Tiểu Hạn",
+    "technicalId": "annual-head",
+    "notes": "The product label is mapped explicitly to the one-year palace moving inside the active decade. Do not infer from variable names."
+  },
+  "profiles": {
+    "nam-phai": {
+      "primaryAnnualHead": {
+        "preferredChartField": "annualHeadPalace",
+        "calculationFact": "getAnnualMajorFortuneIndex / unique isLuuNienDaiVan palace",
+        "legacyRuntimeFlag": "isLuuNienDaiVan",
+        "mustNotUseAsPrimary": [
+          "smallLimitPalace",
+          "taiTuePalace",
+          "annualPalace"
+        ],
+        "missingBehavior": "module_partial_or_unavailable_with_typed_diagnostic"
+      },
+      "secondaryCoordinates": [
+        {
+          "id": "tam-hop-small-limit",
+          "chartField": "smallLimitPalace",
+          "role": "secondary_annual_context"
+        },
+        {
+          "id": "tai-tue",
+          "chartField": "taiTuePalace",
+          "role": "external_calendar_context"
+        },
+        {
+          "id": "major-fortune",
+          "chartField": "majorFortunePalace",
+          "role": "decade_background"
+        }
+      ]
+    },
+    "trung-chau": {
+      "primaryAnnualHead": {
+        "calculationFact": "physical palace with annualPalaceName = Mệnh",
+        "mustNotUseAsPrimary": [
+          "smallLimitPalace"
+        ],
+        "missingBehavior": "module_partial_or_unavailable_with_typed_diagnostic"
+      },
+      "numericCompatibility": "preserve V0.2 byte-identical results in this PR"
+    }
+  },
+  "noCrossSchoolFallback": true
+}

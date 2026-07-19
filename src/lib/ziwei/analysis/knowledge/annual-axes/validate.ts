@@ -146,5 +146,69 @@ export function validateAnnualAxesKnowledge(
     }
   }
 
+  // School domain policy V0.2 — must cover both schools with legal enums.
+  const policy = knowledge.schoolDomainPolicy;
+  if (!policy || !policy.profiles) {
+    issues.push({
+      path: "schoolDomainPolicy",
+      message: "missing school domain policy catalog",
+    });
+  } else {
+    const allowedCoordinates = new Set(["natal-palace-name", "annual-palace-name"]);
+    const allowedFocusModes = new Set(["small-limit", "annual-menh"]);
+    for (const school of ["nam-phai", "trung-chau"] as const) {
+      const profile = policy.profiles[school];
+      if (!profile) {
+        issues.push({
+          path: `schoolDomainPolicy.profiles.${school}`,
+          message: `missing policy profile for ${school}`,
+        });
+        continue;
+      }
+      if (!allowedCoordinates.has(profile.domainAnchorCoordinate)) {
+        issues.push({
+          path: `schoolDomainPolicy.profiles.${school}`,
+          message: `invalid domainAnchorCoordinate: ${profile.domainAnchorCoordinate}`,
+        });
+      }
+      if (!allowedFocusModes.has(profile.primaryAnnualFocus)) {
+        issues.push({
+          path: `schoolDomainPolicy.profiles.${school}`,
+          message: `invalid primaryAnnualFocus: ${profile.primaryAnnualFocus}`,
+        });
+      }
+      if (
+        typeof profile.domainAnchorProvenance !== "string" ||
+        profile.domainAnchorProvenance.length === 0
+      ) {
+        issues.push({
+          path: `schoolDomainPolicy.profiles.${school}`,
+          message: "domainAnchorProvenance must be a non-empty string",
+        });
+      }
+    }
+    // Nam Phái must use natal-palace-name coordinate; Trung Châu must use
+    // annual-palace-name — hard-lock the two known correct pairings so a
+    // future edit to the JSON cannot silently swap the resolvers.
+    if (
+      policy.profiles["nam-phai"] &&
+      policy.profiles["nam-phai"].domainAnchorCoordinate !== "natal-palace-name"
+    ) {
+      issues.push({
+        path: "schoolDomainPolicy.profiles.nam-phai",
+        message: "nam-phai domainAnchorCoordinate must be natal-palace-name",
+      });
+    }
+    if (
+      policy.profiles["trung-chau"] &&
+      policy.profiles["trung-chau"].domainAnchorCoordinate !== "annual-palace-name"
+    ) {
+      issues.push({
+        path: "schoolDomainPolicy.profiles.trung-chau",
+        message: "trung-chau domainAnchorCoordinate must be annual-palace-name",
+      });
+    }
+  }
+
   return { ok: issues.length === 0, issues };
 }

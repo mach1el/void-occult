@@ -1,0 +1,278 @@
+{
+  "schemaVersion": "0.4.0",
+  "catalogId": "annual-domain-affinity-v0-4",
+  "status": "experimental",
+  "requiresCalibration": true,
+  "categoryDefaults": {
+    "star": {
+      "health": 0.25,
+      "family": 0.25,
+      "wealth": 0.25,
+      "career": 0.25,
+      "social": 0.25,
+      "romance": 0.25
+    },
+    "mutagen": {
+      "health": 0.2,
+      "family": 0.2,
+      "wealth": 0.35,
+      "career": 0.35,
+      "social": 0.2,
+      "romance": 0.2
+    }
+  },
+  "records": [
+    {
+      "id": "AFF-TF-LOC",
+      "subject": { "kind": "transformation", "transformation": "Lộc" },
+      "affinities": {
+        "health": 0.15,
+        "family": 0.25,
+        "wealth": 1.0,
+        "career": 0.45,
+        "social": 0.2,
+        "romance": 0.25
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-TF-QUYEN",
+      "subject": { "kind": "transformation", "transformation": "Quyền" },
+      "affinities": {
+        "health": 0.15,
+        "family": 0.2,
+        "wealth": 0.45,
+        "career": 1.0,
+        "social": 0.35,
+        "romance": 0.2
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-TF-KHOA",
+      "subject": { "kind": "transformation", "transformation": "Khoa" },
+      "affinities": {
+        "health": 0.2,
+        "family": 0.25,
+        "wealth": 0.35,
+        "career": 0.55,
+        "social": 0.45,
+        "romance": 0.3
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-TF-KY",
+      "subject": { "kind": "transformation", "transformation": "Kỵ" },
+      "affinities": {
+        "health": 0.55,
+        "family": 0.35,
+        "wealth": 0.55,
+        "career": 0.7,
+        "social": 0.4,
+        "romance": 0.65
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-TU-VI",
+      "subject": { "kind": "star", "canonicalStarName": "Tử Vi" },
+      "affinities": {
+        "health": 0.35,
+        "family": 0.4,
+        "wealth": 0.45,
+        "career": 0.85,
+        "social": 0.4,
+        "romance": 0.35
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THIEN-PHU",
+      "subject": { "kind": "star", "canonicalStarName": "Thiên Phủ" },
+      "affinities": {
+        "health": 0.3,
+        "family": 0.55,
+        "wealth": 0.8,
+        "career": 0.5,
+        "social": 0.35,
+        "romance": 0.3
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THAI-AM",
+      "subject": { "kind": "star", "canonicalStarName": "Thái Âm" },
+      "affinities": {
+        "health": 0.35,
+        "family": 0.55,
+        "wealth": 0.7,
+        "career": 0.3,
+        "social": 0.25,
+        "romance": 0.55
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THAI-DUONG",
+      "subject": { "kind": "star", "canonicalStarName": "Thái Dương" },
+      "affinities": {
+        "health": 0.4,
+        "family": 0.45,
+        "wealth": 0.35,
+        "career": 0.75,
+        "social": 0.55,
+        "romance": 0.35
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THIEN-CO",
+      "subject": { "kind": "star", "canonicalStarName": "Thiên Cơ" },
+      "affinities": {
+        "health": 0.45,
+        "family": 0.35,
+        "wealth": 0.3,
+        "career": 0.55,
+        "social": 0.4,
+        "romance": 0.3
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THIEN-DONG",
+      "subject": { "kind": "star", "canonicalStarName": "Thiên Đồng" },
+      "affinities": {
+        "health": 0.55,
+        "family": 0.45,
+        "wealth": 0.25,
+        "career": 0.3,
+        "social": 0.35,
+        "romance": 0.4
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-VU-KHUC",
+      "subject": { "kind": "star", "canonicalStarName": "Vũ Khúc" },
+      "affinities": {
+        "health": 0.25,
+        "family": 0.3,
+        "wealth": 0.9,
+        "career": 0.7,
+        "social": 0.3,
+        "romance": 0.25
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THIEN-LUONG",
+      "subject": { "kind": "star", "canonicalStarName": "Thiên Lương" },
+      "affinities": {
+        "health": 0.55,
+        "family": 0.5,
+        "wealth": 0.3,
+        "career": 0.4,
+        "social": 0.35,
+        "romance": 0.3
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THAT-SAT",
+      "subject": { "kind": "star", "canonicalStarName": "Thất Sát" },
+      "affinities": {
+        "health": 0.45,
+        "family": 0.3,
+        "wealth": 0.4,
+        "career": 0.85,
+        "social": 0.35,
+        "romance": 0.3
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-PHA-QUAN",
+      "subject": { "kind": "star", "canonicalStarName": "Phá Quân" },
+      "affinities": {
+        "health": 0.4,
+        "family": 0.35,
+        "wealth": 0.45,
+        "career": 0.55,
+        "social": 0.4,
+        "romance": 0.45
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THAM-LANG",
+      "subject": { "kind": "star", "canonicalStarName": "Tham Lang" },
+      "affinities": {
+        "health": 0.25,
+        "family": 0.3,
+        "wealth": 0.7,
+        "career": 0.4,
+        "social": 0.55,
+        "romance": 0.85
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-CU-MON",
+      "subject": { "kind": "star", "canonicalStarName": "Cự Môn" },
+      "affinities": {
+        "health": 0.35,
+        "family": 0.4,
+        "wealth": 0.3,
+        "career": 0.55,
+        "social": 0.7,
+        "romance": 0.45
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-LIEM-TRINH",
+      "subject": { "kind": "star", "canonicalStarName": "Liêm Trinh" },
+      "affinities": {
+        "health": 0.35,
+        "family": 0.35,
+        "wealth": 0.45,
+        "career": 0.65,
+        "social": 0.4,
+        "romance": 0.7
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    },
+    {
+      "id": "AFF-STAR-THIEN-TUONG",
+      "subject": { "kind": "star", "canonicalStarName": "Thiên Tướng" },
+      "affinities": {
+        "health": 0.3,
+        "family": 0.4,
+        "wealth": 0.35,
+        "career": 0.75,
+        "social": 0.55,
+        "romance": 0.35
+      },
+      "sourceIds": ["SRC-AA-ENG-004"],
+      "knowledgeStatus": "experimental"
+    }
+  ]
+}

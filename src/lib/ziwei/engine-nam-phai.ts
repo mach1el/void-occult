@@ -807,9 +807,13 @@ function buildChartData(input: BirthInput): ChartData {
   const smallLimit = assignSmallLimits(palaces, yearBranch, input.gender, nominalAge);
   // Lưu niên đại vận (zigzag trong đại vận) — cung vận của năm xem.
   const luuNienDaiVanIndex = getLNDVBase(majorFortunePalace, nominalAge, directionSign) ?? (smallLimit.palace ? smallLimit.palace.index : null);
+  let annualHeadPalace: Palace | null = null;
   if(luuNienDaiVanIndex != null) {
     const target = palaces[luuNienDaiVanIndex];
-    if (target) target.isLuuNienDaiVan = true;
+    if (target) {
+      target.isLuuNienDaiVan = true;
+      annualHeadPalace = target;
+    }
   }
 
   // Khởi tháng (lưu nguyệt). input.flowBase là string thô từ form (xem BirthInput);
@@ -860,6 +864,7 @@ function buildChartData(input: BirthInput): ChartData {
     palaces, majorFortunePalace, annualPalace:smallLimit.palace,
     smallLimitPalace:smallLimit.palace, smallLimitStartPalace:smallLimit.startPalace,
     smallLimitDirection:smallLimit.direction, taiTuePalace:annualFlow.taiTuePalace,
+    annualHeadPalace,
     monthStartPalace:annualFlow.monthStartPalace, monthlyPalaces:annualFlow.months,
     annualMonthSeed:annualFlow.adjustedMonth,
     natalMutagens, annualMutagens, annualStars, phiFlows, voidMarkers, starCount

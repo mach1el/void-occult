@@ -236,6 +236,31 @@ export interface AnnualCalibrationFixtures {
   behavioralFixtures: AnnualBehavioralFixture[];
 }
 
+export type AnnualDomainAnchorCoordinate =
+  | "natal-palace-name"
+  | "annual-palace-name";
+
+export type AnnualPrimaryFocusMode =
+  | "small-limit"
+  | "annual-menh";
+
+export interface AnnualSchoolDomainPolicyProfile {
+  domainAnchorCoordinate: AnnualDomainAnchorCoordinate;
+  domainAnchorProvenance: string;
+  primaryAnnualFocus: AnnualPrimaryFocusMode;
+  secondaryMarkers: string[];
+}
+
+export interface AnnualSchoolDomainPolicyCatalog {
+  schemaVersion: string;
+  catalogId: string;
+  status: string;
+  profiles: {
+    "nam-phai": AnnualSchoolDomainPolicyProfile;
+    "trung-chau": AnnualSchoolDomainPolicyProfile;
+  };
+}
+
 export interface AnnualAxesKnowledgeV0 {
   axisDefinitions: AnnualAxisDefinitionsCatalog;
   scoringProfile: AnnualScoringProfile;
@@ -245,4 +270,5 @@ export interface AnnualAxesKnowledgeV0 {
   starOverrides: AnnualStarOverridesCatalog;
   sourceRegistry: AnnualSourceRegistry;
   calibrationFixtures: AnnualCalibrationFixtures;
+  schoolDomainPolicy: AnnualSchoolDomainPolicyCatalog;
 }

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "0.4.0",
+  "catalogId": "annual-distribution-gates-v0-4",
+  "status": "experimental",
+  "requiresCalibration": true,
+  "hardGates": {
+    "allSixAbove60RateMax": 0.35,
+    "exactDuplicateVectorRateMax": 0.01,
+    "nearDuplicateVectorRateMax": 0.05,
+    "meanIntraYearAxisStandardDeviationMin": 4.0,
+    "medianIntraYearAxisRangeMin": 10.0,
+    "medianPerDomainTwelveYearRangeMin": 8.0,
+    "medianAdjacentYearAbsoluteDeltaMin": 1.5,
+    "annualHeadMoveSensitivityRateMin": 0.7,
+    "absoluteInterAxisCorrelationMax": 0.9,
+    "unavailableRateMax": 0.02
+  },
+  "notes": "Engineering anti-degeneracy gates — not doctrinal. Do not post-process scores to pass."
+}

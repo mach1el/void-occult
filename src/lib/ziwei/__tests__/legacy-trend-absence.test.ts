@@ -63,6 +63,9 @@ describe("legacy trend scoring absence", () => {
       // Absence tests may mention symbols; skip this file and similar guards.
       if (file.path.includes("legacy-trend-absence")) continue;
       if (file.path.includes("invariants.test")) continue;
+      // The annual-axes import-boundary guard is its own dedicated
+      // legacy-symbol denylist test — it mentions the tokens on purpose.
+      if (file.path.includes("import-boundary.test")) continue;
       for (const token of forbidden) {
         if (file.text.includes(token)) {
           hits.push(`${file.path}: ${token}`);
@@ -74,9 +77,8 @@ describe("legacy trend scoring absence", () => {
 });
 
 describe("analysis availability after reset", () => {
-  it("marks every non-palace-overview module unavailable/rebuilding", () => {
-    for (const module of ANALYSIS_MODULES) {
-      if (module === "palace-overview") continue;
+  it("marks major-fortune and monthly-flow unavailable/rebuilding (no UI published)", () => {
+    for (const module of ["major-fortune", "monthly-flow"] as const) {
       expect(getAnalysisStatus(module)).toEqual({
         status: "unavailable",
         module,
@@ -88,5 +90,19 @@ describe("analysis availability after reset", () => {
   it("marks palace-overview available (default-on since the chart UI publish)", () => {
     const status = getAnalysisStatus("palace-overview");
     expect(status.status).toBe("available");
+  });
+
+  it("marks annual-axes available by default (V0.4 default-on)", () => {
+    const status = getAnalysisStatus("annual-axes");
+    expect(status.status).toBe("available");
+  });
+
+  it("still enumerates all four modules in ANALYSIS_MODULES", () => {
+    expect(ANALYSIS_MODULES).toEqual([
+      "palace-overview",
+      "annual-axes",
+      "major-fortune",
+      "monthly-flow",
+    ]);
   });
 });

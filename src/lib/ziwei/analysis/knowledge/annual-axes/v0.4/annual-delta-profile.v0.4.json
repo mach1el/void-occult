@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "0.4.0",
+  "profileId": "annual-delta-profile-v0-4",
+  "status": "experimental",
+  "requiresCalibration": true,
+  "neutralScore": 50.0,
+  "scoreMin": 0,
+  "scoreMax": 100,
+  "scorePrecision": 1,
+  "supportScale": 2.5,
+  "pressureScale": 2.5,
+  "activationScale": 2.5,
+  "activationGateFloor": 0.15,
+  "activationGateRange": 0.85,
+  "scoreAmplitude": 42.0,
+  "scoreDivisor": 1.15,
+  "natalResponse": {
+    "responseFloor": 0.55,
+    "responseRange": 0.45,
+    "resilienceDampingFloor": 0.7,
+    "resilienceDampingRange": 0.3
+  },
+  "bands": [
+    { "minInclusive": 0, "maxExclusive": 50, "id": "guarded", "labelVi": "Cẩn trọng" },
+    { "minInclusive": 50, "maxExclusive": 60, "id": "balanced", "labelVi": "Cân bằng" },
+    { "minInclusive": 60, "maxExclusive": 75, "id": "supportive", "labelVi": "Thuận lợi" },
+    { "minInclusive": 75, "maxInclusive": 100, "id": "strong", "labelVi": "Mạnh" }
+  ],
+  "confidenceWeights": {
+    "approved": 1.0,
+    "experimental": 0.75
+  },
+  "diminishingReturns": {
+    "expression": "1 / sqrt(rank)",
+    "rankWithin": ["domain", "channel", "stackingGroup"]
+  },
+  "formulaSpec": {
+    "supportNorm": "1 - exp(-supportRaw / supportScale)",
+    "pressureNorm": "1 - exp(-pressureRaw / pressureScale)",
+    "channelSigned": "supportNorm - pressureNorm",
+    "annualSignedDelta": "sum(channelWeight * routedStrengthOrOne * channelSigned)",
+    "activationGate": "activationGateFloor + activationGateRange * (1 - exp(-activationRaw / activationScale))",
+    "amplitudeMultiplier": "responseFloor + responseRange * sensitivity",
+    "resilienceDamping": "resilienceDampingFloor + resilienceDampingRange * resilience",
+    "effectiveDelta": "annualSignedDelta * amplitudeMultiplier * resilienceDamping * activationGate",
+    "score": "clamp(neutralScore + scoreAmplitude * tanh(effectiveDelta / scoreDivisor), 0, 100)",
+    "stabilityRule": "stability never adds to signed quality"
+  }
+}

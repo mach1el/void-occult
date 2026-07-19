@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "0.3.0",
+  "catalogId": "annual-context-markers-nam-phai-v0-3",
+  "status": "experimental",
+  "polarityRule": "activation_only",
+  "records": [
+    {
+      "markerId": "annual-head-routing",
+      "sourceFact": "annualHeadPalace",
+      "axesFormulaRef": "annual-routing-profile-v0-3.structuralActivation",
+      "ruleId": "RULE-AA-V03-HEAD-ROUTING"
+    },
+    {
+      "markerId": "tam-hop-small-limit-secondary",
+      "sourceFact": "smallLimitPalace",
+      "baseAxes": {
+        "support": 0,
+        "pressure": 0,
+        "stability": 0,
+        "activation": 0.35
+      },
+      "ruleId": "RULE-AA-V03-SMALL-LIMIT-SECONDARY"
+    },
+    {
+      "markerId": "tai-tue-external-context",
+      "sourceFact": "taiTuePalace",
+      "baseAxes": {
+        "support": 0,
+        "pressure": 0,
+        "stability": 0,
+        "activation": 0.3
+      },
+      "ruleId": "RULE-AA-V03-TAI-TUE-EXTERNAL"
+    }
+  ],
+  "convergenceRules": [],
+  "notes": "V0.2 convergence bonuses are removed. No unsourced bonus is created when coordinates share a palace."
+}

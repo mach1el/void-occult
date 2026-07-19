@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "0.4.0",
+  "catalogId": "annual-trigger-policy-v0-4",
+  "status": "experimental",
+  "requiresCalibration": true,
+  "enabledTriggers": [
+    {
+      "triggerId": "annual-head-tp4c",
+      "description": "Natal fact physically inside the annual-head TP4C",
+      "enabled": true
+    },
+    {
+      "triggerId": "annual-transformation-exact-target",
+      "description": "Exact annual Tứ Hóa target star/palace",
+      "enabled": true
+    },
+    {
+      "triggerId": "annual-moving-star-palace",
+      "description": "Annual moving star occupies or targets the palace",
+      "enabled": true
+    },
+    {
+      "triggerId": "head-domain-frame-intersection",
+      "description": "Physical intersection of annual-head frame and domain local frame",
+      "enabled": true
+    }
+  ],
+  "natalWithoutTrigger": {
+    "numericSupportPressure": 0,
+    "mayAffectSensitivityOnly": true
+  }
+}

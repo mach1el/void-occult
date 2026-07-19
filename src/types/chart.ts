@@ -107,6 +107,13 @@ export interface ChartData {
   majorFortunePalace?: ChartPalace | null;
   taiTuePalace?: ChartPalace | null;
   smallLimitPalace?: ChartPalace | null;
+  /**
+   * Nam Phái annual head — the one-year palace moving inside the active
+   * Major Fortune decade (`getAnnualMajorFortuneIndex` /
+   * `isLuuNienDaiVan`). Distinct from `smallLimitPalace` (Tam Hợp small-
+   * limit ring). Optional so older charts / Trung Châu remain valid.
+   */
+  annualHeadPalace?: ChartPalace | null;
   // Ý nghĩa khác nhau giữa 2 phái (tiểu hạn ở nam-phai, lưu Thái Tuế ở trung-chau) và
   // không có nơi tiêu thụ nào trong src/ hiện tại — giữ lại để khớp snapshot, không xoá.
   smallLimitStartPalace?: ChartPalace | null;
@@ -183,6 +190,7 @@ export interface ChartDto {
   majorFortunePalace: PalaceRef | null;
   taiTuePalace: PalaceRef | null;
   smallLimitPalace: PalaceRef | null;
+  annualHeadPalace: PalaceRef | null;
   palaces: PalaceDto[];
   natalMutagens: MutagenDto[];
   annualMutagens: MutagenDto[];

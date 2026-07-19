@@ -11,6 +11,7 @@
   display: grid;
   gap: 0.85rem;
   padding: 0.85rem 1rem 1rem;
+  overflow: visible;
   color: var(--ash, #d4ccdf);
   border: 1px solid var(--line-soft, rgba(104, 88, 148, 0.38));
   border-radius: 22px;
@@ -45,17 +46,10 @@
   padding: 0.12rem 0.4rem;
 }
 
-.palace-overview-radar__disclaimer {
-  margin: 0;
-  font-size: 0.82rem;
-  line-height: 1.4;
-  opacity: 0.88;
-  max-width: 42rem;
-}
-
 .palace-overview-radar__body {
   display: grid;
   gap: 1rem;
+  overflow: visible;
 }
 
 @media (min-width: 900px) {
@@ -69,12 +63,14 @@
   position: relative;
   width: min(100%, 320px);
   margin-inline: auto;
+  overflow: visible;
 }
 
 .palace-overview-radar__svg {
   width: 100%;
   height: auto;
   display: block;
+  overflow: visible;
 }
 
 .palace-overview-radar__point {
@@ -90,6 +86,25 @@
   stroke-width: 2.5;
 }
 
+.palace-overview-radar__label {
+  fill: var(--amber-soft, #f6e0a4);
+  /* Be Vietnam Pro is already the compact chart-label face (--font-stars-minor);
+   * Noto Serif Display was clipping wide Vietnamese glyphs on the radar rim. */
+  font-family: var(--font-stars-minor, "Be Vietnam Pro", system-ui, sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+  paint-order: stroke;
+  stroke: rgba(9, 7, 20, 0.75);
+  stroke-width: 2.75px;
+  stroke-linejoin: round;
+}
+
+.palace-overview-radar__label.is-active {
+  fill: var(--amber, #e2bc5f);
+  font-weight: 700;
+}
+
 .palace-overview-radar__tooltip-summary {
   margin: 0.35rem 0 0;
   font-variant-numeric: tabular-nums;
@@ -103,6 +118,12 @@
   border: 1px solid var(--line-soft, rgba(104, 88, 148, 0.38));
   background: rgba(255, 255, 255, 0.04);
   border-radius: 12px;
+}
+
+.palace-overview-radar__tooltip-title {
+  font-family: var(--font-display, "Noto Serif Display", "Noto Serif", serif);
+  font-weight: 650;
+  color: var(--amber-soft, #f6e0a4);
 }
 
 .palace-overview-radar__tooltip dl {

@@ -29,13 +29,27 @@ function dedupIdentity(evidence: AnnualAxisEvidence): string {
   ].join("|");
 }
 
+/** Diminishing-rank competition group for one evidence item within a
+ * domain. `"natal-activated"` ranks globally across the whole layer —
+ * every domain's TP4C frame spans most-to-all of the natal chart once
+ * multiple anchors are unioned, so splitting by `stackingGroup` there left
+ * dozens of independent near-rank-1 slots and effectively let the entire
+ * static natal chart flow into every domain every year. `"annual"` and
+ * `"major-fortune"` evidence are genuinely bounded in count (a handful of
+ * flowing stars/mutagens per year) and keep the original per-stackingGroup
+ * grouping. */
+function diminishingGroupKey(evidence: AnnualAxisEvidence): string {
+  if (evidence.layer === "natal-activated") return evidence.layer;
+  return `${evidence.layer}|${evidence.stackingGroup}`;
+}
+
 /**
  * Resolve raw per-anchor candidates into the final, dedup'd, weighted
  * evidence list for one domain:
  *  1. When the same physical fact is reachable through multiple anchors,
  *     keep only the highest-base-weight candidate (stable tie-break).
- *  2. Diminishing returns apply per one-based rank within the same
- *     layer + stackingGroup, `diminishingFactor = 1/sqrt(rank)`.
+ *  2. Diminishing returns apply per one-based rank within
+ *     `diminishingGroupKey()`, `diminishingFactor = 1/sqrt(rank)`.
  *  3. `effectiveWeight = baseWeight * diminishingFactor`;
  *     `weightedAxes = rawAxes * effectiveWeight`.
  */
@@ -80,7 +94,7 @@ export function aggregateDomainEvidence(
   const rankCounters = new Map<string, number>();
   const out: AnnualAxisEvidence[] = [];
   for (const { evidence, weight } of survivors) {
-    const groupKey = `${evidence.layer}|${evidence.stackingGroup}`;
+    const groupKey = diminishingGroupKey(evidence);
     const rank = (rankCounters.get(groupKey) ?? 0) + 1;
     rankCounters.set(groupKey, rank);
 

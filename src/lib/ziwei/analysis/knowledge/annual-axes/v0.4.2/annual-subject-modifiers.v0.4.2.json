@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "0.4.2",
+  "policyId": "annual-subject-modifiers-v0-4-2",
+  "status": "experimental",
+  "requiresCalibration": true,
+  "defaultModifier": 1.0,
+  "categoryModifiers": {
+    "majorStar": 1.0,
+    "minorStar": 0.0,
+    "mutagen": 1.0
+  },
+  "notes": [
+    "Subject modifiers only scale an already physically eligible domain (§2) — they never create eligibility.",
+    "minorStar defaults to 0.0: under strict physical ownership, every star sharing an owned palace with an annual trigger becomes eligible regardless of semantic significance. Without this modifier, the ~10-20 minor stars typically co-located with a triggered palace flood each domain with small, largely uncorrelated axes and wash out the signal from the few major stars that actually carry meaningful polarity — this reproduces, at the physical-ownership layer, the same 'unmapped subject stays non-numeric' behavior the v0.4.1 affinity catalog already had for minor stars (it never carried exact/family records for them either)."
+  ]
+}

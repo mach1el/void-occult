@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "0.3.1",
+  "guardId": "annual-axes-dynamic-resolution-guard-v0-3",
+  "status": "mandatory",
+  "principles": {
+    "calculationCoreOwnsAstronomyAndPlacement": true,
+    "scorerMayNotRecalculateAnnualHead": true,
+    "scorerMayNotInferMissingPalacesByIndex": true,
+    "scorerMayNotImportConcreteSchoolEngine": true,
+    "schoolPoliciesMustBeVersionedData": true,
+    "numericCoefficientsMustComeFromKnowledge": true,
+    "allPhysicalTargetsMustBeResolvedExactly": true,
+    "allEvidenceMustCarryProvenance": true
+  },
+  "dynamicInputs": [
+    {
+      "fact": "annual-head palace",
+      "source": "ChartData.annualHeadPalace or exactly one isLuuNienDaiVan flag",
+      "forbiddenFallbacks": [
+        "smallLimitPalace",
+        "taiTuePalace",
+        "annualPalace",
+        "hardcoded branch",
+        "hardcoded palace index"
+      ]
+    },
+    {
+      "fact": "Tam Hợp small limit",
+      "source": "ChartData.smallLimitPalace",
+      "role": "secondary context only"
+    },
+    {
+      "fact": "Tai Tue palace",
+      "source": "ChartData.taiTuePalace",
+      "role": "external annual context only"
+    },
+    {
+      "fact": "Major Fortune palace",
+      "source": "ChartData.majorFortunePalace",
+      "role": "decade background only"
+    },
+    {
+      "fact": "domain anchors",
+      "source": "versioned school-specific domain catalog + resolved chart palace names",
+      "forbiddenFallbacks": [
+        "array position",
+        "branch guess",
+        "first matching palace",
+        "single-anchor collapse"
+      ]
+    },
+    {
+      "fact": "annual transformations",
+      "source": "ChartData.annualMutagens",
+      "requirements": [
+        "exact canonical star",
+        "exact physical palace",
+        "target star exists in that palace"
+      ]
+    },
+    {
+      "fact": "TP4C geometry",
+      "source": "resolved physical palace index and modulo-12 offsets from versioned geometry data",
+      "requirements": [
+        "one focus",
+        "one opposite",
+        "two trines",
+        "complete physical chart"
+      ]
+    }
+  ],
+  "forbiddenHardcoding": [
+    "branch-to-palace tables inside scorer",
+    "gender/direction/year-age formulas inside scorer",
+    "Tứ Hóa tables inside scorer",
+    "domain anchor weights inside TypeScript",
+    "TP4C role weights inside TypeScript",
+    "layer weights inside TypeScript",
+    "normalization coefficients inside TypeScript",
+    "special-case user birth data",
+    "special-case Dậu/Tử Tức production logic",
+    "school fallback based on missing fields"
+  ],
+  "requiredRuntimeValidation": [
+    "knowledge schema validation",
+    "deep freeze after load",
+    "school profile exists",
+    "annual-head pointer and runtime flag agree",
+    "all anchor weights sum to 1",
+    "routing in [0,1]",
+    "headShare and localShare sum to 1",
+    "all physical fact IDs unique after dedup",
+    "all source IDs resolve",
+    "no previous module score input"
+  ],
+  "requiredSourceScans": [
+    "no getAnnualMajorFortuneIndex import in Annual Axes scorer",
+    "no assignSmallLimits import in Annual Axes scorer",
+    "no concrete Nam Phai or Trung Chau engine import in scorer",
+    "no numeric coefficient literals duplicated from knowledge JSON",
+    "no analyzeAllPalaces score input",
+    "no Major Fortune score input",
+    "no Monthly Flow score input"
+  ],
+  "testMatrix": {
+    "annualHeadBranches": "all 12 branches",
+    "schools": [
+      "nam-phai",
+      "trung-chau"
+    ],
+    "chartCompleteness": [
+      "complete",
+      "missing node",
+      "duplicate labels"
+    ],
+    "pointerStates": [
+      "valid pointer",
+      "flag-only migration",
+      "zero flags",
+      "multiple flags",
+      "pointer-flag mismatch"
+    ],
+    "dynamicAssertions": [
+      "same birth chart and different annual year can move annual head dynamically",
+      "same annual head and different local palace structure changes local channel only",
+      "changing smallLimitPalace alone cannot change annual-head identity",
+      "changing annualHeadPalace changes routing without hardcoded branch cases",
+      "all 12 focus indexes wrap TP4C correctly"
+    ]
+  }
+}

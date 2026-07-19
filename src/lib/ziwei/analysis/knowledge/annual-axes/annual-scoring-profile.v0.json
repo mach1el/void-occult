@@ -42,7 +42,7 @@
   "layerWeights": {
     "annual": 1.0,
     "major_fortune": 0.55,
-    "natal_activated": 0.3
+    "natal_activated": 0.05
   },
   "confidenceWeights": {
     "approved": 1.0,

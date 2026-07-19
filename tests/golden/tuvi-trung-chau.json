@@ -1255,6 +1255,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -3289,6 +3292,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[3]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -5323,6 +5329,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[11]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -7357,6 +7366,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[1]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -9391,6 +9403,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[0]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -11425,6 +11440,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[2]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -13459,6 +13477,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[1]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -15493,6 +15514,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -17527,6 +17551,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -19561,6 +19588,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[5]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -21595,6 +21625,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -23629,6 +23662,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -25663,6 +25699,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[1]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -27697,6 +27736,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[0]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -29731,6 +29773,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[0]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -31765,6 +31810,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -33799,6 +33847,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -35833,6 +35884,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[8]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -37867,6 +37921,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -39901,6 +39958,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -41935,6 +41995,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[3]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -43969,6 +44032,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[6]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -46003,6 +46069,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[2]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -48037,6 +48106,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[3]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -50071,6 +50143,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[8]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -52105,6 +52180,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -54139,6 +54217,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[6]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -56173,6 +56254,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[10]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -58207,6 +58291,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[3]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -60241,6 +60328,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -62275,6 +62365,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -64309,6 +64402,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -66343,6 +66439,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[2]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -68377,6 +68476,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -70411,6 +70513,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -72445,6 +72550,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[3]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -74479,6 +74587,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -76482,6 +76593,7 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": null,
         "taiTuePalace": {
           "$ref": "$.palaces[0]"
         },
@@ -78483,6 +78595,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[11]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -80517,6 +80632,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[3]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[10]"
         },
@@ -82551,6 +82669,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[6]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -84585,6 +84706,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[2]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -86619,6 +86743,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[6]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -88653,6 +88780,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -90687,6 +90817,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[1]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -92721,6 +92854,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[9]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },
@@ -94755,6 +94891,9 @@
         "smallLimitPalace": null,
         "smallLimitStartPalace": null,
         "smallLimitDirection": "",
+        "annualHeadPalace": {
+          "$ref": "$.palaces[4]"
+        },
         "taiTuePalace": {
           "$ref": "$.palaces[4]"
         },

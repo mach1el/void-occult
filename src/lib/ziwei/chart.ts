@@ -214,6 +214,7 @@ export function serializeChart(
     majorFortunePalace: palaceRef(data.majorFortunePalace),
     taiTuePalace: palaceRef(data.taiTuePalace),
     smallLimitPalace: palaceRef(data.smallLimitPalace),
+    annualHeadPalace: palaceRef(data.annualHeadPalace),
     palaces: data.palaces.map((palace) => ({
       index: palace.index,
       branch: palace.branch,

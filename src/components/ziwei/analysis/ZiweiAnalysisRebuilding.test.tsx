@@ -3,11 +3,12 @@ import { describe, expect, it } from "vitest";
 import { ANALYSIS_MODULES } from "@/lib/ziwei/analysis";
 import { ZiweiAnalysisRebuilding } from "./ZiweiAnalysisRebuilding";
 
-// palace-overview is default-on now — ChartPage swaps in the real
-// PalaceOverviewRadar for it once chart data exists, so this placeholder
-// component only ever renders "unavailable" for the other 3 modules.
+// palace-overview and annual-axes are default-on now — ChartPage swaps
+// in the real UI for both once chart data exists, so this placeholder
+// component only ever renders "unavailable" for major-fortune and
+// monthly-flow (whose scoring engines exist but have no UI yet).
 const STILL_REBUILDING_MODULES = ANALYSIS_MODULES.filter(
-  (m) => m !== "palace-overview",
+  (m) => m !== "palace-overview" && m !== "annual-axes",
 );
 
 describe("ZiweiAnalysisRebuilding", () => {
@@ -31,6 +32,11 @@ describe("ZiweiAnalysisRebuilding", () => {
 
   it("reports palace-overview as available now that the flag defaults on", () => {
     const { container } = render(<ZiweiAnalysisRebuilding module="palace-overview" />);
+    expect(container.querySelector("[data-status='available']")).not.toBeNull();
+  });
+
+  it("reports annual-axes as available now that the V0.2 flag defaults on", () => {
+    const { container } = render(<ZiweiAnalysisRebuilding module="annual-axes" />);
     expect(container.querySelector("[data-status='available']")).not.toBeNull();
   });
 });

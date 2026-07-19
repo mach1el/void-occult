@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "annual-axes-v0.3.schema.json",
+  "title": "Annual Axes V0.3 knowledge fragments",
+  "type": "object",
+  "$defs": {
+    "axes": {
+      "type": "object",
+      "required": [
+        "support",
+        "pressure",
+        "stability",
+        "activation"
+      ],
+      "properties": {
+        "support": {
+          "type": "number"
+        },
+        "pressure": {
+          "type": "number"
+        },
+        "stability": {
+          "type": "number"
+        },
+        "activation": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "domain": {
+      "enum": [
+        "health",
+        "family",
+        "wealth",
+        "career",
+        "social",
+        "romance"
+      ]
+    },
+    "school": {
+      "enum": [
+        "nam-phai",
+        "trung-chau"
+      ]
+    },
+    "headRole": {
+      "enum": [
+        "focus",
+        "opposite",
+        "trine",
+        "outside"
+      ]
+    }
+  }
+}

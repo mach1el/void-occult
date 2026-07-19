@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "0.4.2",
+  "catalogId": "annual-physical-domain-ownership-nam-phai-v0-4-2",
+  "status": "experimental",
+  "requiresCalibration": true,
+  "records": [
+    {
+      "palaceName": "Mệnh",
+      "numericDomains": [
+        {
+          "domain": "health",
+          "ownershipWeight": 1.0,
+          "role": "primary",
+          "rationale": "Derived from v0.4 axis-definitions anchor weights: Mệnh's highest domain weight was health (0.25). Kept as sole primary since the remaining ties (career/social/romance at 0.15) are demoted to context to respect the ≤2 numeric-domains cap.",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        },
+        {
+          "domain": "career",
+          "ownershipWeight": 0.4,
+          "role": "secondary",
+          "rationale": "Second-highest v0.4 anchor weight for Mệnh among the 0.15 three-way tie (career/social/romance); career chosen by alphabetical tie-break as an explicit, documented convention, not a doctrine claim.",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        }
+      ],
+      "contextOnlyDomains": ["social", "romance"]
+    },
+    {
+      "palaceName": "Phụ Mẫu",
+      "numericDomains": [
+        {
+          "domain": "family",
+          "ownershipWeight": 1.0,
+          "role": "primary",
+          "rationale": "Derived from v0.4 axis-definitions: Phụ Mẫu's highest domain weight was family (0.2).",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        },
+        {
+          "domain": "career",
+          "ownershipWeight": 0.4,
+          "role": "secondary",
+          "rationale": "Second-highest v0.4 anchor weight for Phụ Mẫu (career, 0.1).",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        }
+      ]
+    },
+    {
+      "palaceName": "Phúc Đức",
+      "numericDomains": [
+        {
+          "domain": "family",
+          "ownershipWeight": 1.0,
+          "role": "primary",
+          "rationale": "Derived from v0.4 axis-definitions: Phúc Đức's highest domain weight was family (0.25).",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        },
+        {
+          "domain": "romance",
+          "ownershipWeight": 0.4,
+          "role": "secondary",
+          "rationale": "Second-highest v0.4 anchor weight for Phúc Đức (romance, 0.15).",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        }
+      ],
+      "contextOnlyDomains": ["health", "wealth"]
+    },
+    {
+      "palaceName": "Điền Trạch",
+      "numericDomains": [
+        {
+          "domain": "family",
+          "ownershipWeight": 1.0,
+          "role": "primary",
+          "rationale": "Derived from v0.4 axis-definitions: Điền Trạch's highest domain weight was family (0.3).",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        },
+        {
+          "domain": "wealth",
+          "ownershipWeight": 0.4,
+          "role": "secondary",
+          "rationale": "Second v0.4 anchor weight for Điền Trạch (wealth, 0.15) — property/estate palace legitimately touches household finance.",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        }
+      ]
+    },
+    {
+      "palaceName": "Quan Lộc",
+      "numericDomains": [
+        {
+          "domain": "career",
+          "ownershipWeight": 1.0,
+          "role": "primary",
+          "rationale": "Derived from v0.4 axis-definitions: Quan Lộc's highest domain weight was career (0.6), by far its dominant anchor.",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        },
+        {
+          "domain": "wealth",
+          "ownershipWeight": 0.4,
+          "role": "secondary",
+          "rationale": "Second v0.4 anchor weight for Quan Lộc (wealth, 0.15) — career palace legitimately touches income.",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        }
+      ]
+    },
+    {
+      "palaceName": "Nô Bộc",
+      "numericDomains": [
+        {
+          "domain": "social",
+          "ownershipWeight": 1.0,
+          "role": "primary",
+          "rationale": "Derived from v0.4 axis-definitions: Nô Bộc's only domain anchor was social (0.5), its dominant classical association (peers/friends/colleagues).",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        }
+      ]
+    },
+    {
+      "palaceName": "Thiên Di",
+      "numericDomains": [
+        {
+          "domain": "social",
+          "ownershipWeight": 1.0,
+          "role": "primary",
+          "rationale": "Derived from v0.4 axis-definitions: Thiên Di's highest domain weight was social (0.2), just above career (0.15) — public/travel palace.",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        },
+        {
+          "domain": "career",
+          "ownershipWeight": 0.4,
+          "role": "secondary",
+          "rationale": "Second v0.4 anchor weight for Thiên Di (career, 0.15) — external-facing palace legitimately touches career mobility.",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        }
+      ]
+    },
+    {
+      "palaceName": "Tật Ách",
+      "numericDomains": [
+        {
+          "domain": "health",
+          "ownershipWeight": 1.0,
+          "role": "primary",
+          "rationale": "Derived from v0.4 axis-definitions: Tật Ách's only domain anchor was health (0.65), its dominant, classical association.",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        }
+      ]
+    },
+    {
+      "palaceName": "Tài Bạch",
+      "numericDomains": [
+        {
+          "domain": "wealth",
+          "ownershipWeight": 1.0,
+          "role": "primary",
+          "rationale": "Derived from v0.4 axis-definitions: Tài Bạch's only domain anchor was wealth (0.65), its dominant, classical association.",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        }
+      ]
+    },
+    {
+      "palaceName": "Tử Tức",
+      "numericDomains": [
+        {
+          "domain": "family",
+          "ownershipWeight": 1.0,
+          "role": "primary",
+          "rationale": "Derived from v0.4 axis-definitions: Tử Tức's highest domain weight was family (0.15).",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        },
+        {
+          "domain": "romance",
+          "ownershipWeight": 0.4,
+          "role": "secondary",
+          "rationale": "Second v0.4 anchor weight for Tử Tức (romance, 0.1).",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        }
+      ]
+    },
+    {
+      "palaceName": "Phu Thê",
+      "numericDomains": [
+        {
+          "domain": "romance",
+          "ownershipWeight": 1.0,
+          "role": "primary",
+          "rationale": "Derived from v0.4 axis-definitions: Phu Thê's only domain anchor was romance (0.6), its dominant, classical association (spouse palace).",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        }
+      ]
+    },
+    {
+      "palaceName": "Huynh Đệ",
+      "numericDomains": [
+        {
+          "domain": "social",
+          "ownershipWeight": 1.0,
+          "role": "primary",
+          "rationale": "Derived from v0.4 axis-definitions: Huynh Đệ's highest domain weight was social (0.15), just above family (0.1) — siblings/peers palace.",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        },
+        {
+          "domain": "family",
+          "ownershipWeight": 0.4,
+          "role": "secondary",
+          "rationale": "Second v0.4 anchor weight for Huynh Đệ (family, 0.1) — siblings are also classical family evidence.",
+          "sourceIds": ["SRC-AA-ENG-004"],
+          "knowledgeStatus": "experimental"
+        }
+      ]
+    }
+  ]
+}

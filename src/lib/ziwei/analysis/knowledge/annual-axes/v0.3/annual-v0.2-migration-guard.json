@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "0.3.0",
+  "guardId": "annual-v0-2-to-v0-3-migration",
+  "mustRemoveOrReplace": [
+    "nam-phai primaryAnnualFocus = small-limit",
+    "small-limit raw activation 0.8 as primary focus",
+    "tai-tue activation 0.9 greater than the annual head",
+    "post-hoc focus overlay applied after independent domain scores",
+    "V0.2 Mão/Tài Bạch focus fixture if it represents smallLimitPalace rather than annualHeadPalace"
+  ],
+  "mustPreserve": [
+    "Trung Châu byte-identical numeric regression",
+    "exact-target annual Tứ Hóa",
+    "null unavailable scores",
+    "physical evidence provenance",
+    "UI available/partial/unavailable behavior",
+    "feature kill-switch behavior"
+  ],
+  "releaseBlock": true
+}

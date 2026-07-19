@@ -1,0 +1,113 @@
+{
+  "profileId": "annual-axes-current",
+  "school": "trung-chau",
+  "chartCount": 100,
+  "yearsPerChart": 12,
+  "resultCount": 1200,
+  "scoreSummaryByDomain": {
+    "health": {
+      "min": 45.3,
+      "max": 69.7,
+      "mean": 56.47316666666673,
+      "median": 56.3,
+      "p10": 51.5,
+      "p90": 62.1,
+      "standardDeviation": 4.038447001514599
+    },
+    "family": {
+      "min": 45.3,
+      "max": 65.8,
+      "mean": 54.93308333333327,
+      "median": 54.5,
+      "p10": 51.7,
+      "p90": 59.1,
+      "standardDeviation": 2.9705163073668714
+    },
+    "wealth": {
+      "min": 39.7,
+      "max": 70.9,
+      "mean": 53.66591666666664,
+      "median": 53.4,
+      "p10": 47.5,
+      "p90": 60.3,
+      "standardDeviation": 4.955987776291877
+    },
+    "career": {
+      "min": 38.1,
+      "max": 71.1,
+      "mean": 53.488166666666636,
+      "median": 53,
+      "p10": 47.9,
+      "p90": 59.51000000000001,
+      "standardDeviation": 4.6802044364387765
+    },
+    "social": {
+      "min": 43.2,
+      "max": 69.7,
+      "mean": 55.97383333333334,
+      "median": 55.8,
+      "p10": 51.3,
+      "p90": 61.01000000000001,
+      "standardDeviation": 3.937702785242895
+    },
+    "romance": {
+      "min": 37.1,
+      "max": 69.8,
+      "mean": 52.317333333333345,
+      "median": 51.8,
+      "p10": 46.3,
+      "p90": 59.6,
+      "standardDeviation": 5.114511845236861
+    }
+  },
+  "allSixAbove50Rate": 0.44583333333333336,
+  "allSixAbove60Rate": 0,
+  "exactDuplicateVectorRate": 0,
+  "intraYearAxisSpread": {
+    "meanStandardDeviation": 3.8565266283971096,
+    "medianRange": 9.600000000000001,
+    "p10Range": 5.100000000000001
+  },
+  "longitudinalChange": {
+    "medianPerDomainTwelveYearRange": {
+      "health": 10.700000000000003,
+      "family": 7.050000000000001,
+      "wealth": 15.099999999999998,
+      "career": 13.649999999999999,
+      "social": 11.3,
+      "romance": 15.699999999999996
+    },
+    "medianAdjacentYearAbsoluteDelta": {
+      "health": 3.3999999999999986,
+      "family": 1.7999999999999972,
+      "wealth": 5.099999999999994,
+      "career": 4.149999999999999,
+      "social": 3.3999999999999986,
+      "romance": 4.900000000000006
+    },
+    "annualHeadMoveSensitivityRate": 1
+  },
+  "interAxisCorrelation": {
+    "health|family": 0.5530001860020759,
+    "health|wealth": 0.11568274187187097,
+    "health|career": 0.15175040608136867,
+    "health|social": 0.34096738853951186,
+    "health|romance": -0.054849330011425286,
+    "family|wealth": 0.2592797165625876,
+    "family|career": 0.055550790970494784,
+    "family|social": 0.49060095861225866,
+    "family|romance": 0.1328150571398304,
+    "wealth|career": 0.5560911317930537,
+    "wealth|social": -0.15185267556869503,
+    "wealth|romance": 0.3946185130011818,
+    "career|social": -0.17325011399910434,
+    "career|romance": 0.7706716140628801,
+    "social|romance": -0.2774438880198076
+  },
+  "crossChartSimilarity": {
+    "medianNearestNeighborDistance": 1.153233620773344,
+    "nearDuplicateVectorRate": 0.71
+  },
+  "unavailableRate": 0,
+  "partialRate": 0
+}

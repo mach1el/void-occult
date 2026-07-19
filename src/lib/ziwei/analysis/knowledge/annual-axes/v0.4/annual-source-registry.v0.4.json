@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "0.4.0",
+  "registryId": "annual-axes-source-registry-v0-4",
+  "status": "incomplete",
+  "sources": [
+    {
+      "sourceId": "SRC-AA-ENG-004",
+      "title": "ApexVoid Annual Axes V0.4 Annual-Delta Engineering Model",
+      "sourceType": "internal_architecture",
+      "allowedUsage": ["numeric hypothesis", "calibration", "implementation contract"],
+      "prohibitedUsage": ["claim as classical formula"]
+    },
+    {
+      "sourceId": "SRC-AA-CORE-001",
+      "title": "ApexVoid Annual Flow Calculation Core",
+      "sourceType": "internal_calculation_contract",
+      "location": "src/lib/ziwei/annual-flow.ts and engines",
+      "allowedUsage": ["resolved annual-head palace", "resolved small-limit", "resolved Tai Tue", "resolved decade"],
+      "prohibitedUsage": ["doctrine authority", "numeric scoring authority"]
+    }
+  ],
+  "claims": [
+    {
+      "claimId": "CLM-AA-ENG-401",
+      "sourceId": "SRC-AA-ENG-004",
+      "summary": "Annual scores represent year-specific delta around neutral 50, not natal quality.",
+      "confidence": "experimental"
+    }
+  ]
+}

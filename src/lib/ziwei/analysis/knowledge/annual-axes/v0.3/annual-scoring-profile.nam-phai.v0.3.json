@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "0.3.0",
+  "profileId": "annual-axes-nam-phai-head-centric-v0-3",
+  "status": "experimental",
+  "requiresCalibration": true,
+  "output": {
+    "scoreMin": 0,
+    "scoreMax": 100,
+    "scorePrecision": 1,
+    "bands": [
+      {
+        "minInclusive": 0,
+        "maxExclusive": 50,
+        "id": "guarded",
+        "labelVi": "Cẩn trọng"
+      },
+      {
+        "minInclusive": 50,
+        "maxExclusive": 60,
+        "id": "balanced",
+        "labelVi": "Cân bằng"
+      },
+      {
+        "minInclusive": 60,
+        "maxExclusive": 75,
+        "id": "supportive",
+        "labelVi": "Thuận lợi"
+      },
+      {
+        "minInclusive": 75,
+        "maxInclusive": 100,
+        "id": "strong",
+        "labelVi": "Mạnh"
+      }
+    ]
+  },
+  "confidenceWeights": {
+    "approved": 1.0,
+    "experimental": 0.75
+  },
+  "diminishingReturns": {
+    "formula": "inverse_square_root_rank",
+    "expression": "1 / sqrt(rank)",
+    "rankWithin": [
+      "domain",
+      "category",
+      "stackingGroup"
+    ]
+  },
+  "normalization": {
+    "supportScale": 3.0,
+    "pressureScale": 3.0,
+    "stabilityScale": 3.0,
+    "activationScale": 3.0,
+    "stabilityCoefficient": 0.3,
+    "activationGateFloor": 0.25,
+    "activationGateRange": 0.75,
+    "scoreAmplitude": 45.0,
+    "scoreDivisor": 1.2,
+    "neutralScore": 50.0
+  },
+  "formulaSpec": {
+    "supportNorm": "1 - exp(-supportRaw / supportScale)",
+    "pressureNorm": "1 - exp(-pressureRaw / pressureScale)",
+    "stabilityNorm": "tanh(stabilityRaw / stabilityScale)",
+    "activationNorm": "1 - exp(-activationRaw / activationScale)",
+    "netQuality": "supportNorm - pressureNorm + stabilityCoefficient * stabilityNorm",
+    "activationGate": "activationGateFloor + activationGateRange * activationNorm",
+    "score": "clamp(neutralScore + scoreAmplitude * tanh((netQuality * activationGate) / scoreDivisor), 0, 100)",
+    "intensity": "round(100 * activationNorm)",
+    "conflict": "round(100 * min(supportNorm, pressureNorm) * activationNorm)"
+  },
+  "dedup": {
+    "identityFields": [
+      "annualYear",
+      "school",
+      "domain",
+      "category",
+      "physicalFactId",
+      "ruleId",
+      "targetPalaceIndex"
+    ],
+    "headAndLocalSameFactBehavior": "convex_channel_blend_before_diminishing",
+    "multipleLocalAnchorsBehavior": "keep_highest_local_channel_weight",
+    "semanticAnnotationsAreNumeric": false
+  }
+}

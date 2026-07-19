@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "0.3.0",
+  "catalogId": "annual-layer-weights-nam-phai-v0-3",
+  "status": "experimental",
+  "requiresCalibration": true,
+  "weights": {
+    "natal-physical-star": 1.0,
+    "annual-moving-star": 0.85,
+    "annual-transformation": 1.0,
+    "major-fortune-context": 0.4,
+    "tam-hop-small-limit-secondary": 0.35,
+    "tai-tue-external-context": 0.3,
+    "interaction": 0.0
+  },
+  "constraints": {
+    "annualHeadIsNotAnExtraLayerWeight": true,
+    "annualHeadActsThroughGeometryAndRouting": true,
+    "disabledInteractionsRemainZero": true,
+    "previousModuleScoresForbidden": true
+  }
+}

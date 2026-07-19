@@ -27,7 +27,9 @@ import { CompactChart } from "./chart/CompactChart";
 import { MobileChart } from "./chart/MobileChart";
 import { ZiweiAnalysisRebuilding } from "./analysis/ZiweiAnalysisRebuilding";
 import { PalaceOverviewRadar } from "./analysis/PalaceOverviewRadar";
+import { AnnualAxesSection } from "./annual-axes/AnnualAxesSection";
 import { getAnalysisStatus } from "@/lib/ziwei/analysis";
+import { analyzeAnnualAxes } from "@/lib/ziwei/analysis/modules/annual-axes";
 
 const HOUR_BRANCHES = [
   "Tý",
@@ -243,6 +245,15 @@ export function ChartPage() {
     () => form.solarDate.replace(/\D/g, "") || "laso",
     [form.solarDate],
   );
+
+  // Memoize Annual Axes analysis at the page level — the analyzer is
+  // deterministic and byte-stable for identical (chart, school) inputs,
+  // and `AnnualAxesSection` re-renders on every parent state change
+  // otherwise. Skipping when chartData is null keeps null-branch behavior.
+  const annualAxesResult = useMemo(() => {
+    if (!chartData) return null;
+    return analyzeAnnualAxes(chartData, { school });
+  }, [chartData, school]);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -678,7 +689,17 @@ export function ChartPage() {
               ) : (
                 <ZiweiAnalysisRebuilding module="palace-overview" />
               )}
-              <ZiweiAnalysisRebuilding module="annual-axes" />
+              {chartData &&
+              annualAxesResult &&
+              getAnalysisStatus("annual-axes").status === "available" ? (
+                <AnnualAxesSection
+                  chart={chartData}
+                  school={school}
+                  result={annualAxesResult}
+                />
+              ) : (
+                <ZiweiAnalysisRebuilding module="annual-axes" />
+              )}
             </div>
           </section>
 

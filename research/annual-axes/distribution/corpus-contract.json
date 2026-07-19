@@ -1,0 +1,13 @@
+{
+  "contractId": "annual-axes-audit-full-v0.4",
+  "seed": 20260719,
+  "chartCount": 100,
+  "yearsPerChart": 12,
+  "baseAnnualYear": 2018,
+  "timezone": "7",
+  "flowBase": "luu-nien",
+  "notes": [
+    "Minimum smoke corpus from V0.4 corrective prompt §2.",
+    "Deterministic; no personal birth data."
+  ]
+}

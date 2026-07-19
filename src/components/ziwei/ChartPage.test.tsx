@@ -46,17 +46,19 @@ describe("ChartPage profile form", () => {
     expect(container.querySelector(".shell > .chart-section")).not.toBeNull();
     expect(container.querySelector(".shell > .chat-section")).not.toBeNull();
     expect(container.querySelector(".shell > .trend-section")).not.toBeNull();
-    // palace-overview is default-on now: with the auto-calculated default
-    // chart already present on mount, it renders the real Cấu trúc 12 cung
-    // radar instead of a rebuilding placeholder. Only the other 3 trend
-    // modules (annual-axes/major-fortune/monthly-flow) still show it.
+    // palace-overview and annual-axes are default-on now: with the auto-
+    // calculated default chart already present on mount, they render the
+    // real Cấu trúc 12 cung radar and Sáu trục khí vận năm section
+    // respectively. Only major-fortune and monthly-flow (no UI yet) still
+    // show the rebuilding placeholder.
     expect(
       screen.getAllByText(/Module vận khí đang được tái cấu trúc/i).length,
-    ).toBeGreaterThanOrEqual(3);
+    ).toBeGreaterThanOrEqual(2);
     expect(container.querySelectorAll("[data-status='unavailable']")).toHaveLength(
-      3,
+      2,
     );
     expect(screen.getByText("Cấu trúc 12 cung")).toBeInTheDocument();
+    expect(screen.getByText(/Sáu trục khí vận năm/)).toBeInTheDocument();
     // Header "Lá số 12 cung" đã bỏ — Copy/TXT/Ảnh nằm trên thanh nhập liệu.
     expect(screen.queryByRole("heading", { name: "Lá số 12 cung" })).not.toBeInTheDocument();
     expect(container.querySelector(".chart-workspace > .panel-head")).toBeNull();

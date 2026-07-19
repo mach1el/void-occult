@@ -16,23 +16,27 @@ import {
 } from "./explanation-renderer";
 import "./palace-overview-radar.css";
 
-const CX = 150;
-const CY = 150;
-const R = 112;
+const CX = 180;
+const CY = 180;
+/** Chart radius — keep polygon large (~78% of half-viewBox); labels spill
+ * outside via overflow:visible rather than shrinking the ring. */
+const R = 140;
+/** Clearance from the outer ring to the label anchor point. */
+const LABEL_GAP = 12;
 
 /** Short, unambiguous radar labels for the 12 palace names. */
 const PALACE_SHORT_LABEL: Record<string, string> = {
   "Mệnh": "Mệnh",
   "Phụ Mẫu": "P.Mẫu",
   "Phúc Đức": "Phúc",
-  "Điền Trạch": "Đ.Trạch",
+  "Điền Trạch": "Đ.Tr",
   "Quan Lộc": "Q.Lộc",
-  "Nô Bộc": "Nô Bộc",
+  "Nô Bộc": "Nô",
   "Thiên Di": "T.Di",
   "Tật Ách": "T.Ách",
   "Tài Bạch": "T.Bạch",
-  "Tử Tức": "Tử Tức",
-  "Phu Thê": "Phu Thê",
+  "Tử Tức": "T.Tức",
+  "Phu Thê": "P.Thê",
   "Huynh Đệ": "H.Đệ",
 };
 
@@ -69,6 +73,35 @@ function polar(index: number, total: number, radius: number) {
   return {
     x: CX + radius * Math.cos(angle),
     y: CY + radius * Math.sin(angle),
+  };
+}
+
+/** Place labels just outside the ring. Anchor text outward (start/end)
+ * on the sides so long labels grow away from the polygon instead of
+ * forcing the chart to shrink. */
+function labelPlacement(index: number, total: number) {
+  const angle = (Math.PI * 2 * index) / total - Math.PI / 2;
+  const cos = Math.cos(angle);
+  const sin = Math.sin(angle);
+  const radial = R + LABEL_GAP;
+  let textAnchor: "start" | "middle" | "end" = "middle";
+  let dx = 0;
+  let dy = 0;
+  if (cos > 0.35) {
+    textAnchor = "start";
+    dx = 4;
+  } else if (cos < -0.35) {
+    textAnchor = "end";
+    dx = -4;
+  }
+  if (sin > 0.6) dy = 3;
+  else if (sin < -0.6) dy = -2;
+  return {
+    x: CX + radial * cos,
+    y: CY + radial * sin,
+    textAnchor,
+    dx,
+    dy,
   };
 }
 
@@ -149,17 +182,12 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
         <h3 className="palace-overview-radar__title">Cấu trúc 12 cung</h3>
         <span className="palace-overview-radar__badge">Experimental</span>
       </div>
-      <p className="palace-overview-radar__disclaimer">
-        Điểm thể hiện mô hình phân tích cấu trúc lá số, không phải kết luận định
-        mệnh. Chi tiết mỗi cung chỉ hiển thị sao thuộc khung Tam Phương Tứ Chính
-        (bản cung, xung chiếu, tam hợp) của cung được chọn.
-      </p>
 
       <div className="palace-overview-radar__body">
         <div className="palace-overview-radar__svg-wrap">
           <svg
             className="palace-overview-radar__svg"
-            viewBox="0 0 300 300"
+            viewBox="0 0 360 360"
             role="img"
             aria-label="Radar cấu trúc 12 cung"
           >
@@ -197,7 +225,7 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
             />
             {ordered.map((result, i) => {
               const p = polar(i, 12, (result.score / 100) * R);
-              const label = polar(i, 12, R + 16);
+              const label = labelPlacement(i, 12);
               const isActive = active?.palaceIndex === result.palaceIndex;
               return (
                 <g
@@ -237,12 +265,13 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
                     fill="currentColor"
                   />
                   <text
+                    className={`palace-overview-radar__label${isActive ? " is-active" : ""}`}
                     x={label.x}
                     y={label.y}
-                    textAnchor="middle"
+                    dx={label.dx}
+                    dy={label.dy}
+                    textAnchor={label.textAnchor}
                     dominantBaseline="middle"
-                    fontSize={9}
-                    fill="currentColor"
                   >
                     {palaceShortLabel(result.palaceName)}
                     {menhThanSuffix(result)}
@@ -255,7 +284,7 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
 
         {active ? (
           <div className="palace-overview-radar__tooltip" role="status">
-            <strong>
+            <strong className="palace-overview-radar__tooltip-title">
               {active.palaceName} · {active.palaceBranch}
             </strong>
             {palaceDomainHint(active.palaceName) ? (
