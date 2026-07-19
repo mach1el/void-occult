@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "0.2.1",
+  "reportId": "huyen-khi-calendar-panel-corpus-v0-2-1",
+  "outputScope": "menh-and-total",
+  "panelsCaptured": 2,
+  "hoursCaptured": 24,
+  "targetPanels": 20,
+  "targetHours": 240,
+  "panelCompletionRate": 0.1,
+  "hourCompletionRate": 0.1,
+  "panels": [
+    {
+      "solarDate": "1950-01-15",
+      "sex": "male",
+      "hoursCaptured": 12
+    },
+    {
+      "solarDate": "1955-02-15",
+      "sex": "male",
+      "hoursCaptured": 12
+    }
+  ],
+  "note": "Partial by design — session fetch budget under the approved rate limit (1 req/20s, 1 concurrent) covered 2 of the 20 manifest dates. Manifest (calendar-sampling-manifest.v0.2.1.json) is pre-committed and reusable for the remaining 18 dates in a future pass."
+}

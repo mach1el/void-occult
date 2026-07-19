@@ -1,0 +1,563 @@
+{
+  "schemaVersion": "0.2.1",
+  "reportId": "huyen-khi-source-core-agreement-v0-2-1",
+  "recordsCompared": 24,
+  "recordsWithDisagreements": 0,
+  "reports": [
+    {
+      "recordId": "1950-01-15-Tý",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "phá quân"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1950-01-15-Sửu",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "vũ khúc",
+            "phá quân"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1950-01-15-Dần",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "thiên đồng"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1950-01-15-Mão",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "thiên phủ"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1950-01-15-Thìn",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": []
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1950-01-15-Tỵ",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": []
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1950-01-15-Ngọ",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "thất sát"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1950-01-15-Mùi",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "thiên đồng"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1950-01-15-Thân",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "phá quân"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1950-01-15-Dậu",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "tử vi",
+            "tham lang"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1950-01-15-Tuất",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "thiên cơ",
+            "thái âm"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1950-01-15-Hợi",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "thiên cơ"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1955-02-15-Tý",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "thất sát"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1955-02-15-Sửu",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "thái dương",
+            "thái âm"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1955-02-15-Dần",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "vũ khúc",
+            "thiên phủ"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1955-02-15-Mão",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "cự môn"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1955-02-15-Thìn",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "tham lang"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1955-02-15-Tỵ",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "thái dương",
+            "thiên lương"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1955-02-15-Ngọ",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "vũ khúc",
+            "thiên tướng"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1955-02-15-Mùi",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "thiên cơ"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1955-02-15-Thân",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "phá quân"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1955-02-15-Dậu",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "thiên cơ"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1955-02-15-Tuất",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "thất sát"
+          ]
+        }
+      },
+      "disagreements": []
+    },
+    {
+      "recordId": "1955-02-15-Hợi",
+      "identityAgreement": {
+        "solarDate": true,
+        "lunarDate": null,
+        "sex": true,
+        "hourBranch": true
+      },
+      "structuralAgreement": {
+        "menhBranch": true,
+        "menhStem": true,
+        "cuc": true,
+        "thanCu": true,
+        "majorStars": {
+          "onlyInSource": [],
+          "onlyInCore": [],
+          "inBoth": [
+            "thiên đồng"
+          ]
+        }
+      },
+      "disagreements": []
+    }
+  ]
+}

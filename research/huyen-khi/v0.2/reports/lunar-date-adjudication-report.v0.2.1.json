@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "0.2.1",
+  "reportId": "huyen-khi-lunar-date-adjudication-v0-2-1",
+  "cases": [
+    {
+      "solarDate": "1994-05-20",
+      "sourceCalendar": {
+        "year": 1994,
+        "month": 4,
+        "day": 10,
+        "isLeapMonth": false
+      },
+      "calculationCore": {
+        "year": 1994,
+        "month": 4,
+        "day": 11,
+        "isLeapMonth": false
+      },
+      "independentReferences": [],
+      "outcome": "unresolved",
+      "possibleFactors": [
+        "new-moon-boundary",
+        "timezone",
+        "ephemeris-version"
+      ]
+    },
+    {
+      "solarDate": "1969-04-08",
+      "sourceCalendar": {
+        "year": 1969,
+        "month": 2,
+        "day": 22,
+        "isLeapMonth": false
+      },
+      "calculationCore": {
+        "year": 1969,
+        "month": 2,
+        "day": 22,
+        "isLeapMonth": false
+      },
+      "independentReferences": [],
+      "outcome": "all-agree",
+      "possibleFactors": []
+    },
+    {
+      "solarDate": "1997-02-01",
+      "sourceCalendar": {
+        "year": 1996,
+        "month": 12,
+        "day": 24,
+        "isLeapMonth": false
+      },
+      "calculationCore": {
+        "year": 1996,
+        "month": 12,
+        "day": 24,
+        "isLeapMonth": false
+      },
+      "independentReferences": [],
+      "outcome": "all-agree",
+      "possibleFactors": []
+    },
+    {
+      "solarDate": "1997-12-18",
+      "sourceCalendar": {
+        "year": null,
+        "month": 11,
+        "day": 19,
+        "isLeapMonth": false
+      },
+      "calculationCore": {
+        "year": 1997,
+        "month": 11,
+        "day": 19,
+        "isLeapMonth": false
+      },
+      "independentReferences": [],
+      "outcome": "all-agree",
+      "possibleFactors": []
+    },
+    {
+      "solarDate": "1990-01-08",
+      "sourceCalendar": {
+        "year": null,
+        "month": 12,
+        "day": 12,
+        "isLeapMonth": false
+      },
+      "calculationCore": {
+        "year": 1989,
+        "month": 12,
+        "day": 12,
+        "isLeapMonth": false
+      },
+      "independentReferences": [],
+      "outcome": "all-agree",
+      "possibleFactors": []
+    },
+    {
+      "solarDate": "1970-04-24",
+      "sourceCalendar": {
+        "year": null,
+        "month": 3,
+        "day": 19,
+        "isLeapMonth": false
+      },
+      "calculationCore": {
+        "year": 1970,
+        "month": 3,
+        "day": 19,
+        "isLeapMonth": false
+      },
+      "independentReferences": [],
+      "outcome": "all-agree",
+      "possibleFactors": []
+    }
+  ]
+}

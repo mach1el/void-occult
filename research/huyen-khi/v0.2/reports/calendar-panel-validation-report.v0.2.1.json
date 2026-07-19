@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "0.2.1",
+  "reportId": "huyen-khi-calendar-panel-validation-v0-2-1",
+  "reports": [
+    {
+      "solarDate": "1950-01-15",
+      "sex": "male",
+      "complete": true,
+      "invariantFacts": [
+        "solarDate",
+        "sex",
+        "lunarDate"
+      ],
+      "changedFacts": [
+        "hourBranch",
+        "menhHuyenKhi",
+        "wholeChartTotal",
+        "cuc",
+        "thanCu",
+        "menhPalaceStemBranch"
+      ],
+      "missingHours": [],
+      "duplicateHours": []
+    },
+    {
+      "solarDate": "1955-02-15",
+      "sex": "male",
+      "complete": true,
+      "invariantFacts": [
+        "solarDate",
+        "sex",
+        "lunarDate"
+      ],
+      "changedFacts": [
+        "hourBranch",
+        "menhHuyenKhi",
+        "wholeChartTotal",
+        "cuc",
+        "thanCu",
+        "menhPalaceStemBranch"
+      ],
+      "missingHours": [],
+      "duplicateHours": []
+    }
+  ]
+}

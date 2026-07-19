@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "0.2.1",
+  "reportId": "huyen-khi-menh-geometry-parse-v0-2-1",
+  "hoursParsed": 24,
+  "factParseStatusCounts": {
+    "canonical": 474,
+    "known-context-only": 863,
+    "unknown": 0
+  },
+  "unknownFacts": []
+}

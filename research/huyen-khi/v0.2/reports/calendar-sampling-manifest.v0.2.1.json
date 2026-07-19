@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "0.2.1",
+  "manifestId": "huyen-khi-calendar-sampling-manifest-v0-2-1",
+  "committedAt": "2026-07-19T16:20:00Z",
+  "selectionRule": "12 base dates: one year per each of the 12 sexagenary branches, years = 1950 + 5*i for i in 0..11 (step 5 is coprime with 12, guaranteeing full branch coverage across 55 years / 6 decades); month cycles 1..12, day fixed at 15 to avoid incidental lunar-boundary bias. 6 additional dates repeat the same year-selection rule with a +3 year offset (1953, 1958, ... ) to widen stem coverage (Quý/Mậu, beyond the base set's Canh/Ất). 2 final dates are deliberate lunar-New-Year-boundary tests, chosen by checking this repo's own solarToLunar output for lunar day=1 (Tết) — checking a *calendar* boundary is not the same as viewing a Huyền Khí score, so this does not violate the no-cherry-picking rule. All 20 dates were fixed in this file BEFORE any of them were fetched for their Huyền Khí values (only #1969-04-08 and #1997-02-01, already fetched in V0.2 for other reasons, are NOT part of this manifest).",
+  "dates": [
+    { "index": 1, "solarDate": "1950-01-15", "yearStem": "Canh", "yearBranch": "Dần", "purpose": "branch-coverage" },
+    { "index": 2, "solarDate": "1955-02-15", "yearStem": "Ất", "yearBranch": "Mùi", "purpose": "branch-coverage" },
+    { "index": 3, "solarDate": "1960-03-15", "yearStem": "Canh", "yearBranch": "Tý", "purpose": "branch-coverage" },
+    { "index": 4, "solarDate": "1965-04-15", "yearStem": "Ất", "yearBranch": "Tỵ", "purpose": "branch-coverage" },
+    { "index": 5, "solarDate": "1970-05-15", "yearStem": "Canh", "yearBranch": "Tuất", "purpose": "branch-coverage" },
+    { "index": 6, "solarDate": "1975-06-15", "yearStem": "Ất", "yearBranch": "Mão", "purpose": "branch-coverage" },
+    { "index": 7, "solarDate": "1980-07-15", "yearStem": "Canh", "yearBranch": "Thân", "purpose": "branch-coverage" },
+    { "index": 8, "solarDate": "1985-08-15", "yearStem": "Ất", "yearBranch": "Sửu", "purpose": "branch-coverage" },
+    { "index": 9, "solarDate": "1990-09-15", "yearStem": "Canh", "yearBranch": "Ngọ", "purpose": "branch-coverage" },
+    { "index": 10, "solarDate": "1995-10-15", "yearStem": "Ất", "yearBranch": "Hợi", "purpose": "branch-coverage" },
+    { "index": 11, "solarDate": "2000-11-15", "yearStem": "Canh", "yearBranch": "Thìn", "purpose": "branch-coverage" },
+    { "index": 12, "solarDate": "2005-12-15", "yearStem": "Ất", "yearBranch": "Dậu", "purpose": "branch-coverage" },
+    { "index": 13, "solarDate": "1953-01-15", "yearStem": "Quý", "yearBranch": "Tỵ", "purpose": "stem-coverage" },
+    { "index": 14, "solarDate": "1958-02-15", "yearStem": "Mậu", "yearBranch": "Tuất", "purpose": "stem-coverage" },
+    { "index": 15, "solarDate": "1963-03-15", "yearStem": "Quý", "yearBranch": "Mão", "purpose": "stem-coverage" },
+    { "index": 16, "solarDate": "1968-04-15", "yearStem": "Mậu", "yearBranch": "Thân", "purpose": "stem-coverage" },
+    { "index": 17, "solarDate": "1973-05-15", "yearStem": "Quý", "yearBranch": "Sửu", "purpose": "stem-coverage" },
+    { "index": 18, "solarDate": "1978-06-15", "yearStem": "Mậu", "yearBranch": "Ngọ", "purpose": "stem-coverage" },
+    { "index": 19, "solarDate": "2013-02-10", "yearStem": null, "yearBranch": null, "purpose": "lunar-boundary (solarToLunar: lunar day 1, Tết)" },
+    { "index": 20, "solarDate": "2020-01-25", "yearStem": null, "yearBranch": null, "purpose": "lunar-boundary (solarToLunar: lunar day 1, Tết)" }
+  ],
+  "capturedIndexes": [1, 2],
+  "notCapturedReason": "Fetched in manifest order (§ no cherry-picking after commit), bounded by this session's rate-limited fetch budget — 2/20 dates fully captured (24 hour-records with complete Mệnh relation geometry) this pass, see limitations.v0.2.1.md for the exact count and reusable methodology for the remaining 18."
+}

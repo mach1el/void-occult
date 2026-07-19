@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "0.2.1",
+  "reportId": "huyen-khi-v01-date-recovery-v0-2-1",
+  "generatedAt": "2026-07-19T16:45:00Z",
+  "supersedes": "v01-date-recovery-report.json (V0.2)",
+  "totalV01Records": 18,
+  "attempted": 5,
+  "notAttemptedThisPass": 13,
+  "notAttemptedReason": "Session fetch budget — recovery requires a live, rate-limited request per candidate year; V0.2.1 attempted 3 more records (5 total across V0.2+V0.2.1) to extend coverage while leaving budget for the calendar Mệnh panel corpus and required tooling. Fully reusable for the remaining 13.",
+  "recovered": [
+    {
+      "sampleId": "HK-PUB-002",
+      "recoveredSolarDate": "1997-02-01",
+      "hourBranch": "Dần",
+      "matchedFields": ["lunarMonth", "lunarDay", "yinYang", "gender", "displayedWholeChartTotal", "displayedMenhScore"],
+      "verificationTier": "machine-diff-verified",
+      "note": "Recovered in V0.2; unchanged this pass."
+    },
+    {
+      "sampleId": "HK-PUB-005",
+      "recoveredSolarDate": "1997-12-18",
+      "hourBranch": "Dậu",
+      "matchedFields": ["lunarMonth", "lunarDay", "yinYang", "gender", "displayedWholeChartTotal", "displayedMenhScore"],
+      "verificationTier": "machine-diff-verified",
+      "note": "Two independent WebFetch passes of https://tuvi.cohoc.net/lich-la-so-tu-vi-ngay-18-12-1997.html agreed exactly on lunar month 11, lunar day 19, gender Âm Nam, Mệnh score 1, whole-chart total -1.18 — all matching HK-PUB-005 exactly."
+    },
+    {
+      "sampleId": "HK-PUB-006",
+      "recoveredSolarDate": "1990-01-08",
+      "hourBranch": "Tý",
+      "matchedFields": ["lunarMonth", "lunarDay", "yinYang", "gender", "displayedWholeChartTotal", "displayedMenhScore"],
+      "verificationTier": "machine-diff-verified",
+      "note": "Recovered via 2-of-3 independent WebFetch passes (majority, not unanimous — see limitations.v0.2.1.md 'transient extraction error' finding): pass 1 and pass 3 both gave lunar month 12/day 12, Mệnh 2, total 6.76 (exact match to HK-PUB-006), and pass 3's verbatim quote also matched the exact source phrase 'ÂM NAM sinh năm KỶ TỊ giờ TÍ ngày 12 tháng 12 Âm Lịch' — a strong independent confirmation. Pass 2 alone reported Mệnh 1 / total 6.75, contradicted by both other passes; treated as a single transient extraction error, not a genuine site value."
+    }
+  ],
+  "ambiguousOrMismatched": [
+    {
+      "sampleId": "HK-PUB-001",
+      "candidateSolarDate": "1994-05-20",
+      "outcome": "mismatch",
+      "mismatchedFields": ["lunarDay", "gender", "displayedWholeChartTotal"],
+      "note": "Unchanged from V0.2. Other candidate (1934-05-23) not attempted."
+    },
+    {
+      "sampleId": "HK-PUB-003",
+      "candidateSolarDate": "1970-04-24",
+      "outcome": "partial-match-inconclusive",
+      "matchedFields": ["lunarMonth", "lunarDay", "yinYang", "gender", "displayedMenhScore"],
+      "mismatchedFields": ["displayedWholeChartTotal"],
+      "note": "3 of 4 numeric/identity fields matched HK-PUB-003 exactly (lunar month 3, lunar day 19, gender Dương Nam, Mệnh score 1.0), but the whole-chart total disagreed (-3.19 shown vs. -3.27 expected), confirmed by 2 independent passes both giving -3.19. Per the 'a total-only match is invalid' rule this is not promoted to recovered, but per the unique-candidate rule a mismatch on 1 of 4 fields with 3/4 agreeing is not a clean rejection either — genuinely inconclusive. The other candidate (1910-04-28) was not attempted (implausible/very old, and out of this session's budget). Flagged for a follow-up pass rather than forced either way."
+    }
+  ],
+  "notAttemptedSampleIds": [
+    "HK-PUB-004", "HK-PUB-007", "HK-PUB-008", "HK-PUB-009", "HK-PUB-010",
+    "HK-PUB-011", "HK-PUB-012", "HK-PUB-013", "HK-PUB-014", "HK-PUB-015",
+    "HK-PUB-016", "HK-PUB-017", "HK-PUB-018"
+  ]
+}
