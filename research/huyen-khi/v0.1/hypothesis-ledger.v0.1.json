@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "0.1.0",
+  "hypotheses": [
+    {
+      "hypothesisId": "HYP-HK-001",
+      "status": "testable",
+      "statement": "Whole-chart Huyền Khí is exactly the rounded sum of twelve palace scores.",
+      "currentEvidence": "18/18 public summaries exact.",
+      "nextTest": "At least 200 independently collected summaries."
+    },
+    {
+      "hypothesisId": "HYP-HK-002",
+      "status": "testable",
+      "statement": "Palace scores contain a coarse quarter-step base plus fine residual modifiers.",
+      "currentEvidence": "170/207 observed nonzero scores fall on a 0.25 grid.",
+      "nextTest": "Cluster residuals by star state, void, transformations and Cục relations."
+    },
+    {
+      "hypothesisId": "HYP-HK-003",
+      "status": "unresolved",
+      "statement": "Mệnh/Cục and palace branch establish the coarse base score.",
+      "nextTest": "Controlled same-date 12-hour sets and same-star-configuration contrasts."
+    },
+    {
+      "hypothesisId": "HYP-HK-004",
+      "status": "unresolved",
+      "statement": "Tuần/Triệt and Tứ Hóa produce fine residual adjustments.",
+      "nextTest": "Matched pairs differing only in void or transformation target."
+    },
+    {
+      "hypothesisId": "HYP-HK-005",
+      "status": "rejected-for-now",
+      "statement": "Đẩu Minh or Xí Hoa can be used directly as Huyền Khí.",
+      "reason": "No public source establishes equivalence."
+    },
+    {
+      "hypothesisId": "HYP-HK-006",
+      "status": "rejected",
+      "statement": "A generic support-minus-pressure star sum is Huyền Khí.",
+      "reason": "It does not follow the published conceptual definition and has failed annual-axis calibration."
+    }
+  ]
+}

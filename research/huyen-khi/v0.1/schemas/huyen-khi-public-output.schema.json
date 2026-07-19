@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "huyen-khi-public-output.schema.json",
+  "title": "Huyền Khí public output record",
+  "type": "object",
+  "required": [
+    "sampleId",
+    "metricNamespace",
+    "sourceUrl",
+    "displayedTotal",
+    "palaceScores",
+    "totalValidation"
+  ],
+  "properties": {
+    "sampleId": {
+      "type": "string"
+    },
+    "metricNamespace": {
+      "const": "huyen-khi"
+    },
+    "sourceUrl": {
+      "type": "string",
+      "format": "uri"
+    },
+    "displayedTotal": {
+      "type": "number"
+    },
+    "palaceScores": {
+      "type": "object",
+      "required": [
+        "Mệnh",
+        "Phụ Mẫu",
+        "Phúc Đức",
+        "Điền Trạch",
+        "Quan Lộc",
+        "Nô Bộc",
+        "Thiên Di",
+        "Tật Ách",
+        "Tài Bạch",
+        "Tử Tức",
+        "Phu Thê",
+        "Huynh Đệ"
+      ],
+      "properties": {
+        "Mệnh": {
+          "type": "number"
+        },
+        "Phụ Mẫu": {
+          "type": "number"
+        },
+        "Phúc Đức": {
+          "type": "number"
+        },
+        "Điền Trạch": {
+          "type": "number"
+        },
+        "Quan Lộc": {
+          "type": "number"
+        },
+        "Nô Bộc": {
+          "type": "number"
+        },
+        "Thiên Di": {
+          "type": "number"
+        },
+        "Tật Ách": {
+          "type": "number"
+        },
+        "Tài Bạch": {
+          "type": "number"
+        },
+        "Tử Tức": {
+          "type": "number"
+        },
+        "Phu Thê": {
+          "type": "number"
+        },
+        "Huynh Đệ": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "totalValidation": {
+      "enum": [
+        "exact",
+        "mismatch"
+      ]
+    },
+    "evidenceStatus": {
+      "enum": [
+        "source-confirmed",
+        "output-inferred",
+        "experimental",
+        "unresolved"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

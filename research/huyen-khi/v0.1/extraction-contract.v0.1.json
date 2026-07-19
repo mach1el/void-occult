@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractId": "huyen-khi-public-output-extraction-v0-1",
+  "collectionRules": {
+    "publicPagesOnly": true,
+    "authenticationBypassForbidden": true,
+    "robotsAndTermsMustBeReviewedBeforeAutomation": true,
+    "rateLimitRequestsPerMinuteMax": 6,
+    "storeLongInterpretiveProse": false,
+    "storeNumericFactsAndMinimalMetadataOnly": true,
+    "runtimeDependencyOnSourceSiteForbidden": true,
+    "manualFixtureReviewRequired": true
+  },
+  "requiredFields": [
+    "sourceUrl",
+    "metricNamespace",
+    "birthInput",
+    "displayedTotal",
+    "palaceScores",
+    "extractedAt",
+    "extractorVersion"
+  ],
+  "optionalFields": [
+    "displayedClassification",
+    "cuc",
+    "menhBranch",
+    "thanCu",
+    "publicStarLists"
+  ],
+  "normalization": {
+    "palaceNames": [
+      "Mệnh",
+      "Phụ Mẫu",
+      "Phúc Đức",
+      "Điền Trạch",
+      "Quan Lộc",
+      "Nô Bộc",
+      "Thiên Di",
+      "Tật Ách",
+      "Tài Bạch",
+      "Tử Tức",
+      "Phu Thê",
+      "Huynh Đệ"
+    ],
+    "omittedPalaceScorePolicy": "zero-only-when-the-public-summary-omits-it-and-total-validation-confirms",
+    "rounding": "preserve source precision; validate total at two decimals",
+    "metricNamespacesMustRemainSeparate": [
+      "huyen-khi",
+      "xi-hoa",
+      "dau-minh",
+      "cung-khi"
+    ]
+  }
+}

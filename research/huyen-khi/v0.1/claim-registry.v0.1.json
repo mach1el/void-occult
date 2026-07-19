@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "0.1.0",
+  "registryId": "huyen-khi-claim-registry-v0-1",
+  "claims": [
+    {
+      "claimId": "CLM-HK-001",
+      "status": "source-confirmed",
+      "summary": "Huyền Khí is a palace-level strength concept used to judge whether difficult stars are transformed or damage the palace function.",
+      "sourceIds": [
+        "SRC-HK-COHOC-CONCEPT-001"
+      ]
+    },
+    {
+      "claimId": "CLM-HK-002",
+      "status": "source-confirmed",
+      "summary": "Positive Huyền Khí is used to emphasize strengths; negative Huyền Khí to emphasize weaknesses.",
+      "sourceIds": [
+        "SRC-HK-COHOC-USAGE-001"
+      ]
+    },
+    {
+      "claimId": "CLM-HK-003",
+      "status": "source-confirmed",
+      "summary": "The publisher does not publicly disclose the complete underlying theory and warns against imitation scores.",
+      "sourceIds": [
+        "SRC-HK-COHOC-CONCEPT-001",
+        "SRC-HK-COHOC-USAGE-001"
+      ]
+    },
+    {
+      "claimId": "CLM-HK-004",
+      "status": "output-inferred",
+      "summary": "The displayed whole-chart Huyền Khí total is additive over the twelve displayed palace scores.",
+      "sourceIds": [
+        "SRC-HK-COHOC-PUBLIC-OUTPUT-001"
+      ],
+      "evidence": "18/18 manually transcribed summaries match exactly after omitted palaces are treated as zero."
+    },
+    {
+      "claimId": "CLM-HK-005",
+      "status": "source-confirmed",
+      "summary": "Public Cung Khí pages display 20% palace stem element, 50% palace branch element and 30% palace stem-branch nạp-âm element.",
+      "sourceIds": [
+        "SRC-HK-COHOC-DAUMINH-001"
+      ]
+    },
+    {
+      "claimId": "CLM-HK-006",
+      "status": "unresolved",
+      "summary": "The relationship between Huyền Khí, Xí Hoa and Đẩu Minh is not established by the public sources.",
+      "sourceIds": [
+        "SRC-HK-COHOC-XIHOA-001",
+        "SRC-HK-COHOC-DAUMINH-001"
+      ]
+    },
+    {
+      "claimId": "CLM-HK-007",
+      "status": "output-inferred",
+      "summary": "The score alphabet contains many quarter-step values plus smaller residual adjustments, suggesting at least two numeric layers.",
+      "sourceIds": [
+        "SRC-HK-COHOC-PUBLIC-OUTPUT-001"
+      ],
+      "evidence": "170/207 observed nonzero palace scores are exact multiples of 0.25."
+    }
+  ]
+}

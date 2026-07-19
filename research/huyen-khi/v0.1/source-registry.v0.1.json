@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "0.1.0",
+  "registryId": "huyen-khi-source-registry-v0-1",
+  "sources": [
+    {
+      "sourceId": "SRC-HK-COHOC-CONCEPT-001",
+      "title": "Gợi mở ý tưởng Điểm Huyền Khí",
+      "url": "https://tuvi.cohoc.net/goi-mo-y-tuong-diem-huyen-khi-nid-1264.html",
+      "sourceType": "public-concept-article",
+      "allowedClaims": [
+        "Huyền Khí is described as palace-level qi strength related to whether difficult stars are transformed or become destructive.",
+        "The full underlying theory is not publicly disclosed."
+      ],
+      "notAllowed": [
+        "Exact formula",
+        "numeric coefficient authority"
+      ]
+    },
+    {
+      "sourceId": "SRC-HK-COHOC-USAGE-001",
+      "title": "Hướng dẫn giải đoán lá số tử vi bằng sao chính tinh thủ mệnh",
+      "url": "https://tuvi.cohoc.net/huong-dan-giai-doan-la-so-tu-vi-bang-sao-chinh-tinh-thu-menh-nid-1034.html",
+      "sourceType": "public-usage-article",
+      "allowedClaims": [
+        "Positive Huyền Khí is used to lean toward strengths; negative Huyền Khí toward weaknesses.",
+        "The publisher warns that imitations may be inaccurate."
+      ],
+      "notAllowed": [
+        "Exact formula",
+        "permission to copy proprietary implementation"
+      ]
+    },
+    {
+      "sourceId": "SRC-HK-COHOC-PUBLIC-OUTPUT-001",
+      "title": "Public Huyền Khí chart summaries",
+      "sourceType": "public-output-corpus",
+      "urls": [
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-giap-tuat-thang-4-ngay-11-gio-mao-duong-nu-lid-5861.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-binh-ti-thang-12-ngay-24-gio-dan-duong-nam-lid-105343.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-canh-tuat-thang-3-ngay-19-gio-thin-duong-nu-lid-493141.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-tan-mao-thang-4-ngay-29-gio-dan-am-nu-lid-485026.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-dinh-suu-thang-11-ngay-19-gio-dau-am-nam-lid-381920.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-ky-ti-thang-12-ngay-12-gio-ti-am-nam-lid-95046.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-tan-mao-thang-8-ngay-25-gio-ti-am-nam-lid-405320.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-tan-mui-thang-8-ngay-15-gio-dan-am-nu-lid-87057.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-ky-hoi-thang-8-ngay-23-gio-than-am-nam-lid-395732.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-at-dau-thang-3-ngay-26-gio-dan-am-nu-lid-326574.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-canh-dan-thang-6-ngay-11-gio-dan-duong-nu-lid-397996.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-binh-tuat-thang-12-ngay-1-gio-dau-duong-nu-lid-506902.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-ky-ti-thang-4-ngay-14-gio-ngo-am-nu-lid-18546.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-tan-ti-thang-10-ngay-12-gio-than-am-nam-lid-460800.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-binh-dan-thang-3-ngay-26-gio-dau-duong-nam-lid-344464.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-quy-hoi-thang-4-ngay-24-gio-suu-am-nam-lid-501213.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-binh-ngo-thang-1-ngay-14-gio-ngo-duong-nu-lid-152263.html",
+        "https://tuvi.cohoc.net/la-so-tu-vi-nam-canh-ti-thang-2-ngay-8-gio-dan-duong-nam-lid-408053.html"
+      ],
+      "allowedClaims": [
+        "Displayed whole-chart total and displayed per-palace score vector."
+      ],
+      "notAllowed": [
+        "Copying long interpretive prose",
+        "runtime dependency on the site"
+      ]
+    },
+    {
+      "sourceId": "SRC-HK-COHOC-CALENDAR-001",
+      "title": "Lá số tử vi ngày 8/4/1969",
+      "url": "https://tuvi.cohoc.net/lich-la-so-tu-vi-ngay-8-4-1969.html",
+      "sourceType": "controlled-hour-public-output",
+      "allowedClaims": [
+        "Same-date multi-hour pages expose Mệnh Huyền Khí and whole-chart total for controlled comparisons."
+      ]
+    },
+    {
+      "sourceId": "SRC-HK-COHOC-DAUMINH-001",
+      "title": "Public Tổng hợp chart pages with Cung Khí and Đẩu Minh",
+      "sourceType": "public-output-family",
+      "exampleUrls": [
+        "https://tuvi.cohoc.net/tong-hop-la-so-tu-vi-co-hoc-lid-57917.html",
+        "https://tuvi.cohoc.net/tong-hop-la-so-tu-vi-co-hoc-lid-100109.html"
+      ],
+      "allowedClaims": [
+        "Public pages display a 20% stem, 50% branch and 30% nạp-âm element mixture for Cung Khí.",
+        "Đẩu Minh is displayed as a distinct palace/star metric."
+      ],
+      "notAllowed": [
+        "Assuming Đẩu Minh equals Huyền Khí"
+      ]
+    },
+    {
+      "sourceId": "SRC-HK-COHOC-XIHOA-001",
+      "title": "Public Bắc Phái chart pages with Xí Hoa",
+      "sourceType": "public-output-family",
+      "exampleUrls": [
+        "https://tuvi.cohoc.net/bac-phai-la-so-tu-vi-co-hoc-lid-49134.html",
+        "https://tuvi.cohoc.net/bac-phai-la-so-tu-vi-co-hoc-lid-507383.html"
+      ],
+      "allowedClaims": [
+        "Xí Hoa is a separately named metric shown on Bắc Phái pages."
+      ],
+      "notAllowed": [
+        "Assuming Xí Hoa equals Huyền Khí"
+      ]
+    }
+  ]
+}
