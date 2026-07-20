@@ -25,6 +25,8 @@
     "witnessSeparationViolationCount": 0,
     "incompatibleOperationDimensionCount": 0,
     "hardCodedPrNumberCount": 0,
+    "storedDerivedStatusKeyCount": 0,
+    "reviewReferenceViolationCount": 0,
     "manifestComplete": true,
     "versionConsistent": true
   },

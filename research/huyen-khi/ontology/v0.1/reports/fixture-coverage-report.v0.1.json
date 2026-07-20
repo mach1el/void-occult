@@ -1,6 +1,6 @@
 {
   "reportId": "huyen-khi-fixture-coverage-report-v0-1",
-  "note": "derivedStatus counts come only from the append-only review ledger; maturity is the authoring stage",
+  "note": "derivedStatus counts come only from eligible reviews in the append-only ledger; maturity is the authoring stage; only a reviewable fixture with distinct eligible approvers can be approved",
   "templateCount": 36,
   "derivedStatus": {
     "draft": 36,
@@ -8,6 +8,12 @@
     "approved": 0,
     "disputed": 0,
     "approvedForPromotion": 0
+  },
+  "reviewEligibility": {
+    "ineligibleReviewCount": 0,
+    "schoolIncompatibleReviewCount": 0,
+    "unresolvedReviewReferenceCount": 0,
+    "distinctApprovedReviewerCount": 0
   },
   "maturity": {
     "planned": 36,
