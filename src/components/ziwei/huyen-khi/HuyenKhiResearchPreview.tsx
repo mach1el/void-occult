@@ -12,20 +12,41 @@ import "./huyen-khi-research-preview.css";
 const MINOR_STAR_DEFAULT_LIMIT = 8;
 
 const DIMENSION_LABEL_VI: Record<HuyenKhiDimensionId, string> = {
-  capacity: "Năng lực (Capacity)",
-  coherence: "Liên kết (Coherence)",
-  expression: "Biểu đạt (Expression)",
-  regulation: "Điều tiết (Regulation)",
-  tendency: "Xu hướng (Tendency)",
+  capacity: "Sức chứa",
+  coherence: "Tính kết nối",
+  expression: "Khả năng biểu hiện",
+  regulation: "Khả năng điều tiết",
+  tendency: "Khuynh hướng",
 };
 
 const DIMENSION_DEF_VI: Record<HuyenKhiDimensionId, string> = {
-  capacity: "Khả năng chứa và nuôi dưỡng khí tại cung.",
-  coherence: "Mức độ liên kết nội bộ của cấu trúc khí.",
-  expression: "Cách khí biểu hiện ra ngoài qua cung.",
-  regulation: "Khả năng điều tiết và ổn định khí.",
-  tendency: "Xu hướng vận hành của khí tại cung.",
+  capacity: "Khả năng duy trì và chứa đựng lực cấu trúc tại cung.",
+  coherence: "Mức độ các thành phần tại cung phối hợp hoặc kéo ngược nhau.",
+  expression: "Mức độ cấu trúc tại cung có thể biểu hiện ra ngoài hay bị cản trở.",
+  regulation: "Khả năng kiềm chế, điều hòa hoặc chuyển hóa các yếu tố gây nhiễu.",
+  tendency: "Nhãn định hướng định tính của toàn cấu trúc; không phải điểm tốt hoặc xấu.",
 };
+
+/**
+ * Stable identity for the natal chart only — excludes annualYear/flowBase
+ * and any other temporal display input, so palace selection survives
+ * changing the viewed year without resetting to Mệnh.
+ */
+function natalIdentityKey(chart: ChartData, school: School): string {
+  return [
+    school,
+    chart.solar.year,
+    chart.solar.month,
+    chart.solar.day,
+    chart.timeZone,
+    chart.birthHourBranch,
+    chart.yearStem,
+    chart.yearBranch,
+    chart.menhIndex,
+    chart.thanIndex,
+    chart.cuc.number,
+  ].join(":");
+}
 
 export interface HuyenKhiResearchPreviewProps {
   chart: ChartData;
@@ -67,15 +88,22 @@ export function HuyenKhiResearchPreview({
   const [dimsOpen, setDimsOpen] = useState(false);
   const [researchOpen, setResearchOpen] = useState(false);
 
+  const natalKey = useMemo(() => natalIdentityKey(chart, school), [chart, school]);
+
   useEffect(() => {
     setSelectedPalaceIndex(menhIndex);
     setMinorsExpanded(false);
     setMinorsOpen(false);
     setDimsOpen(false);
     setResearchOpen(false);
-  }, [chart, school, menhIndex]);
+    // Only natal chart identity (or school) resets the selection — a
+    // change to annualYear/flowBase alone must preserve it.
+  }, [natalKey, menhIndex]);
 
-  const selected = preview.palaces.find((p) => p.palaceIndex === selectedPalaceIndex) ?? null;
+  const selected =
+    preview.palaces.find((p) => p.palaceIndex === selectedPalaceIndex) ??
+    preview.palaces.find((p) => p.isMenh) ??
+    null;
 
   function selectPalace(index: number) {
     setSelectedPalaceIndex(index);
@@ -164,8 +192,7 @@ export function HuyenKhiResearchPreview({
                 <h4>Nền cung</h4>
                 <ul>
                   <li>
-                    {selected.palaceName} · {selected.stem ?? "—"}
-                    {selected.branch}
+                    {selected.palaceName} · {selected.stem ?? "—"} {selected.branch}
                   </li>
                   <li>
                     {selected.isMenh ? "Mệnh" : null}
@@ -183,7 +210,7 @@ export function HuyenKhiResearchPreview({
               <section className="huyen-khi-preview__block">
                 <h4>Chính tinh</h4>
                 {selected.majorStars.length === 0 ? (
-                  <p>—</p>
+                  <p>Không có chính tinh tọa thủ.</p>
                 ) : (
                   <ul>
                     {selected.majorStars.map((s) => (
@@ -199,7 +226,7 @@ export function HuyenKhiResearchPreview({
               <section className="huyen-khi-preview__block">
                 <h4>Tứ Hóa gốc</h4>
                 {selected.natalTransformations.length === 0 ? (
-                  <p>—</p>
+                  <p>Không có Tứ Hóa gốc tại cung.</p>
                 ) : (
                   <ul>
                     {selected.natalTransformations.map((t) => (
@@ -214,7 +241,7 @@ export function HuyenKhiResearchPreview({
               <section className="huyen-khi-preview__block">
                 <h4>Tuần / Triệt</h4>
                 {selected.voidMarkers.length === 0 ? (
-                  <p>—</p>
+                  <p>Không có Tuần/Triệt tại cung.</p>
                 ) : (
                   <ul>
                     {selected.voidMarkers.map((v) => (
@@ -231,7 +258,7 @@ export function HuyenKhiResearchPreview({
                     Chính tinh tại đối cung (tham chiếu cấu trúc, không hệ số).
                   </p>
                   {selected.borrowedMajorStars.length === 0 ? (
-                    <p>—</p>
+                    <p>Đối cung không có chính tinh để tham chiếu.</p>
                   ) : (
                     <ul>
                       {selected.borrowedMajorStars.map((s) => (

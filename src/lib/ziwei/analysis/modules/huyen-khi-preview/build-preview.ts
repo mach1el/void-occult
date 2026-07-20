@@ -22,7 +22,41 @@ const VERSIONS = {
   copyVersion: "0.1.0",
 } as const;
 
-function compareByFactId(a: { factId: string }, b: { factId: string }): number {
+/** Deterministic presentation order: canonical Vietnamese name, then fact id. */
+function compareStars(a: HuyenKhiPreviewStar, b: HuyenKhiPreviewStar): number {
+  const byName = a.canonicalStarName.localeCompare(b.canonicalStarName, "vi");
+  return byName || a.factId.localeCompare(b.factId);
+}
+
+const TRANSFORMATION_ORDER: Record<string, number> = {
+  "Lộc": 0,
+  "Quyền": 1,
+  "Khoa": 2,
+  "Kỵ": 3,
+};
+
+/** Deterministic presentation order: Lộc/Quyền/Khoa/Kỵ, then target star, then fact id. */
+function compareTransformations(
+  a: HuyenKhiPreviewTransformation,
+  b: HuyenKhiPreviewTransformation,
+): number {
+  const ra = TRANSFORMATION_ORDER[a.transformation] ?? 99;
+  const rb = TRANSFORMATION_ORDER[b.transformation] ?? 99;
+  if (ra !== rb) return ra - rb;
+  const byTarget = a.targetStar.localeCompare(b.targetStar, "vi");
+  return byTarget || a.factId.localeCompare(b.factId);
+}
+
+const VOID_MARKER_ORDER: Record<string, number> = {
+  "Tuần": 0,
+  "Triệt": 1,
+};
+
+/** Deterministic presentation order: Tuần/Triệt, then fact id. */
+function compareVoidMarkers(a: HuyenKhiPreviewVoidMarker, b: HuyenKhiPreviewVoidMarker): number {
+  const ra = VOID_MARKER_ORDER[a.voidType] ?? 99;
+  const rb = VOID_MARKER_ORDER[b.voidType] ?? 99;
+  if (ra !== rb) return ra - rb;
   return a.factId.localeCompare(b.factId);
 }
 
@@ -53,6 +87,10 @@ function toVoid(fact: NatalZiweiFact): HuyenKhiPreviewVoidMarker | null {
     factId: fact.id,
     voidType: fact.voidType,
   };
+}
+
+function isValidPalaceIndex(index: unknown): index is number {
+  return Number.isInteger(index) && (index as number) >= 0 && (index as number) < 12;
 }
 
 function unavailableResult(
@@ -101,6 +139,32 @@ export function buildHuyenKhiPreview(
     return unavailableResult(school, diagnostics);
   }
 
+  // Mệnh/Thân SSOT: the Calculation Core's own canonical indexes, never a
+  // (possibly stale or malformed) per-palace flag. An invalid canonical
+  // index fails closed rather than silently falling back to a flag.
+  const canonicalMenhIndex = chart.menhIndex;
+  const canonicalThanIndex = chart.thanIndex;
+
+  if (!isValidPalaceIndex(canonicalMenhIndex)) {
+    diagnostics.push(
+      makeDiagnostic(
+        "invalid-menh-index",
+        `chart.menhIndex ${JSON.stringify(canonicalMenhIndex)} is not a valid palace index`,
+      ),
+    );
+  }
+  if (!isValidPalaceIndex(canonicalThanIndex)) {
+    diagnostics.push(
+      makeDiagnostic(
+        "invalid-than-index",
+        `chart.thanIndex ${JSON.stringify(canonicalThanIndex)} is not a valid palace index`,
+      ),
+    );
+  }
+  if (!isValidPalaceIndex(canonicalMenhIndex) || !isValidPalaceIndex(canonicalThanIndex)) {
+    return unavailableResult(school, diagnostics);
+  }
+
   const { facts, duplicateIds } = normalizeNatalFacts(chart, { school });
 
   for (const id of [...duplicateIds].sort()) {
@@ -131,22 +195,29 @@ export function buildHuyenKhiPreview(
     }
   }
 
-  const menhPalaces = chart.palaces.filter((p) => p.isMenh);
-  const thanPalaces = chart.palaces.filter((p) => p.isThan);
-
-  if (menhPalaces.length === 0) {
-    diagnostics.push(makeDiagnostic("missing-menh", "no Mệnh palace flagged"));
-  } else if (menhPalaces.length > 1) {
+  // Flag mismatches (zero/multiple/wrong-palace flags) are diagnostics
+  // only — they never change the canonical-index-derived output below.
+  const menhFlaggedIndexes = chart.palaces.filter((p) => p.isMenh).map((p) => p.index);
+  const menhFlagMismatch =
+    menhFlaggedIndexes.length !== 1 || menhFlaggedIndexes[0] !== canonicalMenhIndex;
+  if (menhFlagMismatch) {
     diagnostics.push(
-      makeDiagnostic("multiple-menh", `found ${menhPalaces.length} Mệnh palaces`),
+      makeDiagnostic(
+        "menh-index-flag-mismatch",
+        `flagged Mệnh palace(s) [${menhFlaggedIndexes.join(",")}] do not match canonical index ${canonicalMenhIndex}`,
+      ),
     );
   }
 
-  if (thanPalaces.length === 0) {
-    diagnostics.push(makeDiagnostic("missing-than", "no Thân palace flagged"));
-  } else if (thanPalaces.length > 1) {
+  const thanFlaggedIndexes = chart.palaces.filter((p) => p.isThan).map((p) => p.index);
+  const thanFlagMismatch =
+    thanFlaggedIndexes.length !== 1 || thanFlaggedIndexes[0] !== canonicalThanIndex;
+  if (thanFlagMismatch) {
     diagnostics.push(
-      makeDiagnostic("multiple-than", `found ${thanPalaces.length} Thân palaces`),
+      makeDiagnostic(
+        "than-index-flag-mismatch",
+        `flagged Thân palace(s) [${thanFlaggedIndexes.join(",")}] do not match canonical index ${canonicalThanIndex}`,
+      ),
     );
   }
 
@@ -162,7 +233,7 @@ export function buildHuyenKhiPreview(
         if (star) majors.push(star);
       }
     }
-    majors.sort(compareByFactId);
+    majors.sort(compareStars);
     majorsByPalace.set(i, majors);
   }
 
@@ -203,23 +274,27 @@ export function buildHuyenKhiPreview(
       }
     }
 
-    majorStars.sort(compareByFactId);
-    minorStars.sort(compareByFactId);
-    natalTransformations.sort(compareByFactId);
-    voidMarkers.sort(compareByFactId);
+    majorStars.sort(compareStars);
+    minorStars.sort(compareStars);
+    natalTransformations.sort(compareTransformations);
+    voidMarkers.sort(compareVoidMarkers);
 
     const opp = oppositePalaceIndex(i);
-    const borrowedMajorStars = [...(majorsByPalace.get(opp) ?? [])];
+    // Populated only for Vô Chính Diệu palaces — a factual display
+    // reference to the opposite palace's resident majors, never a
+    // computed influence. See HuyenKhiPreviewPalace.borrowedMajorStars.
+    const isVoChinhDieu = majorStars.length === 0;
+    const borrowedMajorStars = isVoChinhDieu ? [...(majorsByPalace.get(opp) ?? [])] : [];
 
     palaces.push({
       palaceIndex: i,
       palaceName: palace.name,
       branch: palace.branch,
       stem: palace.stem ?? null,
-      isMenh: Boolean(palace.isMenh),
-      isThan: Boolean(palace.isThan),
+      isMenh: palace.index === canonicalMenhIndex,
+      isThan: palace.index === canonicalThanIndex,
       changShengStage: changShengStage ?? palace.changSheng?.trim() ?? null,
-      isVoChinhDieu: majorStars.length === 0,
+      isVoChinhDieu,
       oppositePalaceIndex: opp,
       trinePalaceIndexes: trinePalaceIndexes(i),
       majorStars,
@@ -236,10 +311,8 @@ export function buildHuyenKhiPreview(
 
   const blocking = new Set([
     "invalid-chart",
-    "missing-menh",
-    "multiple-menh",
-    "missing-than",
-    "multiple-than",
+    "invalid-menh-index",
+    "invalid-than-index",
     "missing-palace",
   ]);
   const hasBlocking = diagnostics.some((d) => blocking.has(d.code));

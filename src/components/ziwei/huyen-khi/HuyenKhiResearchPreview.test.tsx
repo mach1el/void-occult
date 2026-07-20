@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
+import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import type { BirthInput } from "@/types/chart";
 import {
   HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG,
@@ -116,7 +117,7 @@ describe("HuyenKhiResearchPreview", () => {
     expect(text).not.toMatch(/\b[0-9]+(\.[0-9]+)?\s*%/);
   });
 
-  it("resets selection to Mệnh when school/chart identity changes", () => {
+  it("resets selection to Mệnh when a natal identity field (birth hour) changes", () => {
     const chartA = calculateNamPhai(REGRESSION);
     const { rerender, container } = render(
       <HuyenKhiResearchPreview chart={chartA} school="nam-phai" />,
@@ -134,5 +135,95 @@ describe("HuyenKhiResearchPreview", () => {
     const menh = chartB.palaces.find((p) => p.isMenh);
     const selected = container.querySelector('.huyen-khi-preview__palace.is-selected');
     expect(selected?.textContent ?? "").toContain(menh!.name);
+  });
+
+  it("preserves a non-Mệnh selection across an annualYear-only rerender (same natal input)", () => {
+    const chartA = calculateNamPhai({ ...REGRESSION, annualYear: "2026" });
+    const { rerender, container } = render(
+      <HuyenKhiResearchPreview chart={chartA} school="nam-phai" />,
+    );
+
+    const nonMenh = screen.getAllByRole("option").find(
+      (o) => o.getAttribute("aria-selected") !== "true",
+    );
+    expect(nonMenh).toBeDefined();
+    const nonMenhLabel = nonMenh!.textContent;
+    fireEvent.click(nonMenh!);
+
+    const selectedBefore = container.querySelector(".huyen-khi-preview__palace.is-selected");
+    expect(selectedBefore?.textContent).toBe(nonMenhLabel);
+
+    // Same natal input, only annualYear differs — mirrors what ChartPage
+    // does when the user changes the viewed year.
+    const chartB = calculateNamPhai({ ...REGRESSION, annualYear: "2031" });
+    rerender(<HuyenKhiResearchPreview chart={chartB} school="nam-phai" />);
+
+    const selectedAfter = container.querySelector(".huyen-khi-preview__palace.is-selected");
+    expect(selectedAfter?.textContent).toBe(nonMenhLabel);
+  });
+
+  it("resets selection to the new school's own Mệnh when school changes", () => {
+    const chartNamPhai = calculateNamPhai(REGRESSION);
+    const { rerender, container } = render(
+      <HuyenKhiResearchPreview chart={chartNamPhai} school="nam-phai" />,
+    );
+
+    const nonMenh = screen.getAllByRole("option").find(
+      (o) => o.getAttribute("aria-selected") !== "true",
+    );
+    fireEvent.click(nonMenh!);
+
+    const chartTrungChau = calculateTrungChau(REGRESSION);
+    rerender(<HuyenKhiResearchPreview chart={chartTrungChau} school="trung-chau" />);
+
+    const menh = chartTrungChau.palaces.find((p) => p.isMenh);
+    const selected = container.querySelector(".huyen-khi-preview__palace.is-selected");
+    expect(selected?.textContent ?? "").toContain(menh!.name);
+  });
+
+  it("renders dimension labels and definitions matching ontology V0.1 vocabulary", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const { container } = render(
+      <HuyenKhiResearchPreview chart={chart} school="nam-phai" />,
+    );
+
+    const dims = container.querySelector('[data-dimensions-collapsed]');
+    fireEvent.click(within(dims as HTMLElement).getByText("Khung đánh giá Huyền Khí"));
+
+    const text = container.textContent ?? "";
+    expect(text).toContain("Sức chứa");
+    expect(text).toContain("Tính kết nối");
+    expect(text).toContain("Khả năng biểu hiện");
+    expect(text).toContain("Khả năng điều tiết");
+    expect(text).toContain("Khuynh hướng");
+    expect(text).toContain(
+      "Khả năng duy trì và chứa đựng lực cấu trúc tại cung.",
+    );
+    expect(text).toContain(
+      "Mức độ các thành phần tại cung phối hợp hoặc kéo ngược nhau.",
+    );
+    expect(text).toContain(
+      "Mức độ cấu trúc tại cung có thể biểu hiện ra ngoài hay bị cản trở.",
+    );
+    expect(text).toContain(
+      "Khả năng kiềm chế, điều hòa hoặc chuyển hóa các yếu tố gây nhiễu.",
+    );
+    expect(text).toContain(
+      "Nhãn định hướng định tính của toàn cấu trúc; không phải điểm tốt hoặc xấu.",
+    );
+    // Guard against the two rejected definitions the finalization prompt
+    // explicitly calls out.
+    expect(text).not.toContain("nuôi dưỡng");
+    expect(text).not.toMatch(/ổn định khí/);
+  });
+
+  it("renders stem and branch with a space between them (no concatenation)", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const { container } = render(
+      <HuyenKhiResearchPreview chart={chart} school="nam-phai" />,
+    );
+    const menh = chart.palaces.find((p) => p.isMenh)!;
+    const detail = container.querySelector(".huyen-khi-preview__detail");
+    expect(detail?.textContent ?? "").toContain(`${menh.stem} ${menh.branch}`);
   });
 });

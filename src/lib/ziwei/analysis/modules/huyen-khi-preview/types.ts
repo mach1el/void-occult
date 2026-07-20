@@ -27,10 +27,10 @@ export type HuyenKhiPreviewDiagnosticCode =
   | "invalid-chart"
   | "duplicate-natal-fact-id"
   | "missing-palace"
-  | "missing-menh"
-  | "multiple-menh"
-  | "missing-than"
-  | "multiple-than"
+  | "invalid-menh-index"
+  | "invalid-than-index"
+  | "menh-index-flag-mismatch"
+  | "than-index-flag-mismatch"
   | "school-mismatch"
   | "unsupported-natal-fact";
 
@@ -74,7 +74,11 @@ export interface HuyenKhiPreviewPalace {
   minorStars: HuyenKhiPreviewStar[];
   natalTransformations: HuyenKhiPreviewTransformation[];
   voidMarkers: HuyenKhiPreviewVoidMarker[];
-  /** Major stars resident in the opposite palace — factual reference only. */
+  /**
+   * Major stars resident in the opposite palace.
+   * Populated only when the focus palace is Vô Chính Diệu.
+   * Factual display reference only; never a computed influence.
+   */
   borrowedMajorStars: HuyenKhiPreviewStar[];
   dimensionStates: HuyenKhiDimensionStates;
   dimensionStateReason: "symbolic-evaluator-not-promoted";
