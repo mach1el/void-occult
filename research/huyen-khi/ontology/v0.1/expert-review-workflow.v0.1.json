@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "0.1.0",
+  "workflowId": "huyen-khi-expert-review-workflow-v0-1",
+  "roles": [
+    "researcher",
+    "source-reviewer",
+    "school-expert",
+    "adjudicator"
+  ],
+  "states": [
+    "draft",
+    "reviewed",
+    "approved",
+    "disputed"
+  ],
+  "requirements": {
+    "reviewed": [
+      "one source-reviewer or school-expert review",
+      "explicit school",
+      "rationale",
+      "resolved source IDs"
+    ],
+    "approved": [
+      "two independent reviews or expert plus adjudicator",
+      "no silent contradiction",
+      "expected dimensions and rules completed"
+    ],
+    "disputed": [
+      "retain all conflicting reviews",
+      "exclude from promotion metrics"
+    ]
+  },
+  "blindReviewRecommended": true,
+  "personalChartDataRequired": false
+}

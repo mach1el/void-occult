@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "0.1.0",
+  "policyId": "huyen-khi-claim-provenance-policy-v0-1",
+  "note": "Which claim statuses require a structured locator, and of which kind. Enforced at load/validate time in addition to the claim schema. Contradictions are recorded via supports/contradicts/qualifies links and are NEVER auto-resolved.",
+  "locatorKinds": [
+    "physical-witness",
+    "searchable-transcription",
+    "modern-commentary",
+    "internal-specification",
+    "expert-review-evidence",
+    "external-benchmark"
+  ],
+  "doctrinalLocatorRequiredForStatus": [
+    "primary-source-reviewed",
+    "secondary-source-reviewed",
+    "expert-consensus",
+    "experimental"
+  ],
+  "doctrinalLocatorKinds": [
+    "physical-witness",
+    "searchable-transcription",
+    "modern-commentary",
+    "expert-review-evidence"
+  ],
+  "engineeringPolicyStatuses": [
+    "approved-engineering",
+    "approved-research-policy"
+  ],
+  "engineeringPolicyLocatorKinds": [
+    "internal-specification"
+  ],
+  "locatorNotRequiredForStatus": ["disputed", "unresolved"],
+  "contradictionLinkFields": [
+    "supportsClaimIds",
+    "contradictsClaimIds",
+    "qualifiesClaimIds"
+  ],
+  "autoResolveContradictions": false,
+  "transcriptionRule": "A searchable-transcription source must declare derivedFromSourceId pointing to its physical-witness source; a transcription locator must be cross-checked against the witness before promotion."
+}

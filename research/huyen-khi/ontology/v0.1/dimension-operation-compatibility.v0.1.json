@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractId": "huyen-khi-dimension-operation-compatibility-v0-1",
+  "note": "Declarative allow-list of (dimension, operation) pairs. Symbolic only — no numeric delta is implied. An operation not listed under a dimension is INVALID and must be rejected (never silently coerced) by both the compatibility schema check and runtime rule validation.",
+  "compatibility": {
+    "capacity": ["strengthen", "weaken", "nourish", "deplete", "transform"],
+    "coherence": ["stabilize", "destabilize", "transform"],
+    "expression": ["block", "restrict", "release", "transform"],
+    "regulation": ["regulate", "overwhelm", "transform"],
+    "tendency": ["classify", "orient"]
+  },
+  "rationale": {
+    "capacity": "capacity is grown or drained: strengthen/weaken and nourish/deplete; transform may transmute it.",
+    "coherence": "coherence is steadied or scattered: stabilize/destabilize; transform may transmute it.",
+    "expression": "expression is opened, narrowed or shut: release/restrict/block; transform may transmute it.",
+    "regulation": "regulation either contains or is overrun: regulate/overwhelm; transform may transmute it.",
+    "tendency": "tendency is an orientation label only: classify/orient. No strengthen/weaken vocabulary and no aggregation."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "reportId": "huyen-khi-fixture-coverage-report-v0-1",
+  "note": "derivedStatus counts come only from eligible reviews in the append-only ledger; maturity is the authoring stage; only a reviewable fixture with distinct eligible approvers can be approved",
+  "templateCount": 36,
+  "derivedStatus": {
+    "draft": 36,
+    "reviewed": 0,
+    "approved": 0,
+    "disputed": 0,
+    "approvedForPromotion": 0
+  },
+  "reviewEligibility": {
+    "ineligibleReviewCount": 0,
+    "schoolIncompatibleReviewCount": 0,
+    "unresolvedReviewReferenceCount": 0,
+    "distinctApprovedReviewerCount": 0
+  },
+  "maturity": {
+    "planned": 36,
+    "researchReady": 0,
+    "reviewable": 0
+  },
+  "minimumApprovedRequiredForNextPhase": 30,
+  "meetsTemplateMinimum": true,
+  "meetsApprovedPromotionGate": false,
+  "byCategory": {
+    "coherence": 1,
+    "combination": 1,
+    "dimension-separation": 4,
+    "major-star-brightness": 4,
+    "palace-foundation": 3,
+    "regulation": 3,
+    "relation-geometry": 5,
+    "transformation": 6,
+    "vo-chinh-dieu": 4,
+    "void-marker": 5
+  },
+  "bySchool": {
+    "shared": 36
+  }
+}

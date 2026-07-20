@@ -20,7 +20,11 @@
     "research:huyen-khi:analyze": "HUYEN_KHI_BUILD_REPORT=1 vitest run src/lib/ziwei/research/huyen-khi/__tests__/generate-report.write.test.ts",
     "research:huyen-khi:validate-v02": "vitest run src/lib/ziwei/research/huyen-khi/__tests__/recover-v01-dates.test.ts src/lib/ziwei/research/huyen-khi/__tests__/gold-workflow.test.ts src/lib/ziwei/research/huyen-khi/__tests__/build-controlled-corpus-v02.test.ts src/lib/ziwei/research/huyen-khi/__tests__/build-chart-fact-snapshot-v02.test.ts",
     "research:huyen-khi:validate-v021": "vitest run src/lib/ziwei/research/huyen-khi/__tests__/validate-calendar-panel.test.ts src/lib/ziwei/research/huyen-khi/__tests__/compare-source-core.test.ts src/lib/ziwei/research/huyen-khi/__tests__/parse-menh-geometry.test.ts src/lib/ziwei/research/huyen-khi/__tests__/lunar-date-adjudication.test.ts src/lib/ziwei/research/huyen-khi/__tests__/output-scope-isolation.test.ts",
-    "research:huyen-khi:build-reports-v021": "HUYEN_KHI_BUILD_REPORT_V02_1=1 vitest run src/lib/ziwei/research/huyen-khi/__tests__/generate-v0-2-1-reports.write.test.ts"
+    "research:huyen-khi:build-reports-v021": "HUYEN_KHI_BUILD_REPORT_V02_1=1 vitest run src/lib/ziwei/research/huyen-khi/__tests__/generate-v0-2-1-reports.write.test.ts",
+    "research:huyen-khi:validate-ontology": "npx tsx src/lib/ziwei/research/huyen-khi/ontology/cli/validate-ontology.ts",
+    "research:huyen-khi:validate-fixtures": "npx tsx src/lib/ziwei/research/huyen-khi/ontology/cli/validate-fixtures.ts",
+    "research:huyen-khi:report-ontology": "npx tsx src/lib/ziwei/research/huyen-khi/ontology/cli/report-ontology.ts",
+    "research:huyen-khi:review-fixture": "npx tsx src/lib/ziwei/research/huyen-khi/ontology/cli/review-fixture.ts"
   },
   "dependencies": {
     "html-to-image": "1.11.13",

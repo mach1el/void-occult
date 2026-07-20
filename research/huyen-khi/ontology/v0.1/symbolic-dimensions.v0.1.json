@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "huyen-khi-symbolic-dimensions-v0-1",
+  "vocabularyNote": "These five dimensions are an ApexVoid analytical vocabulary. They are NOT claimed to be traditional canonical Tử Vi terms, and they carry no numeric mapping. Aggregation across dimensions is deferred to a later phase.",
+  "dimensions": {
+    "capacity": {
+      "orderedStates": ["depleted", "weak", "adequate", "strong", "abundant"],
+      "epistemicStatus": "apexvoid-engineered-construct",
+      "description": "Structural qi capacity: how much sustaining force a palace holds and can retain.",
+      "assessmentTargetKinds": ["palace-foundation", "major-star", "brightness", "void-marker"],
+      "observableIndicators": [
+        "presence or absence of major stars in the palace",
+        "canonical brightness of resident major stars",
+        "Vô Chính Diệu (empty of major stars) status"
+      ],
+      "nonClaims": [
+        "not a luck or fortune score",
+        "not the Palace Overview capacity/stability axis or any numeric vector",
+        "no numeric magnitude is implied"
+      ],
+      "aggregationDeferred": true,
+      "numericMappingForbidden": true
+    },
+    "coherence": {
+      "orderedStates": ["fragmented", "conflicted", "mixed", "coherent", "integrated"],
+      "epistemicStatus": "apexvoid-engineered-construct",
+      "description": "Whether the palace's components coordinate or pull apart / conflict.",
+      "assessmentTargetKinds": ["star-family", "relation", "five-element"],
+      "observableIndicators": [
+        "complementary versus conflicting star families co-present",
+        "relation geometry (opposite / trine) alignment",
+        "five-element agreement or clash among residents"
+      ],
+      "nonClaims": [
+        "not a harmony percentage",
+        "not derived from any prior module driver or aggregate"
+      ],
+      "aggregationDeferred": true,
+      "numericMappingForbidden": true
+    },
+    "expression": {
+      "orderedStates": ["blocked", "restricted", "available", "expressive"],
+      "epistemicStatus": "apexvoid-engineered-construct",
+      "description": "Whether the palace's qi can manifest outward or is impeded.",
+      "assessmentTargetKinds": ["void-marker", "transformation", "major-star"],
+      "observableIndicators": [
+        "Tuần / Triệt presence over the palace",
+        "natal transformations enabling or obstructing expression",
+        "bright versus hidden major-star placement"
+      ],
+      "nonClaims": [
+        "not an activation timing or annual trigger",
+        "does not import Annual Axes activation scores"
+      ],
+      "aggregationDeferred": true,
+      "numericMappingForbidden": true
+    },
+    "regulation": {
+      "orderedStates": ["overwhelmed", "insufficient", "conditional", "effective"],
+      "epistemicStatus": "apexvoid-engineered-construct",
+      "description": "Whether disruptive factors can be contained, moderated or transformed.",
+      "assessmentTargetKinds": ["minor-star", "star-family", "transformation", "combination"],
+      "observableIndicators": [
+        "containing / moderating minor-star families present",
+        "disruptive minor-star families present",
+        "transformations that convert or aggravate disruption"
+      ],
+      "nonClaims": [
+        "not a risk number or pressure score",
+        "not the Palace Overview pressure axis"
+      ],
+      "aggregationDeferred": true,
+      "numericMappingForbidden": true
+    },
+    "tendency": {
+      "unorderedStates": ["nourishing", "mixed", "pressuring", "unresolved"],
+      "epistemicStatus": "apexvoid-engineered-construct",
+      "description": "A qualitative orientation label only: nourishing, mixed, pressuring, or not-yet-determined.",
+      "assessmentTargetKinds": ["palace-foundation", "combination"],
+      "observableIndicators": [
+        "qualitative orientation of the co-present structure",
+        "unresolved when evidence is insufficient"
+      ],
+      "nonClaims": [
+        "tendency is NOT the old support/pressure axis",
+        "must NOT import support/pressure scores, drivers, deltas or vectors",
+        "an orientation label, never an aggregated numeric outcome"
+      ],
+      "aggregationDeferred": true,
+      "numericMappingForbidden": true
+    }
+  },
+  "magnitudeVocabulary": ["trace", "light", "moderate", "strong", "dominant"],
+  "effectOperations": [
+    "strengthen",
+    "weaken",
+    "stabilize",
+    "destabilize",
+    "block",
+    "restrict",
+    "release",
+    "nourish",
+    "deplete",
+    "regulate",
+    "overwhelm",
+    "transform",
+    "classify",
+    "orient"
+  ],
+  "operationVocabularyNote": "Operations are symbolic verbs, never numeric deltas. `restrict` sits between block and release for expression; `classify`/`orient` are tendency-only orientation verbs; `transform` is the cross-cutting transmutation verb (not on tendency). Allowed (dimension, operation) pairs are declared in dimension-operation-compatibility.v0.1.json."
+}

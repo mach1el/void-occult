@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "huyen-khi-example-rules-v0-1",
+  "effective": false,
+  "notes": "Schema examples only. Never loaded as knowledge.",
+  "rules": [
+    {
+      "ruleId": "HK-RULE-EXAMPLE-MAJOR-STATE",
+      "version": "0.1.0",
+      "status": "draft",
+      "schoolProfile": "shared",
+      "specificity": "exact-star-state",
+      "subject": {
+        "kind": "major-star",
+        "id": "example-major-star"
+      },
+      "conditions": [
+        {
+          "fact": "brightness",
+          "operator": "equals",
+          "value": "Miếu"
+        }
+      ],
+      "effects": [
+        {
+          "dimension": "expression",
+          "operation": "release",
+          "magnitude": "moderate"
+        },
+        {
+          "dimension": "capacity",
+          "operation": "strengthen",
+          "magnitude": "light"
+        }
+      ],
+      "stackingGroup": "example-major-state",
+      "suppressesRuleIds": [],
+      "sourceIds": [
+        "HK-SRC-SPEC-001"
+      ],
+      "claimIds": [],
+      "limitations": [
+        "Schema example only."
+      ]
+    },
+    {
+      "ruleId": "HK-RULE-EXAMPLE-VOID",
+      "version": "0.1.0",
+      "status": "draft",
+      "schoolProfile": "shared",
+      "specificity": "generic-structure",
+      "subject": {
+        "kind": "void-marker",
+        "id": "example-void"
+      },
+      "conditions": [],
+      "effects": [
+        {
+          "dimension": "expression",
+          "operation": "block",
+          "magnitude": "moderate"
+        }
+      ],
+      "stackingGroup": "example-void",
+      "suppressesRuleIds": [],
+      "sourceIds": [
+        "HK-SRC-SPEC-001"
+      ],
+      "claimIds": [],
+      "limitations": [
+        "Real Tuần/Triệt behavior is condition-dependent."
+      ]
+    }
+  ]
+}

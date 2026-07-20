@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "0.1.0",
+  "matrixId": "huyen-khi-source-witness-matrix-v0-1",
+  "note": "Separates physical source witnesses from searchable transcriptions, modern commentary, internal specification, expert review evidence and external benchmark output. A transcription is never the same identity as its scan.",
+  "witnesses": [
+    {
+      "sourceId": "HK-SRC-CLASSIC-001",
+      "role": "physical-witness",
+      "title": "紫微斗數全書 — National Archives of Japan scan",
+      "derivedFromSourceId": null,
+      "editionResolved": false,
+      "verificationStatus": "locator-provided"
+    },
+    {
+      "sourceId": "HK-SRC-CLASSIC-TRANSCRIPTION-001",
+      "role": "searchable-transcription",
+      "title": "紫微斗數全書 — Wikisource transcription",
+      "derivedFromSourceId": "HK-SRC-CLASSIC-001",
+      "editionResolved": false,
+      "verificationStatus": "unverified"
+    },
+    {
+      "sourceId": "HK-SRC-VN-001",
+      "role": "modern-commentary",
+      "title": "Tử Vi Đẩu Số Tân Biên (Vân Đằng Thái Thứ Lang)",
+      "derivedFromSourceId": null,
+      "editionResolved": false,
+      "verificationStatus": "unverified"
+    },
+    {
+      "sourceId": "HK-SRC-TC-001",
+      "role": "modern-commentary",
+      "title": "中州派紫微斗數 (Zhongzhou school) bibliography",
+      "derivedFromSourceId": null,
+      "editionResolved": false,
+      "verificationStatus": "unverified"
+    },
+    {
+      "sourceId": "HK-SRC-SPEC-001",
+      "role": "internal-specification",
+      "title": "ApexVoid Huyền Khí Ontology V0.1 Specification",
+      "derivedFromSourceId": null,
+      "editionResolved": true,
+      "verificationStatus": "locator-provided"
+    },
+    {
+      "sourceId": "HK-SRC-EXPERT-001",
+      "role": "expert-review-evidence",
+      "title": "ApexVoid expert review ledger",
+      "derivedFromSourceId": null,
+      "editionResolved": true,
+      "verificationStatus": "unverified"
+    },
+    {
+      "sourceId": "HK-SRC-EXTERNAL-001",
+      "role": "external-benchmark",
+      "title": "Tử Vi Cổ Học public output corpus",
+      "derivedFromSourceId": null,
+      "editionResolved": true,
+      "verificationStatus": "locator-provided"
+    }
+  ]
+}

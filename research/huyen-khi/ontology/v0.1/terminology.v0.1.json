@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "huyen-khi-terminology-v0-1",
+  "dimensionEpistemicNote": "The five dimensions (capacity, coherence, expression, regulation, tendency) are ApexVoid engineered analytical constructs, not traditional canonical Tử Vi terms. They carry no numeric mapping and cross-dimension aggregation is deferred. `tendency` in particular is NOT the old support/pressure axis and must not import its scores, drivers, deltas or vectors.",
+  "terms": [
+    {
+      "termId": "capacity",
+      "labelVi": "Khí lực",
+      "definition": "Khả năng cấu trúc của cung chứa và duy trì tác động khí.",
+      "notEquivalentTo": [
+        "điểm tốt",
+        "Palace Overview score"
+      ]
+    },
+    {
+      "termId": "coherence",
+      "labelVi": "Độ quy tụ",
+      "definition": "Mức các thành phần phối hợp hay phân tán/xung đột."
+    },
+    {
+      "termId": "expression",
+      "labelVi": "Khả năng biểu hiện",
+      "definition": "Mức khí có thể biểu lộ hay bị chặn/hạn chế."
+    },
+    {
+      "termId": "regulation",
+      "labelVi": "Khả năng chế hóa",
+      "definition": "Khả năng điều tiết, chứa hoặc chuyển hóa tác động phá/nhiễu."
+    },
+    {
+      "termId": "tendency",
+      "labelVi": "Khuynh hướng khí",
+      "definition": "Bồi dưỡng, hỗn hợp, gây áp lực hoặc chưa đủ dữ liệu."
+    },
+    {
+      "termId": "dynamic-activation",
+      "labelVi": "Kích hoạt thời vận",
+      "definition": "Deferred to a later phase.",
+      "phase": "deferred"
+    }
+  ],
+  "namespaceSeparations": [
+    {
+      "left": "huyen-khi",
+      "right": "palace-overview",
+      "rule": "No scores, axes, drivers or numeric vectors cross."
+    },
+    {
+      "left": "huyen-khi",
+      "right": "annual-axes",
+      "rule": "Annual Axes is not a natal qi source."
+    },
+    {
+      "left": "huyen-khi",
+      "right": "external-output",
+      "rule": "Benchmark only."
+    }
+  ]
+}

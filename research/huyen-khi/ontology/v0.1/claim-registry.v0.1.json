@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "0.1.0",
+  "registryId": "huyen-khi-claim-registry-v0-1",
+  "claims": [
+    {
+      "claimId": "HK-CLM-BOUNDARY-001",
+      "summary": "Calculation Core owns physical facts, not Huyền Khí interpretation.",
+      "status": "approved-engineering",
+      "sourceIds": ["HK-SRC-CORE-001", "HK-SRC-SPEC-001"],
+      "locator": {
+        "locatorKind": "internal-specification",
+        "sourceId": "HK-SRC-SPEC-001",
+        "section": "Existing module isolation",
+        "verificationStatus": "locator-provided"
+      }
+    },
+    {
+      "claimId": "HK-CLM-BOUNDARY-002",
+      "summary": "External scores are benchmark-only.",
+      "status": "approved-engineering",
+      "sourceIds": ["HK-SRC-EXTERNAL-001", "HK-SRC-SPEC-001"],
+      "locator": {
+        "locatorKind": "internal-specification",
+        "sourceId": "HK-SRC-SPEC-001",
+        "section": "Core pipeline / Forbidden",
+        "verificationStatus": "locator-provided"
+      }
+    },
+    {
+      "claimId": "HK-CLM-BOUNDARY-003",
+      "summary": "V0.1 has symbolic effects and no numeric score coefficients.",
+      "status": "approved-engineering",
+      "sourceIds": ["HK-SRC-SPEC-001"],
+      "locator": {
+        "locatorKind": "internal-specification",
+        "sourceId": "HK-SRC-SPEC-001",
+        "section": "Symbolic effects only",
+        "verificationStatus": "locator-provided"
+      }
+    },
+    {
+      "claimId": "HK-CLM-RESEARCH-001",
+      "summary": "Classical claims require a locator and review before rule promotion.",
+      "status": "approved-research-policy",
+      "sourceIds": ["HK-SRC-CLASSIC-001", "HK-SRC-SPEC-001"],
+      "locator": {
+        "locatorKind": "internal-specification",
+        "sourceId": "HK-SRC-SPEC-001",
+        "section": "Provenance chain",
+        "verificationStatus": "locator-provided"
+      }
+    },
+    {
+      "claimId": "HK-CLM-UNRESOLVED-001",
+      "summary": "The relation between external proprietary scores and ApexVoid ontology is unresolved.",
+      "status": "unresolved",
+      "sourceIds": ["HK-SRC-EXTERNAL-001", "HK-SRC-SPEC-001"],
+      "qualifiesClaimIds": ["HK-CLM-BOUNDARY-002"]
+    }
+  ]
+}

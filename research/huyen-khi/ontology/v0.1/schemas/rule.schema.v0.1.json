@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "huyen-khi-rule.schema.v0.1.json",
+  "type": "object",
+  "required": [
+    "ruleId",
+    "version",
+    "status",
+    "schoolProfile",
+    "specificity",
+    "subject",
+    "conditions",
+    "effects",
+    "stackingGroup",
+    "sourceIds"
+  ],
+  "properties": {
+    "ruleId": {
+      "type": "string",
+      "pattern": "^HK-RULE-"
+    },
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "reviewed",
+        "approved",
+        "experimental",
+        "disputed",
+        "disabled"
+      ]
+    },
+    "schoolProfile": {
+      "enum": [
+        "shared",
+        "nam-phai",
+        "trung-chau"
+      ]
+    },
+    "specificity": {
+      "enum": [
+        "exact-combination",
+        "exact-star-state",
+        "exact-star",
+        "star-family",
+        "generic-structure"
+      ]
+    },
+    "subject": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "palace-foundation",
+            "major-star",
+            "minor-star",
+            "star-family",
+            "transformation",
+            "void-marker",
+            "relation",
+            "combination"
+          ]
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "effects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "dimension",
+          "operation",
+          "magnitude"
+        ],
+        "properties": {
+          "dimension": {
+            "enum": [
+              "capacity",
+              "coherence",
+              "expression",
+              "regulation",
+              "tendency"
+            ]
+          },
+          "operation": {
+            "enum": [
+              "strengthen",
+              "weaken",
+              "stabilize",
+              "destabilize",
+              "block",
+              "restrict",
+              "release",
+              "nourish",
+              "deplete",
+              "regulate",
+              "overwhelm",
+              "transform",
+              "classify",
+              "orient"
+            ]
+          },
+          "magnitude": {
+            "enum": [
+              "trace",
+              "light",
+              "moderate",
+              "strong",
+              "dominant"
+            ]
+          },
+          "targetFactSelector": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "stackingGroup": {
+      "type": "string",
+      "minLength": 1
+    },
+    "suppressesRuleIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sourceIds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "claimIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

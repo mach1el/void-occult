@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "huyen-khi-source.schema.v0.1.json",
+  "type": "object",
+  "required": [
+    "sourceId",
+    "title",
+    "kind",
+    "status"
+  ],
+  "properties": {
+    "sourceId": {
+      "type": "string",
+      "pattern": "^HK-SRC-"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "calculation-core",
+        "classical-primary",
+        "classical-transcription",
+        "modern-vietnamese-reference",
+        "modern-chinese-reference",
+        "expert-review",
+        "external-output-benchmark",
+        "internal-specification"
+      ]
+    },
+    "status": {
+      "type": "string"
+    },
+    "witnessKind": {
+      "enum": ["physical-scan", "searchable-transcription", "bibliography-only", "not-applicable"]
+    },
+    "derivedFromSourceId": {
+      "type": "string",
+      "pattern": "^HK-SRC-"
+    },
+    "allowedUsage": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "prohibitedUsage": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

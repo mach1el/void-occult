@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "0.1.0",
+  "queueId": "huyen-khi-source-extraction-queue-v0-1",
+  "tasks": [
+    {
+      "taskId": "HK-EXT-001",
+      "topic": "Fourteen major stars: nature, element, yin-yang, regulation and vulnerable conditions",
+      "priority": 1,
+      "candidateSourceIds": [
+        "HK-SRC-CLASSIC-001",
+        "HK-SRC-VN-001"
+      ],
+      "requiredOutput": [
+        "claims",
+        "locators",
+        "contradictions"
+      ],
+      "automaticExtractionForbidden": true
+    },
+    {
+      "taskId": "HK-EXT-002",
+      "topic": "Brightness states by symbolic dimension",
+      "priority": 1,
+      "candidateSourceIds": [
+        "HK-SRC-CLASSIC-001",
+        "HK-SRC-VN-001"
+      ],
+      "requiredOutput": [
+        "state claims",
+        "school profile",
+        "limitations"
+      ]
+    },
+    {
+      "taskId": "HK-EXT-003",
+      "topic": "Vô Chính Diệu and borrowed relation structure",
+      "priority": 1,
+      "candidateSourceIds": [
+        "HK-SRC-CLASSIC-001",
+        "HK-SRC-VN-001"
+      ],
+      "requiredOutput": [
+        "conditions",
+        "relation roles",
+        "counterexamples"
+      ]
+    },
+    {
+      "taskId": "HK-EXT-004",
+      "topic": "Tuần and Triệt mechanisms",
+      "priority": 1,
+      "candidateSourceIds": [
+        "HK-SRC-VN-001",
+        "HK-SRC-EXPERT-001"
+      ],
+      "requiredOutput": [
+        "block/release effects",
+        "beneficial/harmful asymmetry",
+        "state dependence"
+      ]
+    },
+    {
+      "taskId": "HK-EXT-005",
+      "topic": "Tứ Hóa exact-target mechanisms",
+      "priority": 1,
+      "candidateSourceIds": [
+        "HK-SRC-CLASSIC-001",
+        "HK-SRC-VN-001"
+      ],
+      "requiredOutput": [
+        "transformation meaning",
+        "target conditions",
+        "school differences"
+      ]
+    },
+    {
+      "taskId": "HK-EXT-006",
+      "topic": "Relation geometry: tọa, xung, tam hợp, nhị hợp, giáp",
+      "priority": 2,
+      "candidateSourceIds": [
+        "HK-SRC-CLASSIC-001",
+        "HK-SRC-VN-001"
+      ],
+      "requiredOutput": [
+        "non-numeric role distinctions",
+        "combination precedence"
+      ]
+    },
+    {
+      "taskId": "HK-EXT-007",
+      "topic": "Five-element foundation, Mệnh/Cục and Nạp Âm boundaries",
+      "priority": 2,
+      "candidateSourceIds": [
+        "HK-SRC-VN-001",
+        "HK-SRC-EXPERT-001"
+      ],
+      "requiredOutput": [
+        "fact ontology",
+        "school applicability",
+        "unresolved boundaries"
+      ]
+    },
+    {
+      "taskId": "HK-EXT-008",
+      "topic": "Regulation/containment of disruptive stars",
+      "priority": 2,
+      "candidateSourceIds": [
+        "HK-SRC-CLASSIC-001",
+        "HK-SRC-VN-001",
+        "HK-SRC-EXPERT-001"
+      ],
+      "requiredOutput": [
+        "exact combinations",
+        "minimum conditions",
+        "failure cases"
+      ]
+    },
+    {
+      "taskId": "HK-EXT-009",
+      "topic": "Supporting and destructive minor-star families",
+      "priority": 3,
+      "candidateSourceIds": [
+        "HK-SRC-VN-001",
+        "HK-SRC-EXPERT-001"
+      ],
+      "requiredOutput": [
+        "taxonomy",
+        "exceptions",
+        "school profile"
+      ]
+    }
+  ]
+}

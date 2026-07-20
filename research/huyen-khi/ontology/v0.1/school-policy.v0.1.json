@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "huyen-khi-school-policy-v0-1",
+  "profiles": {
+    "shared": {
+      "allowedFactNamespaces": [
+        "physical-palace",
+        "canonical-star",
+        "brightness",
+        "void-marker",
+        "natal-transformation",
+        "relation-geometry",
+        "five-element"
+      ],
+      "fallbackPolicy": "none"
+    },
+    "nam-phai": {
+      "status": "research",
+      "inheritsSharedFacts": true,
+      "ruleFallbackToOtherSchool": false
+    },
+    "trung-chau": {
+      "status": "research",
+      "inheritsSharedFacts": true,
+      "ruleFallbackToOtherSchool": false
+    }
+  },
+  "missingProfileBehavior": "invalid-knowledge"
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "0.1.0",
+  "gateId": "huyen-khi-ontology-gates-v0-1",
+  "hardGates": {
+    "schemaValidationPass": true,
+    "unresolvedSourceReferenceCountMax": 0,
+    "unresolvedClaimReferenceCountMax": 0,
+    "numericScoringKeyCountMax": 0,
+    "crossSchoolFallbackCountMax": 0,
+    "productionAnalysisScoreImportCountMax": 0,
+    "externalRuntimeDependencyCountMax": 0,
+    "personalFixtureCountMax": 0,
+    "silentRuleConflictResolutionCountMax": 0,
+    "nonEffectiveExampleLoadedCountMax": 0,
+    "incompatibleOperationDimensionCountMax": 0,
+    "hardCodedPrNumberCountMax": 0,
+    "fixtureTemplateCountMin": 30
+  },
+  "symbolicEvaluatorPhasePromotionGates": {
+    "approvedExpertFixtureCountMin": 30,
+    "researchReadyFixtureCountMin": 30,
+    "sourceReviewedMajorStarCoverageMin": 14,
+    "sourceReviewedTransformationCoverageMin": 4,
+    "voidMechanismCoverageRequired": ["Tuần", "Triệt"],
+    "voChinhDieuCoverageRequired": true,
+    "ruleTraceabilityRateMin": 1.0,
+    "note": "Only approvedExpertFixtureCountMin (derived from the append-only review ledger) may unlock the symbolic evaluator phase. fixtureTemplateCountMin never implies approval. Gate language is capability/phase based, never a mutable PR number."
+  },
+  "productionGate": "No production scorer or UI exists in this ontology phase."
+}

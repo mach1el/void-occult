@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "0.1.0",
+  "policyId": "huyen-khi-fixture-maturity-policy-v0-1",
+  "note": "Fixture maturity. `planned` / `research-ready` / `reviewable` are authoring stages set on the fixture. `reviewed` / `approved` / `disputed` are DERIVED only from the append-only review ledger and are never set by hand.",
+  "maturityLevels": ["planned", "research-ready", "reviewable", "reviewed", "approved", "disputed"],
+  "authoringLevels": ["planned", "research-ready", "reviewable"],
+  "derivedLevels": ["reviewed", "approved", "disputed"],
+  "requirements": {
+    "planned": [
+      "may contain an incomplete synthetic scenario"
+    ],
+    "research-ready": [
+      "non-empty canonical input facts",
+      "research question",
+      "applicable school profile",
+      "candidate source IDs",
+      "expected evidence requirements"
+    ],
+    "reviewable": [
+      "resolved claim locators",
+      "proposed expected symbolic dimensions",
+      "expected or forbidden rule IDs",
+      "rationale",
+      "limitations and known contradictions"
+    ]
+  },
+  "gateNaming": {
+    "fixtureTemplateCountMin": "counts scenario templates of any maturity; NEVER implies approval",
+    "researchReadyFixtureCountMin": "counts fixtures at research-ready or higher",
+    "approvedExpertFixtureCountMin": "counts fixtures DERIVED as approved from the review ledger; the only gate that may unlock the symbolic evaluator phase"
+  }
+}

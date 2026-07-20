@@ -1,0 +1,12 @@
+{
+  "reportId": "huyen-khi-rule-conflict-report-v0-1",
+  "activationContexts": [
+    "shared+nam-phai",
+    "shared+trung-chau"
+  ],
+  "unresolvedConflictCount": 0,
+  "suppressedConflictCount": 0,
+  "silentResolutionCount": 0,
+  "silentResolutionForbidden": true,
+  "unresolved": []
+}

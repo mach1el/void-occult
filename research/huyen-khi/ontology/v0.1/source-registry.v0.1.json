@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "0.1.0",
+  "registryId": "apexvoid-huyen-khi-source-registry-v0-1",
+  "sources": [
+    {
+      "sourceId": "HK-SRC-CORE-001",
+      "title": "ApexVoid Zi Wei Calculation Core",
+      "kind": "calculation-core",
+      "status": "approved-internal",
+      "witnessKind": "not-applicable",
+      "authorityFor": ["physical chart facts"],
+      "notAuthorityFor": ["Huyền Khí meaning", "numeric Huyền Khí"]
+    },
+    {
+      "sourceId": "HK-SRC-CLASSIC-001",
+      "title": "新鋟希夷陳先生紫微斗數全書 / 紫微斗數全書 — physical scan witness",
+      "kind": "classical-primary",
+      "status": "candidate-primary",
+      "witnessKind": "physical-scan",
+      "locations": [
+        {
+          "url": "https://www.digital.archives.go.jp/das/meta/F1000000000000101426.html",
+          "note": "National Archives of Japan record; metadata states CC0. Physical scan witness."
+        }
+      ],
+      "allowedUsage": ["manual claim extraction with locator"],
+      "prohibitedUsage": ["automatic rule import", "numeric coefficient authority"]
+    },
+    {
+      "sourceId": "HK-SRC-CLASSIC-TRANSCRIPTION-001",
+      "title": "紫微斗數全書 — searchable transcription (Wikisource)",
+      "kind": "classical-transcription",
+      "status": "manual-review-required",
+      "witnessKind": "searchable-transcription",
+      "derivedFromSourceId": "HK-SRC-CLASSIC-001",
+      "locations": [
+        {
+          "url": "https://zh.wikisource.org/zh-hans/紫微斗數全書",
+          "note": "Searchable transcription; MUST be verified against the physical scan witness before any claim promotion."
+        }
+      ],
+      "allowedUsage": ["locating candidate passages", "cross-reference to physical witness"],
+      "prohibitedUsage": ["standalone doctrinal authority", "treating transcription as the scan", "numeric coefficient authority"]
+    },
+    {
+      "sourceId": "HK-SRC-VN-001",
+      "title": "Tử Vi Đẩu Số Tân Biên: Lập Thành, Luận Đoán",
+      "author": "Vân Đằng Thái Thứ Lang",
+      "kind": "modern-vietnamese-reference",
+      "status": "manual-review-required",
+      "witnessKind": "bibliography-only",
+      "editionResolved": false,
+      "bibliography": { "googleBooksId": "RU9ezwEACAAJ" },
+      "allowedUsage": ["manual extraction with edition/page", "Nam Phái terminology"],
+      "prohibitedUsage": ["unlocated rules", "numeric coefficient authority"]
+    },
+    {
+      "sourceId": "HK-SRC-TC-001",
+      "title": "中州派紫微斗數 (Zhongzhou School Zi Wei Dou Shu) — bibliography record",
+      "author": "王亭之 (Wang Tingzhi) lineage, Trung Châu phái",
+      "kind": "modern-chinese-reference",
+      "status": "unavailable-manual-review-required",
+      "witnessKind": "bibliography-only",
+      "editionResolved": false,
+      "allowedUsage": ["extraction planning only"],
+      "prohibitedUsage": ["doctrinal claims before an exact edition and page locator are obtained", "numeric coefficient authority"]
+    },
+    {
+      "sourceId": "HK-SRC-EXTERNAL-001",
+      "title": "Tử Vi Cổ Học public Huyền Khí output corpus",
+      "kind": "external-output-benchmark",
+      "status": "benchmark-only",
+      "witnessKind": "not-applicable",
+      "repositoryLocation": "research/huyen-khi/",
+      "allowedUsage": ["external comparison", "parser regression"],
+      "prohibitedUsage": ["runtime dependency", "doctrinal authority", "V0.1 coefficient fitting"]
+    },
+    {
+      "sourceId": "HK-SRC-SPEC-001",
+      "title": "ApexVoid Huyền Khí Ontology V0.1 Specification",
+      "kind": "internal-specification",
+      "status": "experimental",
+      "witnessKind": "not-applicable"
+    },
+    {
+      "sourceId": "HK-SRC-EXPERT-001",
+      "title": "ApexVoid expert review ledger",
+      "kind": "expert-review",
+      "status": "empty-awaiting-review",
+      "witnessKind": "not-applicable"
+    }
+  ]
+}

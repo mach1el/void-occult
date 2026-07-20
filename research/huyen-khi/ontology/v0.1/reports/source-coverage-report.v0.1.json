@@ -1,0 +1,81 @@
+{
+  "reportId": "huyen-khi-source-coverage-report-v0-1",
+  "sourceCount": 8,
+  "byKind": {
+    "calculation-core": 1,
+    "classical-primary": 1,
+    "classical-transcription": 1,
+    "expert-review": 1,
+    "external-output-benchmark": 1,
+    "internal-specification": 1,
+    "modern-chinese-reference": 1,
+    "modern-vietnamese-reference": 1
+  },
+  "externalBenchmarkIsRuntimeForbidden": true,
+  "sources": [
+    {
+      "sourceId": "HK-SRC-CLASSIC-001",
+      "kind": "classical-primary",
+      "status": "candidate-primary",
+      "referencedByClaimCount": 1,
+      "hasAllowedUsage": true,
+      "hasProhibitedUsage": true
+    },
+    {
+      "sourceId": "HK-SRC-CLASSIC-TRANSCRIPTION-001",
+      "kind": "classical-transcription",
+      "status": "manual-review-required",
+      "referencedByClaimCount": 0,
+      "hasAllowedUsage": true,
+      "hasProhibitedUsage": true
+    },
+    {
+      "sourceId": "HK-SRC-CORE-001",
+      "kind": "calculation-core",
+      "status": "approved-internal",
+      "referencedByClaimCount": 1,
+      "hasAllowedUsage": false,
+      "hasProhibitedUsage": false
+    },
+    {
+      "sourceId": "HK-SRC-EXPERT-001",
+      "kind": "expert-review",
+      "status": "empty-awaiting-review",
+      "referencedByClaimCount": 0,
+      "hasAllowedUsage": false,
+      "hasProhibitedUsage": false
+    },
+    {
+      "sourceId": "HK-SRC-EXTERNAL-001",
+      "kind": "external-output-benchmark",
+      "status": "benchmark-only",
+      "referencedByClaimCount": 2,
+      "hasAllowedUsage": true,
+      "hasProhibitedUsage": true
+    },
+    {
+      "sourceId": "HK-SRC-SPEC-001",
+      "kind": "internal-specification",
+      "status": "experimental",
+      "referencedByClaimCount": 5,
+      "hasAllowedUsage": false,
+      "hasProhibitedUsage": false
+    },
+    {
+      "sourceId": "HK-SRC-TC-001",
+      "kind": "modern-chinese-reference",
+      "status": "unavailable-manual-review-required",
+      "referencedByClaimCount": 0,
+      "hasAllowedUsage": true,
+      "hasProhibitedUsage": true
+    },
+    {
+      "sourceId": "HK-SRC-VN-001",
+      "kind": "modern-vietnamese-reference",
+      "status": "manual-review-required",
+      "referencedByClaimCount": 0,
+      "hasAllowedUsage": true,
+      "hasProhibitedUsage": true
+    }
+  ]
+}

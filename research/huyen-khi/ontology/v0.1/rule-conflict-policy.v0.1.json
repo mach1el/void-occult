@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "0.1.0",
+  "policyId": "huyen-khi-rule-conflict-policy-v0-1",
+  "specificityOrder": [
+    "exact-combination",
+    "exact-star-state",
+    "exact-star",
+    "star-family",
+    "generic-structure"
+  ],
+  "rules": [
+    {
+      "id": "HK-CONFLICT-001",
+      "condition": "same target and dimension with explicit suppression",
+      "behavior": "higher-specificity-may-suppress"
+    },
+    {
+      "id": "HK-CONFLICT-002",
+      "condition": "different dimensions",
+      "behavior": "coexist"
+    },
+    {
+      "id": "HK-CONFLICT-003",
+      "condition": "contradictory sourced effects without precedence",
+      "behavior": "emit-unresolved-rule-conflict"
+    },
+    {
+      "id": "HK-CONFLICT-004",
+      "condition": "duplicate physical fact",
+      "behavior": "deduplicate-before-symbolic-aggregation"
+    }
+  ],
+  "silentResolutionForbidden": true
+}

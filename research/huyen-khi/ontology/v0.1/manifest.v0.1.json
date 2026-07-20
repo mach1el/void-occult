@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "0.1.0",
+  "manifestId": "huyen-khi-ontology-manifest-v0-1",
+  "version": "0.1.0",
+  "status": "research",
+  "files": [
+    "source-registry.v0.1.json",
+    "claim-registry.v0.1.json",
+    "terminology.v0.1.json",
+    "symbolic-dimensions.v0.1.json",
+    "dimension-operation-compatibility.v0.1.json",
+    "claim-provenance-policy.v0.1.json",
+    "source-witness-matrix.v0.1.json",
+    "fixture-maturity-policy.v0.1.json",
+    "research-topic-coverage.v0.1.json",
+    "school-policy.v0.1.json",
+    "rule-conflict-policy.v0.1.json",
+    "source-extraction-queue.v0.1.json",
+    "expert-review-workflow.v0.1.json",
+    "release-gates.v0.1.json",
+    "fixtures/expert-fixture-plan.v0.1.json",
+    "schemas/source.schema.v0.1.json",
+    "schemas/claim.schema.v0.1.json",
+    "schemas/locator.schema.v0.1.json",
+    "schemas/rule.schema.v0.1.json",
+    "schemas/expert-fixture.schema.v0.1.json"
+  ],
+  "forbiddenRuntimeDependencies": [
+    "tuvi.cohoc.net",
+    "PalaceOverviewResult",
+    "AnnualAxesResult",
+    "MajorFortuneResult",
+    "MonthlyFlowResult"
+  ]
+}

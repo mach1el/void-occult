@@ -1,0 +1,800 @@
+{
+  "schemaVersion": "0.1.0",
+  "fixtureSetId": "huyen-khi-expert-fixture-plan-v0-1",
+  "minimumApprovedRequiredForNextPhase": 30,
+  "preferredApproved": 60,
+  "fixtures": [
+    {
+      "fixtureId": "HK-FIX-001-MAJOR-MIEU-SUPPORT",
+      "title": "Chính tinh Miếu với nền ngũ hành tương trợ",
+      "category": "major-star-brightness",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-002-MAJOR-HAM-CONFLICT",
+      "title": "Chính tinh Hãm trong nền ngũ hành xung khắc",
+      "category": "major-star-brightness",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-003-MAJOR-BINH-STRONG-SUPPORT",
+      "title": "Chính tinh Bình nhưng được cấu trúc hỗ trợ mạnh",
+      "category": "major-star-brightness",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-004-MAJOR-MIEU-BLOCKED",
+      "title": "Chính tinh Miếu nhưng khả năng biểu hiện bị chặn",
+      "category": "major-star-brightness",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-005-VCD-SUPPORTIVE-OPPOSITE",
+      "title": "Vô Chính Diệu với đối cung mạnh và hỗ trợ",
+      "category": "vo-chinh-dieu",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-006-VCD-DESTRUCTIVE-OPPOSITE",
+      "title": "Vô Chính Diệu với đối cung gây áp lực",
+      "category": "vo-chinh-dieu",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-007-VCD-GOOD-MINORS",
+      "title": "Vô Chính Diệu có phụ tinh tọa thủ quy tụ",
+      "category": "vo-chinh-dieu",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-008-VCD-DISPERSED",
+      "title": "Vô Chính Diệu có cấu trúc phân tán",
+      "category": "vo-chinh-dieu",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-009-TUAN-GOOD-STAR",
+      "title": "Cát cấu trúc gặp Tuần",
+      "category": "void-marker",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-010-TUAN-DISRUPTIVE-STAR",
+      "title": "Cấu trúc phá gặp Tuần",
+      "category": "void-marker",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-011-TRIET-GOOD-STAR",
+      "title": "Cát cấu trúc gặp Triệt",
+      "category": "void-marker",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-012-TRIET-DISRUPTIVE-STAR",
+      "title": "Cấu trúc phá gặp Triệt",
+      "category": "void-marker",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-013-TUAN-TRIET-VCD",
+      "title": "Vô Chính Diệu đồng thời chịu Tuần/Triệt",
+      "category": "void-marker",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-014-LOC-EXACT-TARGET",
+      "title": "Hóa Lộc exact-target",
+      "category": "transformation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-015-QUYEN-EXACT-TARGET",
+      "title": "Hóa Quyền exact-target",
+      "category": "transformation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-016-KHOA-EXACT-TARGET",
+      "title": "Hóa Khoa exact-target",
+      "category": "transformation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-017-KY-EXACT-TARGET",
+      "title": "Hóa Kỵ exact-target",
+      "category": "transformation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-018-LOC-WITH-BLOCK",
+      "title": "Hóa Lộc nhưng expression bị khóa",
+      "category": "transformation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-019-KY-WITH-REGULATION",
+      "title": "Hóa Kỵ gặp cấu trúc điều tiết",
+      "category": "transformation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-020-TOA-VS-XUNG",
+      "title": "Cùng sao: tọa thủ so với xung chiếu",
+      "category": "relation-geometry",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-021-TAMHOP-VS-NHIHOP",
+      "title": "Cùng sao: tam hợp so với nhị hợp",
+      "category": "relation-geometry",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-022-GIAP-SUPPORT",
+      "title": "Hai cung giáp tạo cấu trúc hỗ trợ",
+      "category": "relation-geometry",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-023-GIAP-CONFLICT",
+      "title": "Hai cung giáp tạo xung đột",
+      "category": "relation-geometry",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-024-SAME-STAR-DIFFERENT-RELATION",
+      "title": "Một sao xuất hiện ở các quan hệ khác nhau",
+      "category": "relation-geometry",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-025-GOOD-BAD-COLOCATED",
+      "title": "Cát và hung đồng cung",
+      "category": "combination",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-026-REGULATOR-STRONG-ENOUGH",
+      "title": "Cấu trúc điều tiết đủ lực chế phá",
+      "category": "regulation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-027-REGULATOR-INSUFFICIENT",
+      "title": "Cấu trúc điều tiết không đủ lực",
+      "category": "regulation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-028-MULTIPLE-DISRUPTORS",
+      "title": "Nhiều cấu trúc phá cùng stacking group",
+      "category": "regulation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-029-SUPPORT-WITHOUT-COHERENCE",
+      "title": "Nhiều hỗ trợ nhưng thiếu quy tụ",
+      "category": "coherence",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-030-LOW-CAPACITY-HIGH-EXPRESSION",
+      "title": "Khí lực yếu nhưng biểu hiện mạnh",
+      "category": "dimension-separation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-031-HIGH-CAPACITY-BLOCKED",
+      "title": "Khí lực mạnh nhưng biểu hiện bị khóa",
+      "category": "dimension-separation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-032-COHERENT-PRESSURING",
+      "title": "Cấu trúc quy tụ nhưng khuynh hướng gây áp lực",
+      "category": "dimension-separation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-033-MIXED-EFFECTS",
+      "title": "Một cấu trúc đồng thời dưỡng và nhiễu ở các dimension khác nhau",
+      "category": "dimension-separation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-034-MENH-CUC-SUPPORT",
+      "title": "Mệnh–Cục tương trợ ở nền cung",
+      "category": "palace-foundation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-035-MENH-CUC-CONTROL",
+      "title": "Mệnh–Cục khắc chế ở nền cung",
+      "category": "palace-foundation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    },
+    {
+      "fixtureId": "HK-FIX-036-NAP-AM-UNRESOLVED",
+      "title": "Vai trò Nạp Âm chưa đủ nguồn để kết luận",
+      "category": "palace-foundation",
+      "schoolProfile": "shared",
+      "maturity": "planned",
+      "inputFacts": {
+        "minimalFactSet": [],
+        "notes": "Synthetic canonical facts only; no personal birth data."
+      },
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "reviewQuestions": [
+        "Which symbolic dimensions change?",
+        "Which effects are conditional rather than universal?",
+        "Which source or expert rule supports the judgment?",
+        "Which contradictory interpretation remains visible?"
+      ],
+      "rationale": "Scenario template awaiting sourced extraction and expert review.",
+      "reviews": []
+    }
+  ]
+}

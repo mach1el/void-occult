@@ -1,0 +1,36 @@
+{
+  "reportId": "huyen-khi-ontology-validation-report-v0-1",
+  "knowledgeStatusLegend": [
+    "schema-valid: structurally conforms; NOT approved knowledge",
+    "source-reviewed: a locator + source review exists",
+    "expert-reviewed: a school-expert review exists",
+    "approved: meets promotion review requirements",
+    "disputed: conflicting reviews retained; excluded from promotion",
+    "unresolved: relationship or provenance not settled"
+  ],
+  "ok": true,
+  "summary": {
+    "sourceCount": 8,
+    "claimCount": 5,
+    "fixtureCount": 36,
+    "effectiveRuleCount": 0,
+    "duplicateIdCount": 0,
+    "unresolvedReferenceCount": 0,
+    "numericScoringKeyCount": 0,
+    "crossSchoolFallbackCount": 0,
+    "unresolvedConflictCount": 0,
+    "silentConflictResolutionCount": 0,
+    "nonEffectiveExampleLoadedCount": 0,
+    "claimLocatorViolationCount": 0,
+    "witnessSeparationViolationCount": 0,
+    "incompatibleOperationDimensionCount": 0,
+    "hardCodedPrNumberCount": 0,
+    "storedDerivedStatusKeyCount": 0,
+    "reviewReferenceViolationCount": 0,
+    "manifestComplete": true,
+    "versionConsistent": true
+  },
+  "errorCount": 0,
+  "warningCount": 0,
+  "issues": []
+}

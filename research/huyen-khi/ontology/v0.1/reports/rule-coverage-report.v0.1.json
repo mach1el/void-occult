@@ -1,0 +1,7 @@
+{
+  "reportId": "huyen-khi-rule-coverage-report-v0-1",
+  "effectiveRuleCount": 0,
+  "byStatus": {},
+  "fullyTraceableCount": 0,
+  "note": "V0.1 loads no effective rules; no evaluator exists"
+}

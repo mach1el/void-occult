@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "huyen-khi-claim.schema.v0.1.json",
+  "type": "object",
+  "required": ["claimId", "summary", "status", "sourceIds"],
+  "properties": {
+    "claimId": { "type": "string", "pattern": "^HK-CLM-" },
+    "summary": { "type": "string", "minLength": 1 },
+    "status": {
+      "enum": [
+        "approved-engineering",
+        "approved-research-policy",
+        "primary-source-reviewed",
+        "secondary-source-reviewed",
+        "expert-consensus",
+        "experimental",
+        "disputed",
+        "unresolved"
+      ]
+    },
+    "sourceIds": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "locator": {
+      "type": "object",
+      "required": ["locatorKind", "sourceId", "verificationStatus"],
+      "properties": {
+        "locatorKind": {
+          "enum": [
+            "physical-witness",
+            "searchable-transcription",
+            "modern-commentary",
+            "internal-specification",
+            "expert-review-evidence",
+            "external-benchmark"
+          ]
+        },
+        "sourceId": { "type": "string", "pattern": "^HK-SRC-" },
+        "edition": { "type": "string" },
+        "witnessId": { "type": "string" },
+        "volume": { "type": "string" },
+        "chapter": { "type": "string" },
+        "section": { "type": "string" },
+        "page": { "type": "string" },
+        "folio": { "type": "string" },
+        "stableUrl": { "type": "string" },
+        "transcriptionAnchor": { "type": "string" },
+        "verificationStatus": {
+          "enum": [
+            "unverified",
+            "locator-provided",
+            "cross-checked-against-witness",
+            "expert-verified"
+          ]
+        },
+        "verificationNotes": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "schoolProfiles": {
+      "type": "array",
+      "items": { "enum": ["shared", "nam-phai", "trung-chau"] }
+    },
+    "supportsClaimIds": { "type": "array", "items": { "type": "string" } },
+    "contradictsClaimIds": { "type": "array", "items": { "type": "string" } },
+    "qualifiesClaimIds": { "type": "array", "items": { "type": "string" } },
+    "limitations": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}

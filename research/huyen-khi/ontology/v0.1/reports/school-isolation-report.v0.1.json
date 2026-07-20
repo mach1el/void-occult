@@ -1,0 +1,22 @@
+{
+  "reportId": "huyen-khi-school-isolation-report-v0-1",
+  "missingProfileBehavior": "invalid-knowledge",
+  "crossSchoolFallbackCount": 0,
+  "profiles": [
+    {
+      "profile": "nam-phai",
+      "ruleFallbackToOtherSchool": false,
+      "inheritsSharedFacts": true
+    },
+    {
+      "profile": "shared",
+      "ruleFallbackToOtherSchool": false,
+      "inheritsSharedFacts": false
+    },
+    {
+      "profile": "trung-chau",
+      "ruleFallbackToOtherSchool": false,
+      "inheritsSharedFacts": true
+    }
+  ]
+}

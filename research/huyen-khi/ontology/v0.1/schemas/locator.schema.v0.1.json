@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "huyen-khi-locator.schema.v0.1.json",
+  "type": "object",
+  "required": ["locatorKind", "sourceId", "verificationStatus"],
+  "properties": {
+    "locatorKind": {
+      "enum": [
+        "physical-witness",
+        "searchable-transcription",
+        "modern-commentary",
+        "internal-specification",
+        "expert-review-evidence",
+        "external-benchmark"
+      ]
+    },
+    "sourceId": { "type": "string", "pattern": "^HK-SRC-" },
+    "edition": { "type": "string" },
+    "witnessId": { "type": "string" },
+    "volume": { "type": "string" },
+    "chapter": { "type": "string" },
+    "section": { "type": "string" },
+    "page": { "type": "string" },
+    "folio": { "type": "string" },
+    "stableUrl": { "type": "string" },
+    "transcriptionAnchor": { "type": "string" },
+    "verificationStatus": {
+      "enum": [
+        "unverified",
+        "locator-provided",
+        "cross-checked-against-witness",
+        "expert-verified"
+      ]
+    },
+    "verificationNotes": { "type": "string" }
+  },
+  "additionalProperties": false
+}

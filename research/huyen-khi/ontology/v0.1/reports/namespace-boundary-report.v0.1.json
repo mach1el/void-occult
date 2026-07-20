@@ -1,0 +1,15 @@
+{
+  "reportId": "huyen-khi-namespace-boundary-report-v0-1",
+  "filesScanned": 13,
+  "clean": true,
+  "forbiddenImportHits": [],
+  "networkHits": [],
+  "forbiddenRuntimeDependencies": [
+    "AnnualAxesResult",
+    "MajorFortuneResult",
+    "MonthlyFlowResult",
+    "PalaceOverviewResult",
+    "tuvi.cohoc.net"
+  ],
+  "allowedNeutralImport": "@/lib/ziwei/analysis/facts/types"
+}

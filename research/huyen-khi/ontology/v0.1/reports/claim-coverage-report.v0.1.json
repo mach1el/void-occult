@@ -1,0 +1,42 @@
+{
+  "reportId": "huyen-khi-claim-coverage-report-v0-1",
+  "claimCount": 5,
+  "byStatus": {
+    "approved-engineering": 3,
+    "approved-research-policy": 1,
+    "unresolved": 1
+  },
+  "note": "status is doctrinal standing; not schema validity",
+  "claims": [
+    {
+      "claimId": "HK-CLM-BOUNDARY-001",
+      "status": "approved-engineering",
+      "sourceCount": 2,
+      "hasLocator": true
+    },
+    {
+      "claimId": "HK-CLM-BOUNDARY-002",
+      "status": "approved-engineering",
+      "sourceCount": 2,
+      "hasLocator": true
+    },
+    {
+      "claimId": "HK-CLM-BOUNDARY-003",
+      "status": "approved-engineering",
+      "sourceCount": 1,
+      "hasLocator": true
+    },
+    {
+      "claimId": "HK-CLM-RESEARCH-001",
+      "status": "approved-research-policy",
+      "sourceCount": 2,
+      "hasLocator": true
+    },
+    {
+      "claimId": "HK-CLM-UNRESOLVED-001",
+      "status": "unresolved",
+      "sourceCount": 2,
+      "hasLocator": false
+    }
+  ]
+}
