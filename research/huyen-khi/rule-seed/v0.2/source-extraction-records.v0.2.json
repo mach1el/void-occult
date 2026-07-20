@@ -1,23 +1,39 @@
 {
+  "schemaVersion": "0.2.0",
+  "catalogId": "huyen-khi-source-extractions-v0-2",
+  "ontologyContractVersion": "0.1.0",
   "extractions": [
     {
-      "extractionId": "EXT-001-TUVI-MIEU",
-      "topicId": "HK-TOPIC-MAJOR-TỬ-VI",
-      "sourceId": "SRC-TTL-01",
-      "schoolProfile": "nam-phai",
+      "extractionId": "HK-EXT-V02-MAJOR-TU-VI-001",
+      "topicId": "major-star-tu-vi",
+      "sourceId": "HK-SRC-CLASSIC-TRANSCRIPTION-001",
+      "schoolProfile": "shared",
       "locator": {
-        "chapter": "2",
-        "section": "Tử Vi"
+        "locatorKind": "searchable-transcription",
+        "sourceId": "HK-SRC-CLASSIC-TRANSCRIPTION-001",
+        "volume": "卷一",
+        "section": "諸星問答論 / 問紫微所主若何？",
+        "stableUrl": "https://zh.wikisource.org/zh/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%8D%B7%E4%B8%80",
+        "transcriptionAnchor": "問紫微所主若何？",
+        "verificationStatus": "locator-provided",
+        "verificationNotes": "Located in the searchable transcription only; the physical-scan witness has not yet been checked."
       },
-      "excerpt": "Tử Vi cư Ngọ...",
-      "claimIds": [
-        "CLAIM-001"
+      "excerpt": "俱看在廟旺之鄉否，有何吉凶之守照。如廟旺化吉甚妙，陷又化凶甚凶。",
+      "paraphrase": "The passage treats Tử Vi according to brightness state together with auspicious or inauspicious transformation and surrounding context; it does not independently define an ApexVoid Huyền Khí dimension or magnitude.",
+      "candidateClaimIds": [
+        "HK-CLM-V02-CANDIDATE-MAJOR-TU-VI-001"
       ],
       "verificationFlags": [
         "candidate-located"
       ],
-      "ambiguities": [],
-      "limitations": "Needs review"
+      "ambiguities": [
+        "The transcription has not been cross-checked against HK-SRC-CLASSIC-001.",
+        "Brightness, transformation polarity, and supporting context are bundled in the same passage."
+      ],
+      "limitations": [
+        "Candidate evidence only; not witness-verified or source-reviewed.",
+        "Cannot authorize an effective rule, numeric coefficient, evaluator, or production interpretation."
+      ]
     }
   ]
 }
