@@ -1,20 +1,45 @@
 {
+  "schemaVersion": "0.2.0",
+  "queueId": "huyen-khi-expert-review-queue-v0-2",
   "batches": [
     {
       "batchId": "HK-BATCH-V02-A",
-      "name": "major-star-foundation",
+      "name": "Tử Vi candidate passage and fixture",
       "fixtureIds": [
         "HK-FIX-001-MAJOR-MIEU-SUPPORT"
       ],
-      "topicIds": [],
-      "sourceIds": [],
+      "topicIds": [
+        "major-star-tu-vi",
+        "brightness-states"
+      ],
+      "extractionIds": [
+        "HK-EXT-V02-MAJOR-TU-VI-001"
+      ],
+      "sourceIds": [
+        "HK-SRC-CLASSIC-TRANSCRIPTION-001",
+        "HK-SRC-CLASSIC-001"
+      ],
       "claimIds": [],
-      "candidateRuleIds": [],
-      "openQuestions": [],
+      "candidateRuleIds": [
+        "HK-RULE-V02-MAJOR-001"
+      ],
+      "openQuestions": [
+        "Does the physical scan confirm the searchable transcription passage?",
+        "Can brightness and transformation polarity be separated, or must they remain a bundled condition?",
+        "Is capacity-strengthen moderate an acceptable symbolic candidate mapping?"
+      ],
       "knownContradictions": [],
-      "requiredReviewerRoles": [],
-      "requiredSchoolProfiles": [],
-      "cliTemplates": []
+      "requiredReviewerRoles": [
+        "source-reviewer",
+        "school-expert"
+      ],
+      "requiredSchoolProfiles": [
+        "shared"
+      ],
+      "cliTemplates": [
+        "npm run research:huyen-khi:export-review-workbook-v02",
+        "npm run research:huyen-khi:review-fixture -- HK-FIX-001-MAJOR-MIEU-SUPPORT"
+      ]
     }
   ]
 }
