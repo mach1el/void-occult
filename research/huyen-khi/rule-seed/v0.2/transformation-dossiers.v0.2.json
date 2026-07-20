@@ -1,0 +1,38 @@
+[
+  {
+    "transformationType": "Hóa Lộc",
+    "targetStar": "Any",
+    "school": "shared",
+    "residentPalaceContext": "Any",
+    "sourceBackedClaim": "unresolved",
+    "candidateRuleIds": [],
+    "fixtureIds": []
+  },
+  {
+    "transformationType": "Hóa Quyền",
+    "targetStar": "Any",
+    "school": "shared",
+    "residentPalaceContext": "Any",
+    "sourceBackedClaim": "unresolved",
+    "candidateRuleIds": [],
+    "fixtureIds": []
+  },
+  {
+    "transformationType": "Hóa Khoa",
+    "targetStar": "Any",
+    "school": "shared",
+    "residentPalaceContext": "Any",
+    "sourceBackedClaim": "unresolved",
+    "candidateRuleIds": [],
+    "fixtureIds": []
+  },
+  {
+    "transformationType": "Hóa Kỵ",
+    "targetStar": "Any",
+    "school": "shared",
+    "residentPalaceContext": "Any",
+    "sourceBackedClaim": "unresolved",
+    "candidateRuleIds": [],
+    "fixtureIds": []
+  }
+]
