@@ -38,7 +38,7 @@
       ],
       "cliTemplates": [
         "npm run research:huyen-khi:export-review-workbook-v02",
-        "npm run research:huyen-khi:review-fixture -- HK-FIX-001-MAJOR-MIEU-SUPPORT"
+        "npm run research:huyen-khi:review-rule-seed-fixture-v02 -- --fixture HK-FIX-001-MAJOR-MIEU-SUPPORT --reviewer <reviewer-id> --role source-reviewer --school shared --decision reviewed --rationale <rationale> --source HK-SRC-CLASSIC-TRANSCRIPTION-001"
       ]
     }
   ]
