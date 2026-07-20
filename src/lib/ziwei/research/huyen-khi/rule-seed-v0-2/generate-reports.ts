@@ -14,6 +14,17 @@ function unique<T>(values: readonly T[]): T[] {
   return [...new Set(values)];
 }
 
+function requiredGateNumber(
+  gates: Readonly<Record<string, unknown>>,
+  key: string,
+): number {
+  const value = gates[key];
+  if (typeof value !== "number" || !Number.isFinite(value)) {
+    throw new Error(`Promotion gate '${key}' must be a finite number`);
+  }
+  return value;
+}
+
 export function generateReports(data: any) {
   const loaded = loadHuyenKhiOntology();
   if (!loaded.ok) {
@@ -41,6 +52,11 @@ export function generateReports(data: any) {
   ).length;
   const sourceReviewedTopics = topics.filter(
     (topic) => topic.evidenceStatus === "source-reviewed",
+  ).length;
+  const sourceReviewedMajorStars = topics.filter(
+    (topic) =>
+      topic.topicId.startsWith("major-star-") &&
+      topic.evidenceStatus === "source-reviewed",
   ).length;
 
   write("topic-coverage-report.v0.2.json", {
@@ -96,8 +112,7 @@ export function generateReports(data: any) {
     materializedFixtures: fixtures.fixtures.length,
     ...maturity,
     derivedStatus: status,
-    canonicalPlannedTemplateCount:
-      loaded.ontology.fixturePlan.fixtures.length,
+    canonicalPlannedTemplateCount: loaded.ontology.fixturePlan.fixtures.length,
     note: "V0.2 materializes only evidence-linked fixtures; planned templates remain canonical in ontology V0.1.",
   });
 
@@ -113,20 +128,26 @@ export function generateReports(data: any) {
   });
 
   const gates = loaded.ontology.releaseGates.symbolicEvaluatorPhasePromotionGates;
+  const approvedMinimum = requiredGateNumber(gates, "approvedExpertFixtureCountMin");
+  const researchReadyMinimum = requiredGateNumber(gates, "researchReadyFixtureCountMin");
+  const sourceReviewedMajorMinimum = requiredGateNumber(
+    gates,
+    "sourceReviewedMajorStarCoverageMin",
+  );
   const blockers: string[] = [];
-  if (status.approvedForPromotion < gates.approvedExpertFixtureCountMin) {
+  if (status.approvedForPromotion < approvedMinimum) {
     blockers.push(
-      `approved expert fixtures ${status.approvedForPromotion}/${gates.approvedExpertFixtureCountMin}`,
+      `approved expert fixtures ${status.approvedForPromotion}/${approvedMinimum}`,
     );
   }
-  if (maturity.researchReady < gates.researchReadyFixtureCountMin) {
+  if (maturity.researchReady < researchReadyMinimum) {
     blockers.push(
-      `research-ready fixtures ${maturity.researchReady}/${gates.researchReadyFixtureCountMin}`,
+      `research-ready fixtures ${maturity.researchReady}/${researchReadyMinimum}`,
     );
   }
-  if (sourceReviewedTopics < gates.sourceReviewedMajorStarCoverageMin) {
+  if (sourceReviewedMajorStars < sourceReviewedMajorMinimum) {
     blockers.push(
-      `source-reviewed major-star topics ${sourceReviewedTopics}/${gates.sourceReviewedMajorStarCoverageMin}`,
+      `source-reviewed major-star topics ${sourceReviewedMajorStars}/${sourceReviewedMajorMinimum}`,
     );
   }
 
