@@ -1,0 +1,422 @@
+[
+  {
+    "topicId": "HK-TOPIC-MAJOR-TỬ-VI",
+    "kind": "major-star",
+    "canonicalSubjectId": "Tử Vi",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-MAJOR-THIÊN-CƠ",
+    "kind": "major-star",
+    "canonicalSubjectId": "Thiên Cơ",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-MAJOR-THÁI-DƯƠNG",
+    "kind": "major-star",
+    "canonicalSubjectId": "Thái Dương",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-MAJOR-VŨ-KHÚC",
+    "kind": "major-star",
+    "canonicalSubjectId": "Vũ Khúc",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-MAJOR-THIÊN-ĐỒNG",
+    "kind": "major-star",
+    "canonicalSubjectId": "Thiên Đồng",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-MAJOR-LIÊM-TRINH",
+    "kind": "major-star",
+    "canonicalSubjectId": "Liêm Trinh",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-MAJOR-THIÊN-PHỦ",
+    "kind": "major-star",
+    "canonicalSubjectId": "Thiên Phủ",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-MAJOR-THÁI-ÂM",
+    "kind": "major-star",
+    "canonicalSubjectId": "Thái Âm",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-MAJOR-THAM-LANG",
+    "kind": "major-star",
+    "canonicalSubjectId": "Tham Lang",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-MAJOR-CỰ-MÔN",
+    "kind": "major-star",
+    "canonicalSubjectId": "Cự Môn",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-MAJOR-THIÊN-TƯỚNG",
+    "kind": "major-star",
+    "canonicalSubjectId": "Thiên Tướng",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-MAJOR-THIÊN-LƯƠNG",
+    "kind": "major-star",
+    "canonicalSubjectId": "Thiên Lương",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-MAJOR-THẤT-SÁT",
+    "kind": "major-star",
+    "canonicalSubjectId": "Thất Sát",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-MAJOR-PHÁ-QUÂN",
+    "kind": "major-star",
+    "canonicalSubjectId": "Phá Quân",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-TRANSFORMATION-HÓA-LỘC",
+    "kind": "transformation",
+    "canonicalSubjectId": "Hóa Lộc",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-TRANSFORMATION-HÓA-QUYỀN",
+    "kind": "transformation",
+    "canonicalSubjectId": "Hóa Quyền",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-TRANSFORMATION-HÓA-KHOA",
+    "kind": "transformation",
+    "canonicalSubjectId": "Hóa Khoa",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-TRANSFORMATION-HÓA-KỴ",
+    "kind": "transformation",
+    "canonicalSubjectId": "Hóa Kỵ",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-STRUCTURAL-TUẦN",
+    "kind": "structural-mechanism",
+    "canonicalSubjectId": "Tuần",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-STRUCTURAL-TRIỆT",
+    "kind": "structural-mechanism",
+    "canonicalSubjectId": "Triệt",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-STRUCTURAL-VÔ-CHÍNH-DIỆU",
+    "kind": "structural-mechanism",
+    "canonicalSubjectId": "Vô Chính Diệu",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-STRUCTURAL-MỆNH---THÂN",
+    "kind": "structural-mechanism",
+    "canonicalSubjectId": "Mệnh - Thân",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-PAIR-TẢ-PHÙ---HỮU-BẬT",
+    "kind": "paired-structure",
+    "canonicalSubjectId": "Tả Phù - Hữu Bật",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-PAIR-VĂN-XƯƠNG---VĂN-KHÚC",
+    "kind": "paired-structure",
+    "canonicalSubjectId": "Văn Xương - Văn Khúc",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-PAIR-THIÊN-KHÔI---THIÊN-VIỆT",
+    "kind": "paired-structure",
+    "canonicalSubjectId": "Thiên Khôi - Thiên Việt",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-PAIR-KÌNH-DƯƠNG---ĐÀ-LA",
+    "kind": "paired-structure",
+    "canonicalSubjectId": "Kình Dương - Đà La",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-PAIR-HỎA-TINH---LINH-TINH",
+    "kind": "paired-structure",
+    "canonicalSubjectId": "Hỏa Tinh - Linh Tinh",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  },
+  {
+    "topicId": "HK-TOPIC-PAIR-ĐỊA-KHÔNG---ĐỊA-KIẾP",
+    "kind": "paired-structure",
+    "canonicalSubjectId": "Địa Không - Địa Kiếp",
+    "schoolProfiles": [
+      "shared"
+    ],
+    "sourceIds": [],
+    "claimIds": [],
+    "candidateRuleIds": [],
+    "fixtureIds": [],
+    "sourceReviewStatus": "unresolved",
+    "expertReviewStatus": "not-started",
+    "limitations": []
+  }
+]
