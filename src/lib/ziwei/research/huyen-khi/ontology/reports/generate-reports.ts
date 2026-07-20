@@ -13,7 +13,7 @@ import path from "node:path";
 import { ONTOLOGY_REPORTS_DIR } from "../paths";
 import { validateOntology } from "../validate-ontology";
 import { analyzeConflictsInActivationContexts } from "../validate-ontology";
-import { countFixtureMaturity, countFixtureStatuses } from "../validate-fixture";
+import { countFixtureMaturity, countFixtureStatuses, promotionContext } from "../validate-fixture";
 import { scanNamespaceBoundary } from "../namespace-scan";
 import type { HuyenKhiOntology, HuyenKhiValidationIssue } from "../types";
 
@@ -147,13 +147,13 @@ function ruleConflictReport(ontology: HuyenKhiOntology): unknown {
 }
 
 function fixtureCoverageReport(ontology: HuyenKhiOntology): unknown {
-  const status = countFixtureStatuses(ontology.fixturePlan);
+  const status = countFixtureStatuses(ontology.fixturePlan, promotionContext(ontology));
   const maturity = countFixtureMaturity(ontology.fixturePlan);
   const byCategory = countBy(ontology.fixturePlan.fixtures.map((f) => f.category));
   const bySchool = countBy(ontology.fixturePlan.fixtures.map((f) => f.schoolProfile));
   return {
     reportId: "huyen-khi-fixture-coverage-report-v0-1",
-    note: "derivedStatus counts come only from the append-only review ledger; maturity is the authoring stage",
+    note: "derivedStatus counts come only from eligible reviews in the append-only ledger; maturity is the authoring stage; only a reviewable fixture with distinct eligible approvers can be approved",
     templateCount: status.total,
     derivedStatus: {
       draft: status.draft,
@@ -161,6 +161,12 @@ function fixtureCoverageReport(ontology: HuyenKhiOntology): unknown {
       approved: status.approved,
       disputed: status.disputed,
       approvedForPromotion: status.approvedForPromotion,
+    },
+    reviewEligibility: {
+      ineligibleReviewCount: status.ineligibleReviewCount,
+      schoolIncompatibleReviewCount: status.schoolIncompatibleReviewCount,
+      unresolvedReviewReferenceCount: status.unresolvedReviewReferenceCount,
+      distinctApprovedReviewerCount: status.distinctApprovedReviewerCount,
     },
     maturity,
     minimumApprovedRequiredForNextPhase: ontology.fixturePlan.minimumApprovedRequiredForNextPhase,

@@ -5,7 +5,7 @@
  */
 
 import { loadHuyenKhiOntology } from "../load-ontology";
-import { countFixtureStatuses, validateFixture } from "../validate-fixture";
+import { countFixtureStatuses, promotionContext, validateFixture } from "../validate-fixture";
 
 function main(): void {
   const loaded = loadHuyenKhiOntology();
@@ -22,7 +22,7 @@ function main(): void {
     validateFixture(fixture, "expert-fixture-plan.v0.1.json", index).filter((i) => i.severity === "error"),
   );
 
-  const counts = countFixtureStatuses(plan);
+  const counts = countFixtureStatuses(plan, promotionContext(loaded.ontology));
   process.stdout.write(`Huyền Khí fixtures\n${JSON.stringify(counts, null, 2)}\n`);
 
   if (errors.length > 0) {

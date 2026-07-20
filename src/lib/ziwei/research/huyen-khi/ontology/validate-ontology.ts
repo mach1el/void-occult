@@ -22,6 +22,7 @@ import { scanForbiddenScoringKeys } from "./numeric-key-scan";
 import { scanHardCodedPrNumbers } from "./pr-number-scan";
 import { unresolvedSourceReferences } from "./resolve-source";
 import { isCompatible } from "./validate-compatibility";
+import { validateFixture } from "./validate-fixture";
 import type {
   HuyenKhiClaim,
   HuyenKhiOntology,
@@ -53,6 +54,8 @@ export interface OntologyValidationSummary {
   readonly witnessSeparationViolationCount: number;
   readonly incompatibleOperationDimensionCount: number;
   readonly hardCodedPrNumberCount: number;
+  readonly storedDerivedStatusKeyCount: number;
+  readonly reviewReferenceViolationCount: number;
   readonly manifestComplete: boolean;
   readonly versionConsistent: boolean;
 }
@@ -73,6 +76,8 @@ const EMPTY_SUMMARY: OntologyValidationSummary = {
   witnessSeparationViolationCount: 0,
   incompatibleOperationDimensionCount: 0,
   hardCodedPrNumberCount: 0,
+  storedDerivedStatusKeyCount: 0,
+  reviewReferenceViolationCount: 0,
   manifestComplete: false,
   versionConsistent: false,
 };
@@ -169,6 +174,10 @@ export function validateOntology(): OntologyValidationResult {
     issues.push({ severity: "error", code: "hard-coded-pr-number", file: hit.file, path: `line ${hit.line}`, message: hit.text });
   }
 
+  // 11b. Fixture governance: per-fixture schema/personal/stored-status/maturity
+  // + review referential integrity (§2, §3). Nothing is silently skipped.
+  const fixtureGovernance = checkFixtureGovernance(ontology, issues, knownSourceIds, knownClaimIds, knownRuleIds);
+
   // 12. Non-effective example must never be loaded
   if ((Object.values(ONTOLOGY_FILES) as string[]).includes(NON_EFFECTIVE_EXAMPLE_FILE) &&
       existsSync(path.join(ONTOLOGY_DIR, NON_EFFECTIVE_EXAMPLE_FILE))) {
@@ -191,6 +200,8 @@ export function validateOntology(): OntologyValidationResult {
     witnessSeparationViolationCount,
     incompatibleOperationDimensionCount,
     hardCodedPrNumberCount: prHits.length,
+    storedDerivedStatusKeyCount: fixtureGovernance.storedDerivedStatusKeyCount,
+    reviewReferenceViolationCount: fixtureGovernance.reviewReferenceViolationCount,
     manifestComplete,
     versionConsistent,
   };
@@ -367,6 +378,9 @@ function checkClaimLocators(
       if (!knownSourceIds.has(locator.sourceId)) {
         push(claim.claimId, `locator.sourceId '${locator.sourceId}' does not resolve`);
       }
+      if (!claim.sourceIds.includes(locator.sourceId)) {
+        push(claim.claimId, `locator.sourceId '${locator.sourceId}' must also be listed in the claim's sourceIds`);
+      }
       if (engineeringStatuses.has(claim.status) && !engineeringKinds.has(locator.locatorKind)) {
         push(claim.claimId, `engineering/policy claim locatorKind must be one of [${[...engineeringKinds].join(", ")}]`);
       }
@@ -398,6 +412,47 @@ function checkWitnessSeparation(
     }
   }
   return violations;
+}
+
+/**
+ * §2/§3: per-fixture governance (schema, personal-data, stored derived-status,
+ * maturity) plus referential integrity of every review's cited IDs. A review
+ * that references a source/claim that does not resolve, or ANY effective rule
+ * (there are none in V0.1), fails closed.
+ */
+function checkFixtureGovernance(
+  ontology: HuyenKhiOntology,
+  issues: HuyenKhiValidationIssue[],
+  knownSourceIds: ReadonlySet<string>,
+  knownClaimIds: ReadonlySet<string>,
+  knownRuleIds: ReadonlySet<string>,
+): { storedDerivedStatusKeyCount: number; reviewReferenceViolationCount: number } {
+  let storedDerivedStatusKeyCount = 0;
+  let reviewReferenceViolationCount = 0;
+
+  ontology.fixturePlan.fixtures.forEach((fixture, index) => {
+    for (const issue of validateFixture(fixture, ONTOLOGY_FILES.fixturePlan, index)) {
+      issues.push(issue);
+      if (issue.code === "stored-derived-status") storedDerivedStatusKeyCount += 1;
+    }
+
+    (fixture.reviews ?? []).forEach((review, ri) => {
+      const cite = (ids: readonly string[] | undefined, known: ReadonlySet<string>, kind: string) => {
+        for (const id of ids ?? []) {
+          if (!known.has(id)) {
+            reviewReferenceViolationCount += 1;
+            issues.push({ severity: "error", code: "review-reference-unresolved", file: ONTOLOGY_FILES.fixturePlan, path: `${fixture.fixtureId}.reviews[${ri}]`, message: `review ${kind} '${id}' does not resolve` });
+          }
+        }
+      };
+      cite(review.sourceIds, knownSourceIds, "sourceId");
+      cite(review.claimIds, knownClaimIds, "claimId");
+      cite(review.expectedEffectiveRuleIds, knownRuleIds, "expectedEffectiveRuleId");
+      cite(review.forbiddenRuleIds, knownRuleIds, "forbiddenRuleId");
+    });
+  });
+
+  return { storedDerivedStatusKeyCount, reviewReferenceViolationCount };
 }
 
 /** D: reject any effective rule effect whose (dimension, operation) is invalid. */
@@ -466,11 +521,17 @@ export function analyzeRuleConflicts(
           if (!sameTarget(ea.targetFactSelector, eb.targetFactSelector)) continue;
           if (OPPOSITES[ea.operation] !== eb.operation) continue;
 
+          // Canonical order so ruleA/ruleB and the reason are independent of the
+          // input order — reports stay byte-for-byte deterministic.
+          const [first, second] =
+            a.ruleId <= b.ruleId
+              ? [{ rule: a, effect: ea }, { rule: b, effect: eb }]
+              : [{ rule: b, effect: eb }, { rule: a, effect: ea }];
           const conflict: RuleConflict = {
-            ruleA: a.ruleId,
-            ruleB: b.ruleId,
+            ruleA: first.rule.ruleId,
+            ruleB: second.rule.ruleId,
             dimension: ea.dimension,
-            reason: `${a.ruleId}:${ea.operation} opposes ${b.ruleId}:${eb.operation} on ${ea.dimension} of same target`,
+            reason: `${first.rule.ruleId}:${first.effect.operation} opposes ${second.rule.ruleId}:${second.effect.operation} on ${ea.dimension} of same target`,
           };
           if (declaresSuppression(a, b) || declaresSuppression(b, a)) {
             suppressed.push(conflict);
