@@ -1,4 +1,16 @@
 {
+  "schemaVersion": "0.2.0",
   "approvedExpertFixtureCount": 0,
-  "symbolicEvaluatorPhaseUnlocked": false
+  "researchReadyFixtureCount": 1,
+  "witnessVerifiedExtractionCount": 0,
+  "sourceReviewedTopicCount": 0,
+  "symbolicEvaluatorPhaseUnlocked": false,
+  "blockers": [
+    "approved expert fixtures 0/30",
+    "research-ready fixtures 1/30",
+    "source-reviewed major-star topics 0/14",
+    "source-reviewed transformations 0/4",
+    "Tuần/Triệt and Vô Chính Diệu mechanism coverage unresolved"
+  ],
+  "productionRuntimeUnlocked": false
 }
