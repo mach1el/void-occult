@@ -43,6 +43,14 @@ const PALACE_ORDER = [
   "Huynh Đệ",
 ];
 
+const MOBILE_COMPACT_PHI_FLOW_FIX = `
+  @media (max-width: 960px) {
+    .compact-phi-flow {
+      font-size: 11px;
+    }
+  }
+`;
+
 function starGroups(
   palace: ChartPalace,
   showAnnual: boolean,
@@ -235,63 +243,66 @@ export function MobileChart({
   const thanPalace = data.palaces[data.thanIndex];
 
   return (
-    <div className="mobile-chart-reader">
-      <section className="mobile-chart-summary">
-        <div className="mobile-summary-title">
-          <span>{SCHOOL_LABEL[school]}</span>
-          <strong>
-            {profileName ? profileName.toUpperCase() : "VÔ DANH"}
-          </strong>
-        </div>
-        <div className="mobile-summary-subtitle">
-          {data.yearStem} {data.yearBranch} · Giờ {data.birthHourBranch} · {data.yearPolarity} {gender === "male" ? "Nam Mệnh" : "Nữ Mệnh"}
-        </div>
-        <div className="mobile-summary-grid">
-          <div>
-            <small>Mệnh</small>
-            <b>{getNayinByStemBranch(data.yearStem, data.yearBranch)}</b>
+    <>
+      <style>{MOBILE_COMPACT_PHI_FLOW_FIX}</style>
+      <div className="mobile-chart-reader">
+        <section className="mobile-chart-summary">
+          <div className="mobile-summary-title">
+            <span>{SCHOOL_LABEL[school]}</span>
+            <strong>
+              {profileName ? profileName.toUpperCase() : "VÔ DANH"}
+            </strong>
           </div>
-          <div>
-            <small>Thân</small>
-            <b>{thanPalace?.name ?? "—"}</b>
+          <div className="mobile-summary-subtitle">
+            {data.yearStem} {data.yearBranch} · Giờ {data.birthHourBranch} · {data.yearPolarity} {gender === "male" ? "Nam Mệnh" : "Nữ Mệnh"}
           </div>
-          <div>
-            <small>Cục</small>
-            <b>{data.cuc.name}</b>
+          <div className="mobile-summary-grid">
+            <div>
+              <small>Mệnh</small>
+              <b>{getNayinByStemBranch(data.yearStem, data.yearBranch)}</b>
+            </div>
+            <div>
+              <small>Thân</small>
+              <b>{thanPalace?.name ?? "—"}</b>
+            </div>
+            <div>
+              <small>Cục</small>
+              <b>{data.cuc.name}</b>
+            </div>
+            <div>
+              <small>Lưu niên</small>
+              <b>
+                {data.annualYear} {data.annualStem} {data.annualBranch}
+              </b>
+            </div>
           </div>
-          <div>
-            <small>Lưu niên</small>
-            <b>
-              {data.annualYear} {data.annualStem} {data.annualBranch}
-            </b>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <nav className="mobile-palace-nav" aria-label="Đi nhanh tới cung">
-        {ordered.map((palace, index) => (
-          <a href={`#mobile-palace-${index}`} key={palace.name}>
-            {palace.name}
-          </a>
-        ))}
-      </nav>
+        <nav className="mobile-palace-nav" aria-label="Đi nhanh tới cung">
+          {ordered.map((palace, index) => (
+            <a href={`#mobile-palace-${index}`} key={palace.name}>
+              {palace.name}
+            </a>
+          ))}
+        </nav>
 
-      <div className="mobile-palace-list">
-        {ordered.map((palace, index) => (
-          <PalaceCard
-            palace={palace}
-            school={school}
-            order={index}
-            showAnnual={showAnnual}
-            showMutagens={showMutagens}
-            showPhi={showPhi}
-            phiFlows={(data.phiFlows ?? []).filter(
-              (flow) => flow.source.index === palace.index,
-            )}
-            key={`${palace.name}-${palace.branch}`}
-          />
-        ))}
+        <div className="mobile-palace-list">
+          {ordered.map((palace, index) => (
+            <PalaceCard
+              palace={palace}
+              school={school}
+              order={index}
+              showAnnual={showAnnual}
+              showMutagens={showMutagens}
+              showPhi={showPhi}
+              phiFlows={(data.phiFlows ?? []).filter(
+                (flow) => flow.source.index === palace.index,
+              )}
+              key={`${palace.name}-${palace.branch}`}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
