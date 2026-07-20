@@ -23,6 +23,12 @@ export interface ClaimProvenance {
   readonly sources: readonly HuyenKhiSource[];
   readonly missingSourceIds: readonly string[];
   readonly hasLocator: boolean;
+  /** The locator names a source that resolves in the registry. */
+  readonly locatorSourceResolved: boolean;
+  /** The locator's source is also listed among the claim's cited sources. */
+  readonly locatorSourceInClaimSources: boolean;
+  /** A locator exists, its source resolves, and it is a cited source. */
+  readonly locatorFullyResolved: boolean;
 }
 
 export function resolveClaimProvenance(
@@ -38,12 +44,20 @@ export function resolveClaimProvenance(
     if (source) sources.push(source);
     else missing.push(id);
   }
+  const hasLocator =
+    claim.locator !== undefined && Object.keys(claim.locator).length > 0;
+  const locatorSourceResolved =
+    hasLocator && resolveSource(ontology, claim.locator!.sourceId) !== undefined;
+  const locatorSourceInClaimSources =
+    hasLocator && claim.sourceIds.includes(claim.locator!.sourceId);
   return {
     claim,
     sources,
     missingSourceIds: missing,
-    hasLocator:
-      claim.locator !== undefined && Object.keys(claim.locator).length > 0,
+    hasLocator,
+    locatorSourceResolved,
+    locatorSourceInClaimSources,
+    locatorFullyResolved: hasLocator && locatorSourceResolved && locatorSourceInClaimSources,
   };
 }
 
@@ -85,12 +99,13 @@ export function resolveRuleProvenance(
     directSources.length > 0 ||
     claims.some((c) => c.sources.length > 0 && c.missingSourceIds.length === 0);
 
-  // A4: a fully-traceable doctrinal rule must reach a LOCATOR. Every claim it
-  // cites must carry a locator whose sources resolve — a source alone is not
-  // enough. A rule with no claims cannot be fully traceable.
+  // A4/§5: a fully-traceable doctrinal rule must reach a LOCATOR. Every claim it
+  // cites must carry a locator whose named source both resolves AND is one of
+  // the claim's cited sources — a source alone is not enough. A rule with no
+  // claims cannot be fully traceable.
   const allClaimsLocated =
     claims.length > 0 &&
-    claims.every((c) => c.hasLocator && c.missingSourceIds.length === 0);
+    claims.every((c) => c.locatorFullyResolved && c.missingSourceIds.length === 0);
 
   const fullyTraceable =
     missingClaimIds.length === 0 &&
