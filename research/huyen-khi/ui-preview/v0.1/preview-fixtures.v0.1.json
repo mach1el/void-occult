@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "0.1.0",
+  "fixtureSetId": "huyen-khi-preview-fixtures-v0-1",
+  "fixtures": [
+    {
+      "id": "HK-PREVIEW-001",
+      "case": "Mệnh có chính tinh",
+      "assert": [
+        "default Mệnh",
+        "brightness preserved",
+        "dimension states null"
+      ]
+    },
+    {
+      "id": "HK-PREVIEW-002",
+      "case": "Vô Chính Diệu",
+      "assert": [
+        "VCD true",
+        "opposite majors context-only",
+        "no coefficient"
+      ]
+    },
+    {
+      "id": "HK-PREVIEW-003",
+      "case": "Tuần/Triệt",
+      "assert": [
+        "marker visible",
+        "no inferred state"
+      ]
+    },
+    {
+      "id": "HK-PREVIEW-004",
+      "case": "annual isolation",
+      "assert": [
+        "different annualYear gives deep-equal preview"
+      ]
+    },
+    {
+      "id": "HK-PREVIEW-005",
+      "case": "school isolation",
+      "assert": [
+        "no cross-school fallback"
+      ]
+    },
+    {
+      "id": "HK-PREVIEW-006",
+      "case": "mobile",
+      "assert": [
+        "accessible palace controls",
+        "no overflow"
+      ]
+    }
+  ]
+}

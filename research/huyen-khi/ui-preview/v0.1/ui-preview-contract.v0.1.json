@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractId": "huyen-khi-research-preview-v0-1",
+  "mode": "research-preview",
+  "evaluatorStatus": "not-promoted",
+  "numericScoreForbidden": true,
+  "annualIsolationRequired": true,
+  "dimensionStates": {
+    "capacity": null,
+    "coherence": null,
+    "expression": null,
+    "regulation": null,
+    "tendency": null
+  },
+  "allowedSources": [
+    "normalized-natal-facts",
+    "chart-palace-identity"
+  ],
+  "forbiddenSources": [
+    "palace-overview-score",
+    "annual-axes-score",
+    "major-fortune-score",
+    "monthly-flow-score",
+    "external-runtime-output",
+    "network-fetch"
+  ]
+}

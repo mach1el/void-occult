@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "0.1.0",
+  "title": "Huyền Khí",
+  "badge": "Research Preview",
+  "placement": "after palace-overview-section, before trend-section",
+  "defaultSelection": "menh-palace",
+  "sections": [
+    "12-cung-selector",
+    "nền-cung",
+    "chính-tinh",
+    "tứ-hóa-gốc",
+    "tuần-triệt-và-đối-cung",
+    "phụ-tinh-collapsed",
+    "khung-đánh-giá-collapsed",
+    "thông-tin-nghiên-cứu-collapsed"
+  ],
+  "density": {
+    "onePalaceDetailAtATime": true,
+    "minorStarDefaultLimit": 8,
+    "showNumericScore": false,
+    "showGoodBadBand": false
+  }
+}
