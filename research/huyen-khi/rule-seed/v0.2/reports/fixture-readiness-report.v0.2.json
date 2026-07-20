@@ -1,5 +1,21 @@
 {
-  "planned": 35,
+  "schemaVersion": "0.2.0",
+  "materializedFixtures": 1,
+  "planned": 0,
   "researchReady": 1,
-  "reviewable": 0
+  "reviewable": 0,
+  "derivedStatus": {
+    "total": 1,
+    "draft": 1,
+    "reviewed": 0,
+    "approved": 0,
+    "disputed": 0,
+    "approvedForPromotion": 0,
+    "ineligibleReviewCount": 0,
+    "schoolIncompatibleReviewCount": 0,
+    "unresolvedReviewReferenceCount": 0,
+    "distinctApprovedReviewerCount": 0
+  },
+  "canonicalPlannedTemplateCount": 36,
+  "note": "V0.2 materializes only evidence-linked fixtures; planned templates remain canonical in ontology V0.1."
 }
