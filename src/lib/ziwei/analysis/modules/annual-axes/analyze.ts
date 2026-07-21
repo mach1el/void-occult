@@ -25,9 +25,10 @@ import {
   type AnnualAxisResult,
   type AnnualFocusSummary,
 } from "./types";
-import { isAnnualAxesV043Enabled } from "../../feature-flags";
+import { isAnnualAxesV043Enabled, isAnnualAxesV05Enabled } from "../../feature-flags";
 import { analyzeAnnualAxesNamPhaiV04 } from "./nam-phai-v04/analyze";
 import { analyzeAnnualAxesNamPhaiV043 } from "./nam-phai-v043/analyze";
+import { analyzeAnnualAxesNamPhaiV05 } from "./nam-phai-v05/analyze";
 
 const CONTRACT_VERSION = "0.2.0";
 const ENGINE_VERSION = "0.2.0";
@@ -147,6 +148,9 @@ export function analyzeAnnualAxes(chart: ChartData, options: { school: ZiweiScho
 
   if (school === "nam-phai") {
     // V0.4.3 is experimental and defaults OFF — production stays on V0.4.2.
+    if (isAnnualAxesV05Enabled()) {
+      return analyzeAnnualAxesNamPhaiV05(chart);
+    }
     if (isAnnualAxesV043Enabled()) {
       return analyzeAnnualAxesNamPhaiV043(chart);
     }

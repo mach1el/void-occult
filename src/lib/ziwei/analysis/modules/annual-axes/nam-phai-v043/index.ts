@@ -1,6 +1,7 @@
 export { analyzeAnnualAxesNamPhaiV043 } from "./analyze";
 export { classifyEvidencePaths, classifyActivationPath } from "./classify-paths";
 export { dedupeSpatialPaths, comparePathPrecedence, compareActivationPrecedence } from "./dedupe";
+export type { DedupeSpatialPathsOptions } from "./dedupe";
 export {
   aggregateSpatialBudget,
   computeSignedDiminishingFactors,

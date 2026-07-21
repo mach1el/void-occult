@@ -1,0 +1,50 @@
+{
+  "profileId": "annual-axes-v0.5-holdout",
+  "corpusId": "annual-axes-audit-full-v0.4",
+  "holdoutCharts": 20,
+  "yearsPerChart": 12,
+  "activationScale": 12.089302186318386,
+  "domainScales": {
+    "health": 0.6593154007709149,
+    "family": 0.6600475275189389,
+    "wealth": 0.47976867715803756,
+    "career": 0.5170257026259224,
+    "social": 0.5629475193560145,
+    "romance": 0.4628030787805806
+  },
+  "trainingDiagnostics": {
+    "medianActivationGate": 0.6990259861922142,
+    "p90ActivationGate": 0.8938861816606153,
+    "maxActivationGate": 0.9798899003570146
+  },
+  "holdoutMetrics": {
+    "meanIntraYearAxisStandardDeviation": 10.765021670289888,
+    "medianIntraYearAxisRange": 29.050000000000004,
+    "minDomainMedianTwelveYearRange": 9.8,
+    "perDomainMedianTwelveYearRange": {
+      "health": 9.8,
+      "family": 11.349999999999998,
+      "wealth": 13.100000000000001,
+      "career": 12.5,
+      "social": 10.5,
+      "romance": 16.85
+    },
+    "minDomainAdjacentYearMedianAbsDelta": 2,
+    "perDomainAdjacentYearMedianAbsDelta": {
+      "health": 2,
+      "family": 2.8999999999999986,
+      "wealth": 3,
+      "career": 2.75,
+      "social": 2.799999999999997,
+      "romance": 2.6000000000000014
+    },
+    "exactDuplicateVectorRate": 0,
+    "nearDuplicateVectorRate": 0,
+    "unavailableRate": 0,
+    "maxAbsInterAxisCorrelation": 0.5897893652225832,
+    "extremeScoreRate": 0,
+    "tp4cContributionMaxAbs": 0.05668626830860856,
+    "medianRadarRange": 29.050000000000004,
+    "outsideNeutralBandRate": 1
+  }
+}

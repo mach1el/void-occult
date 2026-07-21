@@ -33,6 +33,15 @@ function pick<T>(rand: () => number, items: readonly T[]): T {
   return items[Math.floor(rand() * items.length) % items.length]!;
 }
 
+function shuffledRange(rand: () => number, count: number): number[] {
+  const values = Array.from({ length: count }, (_, i) => i);
+  for (let i = values.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [values[i], values[j]] = [values[j]!, values[i]!];
+  }
+  return values;
+}
+
 function pad2(n: number): string {
   return n < 10 ? `0${n}` : String(n);
 }
@@ -45,17 +54,21 @@ function pad2(n: number): string {
 export function buildAuditBirthInputs(contract: AuditCorpusContract): BirthInput[] {
   const rand = mulberry32(contract.seed);
   const out: BirthInput[] = [];
+  const yearOffsets = shuffledRange(rand, 40);
+  const monthOffsets = shuffledRange(rand, 12);
+  const dayOffsets = shuffledRange(rand, 28);
+  const hourOffsets = shuffledRange(rand, HOUR_BRANCHES.length);
 
   for (let i = 0; i < contract.chartCount; i++) {
     const gender = i % 2 === 0 ? "female" : "male";
-    // Spread years 1960–1999 so Cục / decade placements vary.
-    const year = 1960 + (i % 40);
-    const month = 1 + (i % 12);
-    const day = 1 + ((i * 3) % 28);
-    const hour = HOUR_BRANCHES[i % HOUR_BRANCHES.length]!;
-    // Nudge a few charts with extra PRNG to avoid pure modular lockstep.
-    const dayNudge = Math.floor(rand() * 0); // reserved — keep pure modular for stability
-    void dayNudge;
+    // Spread years 1960–1999 so Cục / stems / branches vary, but avoid
+    // simple lockstep across chart id order. Each dimension uses a
+    // deterministic permutation plus a coprime stride so the 80/20 split
+    // remains representative instead of clustering by month/hour.
+    const year = 1960 + yearOffsets[(i * 7) % yearOffsets.length]!;
+    const month = 1 + monthOffsets[(i * 5) % monthOffsets.length]!;
+    const day = 1 + dayOffsets[(i * 11) % dayOffsets.length]!;
+    const hour = HOUR_BRANCHES[hourOffsets[(i * 7) % hourOffsets.length]!]!;
 
     out.push({
       solarDate: `${year}-${pad2(month)}-${pad2(day)}`,
