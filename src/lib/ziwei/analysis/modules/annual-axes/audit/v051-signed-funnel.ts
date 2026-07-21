@@ -668,7 +668,10 @@ export function buildSignedEvidenceFunnelForChart(
 export function mergeSignedEvidenceFunnels(
   funnels: SignedEvidenceFunnel[],
 ): SignedEvidenceFunnel {
-  return funnels.reduce((acc, f) => mergeFunnels(acc, f), emptyFunnel());
+  const merged = funnels.reduce((acc, f) => mergeFunnels(acc, f), emptyFunnel());
+  // Corpus aggregates must not embed per-candidate ID lists in research artifacts.
+  merged.retainedWinnerIds = [];
+  return merged;
 }
 
 export type {
