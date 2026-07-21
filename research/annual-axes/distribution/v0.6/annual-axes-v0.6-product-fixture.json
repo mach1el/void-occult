@@ -1,0 +1,85 @@
+{
+  "birth": {
+    "solarDate": "1991-09-21",
+    "birthHour": "Dậu",
+    "gender": "female",
+    "timezone": "7",
+    "annualYear": "2026",
+    "flowBase": "luu-nien"
+  },
+  "v05Baseline": {
+    "health": 41.9,
+    "family": 59.2,
+    "wealth": 47.5,
+    "career": 50,
+    "social": 53.7,
+    "romance": 58.9
+  },
+  "selectedVariant": null,
+  "candidates": {
+    "V05-CONTROL": {
+      "health": 44.9,
+      "family": 56.8,
+      "wealth": 48.1,
+      "career": 48.8,
+      "social": 53.9,
+      "romance": 55,
+      "minimum": 44.9,
+      "maximum": 56.8,
+      "radarRange": 11.899999999999999,
+      "countAbove50": 3,
+      "countAtOrBelow45": 1,
+      "countAtOrAbove60": 0,
+      "l1FromV05": 11.300000000000004,
+      "passesVisibleChangeGate": false
+    },
+    "ANNUAL-DOMINANT-50": {
+      "health": 43.3,
+      "family": 60.4,
+      "wealth": 45.6,
+      "career": 49.4,
+      "social": 53.7,
+      "romance": 57.2,
+      "minimum": 43.3,
+      "maximum": 60.4,
+      "radarRange": 17.1,
+      "countAbove50": 3,
+      "countAtOrBelow45": 1,
+      "countAtOrAbove60": 1,
+      "l1FromV05": 6.79999999999999,
+      "passesVisibleChangeGate": false
+    },
+    "ANNUAL-DOMINANT-35": {
+      "health": 42,
+      "family": 61.1,
+      "wealth": 46.2,
+      "career": 50,
+      "social": 53.6,
+      "romance": 58.7,
+      "minimum": 42,
+      "maximum": 61.1,
+      "radarRange": 19.1,
+      "countAbove50": 3,
+      "countAtOrBelow45": 1,
+      "countAtOrAbove60": 1,
+      "l1FromV05": 3.5999999999999943,
+      "passesVisibleChangeGate": false
+    },
+    "ANNUAL-DOMINANT-25": {
+      "health": 40.6,
+      "family": 61.8,
+      "wealth": 46.7,
+      "career": 50.8,
+      "social": 53.5,
+      "romance": 60.4,
+      "minimum": 40.6,
+      "maximum": 61.8,
+      "radarRange": 21.199999999999996,
+      "countAbove50": 4,
+      "countAtOrBelow45": 1,
+      "countAtOrAbove60": 2,
+      "l1FromV05": 7.199999999999989,
+      "passesVisibleChangeGate": false
+    }
+  }
+}

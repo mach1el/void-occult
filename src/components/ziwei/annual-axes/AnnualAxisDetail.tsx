@@ -87,7 +87,7 @@ export function AnnualAxisDetail({ domain, axis, onClose }: AnnualAxisDetailProp
             </section>
           ) : null}
 
-          {axis.natalResponse && axis.scoreTrace?.formulaVersion !== "v0.5-calibrated-core" ? (
+          {axis.natalResponse && axis.scoreTrace?.formulaVersion !== "v0.5-calibrated-core" && axis.scoreTrace?.formulaVersion !== "v0.6-annual-dominant-core" ? (
             <section className="annual-axis-detail__section" data-natal-response>
               <h5>Đáp ứng bản mệnh (biên độ, không phải điểm tốt/xấu)</h5>
               <ul>
@@ -98,6 +98,23 @@ export function AnnualAxisDetail({ domain, axis, onClose }: AnnualAxisDetailProp
             </section>
           ) : null}
 
+          {axis.scoreTrace?.formulaVersion === "v0.6-annual-dominant-core" ? (
+            <div className="annual-axis-detail__score-trace" aria-label="V0.6 score reconstruction">
+              <h5 className="annual-axis-detail__subtitle">V0.6 · Tái dựng điểm</h5>
+              <ul className="annual-axis-detail__list">
+                <li>Ứng viên: {axis.scoreTrace.candidateId}</li>
+                <li>Hệ số lớp năm: {axis.scoreTrace.signedLayerFactors.annual.toFixed(2)}</li>
+                <li>Hệ số lớp bản mệnh kích hoạt: {axis.scoreTrace.signedLayerFactors.natalActivated.toFixed(2)}</li>
+                <li>Hệ số đại vận: {axis.scoreTrace.signedLayerFactors.majorFortune.toFixed(2)}</li>
+                <li>Kích hoạt năm: {axis.scoreTrace.activationGate.toFixed(4)}</li>
+                <li>Độ nhạy bản mệnh: {axis.scoreTrace.natalGain.toFixed(4)}</li>
+                <li>Tín hiệu không gian: {axis.scoreTrace.spatialSigned.toFixed(4)}</li>
+                <li>Tín hiệu hiệu lực: {axis.scoreTrace.latent.toFixed(4)}</li>
+                <li>Thang chuẩn hóa miền: {axis.scoreTrace.domainScale.toFixed(4)}</li>
+                <li>Điểm tuyệt đối: {axis.scoreTrace.absoluteScore}</li>
+              </ul>
+            </div>
+          ) : null}
           {axis.scoreTrace?.formulaVersion === "v0.5-calibrated-core" ? (
             <section className="annual-axis-detail__section" data-v05-score-trace>
               <h5>Thành phần điểm V0.5 (xác định, không dự đoán)</h5>

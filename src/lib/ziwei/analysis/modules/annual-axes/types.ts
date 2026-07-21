@@ -237,6 +237,33 @@ export interface AnnualAxisScoreTraceV05 {
   absoluteScore: number;
 }
 
+/** V0.6 annual-dominant core — includes signed layer factors. */
+export interface AnnualAxisScoreTraceV06 {
+  formulaVersion: "v0.6-annual-dominant-core";
+  candidateId: string;
+  signedLayerFactors: {
+    annual: number;
+    natalActivated: number;
+    majorFortune: number;
+    global: number;
+  };
+  directSupportRawBeforeLayerFactor: number;
+  directPressureRawBeforeLayerFactor: number;
+  tp4cSupportRawBeforeLayerFactor: number;
+  tp4cPressureRawBeforeLayerFactor: number;
+  directSupportRawAfterLayerFactor: number;
+  directPressureRawAfterLayerFactor: number;
+  tp4cSupportRawAfterLayerFactor: number;
+  tp4cPressureRawAfterLayerFactor: number;
+  spatialSigned: number;
+  annualActivationRaw: number;
+  activationGate: number;
+  natalGain: number;
+  latent: number;
+  domainScale: number;
+  absoluteScore: number;
+}
+
 /** V0.3 — head-centric routing exposure per domain. Undefined when the
  * domain result was produced by a non-head-centric school (currently
  * Trung Châu keeps the V0.2 path). */
@@ -281,7 +308,7 @@ export type AnnualAxisResult =
       /** V0.5 calibrated core latent signal (optional). */
       latent?: number;
       /** V0.5 calibrated core score trace (optional). */
-      scoreTrace?: AnnualAxisScoreTraceV05;
+      scoreTrace?: AnnualAxisScoreTraceV05 | AnnualAxisScoreTraceV06;
     }
   | {
       domain: AnnualAxisDomain;

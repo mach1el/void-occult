@@ -92,6 +92,42 @@ export function isAnnualAxesV043Enabled(): boolean {
   }
 }
 
+
+/**
+ * Feature flag for Annual Axes V0.6 (annual-dominant signed core).
+ * Default OFF until a candidate passes all hard holdout gates.
+ * Kill-switch: VITE_ZIWEI_ANNUAL_AXES_V06=false
+ * Opt-in preview: ?ziweiAnnualAxesV06=1 (session)
+ * Explicit rollback: ?ziweiAnnualAxesV06=0 (session) → V0.5/V0.4.2 chain
+ */
+export const ANNUAL_AXES_V06_FEATURE_FLAG = "ziweiAnnualAxesV06";
+
+export function isAnnualAxesV06Enabled(): boolean {
+  if (import.meta.env.VITE_ZIWEI_ANNUAL_AXES_V06 === "false") {
+    return false;
+  }
+  if (import.meta.env.VITE_ZIWEI_ANNUAL_AXES_V06 === "true") {
+    // Build-time force-on is allowed only for experimental builds; still
+    // respects session rollback to 0.
+  }
+  if (typeof window === "undefined") {
+    return import.meta.env.VITE_ZIWEI_ANNUAL_AXES_V06 === "true";
+  }
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const queryValue = params.get(ANNUAL_AXES_V06_FEATURE_FLAG);
+    if (queryValue === "0" || queryValue === "1") {
+      window.sessionStorage.setItem(ANNUAL_AXES_V06_FEATURE_FLAG, queryValue);
+    }
+    const stored = window.sessionStorage.getItem(ANNUAL_AXES_V06_FEATURE_FLAG);
+    if (stored === "0") return false;
+    if (stored === "1") return true;
+    return import.meta.env.VITE_ZIWEI_ANNUAL_AXES_V06 === "true";
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Feature flag for Annual Axes V0.5 (calibrated scoring core, Nam Phái production).
  * Default ON. Emergency kill-switch via VITE_ZIWEI_ANNUAL_AXES_V05=false, or

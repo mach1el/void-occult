@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "0.6.0",
+  "profileId": "annual-axis-calibration-nam-phai-v0-6",
+  "formulaVersion": "v0.6-annual-dominant-core",
+  "trainingCorpusId": "annual-axes-audit-full-v0.4",
+  "splitPolicy": {
+    "trainingFraction": 0.8,
+    "holdoutFraction": 0.2,
+    "splitBy": "stable-chart-id"
+  },
+  "activationTargetMedianGate": 0.7,
+  "activationScale": 12.089302186318386,
+  "medianPositiveAnnualActivationRaw": 10.485058165646807,
+  "domainScales": {
+    "health": 0.668149753507684,
+    "family": 0.6933703160319541,
+    "wealth": 0.46059218822486403,
+    "career": 0.5026435553869345,
+    "social": 0.6050040636650305,
+    "romance": 0.4643166081208111
+  },
+  "q75AbsLatent": {
+    "health": 0.25830331661891726,
+    "family": 0.2680534585785802,
+    "wealth": 0.1780626112673987,
+    "career": 0.19431945720545185,
+    "social": 0.23389151218298357,
+    "romance": 0.17950245316893962
+  },
+  "trainingDiagnostics": {
+    "medianActivationGate": 0.6990259861922142,
+    "p90ActivationGate": 0.6990259861922142,
+    "maxActivationGate": 0.6990259861922142
+  },
+  "generatedAt": "2026-07-21T00:00:00.000Z",
+  "sourceIds": [
+    "SRC-AA-ENG-004"
+  ],
+  "candidateId": "ANNUAL-DOMINANT-25",
+  "signedLayerFactors": {
+    "annual": 1,
+    "natalActivated": 0.25,
+    "majorFortune": 0,
+    "global": 0
+  },
+  "selectionStatus": "no-variant-approved",
+  "note": "Provisional experimental pack only. No candidate passed hard holdout gates; production routing must remain V0.5."
+}

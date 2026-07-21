@@ -1,0 +1,122 @@
+{
+  "selectionStatus": "no-variant-approved",
+  "selectedVariant": null,
+  "holdoutMetrics": null,
+  "gateResults": [],
+  "candidates": [
+    {
+      "candidateId": "V05-CONTROL",
+      "passedAllGates": false,
+      "blockers": [
+        "control-candidate-not-selectable",
+        "globalMedianScoreMax: 58 vs <= 52",
+        "globalMeanScoreMax: 55.990555555555574 vs <= 53",
+        "positiveLatentRateMax: 0.7284722222222222 vs <= 0.65",
+        "negativeLatentRateMin: 0.2673611111111111 vs >= 0.35",
+        "allSixAbove50RateMax: 0.1375 vs <= 0.12",
+        "fiveOrMoreAbove50RateMax: 0.4583333333333333 vs <= 0.28",
+        "domainMedianMax_health: 59.8 vs <= 55",
+        "domainPositiveLatentRateMax_health: 0.8291666666666667 vs <= 0.75",
+        "domainTwelveYearRangeMin_health: 4.900000000000002 vs >= 8",
+        "domainAdjacentDeltaMin_health: 0.899999999999995 vs >= 1.5",
+        "domainMedianMax_family: 59.75 vs <= 55",
+        "domainPositiveLatentRateMax_family: 0.8083333333333333 vs <= 0.75",
+        "domainTwelveYearRangeMin_family: 7.649999999999999 vs >= 8",
+        "domainAdjacentDeltaMin_family: 1.2999999999999972 vs >= 1.5",
+        "domainAdjacentDeltaMin_wealth: 1.4000000000000021 vs >= 1.5",
+        "domainMedianMax_career: 55.650000000000006 vs <= 55",
+        "domainPositiveLatentRateMax_career: 0.7625 vs <= 0.75",
+        "domainAdjacentDeltaMin_career: 1.4500000000000028 vs >= 1.5",
+        "domainMedianMax_social: 61.9 vs <= 55",
+        "domainPositiveLatentRateMax_social: 0.8041666666666667 vs <= 0.75",
+        "domainTwelveYearRangeMin_social: 7.900000000000002 vs >= 8",
+        "domainAdjacentDeltaMin_social: 1.3000000000000007 vs >= 1.5",
+        "domainMedianMax_romance: 57.75 vs <= 55",
+        "domainAdjacentDeltaMin_romance: 1.3999999999999986 vs >= 1.5"
+      ],
+      "holdoutMetrics": {
+        "globalMedianScore": 58,
+        "globalMeanScore": 55.990555555555574,
+        "positiveLatentRate": 0.7284722222222222,
+        "negativeLatentRate": 0.2673611111111111
+      }
+    },
+    {
+      "candidateId": "ANNUAL-DOMINANT-50",
+      "passedAllGates": false,
+      "blockers": [
+        "globalMedianScoreMax: 57.9 vs <= 52",
+        "globalMeanScoreMax: 56.10034722222233 vs <= 53",
+        "positiveLatentRateMax: 0.7458333333333333 vs <= 0.65",
+        "negativeLatentRateMin: 0.25 vs >= 0.35",
+        "allSixAbove50RateMax: 0.2 vs <= 0.12",
+        "fiveOrMoreAbove50RateMax: 0.4625 vs <= 0.28",
+        "domainMedianMax_health: 59.9 vs <= 55",
+        "domainPositiveLatentRateMax_health: 0.8458333333333333 vs <= 0.75",
+        "domainMedianMax_family: 60 vs <= 55",
+        "domainPositiveLatentRateMax_family: 0.825 vs <= 0.75",
+        "domainMedianMax_career: 55.55 vs <= 55",
+        "domainMedianMax_social: 61.95 vs <= 55",
+        "domainPositiveLatentRateMax_social: 0.8125 vs <= 0.75",
+        "domainMedianMax_romance: 56.5 vs <= 55"
+      ],
+      "holdoutMetrics": {
+        "globalMedianScore": 57.9,
+        "globalMeanScore": 56.10034722222233,
+        "positiveLatentRate": 0.7458333333333333,
+        "negativeLatentRate": 0.25
+      }
+    },
+    {
+      "candidateId": "ANNUAL-DOMINANT-35",
+      "passedAllGates": false,
+      "blockers": [
+        "globalMedianScoreMax: 57.9 vs <= 52",
+        "globalMeanScoreMax: 56.10027777777783 vs <= 53",
+        "positiveLatentRateMax: 0.75 vs <= 0.65",
+        "negativeLatentRateMin: 0.24583333333333332 vs >= 0.35",
+        "allSixAbove50RateMax: 0.19583333333333333 vs <= 0.12",
+        "fiveOrMoreAbove50RateMax: 0.4666666666666667 vs <= 0.28",
+        "domainMedianMax_health: 60.05 vs <= 55",
+        "domainPositiveLatentRateMax_health: 0.8458333333333333 vs <= 0.75",
+        "domainMedianMax_family: 60.45 vs <= 55",
+        "domainPositiveLatentRateMax_family: 0.8333333333333334 vs <= 0.75",
+        "domainMedianMax_career: 56.1 vs <= 55",
+        "domainMedianMax_social: 61.6 vs <= 55",
+        "domainPositiveLatentRateMax_social: 0.8166666666666667 vs <= 0.75",
+        "domainMedianMax_romance: 55.5 vs <= 55"
+      ],
+      "holdoutMetrics": {
+        "globalMedianScore": 57.9,
+        "globalMeanScore": 56.10027777777783,
+        "positiveLatentRate": 0.75,
+        "negativeLatentRate": 0.24583333333333332
+      }
+    },
+    {
+      "candidateId": "ANNUAL-DOMINANT-25",
+      "passedAllGates": false,
+      "blockers": [
+        "globalMedianScoreMax: 57.3 vs <= 52",
+        "globalMeanScoreMax: 56.0280555555557 vs <= 53",
+        "positiveLatentRateMax: 0.7472222222222222 vs <= 0.65",
+        "negativeLatentRateMin: 0.24861111111111112 vs >= 0.35",
+        "allSixAbove50RateMax: 0.18333333333333332 vs <= 0.12",
+        "fiveOrMoreAbove50RateMax: 0.44166666666666665 vs <= 0.28",
+        "domainMedianMax_health: 60.1 vs <= 55",
+        "domainPositiveLatentRateMax_health: 0.8458333333333333 vs <= 0.75",
+        "domainMedianMax_family: 59.849999999999994 vs <= 55",
+        "domainPositiveLatentRateMax_family: 0.8166666666666667 vs <= 0.75",
+        "domainMedianMax_career: 56.25 vs <= 55",
+        "domainMedianMax_social: 61.099999999999994 vs <= 55",
+        "domainPositiveLatentRateMax_social: 0.825 vs <= 0.75"
+      ],
+      "holdoutMetrics": {
+        "globalMedianScore": 57.3,
+        "globalMeanScore": 56.0280555555557,
+        "positiveLatentRate": 0.7472222222222222,
+        "negativeLatentRate": 0.24861111111111112
+      }
+    }
+  ]
+}
