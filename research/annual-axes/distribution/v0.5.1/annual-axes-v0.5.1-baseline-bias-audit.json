@@ -1,0 +1,378 @@
+{
+  "profileId": "annual-axes-v0.5.1-baseline-bias-audit",
+  "corpusId": "annual-axes-audit-full-v0.4",
+  "engineVersion": "0.5.0",
+  "generatedAt": "2026-07-21T00:00:00.000Z",
+  "baselineReproduced": true,
+  "baselineMismatchDetails": [],
+  "global": {
+    "score": {
+      "minimum": 26,
+      "maximum": 78.2,
+      "mean": 55.88027777777802,
+      "median": 57.1,
+      "p10": 40.9,
+      "p25": 49.6,
+      "p75": 63.4,
+      "p90": 67.8,
+      "scoreAbove50Rate": 0.7331944444444445,
+      "scoreBelow50Rate": 0.2590277777777778,
+      "scoreEqual50Rate": 0.0077777777777777776,
+      "scoreAtOrBelow45Rate": 0.15625,
+      "scoreAtOrAbove60Rate": 0.38166666666666665
+    },
+    "vector": {
+      "meanIntraYearSixAxisSd": 9.883257762400188,
+      "medianIntraYearRange": 26.200000000000003,
+      "p10IntraYearRange": 16.39,
+      "p25IntraYearRange": 21.300000000000004,
+      "allSixAbove50Rate": 0.15,
+      "fiveOrMoreAbove50Rate": 0.47,
+      "allSixInside45To65Rate": 0.05,
+      "atLeastOneAtOrBelow45Rate": 0.6875,
+      "atLeastOneAtOrAbove60Rate": 0.9641666666666666,
+      "oneLowAndOneHighRate": 0.6616666666666666,
+      "atLeastTwoOutside42To58Rate": 0.9475
+    },
+    "signed": {
+      "spatialSignedMean": 0.15162903658843785,
+      "spatialSignedMedian": 0.1642557157626292,
+      "latentMean": 0.094675815629777,
+      "latentMedian": 0.10345081250663671,
+      "positiveLatentRate": 0.7348611111111111,
+      "negativeLatentRate": 0.2609722222222222,
+      "zeroLatentRate": 0.004166666666666667,
+      "medianAbsLatent": 0.1390168245249385,
+      "q75AbsLatent": 0.22202376016016284,
+      "positiveNegativeAbsoluteMassRatio": 4.303537852976825
+    },
+    "activation": {
+      "annualActivationRawMean": 10.884655845526536,
+      "annualActivationRawMedian": 10.640703765148789,
+      "activationGateMean": 0.6619151606137776,
+      "activationGateMedian": 0.7065070282263567,
+      "activationGateP10": 0.3485527183230106,
+      "activationGateP90": 0.8923678721843659,
+      "activationGateMaximum": 0.98062670557871,
+      "gateBelow040Rate": 0.12791666666666668,
+      "gateAbove085Rate": 0.20458333333333334
+    },
+    "evidence": {
+      "directSupportRawMass": 25769.79732352959,
+      "directPressureRawMass": 18407.783249764056,
+      "tp4cSupportRawMass": 560.2151585007344,
+      "tp4cPressureRawMass": 343.3517306591232,
+      "supportPressureRawMassRatio": 1.4041823340037682,
+      "retainedSignedFactCount": 41029,
+      "retainedActivationFactCount": 39016
+    }
+  },
+  "perDomain": {
+    "health": {
+      "score": {
+        "minimum": 32.6,
+        "maximum": 74.9,
+        "mean": 56.922833333333216,
+        "median": 58.8,
+        "p10": 42.3,
+        "p25": 51.4,
+        "p75": 64.3,
+        "p90": 66.7,
+        "scoreAbove50Rate": 0.7716666666666666,
+        "scoreBelow50Rate": 0.21916666666666668,
+        "scoreEqual50Rate": 0.009166666666666667,
+        "scoreAtOrBelow45Rate": 0.15083333333333335,
+        "scoreAtOrAbove60Rate": 0.4425
+      },
+      "signed": {
+        "latentMean": 0.1269928034769714,
+        "latentMedian": 0.1560759355492649,
+        "positiveLatentRate": 0.7716666666666666,
+        "negativeLatentRate": 0.21916666666666668
+      },
+      "evidence": {
+        "directSupportRawMass": 4080.202805016532,
+        "directPressureRawMass": 2505.3852589024395,
+        "tp4cSupportRawMass": 73.14694323660618,
+        "tp4cPressureRawMass": 29.39687771403793,
+        "supportPressureRawMassRatio": 1.6385430874927904
+      }
+    },
+    "family": {
+      "score": {
+        "minimum": 30.7,
+        "maximum": 73.3,
+        "mean": 57.556666666666736,
+        "median": 58.1,
+        "p10": 47.28999999999999,
+        "p25": 51.675000000000004,
+        "p75": 64,
+        "p90": 67.41000000000003,
+        "scoreAbove50Rate": 0.8133333333333334,
+        "scoreBelow50Rate": 0.17833333333333334,
+        "scoreEqual50Rate": 0.008333333333333333,
+        "scoreAtOrBelow45Rate": 0.06666666666666667,
+        "scoreAtOrAbove60Rate": 0.42333333333333334
+      },
+      "signed": {
+        "latentMean": 0.13886685594368076,
+        "latentMedian": 0.1434792956082062,
+        "positiveLatentRate": 0.815,
+        "negativeLatentRate": 0.185
+      },
+      "evidence": {
+        "directSupportRawMass": 6698.906780966646,
+        "directPressureRawMass": 4681.175311115754,
+        "tp4cSupportRawMass": 178.89069821555984,
+        "tp4cPressureRawMass": 101.98001781578112,
+        "supportPressureRawMassRatio": 1.437920578823973
+      }
+    },
+    "wealth": {
+      "score": {
+        "minimum": 28,
+        "maximum": 77.9,
+        "mean": 54.40091666666674,
+        "median": 54,
+        "p10": 40.279999999999994,
+        "p25": 48.175000000000004,
+        "p75": 61.125,
+        "p90": 66.8,
+        "scoreAbove50Rate": 0.665,
+        "scoreBelow50Rate": 0.3275,
+        "scoreEqual50Rate": 0.0075,
+        "scoreAtOrBelow45Rate": 0.1575,
+        "scoreAtOrAbove60Rate": 0.31666666666666665
+      },
+      "signed": {
+        "latentMean": 0.06018594592014093,
+        "latentMedian": 0.05128513780704115,
+        "positiveLatentRate": 0.6675,
+        "negativeLatentRate": 0.3283333333333333
+      },
+      "evidence": {
+        "directSupportRawMass": 3113.8240400346713,
+        "directPressureRawMass": 2341.747295219114,
+        "tp4cSupportRawMass": 93.80020901205226,
+        "tp4cPressureRawMass": 63.338913933419875,
+        "supportPressureRawMassRatio": 1.3336836895243647
+      }
+    },
+    "career": {
+      "score": {
+        "minimum": 29.2,
+        "maximum": 76.5,
+        "mean": 55.586250000000014,
+        "median": 56.5,
+        "p10": 39.190000000000005,
+        "p25": 51.1,
+        "p75": 62.72500000000001,
+        "p90": 67.11000000000001,
+        "scoreAbove50Rate": 0.77,
+        "scoreBelow50Rate": 0.2275,
+        "scoreEqual50Rate": 0.0025,
+        "scoreAtOrBelow45Rate": 0.1475,
+        "scoreAtOrAbove60Rate": 0.35
+      },
+      "signed": {
+        "latentMean": 0.08080977195363528,
+        "latentMedian": 0.08996129142546083,
+        "positiveLatentRate": 0.7716666666666666,
+        "negativeLatentRate": 0.22833333333333333
+      },
+      "evidence": {
+        "directSupportRawMass": 3705.675854580615,
+        "directPressureRawMass": 2773.5542362186025,
+        "tp4cSupportRawMass": 77.01502407065072,
+        "tp4cPressureRawMass": 62.82140600356261,
+        "supportPressureRawMassRatio": 1.3336353698509786
+      }
+    },
+    "social": {
+      "score": {
+        "minimum": 30.1,
+        "maximum": 75.8,
+        "mean": 56.02141666666657,
+        "median": 57.7,
+        "p10": 39.7,
+        "p25": 48,
+        "p75": 63.8,
+        "p90": 69.3,
+        "scoreAbove50Rate": 0.715,
+        "scoreBelow50Rate": 0.2808333333333333,
+        "scoreEqual50Rate": 0.004166666666666667,
+        "scoreAtOrBelow45Rate": 0.1875,
+        "scoreAtOrAbove60Rate": 0.4266666666666667
+      },
+      "signed": {
+        "latentMean": 0.09638075788186015,
+        "latentMedian": 0.11544335012868198,
+        "positiveLatentRate": 0.7166666666666667,
+        "negativeLatentRate": 0.2833333333333333
+      },
+      "evidence": {
+        "directSupportRawMass": 5083.30117268821,
+        "directPressureRawMass": 3863.263653129233,
+        "tp4cSupportRawMass": 74.65333113760381,
+        "tp4cPressureRawMass": 49.10788017351162,
+        "supportPressureRawMassRatio": 1.3183703183402857
+      }
+    },
+    "romance": {
+      "score": {
+        "minimum": 26,
+        "maximum": 78.2,
+        "mean": 54.793583333333494,
+        "median": 54.75,
+        "p10": 39.3,
+        "p25": 46.075,
+        "p75": 63.025,
+        "p90": 70.4,
+        "scoreAbove50Rate": 0.6641666666666667,
+        "scoreBelow50Rate": 0.32083333333333336,
+        "scoreEqual50Rate": 0.015,
+        "scoreAtOrBelow45Rate": 0.2275,
+        "scoreAtOrAbove60Rate": 0.3308333333333333
+      },
+      "signed": {
+        "latentMean": 0.06481875860237545,
+        "latentMedian": 0.058167751173456954,
+        "positiveLatentRate": 0.6666666666666666,
+        "negativeLatentRate": 0.32166666666666666
+      },
+      "evidence": {
+        "directSupportRawMass": 3087.886670242822,
+        "directPressureRawMass": 2242.6574951789157,
+        "tp4cSupportRawMass": 62.7089528282611,
+        "tp4cPressureRawMass": 36.70663501880972,
+        "supportPressureRawMassRatio": 1.3822256748410722
+      }
+    }
+  },
+  "evidenceByDimension": {
+    "byLayer": {
+      "annual": {
+        "supportRaw": 2122.7444347020814,
+        "pressureRaw": 1359.8060101043523,
+        "count": 13151
+      },
+      "natal-activated": {
+        "supportRaw": 22891.871333253875,
+        "pressureRaw": 16417.716417448348,
+        "count": 38170
+      },
+      "major-fortune": {
+        "supportRaw": 1315.396714074307,
+        "pressureRaw": 973.6125528704681,
+        "count": 3481
+      }
+    },
+    "byCategory": {
+      "mutagen": {
+        "supportRaw": 2748.3652858400837,
+        "pressureRaw": 1772.0955846289235,
+        "count": 21074
+      },
+      "star": {
+        "supportRaw": 23581.647196190104,
+        "pressureRaw": 16979.03939579439,
+        "count": 33350
+      }
+    },
+    "byGeometryBucket": {
+      "direct": {
+        "supportRaw": 25769.79732352959,
+        "pressureRaw": 18407.783249764056,
+        "count": 47404
+      },
+      "tp4c": {
+        "supportRaw": 560.2151585007344,
+        "pressureRaw": 343.3517306591232,
+        "count": 1269
+      }
+    },
+    "bySourceId": {
+      "SRC-AA-ENG-004": {
+        "supportRaw": 2748.3652858400837,
+        "pressureRaw": 1772.0955846289235,
+        "count": 21074
+      },
+      "src-heuristic-palace-overview-v1": {
+        "supportRaw": 23581.647196190104,
+        "pressureRaw": 16979.03939579439,
+        "count": 33350
+      }
+    },
+    "byRuleId": {
+      "RULE-AA-MUTAGEN-LOC-V0": {
+        "supportRaw": 1359.3173638433655,
+        "pressureRaw": 0,
+        "count": 6872
+      },
+      "RULE-AA-MUTAGEN-QUYEN-V0": {
+        "supportRaw": 430.45515432106305,
+        "pressureRaw": 307.46796737219603,
+        "count": 6832
+      },
+      "RULE-AA-STAR-MAJOR-CANONICAL-V0": {
+        "supportRaw": 23581.647196190104,
+        "pressureRaw": 16979.03939579439,
+        "count": 33350
+      },
+      "RULE-AA-MUTAGEN-KHOA-V0": {
+        "supportRaw": 958.5927676756191,
+        "pressureRaw": 0,
+        "count": 6893
+      },
+      "RULE-AA-MUTAGEN-KY-V0": {
+        "supportRaw": 0,
+        "pressureRaw": 1464.6276172567707,
+        "count": 7177
+      }
+    },
+    "byStackingGroup": {
+      "annual-mutagen": {
+        "supportRaw": 2748.3652858400837,
+        "pressureRaw": 1772.0955846289235,
+        "count": 21074
+      },
+      "major-star": {
+        "supportRaw": 23581.647196190104,
+        "pressureRaw": 16979.03939579439,
+        "count": 33350
+      }
+    },
+    "byOwnershipRole": {
+      "primary": {
+        "supportRaw": 21613.925314309367,
+        "pressureRaw": 15435.669295690594,
+        "count": 30967
+      },
+      "secondary": {
+        "supportRaw": 4716.087167720816,
+        "pressureRaw": 3315.4656847327333,
+        "count": 21046
+      }
+    }
+  },
+  "evidenceBiasFlags": {
+    "globalPositiveLatentBias": true,
+    "perDomainPositiveLatentBiasDomains": [
+      "health",
+      "family",
+      "wealth",
+      "career",
+      "social"
+    ],
+    "scaleOnlyTighteningBlocked": true
+  },
+  "diagnosis": {
+    "softnessInSpatialSigned": false,
+    "latentPositivelyBiased": true,
+    "supportLargerThanPressure": true,
+    "pressureDisproportionatelyTp4c": false,
+    "pressureDroppedByEligibilityOrDedupe": false,
+    "activationTooWeak": false,
+    "calibrationWouldAmplifyPositiveBias": true
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "profileId": "annual-axes-v0.5.1-product-fixture",
+  "fixture": {
+    "solarDate": "1991-09-21",
+    "birthHour": "Dậu",
+    "gender": "female",
+    "timezone": "7",
+    "annualYear": "2026",
+    "flowBase": "luu-nien"
+  },
+  "productionV050": {
+    "engineVersion": "0.5.0",
+    "candidateId": "BASELINE-V05",
+    "scores": {
+      "health": 41.9,
+      "family": 59.2,
+      "wealth": 47.5,
+      "career": 50,
+      "social": 53.7,
+      "romance": 58.9
+    },
+    "minimum": 41.9,
+    "maximum": 59.2,
+    "range": 17.300000000000004,
+    "countAbove50": 3,
+    "countAtOrBelow45": 1,
+    "countAtOrAbove60": 0
+  },
+  "candidates": [
+    {
+      "candidateId": "BASELINE-V05",
+      "scores": {
+        "health": 41.9,
+        "family": 59.2,
+        "wealth": 47.5,
+        "career": 50,
+        "social": 53.7,
+        "romance": 58.9
+      },
+      "minimum": 41.9,
+      "maximum": 59.2,
+      "range": 17.300000000000004,
+      "countAbove50": 3,
+      "countAtOrBelow45": 1,
+      "countAtOrAbove60": 0
+    },
+    {
+      "candidateId": "STRICT-SCALE",
+      "scores": {
+        "health": 39.3,
+        "family": 62.1,
+        "wealth": 46.7,
+        "career": 50,
+        "social": 55,
+        "romance": 61.7
+      },
+      "minimum": 39.3,
+      "maximum": 62.1,
+      "range": 22.800000000000004,
+      "countAbove50": 3,
+      "countAtOrBelow45": 1,
+      "countAtOrAbove60": 2
+    },
+    {
+      "candidateId": "STRICT-BALANCED",
+      "scores": {
+        "health": 40.1,
+        "family": 61.6,
+        "wealth": 46.7,
+        "career": 50,
+        "social": 54.6,
+        "romance": 61.2
+      },
+      "minimum": 40.1,
+      "maximum": 61.6,
+      "range": 21.5,
+      "countAbove50": 3,
+      "countAtOrBelow45": 1,
+      "countAtOrAbove60": 2
+    },
+    {
+      "candidateId": "STRICT-ACTIVATION",
+      "scores": {
+        "health": 39.5,
+        "family": 62.4,
+        "wealth": 46.5,
+        "career": 50,
+        "social": 54.9,
+        "romance": 62
+      },
+      "minimum": 39.5,
+      "maximum": 62.4,
+      "range": 22.9,
+      "countAbove50": 3,
+      "countAtOrBelow45": 1,
+      "countAtOrAbove60": 2
+    }
+  ],
+  "selectedV051": null
+}
