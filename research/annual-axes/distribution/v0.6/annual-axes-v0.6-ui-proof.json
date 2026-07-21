@@ -1,0 +1,48 @@
+{
+  "proof": "annual-axes-v06-ui-dom",
+  "selectionStatus": "no-variant-approved",
+  "selectedVariant": null,
+  "note": "Production default remains V0.5. V0.6 opt-in via ?ziweiAnnualAxesV06=1 only. No candidate passed hard holdout gates.",
+  "routing": {
+    "default": "0.5.0",
+    "V06=1": "0.6.0",
+    "V06=0": "0.5.0",
+    "V06=0+V05=0": "0.4.2",
+    "trungChau": "0.2.0"
+  },
+  "v05": {
+    "badge": "Nam Phái V0.5 · Fallback",
+    "engine": "0.5.0",
+    "scores": {
+      "health": 41.9,
+      "family": 59.2,
+      "wealth": 47.5,
+      "career": 50,
+      "social": 53.7,
+      "romance": 58.9
+    }
+  },
+  "v06ExperimentalPreview": {
+    "badge": "Nam Phái V0.6 · Experimental",
+    "engine": "0.6.0",
+    "candidateId": "ANNUAL-DOMINANT-25",
+    "signedLayerFactors": {
+      "annual": 1,
+      "natalActivated": 0.25,
+      "majorFortune": 0,
+      "global": 0
+    },
+    "scores": {
+      "health": 40.6,
+      "family": 61.8,
+      "wealth": 46.7,
+      "career": 50.8,
+      "social": 53.5,
+      "romance": 60.4
+    },
+    "radarRange": 21.199999999999996,
+    "l1FromV05": 7.199999999999989,
+    "passesVisibleChangeGate": false
+  },
+  "domTest": "src/lib/ziwei/analysis/modules/annual-axes/__tests__/annual-axes-v06-ui-proof.test.tsx"
+}

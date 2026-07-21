@@ -2,12 +2,14 @@
 
 import {
   isAnnualAxesV05Enabled,
+  isAnnualAxesV06Enabled,
   isPalaceOverviewV1Enabled,
 } from "../feature-flags";
 import { loadAnnualAxesKnowledgeV0 } from "../knowledge/annual-axes";
 import { loadAnnualAxesKnowledgeV04NamPhai } from "../knowledge/annual-axes/v0.4";
 import { loadAnnualAxesKnowledgeV042NamPhai } from "../knowledge/annual-axes/v0.4.2";
 import { loadAnnualAxesKnowledgeV05NamPhai } from "../knowledge/annual-axes/v0.5";
+import { loadAnnualAxesKnowledgeV06NamPhai } from "../knowledge/annual-axes/v0.6";
 import { loadPalaceOverviewKnowledgeV1 } from "../knowledge";
 import type { ZiweiSchool } from "../facts";
 
@@ -89,6 +91,42 @@ function annualAxesStatusForNamPhaiV05(): ZiweiAnalysisStatus {
   return { status: "available", module: "annual-axes", version: "0.5.0" };
 }
 
+function annualAxesStatusForNamPhaiV06(): ZiweiAnalysisStatus {
+  const knowledge06 = loadAnnualAxesKnowledgeV06NamPhai();
+  if (!knowledge06.ok) {
+    if (import.meta.env.DEV) {
+      console.warn("[annual-axes] invalid V0.6 knowledge", knowledge06.issues);
+    }
+    return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
+  }
+
+  const knowledge04 = loadAnnualAxesKnowledgeV04NamPhai();
+  if (!knowledge04.ok) {
+    if (import.meta.env.DEV) {
+      console.warn("[annual-axes] invalid V0.4 knowledge", knowledge04.issues);
+    }
+    return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
+  }
+
+  const knowledge042 = loadAnnualAxesKnowledgeV042NamPhai();
+  if (!knowledge042.ok) {
+    if (import.meta.env.DEV) {
+      console.warn("[annual-axes] invalid V0.4.2 knowledge", knowledge042.issues);
+    }
+    return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
+  }
+
+  const numericKnowledge = loadPalaceOverviewKnowledgeV1();
+  if (!numericKnowledge.ok) {
+    if (import.meta.env.DEV) {
+      console.warn("[annual-axes] invalid palace-overview numeric knowledge", numericKnowledge.issues);
+    }
+    return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
+  }
+
+  return { status: "available", module: "annual-axes", version: "0.6.0" };
+}
+
 function annualAxesStatusForNamPhaiV042Fallback(): ZiweiAnalysisStatus {
   const knowledge04 = loadAnnualAxesKnowledgeV04NamPhai();
   if (!knowledge04.ok) {
@@ -140,6 +178,11 @@ export function getAnalysisStatus(
 
     if (school === "trung-chau") {
       return annualAxesStatusForTrungChau();
+    }
+
+    // V0.6 remains opt-in until a candidate is holdout-approved.
+    if (isAnnualAxesV06Enabled()) {
+      return annualAxesStatusForNamPhaiV06();
     }
 
     if (isAnnualAxesV05Enabled()) {

@@ -25,9 +25,10 @@ import {
   type AnnualAxisResult,
   type AnnualFocusSummary,
 } from "./types";
-import { isAnnualAxesV05Enabled } from "../../feature-flags";
+import { isAnnualAxesV05Enabled, isAnnualAxesV06Enabled } from "../../feature-flags";
 import { analyzeAnnualAxesNamPhaiV04 } from "./nam-phai-v04/analyze";
 import { analyzeAnnualAxesNamPhaiV05 } from "./nam-phai-v05/analyze";
+import { analyzeAnnualAxesNamPhaiV06 } from "./nam-phai-v06/analyze";
 
 const CONTRACT_VERSION = "0.2.0";
 const ENGINE_VERSION = "0.2.0";
@@ -146,6 +147,11 @@ export function analyzeAnnualAxes(chart: ChartData, options: { school: ZiweiScho
   const { school } = options;
 
   if (school === "nam-phai") {
+    // V0.6 is opt-in only until a candidate passes all hard holdout gates.
+    // Default production remains V0.5; V0.5 off falls back to V0.4.2.
+    if (isAnnualAxesV06Enabled()) {
+      return analyzeAnnualAxesNamPhaiV06(chart);
+    }
     if (isAnnualAxesV05Enabled()) {
       return analyzeAnnualAxesNamPhaiV05(chart);
     }

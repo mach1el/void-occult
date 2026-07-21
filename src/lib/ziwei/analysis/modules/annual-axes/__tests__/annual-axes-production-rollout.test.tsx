@@ -238,7 +238,7 @@ describe("Annual Axes production badges", () => {
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
     render(<AnnualAxesSection chart={chart} school="nam-phai" result={result} />);
-    expect(screen.getByText("Nam Phái V0.5 · Experimental")).toBeInTheDocument();
+    expect(screen.getByText("Nam Phái V0.5 · Fallback")).toBeInTheDocument();
     expect(screen.getByText("Engine 0.5.0")).toBeInTheDocument();
   });
 
@@ -267,7 +267,7 @@ describe("Annual Axes production badges", () => {
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
     render(<AnnualAxesSection chart={chart} school="nam-phai" result={result} />);
-    expect(screen.getByText("Nam Phái V0.5 · Experimental")).toBeInTheDocument();
+    expect(screen.getByText("Nam Phái V0.5 · Fallback")).toBeInTheDocument();
     expect(screen.getByText("Engine 0.5.0")).toBeInTheDocument();
   });
 });
