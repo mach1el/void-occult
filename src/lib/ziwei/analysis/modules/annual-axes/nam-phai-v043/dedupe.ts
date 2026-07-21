@@ -5,6 +5,7 @@
 
 import type { AnnualAxesKnowledgeV043NamPhai } from "../../../knowledge/annual-axes/v0.4.3";
 import type { ClassifiedPathCandidate } from "./classify-paths";
+import { activationMagnitude } from "./magnitudes";
 
 export interface DedupedSpatialPaths {
   signedRetained: ClassifiedPathCandidate[];
@@ -47,6 +48,41 @@ export function comparePathPrecedence(
   const strengthB =
     b.geometryRoleWeight * b.ownershipSubjectProduct * b.confidenceWeight;
   if (strengthB !== strengthA) return strengthB > strengthA ? 1 : -1;
+
+  const ruleCmp = a.evidence.ruleId.localeCompare(b.evidence.ruleId);
+  if (ruleCmp !== 0) return ruleCmp;
+
+  const idCmp = a.evidence.id.localeCompare(b.evidence.id);
+  if (idCmp !== 0) return idCmp;
+
+  return a.candidatePathId.localeCompare(b.candidatePathId);
+}
+
+/**
+ * Activation winner ordering (§6). Same configured geometry/layer precedence as
+ * the signed order, but the strength tie-break is ACTIVATION magnitude — never
+ * signed support/pressure — so "count-once-at-strongest-path" means the
+ * strongest activation path, not the strongest signed path.
+ */
+export function compareActivationPrecedence(
+  a: ClassifiedPathCandidate,
+  b: ClassifiedPathCandidate,
+  knowledge: AnnualAxesKnowledgeV043NamPhai,
+): number {
+  const geo = knowledge.dedupePolicy.geometryPrecedence;
+  const layers = knowledge.dedupePolicy.layerPrecedence;
+
+  const geoCmp =
+    precedenceIndex(geo, a.geometryClass) - precedenceIndex(geo, b.geometryClass);
+  if (geoCmp !== 0) return geoCmp;
+
+  const layerCmp =
+    precedenceIndex(layers, a.evidence.layer) - precedenceIndex(layers, b.evidence.layer);
+  if (layerCmp !== 0) return layerCmp;
+
+  const magA = activationMagnitude(a);
+  const magB = activationMagnitude(b);
+  if (magB !== magA) return magB > magA ? 1 : -1;
 
   const ruleCmp = a.evidence.ruleId.localeCompare(b.evidence.ruleId);
   if (ruleCmp !== 0) return ruleCmp;
@@ -100,11 +136,16 @@ export function dedupeSpatialPaths(
 
   for (const key of factKeys) {
     const group = byFact.get(key)!;
-    // Already globally sorted; re-sort within group for safety.
-    group.sort((a, b) => comparePathPrecedence(a, b, knowledge));
+    // Signed winner: strongest signed path under configured precedence.
+    const signedSorted = [...group].sort((a, b) => comparePathPrecedence(a, b, knowledge));
+    // Activation winner: strongest ACTIVATION path (independent ordering, §6).
+    const activationSorted = [...group].sort((a, b) =>
+      compareActivationPrecedence(a, b, knowledge),
+    );
 
-    const signedWinner = group.find(signedEligible) ?? null;
-    const activationWinner = group.find((c) => activationEligible(c, knowledge)) ?? null;
+    const signedWinner = signedSorted.find(signedEligible) ?? null;
+    const activationWinner =
+      activationSorted.find((c) => activationEligible(c, knowledge)) ?? null;
 
     if (signedWinner) {
       signedRetained.push(signedWinner);

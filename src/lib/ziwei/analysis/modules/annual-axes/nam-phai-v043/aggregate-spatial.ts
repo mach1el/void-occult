@@ -1,6 +1,14 @@
 /**
  * V0.4.3 spatial aggregation: normalize each of {direct, tp4c} independently,
  * then apply the configured signed budget (default 90/10).
+ *
+ * Signed score and activation are ranked and weighted along SEPARATE paths
+ * (§4/§5): each has its own diminishing map (ranked by its own magnitude) and
+ * its own applied factor. Every aggregate is exactly reconstructable from the
+ * emitted evidence rows:
+ *   - directSupportRaw   = Σ weightedAxes.support   over signed-retained direct
+ *   - tp4cSupportRaw     = Σ weightedAxes.support   over signed-retained tp4c
+ *   - activationRaw      = Σ weightedAxes.activation over activation-retained
  */
 
 import type { AnnualAxesKnowledgeV043NamPhai } from "../../../knowledge/annual-axes/v0.4.3";
@@ -13,6 +21,19 @@ import { emptyAnnualAxes } from "../types";
 import type { ClassifiedPathCandidate } from "./classify-paths";
 import type { DedupedSpatialPaths } from "./dedupe";
 import { comparePathPrecedence } from "./dedupe";
+import {
+  activationMagnitude,
+  activationPathGeometryWeight,
+  signedGeometryWeight,
+  signedMagnitude,
+} from "./magnitudes";
+
+export {
+  activationMagnitude,
+  activationPathGeometryWeight,
+  signedGeometryWeight,
+  signedMagnitude,
+};
 
 export interface SpatialAggregateResult {
   evidence: AnnualAxisEvidence[];
@@ -32,16 +53,27 @@ export interface SpatialAggregateOptions {
   diminishingGroupBy?: DiminishingGroupBy;
 }
 
-/** Geometry attenuation for activation — context paths keep path.geometryWeight (e.g. MF 0.55). */
-export function activationPathGeometryWeight(c: ClassifiedPathCandidate): number {
-  return c.geometryBucket === "context-only" ? c.path.geometryWeight : c.geometryRoleWeight;
+/** Full signed factor applied to support/pressure. */
+export function computeSignedPathFactor(
+  c: ClassifiedPathCandidate,
+  diminishingFactor: number,
+): number {
+  return (
+    c.confidenceWeight * c.ownershipSubjectProduct * signedGeometryWeight(c) * diminishingFactor
+  );
 }
 
+/** Full activation factor applied to raw activation. */
 export function computeActivationPathFactor(
   c: ClassifiedPathCandidate,
   diminishingFactor: number,
 ): number {
-  return c.confidenceWeight * c.ownershipSubjectProduct * activationPathGeometryWeight(c) * diminishingFactor;
+  return (
+    c.confidenceWeight *
+    c.ownershipSubjectProduct *
+    activationPathGeometryWeight(c) *
+    diminishingFactor
+  );
 }
 
 function oneMinusExp(x: number, scale: number): number {
@@ -64,11 +96,15 @@ function diminishingGroupKey(
 
 /**
  * Rank within configured groups; return 1/sqrt(rank) per candidatePathId.
- * Ranking uses pre-diminishing magnitude so insertion order never decides ties.
+ * `magnitudeOf` supplies the ranking metric — SIGNED and ACTIVATION callers
+ * pass their own magnitude so the two rankings are fully independent. Ranking
+ * uses pre-diminishing magnitude and a deterministic precedence tie-break, so
+ * array insertion order never decides ties.
  */
-export function computeDiminishingFactors(
+function computeDiminishingFactors(
   retained: ClassifiedPathCandidate[],
   knowledge: AnnualAxesKnowledgeV043NamPhai,
+  magnitudeOf: (c: ClassifiedPathCandidate) => number,
   groupByOverride?: DiminishingGroupBy,
 ): Map<string, number> {
   const groupBy = groupByOverride ?? knowledge.aggregationProfile.diminishingReturns.groupBy;
@@ -85,16 +121,8 @@ export function computeDiminishingFactors(
   for (const key of groupKeys) {
     const list = groups.get(key)!;
     const ranked = [...list].sort((a, b) => {
-      const magA =
-        (Math.abs(a.evidence.rawAxes.support) + Math.abs(a.evidence.rawAxes.pressure)) *
-        a.confidenceWeight *
-        a.ownershipSubjectProduct *
-        a.geometryRoleWeight;
-      const magB =
-        (Math.abs(b.evidence.rawAxes.support) + Math.abs(b.evidence.rawAxes.pressure)) *
-        b.confidenceWeight *
-        b.ownershipSubjectProduct *
-        b.geometryRoleWeight;
+      const magA = magnitudeOf(a);
+      const magB = magnitudeOf(b);
       if (magB !== magA) return magB > magA ? 1 : -1;
       return comparePathPrecedence(a, b, knowledge);
     });
@@ -105,17 +133,61 @@ export function computeDiminishingFactors(
   return factors;
 }
 
+/** Signed diminishing factors — ranked by signed magnitude. */
+export function computeSignedDiminishingFactors(
+  retained: ClassifiedPathCandidate[],
+  knowledge: AnnualAxesKnowledgeV043NamPhai,
+  groupByOverride?: DiminishingGroupBy,
+): Map<string, number> {
+  return computeDiminishingFactors(retained, knowledge, signedMagnitude, groupByOverride);
+}
+
+/** Activation diminishing factors — ranked by activation magnitude. */
+export function computeActivationDiminishingFactors(
+  retained: ClassifiedPathCandidate[],
+  knowledge: AnnualAxesKnowledgeV043NamPhai,
+  groupByOverride?: DiminishingGroupBy,
+): Map<string, number> {
+  return computeDiminishingFactors(retained, knowledge, activationMagnitude, groupByOverride);
+}
+
+interface EvidenceRowInput {
+  retainedForSignedScore: boolean;
+  retainedForActivation: boolean;
+  rejectedPathReason?: string;
+  signedDiminishingFactor: number;
+  activationDiminishingFactor: number;
+  signedAppliedFactor: number;
+  activationAppliedFactor: number;
+}
+
 function toEvidenceRow(
   c: ClassifiedPathCandidate,
-  opts: {
-    retainedForSignedScore: boolean;
-    retainedForActivation: boolean;
-    rejectedPathReason?: string;
-    diminishingFactor: number;
-    finalAppliedFactor: number;
-  },
+  opts: EvidenceRowInput,
 ): AnnualAxisEvidence {
-  const factor = opts.finalAppliedFactor;
+  const support = opts.retainedForSignedScore
+    ? c.evidence.rawAxes.support * opts.signedAppliedFactor
+    : 0;
+  const pressure = opts.retainedForSignedScore
+    ? c.evidence.rawAxes.pressure * opts.signedAppliedFactor
+    : 0;
+  const activation = opts.retainedForActivation
+    ? c.evidence.rawAxes.activation * opts.activationAppliedFactor
+    : 0;
+
+  // Compatibility: primary-role applied factor (signed if signed-retained,
+  // else activation). Never the activation source of truth (§5).
+  const primaryFactor = opts.retainedForSignedScore
+    ? opts.signedAppliedFactor
+    : opts.retainedForActivation
+      ? opts.activationAppliedFactor
+      : 0;
+  const primaryDiminishing = opts.retainedForSignedScore
+    ? opts.signedDiminishingFactor
+    : opts.retainedForActivation
+      ? opts.activationDiminishingFactor
+      : 1;
+
   return {
     ...c.evidence,
     geometryClass: c.geometryClass,
@@ -125,15 +197,14 @@ function toEvidenceRow(
     rejectedPathReason: opts.rejectedPathReason,
     ownershipWeight: c.ownershipWeight,
     confidenceWeight: c.confidenceWeight,
-    diminishingFactor: opts.diminishingFactor,
-    finalAppliedFactor: factor,
-    effectiveWeight: factor,
-    weightedAxes: {
-      support: c.evidence.rawAxes.support * factor,
-      pressure: c.evidence.rawAxes.pressure * factor,
-      stability: 0,
-      activation: c.evidence.rawAxes.activation * factor,
-    },
+    signedDiminishingFactor: opts.retainedForSignedScore ? opts.signedDiminishingFactor : undefined,
+    activationDiminishingFactor: opts.retainedForActivation ? opts.activationDiminishingFactor : undefined,
+    signedAppliedFactor: opts.retainedForSignedScore ? opts.signedAppliedFactor : 0,
+    activationAppliedFactor: opts.retainedForActivation ? opts.activationAppliedFactor : 0,
+    diminishingFactor: primaryDiminishing,
+    finalAppliedFactor: primaryFactor,
+    effectiveWeight: primaryFactor,
+    weightedAxes: { support, pressure, stability: 0, activation },
     activationPaths: [c.path],
   };
 }
@@ -147,16 +218,21 @@ export function aggregateSpatialBudget(
   const scales = aggregationProfile.normalization;
   const diminishingGroupBy = options?.diminishingGroupBy;
 
-  const signedDiminishing = computeDiminishingFactors(
+  const signedDiminishing = computeSignedDiminishingFactors(
     deduped.signedRetained,
     knowledge,
     diminishingGroupBy,
   );
-  const activationDiminishing = computeDiminishingFactors(
+  const activationDiminishing = computeActivationDiminishingFactors(
     deduped.activationRetained,
     knowledge,
     diminishingGroupBy,
   );
+
+  const signedFactorOf = (c: ClassifiedPathCandidate) =>
+    computeSignedPathFactor(c, signedDiminishing.get(c.candidatePathId) ?? 1);
+  const activationFactorOf = (c: ClassifiedPathCandidate) =>
+    computeActivationPathFactor(c, activationDiminishing.get(c.candidatePathId) ?? 1);
 
   const buckets = {
     direct: { supportRaw: 0, pressureRaw: 0 },
@@ -168,60 +244,66 @@ export function aggregateSpatialBudget(
 
   const evidenceOut: AnnualAxisEvidence[] = [];
 
+  // 1. Signed-retained rows (may also be activation winners for the same path).
   for (const c of deduped.signedRetained) {
-    const diminishingFactor = signedDiminishing.get(c.candidatePathId) ?? 1;
-    // factor = confidence * ownership * subjectModifier * geometryRoleWeight * diminishing
-    // ownershipSubjectProduct already = ownership * subjectModifier
-    const finalAppliedFactor =
-      c.confidenceWeight *
-      c.ownershipSubjectProduct *
-      c.geometryRoleWeight *
-      diminishingFactor;
+    const signedDim = signedDiminishing.get(c.candidatePathId) ?? 1;
+    const signedApplied = computeSignedPathFactor(c, signedDim);
+    const alsoActivation = activationIds.has(c.candidatePathId);
+    const activationDim = alsoActivation ? (activationDiminishing.get(c.candidatePathId) ?? 1) : 1;
+    const activationApplied = alsoActivation ? activationFactorOf(c) : 0;
 
     if (c.geometryBucket === "direct" || c.geometryBucket === "tp4c") {
       const bucket = buckets[c.geometryBucket];
-      bucket.supportRaw += c.evidence.rawAxes.support * finalAppliedFactor;
-      bucket.pressureRaw += c.evidence.rawAxes.pressure * finalAppliedFactor;
+      bucket.supportRaw += c.evidence.rawAxes.support * signedApplied;
+      bucket.pressureRaw += c.evidence.rawAxes.pressure * signedApplied;
     }
 
     evidenceOut.push(
       toEvidenceRow(c, {
         retainedForSignedScore: true,
-        retainedForActivation: activationIds.has(c.candidatePathId),
-        diminishingFactor,
-        finalAppliedFactor,
+        retainedForActivation: alsoActivation,
+        signedDiminishingFactor: signedDim,
+        activationDiminishingFactor: activationDim,
+        signedAppliedFactor: signedApplied,
+        activationAppliedFactor: activationApplied,
       }),
     );
   }
 
-  // Activation-only retained paths that were not also signed winners.
+  // 2. Activation-only rows (winners not also retained for the signed score).
   for (const c of deduped.activationRetained) {
     if (signedIds.has(c.candidatePathId)) continue;
-    const diminishingFactor = activationDiminishing.get(c.candidatePathId) ?? 1;
-    const activationFactor = computeActivationPathFactor(c, diminishingFactor);
+    const activationDim = activationDiminishing.get(c.candidatePathId) ?? 1;
     evidenceOut.push(
       toEvidenceRow(c, {
         retainedForSignedScore: false,
         retainedForActivation: true,
-        diminishingFactor,
-        finalAppliedFactor: activationFactor,
+        signedDiminishingFactor: 1,
+        activationDiminishingFactor: activationDim,
+        signedAppliedFactor: 0,
+        activationAppliedFactor: computeActivationPathFactor(c, activationDim),
       }),
     );
   }
 
+  // 3. Rejected rows contribute nothing but are retained for audit.
   for (const c of deduped.rejected) {
     evidenceOut.push(
       toEvidenceRow(c, {
         retainedForSignedScore: false,
         retainedForActivation: false,
         rejectedPathReason: c.rejectedPathReason,
-        diminishingFactor: 1,
-        finalAppliedFactor: 0,
+        signedDiminishingFactor: 1,
+        activationDiminishingFactor: 1,
+        signedAppliedFactor: 0,
+        activationAppliedFactor: 0,
       }),
     );
   }
 
-  evidenceOut.sort((a, b) => a.id.localeCompare(b.id) || (a.geometryClass ?? "").localeCompare(b.geometryClass ?? ""));
+  evidenceOut.sort(
+    (a, b) => a.id.localeCompare(b.id) || (a.geometryClass ?? "").localeCompare(b.geometryClass ?? ""),
+  );
 
   const directSupportNorm = oneMinusExp(buckets.direct.supportRaw, scales.supportScale);
   const directPressureNorm = oneMinusExp(buckets.direct.pressureRaw, scales.pressureScale);
@@ -237,12 +319,11 @@ export function aggregateSpatialBudget(
   const tp4cContribution = tp4cBudget * tp4cSigned;
   const spatialSigned = directContribution + tp4cContribution;
 
-  // Activation once per physical fact at strongest eligible path.
+  // Activation once per physical fact at strongest eligible path — identical
+  // to Σ weightedAxes.activation over activation-retained rows (reconstructable).
   let activationRaw = 0;
   for (const c of deduped.activationRetained) {
-    const diminishingFactor = activationDiminishing.get(c.candidatePathId) ?? 1;
-    const factor = computeActivationPathFactor(c, diminishingFactor);
-    activationRaw += c.evidence.rawAxes.activation * factor;
+    activationRaw += c.evidence.rawAxes.activation * activationFactorOf(c);
   }
   const activationNorm = oneMinusExp(activationRaw, scales.activationScale);
 

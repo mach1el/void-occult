@@ -81,3 +81,131 @@ describe("Annual Axes V0.4.3 knowledge validation", () => {
     ).toBe(false);
   });
 });
+
+describe("Annual Axes V0.4.3 knowledge validation · malformed packs fail closed (§8)", () => {
+  const SRC = new Set(["SRC-AA-ENG-004"]);
+  function base(): AnnualAxesKnowledgeV043NamPhai {
+    const loaded = loadAnnualAxesKnowledgeV043NamPhai();
+    if (!loaded.ok) throw new Error("expected production pack to load");
+    return structuredClone(loaded.knowledge);
+  }
+  function rejects(mutate: (k: AnnualAxesKnowledgeV043NamPhai) => void): boolean {
+    const k = base();
+    mutate(k);
+    return validateAnnualAxesKnowledgeV043NamPhai(k, SRC).ok === false;
+  }
+
+  it("the pristine production pack validates", () => {
+    expect(validateAnnualAxesKnowledgeV043NamPhai(base(), SRC).ok).toBe(true);
+  });
+
+  it("reordered layerPrecedence", () => {
+    expect(rejects((k) => (k.dedupePolicy.layerPrecedence = ["major-fortune", "annual", "natal-activated"]))).toBe(true);
+  });
+
+  it("duplicated layer", () => {
+    expect(rejects((k) => (k.dedupePolicy.layerPrecedence = ["annual", "annual", "natal-activated"]))).toBe(true);
+  });
+
+  it("missing geometry class", () => {
+    expect(
+      rejects(
+        (k) =>
+          (k.dedupePolicy.geometryPrecedence = [
+            "direct-exact-target",
+            "direct-head-focus",
+            "tp4c-opposite",
+            "tp4c-trine",
+          ]),
+      ),
+    ).toBe(true);
+  });
+
+  it("duplicated geometry class", () => {
+    expect(
+      rejects(
+        (k) =>
+          (k.dedupePolicy.geometryPrecedence = [
+            "direct-exact-target",
+            "direct-exact-target",
+            "tp4c-opposite",
+            "tp4c-trine",
+            "context-only",
+          ]),
+      ),
+    ).toBe(true);
+  });
+
+  it("incomplete / reordered signed dedupe key", () => {
+    expect(rejects((k) => (k.dedupePolicy.signedDedupeKey = ["domain"]))).toBe(true);
+    expect(rejects((k) => (k.dedupePolicy.signedDedupeKey = ["physicalFactId", "domain"]))).toBe(true);
+  });
+
+  it("wrong stableTieBreak order or content", () => {
+    expect(rejects((k) => (k.dedupePolicy.stableTieBreak = ["evidenceId", "ruleId"]))).toBe(true);
+    expect(rejects((k) => (k.dedupePolicy.stableTieBreak = ["ruleId"]))).toBe(true);
+  });
+
+  it("duplicate groupBy key", () => {
+    expect(
+      rejects(
+        (k) =>
+          (k.aggregationProfile.diminishingReturns.groupBy = [
+            "domain",
+            "domain",
+            "layer",
+            "stackingGroup",
+          ]),
+      ),
+    ).toBe(true);
+  });
+
+  it("non-production groupBy (missing geometryBucket)", () => {
+    expect(
+      rejects(
+        (k) => (k.aggregationProfile.diminishingReturns.groupBy = ["domain", "layer", "stackingGroup"]),
+      ),
+    ).toBe(true);
+  });
+
+  it("invalid activation gate floor/range (sum > 1)", () => {
+    expect(rejects((k) => ((k.aggregationProfile.activationGate.floor = 0.5), (k.aggregationProfile.activationGate.range = 0.85)))).toBe(true);
+    expect(rejects((k) => (k.aggregationProfile.activationGate.range = 1.5))).toBe(true);
+    expect(rejects((k) => (k.aggregationProfile.activationGate.floor = -0.1))).toBe(true);
+  });
+
+  it("non-integer / negative score precision", () => {
+    expect(rejects((k) => (k.aggregationProfile.score.precision = 1.5))).toBe(true);
+    expect(rejects((k) => (k.aggregationProfile.score.precision = -1))).toBe(true);
+  });
+
+  it("negative amplitude", () => {
+    expect(rejects((k) => (k.aggregationProfile.score.amplitude = -1))).toBe(true);
+  });
+
+  it("neutral not strictly between minimum and maximum", () => {
+    expect(rejects((k) => (k.aggregationProfile.score.neutral = 0))).toBe(true);
+    expect(rejects((k) => (k.aggregationProfile.score.neutral = 100))).toBe(true);
+  });
+
+  it("non-positive normalization scale", () => {
+    expect(rejects((k) => (k.aggregationProfile.normalization.supportScale = 0))).toBe(true);
+  });
+
+  it("unresolved source id", () => {
+    expect(
+      validateAnnualAxesKnowledgeV043NamPhai(base(), new Set(["OTHER-SRC"])).ok,
+    ).toBe(false);
+  });
+
+  it("duplicate fixture domain", () => {
+    expect(
+      rejects((k) => {
+        k.fixtureMatrix.directAnchors[1] = {
+          ...k.fixtureMatrix.directAnchors[1]!,
+          domain: k.fixtureMatrix.directAnchors[0]!.domain,
+        };
+      }),
+    ).toBe(true);
+  });
+});

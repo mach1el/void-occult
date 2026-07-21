@@ -131,20 +131,35 @@ function validateSpatialBudget(
   }
 }
 
+const STABLE_TIE_BREAK: Array<"ruleId" | "evidenceId"> = ["ruleId", "evidenceId"];
+const PRODUCTION_GROUP_BY = ["domain", "geometryBucket", "layer", "stackingGroup"] as const;
+
 function validateDedupe(
   policy: AnnualEvidenceDedupePolicyV043,
   resolvedSourceIds: Set<string>,
   issues: AnnualKnowledgeV043ValidationIssue[],
 ): void {
+  // signedDedupeKey must be EXACTLY [domain, physicalFactId] — order included.
   if (
-    policy.signedDedupeKey.join("|") !== "domain|physicalFactId" &&
-    !(
-      policy.signedDedupeKey.includes("domain") &&
-      policy.signedDedupeKey.includes("physicalFactId")
-    )
+    policy.signedDedupeKey.length !== 2 ||
+    policy.signedDedupeKey[0] !== "domain" ||
+    policy.signedDedupeKey[1] !== "physicalFactId"
   ) {
     issues.push(
-      issue("dedupePolicy.signedDedupeKey", "must include domain and physicalFactId"),
+      issue("dedupePolicy.signedDedupeKey", "must be exactly [domain, physicalFactId]"),
+    );
+  }
+
+  // stableTieBreak must contain every required field exactly once, in order.
+  if (
+    policy.stableTieBreak.length !== STABLE_TIE_BREAK.length ||
+    !STABLE_TIE_BREAK.every((f, i) => policy.stableTieBreak[i] === f)
+  ) {
+    issues.push(
+      issue(
+        "dedupePolicy.stableTieBreak",
+        `must be exactly [${STABLE_TIE_BREAK.join(", ")}] in order`,
+      ),
     );
   }
 
@@ -232,6 +247,21 @@ function validateAggregation(
       issues.push(issue(`aggregationProfile.diminishingReturns.groupBy.${key}`, "unknown group key"));
     }
   }
+  if (new Set(dr.groupBy).size !== dr.groupBy.length) {
+    issues.push(issue("aggregationProfile.diminishingReturns.groupBy", "duplicate group keys"));
+  }
+  // The production V0.4.3 (variant E) grouping must be exact.
+  if (
+    dr.groupBy.length !== PRODUCTION_GROUP_BY.length ||
+    !PRODUCTION_GROUP_BY.every((k, i) => dr.groupBy[i] === k)
+  ) {
+    issues.push(
+      issue(
+        "aggregationProfile.diminishingReturns.groupBy",
+        `production V0.4.3 groupBy must be exactly [${PRODUCTION_GROUP_BY.join(", ")}]`,
+      ),
+    );
+  }
 
   const gate = profile.activationGate;
   if (!isUnitInterval(gate.floor) || !isUnitInterval(gate.range)) {
@@ -250,12 +280,23 @@ function validateAggregation(
   if (isFiniteNumber(score.divisor) && score.divisor <= 0) {
     issues.push(issue("aggregationProfile.score.divisor", "must be positive"));
   }
+  if (isFiniteNumber(score.amplitude) && score.amplitude < 0) {
+    issues.push(issue("aggregationProfile.score.amplitude", "must be non-negative"));
+  }
+  if (
+    isFiniteNumber(score.precision) &&
+    (!Number.isInteger(score.precision) || score.precision < 0)
+  ) {
+    issues.push(issue("aggregationProfile.score.precision", "must be a non-negative integer"));
+  }
+  // minimum < neutral < maximum.
   if (
     isFiniteNumber(score.minimum) &&
+    isFiniteNumber(score.neutral) &&
     isFiniteNumber(score.maximum) &&
-    score.minimum >= score.maximum
+    !(score.minimum < score.neutral && score.neutral < score.maximum)
   ) {
-    issues.push(issue("aggregationProfile.score", "minimum must be < maximum"));
+    issues.push(issue("aggregationProfile.score", "must satisfy minimum < neutral < maximum"));
   }
 
   if (profile.contextChannels.globalAnnualClimateSigned) {

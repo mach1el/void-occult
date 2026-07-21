@@ -5,61 +5,163 @@
     "globalAnnualClimate": 0,
     "majorFortuneBackground": 0
   },
-  "observed": {
-    "meanAbsDirectContribution": 0.08043646154785022,
-    "meanAbsTp4cContribution": 0.0013054889199870545,
-    "maxAbsTp4cContribution": 0.05403723084762511,
-    "meanDeduplicatedPhysicalFactCount": 5.752916666666667,
-    "directTp4cCollisionRate": 0.5558333333333333,
-    "meanNumericEvidenceCount": 5.752916666666667
-  },
-  "semanticHardRequirements": {
-    "maxAbsTp4cContributionOk": true,
-    "configuredBudgetSumsToOne": true,
-    "note": "V0.4.3 enforces abs(tp4cContribution) <= 0.10 after budget."
-  },
-  "distributionSafety": {
-    "unavailableRate": 0,
-    "annualHeadMoveSensitivityRate": 0.8390909090909091,
-    "maxAbsInterAxisCorrelation": 0.49557266236635944,
-    "allGatesPassed": false
-  },
-  "remainingBlockers": [
+  "activationGateModel": "activationGate = floor + range * activationNorm (clamped to <= 1)",
+  "configTable": [
     {
-      "gateId": "exactDuplicateVectorRateMax",
-      "observed": 0.04666666666666667,
-      "threshold": 0.01,
-      "comparator": "<="
+      "variant": "B-budget-only-no-dedupe",
+      "dedupe": false,
+      "activationGateFloor": 0.15,
+      "activationGateRange": 0.85,
+      "diminishingGroupBy": [
+        "domain",
+        "layer",
+        "stackingGroup"
+      ],
+      "geometryBucketGrouping": false
     },
     {
-      "gateId": "nearDuplicateVectorRateMax",
-      "observed": 0.95,
-      "threshold": 0.05,
-      "comparator": "<="
+      "variant": "C-budget-plus-direct-wins",
+      "dedupe": true,
+      "activationGateFloor": 0.15,
+      "activationGateRange": 0.85,
+      "diminishingGroupBy": [
+        "domain",
+        "layer",
+        "stackingGroup"
+      ],
+      "geometryBucketGrouping": false
     },
     {
-      "gateId": "meanIntraYearAxisStandardDeviationMin",
-      "observed": 3.214747519464161,
-      "threshold": 4,
-      "comparator": ">="
+      "variant": "D-c-plus-activation-floor-0",
+      "dedupe": true,
+      "activationGateFloor": 0,
+      "activationGateRange": 1,
+      "diminishingGroupBy": [
+        "domain",
+        "layer",
+        "stackingGroup"
+      ],
+      "geometryBucketGrouping": false
     },
     {
-      "gateId": "medianIntraYearAxisRangeMin",
-      "observed": 8.399999999999999,
-      "threshold": 10,
-      "comparator": ">="
-    },
-    {
-      "gateId": "medianPerDomainTwelveYearRangeMin",
-      "observed": 1.1999999999999993,
-      "threshold": 8,
-      "comparator": ">="
-    },
-    {
-      "gateId": "medianAdjacentYearAbsoluteDeltaMin",
-      "observed": 0.14999999999999858,
-      "threshold": 1.5,
-      "comparator": ">="
+      "variant": "E-d-plus-diminishing-geometryBucket",
+      "dedupe": true,
+      "activationGateFloor": 0,
+      "activationGateRange": 1,
+      "diminishingGroupBy": [
+        "domain",
+        "geometryBucket",
+        "layer",
+        "stackingGroup"
+      ],
+      "geometryBucketGrouping": true
     }
-  ]
+  ],
+  "perVariant": [
+    {
+      "variant": "A-v042-baseline",
+      "meanAbsDirectContribution": 0.04064,
+      "meanAbsTp4cContribution": 0.011931,
+      "maxAbsTp4cContribution": 0.12036,
+      "meanActivationGate": 0,
+      "p10ActivationGate": 0,
+      "medianActivationGate": 0,
+      "p90ActivationGate": 0,
+      "maxActivationGate": 0,
+      "directTp4cCollisionRate": 0,
+      "failedGates": [
+        "exactDuplicateVectorRateMax",
+        "nearDuplicateVectorRateMax",
+        "meanIntraYearAxisStandardDeviationMin",
+        "medianIntraYearAxisRangeMin",
+        "medianPerDomainTwelveYearRangeMin",
+        "medianAdjacentYearAbsoluteDeltaMin"
+      ]
+    },
+    {
+      "variant": "B-budget-only-no-dedupe",
+      "meanAbsDirectContribution": 0.077565,
+      "meanAbsTp4cContribution": 0.01143,
+      "maxAbsTp4cContribution": 0.05401,
+      "meanActivationGate": 0.970921,
+      "p10ActivationGate": 0.912333,
+      "medianActivationGate": 0.996188,
+      "p90ActivationGate": 0.999907,
+      "maxActivationGate": 1,
+      "directTp4cCollisionRate": 0,
+      "failedGates": [
+        "exactDuplicateVectorRateMax",
+        "nearDuplicateVectorRateMax",
+        "meanIntraYearAxisStandardDeviationMin",
+        "medianIntraYearAxisRangeMin",
+        "medianPerDomainTwelveYearRangeMin",
+        "medianAdjacentYearAbsoluteDeltaMin"
+      ]
+    },
+    {
+      "variant": "C-budget-plus-direct-wins",
+      "meanAbsDirectContribution": 0.080494,
+      "meanAbsTp4cContribution": 0.001181,
+      "maxAbsTp4cContribution": 0.05401,
+      "meanActivationGate": 0.962032,
+      "p10ActivationGate": 0.871102,
+      "medianActivationGate": 0.991225,
+      "p90ActivationGate": 0.999515,
+      "maxActivationGate": 0.999999,
+      "directTp4cCollisionRate": 0.555833,
+      "failedGates": [
+        "exactDuplicateVectorRateMax",
+        "nearDuplicateVectorRateMax",
+        "meanIntraYearAxisStandardDeviationMin",
+        "medianIntraYearAxisRangeMin",
+        "medianPerDomainTwelveYearRangeMin",
+        "medianAdjacentYearAbsoluteDeltaMin"
+      ]
+    },
+    {
+      "variant": "D-c-plus-activation-floor-0",
+      "meanAbsDirectContribution": 0.080494,
+      "meanAbsTp4cContribution": 0.001181,
+      "maxAbsTp4cContribution": 0.05401,
+      "meanActivationGate": 0.955331,
+      "p10ActivationGate": 0.848355,
+      "medianActivationGate": 0.989676,
+      "p90ActivationGate": 0.999429,
+      "maxActivationGate": 0.999998,
+      "directTp4cCollisionRate": 0.555833,
+      "failedGates": [
+        "exactDuplicateVectorRateMax",
+        "nearDuplicateVectorRateMax",
+        "meanIntraYearAxisStandardDeviationMin",
+        "medianIntraYearAxisRangeMin",
+        "medianPerDomainTwelveYearRangeMin",
+        "medianAdjacentYearAbsoluteDeltaMin"
+      ]
+    },
+    {
+      "variant": "E-d-plus-diminishing-geometryBucket",
+      "meanAbsDirectContribution": 0.080436,
+      "meanAbsTp4cContribution": 0.001305,
+      "maxAbsTp4cContribution": 0.054037,
+      "meanActivationGate": 0.955687,
+      "p10ActivationGate": 0.848355,
+      "medianActivationGate": 0.989842,
+      "p90ActivationGate": 0.999462,
+      "maxActivationGate": 0.999998,
+      "directTp4cCollisionRate": 0.555833,
+      "failedGates": [
+        "exactDuplicateVectorRateMax",
+        "nearDuplicateVectorRateMax",
+        "meanIntraYearAxisStandardDeviationMin",
+        "medianIntraYearAxisRangeMin",
+        "medianPerDomainTwelveYearRangeMin",
+        "medianAdjacentYearAbsoluteDeltaMin"
+      ]
+    }
+  ],
+  "hardInvariants": {
+    "maxAbsTp4cContributionOverAllVariants": 0.054037,
+    "tp4cContributionCapEnforced": true,
+    "activationGateNeverExceedsOne": true
+  }
 }

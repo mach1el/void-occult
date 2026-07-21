@@ -126,8 +126,29 @@ export interface AnnualAxisEvidence {
   retainedForSignedScore?: boolean;
   retainedForActivation?: boolean;
   rejectedPathReason?: string;
+  /** @deprecated V0.4.3 — signed and activation paths use SEPARATE diminishing
+   * maps and factors. Kept only for display compatibility; equals
+   * `signedDiminishingFactor` for signed rows and `activationDiminishingFactor`
+   * for activation-only rows. Never the source of truth for activation. */
   diminishingFactor?: number;
+  /** @deprecated V0.4.3 — see `signedAppliedFactor` / `activationAppliedFactor`.
+   * Equals the applied factor of this row's PRIMARY role (signed if
+   * signed-retained, else activation). Not the activation source of truth. */
   finalAppliedFactor?: number;
+  /** V0.4.3 — inverse-sqrt-rank diminishing factor used for the SIGNED score,
+   * ranked by signed magnitude. Present when `retainedForSignedScore`. */
+  signedDiminishingFactor?: number;
+  /** V0.4.3 — inverse-sqrt-rank diminishing factor used for ACTIVATION, ranked
+   * by activation magnitude. Present when `retainedForActivation`. */
+  activationDiminishingFactor?: number;
+  /** V0.4.3 — full multiplicative factor applied to signed support/pressure:
+   * confidence × ownershipSubject × signedGeometryWeight × signedDiminishing.
+   * Zero (and unused) when not retained for the signed score. */
+  signedAppliedFactor?: number;
+  /** V0.4.3 — full multiplicative factor applied to activation:
+   * confidence × ownershipSubject × activationPathGeometryWeight ×
+   * activationDiminishing. Zero (and unused) when not retained for activation. */
+  activationAppliedFactor?: number;
 }
 
 export type AnnualEvidenceChannel =

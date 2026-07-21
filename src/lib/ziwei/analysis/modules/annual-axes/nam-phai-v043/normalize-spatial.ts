@@ -11,6 +11,22 @@ import type {
 } from "../types";
 import { resilienceDamping } from "../nam-phai-v04/natal-response";
 
+/**
+ * A complete activation-gate policy: gate = floor + range * activationNorm.
+ * Overridden as a PAIR (never floor-only) so `floor + range` stays a controlled
+ * sum — B/C use {0.15, 0.85}, D/E use {0, 1.0}, both summing to 1.
+ */
+export interface ActivationGateOverride {
+  floor: number;
+  range: number;
+}
+
+/** Validate a gate pair is finite, bounded to [0,1], and sums to at most 1. */
+export function isValidActivationGate(gate: ActivationGateOverride): boolean {
+  const inUnit = (n: number) => Number.isFinite(n) && n >= 0 && n <= 1;
+  return inUnit(gate.floor) && inUnit(gate.range) && gate.floor + gate.range <= 1 + 1e-12;
+}
+
 export interface NormalizeSpatialInput {
   spatialSigned: number;
   activationNorm: number;
@@ -19,8 +35,11 @@ export interface NormalizeSpatialInput {
   knowledge043: AnnualAxesKnowledgeV043NamPhai;
   /** Band table still sourced from V0.4 delta profile (labels only). */
   knowledge04: AnnualAxesKnowledgeV04NamPhai;
-  /** Ablation override — production uses aggregationProfile.activationGate.floor. */
-  activationGateFloorOverride?: number;
+  /**
+   * Ablation override — a COMPLETE {floor, range} pair. Production uses
+   * `aggregationProfile.activationGate`. Never override only the floor.
+   */
+  activationGateOverride?: ActivationGateOverride;
 }
 
 export interface NormalizeSpatialResult {
@@ -58,10 +77,15 @@ export function normalizeSpatialBudgetV043(input: NormalizeSpatialInput): Normal
     input;
   const agg = knowledge043.aggregationProfile;
   const scoreCfg = agg.score;
-  const gateCfg = agg.activationGate;
-  const gateFloor = input.activationGateFloorOverride ?? gateCfg.floor;
+  const gate = input.activationGateOverride ?? agg.activationGate;
+  if (!isValidActivationGate(gate)) {
+    throw new Error(
+      `invalid activation gate {floor:${gate.floor}, range:${gate.range}} — must be finite, in [0,1], summing to <= 1`,
+    );
+  }
 
-  const activationGate = gateFloor + gateCfg.range * activationNorm;
+  // gate = floor + range * activationNorm, clamped to <= 1 as a hard invariant.
+  const activationGate = Math.min(1, gate.floor + gate.range * activationNorm);
   const damping = resilienceDamping(natalResponse.resilience, knowledge04);
   const effectiveDelta =
     spatialSigned * natalResponse.amplitudeMultiplier * damping * activationGate;

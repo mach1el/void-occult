@@ -1,14 +1,37 @@
 {
-  "policy": "direct-wins keep-highest-precedence",
-  "meanDeduplicatedPhysicalFactCount": 5.752916666666667,
-  "directTp4cCollisionRate": 0.5558333333333333,
-  "maxAbsTp4cContribution": 0.05403723084762511,
-  "comparisonNoDedupe": {
-    "meanAbsDirectContribution": 0.0765919976381771,
-    "meanAbsTp4cContribution": 0.01219817059362219,
-    "maxAbsTp4cContribution": 0.05467705551177307,
-    "meanDeduplicatedPhysicalFactCount": 7.2275,
-    "directTp4cCollisionRate": 0,
-    "meanNumericEvidenceCount": 5.752916666666667
-  }
+  "policy": "direct-wins keep-highest-precedence; activation counted once at strongest activation path",
+  "perVariant": [
+    {
+      "variant": "B-budget-only-no-dedupe",
+      "dedupeEnabled": false,
+      "meanDeduplicatedSignedFactCount": 7.2275,
+      "meanDeduplicatedActivationFactCount": 7.469306,
+      "directTp4cCollisionRate": 0,
+      "maxAbsTp4cContribution": 0.05401
+    },
+    {
+      "variant": "C-budget-plus-direct-wins",
+      "dedupeEnabled": true,
+      "meanDeduplicatedSignedFactCount": 5.752917,
+      "meanDeduplicatedActivationFactCount": 5.752917,
+      "directTp4cCollisionRate": 0.555833,
+      "maxAbsTp4cContribution": 0.05401
+    },
+    {
+      "variant": "D-c-plus-activation-floor-0",
+      "dedupeEnabled": true,
+      "meanDeduplicatedSignedFactCount": 5.752917,
+      "meanDeduplicatedActivationFactCount": 5.752917,
+      "directTp4cCollisionRate": 0.555833,
+      "maxAbsTp4cContribution": 0.05401
+    },
+    {
+      "variant": "E-d-plus-diminishing-geometryBucket",
+      "dedupeEnabled": true,
+      "meanDeduplicatedSignedFactCount": 5.752917,
+      "meanDeduplicatedActivationFactCount": 5.752917,
+      "directTp4cCollisionRate": 0.555833,
+      "maxAbsTp4cContribution": 0.054037
+    }
+  ]
 }

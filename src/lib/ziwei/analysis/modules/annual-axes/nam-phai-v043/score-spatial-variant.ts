@@ -1,5 +1,9 @@
 /**
- * Shared spatial-budget scoring path for production (E) and ablation variants B–E.
+ * Shared spatial-budget scoring path for production (E) and ablation variants
+ * B–E. Each variant is a COMPLETE, explicit configuration so the ablation is
+ * strictly stepwise — B→C changes only dedupe, C→D changes only the activation
+ * gate, D→E changes only whether geometryBucket joins the diminishing grouping.
+ * Every variant is executed independently; no variant relabels another's output.
  */
 
 import type { ChartData } from "@/types/chart";
@@ -17,7 +21,11 @@ import { computeDomainRoutingsV04 } from "../nam-phai-v04/routing";
 import { classifyEvidencePaths } from "./classify-paths";
 import { aggregateSpatialBudget, type DiminishingGroupBy } from "./aggregate-spatial";
 import { dedupeSpatialPaths } from "./dedupe";
-import { normalizeSpatialBudgetV043 } from "./normalize-spatial";
+import {
+  isValidActivationGate,
+  normalizeSpatialBudgetV043,
+  type ActivationGateOverride,
+} from "./normalize-spatial";
 
 export interface SpatialVariantDomainMetrics {
   domain: AnnualAxisDomain;
@@ -26,20 +34,36 @@ export interface SpatialVariantDomainMetrics {
   tp4cContribution: number;
   spatialSigned: number;
   activationGate: number;
+  activationRaw: number;
+  activationNorm: number;
   retainedSignedFactCount: number;
   retainedActivationFactCount: number;
   directWonCollisionCount: number;
   numericEvidenceCount: number;
 }
 
-export interface SpatialVariantOptions {
-  /** Variant B — keep every signed path (no physical-fact dedupe). */
-  skipDedupe?: boolean;
-  /** Variant C uses V0.4 delta floor (0.15); D/E use production floor (0). */
-  activationGateFloor?: number;
-  /** Variant C/D omit geometryBucket; variant E includes it (production). */
-  diminishingGroupBy?: DiminishingGroupBy;
+/**
+ * A COMPLETE spatial-budget variant configuration. Every field is explicit so
+ * the difference between any two variants is exactly one field.
+ */
+export interface SpatialVariantConfig {
+  /** Physical-fact direct-wins dedupe. B = false (disabled); C/D/E = true. */
+  dedupe: boolean;
+  /** Activation-gate policy as a complete pair (never floor-only). */
+  activationGate: ActivationGateOverride;
+  /** Diminishing-return grouping keys. */
+  diminishingGroupBy: DiminishingGroupBy;
 }
+
+const GROUP_BY_NO_GEOMETRY: DiminishingGroupBy = ["domain", "layer", "stackingGroup"];
+const GROUP_BY_WITH_GEOMETRY: DiminishingGroupBy = [
+  "domain",
+  "geometryBucket",
+  "layer",
+  "stackingGroup",
+];
+const GATE_FLOORED: ActivationGateOverride = { floor: 0.15, range: 0.85 };
+const GATE_ZERO_FLOOR: ActivationGateOverride = { floor: 0.0, range: 1.0 };
 
 const UNAVAILABLE_DOMAIN = (domain: AnnualAxisDomain): SpatialVariantDomainMetrics => ({
   domain,
@@ -48,6 +72,8 @@ const UNAVAILABLE_DOMAIN = (domain: AnnualAxisDomain): SpatialVariantDomainMetri
   tp4cContribution: 0,
   spatialSigned: 0,
   activationGate: 0,
+  activationRaw: 0,
+  activationNorm: 0,
   retainedSignedFactCount: 0,
   retainedActivationFactCount: 0,
   directWonCollisionCount: 0,
@@ -57,8 +83,14 @@ const UNAVAILABLE_DOMAIN = (domain: AnnualAxisDomain): SpatialVariantDomainMetri
 /** Score all six domains under a spatial-budget variant (research / ablation). */
 export function scoreSpatialVariantDomains(
   chart: ChartData,
-  options: SpatialVariantOptions = {},
+  config: SpatialVariantConfig,
 ): SpatialVariantDomainMetrics[] {
+  if (!isValidActivationGate(config.activationGate)) {
+    throw new Error(
+      `invalid variant activation gate {floor:${config.activationGate.floor}, range:${config.activationGate.range}}`,
+    );
+  }
+
   const knowledge04 = loadAnnualAxesKnowledgeV04NamPhai();
   const knowledge042 = loadAnnualAxesKnowledgeV042NamPhai();
   const knowledge043 = loadAnnualAxesKnowledgeV043NamPhai();
@@ -101,35 +133,12 @@ export function scoreSpatialVariantDomains(
       knowledge043.knowledge.spatialBudget.tp4cRelativeRoleWeights,
     );
 
-    const deduped = options.skipDedupe
-      ? (() => {
-          const signed = classified.filter(
-            (c) => c.geometryBucket === "direct" || c.geometryBucket === "tp4c",
-          );
-          const activation = classified.filter(
-            (c) =>
-              c.geometryBucket === "direct" ||
-              c.geometryBucket === "tp4c" ||
-              knowledge043.knowledge.aggregationProfile.contextChannels.mayContributeActivation,
-          );
-          return {
-            signedRetained: signed,
-            activationRetained: activation,
-            rejected: [] as ReturnType<typeof dedupeSpatialPaths>["rejected"],
-            trace: {
-              candidateEvidenceCount: evidence.length,
-              candidatePathCount: classified.length,
-              retainedSignedFactCount: signed.length,
-              retainedActivationFactCount: activation.length,
-              droppedDuplicatePathCount: 0,
-              directWonCollisionCount: 0,
-            },
-          };
-        })()
-      : dedupeSpatialPaths(classified, knowledge043.knowledge);
+    const deduped = config.dedupe
+      ? dedupeSpatialPaths(classified, knowledge043.knowledge)
+      : noDedupe(classified, knowledge043.knowledge.aggregationProfile.contextChannels.mayContributeActivation);
 
     const aggregated = aggregateSpatialBudget(deduped, knowledge043.knowledge, {
-      diminishingGroupBy: options.diminishingGroupBy,
+      diminishingGroupBy: config.diminishingGroupBy,
     });
     const natalResponse = computeNatalDomainResponse(
       chart,
@@ -144,7 +153,7 @@ export function scoreSpatialVariantDomains(
       rawAxes: aggregated.rawAxes,
       knowledge043: knowledge043.knowledge,
       knowledge04: knowledge04.knowledge,
-      activationGateFloorOverride: options.activationGateFloor,
+      activationGateOverride: config.activationGate,
     });
 
     out.push({
@@ -154,6 +163,8 @@ export function scoreSpatialVariantDomains(
       tp4cContribution: aggregated.spatialBudgetTrace.tp4cContribution,
       spatialSigned: aggregated.spatialSigned,
       activationGate: normalized.activationGate,
+      activationRaw: aggregated.activationRaw,
+      activationNorm: aggregated.activationNorm,
       retainedSignedFactCount: deduped.trace.retainedSignedFactCount,
       retainedActivationFactCount: deduped.trace.retainedActivationFactCount,
       directWonCollisionCount: deduped.trace.directWonCollisionCount,
@@ -164,19 +175,66 @@ export function scoreSpatialVariantDomains(
   return out;
 }
 
-/** Production V0.4.3 (variant E) — dedupe + floor 0 + geometryBucket diminishing. */
-export const PRODUCTION_SPATIAL_VARIANT: SpatialVariantOptions = {};
+/** Variant B — keep every classified path (no physical-fact dedupe). */
+function noDedupe(
+  classified: ReturnType<typeof classifyEvidencePaths>,
+  mayContributeActivation: boolean,
+): ReturnType<typeof dedupeSpatialPaths> {
+  const signed = classified.filter(
+    (c) => c.geometryBucket === "direct" || c.geometryBucket === "tp4c",
+  );
+  const activation = classified.filter(
+    (c) =>
+      c.geometryBucket === "direct" ||
+      c.geometryBucket === "tp4c" ||
+      mayContributeActivation,
+  );
+  return {
+    signedRetained: signed,
+    activationRetained: activation,
+    rejected: [],
+    trace: {
+      candidateEvidenceCount: new Set(classified.map((c) => c.evidence.id)).size,
+      candidatePathCount: classified.length,
+      retainedSignedFactCount: signed.length,
+      retainedActivationFactCount: activation.length,
+      droppedDuplicatePathCount: 0,
+      directWonCollisionCount: 0,
+    },
+  };
+}
 
-/** Ablation matrix presets (each measures one incremental change). */
+/** Ablation matrix — each preset changes exactly ONE field from the previous. */
 export const ABLATION_SPATIAL_VARIANTS = {
-  "B-budget-only-no-dedupe": { skipDedupe: true } satisfies SpatialVariantOptions,
+  "B-budget-only-no-dedupe": {
+    dedupe: false,
+    activationGate: GATE_FLOORED,
+    diminishingGroupBy: GROUP_BY_NO_GEOMETRY,
+  },
   "C-budget-plus-direct-wins": {
-    activationGateFloor: 0.15,
-    diminishingGroupBy: ["domain", "layer", "stackingGroup"],
-  } satisfies SpatialVariantOptions,
+    dedupe: true,
+    activationGate: GATE_FLOORED,
+    diminishingGroupBy: GROUP_BY_NO_GEOMETRY,
+  },
   "D-c-plus-activation-floor-0": {
-    activationGateFloor: 0,
-    diminishingGroupBy: ["domain", "layer", "stackingGroup"],
-  } satisfies SpatialVariantOptions,
-  "E-d-plus-diminishing-geometryBucket": PRODUCTION_SPATIAL_VARIANT,
-} as const;
+    dedupe: true,
+    activationGate: GATE_ZERO_FLOOR,
+    diminishingGroupBy: GROUP_BY_NO_GEOMETRY,
+  },
+  "E-d-plus-diminishing-geometryBucket": {
+    dedupe: true,
+    activationGate: GATE_ZERO_FLOOR,
+    diminishingGroupBy: GROUP_BY_WITH_GEOMETRY,
+  },
+} as const satisfies Record<string, SpatialVariantConfig>;
+
+/** Production V0.4.3 == variant E. */
+export const PRODUCTION_SPATIAL_VARIANT: SpatialVariantConfig =
+  ABLATION_SPATIAL_VARIANTS["E-d-plus-diminishing-geometryBucket"];
+
+// Fail closed at module load: every research variant must carry a valid gate.
+for (const [id, cfg] of Object.entries(ABLATION_SPATIAL_VARIANTS)) {
+  if (!isValidActivationGate(cfg.activationGate)) {
+    throw new Error(`ablation variant ${id} has an invalid activation gate`);
+  }
+}
