@@ -136,7 +136,10 @@ export function validateExtractions(data: any): ValidationResult {
       issues.push(
         error("EXT_MISSING_EXCERPT", `${base}.excerpt`, "excerpt must be non-empty"),
       );
-    } else if (entry.excerpt.includes("...")) {
+    }
+    // Independent of length: a short ellipsis string is still a placeholder,
+    // not a source-located excerpt (fail closed on both conditions).
+    if (typeof entry?.excerpt === "string" && entry.excerpt.includes("...")) {
       issues.push(
         error(
           "EXT_PLACEHOLDER_EXCERPT",

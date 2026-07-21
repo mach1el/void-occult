@@ -75,6 +75,24 @@ describe("Huyền Khí Rule Seed V0.2", () => {
     );
   });
 
+  it("flags short ellipsis excerpts as both missing and placeholder", () => {
+    // Regression for PR #97: length gate must not short-circuit placeholder detection.
+    const data = clone(loadRuleSeed());
+    data.extractions.extractions[0].excerpt = "Tử Vi...";
+    const codes = validateExtractions(data).issues.map((issue) => issue.code);
+    expect(codes).toEqual(
+      expect.arrayContaining(["EXT_MISSING_EXCERPT", "EXT_PLACEHOLDER_EXCERPT"]),
+    );
+  });
+
+  it("rejects a long ellipsis excerpt as placeholder without missing-excerpt", () => {
+    const data = clone(loadRuleSeed());
+    data.extractions.extractions[0].excerpt =
+      "Tử Vi tại cung Mệnh xem miếu vượng...";
+    const codes = validateExtractions(data).issues.map((issue) => issue.code);
+    expect(codes).toContain("EXT_PLACEHOLDER_EXCERPT");
+    expect(codes).not.toContain("EXT_MISSING_EXCERPT");
+  });
   it("rejects a schema-invalid candidate rule", () => {
     const data = clone(loadRuleSeed());
     data.rules.rules[0].subject = "Tử Vi";
