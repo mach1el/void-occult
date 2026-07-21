@@ -14,6 +14,7 @@
     "test": "vitest run",
     "test:annual-axes-distribution:fast": "vitest run src/lib/ziwei/analysis/modules/annual-axes/audit",
     "audit:annual-axes-distribution": "ANNUAL_AXES_FULL_AUDIT=1 vitest run src/lib/ziwei/analysis/modules/annual-axes/audit/__tests__/full-audit.write.test.ts",
+    "audit:annual-axes-v043": "ANNUAL_AXES_V043_AUDIT=1 vitest run src/lib/ziwei/analysis/modules/annual-axes/audit/__tests__/v043-ablation.write.test.ts",
     "research:huyen-khi:validate-seed": "vitest run src/lib/ziwei/research/huyen-khi/__tests__/validate-seed.test.ts src/lib/ziwei/research/huyen-khi/__tests__/namespace-isolation.test.ts",
     "research:huyen-khi:import": "npx tsx src/lib/ziwei/research/huyen-khi/import-manual-record.ts",
     "research:huyen-khi:build-facts": "HUYEN_KHI_BUILD_REPORT=1 vitest run src/lib/ziwei/research/huyen-khi/__tests__/generate-report.write.test.ts",

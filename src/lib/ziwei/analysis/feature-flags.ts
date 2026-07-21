@@ -61,6 +61,38 @@ export function isAnnualAxesV04Enabled(): boolean {
 }
 
 /**
+ * Feature flag for Annual Axes V0.4.3 (90/10 spatial budget, experimental).
+ * Default OFF. Opt-in via VITE_ZIWEI_ANNUAL_AXES_V043=true, or
+ * `?ziweiAnnualAxesV043=1` (persisted in sessionStorage).
+ */
+export const ANNUAL_AXES_V043_FEATURE_FLAG = "ziweiAnnualAxesV043";
+
+export function isAnnualAxesV043Enabled(): boolean {
+  if (import.meta.env.VITE_ZIWEI_ANNUAL_AXES_V043 === "true") {
+    return true;
+  }
+  if (import.meta.env.VITE_ZIWEI_ANNUAL_AXES_V043 === "false") {
+    return false;
+  }
+  if (typeof window === "undefined") {
+    return false;
+  }
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const queryValue = params.get(ANNUAL_AXES_V043_FEATURE_FLAG);
+    if (queryValue === "0" || queryValue === "1") {
+      window.sessionStorage.setItem(ANNUAL_AXES_V043_FEATURE_FLAG, queryValue);
+    }
+    const stored = window.sessionStorage.getItem(ANNUAL_AXES_V043_FEATURE_FLAG);
+    if (stored === "0") return false;
+    if (stored === "1") return true;
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Feature flag for Annual Axes V0.3 (head-centric Nam Phái + preserved
  * V0.2 Trung Châu). Default ON while PR #90 remains experimental.
  * Kill-switch via VITE_ZIWEI_ANNUAL_AXES_V03=false, or `?ziweiAnnualAxesV03=0`.

@@ -1,5 +1,15 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
-import { isHuyenKhiPreviewV01Enabled, HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG } from "../feature-flags";
+import {
+  isHuyenKhiPreviewV01Enabled,
+  HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG,
+  isAnnualAxesV043Enabled,
+} from "../feature-flags";
+
+describe("isAnnualAxesV043Enabled", () => {
+  it("defaults OFF in non-browser / unset env", () => {
+    expect(isAnnualAxesV043Enabled()).toBe(false);
+  });
+});
 
 describe("isHuyenKhiPreviewV01Enabled", () => {
   const originalWindow = globalThis.window;

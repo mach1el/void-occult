@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "0.4.3",
+  "matrixId": "annual-axis-fixture-matrix-nam-phai-v0-4-3",
+  "status": "experimental",
+  "notes": [
+    "Canonical direct-palace fixtures for six-domain regression tests.",
+    "These anchors are test fixtures, not a replacement for the V0.4.2 physical-domain ownership catalog."
+  ],
+  "directAnchors": [
+    {
+      "domain": "health",
+      "labelVi": "Sức khỏe",
+      "directFixturePalace": "Tật Ách"
+    },
+    {
+      "domain": "family",
+      "labelVi": "Gia đạo",
+      "directFixturePalace": "Điền Trạch"
+    },
+    {
+      "domain": "wealth",
+      "labelVi": "Tài lộc",
+      "directFixturePalace": "Tài Bạch"
+    },
+    {
+      "domain": "career",
+      "labelVi": "Công việc",
+      "directFixturePalace": "Quan Lộc"
+    },
+    {
+      "domain": "social",
+      "labelVi": "Giao hữu",
+      "directFixturePalace": "Nô Bộc"
+    },
+    {
+      "domain": "romance",
+      "labelVi": "Tình duyên",
+      "directFixturePalace": "Phu Thê"
+    }
+  ],
+  "sourceIds": [
+    "SRC-AA-ENG-004"
+  ]
+}

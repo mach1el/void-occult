@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "0.4.3",
+  "profileId": "annual-aggregation-profile-nam-phai-v0-4-3",
+  "status": "experimental",
+  "requiresCalibration": true,
+  "normalization": {
+    "function": "one-minus-exp",
+    "supportScale": 2.5,
+    "pressureScale": 2.5,
+    "activationScale": 2.5
+  },
+  "diminishingReturns": {
+    "function": "inverse-square-root-rank",
+    "groupBy": [
+      "domain",
+      "geometryBucket",
+      "layer",
+      "stackingGroup"
+    ]
+  },
+  "activationGate": {
+    "floor": 0.0,
+    "range": 1.0
+  },
+  "score": {
+    "neutral": 50.0,
+    "amplitude": 42.0,
+    "divisor": 1.15,
+    "minimum": 0,
+    "maximum": 100,
+    "precision": 1
+  },
+  "contextChannels": {
+    "globalAnnualClimateSigned": false,
+    "majorFortuneBackgroundSigned": false,
+    "mayContributeActivation": true
+  },
+  "sourceIds": [
+    "SRC-AA-ENG-004"
+  ]
+}

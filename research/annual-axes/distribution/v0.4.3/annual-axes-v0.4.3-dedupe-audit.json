@@ -1,0 +1,14 @@
+{
+  "policy": "direct-wins keep-highest-precedence",
+  "meanDeduplicatedPhysicalFactCount": 5.752916666666667,
+  "directTp4cCollisionRate": 0.5558333333333333,
+  "maxAbsTp4cContribution": 0.05403723084762511,
+  "comparisonNoDedupe": {
+    "meanAbsDirectContribution": 0.0765919976381771,
+    "meanAbsTp4cContribution": 0.01219817059362219,
+    "maxAbsTp4cContribution": 0.05467705551177307,
+    "meanDeduplicatedPhysicalFactCount": 7.2275,
+    "directTp4cCollisionRate": 0,
+    "meanNumericEvidenceCount": 5.752916666666667
+  }
+}

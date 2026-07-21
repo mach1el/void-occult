@@ -1,0 +1,33 @@
+{
+  "signedBudget": {
+    "direct": 0.9,
+    "tp4c": 0.1,
+    "globalAnnualClimate": 0,
+    "majorFortuneBackground": 0
+  },
+  "observed": {
+    "meanAbsDirectContribution": 0.08043646154785022,
+    "meanAbsTp4cContribution": 0.0013054889199870545,
+    "maxAbsTp4cContribution": 0.05403723084762511,
+    "meanDeduplicatedPhysicalFactCount": 5.752916666666667,
+    "directTp4cCollisionRate": 0.5558333333333333,
+    "meanNumericEvidenceCount": 5.752916666666667
+  },
+  "semanticHardRequirements": {
+    "maxAbsTp4cContributionOk": true,
+    "configuredBudgetSumsToOne": true,
+    "note": "V0.4.3 enforces abs(tp4cContribution) <= 0.10 after budget."
+  },
+  "distributionSafety": {
+    "unavailableRate": 0,
+    "annualHeadMoveSensitivityRate": 0.8390909090909091,
+    "maxAbsInterAxisCorrelation": 0.49557266236635944
+  },
+  "remainingBlockers": [
+    {
+      "metric": "nearDuplicateVectorRate",
+      "value": 0.95,
+      "note": "Anti-degeneracy not claimed solved; flag stays OFF."
+    }
+  ]
+}
