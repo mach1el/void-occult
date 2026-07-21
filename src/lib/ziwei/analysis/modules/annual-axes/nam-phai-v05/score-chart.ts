@@ -12,9 +12,8 @@ import { collectNamPhaiV04TriggeredEvidence } from "../nam-phai-v04/collect-evid
 import { computeNatalDomainResponse } from "../nam-phai-v04/natal-response";
 import { computeDomainRoutingsV04 } from "../nam-phai-v04/routing";
 import { classifyEvidencePaths } from "../nam-phai-v043/classify-paths";
-import { dedupeSpatialPaths } from "../nam-phai-v043/dedupe";
+import { dedupeV05SpatialPaths } from "./dedupe";
 import { aggregateV05Buckets } from "./aggregate-buckets";
-import { asV043DedupeKnowledge } from "./knowledge-adapter";
 import { scoreV05Domain } from "./score-domain";
 import type { V05BucketAggregateResult } from "./aggregate-buckets";
 
@@ -68,7 +67,6 @@ export function scoreV05ChartDomains(
     headFrame,
     diagnostics,
   );
-  const dedupeKnowledge = asV043DedupeKnowledge(knowledge05);
   const out: V05DomainIntermediate[] = [];
 
   for (const domain of ANNUAL_AXIS_DOMAINS) {
@@ -91,7 +89,7 @@ export function scoreV05ChartDomains(
       headFrame.focusPalaceIndex,
       knowledge05.spatialBudget.tp4cRelativeRoleWeights,
     );
-    const deduped = dedupeSpatialPaths(classified, dedupeKnowledge);
+    const deduped = dedupeV05SpatialPaths(classified, knowledge05);
     const aggregate = aggregateV05Buckets(deduped, knowledge05);
     const natalResponse = computeNatalDomainResponse(
       chart,

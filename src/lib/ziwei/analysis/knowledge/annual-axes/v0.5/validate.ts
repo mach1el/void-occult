@@ -118,6 +118,19 @@ function validateBucketFormula(
       );
     }
   }
+  const aas = formula.annualActivationStrength;
+  if (
+    aas.supportWeight !== 0 ||
+    aas.pressureWeight !== 0 ||
+    aas.activationWeight !== 1
+  ) {
+    issues.push(
+      issue(
+        "bucketFormula.annualActivationStrength",
+        "V0.5 requires supportWeight=0, pressureWeight=0, activationWeight=1",
+      ),
+    );
+  }
   if (typeof formula.contextChannels.mayContributeActivation !== "boolean") {
     issues.push(
       issue(

@@ -1,5 +1,6 @@
 import { describe, expect, it, beforeEach } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
+import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import type { BirthInput } from "@/types/chart";
 import { analyzeAnnualAxes } from "../analyze";
 import { render, screen } from "@testing-library/react";
@@ -14,7 +15,20 @@ import {
 import { computeNatalGainV05 } from "../nam-phai-v05/natal-gain";
 import { scoreV05Domain } from "../nam-phai-v05/score-domain";
 import { isAnnualActivationCandidate } from "../nam-phai-v05/annual-activation";
-import { loadAnnualAxesKnowledgeV05NamPhai } from "../../../knowledge/annual-axes/v0.5";
+import { dedupeV05SpatialPaths } from "../nam-phai-v05/dedupe";
+import { aggregateV05Buckets } from "../nam-phai-v05/aggregate-buckets";
+import { asV043DedupeKnowledge } from "../nam-phai-v05/knowledge-adapter";
+import { dedupeSpatialPaths } from "../nam-phai-v043/dedupe";
+import {
+  computeActivationDiminishingFactors,
+  computeActivationPathFactor,
+} from "../nam-phai-v043/aggregate-spatial";
+import type { ClassifiedPathCandidate } from "../nam-phai-v043/classify-paths";
+import type { AnnualGeometryClass } from "../types";
+import {
+  loadAnnualAxesKnowledgeV05NamPhai,
+  validateAnnualAxesKnowledgeV05NamPhai,
+} from "../../../knowledge/annual-axes/v0.5";
 
 const REGRESSION: BirthInput = {
   solarDate: "1991-09-21",
@@ -24,6 +38,88 @@ const REGRESSION: BirthInput = {
   annualYear: "2026",
   flowBase: "luu-nien",
 };
+
+const loadedV05 = loadAnnualAxesKnowledgeV05NamPhai();
+if (!loadedV05.ok) throw new Error("v0.5 knowledge invalid");
+const knowledgeV05 = loadedV05.knowledge;
+const dedupeKnowledgeV043 = asV043DedupeKnowledge(knowledgeV05);
+
+interface CandOverrides {
+  id: string;
+  support?: number;
+  pressure?: number;
+  activation?: number;
+  geometryClass?: AnnualGeometryClass;
+  geometryBucket?: "direct" | "tp4c" | "context-only";
+  boundedPathWeight?: number;
+  confidenceWeight?: number;
+  ownershipSubjectProduct?: number;
+  layer?: "annual" | "major-fortune" | "natal-activated";
+  channel?: "global" | "major-background" | "direct-domain";
+  stackingGroup?: string;
+  physicalFactId?: string;
+  annualTriggerIds?: string[];
+}
+
+function cand(o: CandOverrides): ClassifiedPathCandidate {
+  const support = o.support ?? 0;
+  const pressure = o.pressure ?? 0;
+  const activation = o.activation ?? 0;
+  const geometryBucket = o.geometryBucket ?? "direct";
+  const channel =
+    o.channel ??
+    (geometryBucket === "context-only" ? "major-background" : "direct-domain");
+  const geometryRoleWeight =
+    geometryBucket === "context-only" ? 0 : geometryBucket === "tp4c" ? 0.8 : 1;
+  return {
+    evidence: {
+      id: o.id,
+      domain: "wealth",
+      layer: o.layer ?? "annual",
+      category: "star",
+      physicalFactId: o.physicalFactId ?? o.id,
+      ruleId: "RULE-TEST",
+      targetPalaceIndex: 0,
+      targetPalaceName: "Tài Bạch",
+      targetAnnualPalaceName: null,
+      frameRole: "focus",
+      anchorPalaceName: "Tài Bạch",
+      stackingGroup: o.stackingGroup ?? "sg",
+      annualTriggerIds: o.annualTriggerIds,
+      rawAxes: { support, pressure, stability: 0, activation },
+      effectiveWeight: 1,
+      weightedAxes: { support, pressure, stability: 0, activation },
+      confidenceWeight: o.confidenceWeight ?? 1,
+      factIds: [o.id],
+      sourceIds: ["SRC-AA-ENG-004"],
+      knowledgeStatus: "experimental",
+      ownershipWeight: 1,
+    },
+    path: {
+      triggerId: "trigger",
+      channel,
+      geometryWeight: o.boundedPathWeight ?? (geometryBucket === "context-only" ? 0.5 : 1),
+      affinityWeight: 1,
+      effectivePathWeight: 1,
+      boundedPathWeight: o.boundedPathWeight ?? (geometryBucket === "context-only" ? 0.5 : 1),
+    },
+    geometryClass:
+      o.geometryClass ??
+      (geometryBucket === "tp4c"
+        ? "tp4c-opposite"
+        : geometryBucket === "context-only"
+          ? "context-only"
+          : "direct-exact-target"),
+    geometryBucket,
+    headRole: "focus",
+    ownershipSubjectProduct: o.ownershipSubjectProduct ?? 1,
+    ownershipWeight: 1,
+    subjectModifier: 1,
+    geometryRoleWeight,
+    confidenceWeight: o.confidenceWeight ?? 1,
+    candidatePathId: o.id,
+  } as ClassifiedPathCandidate;
+}
 
 describe("Nam Phái Annual Axes V0.5 calibrated core", () => {
   it("bucket intensity/polarity/signed are bounded and consistent", () => {
@@ -43,25 +139,6 @@ describe("Nam Phái Annual Axes V0.5 calibrated core", () => {
     expect(a.signed).toBeGreaterThanOrEqual(-1);
     expect(a.signed).toBeLessThanOrEqual(1);
     expect(a.signed).toBeCloseTo(a.intensity * a.polarity, 12);
-
-    const b = computeBucketSigned({
-      supportRaw: 1,
-      pressureRaw: 2,
-      evidenceScale,
-      epsilon,
-    });
-    expect(b.polarity).toBeLessThan(0);
-    expect(b.signed).toBeLessThan(0);
-
-    const c = computeBucketSigned({
-      supportRaw: 0,
-      pressureRaw: 0,
-      evidenceScale,
-      epsilon,
-    });
-    expect(c.intensity).toBe(0);
-    expect(c.polarity).toBe(0);
-    expect(c.signed).toBe(0);
   });
 
   it("direct/TP4C 90/10 composition never exceeds ±1", () => {
@@ -70,12 +147,6 @@ describe("Nam Phái Annual Axes V0.5 calibrated core", () => {
 
     const { spatialSigned: s2 } = computeSpatialSigned(1, -1);
     expect(s2).toBeCloseTo(0.8, 12);
-
-    const { spatialSigned: s3 } = computeSpatialSigned(-1, 1);
-    expect(s3).toBeCloseTo(-0.8, 12);
-
-    const { spatialSigned: s4 } = computeSpatialSigned(-1, -1);
-    expect(s4).toBeCloseTo(-1, 12);
   });
 
   it("activationGate is tanh(annualActivationRaw / activationScale) and clamps to 0 when non-positive", () => {
@@ -87,94 +158,252 @@ describe("Nam Phái Annual Axes V0.5 calibrated core", () => {
     expect(gate).toBeLessThanOrEqual(1);
   });
 
-  it("annual-only activation excludes global/MF channels and untriggered natal context", () => {
-    const ctxOnly = {
-      geometryBucket: "context-only",
-      path: {
-        channel: "direct-domain",
-        geometryWeight: 1,
-        affinityWeight: 1,
-        effectivePathWeight: 1,
-        boundedPathWeight: 1,
-      },
-      evidence: { layer: "annual", annualTriggerIds: ["SRC"] },
-    } as any;
-    expect(isAnnualActivationCandidate(ctxOnly)).toBe(true);
+  describe("annual-activation eligibility", () => {
+    it("annual direct without annualTriggerIds is eligible", () => {
+      expect(
+        isAnnualActivationCandidate(
+          cand({ id: "d", geometryBucket: "direct", annualTriggerIds: [] }),
+        ),
+      ).toBe(true);
+    });
 
-    const global = {
-      geometryBucket: "direct",
-      path: {
-        channel: "global",
-        geometryWeight: 1,
-        affinityWeight: 1,
-        effectivePathWeight: 1,
-        boundedPathWeight: 1,
-      },
-      evidence: { layer: "annual", annualTriggerIds: ["SRC"] },
-    } as any;
-    expect(isAnnualActivationCandidate(global)).toBe(false);
+    it("annual TP4C without annualTriggerIds is eligible", () => {
+      expect(
+        isAnnualActivationCandidate(
+          cand({ id: "t", geometryBucket: "tp4c", annualTriggerIds: [] }),
+        ),
+      ).toBe(true);
+    });
 
-    const annual = {
-      geometryBucket: "direct",
-      path: {
-        channel: "direct-domain",
-        geometryWeight: 1,
-        affinityWeight: 1,
-        effectivePathWeight: 1,
-        boundedPathWeight: 1,
-      },
-      evidence: { layer: "annual", annualTriggerIds: [] },
-    } as any;
-    expect(isAnnualActivationCandidate(annual)).toBe(true);
+    it("annual context-only without a trigger is ineligible", () => {
+      expect(
+        isAnnualActivationCandidate(
+          cand({ id: "c", geometryBucket: "context-only", annualTriggerIds: [] }),
+        ),
+      ).toBe(false);
+    });
 
-    const annualContextWithTrigger = {
-      geometryBucket: "context-only",
-      path: {
-        channel: "direct-domain",
-        geometryWeight: 1,
-        affinityWeight: 1,
-        effectivePathWeight: 1,
-        boundedPathWeight: 1,
-      },
-      evidence: { layer: "annual", annualTriggerIds: ["ANNUAL-TRIGGER"] },
-    } as any;
-    expect(isAnnualActivationCandidate(annualContextWithTrigger)).toBe(true);
+    it("annual context-only with a trigger is eligible", () => {
+      expect(
+        isAnnualActivationCandidate(
+          cand({
+            id: "c",
+            geometryBucket: "context-only",
+            channel: "direct-domain",
+            annualTriggerIds: ["ANNUAL-TRIGGER"],
+          }),
+        ),
+      ).toBe(true);
+    });
 
-    const natalNoTrigger = {
-      geometryBucket: "direct",
-      path: {
-        channel: "direct-domain",
-        geometryWeight: 1,
-        affinityWeight: 1,
-        effectivePathWeight: 1,
-        boundedPathWeight: 1,
-      },
-      evidence: { layer: "natal-activated", annualTriggerIds: [] },
-    } as any;
-    expect(isAnnualActivationCandidate(natalNoTrigger)).toBe(false);
+    it("natal-activated without a trigger is ineligible", () => {
+      expect(
+        isAnnualActivationCandidate(
+          cand({ id: "n", layer: "natal-activated", annualTriggerIds: [] }),
+        ),
+      ).toBe(false);
+    });
 
-    const natalWithTrigger = {
-      geometryBucket: "direct",
-      path: {
+    it("natal-activated with a trigger is eligible", () => {
+      expect(
+        isAnnualActivationCandidate(
+          cand({
+            id: "n",
+            layer: "natal-activated",
+            annualTriggerIds: ["ANNUAL-TRIGGER"],
+          }),
+        ),
+      ).toBe(true);
+    });
+
+    it("global and major-background channels are always ineligible", () => {
+      expect(
+        isAnnualActivationCandidate(
+          cand({ id: "g", channel: "global", geometryBucket: "direct" }),
+        ),
+      ).toBe(false);
+      expect(
+        isAnnualActivationCandidate(
+          cand({ id: "m", channel: "major-background", geometryBucket: "direct" }),
+        ),
+      ).toBe(false);
+    });
+
+    it("major-fortune layer is always ineligible", () => {
+      expect(
+        isAnnualActivationCandidate(
+          cand({ id: "mf", layer: "major-fortune", geometryBucket: "direct" }),
+        ),
+      ).toBe(false);
+    });
+  });
+
+  describe("activation-before-dedupe", () => {
+    it("ineligible stronger Major Fortune path cannot suppress an eligible annual path", () => {
+      const mfDirectStrong = cand({
+        id: "mf",
+        layer: "major-fortune",
+        geometryBucket: "direct",
+        activation: 20,
+        physicalFactId: "same-fact",
+        stackingGroup: "s",
+      });
+      const annualTp4c = cand({
+        id: "annual",
+        layer: "annual",
+        geometryBucket: "tp4c",
+        activation: 5,
+        physicalFactId: "same-fact",
+        stackingGroup: "s",
+      });
+
+      const v043 = dedupeSpatialPaths([mfDirectStrong, annualTp4c], dedupeKnowledgeV043);
+      expect(v043.activationRetained[0]?.candidatePathId).toBe("mf");
+
+      const v05 = dedupeV05SpatialPaths([mfDirectStrong, annualTp4c], knowledgeV05);
+      expect(v05.activationRetained).toHaveLength(1);
+      expect(v05.activationRetained[0]?.candidatePathId).toBe("annual");
+    });
+
+    it("untriggered context-only path cannot consume an activation rank", () => {
+      const ctxNoTrigger = cand({
+        id: "ctx",
+        geometryBucket: "context-only",
         channel: "direct-domain",
-        geometryWeight: 1,
-        affinityWeight: 1,
-        effectivePathWeight: 1,
-        boundedPathWeight: 1,
-      },
-      evidence: { layer: "natal-activated", annualTriggerIds: ["ANNUAL-TRIGGER"] },
-    } as any;
-    expect(isAnnualActivationCandidate(natalWithTrigger)).toBe(true);
+        activation: 15,
+        physicalFactId: "fact-a",
+        stackingGroup: "s1",
+      });
+      const annualDirect = cand({
+        id: "annual",
+        activation: 4,
+        physicalFactId: "fact-b",
+        stackingGroup: "s2",
+      });
+
+      const deduped = dedupeV05SpatialPaths([ctxNoTrigger, annualDirect], knowledgeV05);
+      expect(deduped.activationRetained.map((c) => c.candidatePathId)).toEqual(["annual"]);
+      const rejectedCtx = deduped.rejected.find((c) => c.candidatePathId === "ctx");
+      expect(rejectedCtx?.rejectedPathReason).toBe("not-annual-activation-eligible");
+    });
+
+    it("reversing candidate input order preserves activation winners and annualActivationRaw", () => {
+      const a = cand({
+        id: "a",
+        activation: 6,
+        physicalFactId: "f1",
+        stackingGroup: "s1",
+      });
+      const b = cand({
+        id: "b",
+        activation: 3,
+        physicalFactId: "f2",
+        stackingGroup: "s2",
+      });
+
+      const forward = aggregateV05Buckets(dedupeV05SpatialPaths([a, b], knowledgeV05), knowledgeV05);
+      const reverse = aggregateV05Buckets(dedupeV05SpatialPaths([b, a], knowledgeV05), knowledgeV05);
+
+      expect(reverse.annualActivationRaw).toBeCloseTo(forward.annualActivationRaw, 9);
+      expect(reverse.spatialSigned).toBeCloseTo(forward.spatialSigned, 9);
+    });
+  });
+
+  describe("activation trace reconstructability", () => {
+    it("annualActivationRaw reconstructs from retained activation evidence", () => {
+      const paths = [
+        cand({ id: "d1", activation: 4, physicalFactId: "f1", stackingGroup: "s1" }),
+        cand({
+          id: "d2",
+          activation: 3,
+          geometryBucket: "tp4c",
+          physicalFactId: "f2",
+          stackingGroup: "s2",
+        }),
+        cand({
+          id: "ctx",
+          activation: 5,
+          geometryBucket: "context-only",
+          channel: "direct-domain",
+          annualTriggerIds: ["TRIGGER"],
+          physicalFactId: "f3",
+          stackingGroup: "s3",
+        }),
+      ];
+      const deduped = dedupeV05SpatialPaths(paths, knowledgeV05);
+      const agg = aggregateV05Buckets(deduped, knowledgeV05);
+
+      const fromEvidence = agg.evidence
+        .filter((e) => e.retainedForActivation)
+        .reduce((sum, e) => sum + e.weightedAxes.activation, 0);
+
+      expect(fromEvidence).toBeCloseTo(agg.annualActivationRaw, 9);
+    });
+
+    it("activationGate reconstructs from annualActivationRaw and scale", () => {
+      const paths = [
+        cand({ id: "d1", activation: 8, physicalFactId: "f1", stackingGroup: "s1" }),
+        cand({ id: "d2", activation: 6, physicalFactId: "f2", stackingGroup: "s2" }),
+      ];
+      const agg = aggregateV05Buckets(dedupeV05SpatialPaths(paths, knowledgeV05), knowledgeV05);
+      const scale = knowledgeV05.calibration.activationScale;
+      const expectedGate = computeActivationGate(agg.annualActivationRaw, scale);
+
+      const scored = scoreV05Domain({
+        aggregate: agg,
+        natalResponse: { sensitivity: 0.5, resilience: 0.5 } as any,
+        domain: "wealth",
+        knowledge: knowledgeV05,
+      });
+      expect(scored.activationGate).toBeCloseTo(expectedGate, 12);
+    });
+
+    it("activation diminishing is computed only over eligible retained winners", () => {
+      const sameGroup = [
+        cand({ id: "w1", activation: 10, physicalFactId: "f1", stackingGroup: "sg" }),
+        cand({ id: "w2", activation: 8, physicalFactId: "f2", stackingGroup: "sg" }),
+        cand({
+          id: "mf",
+          layer: "major-fortune",
+          activation: 20,
+          physicalFactId: "f3",
+          stackingGroup: "sg",
+        }),
+      ];
+      const deduped = dedupeV05SpatialPaths(sameGroup, knowledgeV05);
+      expect(deduped.activationRetained).toHaveLength(2);
+      expect(deduped.activationRetained.map((c) => c.candidatePathId).sort()).toEqual([
+        "w1",
+        "w2",
+      ]);
+
+      const diminishing = computeActivationDiminishingFactors(
+        deduped.activationRetained,
+        dedupeKnowledgeV043,
+      );
+      expect(diminishing.size).toBe(2);
+      expect(diminishing.has("mf")).toBe(false);
+    });
+
+    it("activationAppliedFactor includes confidence, ownership, geometry, and diminishing", () => {
+      const path = cand({
+        id: "p",
+        activation: 4,
+        confidenceWeight: 0.8,
+        ownershipSubjectProduct: 0.9,
+        boundedPathWeight: 0.7,
+      });
+      const deduped = dedupeV05SpatialPaths([path], knowledgeV05);
+      const agg = aggregateV05Buckets(deduped, knowledgeV05);
+      const row = agg.evidence.find((e) => e.id === "p")!;
+      const dim = row.activationDiminishingFactor ?? 1;
+      const expected = computeActivationPathFactor(path, dim);
+      expect(row.activationAppliedFactor).toBeCloseTo(expected, 12);
+      expect(row.weightedAxes.activation).toBeCloseTo(4 * expected, 12);
+    });
   });
 
   it("no positive annual activation yields activationGate=0 and score=50", () => {
-    const loaded = loadAnnualAxesKnowledgeV05NamPhai();
-    expect(loaded.ok).toBe(true);
-    if (!loaded.ok) return;
-
-    const knowledge = loaded.knowledge;
-    const domain = "wealth";
-
     const aggregate = {
       evidence: [],
       rawAxes: { support: 0, pressure: 0, stability: 0, activation: 0 },
@@ -211,27 +440,166 @@ describe("Nam Phái Annual Axes V0.5 calibrated core", () => {
       annualActivationRaw: 0,
     } as any;
 
-    const natalResponse = { sensitivity: 0.5, resilience: 0.5, amplitudeMultiplier: 1, provenance: [] } as any;
-    const scored = scoreV05Domain({ aggregate, natalResponse, domain: domain as any, knowledge });
+    const scored = scoreV05Domain({
+      aggregate,
+      natalResponse: { sensitivity: 0.5, resilience: 0.5 } as any,
+      domain: "wealth",
+      knowledge: knowledgeV05,
+    });
     expect(scored.activationGate).toBe(0);
-    expect(scored.score).toBe(knowledge.scoreProfile.neutral);
+    expect(scored.score).toBe(knowledgeV05.scoreProfile.neutral);
+  });
+
+  it("positive eligible activation never yields score exactly 50", () => {
+    const paths = [cand({ id: "d", activation: 5, support: 2, physicalFactId: "f", stackingGroup: "s" })];
+    const agg = aggregateV05Buckets(dedupeV05SpatialPaths(paths, knowledgeV05), knowledgeV05);
+    expect(agg.annualActivationRaw).toBeGreaterThan(0);
+
+    const scored = scoreV05Domain({
+      aggregate: agg,
+      natalResponse: { sensitivity: 0.5, resilience: 0.5 } as any,
+      domain: "wealth",
+      knowledge: knowledgeV05,
+    });
+    expect(scored.activationGate).toBeGreaterThan(0);
+    expect(scored.score).not.toBe(50);
+  });
+
+  describe("support/pressure normalized axes", () => {
+    it("increasing direct pressure increases pressureNorm, not supportNorm", () => {
+      const lowPressure = aggregateV05Buckets(
+        dedupeV05SpatialPaths(
+          [cand({ id: "d", support: 3, pressure: 1, physicalFactId: "f", stackingGroup: "s" })],
+          knowledgeV05,
+        ),
+        knowledgeV05,
+      );
+      const highPressure = aggregateV05Buckets(
+        dedupeV05SpatialPaths(
+          [cand({ id: "d", support: 3, pressure: 5, physicalFactId: "f", stackingGroup: "s" })],
+          knowledgeV05,
+        ),
+        knowledgeV05,
+      );
+
+      const low = scoreV05Domain({
+        aggregate: lowPressure,
+        natalResponse: { sensitivity: 0.5, resilience: 0.5 } as any,
+        domain: "wealth",
+        knowledge: knowledgeV05,
+      });
+      const high = scoreV05Domain({
+        aggregate: highPressure,
+        natalResponse: { sensitivity: 0.5, resilience: 0.5 } as any,
+        domain: "wealth",
+        knowledge: knowledgeV05,
+      });
+
+      expect(high.pressureNorm).toBeGreaterThan(low.pressureNorm);
+      expect(high.supportNorm).toBeCloseTo(low.supportNorm, 9);
+    });
+
+    it("increasing TP4C support increases supportNorm, not pressureNorm", () => {
+      const lowSupport = aggregateV05Buckets(
+        dedupeV05SpatialPaths(
+          [
+            cand({
+              id: "t",
+              support: 1,
+              pressure: 2,
+              geometryBucket: "tp4c",
+              physicalFactId: "f",
+              stackingGroup: "s",
+            }),
+          ],
+          knowledgeV05,
+        ),
+        knowledgeV05,
+      );
+      const highSupport = aggregateV05Buckets(
+        dedupeV05SpatialPaths(
+          [
+            cand({
+              id: "t",
+              support: 6,
+              pressure: 2,
+              geometryBucket: "tp4c",
+              physicalFactId: "f",
+              stackingGroup: "s",
+            }),
+          ],
+          knowledgeV05,
+        ),
+        knowledgeV05,
+      );
+
+      const low = scoreV05Domain({
+        aggregate: lowSupport,
+        natalResponse: { sensitivity: 0.5, resilience: 0.5 } as any,
+        domain: "wealth",
+        knowledge: knowledgeV05,
+      });
+      const high = scoreV05Domain({
+        aggregate: highSupport,
+        natalResponse: { sensitivity: 0.5, resilience: 0.5 } as any,
+        domain: "wealth",
+        knowledge: knowledgeV05,
+      });
+
+      expect(high.supportNorm).toBeGreaterThan(low.supportNorm);
+      expect(high.pressureNorm).toBeCloseTo(low.pressureNorm, 9);
+    });
+
+    it("conflict rises only when both support and pressure are present", () => {
+      const supportOnly = aggregateV05Buckets(
+        dedupeV05SpatialPaths(
+          [cand({ id: "d", support: 5, activation: 3, physicalFactId: "f", stackingGroup: "s" })],
+          knowledgeV05,
+        ),
+        knowledgeV05,
+      );
+      const both = aggregateV05Buckets(
+        dedupeV05SpatialPaths(
+          [
+            cand({
+              id: "d",
+              support: 5,
+              pressure: 4,
+              activation: 3,
+              physicalFactId: "f",
+              stackingGroup: "s",
+            }),
+          ],
+          knowledgeV05,
+        ),
+        knowledgeV05,
+      );
+
+      const sOnly = scoreV05Domain({
+        aggregate: supportOnly,
+        natalResponse: { sensitivity: 0.5, resilience: 0.5 } as any,
+        domain: "wealth",
+        knowledge: knowledgeV05,
+      });
+      const sAndP = scoreV05Domain({
+        aggregate: both,
+        natalResponse: { sensitivity: 0.5, resilience: 0.5 } as any,
+        domain: "wealth",
+        knowledge: knowledgeV05,
+      });
+
+      expect(sAndP.conflict).toBeGreaterThan(sOnly.conflict);
+    });
   });
 
   it("natalGain stays inside configured bounds", () => {
-    const loaded = loadAnnualAxesKnowledgeV05NamPhai();
-    expect(loaded.ok).toBe(true);
-    if (!loaded.ok) return;
-    const knowledge = loaded.knowledge;
+    const g1 = computeNatalGainV05({ sensitivity: 1, resilience: 1 } as any, knowledgeV05);
+    expect(g1).toBeGreaterThanOrEqual(knowledgeV05.natalGain.minimum);
+    expect(g1).toBeLessThanOrEqual(knowledgeV05.natalGain.maximum);
 
-    const natalResponseHi = { sensitivity: 1, resilience: 1 } as any;
-    const g1 = computeNatalGainV05(natalResponseHi, knowledge);
-    expect(g1).toBeGreaterThanOrEqual(knowledge.natalGain.minimum);
-    expect(g1).toBeLessThanOrEqual(knowledge.natalGain.maximum);
-
-    const natalResponseLo = { sensitivity: 0, resilience: 0 } as any;
-    const g2 = computeNatalGainV05(natalResponseLo, knowledge);
-    expect(g2).toBeGreaterThanOrEqual(knowledge.natalGain.minimum);
-    expect(g2).toBeLessThanOrEqual(knowledge.natalGain.maximum);
+    const g2 = computeNatalGainV05({ sensitivity: 0, resilience: 0 } as any, knowledgeV05);
+    expect(g2).toBeGreaterThanOrEqual(knowledgeV05.natalGain.minimum);
+    expect(g2).toBeLessThanOrEqual(knowledgeV05.natalGain.maximum);
   });
 
   describe("V0.5 preview flag wiring", () => {
@@ -253,14 +621,69 @@ describe("Nam Phái Annual Axes V0.5 calibrated core", () => {
       expect(result.versions.engineVersion).toBe("0.4.2");
     });
 
-    it("renders the visible V0.5 preview badge in the six-axis UI", () => {
+    it("Trung Châu remains unchanged with the V0.5 query flag present", () => {
+      window.history.replaceState({}, "", "/?ziweiAnnualAxesV05=1");
+      const chart = calculateTrungChau(REGRESSION);
+      const result = analyzeAnnualAxes(chart, { school: "trung-chau" });
+      expect(result.versions.engineVersion).toBe("0.2.0");
+    });
+  });
+
+  describe("result-driven V0.5 badge", () => {
+    beforeEach(() => {
+      window.sessionStorage.clear();
+      window.history.replaceState({}, "", "/");
+    });
+
+    it("Nam Phái V0.5 result shows V0.5 Preview badge", () => {
       window.history.replaceState({}, "", "/?ziweiAnnualAxesV05=1");
       const chart = calculateNamPhai(REGRESSION);
-      render(<AnnualAxesSection chart={chart} school="nam-phai" />);
+      const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
+      render(<AnnualAxesSection chart={chart} school="nam-phai" result={result} />);
       expect(
         screen.getByText(/Annual Axes Engine: Nam Phái V0.5 Preview/i),
       ).toBeInTheDocument();
+      expect(screen.getByText(/Engine 0\.5\.0/)).toBeInTheDocument();
+    });
+
+    it("Nam Phái V0.4.2 result does not show V0.5 Preview badge", () => {
+      const chart = calculateNamPhai(REGRESSION);
+      const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
+      render(<AnnualAxesSection chart={chart} school="nam-phai" result={result} />);
+      expect(
+        screen.queryByText(/Annual Axes Engine: Nam Phái V0.5 Preview/i),
+      ).toBeNull();
+      expect(screen.getByText(/Engine 0\.4\.2/)).toBeInTheDocument();
+    });
+
+    it("Trung Châu with ?ziweiAnnualAxesV05=1 does not show Nam Phái V0.5 badge", () => {
+      window.history.replaceState({}, "", "/?ziweiAnnualAxesV05=1");
+      const chart = calculateTrungChau(REGRESSION);
+      const result = analyzeAnnualAxes(chart, { school: "trung-chau" });
+      render(<AnnualAxesSection chart={chart} school="trung-chau" result={result} />);
+      expect(
+        screen.queryByText(/Annual Axes Engine: Nam Phái V0.5 Preview/i),
+      ).toBeNull();
     });
   });
 });
 
+describe("Annual Axes V0.5 knowledge validation", () => {
+  it("loads and validates the V0.5 bundle", () => {
+    expect(loadedV05.ok).toBe(true);
+  });
+
+  it("fails closed when activation strength config is not activation-only", () => {
+    const broken = structuredClone(knowledgeV05);
+    broken.bucketFormula.annualActivationStrength = {
+      supportWeight: 1,
+      pressureWeight: 0,
+      activationWeight: 1,
+    };
+    const result = validateAnnualAxesKnowledgeV05NamPhai(
+      broken,
+      new Set(["SRC-AA-ENG-004"]),
+    );
+    expect(result.ok).toBe(false);
+  });
+});

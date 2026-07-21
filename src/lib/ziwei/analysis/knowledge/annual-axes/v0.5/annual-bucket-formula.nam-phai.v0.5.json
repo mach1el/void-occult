@@ -10,8 +10,8 @@
     "natal-activated": 0.35
   },
   "annualActivationStrength": {
-    "supportWeight": 1.0,
-    "pressureWeight": 1.0,
+    "supportWeight": 0,
+    "pressureWeight": 0,
     "activationWeight": 1.0
   },
   "diminishingReturns": {

@@ -17,7 +17,6 @@ import { collectNamPhaiV04TriggeredEvidence } from "../nam-phai-v04/collect-evid
 import { computeNatalDomainResponse } from "../nam-phai-v04/natal-response";
 import { computeDomainRoutingsV04 } from "../nam-phai-v04/routing";
 import { classifyEvidencePaths } from "../nam-phai-v043/classify-paths";
-import { dedupeSpatialPaths } from "../nam-phai-v043/dedupe";
 import {
   type AnnualAxesCapabilities,
   type AnnualAxesResult,
@@ -29,7 +28,7 @@ import {
 } from "../types";
 import { ANNUAL_AXIS_DOMAINS } from "../../../contracts/annual-axes";
 import { aggregateV05Buckets } from "./aggregate-buckets";
-import { asV043DedupeKnowledge } from "./knowledge-adapter";
+import { dedupeV05SpatialPaths } from "./dedupe";
 import { scoreV05Domain } from "./score-domain";
 
 const CONTRACT_VERSION = "0.5.0";
@@ -157,7 +156,6 @@ export function analyzeAnnualAxesNamPhaiV05(chart: ChartData): AnnualAxesResult 
     : null;
 
   const axes = {} as Record<AnnualAxisDomain, AnnualAxisResult>;
-  const dedupeKnowledge = asV043DedupeKnowledge(knowledge05);
 
   if (!headFrame) {
     for (const domain of ANNUAL_AXIS_DOMAINS) {
@@ -212,7 +210,7 @@ export function analyzeAnnualAxesNamPhaiV05(chart: ChartData): AnnualAxesResult 
       headFrame.focusPalaceIndex,
       knowledge05.spatialBudget.tp4cRelativeRoleWeights,
     );
-    const deduped = dedupeSpatialPaths(classified, dedupeKnowledge);
+    const deduped = dedupeV05SpatialPaths(classified, knowledge05);
     const aggregate = aggregateV05Buckets(deduped, knowledge05);
     const natalResponse = computeNatalDomainResponse(chart, domain, knowledge04, numericKnowledge);
     const scored = scoreV05Domain({
@@ -229,8 +227,8 @@ export function analyzeAnnualAxesNamPhaiV05(chart: ChartData): AnnualAxesResult 
       band: resolveBand(scored.score, knowledge04),
       rawAxes: aggregate.rawAxes,
       normalizedAxes: {
-        support: aggregate.directBucket.intensity,
-        pressure: aggregate.tp4cBucket.intensity,
+        support: scored.supportNorm,
+        pressure: scored.pressureNorm,
         stability: 0,
         activation: scored.activationGate,
       },

@@ -18,7 +18,6 @@ import {
   computeSignedDiminishingFactors,
 } from "../nam-phai-v043/aggregate-spatial";
 import { asV043DedupeKnowledge } from "./knowledge-adapter";
-import { filterAnnualActivationRetained } from "./annual-activation";
 import {
   computeBucketSigned,
   computeSpatialSigned,
@@ -33,18 +32,6 @@ export interface V05BucketAggregateResult {
   tp4cBucket: BucketSignedResult;
   spatialSigned: number;
   annualActivationRaw: number;
-}
-
-function annualActivationSignalOf(
-  c: ClassifiedPathCandidate,
-  knowledge: AnnualAxesKnowledgeV05NamPhai,
-): number {
-  const weights = knowledge.bucketFormula.annualActivationStrength;
-  const base =
-    weights.supportWeight * Math.max(0, c.evidence.rawAxes.support) +
-    weights.pressureWeight * Math.max(0, c.evidence.rawAxes.pressure) +
-    weights.activationWeight * Math.max(0, c.evidence.rawAxes.activation);
-  return base * c.confidenceWeight * c.ownershipSubjectProduct;
 }
 
 function signedLayerWeightOf(
@@ -64,7 +51,6 @@ function toEvidenceRow(
     activationDiminishingFactor: number;
     signedAppliedFactor: number;
     activationAppliedFactor: number;
-    countsTowardAnnualActivation: boolean;
   },
 ): AnnualAxisEvidence {
   const support = opts.retainedForSignedScore
@@ -73,14 +59,13 @@ function toEvidenceRow(
   const pressure = opts.retainedForSignedScore
     ? c.evidence.rawAxes.pressure * opts.signedAppliedFactor
     : 0;
-  const activation =
-    opts.countsTowardAnnualActivation && opts.retainedForActivation
-      ? c.evidence.rawAxes.activation * opts.activationAppliedFactor
-      : 0;
+  const activation = opts.retainedForActivation
+    ? Math.max(0, c.evidence.rawAxes.activation) * opts.activationAppliedFactor
+    : 0;
 
   const primaryFactor = opts.retainedForSignedScore
     ? opts.signedAppliedFactor
-    : opts.countsTowardAnnualActivation && opts.retainedForActivation
+    : opts.retainedForActivation
       ? opts.activationAppliedFactor
       : 0;
 
@@ -89,20 +74,16 @@ function toEvidenceRow(
     geometryClass: c.geometryClass,
     geometryBucket: c.geometryBucket,
     retainedForSignedScore: opts.retainedForSignedScore,
-    retainedForActivation: opts.retainedForActivation && opts.countsTowardAnnualActivation,
+    retainedForActivation: opts.retainedForActivation,
     rejectedPathReason: opts.rejectedPathReason,
     ownershipWeight: c.ownershipWeight,
     confidenceWeight: c.confidenceWeight,
     signedDiminishingFactor: opts.retainedForSignedScore ? opts.signedDiminishingFactor : undefined,
-    activationDiminishingFactor:
-      opts.retainedForActivation && opts.countsTowardAnnualActivation
-        ? opts.activationDiminishingFactor
-        : undefined,
+    activationDiminishingFactor: opts.retainedForActivation
+      ? opts.activationDiminishingFactor
+      : undefined,
     signedAppliedFactor: opts.retainedForSignedScore ? opts.signedAppliedFactor : 0,
-    activationAppliedFactor:
-      opts.countsTowardAnnualActivation && opts.retainedForActivation
-        ? opts.activationAppliedFactor
-        : 0,
+    activationAppliedFactor: opts.retainedForActivation ? opts.activationAppliedFactor : 0,
     diminishingFactor: opts.retainedForSignedScore
       ? opts.signedDiminishingFactor
       : opts.activationDiminishingFactor,
@@ -130,8 +111,6 @@ export function aggregateV05Buckets(
     dedupeKnowledge,
   );
 
-  const annualActivationCandidates = filterAnnualActivationRetained(deduped.activationRetained);
-  const annualActivationIds = new Set(annualActivationCandidates.map((c) => c.candidatePathId));
   const signedIds = new Set(deduped.signedRetained.map((c) => c.candidatePathId));
   const activationIds = new Set(deduped.activationRetained.map((c) => c.candidatePathId));
 
@@ -151,7 +130,6 @@ export function aggregateV05Buckets(
     const activationApplied = alsoActivation
       ? computeActivationPathFactor(c, activationDim)
       : 0;
-    const countsAnnual = annualActivationIds.has(c.candidatePathId);
 
     if (c.geometryBucket === "direct" || c.geometryBucket === "tp4c") {
       const bucket = buckets[c.geometryBucket];
@@ -167,7 +145,6 @@ export function aggregateV05Buckets(
         activationDiminishingFactor: activationDim,
         signedAppliedFactor: signedApplied,
         activationAppliedFactor: activationApplied,
-        countsTowardAnnualActivation: countsAnnual,
       }),
     );
   }
@@ -175,7 +152,7 @@ export function aggregateV05Buckets(
   for (const c of deduped.activationRetained) {
     if (signedIds.has(c.candidatePathId)) continue;
     const activationDim = activationDiminishing.get(c.candidatePathId) ?? 1;
-    const countsAnnual = annualActivationIds.has(c.candidatePathId);
+    const activationApplied = computeActivationPathFactor(c, activationDim);
     evidenceOut.push(
       toEvidenceRow(c, {
         retainedForSignedScore: false,
@@ -183,8 +160,7 @@ export function aggregateV05Buckets(
         signedDiminishingFactor: 1,
         activationDiminishingFactor: activationDim,
         signedAppliedFactor: 0,
-        activationAppliedFactor: computeActivationPathFactor(c, activationDim),
-        countsTowardAnnualActivation: countsAnnual,
+        activationAppliedFactor: activationApplied,
       }),
     );
   }
@@ -199,7 +175,6 @@ export function aggregateV05Buckets(
         activationDiminishingFactor: 1,
         signedAppliedFactor: 0,
         activationAppliedFactor: 0,
-        countsTowardAnnualActivation: false,
       }),
     );
   }
@@ -229,8 +204,10 @@ export function aggregateV05Buckets(
   );
 
   let annualActivationRaw = 0;
-  for (const c of annualActivationCandidates) {
-    annualActivationRaw += annualActivationSignalOf(c, knowledge);
+  for (const c of deduped.activationRetained) {
+    const activationDim = activationDiminishing.get(c.candidatePathId) ?? 1;
+    const activationApplied = computeActivationPathFactor(c, activationDim);
+    annualActivationRaw += Math.max(0, c.evidence.rawAxes.activation) * activationApplied;
   }
 
   const spatialBudgetTrace: AnnualSpatialBudgetTrace = {

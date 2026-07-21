@@ -9,28 +9,28 @@
     "splitBy": "stable-chart-id"
   },
   "activationTargetMedianGate": 0.7,
-  "activationScale": 37.3227029920807,
-  "medianPositiveAnnualActivationRaw": 32.370000000000005,
+  "activationScale": 12.089302186318386,
+  "medianPositiveAnnualActivationRaw": 10.485058165646807,
   "domainScales": {
-    "health": 0.648463763864923,
-    "family": 0.6862903366434582,
-    "wealth": 0.49022988717872246,
-    "career": 0.5424645481250435,
-    "social": 0.5697512409985493,
-    "romance": 0.458705004001432
+    "health": 0.6593154007709149,
+    "family": 0.6600475275189389,
+    "wealth": 0.47976867715803756,
+    "career": 0.5170257026259224,
+    "social": 0.5629475193560145,
+    "romance": 0.4628030787805806
   },
   "q75AbsLatent": {
-    "health": 0.25069281255309134,
-    "family": 0.26531637434253696,
-    "wealth": 0.18952039583821437,
-    "career": 0.20971405166771426,
-    "social": 0.2202629491742779,
-    "romance": 0.177333035388003
+    "health": 0.2548880005163384,
+    "family": 0.25517103701557714,
+    "wealth": 0.18547614493487422,
+    "career": 0.19987952261358716,
+    "social": 0.2176326647860963,
+    "romance": 0.17891733037823415
   },
   "trainingDiagnostics": {
-    "medianActivationGate": 0.6993589074483677,
-    "p90ActivationGate": 0.9143849855985204,
-    "maxActivationGate": 0.9906116359889144
+    "medianActivationGate": 0.6990259861922142,
+    "p90ActivationGate": 0.8938861816606153,
+    "maxActivationGate": 0.9798899003570146
   },
   "generatedAt": "2026-07-21T00:00:00.000Z",
   "sourceIds": [

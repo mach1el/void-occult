@@ -29,6 +29,8 @@ export interface V05DomainScoreResult {
   trace: V05DomainScoreTrace;
   intensity: number;
   conflict: number;
+  supportNorm: number;
+  pressureNorm: number;
 }
 
 export function scoreV05Domain(input: {
@@ -61,8 +63,13 @@ export function scoreV05Domain(input: {
           knowledge.scoreProfile.precision,
         );
 
-  const supportNorm = aggregate.directBucket.intensity;
-  const pressureNorm = aggregate.tp4cBucket.intensity;
+  const totalSupportRaw =
+    aggregate.spatialBudgetTrace.directSupportRaw + aggregate.spatialBudgetTrace.tp4cSupportRaw;
+  const totalPressureRaw =
+    aggregate.spatialBudgetTrace.directPressureRaw + aggregate.spatialBudgetTrace.tp4cPressureRaw;
+  const evidenceScale = knowledge.bucketFormula.evidenceScale;
+  const supportNorm = 1 - Math.exp(-Math.max(0, totalSupportRaw) / evidenceScale);
+  const pressureNorm = 1 - Math.exp(-Math.max(0, totalPressureRaw) / evidenceScale);
 
   return {
     score,
@@ -81,5 +88,7 @@ export function scoreV05Domain(input: {
     },
     intensity: Math.round(100 * activationGate),
     conflict: Math.round(100 * Math.min(supportNorm, pressureNorm) * activationGate),
+    supportNorm,
+    pressureNorm,
   };
 }

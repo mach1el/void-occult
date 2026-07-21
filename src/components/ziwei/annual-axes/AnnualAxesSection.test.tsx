@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import type { BirthInput } from "@/types/chart";
@@ -15,6 +15,11 @@ const REGRESSION: BirthInput = {
   annualYear: "2026",
   flowBase: "luu-nien",
 };
+
+beforeEach(() => {
+  window.sessionStorage.clear();
+  window.history.replaceState({}, "", "/");
+});
 
 function renderSection(school: "trung-chau" | "nam-phai" = "trung-chau") {
   const chart =
@@ -47,6 +52,16 @@ describe("AnnualAxesSection — Trung Châu available result", () => {
     expect(container.querySelector('.annual-axes-section__focus')).toBeNull();
   });
 
+  it("does not show Nam Phái V0.5 badge when V0.5 query flag is present", () => {
+    window.history.replaceState({}, "", "/?ziweiAnnualAxesV05=1");
+    const chart = calculateTrungChau(REGRESSION);
+    const result = analyzeAnnualAxes(chart, { school: "trung-chau" });
+    const { container } = render(
+      <AnnualAxesSection chart={chart} school="trung-chau" result={result} />,
+    );
+    expect(container.textContent ?? "").not.toContain("Nam Phái V0.5 Preview");
+  });
+
   it("opens the detail panel when a radar point is clicked", () => {
     const { container } = renderSection("trung-chau");
     const point = firstAvailablePoint(container);
@@ -70,10 +85,13 @@ describe("AnnualAxesSection — Trung Châu available result", () => {
 describe("AnnualAxesSection — Nam Phái available result", () => {
   it("renders the six-axis radar without a focus summary bar", () => {
     const chart = calculateNamPhai(REGRESSION);
-    const { container } = render(<AnnualAxesSection chart={chart} school="nam-phai" />);
+    const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
+    const { container } = render(
+      <AnnualAxesSection chart={chart} school="nam-phai" result={result} />,
+    );
     expect(container.querySelectorAll('.annual-axes-radar__point')).toHaveLength(6);
     expect(container.querySelector('.annual-axes-section__focus')).toBeNull();
-    expect(container.textContent ?? "").toMatch(/Engine 0\./);
+    expect(container.textContent ?? "").toContain(`Engine ${result.versions.engineVersion}`);
   });
 
   it("renders the exact core score without React-side rescaling", () => {
@@ -90,6 +108,16 @@ describe("AnnualAxesSection — Nam Phái available result", () => {
     expect(wealth.status).toBe("available");
     if (wealth.status !== "available") return;
     expect(container.textContent ?? "").toContain(`Điểm ${wealth.score.toFixed(1)}`);
+    expect(result.versions.engineVersion).toBe("0.5.0");
+  });
+
+  it("does not show V0.5 preview badge for Nam Phái V0.4.2 result", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
+    const { container } = render(
+      <AnnualAxesSection chart={chart} school="nam-phai" result={result} />,
+    );
+    expect(container.textContent ?? "").not.toContain("Nam Phái V0.5 Preview");
   });
 });
 

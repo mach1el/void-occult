@@ -7,6 +7,11 @@ import type { AnnualAxesKnowledgeV043NamPhai } from "../../../knowledge/annual-a
 import type { ClassifiedPathCandidate } from "./classify-paths";
 import { activationMagnitude } from "./magnitudes";
 
+export interface DedupeSpatialPathsOptions {
+  /** When set, replaces the default activation eligibility predicate. */
+  activationEligibilityPredicate?: (c: ClassifiedPathCandidate) => boolean;
+}
+
 export interface DedupedSpatialPaths {
   signedRetained: ClassifiedPathCandidate[];
   activationRetained: ClassifiedPathCandidate[];
@@ -112,7 +117,11 @@ function activationEligible(
 export function dedupeSpatialPaths(
   candidates: ClassifiedPathCandidate[],
   knowledge: AnnualAxesKnowledgeV043NamPhai,
+  options?: DedupeSpatialPathsOptions,
 ): DedupedSpatialPaths {
+  const activationEligibility =
+    options?.activationEligibilityPredicate ??
+    ((c: ClassifiedPathCandidate) => activationEligible(c, knowledge));
   const sorted = [...candidates].sort((a, b) => comparePathPrecedence(a, b, knowledge));
 
   const byFact = new Map<string, ClassifiedPathCandidate[]>();
@@ -144,8 +153,7 @@ export function dedupeSpatialPaths(
     );
 
     const signedWinner = signedSorted.find(signedEligible) ?? null;
-    const activationWinner =
-      activationSorted.find((c) => activationEligible(c, knowledge)) ?? null;
+    const activationWinner = activationSorted.find((c) => activationEligibility(c)) ?? null;
 
     if (signedWinner) {
       signedRetained.push(signedWinner);
@@ -176,8 +184,16 @@ export function dedupeSpatialPaths(
         reason = "direct-wins-collision";
       } else if (signedWinner && signedEligible(c)) {
         reason = "signed-duplicate-same-physical-fact";
-      } else if (activationWinner && activationEligible(c, knowledge)) {
-        reason = "activation-duplicate-same-physical-fact";
+      } else if (activationWinner && activationEligibility(c)) {
+        reason = options?.activationEligibilityPredicate
+          ? "duplicate-annual-activation-physical-fact"
+          : "activation-duplicate-same-physical-fact";
+      } else if (
+        options?.activationEligibilityPredicate &&
+        !activationEligibility(c) &&
+        activationEligible(c, knowledge)
+      ) {
+        reason = "not-annual-activation-eligible";
       } else if (c.geometryBucket === "context-only") {
         reason = "context-only-not-signed";
       }
