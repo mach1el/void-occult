@@ -16,13 +16,12 @@ import {
   type MatchedStarFact,
 } from "./match-stars";
 import { normalizeStarIdentity } from "./star-identity";
+import {
+  classifyV08ScoreState,
+  type V08ScoreState,
+} from "./classify-score-state";
 
-export type V08ScoreState =
-  | "scored"
-  | "no-signal"
-  | "balanced-signal"
-  | "partial-data"
-  | "unavailable";
+export type { V08ScoreState };
 
 export type V08AxisAvailability = "available" | "partial-data" | "unavailable";
 
@@ -405,16 +404,11 @@ export function scoreV08Domain(input: {
     ? "partial-data"
     : "available";
 
-  let scoreState: V08ScoreState;
-  if (matchedStarCount === 0 && prominenceAdjustedRaw === 0) {
-    scoreState = hasCooperatingGap ? "partial-data" : "no-signal";
-  } else if (prominenceAdjustedRaw === 0) {
-    scoreState = hasCooperatingGap ? "partial-data" : "balanced-signal";
-  } else if (hasCooperatingGap) {
-    scoreState = "partial-data";
-  } else {
-    scoreState = "scored";
-  }
+  const scoreState = classifyV08ScoreState({
+    matchedStarCount,
+    prominenceAdjustedRaw,
+    hasCooperatingGap,
+  });
 
   let primaryTrace: V08PalaceContributionTrace =
     primaryTracePlaceholder ??

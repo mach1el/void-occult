@@ -49,20 +49,12 @@ function accumulateBreakdown(
 /**
  * Score === 50 is not synonymous with "no signal" under the V0.8 formula:
  * `no-signal` (zero matched stars), `balanced-signal` (matched stars whose
- * raw net is exactly zero), and `partial-data` (missing cooperating palace,
- * raw happens to be zero) can all land on 50 — but the "scored" state
- * mathematically cannot, since `score = 50 + 5×raw` only equals 50 when
- * `raw = 0`, which is exactly the no-signal/balanced-signal/partial-data
- * condition — *mathematically*, at least. In practice `scoredStateScore50Count`
- * can be a small nonzero number: the V0.8 formula compares
- * `axisRawBeforeThaiTue`/`prominenceAdjustedRaw` to zero with strict
- * (in)equality, and floating-point summation of weighted contributions can
- * land on a near-zero epsilon (e.g. `5.55e-17`) instead of exact `0`. The
- * rounded score still correctly lands on 50, but the true balanced-signal
- * case gets classified as `scored` instead. This is a genuine, documented
- * V0.9 research finding (candidate category: point policy / floating-point
- * epsilon tolerance in scoreState classification) — not a regression, and
- * not something this read-only audit fixes in the V0.8 formula.
+ * raw net is effectively zero), and `partial-data` (missing cooperating palace)
+ * can all land on 50. Historically, strict `raw === 0` misclassified near-zero
+ * floating-point cancellation residues (e.g. `5.55e-17`) as `scored` while the
+ * rounded score correctly remained 50 (Finding 6). Production classification
+ * now uses an absolute epsilon (`V08_RAW_ZERO_EPSILON`) so those cases become
+ * `balanced-signal` without changing numeric scores.
  */
 export function buildNoSignalAnalysisV09(
   observations: AnnualAxesAuditObservationV09[],

@@ -139,11 +139,8 @@ describe("annual axes v0.9 metrics — fast corpus integration", () => {
     ] as const) {
       expect(Number.isFinite(m[key]), `${key} should be finite`).toBe(true);
     }
-    // scoredStateNeutralScoreCount is not guaranteed to be 0: floating-point
-    // summation of weighted contributions can land on a near-zero epsilon
-    // instead of exact 0, which rounds to a score of 50 while still being
-    // classified "scored" — a documented V0.9 finding, not a bug in this
-    // read-only audit. See no-signal-analysis.ts for the full explanation.
-    expect(m.scoredStateNeutralScoreCount).toBeGreaterThanOrEqual(0);
+    // Finding 6 fix: epsilon-safe scoreState classification must keep
+    // scored-at-neutral at zero for any corpus the engine produces.
+    expect(m.scoredStateNeutralScoreCount).toBe(0);
   });
 });
