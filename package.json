@@ -15,6 +15,8 @@
     "test:annual-axes-distribution:fast": "vitest run src/lib/ziwei/analysis/modules/annual-axes/audit",
     "audit:annual-axes-distribution": "ANNUAL_AXES_FULL_AUDIT=1 vitest run src/lib/ziwei/analysis/modules/annual-axes/audit/__tests__/full-audit.write.test.ts",
     "test:annual-axes-v08": "vitest run src/lib/ziwei/analysis/modules/annual-axes/nam-phai-v08/__tests__/v08-integrity.test.ts src/lib/ziwei/analysis/modules/annual-axes/audit/__tests__/v08-core.test.ts",
+    "test:annual-axes-v08-scorestate": "vitest run src/lib/ziwei/analysis/modules/annual-axes/nam-phai-v08/__tests__/classify-score-state.test.ts src/lib/ziwei/analysis/modules/annual-axes/nam-phai-v08/__tests__/scorestate-epsilon-regression.test.ts",
+    "research:annual-axes-v08:scorestate-proof": "ANNUAL_AXES_V08_SCORESTATE_PROOF=1 vitest run src/lib/ziwei/analysis/modules/annual-axes/nam-phai-v08/__tests__/scorestate-epsilon-proof.write.test.ts",
     "test:annual-axes-v08-holdout": "vitest run src/lib/ziwei/analysis/modules/annual-axes/audit/__tests__/v08-holdout.test.ts",
     "test:annual-axes-v08-ui": "vitest run src/lib/ziwei/analysis/modules/annual-axes/__tests__/annual-axes-v08-ui-proof.test.tsx",
     "generate:annual-axes-v08-fixtures": "ANNUAL_AXES_V08_GENERATE_FIXTURES=1 vitest run src/lib/ziwei/analysis/modules/annual-axes/audit/__tests__/v08-generate-fixtures.write.test.ts",

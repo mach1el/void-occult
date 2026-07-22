@@ -1,0 +1,51 @@
+{
+  "proofId": "annual-axes-v08-scorestate-epsilon",
+  "corpus": {
+    "charts": 100,
+    "yearsPerChart": 12,
+    "chartYears": 1200,
+    "domainObservations": 7200,
+    "seed": 20260719
+  },
+  "epsilon": {
+    "rawZeroEpsilon": 1e-9,
+    "smallestMeaningfulRawContribution": 0.2
+  },
+  "before": {
+    "neutralScoreCount": 1027,
+    "noSignalNeutralCount": 522,
+    "balancedSignalNeutralCount": 398,
+    "scoredNeutralCount": 107,
+    "partialDataNeutralCount": 0
+  },
+  "after": {
+    "neutralScoreCount": 1027,
+    "noSignalNeutralCount": 522,
+    "balancedSignalNeutralCount": 505,
+    "scoredNeutralCount": 0,
+    "partialDataNeutralCount": 0
+  },
+  "numericEquivalence": {
+    "allScoresEqual": true,
+    "allBandsEqual": true,
+    "allRawScoresEqual": true,
+    "allAbsoluteScoresEqual": true,
+    "allContributionMassEqual": true,
+    "allGateMetricsEqual": true
+  },
+  "classificationDelta": {
+    "scoredToBalancedSignal": 107,
+    "otherTransitions": 0
+  },
+  "gates": {
+    "passed": 19,
+    "failed": 9
+  },
+  "versionDecision": {
+    "contractVersion": "0.8.0",
+    "engineVersion": "0.8.0",
+    "knowledgeVersion": "0.8.0",
+    "formulaVersion": "v0.8-annual-palace-weighted-score",
+    "rationale": "Label-classification bug fix only; repository policy does not require a patch bump for non-numeric scoreState semantics."
+  }
+}
