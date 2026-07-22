@@ -1,0 +1,53 @@
+{
+  "candidateId": "V09-TM-SOCIAL",
+  "candidateType": "experimental",
+  "engineVersion": "0.8.0",
+  "knowledgeVersion": "research-r2:V09-TM-SOCIAL",
+  "formulaVersion": "v0.8-annual-palace-weighted-score",
+  "description": "Lưu Thiên Mã positive activation bound to social only (engineering hypothesis magnitude 1 → staticPositive).",
+  "authorizedShapeIds": ["SHAPE-AAV09-THIEN-MA-MOVEMENT"],
+  "policyRecordIds": ["POL-AAV09-STAR-LUU-THIEN-MA"],
+  "claimIds": ["CLM-AAV09-019", "CLM-AAV09-007", "CLM-AAV09-015"],
+  "sourceIds": ["SRC-AA-V09-TAN-BIEN-1956", "SRC-AA-CORE-001"],
+  "changeCategories": ["star-registry", "star-domain", "point-policy"],
+  "includedStarNames": ["Lưu Thiên Mã"],
+  "excludedStarNames": [
+    "Lưu Đào Hoa",
+    "Lưu Hồng Loan",
+    "Lưu Hỷ Thần",
+    "Lưu Kiếp Sát",
+    "Lưu Long Đức",
+    "Lưu Nguyệt Đức",
+    "Lưu Phúc Đức",
+    "Lưu Thiên Đức",
+    "Lưu Thiên Hỷ",
+    "Lưu Văn Khúc",
+    "Lưu Văn Xương",
+    "Lưu Đại Hao",
+    "Lưu Tiểu Hao",
+    "Lưu Phục Binh",
+    "Lưu Tuần",
+    "Lưu Triệt"
+  ],
+  "domainBindings": ["social"],
+  "pointMagnitude": 1,
+  "polarityMode": "positive-activation",
+  "dignityMode": "none",
+  "assumptions": [
+    {
+      "statement": "Movement, external contact, and mobility may register on the social axis.",
+      "status": "engineering-hypothesis"
+    },
+    {
+      "statement": "Point magnitude 1 maps to V0.8 staticPositive; not classical doctrine.",
+      "status": "engineering-hypothesis"
+    }
+  ],
+  "expectedEffects": [
+    "Increase social-axis annual variance when Lưu Thiên Mã occupies social-mapped palaces"
+  ],
+  "knownRisks": [
+    "Social binding may be weaker than career for movement doctrine",
+    "Limited global spread impact"
+  ]
+}

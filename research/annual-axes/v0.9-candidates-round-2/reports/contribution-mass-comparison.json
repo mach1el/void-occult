@@ -1,0 +1,54 @@
+{
+  "candidates": {
+    "CONTROL-V08": {
+      "massRatioPositiveToNegative": 0.9496650748373383,
+      "matchCountNegative": 8650,
+      "matchCountPositive": 9716,
+      "matchCountRatioPositiveToNegative": 1.1232369942196532,
+      "negativeRawMass": 15649,
+      "negativeWeightedMass": 6240.199999999783,
+      "positiveRawMass": 15057,
+      "positiveWeightedMass": 5926.099999999753
+    },
+    "V09-TM-CAREER": {
+      "massRatioPositiveToNegative": 0.9681580718566649,
+      "matchCountNegative": 8650,
+      "matchCountPositive": 10031,
+      "matchCountRatioPositiveToNegative": 1.1596531791907514,
+      "negativeRawMass": 15649,
+      "negativeWeightedMass": 6240.199999999783,
+      "positiveRawMass": 15372,
+      "positiveWeightedMass": 6041.499999999751
+    },
+    "V09-TM-CAREER-SOCIAL": {
+      "massRatioPositiveToNegative": 0.9847601038428189,
+      "matchCountNegative": 8650,
+      "matchCountPositive": 10236,
+      "matchCountRatioPositiveToNegative": 1.1833526011560693,
+      "negativeRawMass": 15649,
+      "negativeWeightedMass": 6240.199999999783,
+      "positiveRawMass": 15577,
+      "positiveWeightedMass": 6145.099999999745
+    },
+    "V09-TM-PALACE-CONTEXT": {
+      "massRatioPositiveToNegative": 0.9847601038428189,
+      "matchCountNegative": 8650,
+      "matchCountPositive": 10236,
+      "matchCountRatioPositiveToNegative": 1.1833526011560693,
+      "negativeRawMass": 15649,
+      "negativeWeightedMass": 6240.199999999783,
+      "positiveRawMass": 15577,
+      "positiveWeightedMass": 6145.099999999745
+    },
+    "V09-TM-SOCIAL": {
+      "massRatioPositiveToNegative": 0.9662671068234936,
+      "matchCountNegative": 8650,
+      "matchCountPositive": 9921,
+      "matchCountRatioPositiveToNegative": 1.146936416184971,
+      "negativeRawMass": 15649,
+      "negativeWeightedMass": 6240.199999999783,
+      "positiveRawMass": 15262,
+      "positiveWeightedMass": 6029.699999999755
+    }
+  }
+}

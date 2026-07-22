@@ -1,0 +1,84 @@
+{
+  "candidates": {
+    "CONTROL-V08": {
+      "ruleCount": 70,
+      "thienMa": {
+        "contributionRate": 0,
+        "matchCount": 0,
+        "perDomain": {
+          "career": 0,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 0,
+          "wealth": 0
+        },
+        "zeroEffectRate": 1
+      }
+    },
+    "V09-TM-CAREER": {
+      "ruleCount": 70,
+      "thienMa": {
+        "contributionRate": 0.2625,
+        "matchCount": 315,
+        "perDomain": {
+          "career": 315,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 0,
+          "wealth": 0
+        },
+        "zeroEffectRate": 0
+      }
+    },
+    "V09-TM-CAREER-SOCIAL": {
+      "ruleCount": 70,
+      "thienMa": {
+        "contributionRate": 0.43333333333333335,
+        "matchCount": 520,
+        "perDomain": {
+          "career": 315,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 205,
+          "wealth": 0
+        },
+        "zeroEffectRate": 0
+      }
+    },
+    "V09-TM-PALACE-CONTEXT": {
+      "ruleCount": 70,
+      "thienMa": {
+        "contributionRate": 0.43333333333333335,
+        "matchCount": 520,
+        "perDomain": {
+          "career": 315,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 205,
+          "wealth": 0
+        },
+        "zeroEffectRate": 0
+      }
+    },
+    "V09-TM-SOCIAL": {
+      "ruleCount": 70,
+      "thienMa": {
+        "contributionRate": 0.17083333333333334,
+        "matchCount": 205,
+        "perDomain": {
+          "career": 0,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 205,
+          "wealth": 0
+        },
+        "zeroEffectRate": 0
+      }
+    }
+  }
+}

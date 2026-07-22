@@ -19,6 +19,8 @@ on:
       - "research/annual-axes/distribution/v0.8/**"
       - "research/annual-axes/v0.9-foundation/**"
       - "research/annual-axes/v0.9-candidates/**"
+      - "research/annual-axes/v0.9-candidates-round-2/**"
+      - "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/**"
   push:
     branches: [master]
     paths:
@@ -33,6 +35,8 @@ on:
       - "research/annual-axes/distribution/v0.8/**"
       - "research/annual-axes/v0.9-foundation/**"
       - "research/annual-axes/v0.9-candidates/**"
+      - "research/annual-axes/v0.9-candidates-round-2/**"
+      - "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/**"
   workflow_dispatch:
 
 jobs:

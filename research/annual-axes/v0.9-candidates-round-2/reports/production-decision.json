@@ -1,0 +1,79 @@
+{
+  "controlVersion": {
+    "engineVersion": "0.8.0",
+    "formulaVersion": "v0.8-annual-palace-weighted-score"
+  },
+  "decision": "KEEP_V0_8_PRODUCTION",
+  "evidence": {
+    "candidateIds": [
+      "CONTROL-V08",
+      "V09-TM-CAREER",
+      "V09-TM-CAREER-SOCIAL",
+      "V09-TM-PALACE-CONTEXT",
+      "V09-TM-SOCIAL"
+    ],
+    "claimIds": [
+      "CLM-AAV09-019",
+      "CLM-AAV09-007",
+      "CLM-AAV09-015"
+    ],
+    "failedGateIds": [
+      "global:atLeastOneAtOrAbove60Rate",
+      "global:atLeastOneAtOrBelow40Rate",
+      "global:atLeastTwoOutside42To58Rate",
+      "global:meanIntraYearAxisStandardDeviation",
+      "global:medianIntraYearAxisRange",
+      "global:oneLowAndOneHighRate",
+      "global:p10IntraYearRange",
+      "global:p25IntraYearRange"
+    ],
+    "passedGateIds": [
+      "career:medianAdjacentYearAbsoluteDelta",
+      "career:medianPerDomainTwelveYearRange",
+      "family:medianAdjacentYearAbsoluteDelta",
+      "family:medianPerDomainTwelveYearRange",
+      "global:allSixAbove50Rate",
+      "global:allSixInside45To65Rate",
+      "global:boundaryScoreRate",
+      "global:exactDuplicateVectorRate",
+      "global:fiveOrMoreAbove50Rate",
+      "global:maximumAbsoluteInterAxisCorrelation",
+      "global:nearDuplicateVectorRate",
+      "global:unavailableRate",
+      "health:medianAdjacentYearAbsoluteDelta",
+      "health:medianPerDomainTwelveYearRange",
+      "romance:medianAdjacentYearAbsoluteDelta",
+      "romance:medianPerDomainTwelveYearRange",
+      "social:medianAdjacentYearAbsoluteDelta",
+      "social:medianPerDomainTwelveYearRange",
+      "wealth:medianAdjacentYearAbsoluteDelta",
+      "wealth:medianPerDomainTwelveYearRange"
+    ],
+    "policyRecordIds": [
+      "POL-AAV09-STAR-LUU-THIEN-MA"
+    ],
+    "sourceIds": [
+      "SRC-AA-V09-TAN-BIEN-1956",
+      "SRC-AA-CORE-001"
+    ]
+  },
+  "foundation": {
+    "readiness": "READY_FOR_V0_9_CANDIDATE",
+    "shapeIds": [
+      "SHAPE-AAV09-THIEN-MA-MOVEMENT"
+    ]
+  },
+  "improvements": [],
+  "nextTask": "Close Round-2 candidate evaluation and retain V0.8 production",
+  "regressions": [],
+  "residualRisks": [
+    "doctrinal: Thiên Mã numeric magnitude remains engineering-hypothesis",
+    "doctrinal: other 11 emitted annual stars remain interpretive-only",
+    "engineering: absolute 28/28 hard-gate bar is stringent relative to V0.8 baseline failures",
+    "distribution: V0.8 control itself fails multiple spread gates",
+    "holdout: experimental absolute-pass requirement not met by Thiên Mã-only increment",
+    "product: no production routing change in this PR",
+    "technical: Finding 6 scoreState epsilon remains a separate engineering follow-up"
+  ],
+  "selectedCandidateId": null
+}

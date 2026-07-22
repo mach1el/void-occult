@@ -1,0 +1,53 @@
+{
+  "candidateId": "V09-TM-PALACE-CONTEXT",
+  "candidateType": "experimental",
+  "engineVersion": "0.8.0",
+  "knowledgeVersion": "research-r2:V09-TM-PALACE-CONTEXT",
+  "formulaVersion": "v0.8-annual-palace-weighted-score",
+  "description": "Lưu Thiên Mã contributes to career and social only via existing domain-palace mapping (palace-context activation). Polarity mode contextual-activation; magnitude 1.",
+  "authorizedShapeIds": ["SHAPE-AAV09-THIEN-MA-MOVEMENT"],
+  "policyRecordIds": ["POL-AAV09-STAR-LUU-THIEN-MA"],
+  "claimIds": ["CLM-AAV09-019", "CLM-AAV09-007", "CLM-AAV09-015"],
+  "sourceIds": ["SRC-AA-V09-TAN-BIEN-1956", "SRC-AA-CORE-001"],
+  "changeCategories": ["star-registry", "star-domain", "point-policy", "palace-context"],
+  "includedStarNames": ["Lưu Thiên Mã"],
+  "excludedStarNames": [
+    "Lưu Đào Hoa",
+    "Lưu Hồng Loan",
+    "Lưu Hỷ Thần",
+    "Lưu Kiếp Sát",
+    "Lưu Long Đức",
+    "Lưu Nguyệt Đức",
+    "Lưu Phúc Đức",
+    "Lưu Thiên Đức",
+    "Lưu Thiên Hỷ",
+    "Lưu Văn Khúc",
+    "Lưu Văn Xương",
+    "Lưu Đại Hao",
+    "Lưu Tiểu Hao",
+    "Lưu Phục Binh",
+    "Lưu Tuần",
+    "Lưu Triệt"
+  ],
+  "domainBindings": ["career", "social"],
+  "pointMagnitude": 1,
+  "polarityMode": "contextual-activation",
+  "dignityMode": "none",
+  "assumptions": [
+    {
+      "statement": "Palace-context activation means the star contributes only when physically located in a career/social mapped palace (existing V0.8 matcher behavior).",
+      "status": "engineering-hypothesis"
+    },
+    {
+      "statement": "Contextual-activation labels movement prominence without inventing a separate negative polarity engine.",
+      "status": "engineering-hypothesis"
+    }
+  ],
+  "expectedEffects": [
+    "Same mechanical binding as career+social with explicit palace-context labeling"
+  ],
+  "knownRisks": [
+    "Near-duplicate of V09-TM-CAREER-SOCIAL mechanically",
+    "May not differentiate enough for selection"
+  ]
+}

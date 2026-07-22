@@ -1,0 +1,477 @@
+{
+  "full": [
+    {
+      "candidateId": "CONTROL-V08",
+      "degradedVsControl": [],
+      "failedGateCount": 9,
+      "failedGateIds": [
+        "global:atLeastOneAtOrAbove60Rate",
+        "global:atLeastOneAtOrBelow40Rate",
+        "global:atLeastTwoOutside42To58Rate",
+        "global:meanIntraYearAxisStandardDeviation",
+        "global:medianIntraYearAxisRange",
+        "global:nearDuplicateVectorRate",
+        "global:oneLowAndOneHighRate",
+        "global:p10IntraYearRange",
+        "global:p25IntraYearRange"
+      ],
+      "improvedVsControl": [],
+      "massRatio": 0.9496650748373383,
+      "meanIntraYearSd": 5.901296999446484,
+      "medianIntraYearRange": 15,
+      "noSignalRate": 0.0725,
+      "passedGateCount": 19,
+      "passedMandatoryAbsolute": false,
+      "thienMa": {
+        "contributionRate": 0,
+        "matchCount": 0,
+        "perDomain": {
+          "career": 0,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 0,
+          "wealth": 0
+        },
+        "zeroEffectRate": 1
+      }
+    },
+    {
+      "candidateId": "V09-TM-CAREER",
+      "degradedVsControl": [],
+      "failedGateCount": 9,
+      "failedGateIds": [
+        "global:atLeastOneAtOrAbove60Rate",
+        "global:atLeastOneAtOrBelow40Rate",
+        "global:atLeastTwoOutside42To58Rate",
+        "global:meanIntraYearAxisStandardDeviation",
+        "global:medianIntraYearAxisRange",
+        "global:nearDuplicateVectorRate",
+        "global:oneLowAndOneHighRate",
+        "global:p10IntraYearRange",
+        "global:p25IntraYearRange"
+      ],
+      "improvedVsControl": [],
+      "massRatio": 0.9681580718566649,
+      "meanIntraYearSd": 5.906764675492031,
+      "medianIntraYearRange": 15,
+      "noSignalRate": 0.06875,
+      "passedGateCount": 19,
+      "passedMandatoryAbsolute": false,
+      "thienMa": {
+        "contributionRate": 0.2625,
+        "matchCount": 315,
+        "perDomain": {
+          "career": 315,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 0,
+          "wealth": 0
+        },
+        "zeroEffectRate": 0
+      }
+    },
+    {
+      "candidateId": "V09-TM-CAREER-SOCIAL",
+      "degradedVsControl": [
+        "global:allSixInside45To65Rate"
+      ],
+      "failedGateCount": 10,
+      "failedGateIds": [
+        "global:allSixInside45To65Rate",
+        "global:atLeastOneAtOrAbove60Rate",
+        "global:atLeastOneAtOrBelow40Rate",
+        "global:atLeastTwoOutside42To58Rate",
+        "global:meanIntraYearAxisStandardDeviation",
+        "global:medianIntraYearAxisRange",
+        "global:nearDuplicateVectorRate",
+        "global:oneLowAndOneHighRate",
+        "global:p10IntraYearRange",
+        "global:p25IntraYearRange"
+      ],
+      "improvedVsControl": [],
+      "massRatio": 0.9847601038428189,
+      "meanIntraYearSd": 5.914704427070972,
+      "medianIntraYearRange": 15,
+      "noSignalRate": 0.06458333333333334,
+      "passedGateCount": 18,
+      "passedMandatoryAbsolute": false,
+      "thienMa": {
+        "contributionRate": 0.43333333333333335,
+        "matchCount": 520,
+        "perDomain": {
+          "career": 315,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 205,
+          "wealth": 0
+        },
+        "zeroEffectRate": 0
+      }
+    },
+    {
+      "candidateId": "V09-TM-PALACE-CONTEXT",
+      "degradedVsControl": [
+        "global:allSixInside45To65Rate"
+      ],
+      "failedGateCount": 10,
+      "failedGateIds": [
+        "global:allSixInside45To65Rate",
+        "global:atLeastOneAtOrAbove60Rate",
+        "global:atLeastOneAtOrBelow40Rate",
+        "global:atLeastTwoOutside42To58Rate",
+        "global:meanIntraYearAxisStandardDeviation",
+        "global:medianIntraYearAxisRange",
+        "global:nearDuplicateVectorRate",
+        "global:oneLowAndOneHighRate",
+        "global:p10IntraYearRange",
+        "global:p25IntraYearRange"
+      ],
+      "improvedVsControl": [],
+      "massRatio": 0.9847601038428189,
+      "meanIntraYearSd": 5.914704427070972,
+      "medianIntraYearRange": 15,
+      "noSignalRate": 0.06458333333333334,
+      "passedGateCount": 18,
+      "passedMandatoryAbsolute": false,
+      "thienMa": {
+        "contributionRate": 0.43333333333333335,
+        "matchCount": 520,
+        "perDomain": {
+          "career": 315,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 205,
+          "wealth": 0
+        },
+        "zeroEffectRate": 0
+      }
+    },
+    {
+      "candidateId": "V09-TM-SOCIAL",
+      "degradedVsControl": [],
+      "failedGateCount": 9,
+      "failedGateIds": [
+        "global:atLeastOneAtOrAbove60Rate",
+        "global:atLeastOneAtOrBelow40Rate",
+        "global:atLeastTwoOutside42To58Rate",
+        "global:meanIntraYearAxisStandardDeviation",
+        "global:medianIntraYearAxisRange",
+        "global:nearDuplicateVectorRate",
+        "global:oneLowAndOneHighRate",
+        "global:p10IntraYearRange",
+        "global:p25IntraYearRange"
+      ],
+      "improvedVsControl": [],
+      "massRatio": 0.9662671068234936,
+      "meanIntraYearSd": 5.910226673296362,
+      "medianIntraYearRange": 15.200000000000003,
+      "noSignalRate": 0.06833333333333333,
+      "passedGateCount": 19,
+      "passedMandatoryAbsolute": false,
+      "thienMa": {
+        "contributionRate": 0.17083333333333334,
+        "matchCount": 205,
+        "perDomain": {
+          "career": 0,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 205,
+          "wealth": 0
+        },
+        "zeroEffectRate": 0
+      }
+    }
+  ],
+  "holdout": [
+    {
+      "candidateId": "CONTROL-V08",
+      "degradedVsControl": [],
+      "failedGateCount": 8,
+      "failedGateIds": [
+        "global:atLeastOneAtOrAbove60Rate",
+        "global:atLeastOneAtOrBelow40Rate",
+        "global:atLeastTwoOutside42To58Rate",
+        "global:meanIntraYearAxisStandardDeviation",
+        "global:medianIntraYearAxisRange",
+        "global:oneLowAndOneHighRate",
+        "global:p10IntraYearRange",
+        "global:p25IntraYearRange"
+      ],
+      "improvedVsControl": [],
+      "massRatio": 0.9639947542026022,
+      "meanIntraYearSd": 5.831492562205922,
+      "medianIntraYearRange": 15,
+      "noSignalRate": 0.06458333333333334,
+      "passedGateCount": 20,
+      "passedMandatoryAbsolute": false,
+      "thienMa": {
+        "contributionRate": 0,
+        "matchCount": 0,
+        "perDomain": {
+          "career": 0,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 0,
+          "wealth": 0
+        },
+        "zeroEffectRate": 1
+      }
+    },
+    {
+      "candidateId": "V09-TM-CAREER",
+      "degradedVsControl": [],
+      "failedGateCount": 8,
+      "failedGateIds": [
+        "global:atLeastOneAtOrAbove60Rate",
+        "global:atLeastOneAtOrBelow40Rate",
+        "global:atLeastTwoOutside42To58Rate",
+        "global:meanIntraYearAxisStandardDeviation",
+        "global:medianIntraYearAxisRange",
+        "global:oneLowAndOneHighRate",
+        "global:p10IntraYearRange",
+        "global:p25IntraYearRange"
+      ],
+      "improvedVsControl": [],
+      "massRatio": 0.9816397090966935,
+      "meanIntraYearSd": 5.836074904478953,
+      "medianIntraYearRange": 15,
+      "noSignalRate": 0.06041666666666667,
+      "passedGateCount": 20,
+      "passedMandatoryAbsolute": false,
+      "thienMa": {
+        "contributionRate": 0.2625,
+        "matchCount": 63,
+        "perDomain": {
+          "career": 63,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 0,
+          "wealth": 0
+        },
+        "zeroEffectRate": 0
+      }
+    },
+    {
+      "candidateId": "V09-TM-CAREER-SOCIAL",
+      "degradedVsControl": [],
+      "failedGateCount": 8,
+      "failedGateIds": [
+        "global:atLeastOneAtOrAbove60Rate",
+        "global:atLeastOneAtOrBelow40Rate",
+        "global:atLeastTwoOutside42To58Rate",
+        "global:meanIntraYearAxisStandardDeviation",
+        "global:medianIntraYearAxisRange",
+        "global:oneLowAndOneHighRate",
+        "global:p10IntraYearRange",
+        "global:p25IntraYearRange"
+      ],
+      "improvedVsControl": [],
+      "massRatio": 1.0008742995668283,
+      "meanIntraYearSd": 5.838095806730233,
+      "medianIntraYearRange": 15,
+      "noSignalRate": 0.058333333333333334,
+      "passedGateCount": 20,
+      "passedMandatoryAbsolute": false,
+      "thienMa": {
+        "contributionRate": 0.4666666666666667,
+        "matchCount": 112,
+        "perDomain": {
+          "career": 63,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 49,
+          "wealth": 0
+        },
+        "zeroEffectRate": 0
+      }
+    },
+    {
+      "candidateId": "V09-TM-PALACE-CONTEXT",
+      "degradedVsControl": [],
+      "failedGateCount": 8,
+      "failedGateIds": [
+        "global:atLeastOneAtOrAbove60Rate",
+        "global:atLeastOneAtOrBelow40Rate",
+        "global:atLeastTwoOutside42To58Rate",
+        "global:meanIntraYearAxisStandardDeviation",
+        "global:medianIntraYearAxisRange",
+        "global:oneLowAndOneHighRate",
+        "global:p10IntraYearRange",
+        "global:p25IntraYearRange"
+      ],
+      "improvedVsControl": [],
+      "massRatio": 1.0008742995668283,
+      "meanIntraYearSd": 5.838095806730233,
+      "medianIntraYearRange": 15,
+      "noSignalRate": 0.058333333333333334,
+      "passedGateCount": 20,
+      "passedMandatoryAbsolute": false,
+      "thienMa": {
+        "contributionRate": 0.4666666666666667,
+        "matchCount": 112,
+        "perDomain": {
+          "career": 63,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 49,
+          "wealth": 0
+        },
+        "zeroEffectRate": 0
+      }
+    },
+    {
+      "candidateId": "V09-TM-SOCIAL",
+      "degradedVsControl": [],
+      "failedGateCount": 8,
+      "failedGateIds": [
+        "global:atLeastOneAtOrAbove60Rate",
+        "global:atLeastOneAtOrBelow40Rate",
+        "global:atLeastTwoOutside42To58Rate",
+        "global:meanIntraYearAxisStandardDeviation",
+        "global:medianIntraYearAxisRange",
+        "global:oneLowAndOneHighRate",
+        "global:p10IntraYearRange",
+        "global:p25IntraYearRange"
+      ],
+      "improvedVsControl": [],
+      "massRatio": 0.9832293446727376,
+      "meanIntraYearSd": 5.834794249100924,
+      "medianIntraYearRange": 15,
+      "noSignalRate": 0.0625,
+      "passedGateCount": 20,
+      "passedMandatoryAbsolute": false,
+      "thienMa": {
+        "contributionRate": 0.20416666666666666,
+        "matchCount": 49,
+        "perDomain": {
+          "career": 0,
+          "family": 0,
+          "health": 0,
+          "romance": 0,
+          "social": 49,
+          "wealth": 0
+        },
+        "zeroEffectRate": 0
+      }
+    }
+  ],
+  "selection": {
+    "candidateResults": [
+      {
+        "blockingReasons": [],
+        "candidateId": "CONTROL-V08",
+        "failedGateIds": [
+          "global:atLeastOneAtOrAbove60Rate",
+          "global:atLeastOneAtOrBelow40Rate",
+          "global:atLeastTwoOutside42To58Rate",
+          "global:meanIntraYearAxisStandardDeviation",
+          "global:medianIntraYearAxisRange",
+          "global:oneLowAndOneHighRate",
+          "global:p10IntraYearRange",
+          "global:p25IntraYearRange"
+        ],
+        "improvements": [],
+        "passedMandatoryGates": false,
+        "regressions": [],
+        "selectable": false
+      },
+      {
+        "blockingReasons": [
+          "Failed absolute hard-gate pass (28/28 required for selection)."
+        ],
+        "candidateId": "V09-TM-CAREER",
+        "failedGateIds": [
+          "global:atLeastOneAtOrAbove60Rate",
+          "global:atLeastOneAtOrBelow40Rate",
+          "global:atLeastTwoOutside42To58Rate",
+          "global:meanIntraYearAxisStandardDeviation",
+          "global:medianIntraYearAxisRange",
+          "global:oneLowAndOneHighRate",
+          "global:p10IntraYearRange",
+          "global:p25IntraYearRange"
+        ],
+        "improvements": [],
+        "passedMandatoryGates": false,
+        "regressions": [],
+        "selectable": false
+      },
+      {
+        "blockingReasons": [
+          "Failed absolute hard-gate pass (28/28 required for selection)."
+        ],
+        "candidateId": "V09-TM-CAREER-SOCIAL",
+        "failedGateIds": [
+          "global:atLeastOneAtOrAbove60Rate",
+          "global:atLeastOneAtOrBelow40Rate",
+          "global:atLeastTwoOutside42To58Rate",
+          "global:meanIntraYearAxisStandardDeviation",
+          "global:medianIntraYearAxisRange",
+          "global:oneLowAndOneHighRate",
+          "global:p10IntraYearRange",
+          "global:p25IntraYearRange"
+        ],
+        "improvements": [],
+        "passedMandatoryGates": false,
+        "regressions": [],
+        "selectable": false
+      },
+      {
+        "blockingReasons": [
+          "Failed absolute hard-gate pass (28/28 required for selection)."
+        ],
+        "candidateId": "V09-TM-PALACE-CONTEXT",
+        "failedGateIds": [
+          "global:atLeastOneAtOrAbove60Rate",
+          "global:atLeastOneAtOrBelow40Rate",
+          "global:atLeastTwoOutside42To58Rate",
+          "global:meanIntraYearAxisStandardDeviation",
+          "global:medianIntraYearAxisRange",
+          "global:oneLowAndOneHighRate",
+          "global:p10IntraYearRange",
+          "global:p25IntraYearRange"
+        ],
+        "improvements": [],
+        "passedMandatoryGates": false,
+        "regressions": [],
+        "selectable": false
+      },
+      {
+        "blockingReasons": [
+          "Failed absolute hard-gate pass (28/28 required for selection)."
+        ],
+        "candidateId": "V09-TM-SOCIAL",
+        "failedGateIds": [
+          "global:atLeastOneAtOrAbove60Rate",
+          "global:atLeastOneAtOrBelow40Rate",
+          "global:atLeastTwoOutside42To58Rate",
+          "global:meanIntraYearAxisStandardDeviation",
+          "global:medianIntraYearAxisRange",
+          "global:oneLowAndOneHighRate",
+          "global:p10IntraYearRange",
+          "global:p25IntraYearRange"
+        ],
+        "improvements": [],
+        "passedMandatoryGates": false,
+        "regressions": [],
+        "selectable": false
+      }
+    ],
+    "controlCandidateId": "CONTROL-V08",
+    "rationale": [
+      "Control failed gates: 8; absolute 28/28 required for experimental selection.",
+      "Selectable experimental candidates: 0.",
+      "No experimental candidate passed all mandatory gates; selectedCandidateId remains null."
+    ],
+    "selectedCandidateId": null,
+    "selectionStatus": "no-candidate-approved"
+  }
+}

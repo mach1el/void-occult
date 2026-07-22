@@ -1,0 +1,48 @@
+{
+  "candidateId": "CONTROL-V08",
+  "candidateType": "control",
+  "engineVersion": "0.8.0",
+  "knowledgeVersion": "0.8.0",
+  "formulaVersion": "v0.8-annual-palace-weighted-score",
+  "description": "Exact reproduction of production Nam Phái Annual Axes V0.8. No policy changes.",
+  "authorizedShapeIds": [],
+  "policyRecordIds": [],
+  "claimIds": [],
+  "sourceIds": [],
+  "changeCategories": [],
+  "includedStarNames": [],
+  "excludedStarNames": [
+    "Lưu Đào Hoa",
+    "Lưu Hồng Loan",
+    "Lưu Hỷ Thần",
+    "Lưu Kiếp Sát",
+    "Lưu Long Đức",
+    "Lưu Nguyệt Đức",
+    "Lưu Phúc Đức",
+    "Lưu Thiên Đức",
+    "Lưu Thiên Hỷ",
+    "Lưu Văn Khúc",
+    "Lưu Văn Xương",
+    "Lưu Đại Hao",
+    "Lưu Tiểu Hao",
+    "Lưu Phục Binh",
+    "Lưu Tuần",
+    "Lưu Triệt"
+  ],
+  "domainBindings": [],
+  "pointMagnitude": 0,
+  "polarityMode": "positive-activation",
+  "dignityMode": "none",
+  "assumptions": [
+    {
+      "statement": "Production V0.8 remains the frozen control for all Round-2 comparisons.",
+      "status": "derived"
+    }
+  ],
+  "expectedEffects": [
+    "Byte-identical scores vs production analyzeAnnualAxesNamPhaiV08"
+  ],
+  "knownRisks": [
+    "If control diverges from production, experimental evaluation must stop"
+  ]
+}

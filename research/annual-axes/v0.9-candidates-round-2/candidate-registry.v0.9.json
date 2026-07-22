@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "0.9.0-r2",
+  "registryId": "annual-axes-v0.9-candidates-round-2",
+  "candidates": [
+    { "candidateId": "CONTROL-V08", "path": "candidates/control-v08.json" },
+    { "candidateId": "V09-TM-CAREER", "path": "candidates/thien-ma-career.json" },
+    { "candidateId": "V09-TM-CAREER-SOCIAL", "path": "candidates/thien-ma-career-social.json" },
+    { "candidateId": "V09-TM-PALACE-CONTEXT", "path": "candidates/thien-ma-palace-context.json" },
+    { "candidateId": "V09-TM-SOCIAL", "path": "candidates/thien-ma-social.json" }
+  ]
+}
