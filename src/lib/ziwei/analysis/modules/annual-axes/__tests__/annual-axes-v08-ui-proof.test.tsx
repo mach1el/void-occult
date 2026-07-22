@@ -85,9 +85,10 @@ describe("Annual Axes V0.8 UI proof (read-only)", () => {
     expect(container.textContent ?? "").not.toContain("Tín hiệu có trọng số");
     expect(container.textContent ?? "").not.toContain("Tín hiệu sau Thái Tuế");
     expect(container.textContent ?? "").not.toContain("Ánh xạ cung lưu niên");
+    expect(container.textContent ?? "").not.toContain("Độ phủ");
+    expect(container.textContent ?? "").not.toContain("Lưu Thái Tuế: Không");
     if (wealth.engine === "v0.8") {
       expect(container.textContent ?? "").toContain("Cung trọng tâm");
-      expect(container.textContent ?? "").toContain("Cung phối hợp");
       if (wealth.scoreTrace.scoreState === "no-signal") {
         expect(container.textContent ?? "").not.toContain("Cân bằng");
       }

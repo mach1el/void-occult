@@ -106,7 +106,7 @@ describe("ChartPage profile form", () => {
       /\.mobile-chart-switch button\.is-active\s*\{[^}]*background:\s*linear-gradient\(145deg,\s*#fff3c4/,
     );
     expect(compactChartCss).toMatch(
-      /@media\s*\(\s*max-width:\s*960px\s*\)[\s\S]*?\.compact-phi-flow\s*\{[^}]*font-family:\s*var\(--font-stars-minor,\s*"Be Vietnam Pro"[^}]*font-size:\s*14px/,
+      /@media\s*\(\s*max-width:\s*960px\s*\)[\s\S]*?\.compact-phi-flow\s*\{[^}]*font-family:\s*var\(--font-stars-minor,\s*"Be Vietnam Pro"[^}]*font-size:\s*10px/,
     );
     expect(mobileChartCss).toMatch(
       /\.mobile-phi-section span\s*\{[^}]*font-family:\s*"Be Vietnam Pro"[^}]*font-size:\s*0\.84rem/,

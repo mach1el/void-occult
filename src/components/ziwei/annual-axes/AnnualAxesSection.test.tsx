@@ -39,14 +39,14 @@ function firstAvailablePoint(container: HTMLElement) {
 }
 
 describe("AnnualAxesSection — Trung Châu available result", () => {
-  it("renders header, radar, and selection hint tooltip", () => {
+  it("renders header, radar, and selection hint", () => {
     const { container } = renderSection("trung-chau");
 
     expect(screen.getByText(/Sáu trục khí vận năm/)).toBeInTheDocument();
     expect(container.querySelector('[data-module="annual-axes"]')).toBeInTheDocument();
     expect(container.querySelectorAll('.annual-axes-radar__point')).toHaveLength(6);
-    expect(container.querySelector('.annual-axes-section__tooltip')?.textContent ?? "").toMatch(
-      /Di chuột hoặc chọn/,
+    expect(container.querySelector('.annual-axes-section__hint')?.textContent ?? "").toMatch(
+      /Chọn một trục/,
     );
     expect(container.querySelector('.annual-axes-section__disclaimer')).toBeNull();
     expect(container.querySelector('.annual-axes-section__focus')).toBeNull();

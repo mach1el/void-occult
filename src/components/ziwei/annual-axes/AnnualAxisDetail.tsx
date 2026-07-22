@@ -2,9 +2,15 @@ import type {
   AnnualAxisResult,
   AnnualAxisEvidence,
   AnnualAxisV08Evidence,
+  AnnualAxisPalaceContributionTraceV08,
 } from "@/lib/ziwei/analysis/modules/annual-axes";
 import { ANNUAL_AXIS_BAND_LABEL_VI, ANNUAL_AXIS_LABEL_VI } from "./labels";
 import type { AnnualAxisDomain } from "@/lib/ziwei/analysis";
+import {
+  formatPalaceStars,
+  isRelevantCooperatingPalace,
+  shouldShowCoverage,
+} from "./v08-display";
 
 const CATEGORY_LABEL_VI: Record<AnnualAxisEvidence["category"], string> = {
   star: "Sao",
@@ -33,21 +39,6 @@ function EvidenceLine({ e }: { e: AnnualAxisEvidence }) {
       {ROLE_LABEL_VI[e.frameRole]} · {LAYER_LABEL_VI[e.layer]}
     </li>
   );
-}
-
-function formatStarList(
-  facts: Array<{ starName: string; points: number; polarity: "positive" | "negative" }>,
-  polarity: "positive" | "negative",
-): string {
-  const matched = facts.filter((f) => f.polarity === polarity);
-  if (matched.length === 0) return "—";
-  return matched
-    .map((f) => {
-      const pts = f.points;
-      const signed = pts > 0 ? `+${pts}` : `${pts}`;
-      return `${f.starName} (${signed})`;
-    })
-    .join(", ");
 }
 
 function formatWeightedEvidence(items: AnnualAxisV08Evidence[] | undefined): string {
@@ -79,6 +70,42 @@ function v08ScoreStateLabel(
   }
 }
 
+function V08PalaceContribution({
+  palace,
+}: {
+  palace: AnnualAxisPalaceContributionTraceV08;
+}) {
+  const positiveStars = formatPalaceStars(palace.matchedFacts, "positive");
+  const negativeStars = formatPalaceStars(palace.matchedFacts, "negative");
+
+  return (
+    <li>
+      <strong>{palace.palaceName}</strong>
+      {palace.missingReason ? (
+        <>
+          <br />
+          Thiếu dữ liệu: {palace.missingReason}
+        </>
+      ) : (
+        <>
+          {positiveStars ? (
+            <>
+              <br />
+              Sao tốt: {positiveStars}
+            </>
+          ) : null}
+          {negativeStars ? (
+            <>
+              <br />
+              Sao xấu: {negativeStars}
+            </>
+          ) : null}
+        </>
+      )}
+    </li>
+  );
+}
+
 export interface AnnualAxisDetailProps {
   domain: AnnualAxisDomain;
   axis: AnnualAxisResult;
@@ -87,11 +114,26 @@ export interface AnnualAxisDetailProps {
 
 /**
  * Deterministic detail modal — no prediction prose.
- * V0.8 shows palace mapping, weighted evidence, coverage, and final score.
+ * V0.8 shows only palaces and stars that contribute to the score.
  */
 export function AnnualAxisDetail({ domain, axis, onClose }: AnnualAxisDetailProps) {
   const label = ANNUAL_AXIS_LABEL_VI[domain];
   const isV08 = axis.engine === "v0.8";
+
+  const relevantCooperating =
+    isV08 && axis.scoreTrace?.formulaVersion === "v0.8-annual-palace-weighted-score"
+      ? axis.scoreTrace.cooperating.filter(isRelevantCooperatingPalace)
+      : [];
+
+  const supportDrivers =
+    isV08 && axis.status !== "unavailable" ? formatWeightedEvidence(axis.topSupportDriversV08) : null;
+  const pressureDrivers =
+    isV08 && axis.status !== "unavailable"
+      ? formatWeightedEvidence(axis.topPressureDriversV08)
+      : null;
+  const showWeightedDrivers =
+    (supportDrivers !== null && supportDrivers !== "—") ||
+    (pressureDrivers !== null && pressureDrivers !== "—");
 
   return (
     <div className="annual-axis-detail" role="region" aria-label={`Chi tiết ${label}`}>
@@ -112,13 +154,9 @@ export function AnnualAxisDetail({ domain, axis, onClose }: AnnualAxisDetailProp
                 {(axis.reasonCodes ?? []).map((code) => (
                   <li key={code}>{code}</li>
                 ))}
-                {axis.coverage ? (
+                {shouldShowCoverage(axis.coverage) && axis.coverage ? (
                   <li>
-                    Độ phủ: {(axis.coverage.resolvedWeight * 100).toFixed(0)}% /{" "}
-                    {(axis.coverage.totalWeight * 100).toFixed(0)}%
-                    {axis.coverage.missingPalaces.length > 0
-                      ? ` · thiếu: ${axis.coverage.missingPalaces.join(", ")}`
-                      : ""}
+                    Thiếu: {axis.coverage.missingPalaces.join(", ")}
                   </li>
                 ) : null}
               </ul>
@@ -133,85 +171,45 @@ export function AnnualAxisDetail({ domain, axis, onClose }: AnnualAxisDetailProp
             </p>
           )}
 
-          <div className="annual-axis-detail__score-trace" aria-label="V0.8 palace mapping">
-            <h6>Cung trọng tâm — {(axis.scoreTrace.primary.configuredWeight * 100).toFixed(0)}%</h6>
-            <ul className="annual-axis-detail__list">
-              <li>
-                <strong>{axis.scoreTrace.primary.palaceName}</strong>
-                {axis.scoreTrace.primary.missingReason ? " · thiếu dữ liệu" : null}
-              </li>
-              {!axis.scoreTrace.primary.missingReason ? (
+          {axis.status !== "unavailable" ? (
+            <div className="annual-axis-detail__score-trace" aria-label="V0.8 palace mapping">
+              <h6>Cung trọng tâm</h6>
+              <ul className="annual-axis-detail__list">
+                <V08PalaceContribution palace={axis.scoreTrace.primary} />
+              </ul>
+
+              {relevantCooperating.length > 0 ? (
                 <>
-                  <li>
-                    Sao tốt: {formatStarList(axis.scoreTrace.primary.matchedFacts, "positive")}
-                  </li>
-                  <li>
-                    Sao xấu: {formatStarList(axis.scoreTrace.primary.matchedFacts, "negative")}
-                  </li>
-                  <li>Điểm cung: {axis.scoreTrace.primary.palaceRaw.toFixed(1)}</li>
+                  <h6>Cung phối hợp</h6>
+                  <ul className="annual-axis-detail__list">
+                    {relevantCooperating.map((c) => (
+                      <V08PalaceContribution key={`${c.role}-${c.palaceName}`} palace={c} />
+                    ))}
+                  </ul>
                 </>
-              ) : (
-                <li>{axis.scoreTrace.primary.missingReason}</li>
-              )}
-            </ul>
-
-            <h6>Cung phối hợp</h6>
-            <ul className="annual-axis-detail__list">
-              {axis.scoreTrace.cooperating.length === 0 ? (
-                <li>—</li>
-              ) : (
-                axis.scoreTrace.cooperating.map((c) => (
-                  <li key={`${c.role}-${c.palaceName}`}>
-                    <strong>{c.palaceName}</strong> ({(c.configuredWeight * 100).toFixed(0)}%)
-                    {c.missingReason ? (
-                      <>
-                        <br />
-                        Thiếu dữ liệu: {c.missingReason}
-                      </>
-                    ) : (
-                      <>
-                        <br />
-                        Sao tốt: {formatStarList(c.matchedFacts, "positive")}
-                        <br />
-                        Sao xấu: {formatStarList(c.matchedFacts, "negative")}
-                        <br />
-                        Điểm cung: {c.palaceRaw.toFixed(1)}
-                      </>
-                    )}
-                  </li>
-                ))
-              )}
-            </ul>
-
-            <h6>Đóng góp có trọng số</h6>
-            <ul className="annual-axis-detail__list">
-              <li>Hỗ trợ: {formatWeightedEvidence(axis.topSupportDriversV08)}</li>
-              <li>Áp lực: {formatWeightedEvidence(axis.topPressureDriversV08)}</li>
-            </ul>
-
-            <h6>Kết quả</h6>
-            <ul className="annual-axis-detail__list">
-              {axis.coverage ? (
-                <li>
-                  Độ phủ: {(axis.coverage.resolvedWeight * 100).toFixed(0)}% /{" "}
-                  {(axis.coverage.totalWeight * 100).toFixed(0)}%
-                  {axis.coverage.missingPalaces.length > 0
-                    ? ` · thiếu: ${axis.coverage.missingPalaces.join(", ")}`
-                    : ""}
-                </li>
               ) : null}
-              <li>
-                Lưu Thái Tuế nổi bật: {axis.scoreTrace.isThaiTueHighlighted ? "Có" : "Không"}
-                {axis.scoreTrace.isThaiTueHighlighted ? " (×1.25)" : ""}
-              </li>
-              <li>
-                Điểm:{" "}
-                <strong>
-                  {axis.status === "unavailable" ? "—" : axis.score.toFixed(1)}
-                </strong>
-              </li>
-            </ul>
-          </div>
+
+              {showWeightedDrivers ? (
+                <>
+                  <h6>Tín hiệu nổi bật</h6>
+                  <ul className="annual-axis-detail__list">
+                    {supportDrivers !== "—" ? <li>Hỗ trợ: {supportDrivers}</li> : null}
+                    {pressureDrivers !== "—" ? <li>Áp lực: {pressureDrivers}</li> : null}
+                  </ul>
+                </>
+              ) : null}
+
+              {axis.scoreTrace.isThaiTueHighlighted ? (
+                <p className="annual-axis-detail__note">Lưu Thái Tuế nổi bật (×1.25)</p>
+              ) : null}
+
+              {shouldShowCoverage(axis.coverage) && axis.coverage ? (
+                <p className="annual-axis-detail__note">
+                  Thiếu dữ liệu một phần: {axis.coverage.missingPalaces.join(", ")}
+                </p>
+              ) : null}
+            </div>
+          ) : null}
         </>
       ) : axis.engine === "v0.2" &&
         (axis.status === "available" || axis.status === "partial-data") ? (

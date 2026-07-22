@@ -24,7 +24,7 @@ function labelPlacement(index: number, total: number) {
   const angle = (Math.PI * 2 * index) / total - Math.PI / 2;
   const cos = Math.cos(angle);
   const sin = Math.sin(angle);
-  const radial = R + LABEL_GAP;
+  const radial = R + LABEL_GAP + (sin > 0.55 ? 8 : 0);
   let textAnchor: "start" | "middle" | "end" = "middle";
   let dx = 0;
   let dy = 0;
@@ -35,8 +35,8 @@ function labelPlacement(index: number, total: number) {
     textAnchor = "end";
     dx = -4;
   }
-  if (sin > 0.6) dy = 3;
-  else if (sin < -0.6) dy = -2;
+  if (sin > 0.55) dy = 10;
+  else if (sin < -0.55) dy = -4;
   return {
     x: CX + radial * cos,
     y: CY + radial * sin,
@@ -227,51 +227,52 @@ export function AnnualAxesRadar({
             ? `điểm ${axis.score}${axis.status === "partial-data" ? " · thiếu dữ liệu" : ""}`
             : "không đủ dữ liệu";
           return (
-            <g
-              key={domain}
-              className={`annual-axes-radar__point${isActive ? " is-active" : ""}`}
-              tabIndex={0}
-              role="button"
-              aria-pressed={selectedDomain === domain}
-              aria-label={`${axisLabel} — ${scoreLabel}`}
-              data-domain={domain}
-              data-status={axis.status}
-              data-radius={isPlottable ? "scored" : "gap"}
-              onMouseEnter={() => onHover(domain)}
-              onMouseLeave={() => onHover(null)}
-              onFocus={() => onHover(domain)}
-              onBlur={() => onHover(null)}
-              onClick={() => onSelect(domain)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  onSelect(domain);
-                }
-              }}
-            >
-              {/* invisible larger hit target for pointer/keyboard tap area */}
-              <circle cx={p.x} cy={p.y} r={22} fill="transparent" pointerEvents="all" />
-              {isPlottable ? (
-                <circle
-                  cx={p.x}
-                  cy={p.y}
-                  r={isActive ? 5 : 3.5}
-                  fill="currentColor"
-                  stroke={axis.status === "partial-data" ? "currentColor" : undefined}
-                  strokeDasharray={axis.status === "partial-data" ? "2 2" : undefined}
-                  data-plot="scored"
-                />
-              ) : (
-                <circle
-                  cx={p.x}
-                  cy={p.y}
-                  r={isActive ? 5 : 3.5}
-                  fill="none"
-                  stroke="currentColor"
-                  strokeDasharray="2 3"
-                  data-plot="unavailable"
-                />
-              )}
+            <g key={domain} className="annual-axes-radar__axis">
+              <g
+                className={`annual-axes-radar__point${isActive ? " is-active" : ""}`}
+                tabIndex={0}
+                role="button"
+                aria-pressed={selectedDomain === domain}
+                aria-label={`${axisLabel} — ${scoreLabel}`}
+                data-domain={domain}
+                data-status={axis.status}
+                data-radius={isPlottable ? "scored" : "gap"}
+                onMouseEnter={() => onHover(domain)}
+                onMouseLeave={() => onHover(null)}
+                onFocus={() => onHover(domain)}
+                onBlur={() => onHover(null)}
+                onClick={() => onSelect(domain)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onSelect(domain);
+                  }
+                }}
+              >
+                {/* invisible larger hit target for pointer/keyboard tap area */}
+                <circle cx={p.x} cy={p.y} r={22} fill="transparent" pointerEvents="all" />
+                {isPlottable ? (
+                  <circle
+                    cx={p.x}
+                    cy={p.y}
+                    r={isActive ? 5 : 3.5}
+                    fill="currentColor"
+                    stroke={axis.status === "partial-data" ? "currentColor" : undefined}
+                    strokeDasharray={axis.status === "partial-data" ? "2 2" : undefined}
+                    data-plot="scored"
+                  />
+                ) : (
+                  <circle
+                    cx={p.x}
+                    cy={p.y}
+                    r={isActive ? 5 : 3.5}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeDasharray="2 3"
+                    data-plot="unavailable"
+                  />
+                )}
+              </g>
               <text
                 className={`annual-axes-radar__label${isActive ? " is-active" : ""}`}
                 x={label.x}
@@ -280,6 +281,7 @@ export function AnnualAxesRadar({
                 dy={label.dy}
                 textAnchor={label.textAnchor}
                 dominantBaseline="middle"
+                pointerEvents="none"
               >
                 {axisLabel}
               </text>

@@ -42,36 +42,18 @@
 
 .annual-axes-section__body {
   display: grid;
-  gap: 1rem;
+  gap: 0.65rem;
   overflow: visible;
+  justify-items: center;
 }
 
-@media (min-width: 900px) {
-  .annual-axes-section__body {
-    grid-template-columns: minmax(240px, 320px) 1fr;
-    align-items: start;
-  }
-}
-
-.annual-axes-section__tooltip {
+.annual-axes-section__hint {
   margin: 0;
-  font-size: 0.84rem;
-  line-height: 1.45;
-  padding: 0.65rem 0.75rem;
-  border: 1px solid var(--line-soft, rgba(104, 88, 148, 0.38));
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 12px;
-}
-
-.annual-axes-section__tooltip-title {
-  font-family: var(--font-display, "Noto Serif Display", "Noto Serif", serif);
-  font-weight: 650;
-  color: var(--amber-soft, #f6e0a4);
-}
-
-.annual-axes-section__tooltip-summary {
-  margin: 0.35rem 0 0;
-  font-variant-numeric: tabular-nums;
+  max-width: 20rem;
+  text-align: center;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  opacity: 0.75;
 }
 
 .annual-axes-radar {
@@ -90,15 +72,29 @@
 
 .annual-axes-radar__point {
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
+.annual-axes-radar__point:focus,
 .annual-axes-radar__point:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
+  outline: none;
 }
 
-.annual-axes-radar__point.is-active circle:last-of-type {
+.annual-axes-radar__point.is-active circle[data-plot] {
+  stroke: currentColor;
   stroke-width: 2.5;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .annual-axes-radar__point:focus-visible circle[data-plot] {
+    stroke: unset;
+    stroke-width: unset;
+  }
+
+  .annual-axes-radar__point.is-active circle[data-plot] {
+    stroke: currentColor;
+    stroke-width: 2.5;
+  }
 }
 
 .annual-axes-radar__label {
@@ -155,6 +151,19 @@
   padding-left: 1.1rem;
   font-size: 0.84rem;
   line-height: 1.4;
+}
+
+.annual-axis-detail__list {
+  margin: 0 0 0.65rem;
+  padding-left: 1.1rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.annual-axis-detail__note {
+  margin: 0.35rem 0 0;
+  font-size: 0.82rem;
+  opacity: 0.85;
 }
 
 .annual-axis-detail__close {

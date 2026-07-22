@@ -65,12 +65,27 @@
 .compact-palace {
   cursor: pointer;
   outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.compact-palace:focus:not(:focus-visible) .compact-palace-bg {
+  fill: transparent;
+  stroke: var(--line);
+  stroke-width: 1.4;
 }
 
 .compact-palace:focus-visible .compact-palace-bg {
   fill: #211b3b;
   stroke: var(--amber-soft);
   stroke-width: 2.3;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .compact-palace:focus-visible .compact-palace-bg {
+    fill: transparent;
+    stroke: var(--line);
+    stroke-width: 1.4;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -522,12 +537,18 @@
     cursor: default;
   }
 
+  .compact-palace:focus-visible .compact-palace-bg {
+    fill: transparent;
+    stroke: var(--line);
+    stroke-width: 1.4;
+  }
+
   .compact-phi-flow {
     font-family: var(--font-stars-minor, "Be Vietnam Pro", system-ui, sans-serif);
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 0;
-    stroke-width: 1.5px;
+    stroke-width: 1.25px;
   }
 
   .compact-tam-hop {

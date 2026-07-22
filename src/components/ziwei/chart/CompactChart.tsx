@@ -65,7 +65,9 @@ const MOBILE_CELL_HEIGHT = 300;
 /** Khớp page shell tu-vi.css — stack layout. */
 const STACKED_LAYOUT_QUERY = "(max-width: 1200px)";
 
-function createGeometry(cellWidth: number, cellHeight: number): ChartGeometry {
+function createGeometry(cellWidth: number, cellHeight: number, compactPhi = false): ChartGeometry {
+  const palaceFooterY = cellHeight - 10;
+  const phiGap = compactPhi ? 20 : 14;
   return {
     cellWidth,
     cellHeight,
@@ -73,8 +75,8 @@ function createGeometry(cellWidth: number, cellHeight: number): ChartGeometry {
     height: cellHeight * 4,
     centerWidth: cellWidth * 2,
     centerHeight: cellHeight * 2,
-    palaceFooterY: cellHeight - 9,
-    palacePhiY: cellHeight - 22,
+    palaceFooterY,
+    palacePhiY: palaceFooterY - phiGap,
     positions: {
       Tỵ: { x: 0, y: 0 },
       Ngọ: { x: cellWidth, y: 0 },
@@ -92,8 +94,8 @@ function createGeometry(cellWidth: number, cellHeight: number): ChartGeometry {
   };
 }
 
-const DESKTOP_GEOMETRY = createGeometry(DESKTOP_CELL_WIDTH, DESKTOP_CELL_HEIGHT);
-const MOBILE_GEOMETRY = createGeometry(MOBILE_CELL_WIDTH, MOBILE_CELL_HEIGHT);
+const DESKTOP_GEOMETRY = createGeometry(DESKTOP_CELL_WIDTH, DESKTOP_CELL_HEIGHT, false);
+const MOBILE_GEOMETRY = createGeometry(MOBILE_CELL_WIDTH, MOBILE_CELL_HEIGHT, true);
 
 const ChartGeometryContext = createContext<ChartGeometry>(DESKTOP_GEOMETRY);
 
@@ -391,6 +393,8 @@ function Palace({
   const centerX = cellWidth / 2;
   const endX = cellWidth - 10;
   const maleficX = centerX + 10;
+  const phiSpacing = cellHeight > DESKTOP_CELL_HEIGHT ? 4 : 6;
+  const clipId = `compact-palace-clip-${palace.index}`;
 
   function keyDown(event: KeyboardEvent<SVGGElement>) {
     if (event.key === "Enter" || event.key === " ") {
@@ -421,6 +425,12 @@ function Palace({
         className="compact-palace-bg"
         pointerEvents="all"
       />
+      <defs>
+        <clipPath id={clipId}>
+          <rect width={cellWidth} height={cellHeight} />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#${clipId})`}>
       <text x="9" y="18" className="compact-palace-stem">
         {STEM_ABBREVIATIONS[palace.stem ?? ""] ?? palace.stem} {palace.branch}
       </text>
@@ -491,7 +501,7 @@ function Palace({
               <tspan
                 key={`${flow.mutagen}-${flow.starName}`}
                 className={`compact-phi-flow is-${flow.mutagen.toLowerCase()}`}
-                dx={index === 0 ? 0 : 8}
+                dx={index === 0 ? 0 : phiSpacing}
               >
                 {MUTAGEN_ABBREVIATIONS[flow.mutagen] ?? flow.mutagen}→{flow.self ? "Tự" : PALACE_ABBREVIATIONS[flow.target?.name ?? ""] ?? "?"}
               </tspan>
@@ -521,6 +531,7 @@ function Palace({
         </text>
       )}
 
+      </g>
 
       <rect
         width={cellWidth}

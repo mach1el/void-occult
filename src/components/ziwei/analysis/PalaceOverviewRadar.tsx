@@ -11,7 +11,6 @@ import {
 import {
   formatAxisContribution,
   formatContribution,
-  palaceDomainHint,
   renderExplanationKey,
 } from "./explanation-renderer";
 import "./palace-overview-radar.css";
@@ -83,7 +82,7 @@ function labelPlacement(index: number, total: number) {
   const angle = (Math.PI * 2 * index) / total - Math.PI / 2;
   const cos = Math.cos(angle);
   const sin = Math.sin(angle);
-  const radial = R + LABEL_GAP;
+  const radial = R + LABEL_GAP + (sin > 0.55 ? 8 : 0);
   let textAnchor: "start" | "middle" | "end" = "middle";
   let dx = 0;
   let dy = 0;
@@ -94,8 +93,8 @@ function labelPlacement(index: number, total: number) {
     textAnchor = "end";
     dx = -4;
   }
-  if (sin > 0.6) dy = 3;
-  else if (sin < -0.6) dy = -2;
+  if (sin > 0.55) dy = 10;
+  else if (sin < -0.55) dy = -4;
   return {
     x: CX + radial * cos,
     y: CY + radial * sin,
@@ -228,42 +227,43 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
               const label = labelPlacement(i, 12);
               const isActive = active?.palaceIndex === result.palaceIndex;
               return (
-                <g
-                  key={result.palaceIndex}
-                  ref={(el) => {
-                    if (el) pointRefs.current.set(result.palaceIndex, el);
-                    else pointRefs.current.delete(result.palaceIndex);
-                  }}
-                  className={`palace-overview-radar__point${isActive ? " is-active" : ""}`}
-                  tabIndex={0}
-                  role="button"
-                  aria-pressed={selectedPalaceIndex === result.palaceIndex}
-                  aria-label={`${result.palaceName} · ${result.palaceBranch}${menhThanSuffix(result)} — điểm ${result.score}, ${BAND_LABEL[result.band]}`}
-                  onMouseEnter={() => setHoveredPalaceIndex(result.palaceIndex)}
-                  onMouseLeave={() => setHoveredPalaceIndex(null)}
-                  onFocus={() => setHoveredPalaceIndex(result.palaceIndex)}
-                  onBlur={() => setHoveredPalaceIndex(null)}
-                  onClick={() => togglePalace(result.palaceIndex)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      togglePalace(result.palaceIndex);
-                    }
-                  }}
-                >
-                  <circle
-                    cx={p.x}
-                    cy={p.y}
-                    r={14}
-                    fill="transparent"
-                    pointerEvents="all"
-                  />
-                  <circle
-                    cx={p.x}
-                    cy={p.y}
-                    r={isActive ? 4.5 : 3.2}
-                    fill="currentColor"
-                  />
+                <g key={result.palaceIndex} className="palace-overview-radar__axis">
+                  <g
+                    ref={(el) => {
+                      if (el) pointRefs.current.set(result.palaceIndex, el);
+                      else pointRefs.current.delete(result.palaceIndex);
+                    }}
+                    className={`palace-overview-radar__point${isActive ? " is-active" : ""}`}
+                    tabIndex={0}
+                    role="button"
+                    aria-pressed={selectedPalaceIndex === result.palaceIndex}
+                    aria-label={`${result.palaceName} · ${result.palaceBranch}${menhThanSuffix(result)} — điểm ${result.score}, ${BAND_LABEL[result.band]}`}
+                    onMouseEnter={() => setHoveredPalaceIndex(result.palaceIndex)}
+                    onMouseLeave={() => setHoveredPalaceIndex(null)}
+                    onFocus={() => setHoveredPalaceIndex(result.palaceIndex)}
+                    onBlur={() => setHoveredPalaceIndex(null)}
+                    onClick={() => togglePalace(result.palaceIndex)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        togglePalace(result.palaceIndex);
+                      }
+                    }}
+                  >
+                    <circle
+                      cx={p.x}
+                      cy={p.y}
+                      r={14}
+                      fill="transparent"
+                      pointerEvents="all"
+                    />
+                    <circle
+                      cx={p.x}
+                      cy={p.y}
+                      r={isActive ? 4.5 : 3.2}
+                      fill="currentColor"
+                    />
+                  </g>
                   <text
                     className={`palace-overview-radar__label${isActive ? " is-active" : ""}`}
                     x={label.x}
@@ -272,6 +272,7 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
                     dy={label.dy}
                     textAnchor={label.textAnchor}
                     dominantBaseline="middle"
+                    pointerEvents="none"
                   >
                     {palaceShortLabel(result.palaceName)}
                     {menhThanSuffix(result)}
@@ -282,28 +283,9 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
           </svg>
         </div>
 
-        {active ? (
-          <div className="palace-overview-radar__tooltip" role="status">
-            <strong className="palace-overview-radar__tooltip-title">
-              {active.palaceName} · {active.palaceBranch}
-            </strong>
-            {palaceDomainHint(active.palaceName) ? (
-              <div style={{ opacity: 0.8, fontSize: "0.8rem" }}>
-                {palaceDomainHint(active.palaceName)}
-              </div>
-            ) : null}
-            <p className="palace-overview-radar__tooltip-summary">
-              Điểm {active.score} · {BAND_LABEL[active.band]}
-              <br />
-              {formatContribution(active.rawAxes)}
-            </p>
-          </div>
-        ) : (
-          <p className="palace-overview-radar__tooltip">
-            Di chuột hoặc chọn một cung để xem chi tiết (dùng Tab + Enter trên
-            bàn phím).
-          </p>
-        )}
+        <p className="palace-overview-radar__hint">
+          Chọn một cung trên biểu đồ để xem chi tiết.
+        </p>
       </div>
 
       {selected ? (

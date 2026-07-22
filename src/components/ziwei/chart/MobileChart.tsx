@@ -43,14 +43,6 @@ const PALACE_ORDER = [
   "Huynh Đệ",
 ];
 
-const MOBILE_COMPACT_PHI_FLOW_FIX = `
-  @media (max-width: 960px) {
-    .compact-phi-flow {
-      font-size: 11px;
-    }
-  }
-`;
-
 function starGroups(
   palace: ChartPalace,
   showAnnual: boolean,
@@ -244,7 +236,6 @@ export function MobileChart({
 
   return (
     <>
-      <style>{MOBILE_COMPACT_PHI_FLOW_FIX}</style>
       <div className="mobile-chart-reader">
         <section className="mobile-chart-summary">
           <div className="mobile-summary-title">

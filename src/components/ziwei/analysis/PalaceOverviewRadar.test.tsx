@@ -162,12 +162,12 @@ describe("PalaceOverviewRadar", () => {
     expect(details?.textContent).toMatch(/palace-overview-v1/);
   });
 
-  it("localizes the tooltip band label instead of the raw English band string", () => {
+  it("localizes the radar point band label instead of the raw English band string", () => {
     const { container } = renderRadar();
     const point = container.querySelector(".palace-overview-radar__point")!;
-    fireEvent.mouseEnter(point);
-    const tooltip = container.querySelector(".palace-overview-radar__tooltip")!;
-    expect(tooltip.textContent).not.toMatch(/\b(low|guarded|balanced|supportive|strong)\b/);
+    const aria = point.getAttribute("aria-label") ?? "";
+    expect(aria).not.toMatch(/\b(low|guarded|balanced|supportive|strong)\b/);
+    expect(aria).toMatch(/điểm \d+/i);
   });
 
   it("V1.2: the first radar point is always Mệnh (pinned to 12 o'clock) and shows the Mệnh badge", () => {
@@ -428,22 +428,21 @@ describe("PalaceOverviewRadar — V1.2.1 stale-selection regression (PR #81 revi
     expect(container.querySelector(".palace-overview-detail")).toBeNull();
   });
 
-  it("hover state clears when chart changes (no stale tooltip)", () => {
+  it("hover state clears when chart changes", () => {
     const chartA = calculateNamPhai(REGRESSION);
     const { container, rerender } = render(
       <PalaceOverviewRadar chart={chartA} school="nam-phai" />,
     );
     const point = container.querySelector(".palace-overview-radar__point")!;
     fireEvent.mouseEnter(point);
-    expect(container.querySelector(".palace-overview-radar__tooltip")).not.toBeNull();
+    expect(point.classList.contains("is-active")).toBe(true);
 
     const chartB = calculateNamPhai(OTHER_CHART);
     rerender(<PalaceOverviewRadar chart={chartB} school="nam-phai" />);
 
-    // Falls back to the "no selection" hint text once hover is cleared.
-    expect(
-      screen.getByText(/Di chuột hoặc chọn một cung/),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Chọn một cung trên biểu đồ/)).toBeInTheDocument();
+    const pointAfter = container.querySelector(".palace-overview-radar__point")!;
+    expect(pointAfter.classList.contains("is-active")).toBe(false);
   });
 
   it("selection always resolves against the current results (never a stored stale object)", () => {

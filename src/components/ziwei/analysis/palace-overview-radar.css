@@ -48,15 +48,18 @@
 
 .palace-overview-radar__body {
   display: grid;
-  gap: 1rem;
+  gap: 0.65rem;
   overflow: visible;
+  justify-items: center;
 }
 
-@media (min-width: 900px) {
-  .palace-overview-radar__body {
-    grid-template-columns: minmax(240px, 320px) 1fr;
-    align-items: start;
-  }
+.palace-overview-radar__hint {
+  margin: 0;
+  max-width: 20rem;
+  text-align: center;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  opacity: 0.75;
 }
 
 .palace-overview-radar__svg-wrap {
@@ -75,15 +78,29 @@
 
 .palace-overview-radar__point {
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
+.palace-overview-radar__point:focus,
 .palace-overview-radar__point:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
+  outline: none;
 }
 
-.palace-overview-radar__point.is-active circle:last-of-type {
+.palace-overview-radar__point.is-active circle:nth-of-type(2) {
+  stroke: currentColor;
   stroke-width: 2.5;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .palace-overview-radar__point:focus-visible circle:nth-of-type(2) {
+    stroke: unset;
+    stroke-width: unset;
+  }
+
+  .palace-overview-radar__point.is-active circle:nth-of-type(2) {
+    stroke: currentColor;
+    stroke-width: 2.5;
+  }
 }
 
 .palace-overview-radar__label {
@@ -103,43 +120,6 @@
 .palace-overview-radar__label.is-active {
   fill: var(--amber, #e2bc5f);
   font-weight: 700;
-}
-
-.palace-overview-radar__tooltip-summary {
-  margin: 0.35rem 0 0;
-  font-variant-numeric: tabular-nums;
-}
-
-.palace-overview-radar__tooltip {
-  margin: 0;
-  font-size: 0.84rem;
-  line-height: 1.45;
-  padding: 0.65rem 0.75rem;
-  border: 1px solid var(--line-soft, rgba(104, 88, 148, 0.38));
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 12px;
-}
-
-.palace-overview-radar__tooltip-title {
-  font-family: var(--font-display, "Noto Serif Display", "Noto Serif", serif);
-  font-weight: 650;
-  color: var(--amber-soft, #f6e0a4);
-}
-
-.palace-overview-radar__tooltip dl {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.2rem 0.75rem;
-  margin: 0.35rem 0 0;
-}
-
-.palace-overview-radar__tooltip dt {
-  opacity: 0.75;
-}
-
-.palace-overview-radar__tooltip dd {
-  margin: 0;
-  font-variant-numeric: tabular-nums;
 }
 
 .palace-overview-detail {
