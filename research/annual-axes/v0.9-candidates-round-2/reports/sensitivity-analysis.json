@@ -1,0 +1,115 @@
+{
+  "fragileParameters": [
+    "pointMagnitude"
+  ],
+  "gateReversals": [
+    "V09-TM-CAREER: failedGateCount 8 vs 9",
+    "V09-TM-CAREER-SOCIAL: failedGateCount 8 vs 9",
+    "V09-TM-PALACE-CONTEXT: failedGateCount 8 vs 9",
+    "V09-TM-SOCIAL: failedGateCount 8 vs 9"
+  ],
+  "rankingReversals": [],
+  "stableParameters": [],
+  "variants": [
+    {
+      "candidateId": "V09-TM-CAREER-SOCIAL",
+      "degradedVsControl": 0,
+      "domainBindings": [
+        "career",
+        "social"
+      ],
+      "failedGateCount": 8,
+      "improvedVsControl": 0,
+      "label": "V09-TM-CAREER-SOCIAL@1",
+      "pointMagnitude": 1,
+      "thienMaMatches": 112
+    },
+    {
+      "candidateId": "V09-TM-CAREER-SOCIAL",
+      "degradedVsControl": 1,
+      "domainBindings": [
+        "career",
+        "social"
+      ],
+      "failedGateCount": 9,
+      "improvedVsControl": 0,
+      "label": "V09-TM-CAREER-SOCIAL@2",
+      "pointMagnitude": 2,
+      "thienMaMatches": 112
+    },
+    {
+      "candidateId": "V09-TM-CAREER",
+      "degradedVsControl": 0,
+      "domainBindings": [
+        "career"
+      ],
+      "failedGateCount": 8,
+      "improvedVsControl": 0,
+      "label": "V09-TM-CAREER@1",
+      "pointMagnitude": 1,
+      "thienMaMatches": 63
+    },
+    {
+      "candidateId": "V09-TM-CAREER",
+      "degradedVsControl": 1,
+      "domainBindings": [
+        "career"
+      ],
+      "failedGateCount": 9,
+      "improvedVsControl": 0,
+      "label": "V09-TM-CAREER@2",
+      "pointMagnitude": 2,
+      "thienMaMatches": 63
+    },
+    {
+      "candidateId": "V09-TM-PALACE-CONTEXT",
+      "degradedVsControl": 0,
+      "domainBindings": [
+        "career",
+        "social"
+      ],
+      "failedGateCount": 8,
+      "improvedVsControl": 0,
+      "label": "V09-TM-PALACE-CONTEXT@1",
+      "pointMagnitude": 1,
+      "thienMaMatches": 112
+    },
+    {
+      "candidateId": "V09-TM-PALACE-CONTEXT",
+      "degradedVsControl": 1,
+      "domainBindings": [
+        "career",
+        "social"
+      ],
+      "failedGateCount": 9,
+      "improvedVsControl": 0,
+      "label": "V09-TM-PALACE-CONTEXT@2",
+      "pointMagnitude": 2,
+      "thienMaMatches": 112
+    },
+    {
+      "candidateId": "V09-TM-SOCIAL",
+      "degradedVsControl": 0,
+      "domainBindings": [
+        "social"
+      ],
+      "failedGateCount": 8,
+      "improvedVsControl": 0,
+      "label": "V09-TM-SOCIAL@1",
+      "pointMagnitude": 1,
+      "thienMaMatches": 49
+    },
+    {
+      "candidateId": "V09-TM-SOCIAL",
+      "degradedVsControl": 1,
+      "domainBindings": [
+        "social"
+      ],
+      "failedGateCount": 9,
+      "improvedVsControl": 0,
+      "label": "V09-TM-SOCIAL@2",
+      "pointMagnitude": 2,
+      "thienMaMatches": 49
+    }
+  ]
+}

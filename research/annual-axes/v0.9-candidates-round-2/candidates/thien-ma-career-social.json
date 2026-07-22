@@ -1,0 +1,53 @@
+{
+  "candidateId": "V09-TM-CAREER-SOCIAL",
+  "candidateType": "experimental",
+  "engineVersion": "0.8.0",
+  "knowledgeVersion": "research-r2:V09-TM-CAREER-SOCIAL",
+  "formulaVersion": "v0.8-annual-palace-weighted-score",
+  "description": "Lưu Thiên Mã positive activation bound to career and social. Physical-star dedupe remains within each axis; no cross-axis double count of the same axis match.",
+  "authorizedShapeIds": ["SHAPE-AAV09-THIEN-MA-MOVEMENT"],
+  "policyRecordIds": ["POL-AAV09-STAR-LUU-THIEN-MA"],
+  "claimIds": ["CLM-AAV09-019", "CLM-AAV09-007", "CLM-AAV09-015"],
+  "sourceIds": ["SRC-AA-V09-TAN-BIEN-1956", "SRC-AA-CORE-001"],
+  "changeCategories": ["star-registry", "star-domain", "point-policy"],
+  "includedStarNames": ["Lưu Thiên Mã"],
+  "excludedStarNames": [
+    "Lưu Đào Hoa",
+    "Lưu Hồng Loan",
+    "Lưu Hỷ Thần",
+    "Lưu Kiếp Sát",
+    "Lưu Long Đức",
+    "Lưu Nguyệt Đức",
+    "Lưu Phúc Đức",
+    "Lưu Thiên Đức",
+    "Lưu Thiên Hỷ",
+    "Lưu Văn Khúc",
+    "Lưu Văn Xương",
+    "Lưu Đại Hao",
+    "Lưu Tiểu Hao",
+    "Lưu Phục Binh",
+    "Lưu Tuần",
+    "Lưu Triệt"
+  ],
+  "domainBindings": ["career", "social"],
+  "pointMagnitude": 1,
+  "polarityMode": "positive-activation",
+  "dignityMode": "none",
+  "assumptions": [
+    {
+      "statement": "Career and social both receive movement/change activation when Lưu Thiên Mã sits in each domain's mapped palaces.",
+      "status": "engineering-hypothesis"
+    },
+    {
+      "statement": "Point magnitude 1 maps to V0.8 staticPositive; not classical doctrine.",
+      "status": "engineering-hypothesis"
+    }
+  ],
+  "expectedEffects": [
+    "Joint career+social annual variance increase without changing other domains"
+  ],
+  "knownRisks": [
+    "May increase career-social correlation",
+    "Still unlikely to clear absolute 28/28 spread gates alone"
+  ]
+}

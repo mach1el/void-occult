@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "0.9.0-r2",
+  "contractId": "annual-axes-v0.9-round-2-evaluation",
+  "foundationReadinessRequired": "READY_FOR_V0_9_CANDIDATE",
+  "authorizedShapeId": "SHAPE-AAV09-THIEN-MA-MOVEMENT",
+  "authorizedStar": "Lưu Thiên Mã",
+  "controlCandidateId": "CONTROL-V08",
+  "corpus": {
+    "contractId": "FULL_CORPUS_CONTRACT",
+    "chartCount": 100,
+    "yearsPerChart": 12,
+    "trainingRatio": 0.8,
+    "splitBy": "stable-chart-index-hash",
+    "seed": 20260719
+  },
+  "selectionRule": "lexicographic-tier-0-to-4-absolute-holdout-gates",
+  "mandatoryHoldoutPolicy": "absolute-pass-all-configured-hard-gates",
+  "prohibited": [
+    "other-annual-stars",
+    "dao-hoa-fixed-polarity",
+    "natal-thien-ma-as-luu",
+    "annual-tuan-triet-gating",
+    "production-routing-change",
+    "round-1-snapshot-rewrite"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "candidateHashes": {
+    "CONTROL-V08": "c4bece4074e5d106a81168ab305e807df77205d7a40f728e63fe88f7b2b7d2df",
+    "V09-TM-CAREER": "e70d31f243b109a107abb9c47247d94e9b4574762a5fee7ff9b527305e6f9e19",
+    "V09-TM-CAREER-SOCIAL": "6785ac659bb3d7362c3de12e64dc19f3653a3a40ba53c01fcc2cf2181a71a3aa",
+    "V09-TM-PALACE-CONTEXT": "b3a5caabcdfc095d24a48ee5da3713993e80baff836ddae2f01c3631f5d7dcfa",
+    "V09-TM-SOCIAL": "dc57bcc04726ed4cb4825290570d8ffb3c1bd423958b780258fff1f28944da8b"
+  },
+  "candidateOrder": [
+    "CONTROL-V08",
+    "V09-TM-CAREER",
+    "V09-TM-CAREER-SOCIAL",
+    "V09-TM-PALACE-CONTEXT",
+    "V09-TM-SOCIAL"
+  ],
+  "freezeId": "annual-axes-v0.9-round-2-freeze",
+  "registryHash": "55d98ba44366de7426cdbf92ea81e8acaa9330840f9ec1bc6ed3c2ca38649753",
+  "schemaVersion": "0.9.0-r2"
+}
