@@ -1,0 +1,50 @@
+{
+  "decision": "RESEARCH_REVISION_REQUIRED",
+  "selectedCandidateId": null,
+  "controlVersion": {
+    "engineVersion": "0.8.0",
+    "formulaVersion": "v0.8-annual-palace-weighted-score"
+  },
+  "evidence": {
+    "foundationDecision": "RESEARCH_INCOMPLETE",
+    "auditFindingIds": [
+      "Finding-1-spread-gates",
+      "Finding-2-natal-anchor",
+      "Finding-3-unreferenced-stars",
+      "Finding-6-scoreState-epsilon"
+    ],
+    "claimIds": [
+      "CLM-AAV09-003",
+      "CLM-AAV09-004",
+      "CLM-AAV09-005",
+      "CLM-AAV09-006",
+      "CLM-AAV09-007",
+      "CLM-AAV09-015",
+      "CLM-AAV09-018"
+    ],
+    "sourceIds": [],
+    "passedGateIds": [
+      "control-reproduction",
+      "production-routing-unchanged",
+      "fixture-byte-check"
+    ],
+    "failedGateIds": [
+      "foundation-readiness-not-ready-for-candidate"
+    ]
+  },
+  "residualRisks": [
+    "doctrinal: zero classical/school-manual sources; zero classical-status claims",
+    "doctrinal: CONTRA-AAV09-001 (Lưu Đào Hoa polarity) unadjudicated",
+    "Calculation Core: Lưu Đại Hao/Tiểu Hao/Phục Binh/Tuần/Triệt unsupported",
+    "distribution: V0.8 fails 9/28 spread/dispersion gates (documented in foundation audit)",
+    "holdout: experimental candidates were not run (blocked)",
+    "product: no V0.9 candidate scores generated",
+    "technical: scoreState epsilon mislabel (Finding 6) remains a separate production-code fix"
+  ],
+  "prohibitedClaims": [
+    "Do not invent annual identities for Core-blocked stars",
+    "Do not treat engineering-hypothesis star polarities as classical doctrine",
+    "Do not change production routing from this evaluation task"
+  ],
+  "nextTask": "Focused source extraction + claim adjudication (research completion)"
+}

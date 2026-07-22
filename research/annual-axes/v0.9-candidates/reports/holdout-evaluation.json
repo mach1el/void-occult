@@ -1,0 +1,9 @@
+{
+  "status": "skipped",
+  "reason": "RESEARCH_INCOMPLETE",
+  "freezeHashes": {
+    "CONTROL-V08": "afca42a33c65d810e976cc71edf492f67163026e18bbbb8924299f162c43e6bb",
+    "__registry__": "d51211bb58eb21f027b859d239cc81724c0359838b34a1f21f8d902d96d78759"
+  },
+  "note": "Holdout was not opened; candidate freeze recorded for control only."
+}

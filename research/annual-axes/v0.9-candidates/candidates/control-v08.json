@@ -1,0 +1,34 @@
+{
+  "candidateId": "CONTROL-V08",
+  "candidateType": "control",
+  "formulaVersion": "v0.8-annual-palace-weighted-score",
+  "engineVersion": "0.8.0",
+  "knowledgeVersion": "0.8.0",
+  "description": "Exact reproduction of production Nam Phái Annual Axes V0.8. No policy changes.",
+  "changeCategories": [],
+  "auditFindingIds": [],
+  "claimIds": [],
+  "sourceIds": [],
+  "policyRecordIds": [],
+  "assumptions": [
+    {
+      "statement": "Production V0.8 remains the frozen control for all V0.9 candidate comparisons.",
+      "status": "derived"
+    }
+  ],
+  "configuration": {
+    "domainMapping": "production-v0.8",
+    "pointPolicy": "production-v0.8",
+    "registryPolicy": "production-v0.8",
+    "temporalPolicy": "production-v0.8",
+    "dignityPolicy": "production-v0.8",
+    "thaiTuePolicy": "production-v0.8"
+  },
+  "expectedEffects": [
+    "Byte-identical scores vs production analyzeAnnualAxesNamPhaiV08",
+    "Committed V0.8 product fixture remains unchanged"
+  ],
+  "knownRisks": [
+    "If control diverges from production, experimental evaluation must stop"
+  ]
+}

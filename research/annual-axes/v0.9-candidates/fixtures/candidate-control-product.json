@@ -1,0 +1,21 @@
+{
+  "candidateId": "CONTROL-V08",
+  "scores": {
+    "health": 42,
+    "family": 43,
+    "wealth": 56,
+    "career": 55,
+    "social": 49,
+    "romance": 33.8
+  },
+  "fixtureScores": {
+    "health": 42,
+    "family": 43,
+    "wealth": 56,
+    "career": 55,
+    "social": 49,
+    "romance": 33.8
+  },
+  "fixtureHash": "1d73f1665acffc364c921dd94a7cb29503cb1b7c3e941c9fb5d03d21efe0c492",
+  "ok": true
+}

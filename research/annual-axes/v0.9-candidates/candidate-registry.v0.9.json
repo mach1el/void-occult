@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "0.9.0",
+  "packId": "annual-axes-v0.9-candidates",
+  "generatedAt": "2026-07-22T00:00:00.000Z",
+  "foundationReadinessAtCreation": "RESEARCH_INCOMPLETE",
+  "note": "Only CONTROL-V08 is registered. Experimental candidates are forbidden until foundation readiness is READY_FOR_V0_9_CANDIDATE.",
+  "candidates": [
+    {
+      "candidateId": "CONTROL-V08",
+      "path": "candidates/control-v08.json",
+      "candidateType": "control"
+    }
+  ]
+}

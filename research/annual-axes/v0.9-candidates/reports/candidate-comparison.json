@@ -1,0 +1,38 @@
+{
+  "generatedAt": "2026-07-22T00:00:00.000Z",
+  "foundationReadiness": "RESEARCH_INCOMPLETE",
+  "experimentalEvaluation": "blocked",
+  "candidates": [
+    {
+      "candidateId": "CONTROL-V08",
+      "candidateType": "control",
+      "changeCategories": [],
+      "claimIds": [],
+      "sourceIds": [],
+      "selectable": false
+    }
+  ],
+  "selection": {
+    "selectionStatus": "evaluation-inconclusive",
+    "selectedCandidateId": null,
+    "controlCandidateId": "CONTROL-V08",
+    "candidateResults": [
+      {
+        "candidateId": "CONTROL-V08",
+        "selectable": false,
+        "passedAllMandatoryGates": true,
+        "failedGateIds": [],
+        "blockingReasons": [
+          "Control only — not an experimental production candidate."
+        ]
+      }
+    ],
+    "rationale": [
+      "Foundation readiness: RESEARCH_INCOMPLETE.",
+      "Foundation readiness is RESEARCH_INCOMPLETE; experimental candidate evaluation is blocked.",
+      "CONTROL-V08 reproduces production V0.8 exactly.",
+      "No experimental candidates were registered (correct under RESEARCH_INCOMPLETE).",
+      "selectedCandidateId remains null."
+    ]
+  }
+}

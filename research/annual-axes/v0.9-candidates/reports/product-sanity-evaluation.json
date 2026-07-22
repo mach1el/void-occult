@@ -1,0 +1,16 @@
+{
+  "control": {
+    "candidateId": "CONTROL-V08",
+    "scores": {
+      "health": 42,
+      "family": 43,
+      "wealth": 56,
+      "career": 55,
+      "social": 49,
+      "romance": 33.8
+    },
+    "fixtureEquality": true
+  },
+  "experimental": [],
+  "note": "Only CONTROL-V08 product fixture was verified."
+}

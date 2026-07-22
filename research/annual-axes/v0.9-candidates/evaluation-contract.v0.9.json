@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "0.9.0",
+  "contractId": "annual-axes-v0.9-candidate-evaluation",
+  "controlCandidateId": "CONTROL-V08",
+  "controlFormulaVersion": "v0.8-annual-palace-weighted-score",
+  "controlEngineVersion": "0.8.0",
+  "requiredFoundationReadiness": "READY_FOR_V0_9_CANDIDATE",
+  "blockedReadinessStates": [
+    "RESEARCH_INCOMPLETE",
+    "V0_8_SHOULD_REMAIN_UNCHANGED",
+    "CALCULATION_CORE_BLOCKED",
+    "FOUNDATION_INVALID"
+  ],
+  "productionSafety": {
+    "defaultRoutingMustRemain": "0.8.0",
+    "allowPublicV09Route": false,
+    "allowBrowserQueryFlags": false,
+    "trungChauMustRemain": "0.2.0"
+  },
+  "corpus": {
+    "charts": 100,
+    "yearsPerChart": 12,
+    "splitBy": "stable-chart-id",
+    "trainingFraction": 0.8,
+    "holdoutFraction": 0.2,
+    "note": "Experimental split opens only under READY_FOR_V0_9_CANDIDATE."
+  },
+  "selectionRule": "lexicographic-tier-0-to-4",
+  "prohibitedTechniques": [
+    "global-pressure-multipliers",
+    "arbitrary-score-stretching",
+    "post-hoc-rank-normalization",
+    "per-chart-normalization",
+    "product-fixture-calibration",
+    "invented-annual-identities"
+  ]
+}
