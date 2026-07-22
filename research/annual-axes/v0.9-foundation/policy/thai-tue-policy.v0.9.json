@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "0.9.0",
+  "policyId": "annual-axes-v0.9-thai-tue-policy",
+  "currentV08Policy": {
+    "description": "Prominence multiplier ×1.25 applied to axisRaw before the axis-level clamp; does not create direction from zero (zero raw × 1.25 = zero). Applied at most once per axis regardless of how many mapped physical palaces contain Lưu Thái Tuế.",
+    "claimIds": ["CLM-AAV09-013"],
+    "sourceIds": ["SRC-AA-ENG-008"],
+    "status": "engineering-hypothesis",
+    "confidence": "medium"
+  },
+  "auditMeasurement": {
+    "thaiTueApplicationRate": 0.2118,
+    "axisClampRateWhenApplied": 0,
+    "description": "Across the full 100x12 corpus, the multiplier applies in 21.18% of domain-observations. It never once co-occurs with an axis-level clamp trigger (axisClampRate is 0 corpus-wide, including whenever Thái Tuế applies) — the ×1.25 scaling has not been observed to push any real chart into the clamp boundary.",
+    "claimIds": ["CLM-AAV09-014", "CLM-AAV09-002"],
+    "sourceIds": ["SRC-AA-CORE-001"],
+    "status": "derived",
+    "confidence": "high"
+  },
+  "alternativesResearched": [
+    {
+      "alternative": "annotation only (no numeric effect, UI-only highlight)",
+      "sourceEvidence": "none found",
+      "schoolScope": "unspecified",
+      "confidence": "low",
+      "status": "engineering-hypothesis"
+    },
+    {
+      "alternative": "activation trigger (Thái Tuế must be present for other rules to fire)",
+      "sourceEvidence": "none found",
+      "schoolScope": "unspecified",
+      "confidence": "low",
+      "status": "engineering-hypothesis"
+    },
+    {
+      "alternative": "palace emphasis (weight boost to the palace itself rather than the whole axis)",
+      "sourceEvidence": "none found",
+      "schoolScope": "unspecified",
+      "confidence": "low",
+      "status": "engineering-hypothesis"
+    },
+    {
+      "alternative": "magnitude multiplier (current V0.8 policy)",
+      "sourceEvidence": "SRC-AA-ENG-008 (internal engineering hypothesis, not classical)",
+      "schoolScope": "nam-phai",
+      "confidence": "medium",
+      "status": "engineering-hypothesis"
+    },
+    {
+      "alternative": "independent positive or negative signal (Thái Tuế itself carries a point value)",
+      "sourceEvidence": "none found; would contradict the current 'never creates direction from zero' invariant, which this pack found no source-backed reason to overturn",
+      "schoolScope": "unspecified",
+      "confidence": "low",
+      "status": "disputed-candidate (not adjudicated — no second source to actually dispute against)"
+    }
+  ],
+  "decision": {
+    "v08PolicyRemainsControl": true,
+    "v09CandidateJustified": false,
+    "rationale": "No source-backed alternative to the magnitude-multiplier policy was found. The audit measurement (never co-occurring with a clamp trigger) shows the current policy is not currently binding against its own safety bound, so there is no urgent engineering reason to change it either. Production multiplier is unchanged by this task.",
+    "confidence": "medium"
+  }
+}

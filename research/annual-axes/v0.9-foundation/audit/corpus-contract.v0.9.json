@@ -1,0 +1,14 @@
+{
+  "contractId": "annual-axes-audit-full-v0.8",
+  "seed": 20260719,
+  "chartCount": 100,
+  "yearsPerChart": 12,
+  "baseAnnualYear": 2018,
+  "timezone": "7",
+  "flowBase": "luu-nien",
+  "notes": [
+    "Deterministic full corpus sizing for advisory distribution audits.",
+    "Historical sizing origin: V0.4 corrective prompt §2 — engine is not V0.4.",
+    "Deterministic; no personal birth data."
+  ]
+}

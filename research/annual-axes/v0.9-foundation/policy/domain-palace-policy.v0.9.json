@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "0.9.0",
+  "policyId": "annual-axes-v0.9-domain-palace-policy",
+  "notes": [
+    "Every relationship below is classified source-backed | derived | engineering-only | disputed | unsupported.",
+    "source-backed requires a classical/school-manual/published-reference source — this pack has none (see sources/source-review-log.md), so no relationship below is classified source-backed.",
+    "The current 60/20/20 or 60/40 structure is NOT assumed doctrinal; it is explicitly engineering-only unless a specific measurement (derived) says otherwise."
+  ],
+  "domains": [
+    {
+      "domain": "health",
+      "currentPrimaryPalace": "Tật Ách",
+      "currentCooperatingPalaces": [
+        { "palace": "Mệnh", "role": "luu-menh", "weight": 0.2 },
+        { "palace": "Tiểu Hạn (small-limit)", "role": "tieu-han", "weight": 0.2 }
+      ],
+      "relevance": {
+        "tieuHan": { "classification": "engineering-only", "note": "Only domain where Tiểu Hạn cooperates; no source-backed rationale for why health specifically (CLM-AAV09-018)." },
+        "luuMenh": { "classification": "engineering-only", "note": "Mệnh-as-cooperating is a common general Tử Vi intuition (self/body linked to health) but unverified here." },
+        "phucDuc": { "classification": "unsupported", "note": "Not currently mapped to health; no evidence reviewed either way." },
+        "thienDi": { "classification": "unsupported", "note": "Not currently mapped to health." },
+        "tuTuc": { "classification": "unsupported", "note": "Not currently mapped to health." },
+        "phuMau": { "classification": "unsupported", "note": "Not currently mapped to health." }
+      },
+      "claimIds": ["CLM-AAV09-001", "CLM-AAV09-018"],
+      "sourceIds": ["SRC-AA-ENG-008"]
+    },
+    {
+      "domain": "family",
+      "currentPrimaryPalace": "Điền Trạch",
+      "currentCooperatingPalaces": [
+        { "palace": "Phúc Đức", "role": "luu-phuc-duc", "weight": 0.2 },
+        { "palace": "Phụ Mẫu", "role": "luu-phu-mau", "weight": 0.2 }
+      ],
+      "relevance": {
+        "tieuHan": { "classification": "unsupported", "note": "Not currently mapped to family." },
+        "luuMenh": { "classification": "unsupported", "note": "Not currently mapped to family." },
+        "phucDuc": { "classification": "engineering-only", "note": "Phúc Đức also cooperates with wealth (shared-palace design); audit shows this is not producing redundant axes (CLM-AAV09-016, correlation 0.325 max)." },
+        "thienDi": { "classification": "unsupported", "note": "Not currently mapped to family." },
+        "tuTuc": { "classification": "unsupported", "note": "Not currently mapped to family." },
+        "phuMau": { "classification": "engineering-only", "note": "Parents' palace cooperating with family/home domain is a common general intuition, unverified here." }
+      },
+      "claimIds": ["CLM-AAV09-001", "CLM-AAV09-016"],
+      "sourceIds": ["SRC-AA-ENG-008"]
+    },
+    {
+      "domain": "wealth",
+      "currentPrimaryPalace": "Tài Bạch",
+      "currentCooperatingPalaces": [
+        { "palace": "Phúc Đức", "role": "luu-phuc-duc", "weight": 0.2 },
+        { "palace": "Điền Trạch", "role": "luu-dien-trach", "weight": 0.2 }
+      ],
+      "relevance": {
+        "tieuHan": { "classification": "unsupported", "note": "Not currently mapped to wealth." },
+        "luuMenh": { "classification": "unsupported", "note": "Not currently mapped to wealth." },
+        "phucDuc": { "classification": "engineering-only", "note": "Shared with family (see above); correlation evidence does not show redundancy." },
+        "thienDi": { "classification": "unsupported", "note": "Not currently mapped to wealth." },
+        "tuTuc": { "classification": "unsupported", "note": "Not currently mapped to wealth." },
+        "phuMau": { "classification": "unsupported", "note": "Not currently mapped to wealth." }
+      },
+      "claimIds": ["CLM-AAV09-001", "CLM-AAV09-016"],
+      "sourceIds": ["SRC-AA-ENG-008"],
+      "note": "Điền Trạch (property) cooperating with wealth and being the family domain's primary is the second shared-palace pattern in the mapping; also checked against correlation evidence (family|wealth pairwise correlation −0.0145 — negligible, not redundant)."
+    },
+    {
+      "domain": "career",
+      "currentPrimaryPalace": "Quan Lộc",
+      "currentCooperatingPalaces": [
+        { "palace": "Thiên Di", "role": "luu-thien-di", "weight": 0.2 },
+        { "palace": "Mệnh", "role": "luu-menh", "weight": 0.2 }
+      ],
+      "relevance": {
+        "tieuHan": { "classification": "unsupported", "note": "Not currently mapped to career." },
+        "luuMenh": { "classification": "engineering-only", "note": "Mệnh also cooperates with health (shared-palace design)." },
+        "phucDuc": { "classification": "unsupported", "note": "Not currently mapped to career." },
+        "thienDi": { "classification": "engineering-only", "note": "Also cooperates with social (shared-palace design); career|social correlation 0.0077 — negligible, not redundant." },
+        "tuTuc": { "classification": "unsupported", "note": "Not currently mapped to career." },
+        "phuMau": { "classification": "unsupported", "note": "Not currently mapped to career." }
+      },
+      "claimIds": ["CLM-AAV09-001", "CLM-AAV09-016"],
+      "sourceIds": ["SRC-AA-ENG-008"]
+    },
+    {
+      "domain": "social",
+      "currentPrimaryPalace": "Nô Bộc",
+      "currentCooperatingPalaces": [
+        { "palace": "Thiên Di", "role": "luu-thien-di", "weight": 0.4 }
+      ],
+      "relevance": {
+        "tieuHan": { "classification": "unsupported", "note": "Not currently mapped to social." },
+        "luuMenh": { "classification": "unsupported", "note": "Not currently mapped to social." },
+        "phucDuc": { "classification": "unsupported", "note": "Not currently mapped to social." },
+        "thienDi": { "classification": "engineering-only", "note": "Travel/external-relations palace cooperating with social contacts is an intuitive pairing, unverified here; also shared with career." },
+        "tuTuc": { "classification": "unsupported", "note": "Not currently mapped to social." },
+        "phuMau": { "classification": "unsupported", "note": "Not currently mapped to social." }
+      },
+      "claimIds": ["CLM-AAV09-001"],
+      "sourceIds": ["SRC-AA-ENG-008"],
+      "note": "Social is the only domain with a single cooperating palace (no third relationship) — worth flagging as an asymmetry versus the other five domains' two-cooperating-palace pattern; no source found explaining the asymmetry."
+    },
+    {
+      "domain": "romance",
+      "currentPrimaryPalace": "Phu Thê",
+      "currentCooperatingPalaces": [
+        { "palace": "Tử Tức", "role": "luu-tu-tuc", "weight": 0.4 }
+      ],
+      "relevance": {
+        "tieuHan": { "classification": "unsupported", "note": "Not currently mapped to romance." },
+        "luuMenh": { "classification": "unsupported", "note": "Not currently mapped to romance." },
+        "phucDuc": { "classification": "unsupported", "note": "Not currently mapped to romance." },
+        "thienDi": { "classification": "unsupported", "note": "Not currently mapped to romance." },
+        "tuTuc": { "classification": "engineering-only", "note": "Children's palace cooperating with romance/spouse domain is an intuitive pairing (offspring as consequence of the romantic/marital relationship), unverified here." },
+        "phuMau": { "classification": "unsupported", "note": "Not currently mapped to romance." }
+      },
+      "claimIds": ["CLM-AAV09-001"],
+      "sourceIds": ["SRC-AA-ENG-008"],
+      "note": "Also the only domain (besides social) with a single cooperating palace."
+    }
+  ]
+}

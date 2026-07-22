@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "0.9.0",
+  "registryId": "annual-axes-v0.9-source-registry",
+  "sources": [
+    {
+      "sourceId": "SRC-AA-ENG-008",
+      "title": "ApexVoid Annual Axes V0.8 Palace-Weighted Engineering Model",
+      "language": "en",
+      "sourceType": "internal-engineering-policy",
+      "schoolScope": "nam-phai",
+      "locator": "src/lib/ziwei/analysis/knowledge/annual-axes/v0.8/annual-source-registry.v0.8.json#SRC-AA-ENG-008",
+      "accessStatus": "verified",
+      "allowedUsage": [
+        "documenting current V0.8 engineering constants (60/40 weights, point classes, clamps, Thái Tuế multiplier)",
+        "baseline for V0.9 comparison"
+      ],
+      "prohibitedUsage": ["claim as classical formula", "doctrine authority"],
+      "notes": "Reused verbatim from the production V0.8 knowledge package. Not classical; internal engineering hypothesis only."
+    },
+    {
+      "sourceId": "SRC-AA-CORE-001",
+      "title": "ApexVoid Annual Flow Calculation Core",
+      "language": "en",
+      "sourceType": "internal-calculation-contract",
+      "schoolScope": "nam-phai",
+      "locator": "src/lib/ziwei/engine-nam-phai.ts and src/lib/ziwei/annual-flow.ts",
+      "accessStatus": "verified",
+      "allowedUsage": [
+        "resolved annual-head palace, small-limit, Thái Tuế, decade",
+        "capability-coverage producer verification (emission scanning)"
+      ],
+      "prohibitedUsage": ["doctrine authority", "numeric scoring authority"],
+      "notes": "Reused verbatim from the production V0.8 knowledge package. Authoritative for what Calculation Core actually emits, verified directly by the full-corpus star-emission scan in this V0.9 audit (capability-coverage.v0.8.json)."
+    },
+    {
+      "sourceId": "SRC-AA-V09-UNVERIFIED-001",
+      "title": "Tử Vi Đẩu Số Tân Biên",
+      "author": "Vân Đằng Thái Thứ Lang",
+      "publicationYear": 1970,
+      "language": "vi",
+      "sourceType": "unverified-summary",
+      "schoolScope": "nam-phai",
+      "locator": "Unknown — no verified edition/page on hand; cited only from general domain familiarity with this widely-referenced Vietnamese Tử Vi text, not from a checked copy.",
+      "accessStatus": "unavailable",
+      "allowedUsage": [
+        "research-only background for engineering-hypothesis/disputed claims",
+        "naming a widely-known school reference point for later human verification"
+      ],
+      "prohibitedUsage": [
+        "classical-status claims",
+        "production rule authority",
+        "citing a specific page/chapter/edition without independent verification"
+      ],
+      "notes": "This same title appears in research/major-fortune/sources/source-registry.json (SRC-MF-001) tagged sourceType classical_text with locator 'Unknown'. This V0.9 pack deliberately tags it lower-confidence (unverified-summary, not classical-text) per explicit instruction for this task — no verified copy was available to check locators against. See sources/source-review-log.md."
+    },
+    {
+      "sourceId": "SRC-AA-V09-UNVERIFIED-002",
+      "title": "General Lưu Niên (annual-flow) auxiliary-star doctrine as commonly taught in modern Vietnamese Tử Vi practice",
+      "language": "vi",
+      "sourceType": "unverified-summary",
+      "schoolScope": "mixed",
+      "locator": "Unknown — general domain-knowledge synthesis, not a single citable text; practice varies materially by teacher/school lineage.",
+      "accessStatus": "unavailable",
+      "allowedUsage": ["research-only background for star-domain-policy candidate rules"],
+      "prohibitedUsage": ["classical-status claims", "production rule authority", "school-specific attribution without a named text"],
+      "notes": "Used only to frame candidate star-domain hypotheses (e.g. Lưu Đào Hoa → romance polarity) as engineering-hypothesis/disputed, never as classical."
+    },
+    {
+      "sourceId": "SRC-AA-V09-UNVERIFIED-003",
+      "title": "General Bác Sĩ 12-cycle (Trường Sinh) doctrine covering Đại Hao / Tiểu Hao / Phục Binh, as commonly described in Tử Vi pedagogy",
+      "language": "vi",
+      "sourceType": "unverified-summary",
+      "schoolScope": "mixed",
+      "locator": "Unknown — general domain-knowledge synthesis; the natal Bác Sĩ cycle itself is well-established, but its *annual* placement/reinterpretation is exactly the disputed point this pack researches.",
+      "accessStatus": "unavailable",
+      "allowedUsage": ["research-only background for unsupported-star-policy adjudication of Lưu Đại Hao / Lưu Tiểu Hao / Lưu Phục Binh"],
+      "prohibitedUsage": ["classical-status claims", "production rule authority", "asserting a specific annual placement formula"],
+      "notes": "Confirms the natal cycle exists and is well-known; does NOT supply a verified annual placement rule, which is the actual blocker per SRC-AA-CORE-001."
+    },
+    {
+      "sourceId": "SRC-AA-V09-UNVERIFIED-004",
+      "title": "General Tuần / Triệt (void) doctrine as commonly described in Tử Vi pedagogy",
+      "language": "vi",
+      "sourceType": "unverified-summary",
+      "schoolScope": "mixed",
+      "locator": "Unknown — general domain-knowledge synthesis.",
+      "accessStatus": "unavailable",
+      "allowedUsage": ["research-only background for unsupported-star-policy adjudication of Lưu Tuần / Lưu Triệt"],
+      "prohibitedUsage": ["classical-status claims", "production rule authority", "asserting a specific annual placement formula"],
+      "notes": "Natal Tuần/Triệt void markers are well-established; an annual re-derivation of them is exactly the disputed, unverified point."
+    },
+    {
+      "sourceId": "SRC-AA-V09-XREF-MAJOR-FORTUNE",
+      "title": "ApexVoid Major Fortune research pack (in-repo convention reference)",
+      "language": "en",
+      "sourceType": "internal-engineering-policy",
+      "schoolScope": "mixed",
+      "locator": "research/major-fortune/",
+      "accessStatus": "verified",
+      "allowedUsage": ["convention reference for this pack's file layout, ADR format, and schema-validation test pattern"],
+      "prohibitedUsage": ["doctrine authority for annual axes content", "reusing its classical_text confidence tagging without independent verification"],
+      "notes": "Structural precedent only. Its SRC-MF-001 entry cites the same Vân Đằng Thái Thứ Lang text at classical_text confidence; this pack intentionally does not carry that confidence level forward (see SRC-AA-V09-UNVERIFIED-001)."
+    }
+  ]
+}

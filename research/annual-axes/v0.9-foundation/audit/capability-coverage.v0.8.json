@@ -1,0 +1,451 @@
+[
+  {
+    "exactStarName": "Lưu Bạch Hổ",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+    "rationale": "Annual branch Thái Tuế-cycle subset emits Lưu Bạch Hổ.",
+    "referencingRuleIds": [
+      "health-neg-luu-bach-ho"
+    ],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 285,
+    "coverageStatus": "observed",
+    "coverageExplanation": "Star was emitted and matched inside a configured domain palace."
+  },
+  {
+    "exactStarName": "Lưu Đà La",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addLuGroup(source=annual)",
+    "rationale": "addLuGroup with annual source emits Lưu Đà La adjacent to annual Lộc Tồn.",
+    "referencingRuleIds": [
+      "health-neg-luu-da-la",
+      "romance-neg-luu-da-la",
+      "social-neg-luu-da-la",
+      "wealth-neg-luu-da-la"
+    ],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 1042,
+    "coverageStatus": "observed",
+    "coverageExplanation": "Star was emitted and matched inside a configured domain palace."
+  },
+  {
+    "exactStarName": "Lưu Đại Hao",
+    "temporalLayer": "annual",
+    "supportStatus": "unsupported",
+    "producer": null,
+    "rationale": "Bác Sĩ cycle (including Đại Hao) is natal-only via addLuGroup; annual addLuGroup does not emit Lưu Đại Hao. No authoritative annual placement formula exists in-repo.",
+    "referencingRuleIds": [],
+    "emissionCount": 0,
+    "emittingChartCount": 0,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unsupported",
+    "coverageExplanation": "Producer unreachable: Calculation Core never emits this exact annual identity (verified by zero corpus emissions)."
+  },
+  {
+    "exactStarName": "Lưu Đào Hoa",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+    "rationale": "Annual branch path emits Lưu Đào Hoa.",
+    "referencingRuleIds": [],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unreachable",
+    "coverageExplanation": "No active scoring rule references this exact star name; it cannot contribute to any domain regardless of emission."
+  },
+  {
+    "exactStarName": "Lưu Hóa Khoa",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addMutagenStars(source=annual-mutagen)",
+    "rationale": "Annual mutagen placement emits Lưu Hóa Khoa.",
+    "referencingRuleIds": [
+      "health-pos-luu-hoa-khoa",
+      "romance-pos-luu-hoa-khoa",
+      "social-pos-luu-hoa-khoa"
+    ],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 698,
+    "coverageStatus": "observed",
+    "coverageExplanation": "Star was emitted and matched inside a configured domain palace."
+  },
+  {
+    "exactStarName": "Lưu Hóa Kỵ",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addMutagenStars(source=annual-mutagen)",
+    "rationale": "Annual mutagen placement emits Lưu Hóa Kỵ.",
+    "referencingRuleIds": [
+      "career-neg-luu-hoa-ky",
+      "family-neg-luu-hoa-ky",
+      "health-neg-luu-hoa-ky",
+      "romance-neg-luu-hoa-ky",
+      "social-neg-luu-hoa-ky",
+      "wealth-neg-luu-hoa-ky"
+    ],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 1561,
+    "coverageStatus": "observed",
+    "coverageExplanation": "Star was emitted and matched inside a configured domain palace."
+  },
+  {
+    "exactStarName": "Lưu Hóa Lộc",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addMutagenStars(source=annual-mutagen)",
+    "rationale": "Annual mutagen placement emits Lưu Hóa Lộc.",
+    "referencingRuleIds": [
+      "romance-pos-luu-hoa-loc",
+      "social-pos-luu-hoa-loc",
+      "wealth-pos-luu-hoa-loc"
+    ],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 679,
+    "coverageStatus": "observed",
+    "coverageExplanation": "Star was emitted and matched inside a configured domain palace."
+  },
+  {
+    "exactStarName": "Lưu Hóa Quyền",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addMutagenStars(source=annual-mutagen)",
+    "rationale": "Annual mutagen placement emits Lưu Hóa Quyền.",
+    "referencingRuleIds": [
+      "career-pos-luu-hoa-quyen",
+      "wealth-pos-luu-hoa-quyen"
+    ],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 602,
+    "coverageStatus": "observed",
+    "coverageExplanation": "Star was emitted and matched inside a configured domain palace."
+  },
+  {
+    "exactStarName": "Lưu Hồng Loan",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+    "rationale": "Annual branch path emits Lưu Hồng Loan.",
+    "referencingRuleIds": [],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unreachable",
+    "coverageExplanation": "No active scoring rule references this exact star name; it cannot contribute to any domain regardless of emission."
+  },
+  {
+    "exactStarName": "Lưu Hỷ Thần",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addStemStars(source=annual)",
+    "rationale": "Annual stem path emits Lưu Hỷ Thần from annual Lộc index.",
+    "referencingRuleIds": [],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unreachable",
+    "coverageExplanation": "No active scoring rule references this exact star name; it cannot contribute to any domain regardless of emission."
+  },
+  {
+    "exactStarName": "Lưu Kiếp Sát",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+    "rationale": "Annual branch path emits Lưu Kiếp Sát.",
+    "referencingRuleIds": [],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unreachable",
+    "coverageExplanation": "No active scoring rule references this exact star name; it cannot contribute to any domain regardless of emission."
+  },
+  {
+    "exactStarName": "Lưu Kình Dương",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addLuGroup(source=annual)",
+    "rationale": "addLuGroup with annual source emits Lưu Kình Dương adjacent to annual Lộc Tồn.",
+    "referencingRuleIds": [
+      "health-neg-luu-kinh-duong",
+      "romance-neg-luu-kinh-duong",
+      "wealth-neg-luu-kinh-duong"
+    ],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 870,
+    "coverageStatus": "observed",
+    "coverageExplanation": "Star was emitted and matched inside a configured domain palace."
+  },
+  {
+    "exactStarName": "Lưu Lộc Tồn",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addLuGroup(source=annual)",
+    "rationale": "addLuGroup with annual source emits Lưu Lộc Tồn at the annual stem Lộc index.",
+    "referencingRuleIds": [
+      "family-pos-luu-loc-ton",
+      "wealth-pos-luu-loc-ton"
+    ],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 537,
+    "coverageStatus": "observed",
+    "coverageExplanation": "Star was emitted and matched inside a configured domain palace."
+  },
+  {
+    "exactStarName": "Lưu Long Đức",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+    "rationale": "Annual branch Thái Tuế-cycle subset emits Lưu Long Đức.",
+    "referencingRuleIds": [],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unreachable",
+    "coverageExplanation": "No active scoring rule references this exact star name; it cannot contribute to any domain regardless of emission."
+  },
+  {
+    "exactStarName": "Lưu Nguyệt Đức",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+    "rationale": "Annual branch path emits Lưu Nguyệt Đức.",
+    "referencingRuleIds": [],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unreachable",
+    "coverageExplanation": "No active scoring rule references this exact star name; it cannot contribute to any domain regardless of emission."
+  },
+  {
+    "exactStarName": "Lưu Phục Binh",
+    "temporalLayer": "annual",
+    "supportStatus": "unsupported",
+    "producer": null,
+    "rationale": "Bác Sĩ cycle is natal-only; annual addLuGroup does not emit Lưu Phục Binh. No authoritative annual placement formula exists in-repo.",
+    "referencingRuleIds": [],
+    "emissionCount": 0,
+    "emittingChartCount": 0,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unsupported",
+    "coverageExplanation": "Producer unreachable: Calculation Core never emits this exact annual identity (verified by zero corpus emissions)."
+  },
+  {
+    "exactStarName": "Lưu Phúc Đức",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+    "rationale": "Annual branch Thái Tuế-cycle subset emits Lưu Phúc Đức.",
+    "referencingRuleIds": [],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unreachable",
+    "coverageExplanation": "No active scoring rule references this exact star name; it cannot contribute to any domain regardless of emission."
+  },
+  {
+    "exactStarName": "Lưu Tang Môn",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+    "rationale": "Annual branch Thái Tuế-cycle subset emits Lưu Tang Môn.",
+    "referencingRuleIds": [
+      "family-neg-luu-tang-mon",
+      "health-neg-luu-tang-mon"
+    ],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 751,
+    "coverageStatus": "observed",
+    "coverageExplanation": "Star was emitted and matched inside a configured domain palace."
+  },
+  {
+    "exactStarName": "Lưu Thái Tuế",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+    "rationale": "Annual branch path emits Lưu Thái Tuế; used as prominence only in V0.8 scoring.",
+    "referencingRuleIds": [],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unreachable",
+    "coverageExplanation": "No active scoring rule references this exact star name; it cannot contribute to any domain regardless of emission."
+  },
+  {
+    "exactStarName": "Lưu Thiên Đức",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+    "rationale": "Annual branch path emits Lưu Thiên Đức.",
+    "referencingRuleIds": [],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unreachable",
+    "coverageExplanation": "No active scoring rule references this exact star name; it cannot contribute to any domain regardless of emission."
+  },
+  {
+    "exactStarName": "Lưu Thiên Hư",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+    "rationale": "Annual branch path emits Lưu Thiên Hư.",
+    "referencingRuleIds": [
+      "family-neg-luu-thien-hu"
+    ],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 299,
+    "coverageStatus": "observed",
+    "coverageExplanation": "Star was emitted and matched inside a configured domain palace."
+  },
+  {
+    "exactStarName": "Lưu Thiên Hỷ",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+    "rationale": "Annual branch path emits Lưu Thiên Hỷ.",
+    "referencingRuleIds": [],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unreachable",
+    "coverageExplanation": "No active scoring rule references this exact star name; it cannot contribute to any domain regardless of emission."
+  },
+  {
+    "exactStarName": "Lưu Thiên Khốc",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+    "rationale": "Annual branch path emits Lưu Thiên Khốc.",
+    "referencingRuleIds": [
+      "career-neg-luu-thien-khoc",
+      "family-neg-luu-thien-khoc"
+    ],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 630,
+    "coverageStatus": "observed",
+    "coverageExplanation": "Star was emitted and matched inside a configured domain palace."
+  },
+  {
+    "exactStarName": "Lưu Thiên Khôi",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addStemStars(source=annual)",
+    "rationale": "Annual stem path emits Lưu Thiên Khôi from STEM_KHOI_VIET.",
+    "referencingRuleIds": [
+      "career-pos-luu-thien-khoi",
+      "family-pos-luu-thien-khoi"
+    ],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 640,
+    "coverageStatus": "observed",
+    "coverageExplanation": "Star was emitted and matched inside a configured domain palace."
+  },
+  {
+    "exactStarName": "Lưu Thiên Mã",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+    "rationale": "Annual branch path emits Lưu Thiên Mã.",
+    "referencingRuleIds": [],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unreachable",
+    "coverageExplanation": "No active scoring rule references this exact star name; it cannot contribute to any domain regardless of emission."
+  },
+  {
+    "exactStarName": "Lưu Thiên Việt",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addStemStars(source=annual)",
+    "rationale": "Annual stem path emits Lưu Thiên Việt from STEM_KHOI_VIET.",
+    "referencingRuleIds": [
+      "career-pos-luu-thien-viet",
+      "family-pos-luu-thien-viet"
+    ],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 599,
+    "coverageStatus": "observed",
+    "coverageExplanation": "Star was emitted and matched inside a configured domain palace."
+  },
+  {
+    "exactStarName": "Lưu Tiểu Hao",
+    "temporalLayer": "annual",
+    "supportStatus": "unsupported",
+    "producer": null,
+    "rationale": "Bác Sĩ cycle is natal-only; annual addLuGroup does not emit Lưu Tiểu Hao. No authoritative annual placement formula exists in-repo.",
+    "referencingRuleIds": [],
+    "emissionCount": 0,
+    "emittingChartCount": 0,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unsupported",
+    "coverageExplanation": "Producer unreachable: Calculation Core never emits this exact annual identity (verified by zero corpus emissions)."
+  },
+  {
+    "exactStarName": "Lưu Triệt",
+    "temporalLayer": "annual",
+    "supportStatus": "unsupported",
+    "producer": null,
+    "rationale": "Void markers emit natal Tuần/Triệt only via addVoidStars; Lưu Triệt is never constructed. Do not invent a placement formula.",
+    "referencingRuleIds": [],
+    "emissionCount": 0,
+    "emittingChartCount": 0,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unsupported",
+    "coverageExplanation": "Producer unreachable: Calculation Core never emits this exact annual identity (verified by zero corpus emissions)."
+  },
+  {
+    "exactStarName": "Lưu Tuần",
+    "temporalLayer": "annual",
+    "supportStatus": "unsupported",
+    "producer": null,
+    "rationale": "Void markers emit natal Tuần/Triệt only via addVoidStars; Lưu Tuần is never constructed. Do not invent a placement formula.",
+    "referencingRuleIds": [],
+    "emissionCount": 0,
+    "emittingChartCount": 0,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unsupported",
+    "coverageExplanation": "Producer unreachable: Calculation Core never emits this exact annual identity (verified by zero corpus emissions)."
+  },
+  {
+    "exactStarName": "Lưu Văn Khúc",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addStemStars(source=annual)",
+    "rationale": "Annual stem path emits Lưu Văn Khúc.",
+    "referencingRuleIds": [],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unreachable",
+    "coverageExplanation": "No active scoring rule references this exact star name; it cannot contribute to any domain regardless of emission."
+  },
+  {
+    "exactStarName": "Lưu Văn Xương",
+    "temporalLayer": "annual",
+    "supportStatus": "supported",
+    "producer": "engine-nam-phai.ts#addStemStars(source=annual)",
+    "rationale": "Annual stem path emits Lưu Văn Xương.",
+    "referencingRuleIds": [],
+    "emissionCount": 1200,
+    "emittingChartCount": 100,
+    "configuredPalaceMatchCount": 0,
+    "coverageStatus": "unreachable",
+    "coverageExplanation": "No active scoring rule references this exact star name; it cannot contribute to any domain regardless of emission."
+  }
+]

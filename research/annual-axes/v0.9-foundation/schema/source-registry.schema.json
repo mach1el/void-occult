@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Annual Axes V0.9 Source Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "registryId": { "type": "string" },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "sourceId": { "type": "string", "pattern": "^SRC-AA-" },
+          "title": { "type": "string", "minLength": 1 },
+          "author": { "type": "string" },
+          "edition": { "type": "string" },
+          "publicationYear": { "type": "number" },
+          "language": { "type": "string", "minLength": 2 },
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "classical-text",
+              "school-manual",
+              "published-reference",
+              "modern-commentary",
+              "internal-calculation-contract",
+              "internal-engineering-policy",
+              "unverified-summary"
+            ]
+          },
+          "schoolScope": { "type": "string", "enum": ["nam-phai", "trung-chau", "mixed", "unspecified"] },
+          "locator": { "type": "string", "minLength": 1 },
+          "accessStatus": { "type": "string", "enum": ["verified", "partial", "unavailable"] },
+          "allowedUsage": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "prohibitedUsage": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "notes": { "type": "string" }
+        },
+        "required": [
+          "sourceId", "title", "language", "sourceType", "schoolScope", "locator",
+          "accessStatus", "allowedUsage", "prohibitedUsage"
+        ]
+      }
+    }
+  },
+  "required": ["schemaVersion", "registryId", "sources"]
+}

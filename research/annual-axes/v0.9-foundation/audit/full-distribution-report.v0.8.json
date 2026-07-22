@@ -1,0 +1,90 @@
+{
+  "meanIntraYearAxisStandardDeviation": 5.901296999446484,
+  "medianIntraYearAxisRange": 15,
+  "p25IntraYearRange": 11.799999999999997,
+  "p10IntraYearRange": 9,
+  "boundaryScoreRate": 0,
+  "atLeastTwoOutside42To58Rate": 0.26666666666666666,
+  "atLeastOneAtOrBelow40Rate": 0.3516666666666667,
+  "atLeastOneAtOrAbove60Rate": 0.2758333333333333,
+  "oneLowAndOneHighRate": 0.10916666666666666,
+  "allSixAbove50Rate": 0.0008333333333333334,
+  "fiveOrMoreAbove50Rate": 0.034166666666666665,
+  "allSixInside45To65Rate": 0.24416666666666667,
+  "exactDuplicateVectorRate": 0,
+  "nearDuplicateVectorRate": 0.08,
+  "unavailableRate": 0,
+  "partialRate": 0,
+  "maximumAbsoluteInterAxisCorrelation": 0.3247707625319468,
+  "annualHeadMoveSensitivityRate": 1,
+  "noSignalRate": 0.0725,
+  "balancedSignalRate": 0.05527777777777778,
+  "neutralScoreRate": 0.1426388888888889,
+  "scoredStateNeutralScoreCount": 107,
+  "palaceClampRate": 0,
+  "axisClampRate": 0,
+  "thaiTueApplicationRate": 0.21180555555555555,
+  "meanResolvedCoverage": 1,
+  "partialCoverageDistribution": {
+    "count": 0,
+    "min": 0,
+    "max": 0,
+    "mean": 0,
+    "median": 0
+  },
+  "interAxisCorrelation": {
+    "health|family": -0.014519827605536778,
+    "health|wealth": -0.23150510114066708,
+    "health|career": 0.019922514898266314,
+    "health|social": -0.029852985553247873,
+    "health|romance": 0.011168235943522405,
+    "family|wealth": -0.014470138596317971,
+    "family|career": -0.3247707625319468,
+    "family|social": -0.021201354693285015,
+    "family|romance": -0.01825568908998945,
+    "wealth|career": -0.11525974881903181,
+    "wealth|social": -0.02981439005889136,
+    "wealth|romance": -0.0644508038930154,
+    "career|social": 0.007671937982020571,
+    "career|romance": -0.03992131835793398,
+    "social|romance": -0.2195083424257487
+  },
+  "perDomain": {
+    "health": {
+      "medianPerDomainTwelveYearRange": 19.4,
+      "medianAdjacentYearAbsoluteDelta": 6,
+      "noSignalRate": 0.03,
+      "neutralScoreRate": 0.10166666666666667
+    },
+    "family": {
+      "medianPerDomainTwelveYearRange": 18,
+      "medianAdjacentYearAbsoluteDelta": 4.25,
+      "noSignalRate": 0.005,
+      "neutralScoreRate": 0.095
+    },
+    "wealth": {
+      "medianPerDomainTwelveYearRange": 21,
+      "medianAdjacentYearAbsoluteDelta": 6,
+      "noSignalRate": 0.07416666666666667,
+      "neutralScoreRate": 0.15583333333333332
+    },
+    "career": {
+      "medianPerDomainTwelveYearRange": 17,
+      "medianAdjacentYearAbsoluteDelta": 5,
+      "noSignalRate": 0.10166666666666667,
+      "neutralScoreRate": 0.16333333333333333
+    },
+    "social": {
+      "medianPerDomainTwelveYearRange": 19.35,
+      "medianAdjacentYearAbsoluteDelta": 5,
+      "noSignalRate": 0.13666666666666666,
+      "neutralScoreRate": 0.18333333333333332
+    },
+    "romance": {
+      "medianPerDomainTwelveYearRange": 19,
+      "medianAdjacentYearAbsoluteDelta": 5,
+      "noSignalRate": 0.0875,
+      "neutralScoreRate": 0.15666666666666668
+    }
+  }
+}

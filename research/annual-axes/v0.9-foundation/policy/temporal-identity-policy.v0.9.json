@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "0.9.0",
+  "policyId": "annual-axes-v0.9-temporal-identity-policy",
+  "layers": ["natal", "annual", "decadal", "monthly", "daily", "unknown"],
+  "requiredDecisions": [
+    {
+      "decision": "whether a natal star in an annual palace contributes",
+      "v08Position": "Yes — natal-layer stars physically present in an annual-configured palace contribute at the same point-class weight as any other allowed layer for that rule (allowedTemporalLayers includes 'natal' for most staticPositive/staticNegative rules).",
+      "status": "engineering-hypothesis",
+      "confidence": "medium",
+      "claimIds": ["CLM-AAV09-003"],
+      "sourceIds": ["SRC-AA-ENG-008", "SRC-AA-CORE-001"],
+      "v09Note": "Preserved as-is per task instruction (no source-backed alternative found). This audit measured its consequence: natal-layer contribution is the larger, positive-leaning, year-invariant component that anchors intra-year spread (see audit-findings.md Finding 2). Any V0.9 change here is a point-policy/temporal-identity candidate, not something this pack recommends outright."
+    },
+    {
+      "decision": "whether annual Tứ Hóa is a distinct star identity",
+      "v08Position": "Yes — Lưu Hóa {Lộc,Quyền,Khoa,Kỵ} are exact, temporally distinct identities from natal/decadal Hóa {...}; matching requires exact name + allowedTemporalLayers.",
+      "status": "engineering-hypothesis",
+      "confidence": "medium",
+      "claimIds": ["CLM-AAV09-017"],
+      "sourceIds": ["SRC-AA-ENG-008"],
+      "v09Note": "Preserved as-is; no source-backed alternative found."
+    },
+    {
+      "decision": "whether aliases may cross temporal layers",
+      "v08Position": "No — annual-star-aliases.nam-phai.v0.8.json aliases are spelling/naming variants of the exact same temporal identity only; star families (e.g. groups sharing a familyId) are never treated as interchangeable during exact rule matching.",
+      "status": "engineering-hypothesis",
+      "confidence": "high",
+      "claimIds": [],
+      "sourceIds": ["SRC-AA-ENG-008"],
+      "v09Note": "Preserved as-is; this is a core runtime integrity invariant (v08-integrity.test.ts already asserts it) and this pack found no evidence to challenge it."
+    },
+    {
+      "decision": "how source metadata affects layer inference",
+      "v08Position": "resolveTemporalLayer() prefers structured star.source/star.layer metadata (e.g. 'annual', 'natal', 'major') over name-prefix inference; falls back to exactCanonicalStarName + inferTemporalLayerFromCanonicalName only when metadata is absent.",
+      "status": "engineering-hypothesis",
+      "confidence": "medium",
+      "claimIds": [],
+      "sourceIds": ["SRC-AA-CORE-001"],
+      "v09Note": "Preserved as-is; verified directly by reading nam-phai-v08/star-identity.ts."
+    },
+    {
+      "decision": "how Lưu Hà is classified",
+      "v08Position": "Not evaluated in this pack — not found in the current V0.8 star registry, capability catalog, or corpus emissions scan.",
+      "status": "unsupported",
+      "confidence": "low",
+      "claimIds": [],
+      "sourceIds": [],
+      "v09Note": "RESEARCH_INCOMPLETE for this specific star; out of the explicitly-requested star list for this task, and this audit found no production reference to it."
+    },
+    {
+      "decision": "how bare Thái Tuế differs from Lưu Thái Tuế",
+      "v08Position": "Bare natal Thái Tuế never activates the Lưu Thái Tuế prominence multiplier — isLuuThaiTueInPalace() requires either the authoritative chart.taiTuePalace pointer or an exact 'Lưu Thái Tuế' identity with temporalLayer 'annual'.",
+      "status": "engineering-hypothesis",
+      "confidence": "high",
+      "claimIds": ["CLM-AAV09-013"],
+      "sourceIds": ["SRC-AA-ENG-008", "SRC-AA-CORE-001"],
+      "v09Note": "Preserved as-is; verified directly by reading nam-phai-v08/score-domain.ts:isLuuThaiTueInPalace."
+    }
+  ],
+  "preservationStatement": "The current exact-matching behavior is preserved unless research produces a source-backed alternative for V0.9. This pack produced no source-backed alternative for any of the six decisions above (only derived audit measurements and low-confidence engineering-hypothesis notes) — none of them changes."
+}

@@ -1,0 +1,301 @@
+{
+  "schemaVersion": "0.9.0",
+  "policyId": "annual-axes-v0.9-star-domain-policy",
+  "notes": [
+    "'currentV08Behavior' reflects verified production behavior (registry + capability catalog + this audit's corpus measurement), not assumption.",
+    "'proposedV09Policy' is always marked as an engineering-hypothesis-or-lower confidence proposal, never presented as a production decision."
+  ],
+  "explicitlyRequestedStars": [
+    {
+      "exactStarName": "Lưu Hóa Lộc",
+      "temporalLayer": "annual",
+      "currentV08Behavior": "Supported; registry rules reference it across multiple domains as annualTransformPositive/StrongPositive point class.",
+      "capabilityStatus": "supported",
+      "proposedV09Policy": "No change proposed; already reachable and observed (see rule-coverage.v0.8.json).",
+      "polarity": "positive",
+      "dignityCondition": "none",
+      "activationCondition": "annual mutagen placement (Calculation Core)",
+      "schoolScope": "nam-phai",
+      "claimIds": ["CLM-AAV09-017"],
+      "sourceIds": ["SRC-AA-ENG-008", "SRC-AA-CORE-001"],
+      "confidence": "medium"
+    },
+    {
+      "exactStarName": "Lưu Hóa Quyền",
+      "temporalLayer": "annual",
+      "currentV08Behavior": "Supported; same pattern as Lưu Hóa Lộc.",
+      "capabilityStatus": "supported",
+      "proposedV09Policy": "No change proposed.",
+      "polarity": "positive",
+      "dignityCondition": "none",
+      "activationCondition": "annual mutagen placement (Calculation Core)",
+      "schoolScope": "nam-phai",
+      "claimIds": ["CLM-AAV09-017"],
+      "sourceIds": ["SRC-AA-ENG-008", "SRC-AA-CORE-001"],
+      "confidence": "medium"
+    },
+    {
+      "exactStarName": "Lưu Hóa Khoa",
+      "temporalLayer": "annual",
+      "currentV08Behavior": "Supported; same pattern.",
+      "capabilityStatus": "supported",
+      "proposedV09Policy": "No change proposed.",
+      "polarity": "positive",
+      "dignityCondition": "none",
+      "activationCondition": "annual mutagen placement (Calculation Core)",
+      "schoolScope": "nam-phai",
+      "claimIds": ["CLM-AAV09-017"],
+      "sourceIds": ["SRC-AA-ENG-008", "SRC-AA-CORE-001"],
+      "confidence": "medium"
+    },
+    {
+      "exactStarName": "Lưu Hóa Kỵ",
+      "temporalLayer": "annual",
+      "currentV08Behavior": "Supported; annualTransformNegative point class.",
+      "capabilityStatus": "supported",
+      "proposedV09Policy": "No change proposed.",
+      "polarity": "negative",
+      "dignityCondition": "none",
+      "activationCondition": "annual mutagen placement (Calculation Core)",
+      "schoolScope": "nam-phai",
+      "claimIds": ["CLM-AAV09-017"],
+      "sourceIds": ["SRC-AA-ENG-008", "SRC-AA-CORE-001"],
+      "confidence": "medium"
+    },
+    {
+      "exactStarName": "Lưu Lộc Tồn",
+      "temporalLayer": "annual",
+      "currentV08Behavior": "Supported (addLuGroup, annual stem Lộc index); observed in rule-coverage.v0.8.json.",
+      "capabilityStatus": "supported",
+      "proposedV09Policy": "No change proposed.",
+      "polarity": "positive",
+      "dignityCondition": "none",
+      "activationCondition": "annual stem placement (Calculation Core)",
+      "schoolScope": "nam-phai",
+      "claimIds": [],
+      "sourceIds": ["SRC-AA-CORE-001"],
+      "confidence": "medium"
+    },
+    {
+      "exactStarName": "Lưu Kình Dương",
+      "temporalLayer": "annual",
+      "currentV08Behavior": "Supported (addLuGroup, adjacent to annual Lộc Tồn); observed.",
+      "capabilityStatus": "supported",
+      "proposedV09Policy": "No change proposed.",
+      "polarity": "negative",
+      "dignityCondition": "none",
+      "activationCondition": "annual stem placement (Calculation Core)",
+      "schoolScope": "nam-phai",
+      "claimIds": [],
+      "sourceIds": ["SRC-AA-CORE-001"],
+      "confidence": "medium"
+    },
+    {
+      "exactStarName": "Lưu Đà La",
+      "temporalLayer": "annual",
+      "currentV08Behavior": "Supported (addLuGroup, adjacent to annual Lộc Tồn); observed.",
+      "capabilityStatus": "supported",
+      "proposedV09Policy": "No change proposed.",
+      "polarity": "negative",
+      "dignityCondition": "none",
+      "activationCondition": "annual stem placement (Calculation Core)",
+      "schoolScope": "nam-phai",
+      "claimIds": [],
+      "sourceIds": ["SRC-AA-CORE-001"],
+      "confidence": "medium"
+    },
+    {
+      "exactStarName": "Lưu Thiên Khôi",
+      "temporalLayer": "annual",
+      "currentV08Behavior": "Supported (addStemStars, STEM_KHOI_VIET); observed.",
+      "capabilityStatus": "supported",
+      "proposedV09Policy": "No change proposed.",
+      "polarity": "positive",
+      "dignityCondition": "none",
+      "activationCondition": "annual stem placement (Calculation Core)",
+      "schoolScope": "nam-phai",
+      "claimIds": [],
+      "sourceIds": ["SRC-AA-CORE-001"],
+      "confidence": "medium"
+    },
+    {
+      "exactStarName": "Lưu Thiên Việt",
+      "temporalLayer": "annual",
+      "currentV08Behavior": "Supported (addStemStars, STEM_KHOI_VIET); observed.",
+      "capabilityStatus": "supported",
+      "proposedV09Policy": "No change proposed.",
+      "polarity": "positive",
+      "dignityCondition": "none",
+      "activationCondition": "annual stem placement (Calculation Core)",
+      "schoolScope": "nam-phai",
+      "claimIds": [],
+      "sourceIds": ["SRC-AA-CORE-001"],
+      "confidence": "medium"
+    },
+    {
+      "exactStarName": "Lưu Đại Hao",
+      "temporalLayer": "annual",
+      "currentV08Behavior": "Unsupported; no rule in registry; zero corpus emissions (confirmed).",
+      "capabilityStatus": "unsupported",
+      "proposedV09Policy": "unsupported — see policy/unsupported-star-policy.v0.9.json",
+      "polarity": "negative (candidate, unverified)",
+      "dignityCondition": "unknown",
+      "activationCondition": "no verified annual placement rule exists",
+      "schoolScope": "nam-phai",
+      "claimIds": ["CLM-AAV09-008"],
+      "sourceIds": ["SRC-AA-CORE-001", "SRC-AA-V09-UNVERIFIED-003"],
+      "confidence": "low"
+    },
+    {
+      "exactStarName": "Lưu Tiểu Hao",
+      "temporalLayer": "annual",
+      "currentV08Behavior": "Unsupported; no rule in registry; zero corpus emissions (confirmed).",
+      "capabilityStatus": "unsupported",
+      "proposedV09Policy": "unsupported — see policy/unsupported-star-policy.v0.9.json",
+      "polarity": "negative (candidate, unverified)",
+      "dignityCondition": "unknown",
+      "activationCondition": "no verified annual placement rule exists",
+      "schoolScope": "nam-phai",
+      "claimIds": ["CLM-AAV09-009"],
+      "sourceIds": ["SRC-AA-CORE-001", "SRC-AA-V09-UNVERIFIED-003"],
+      "confidence": "low"
+    },
+    {
+      "exactStarName": "Lưu Phục Binh",
+      "temporalLayer": "annual",
+      "currentV08Behavior": "Unsupported; no rule in registry; zero corpus emissions (confirmed).",
+      "capabilityStatus": "unsupported",
+      "proposedV09Policy": "unsupported — see policy/unsupported-star-policy.v0.9.json",
+      "polarity": "negative (candidate, unverified)",
+      "dignityCondition": "unknown",
+      "activationCondition": "no verified annual placement rule exists",
+      "schoolScope": "nam-phai",
+      "claimIds": ["CLM-AAV09-010"],
+      "sourceIds": ["SRC-AA-CORE-001", "SRC-AA-V09-UNVERIFIED-003"],
+      "confidence": "low"
+    },
+    {
+      "exactStarName": "Lưu Tuần",
+      "temporalLayer": "annual",
+      "currentV08Behavior": "Unsupported; no rule in registry; zero corpus emissions (confirmed).",
+      "capabilityStatus": "unsupported",
+      "proposedV09Policy": "unsupported — see policy/unsupported-star-policy.v0.9.json",
+      "polarity": "negative-or-void (candidate, unverified)",
+      "dignityCondition": "unknown",
+      "activationCondition": "no verified annual placement rule exists",
+      "schoolScope": "nam-phai",
+      "claimIds": ["CLM-AAV09-011"],
+      "sourceIds": ["SRC-AA-CORE-001", "SRC-AA-V09-UNVERIFIED-004"],
+      "confidence": "low"
+    },
+    {
+      "exactStarName": "Lưu Triệt",
+      "temporalLayer": "annual",
+      "currentV08Behavior": "Unsupported; no rule in registry; zero corpus emissions (confirmed).",
+      "capabilityStatus": "unsupported",
+      "proposedV09Policy": "unsupported — see policy/unsupported-star-policy.v0.9.json",
+      "polarity": "negative-or-void (candidate, unverified)",
+      "dignityCondition": "unknown",
+      "activationCondition": "no verified annual placement rule exists",
+      "schoolScope": "nam-phai",
+      "claimIds": ["CLM-AAV09-012"],
+      "sourceIds": ["SRC-AA-CORE-001", "SRC-AA-V09-UNVERIFIED-004"],
+      "confidence": "low"
+    }
+  ],
+  "unreferencedButEmittedStars": {
+    "description": "12 stars this audit confirmed Calculation Core emits in 100% of the corpus (capability-coverage.v0.8.json), but which zero registry rules currently reference. Lưu Thái Tuế is intentionally excluded from this list — see policy/thai-tue-policy.v0.9.json.",
+    "entries": [
+      {
+        "exactStarName": "Lưu Đào Hoa",
+        "candidateDomain": "romance",
+        "candidatePolarity": "disputed (positive vs. negative/mixed — see contradiction CONTRA-AAV09-001)",
+        "claimIds": ["CLM-AAV09-005", "CLM-AAV09-006"],
+        "confidence": "low"
+      },
+      {
+        "exactStarName": "Lưu Hồng Loan",
+        "candidateDomain": "romance (candidate, unverified)",
+        "candidatePolarity": "positive (candidate, unverified)",
+        "claimIds": ["CLM-AAV09-007"],
+        "confidence": "low"
+      },
+      {
+        "exactStarName": "Lưu Hỷ Thần",
+        "candidateDomain": "family or romance (candidate, unverified — 'happiness/joy' star, ambiguous target domain)",
+        "candidatePolarity": "positive (candidate, unverified)",
+        "claimIds": ["CLM-AAV09-007"],
+        "confidence": "low"
+      },
+      {
+        "exactStarName": "Lưu Kiếp Sát",
+        "candidateDomain": "health or wealth (candidate, unverified — 'robbery/calamity' star, ambiguous target domain)",
+        "candidatePolarity": "negative (candidate, unverified)",
+        "claimIds": ["CLM-AAV09-007"],
+        "confidence": "low"
+      },
+      {
+        "exactStarName": "Lưu Long Đức",
+        "candidateDomain": "family (candidate, unverified — virtue/protection star)",
+        "candidatePolarity": "positive (candidate, unverified)",
+        "claimIds": ["CLM-AAV09-007"],
+        "confidence": "low"
+      },
+      {
+        "exactStarName": "Lưu Nguyệt Đức",
+        "candidateDomain": "family (candidate, unverified — virtue/protection star)",
+        "candidatePolarity": "positive (candidate, unverified)",
+        "claimIds": ["CLM-AAV09-007"],
+        "confidence": "low"
+      },
+      {
+        "exactStarName": "Lưu Phúc Đức",
+        "candidateDomain": "family (candidate, unverified — distinct from the Phúc Đức *palace*; this is a star of the same name)",
+        "candidatePolarity": "positive (candidate, unverified)",
+        "claimIds": ["CLM-AAV09-007"],
+        "confidence": "low"
+      },
+      {
+        "exactStarName": "Lưu Thiên Đức",
+        "candidateDomain": "family (candidate, unverified — virtue/protection star)",
+        "candidatePolarity": "positive (candidate, unverified)",
+        "claimIds": ["CLM-AAV09-007"],
+        "confidence": "low"
+      },
+      {
+        "exactStarName": "Lưu Thiên Hỷ",
+        "candidateDomain": "romance or family (candidate, unverified — 'celestial joy' star, ambiguous target domain)",
+        "candidatePolarity": "positive (candidate, unverified)",
+        "claimIds": ["CLM-AAV09-007"],
+        "confidence": "low"
+      },
+      {
+        "exactStarName": "Lưu Thiên Mã",
+        "candidateDomain": "career or social (candidate, unverified — 'celestial horse' movement/travel star)",
+        "candidatePolarity": "positive (candidate, unverified)",
+        "claimIds": ["CLM-AAV09-007"],
+        "confidence": "low"
+      },
+      {
+        "exactStarName": "Lưu Văn Khúc",
+        "candidateDomain": "career (candidate, unverified — literary/scholarly star)",
+        "candidatePolarity": "positive (candidate, unverified)",
+        "claimIds": ["CLM-AAV09-007"],
+        "confidence": "low"
+      },
+      {
+        "exactStarName": "Lưu Văn Xương",
+        "candidateDomain": "career (candidate, unverified — literary/scholarly star)",
+        "candidatePolarity": "positive (candidate, unverified)",
+        "claimIds": ["CLM-AAV09-007"],
+        "confidence": "low"
+      }
+    ]
+  },
+  "natalMainStarsInsideAnnualPalaces": {
+    "description": "Natal main stars (Tử Vi, Thiên Cơ, etc.) physically resident in an annual-configured palace already contribute at production point-class weights (see school-policy-matrix.v0.9.json 'natal stars inside annual palace'). This audit measured, but this pack does not re-litigate, that policy's consequence: natal-layer mass is net-positive (ratio 1.84) and anchors intra-year spread (CLM-AAV09-003).",
+    "claimIds": ["CLM-AAV09-003"],
+    "confidence": "high",
+    "status": "derived"
+  }
+}

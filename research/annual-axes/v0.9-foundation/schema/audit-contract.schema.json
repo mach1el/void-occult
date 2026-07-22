@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Annual Axes V0.9 Audit Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "contractId": { "type": "string", "pattern": "^annual-axes-v0\\.9-" },
+    "implementation": { "type": "string", "minLength": 1 },
+    "description": { "type": "string", "minLength": 1 },
+    "domainObservationFields": { "type": "object" },
+    "observationFields": { "type": "object" },
+    "invariants": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1
+    }
+  },
+  "required": ["schemaVersion", "contractId", "domainObservationFields", "observationFields", "invariants"]
+}

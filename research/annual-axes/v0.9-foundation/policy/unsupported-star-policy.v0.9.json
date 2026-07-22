@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "0.9.0",
+  "policyId": "annual-axes-v0.9-unsupported-star-policy",
+  "allowedDecisions": ["supported-for-future-core", "research-only", "interpretive-only", "unsupported", "disputed"],
+  "requiredForSupportedForFutureCore": [
+    "verified placement rule",
+    "source locator",
+    "temporal identity definition",
+    "deterministic calculation inputs",
+    "test-vector examples"
+  ],
+  "stars": [
+    {
+      "exactStarName": "Lưu Đại Hao",
+      "isAnnualIdentityValidInNamPhai": "unresolved — natal Đại Hao (Bác Sĩ cycle) is a recognized Nam Phái natal concept; no annual re-derivation was found documented anywhere available to this pack",
+      "isAnnualPlacementFormulaDocumented": false,
+      "calculationCoreHasEnoughInputs": false,
+      "trueAnnualStarOrNatalReinterpretation": "would be an annual reinterpretation of a natal Bác Sĩ-cycle marker, not an independently-attested annual star",
+      "sourceAndLocator": "none found — SRC-AA-V09-UNVERIFIED-003 confirms only that the natal cycle is well-known, not an annual placement",
+      "numericOrInterpretiveOnly": "neither is currently justified — no annual identity to interpret or score",
+      "decision": "unsupported",
+      "decisionRationale": "Fails all 5 supported-for-future-core preconditions. Matches current production status exactly (annual-star-capabilities.nam-phai.v0.8.json, confirmed zero corpus emissions in capability-coverage.v0.8.json).",
+      "claimIds": ["CLM-AAV09-008"],
+      "confidence": "medium"
+    },
+    {
+      "exactStarName": "Lưu Tiểu Hao",
+      "isAnnualIdentityValidInNamPhai": "unresolved — same as Lưu Đại Hao",
+      "isAnnualPlacementFormulaDocumented": false,
+      "calculationCoreHasEnoughInputs": false,
+      "trueAnnualStarOrNatalReinterpretation": "would be an annual reinterpretation of a natal Bác Sĩ-cycle marker",
+      "sourceAndLocator": "none found",
+      "numericOrInterpretiveOnly": "neither currently justified",
+      "decision": "unsupported",
+      "decisionRationale": "Fails all 5 preconditions; matches current production status.",
+      "claimIds": ["CLM-AAV09-009"],
+      "confidence": "medium"
+    },
+    {
+      "exactStarName": "Lưu Phục Binh",
+      "isAnnualIdentityValidInNamPhai": "unresolved — same as Lưu Đại Hao",
+      "isAnnualPlacementFormulaDocumented": false,
+      "calculationCoreHasEnoughInputs": false,
+      "trueAnnualStarOrNatalReinterpretation": "would be an annual reinterpretation of a natal Bác Sĩ-cycle marker",
+      "sourceAndLocator": "none found",
+      "numericOrInterpretiveOnly": "neither currently justified",
+      "decision": "unsupported",
+      "decisionRationale": "Fails all 5 preconditions; matches current production status.",
+      "claimIds": ["CLM-AAV09-010"],
+      "confidence": "medium"
+    },
+    {
+      "exactStarName": "Lưu Tuần",
+      "isAnnualIdentityValidInNamPhai": "unresolved — natal Tuần (void) is a recognized Nam Phái concept; no annual re-derivation was found documented",
+      "isAnnualPlacementFormulaDocumented": false,
+      "calculationCoreHasEnoughInputs": false,
+      "trueAnnualStarOrNatalReinterpretation": "would be an annual reinterpretation of the natal void marker",
+      "sourceAndLocator": "none found — SRC-AA-V09-UNVERIFIED-004 confirms only that the natal void doctrine is well-known",
+      "numericOrInterpretiveOnly": "neither currently justified",
+      "decision": "unsupported",
+      "decisionRationale": "Fails all 5 preconditions; matches current production status (addVoidStars only constructs natal identities).",
+      "claimIds": ["CLM-AAV09-011"],
+      "confidence": "medium"
+    },
+    {
+      "exactStarName": "Lưu Triệt",
+      "isAnnualIdentityValidInNamPhai": "unresolved — same as Lưu Tuần",
+      "isAnnualPlacementFormulaDocumented": false,
+      "calculationCoreHasEnoughInputs": false,
+      "trueAnnualStarOrNatalReinterpretation": "would be an annual reinterpretation of the natal void marker",
+      "sourceAndLocator": "none found",
+      "numericOrInterpretiveOnly": "neither currently justified",
+      "decision": "unsupported",
+      "decisionRationale": "Fails all 5 preconditions; matches current production status.",
+      "claimIds": ["CLM-AAV09-012"],
+      "confidence": "medium"
+    }
+  ],
+  "summary": "All five unsupported annual stars remain 'unsupported' — none qualifies for 'research-only', 'interpretive-only', 'supported-for-future-core', or 'disputed' because no source in this pack documents even a candidate annual placement mechanism (disputed requires two competing documented positions; here there are zero). This is the cleanest, most confident finding in the entire research pack: the current V0.8 production exclusion of these five stars is correct and this pack found no reason to revisit it."
+}

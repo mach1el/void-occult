@@ -1,0 +1,288 @@
+{
+  "catalogId": "annual-distribution-gates-v0-8",
+  "evaluations": [
+    {
+      "metricId": "meanIntraYearAxisStandardDeviation",
+      "scope": "global",
+      "actual": 5.901296999446484,
+      "threshold": 11,
+      "operator": "minimum",
+      "passed": false,
+      "status": "failed",
+      "explanation": "meanIntraYearAxisStandardDeviation (global) = 5.901296999446484 violates minimum threshold 11."
+    },
+    {
+      "metricId": "medianIntraYearAxisRange",
+      "scope": "global",
+      "actual": 15,
+      "threshold": 30,
+      "operator": "minimum",
+      "passed": false,
+      "status": "failed",
+      "explanation": "medianIntraYearAxisRange (global) = 15 violates minimum threshold 30."
+    },
+    {
+      "metricId": "p25IntraYearRange",
+      "scope": "global",
+      "actual": 11.799999999999997,
+      "threshold": 20,
+      "operator": "minimum",
+      "passed": false,
+      "status": "failed",
+      "explanation": "p25IntraYearRange (global) = 11.799999999999997 violates minimum threshold 20."
+    },
+    {
+      "metricId": "p10IntraYearRange",
+      "scope": "global",
+      "actual": 9,
+      "threshold": 14,
+      "operator": "minimum",
+      "passed": false,
+      "status": "failed",
+      "explanation": "p10IntraYearRange (global) = 9 violates minimum threshold 14."
+    },
+    {
+      "metricId": "medianPerDomainTwelveYearRange",
+      "scope": "health",
+      "actual": 19.4,
+      "threshold": 12,
+      "operator": "minimum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "medianPerDomainTwelveYearRange (health) = 19.4 satisfies minimum threshold 12."
+    },
+    {
+      "metricId": "medianPerDomainTwelveYearRange",
+      "scope": "family",
+      "actual": 18,
+      "threshold": 12,
+      "operator": "minimum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "medianPerDomainTwelveYearRange (family) = 18 satisfies minimum threshold 12."
+    },
+    {
+      "metricId": "medianPerDomainTwelveYearRange",
+      "scope": "wealth",
+      "actual": 21,
+      "threshold": 12,
+      "operator": "minimum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "medianPerDomainTwelveYearRange (wealth) = 21 satisfies minimum threshold 12."
+    },
+    {
+      "metricId": "medianPerDomainTwelveYearRange",
+      "scope": "career",
+      "actual": 17,
+      "threshold": 12,
+      "operator": "minimum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "medianPerDomainTwelveYearRange (career) = 17 satisfies minimum threshold 12."
+    },
+    {
+      "metricId": "medianPerDomainTwelveYearRange",
+      "scope": "social",
+      "actual": 19.35,
+      "threshold": 12,
+      "operator": "minimum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "medianPerDomainTwelveYearRange (social) = 19.35 satisfies minimum threshold 12."
+    },
+    {
+      "metricId": "medianPerDomainTwelveYearRange",
+      "scope": "romance",
+      "actual": 19,
+      "threshold": 12,
+      "operator": "minimum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "medianPerDomainTwelveYearRange (romance) = 19 satisfies minimum threshold 12."
+    },
+    {
+      "metricId": "medianAdjacentYearAbsoluteDelta",
+      "scope": "health",
+      "actual": 6,
+      "threshold": 2.5,
+      "operator": "minimum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "medianAdjacentYearAbsoluteDelta (health) = 6 satisfies minimum threshold 2.5."
+    },
+    {
+      "metricId": "medianAdjacentYearAbsoluteDelta",
+      "scope": "family",
+      "actual": 4.25,
+      "threshold": 2.5,
+      "operator": "minimum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "medianAdjacentYearAbsoluteDelta (family) = 4.25 satisfies minimum threshold 2.5."
+    },
+    {
+      "metricId": "medianAdjacentYearAbsoluteDelta",
+      "scope": "wealth",
+      "actual": 6,
+      "threshold": 2.5,
+      "operator": "minimum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "medianAdjacentYearAbsoluteDelta (wealth) = 6 satisfies minimum threshold 2.5."
+    },
+    {
+      "metricId": "medianAdjacentYearAbsoluteDelta",
+      "scope": "career",
+      "actual": 5,
+      "threshold": 2.5,
+      "operator": "minimum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "medianAdjacentYearAbsoluteDelta (career) = 5 satisfies minimum threshold 2.5."
+    },
+    {
+      "metricId": "medianAdjacentYearAbsoluteDelta",
+      "scope": "social",
+      "actual": 5,
+      "threshold": 2.5,
+      "operator": "minimum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "medianAdjacentYearAbsoluteDelta (social) = 5 satisfies minimum threshold 2.5."
+    },
+    {
+      "metricId": "medianAdjacentYearAbsoluteDelta",
+      "scope": "romance",
+      "actual": 5,
+      "threshold": 2.5,
+      "operator": "minimum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "medianAdjacentYearAbsoluteDelta (romance) = 5 satisfies minimum threshold 2.5."
+    },
+    {
+      "metricId": "exactDuplicateVectorRate",
+      "scope": "global",
+      "actual": 0,
+      "threshold": 0.01,
+      "operator": "maximum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "exactDuplicateVectorRate (global) = 0 satisfies maximum threshold 0.01."
+    },
+    {
+      "metricId": "nearDuplicateVectorRate",
+      "scope": "global",
+      "actual": 0.08,
+      "threshold": 0.05,
+      "operator": "maximum",
+      "passed": false,
+      "status": "failed",
+      "explanation": "nearDuplicateVectorRate (global) = 0.08 violates maximum threshold 0.05."
+    },
+    {
+      "metricId": "unavailableRate",
+      "scope": "global",
+      "actual": 0,
+      "threshold": 0.02,
+      "operator": "maximum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "unavailableRate (global) = 0 satisfies maximum threshold 0.02."
+    },
+    {
+      "metricId": "maximumAbsoluteInterAxisCorrelation",
+      "scope": "global",
+      "actual": 0.3247707625319468,
+      "threshold": 0.88,
+      "operator": "maximum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "maximumAbsoluteInterAxisCorrelation (global) = 0.3247707625319468 satisfies maximum threshold 0.88."
+    },
+    {
+      "metricId": "boundaryScoreRate",
+      "scope": "global",
+      "actual": 0,
+      "threshold": 0.04,
+      "operator": "maximum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "boundaryScoreRate (global) = 0 satisfies maximum threshold 0.04."
+    },
+    {
+      "metricId": "atLeastTwoOutside42To58Rate",
+      "scope": "global",
+      "actual": 0.26666666666666666,
+      "threshold": 0.7,
+      "operator": "minimum",
+      "passed": false,
+      "status": "failed",
+      "explanation": "atLeastTwoOutside42To58Rate (global) = 0.26666666666666666 violates minimum threshold 0.7."
+    },
+    {
+      "metricId": "atLeastOneAtOrBelow40Rate",
+      "scope": "global",
+      "actual": 0.3516666666666667,
+      "threshold": 0.6,
+      "operator": "minimum",
+      "passed": false,
+      "status": "failed",
+      "explanation": "atLeastOneAtOrBelow40Rate (global) = 0.3516666666666667 violates minimum threshold 0.6."
+    },
+    {
+      "metricId": "atLeastOneAtOrAbove60Rate",
+      "scope": "global",
+      "actual": 0.2758333333333333,
+      "threshold": 0.6,
+      "operator": "minimum",
+      "passed": false,
+      "status": "failed",
+      "explanation": "atLeastOneAtOrAbove60Rate (global) = 0.2758333333333333 violates minimum threshold 0.6."
+    },
+    {
+      "metricId": "oneLowAndOneHighRate",
+      "scope": "global",
+      "actual": 0.10916666666666666,
+      "threshold": 0.55,
+      "operator": "minimum",
+      "passed": false,
+      "status": "failed",
+      "explanation": "oneLowAndOneHighRate (global) = 0.10916666666666666 violates minimum threshold 0.55."
+    },
+    {
+      "metricId": "allSixAbove50Rate",
+      "scope": "global",
+      "actual": 0.0008333333333333334,
+      "threshold": 0.08,
+      "operator": "maximum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "allSixAbove50Rate (global) = 0.0008333333333333334 satisfies maximum threshold 0.08."
+    },
+    {
+      "metricId": "fiveOrMoreAbove50Rate",
+      "scope": "global",
+      "actual": 0.034166666666666665,
+      "threshold": 0.25,
+      "operator": "maximum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "fiveOrMoreAbove50Rate (global) = 0.034166666666666665 satisfies maximum threshold 0.25."
+    },
+    {
+      "metricId": "allSixInside45To65Rate",
+      "scope": "global",
+      "actual": 0.24416666666666667,
+      "threshold": 0.25,
+      "operator": "maximum",
+      "passed": true,
+      "status": "passed",
+      "explanation": "allSixInside45To65Rate (global) = 0.24416666666666667 satisfies maximum threshold 0.25."
+    }
+  ],
+  "unknownConfiguredGateKeys": [],
+  "allConfiguredGatesEvaluated": true,
+  "anyFailed": true
+}

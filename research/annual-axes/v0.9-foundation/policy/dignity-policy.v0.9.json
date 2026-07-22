@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "0.9.0",
+  "policyId": "annual-axes-v0.9-dignity-policy",
+  "researchQuestions": [
+    "does dignity affect main-star positive contribution?",
+    "does dignity affect main-star negative contribution?",
+    "does dignity affect annual star contribution?",
+    "does dignity affect Tứ Hóa contribution?",
+    "does dignity affect palace-specific interpretation?"
+  ],
+  "findings": {
+    "requiredDignitySet": {
+      "description": "V0.8's `requiresDignity` rule field (V08StarRule) is optional; when present, it gates whether a rule matches based on `star.brightness` (dignityOk() in match-stars.ts). This pack found no full enumeration of which specific rules currently set it, beyond what is visible per-rule in rule-coverage.v0.8.json.",
+      "status": "engineering-hypothesis",
+      "confidence": "low"
+    },
+    "optionalDignityMultiplier": {
+      "description": "No numeric dignity multiplier exists in V0.8 — dignity is a binary gate (matches or doesn't), not a magnitude scaler. `dignifiedStaticPositive` is a distinct point class (value 2) rather than a multiplier applied to `staticPositive` (value 1); it is configured per-rule, not derived by multiplying.",
+      "status": "engineering-hypothesis",
+      "confidence": "medium"
+    },
+    "noDignityDependency": {
+      "description": "Most rules in the registry do not set `requiresDignity` at all and are unconditional on dignity.",
+      "status": "engineering-hypothesis",
+      "confidence": "low"
+    },
+    "schoolSpecificDisagreement": {
+      "description": "Not evaluated — this pack has no Trung Châu dignity policy to compare against, and no classical/school-manual source to establish whether Nam Phái's binary dignity gate matches or diverges from other schools' treatment.",
+      "status": "unsupported",
+      "confidence": "low"
+    }
+  },
+  "numericMultipliersIntroduced": false,
+  "claimIds": ["CLM-AAV09-015"],
+  "sourceIds": ["SRC-AA-ENG-008"],
+  "readinessNote": "RESEARCH_INCOMPLETE for dignity policy as a whole — no source-backed evidence was found to justify any V0.9 change, and per task instruction this pack introduces no numeric dignity multipliers."
+}

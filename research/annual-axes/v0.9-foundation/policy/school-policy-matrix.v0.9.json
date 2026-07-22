@@ -1,0 +1,262 @@
+{
+  "schemaVersion": "0.9.0",
+  "policyId": "annual-axes-v0.9-school-policy-matrix",
+  "notes": [
+    "Nam Phái and Trung Châu are never merged into a generic rule without evidence.",
+    "Trung Châu remains isolated on its own V0.2 pipeline; this pack does not propose changing it."
+  ],
+  "topics": [
+    {
+      "topic": "annual palace coordinate",
+      "namPhai": {
+        "policy": "Domain anchors resolve via natal palace name matched to the annual head rotation (annual-palace-name coordinate).",
+        "claimIds": ["CLM-AAV09-001"],
+        "sourceIds": ["SRC-AA-ENG-008"],
+        "status": "engineering-hypothesis",
+        "confidence": "medium",
+        "runtimeCompatibility": "matches production nam-phai-v08/resolve-annual-palace.ts",
+        "knownContradictions": []
+      },
+      "trungChau": {
+        "policy": "Uses annual 'trùng bài' labels directly (annual-palace-name coordinate), via a separate V0.2 resolver.",
+        "claimIds": [],
+        "sourceIds": [],
+        "status": "engineering-hypothesis",
+        "confidence": "low",
+        "runtimeCompatibility": "out of scope for this pack; documented for contrast only",
+        "knownContradictions": []
+      }
+    },
+    {
+      "topic": "annual head palace",
+      "namPhai": {
+        "policy": "annualHeadPalace / isLuuNienDaiVan flag identifies the annual Mệnh-equivalent head for the year.",
+        "claimIds": [],
+        "sourceIds": ["SRC-AA-CORE-001"],
+        "status": "engineering-hypothesis",
+        "confidence": "medium",
+        "runtimeCompatibility": "matches production; annualHeadMoveSensitivityRate = 1.0 in this audit (every head move changes at least one axis > 0.5)",
+        "knownContradictions": []
+      },
+      "trungChau": {
+        "policy": "Annual Mệnh via separate V0.2 focus resolution.",
+        "claimIds": [],
+        "sourceIds": [],
+        "status": "engineering-hypothesis",
+        "confidence": "low",
+        "runtimeCompatibility": "out of scope",
+        "knownContradictions": []
+      }
+    },
+    {
+      "topic": "small-limit role",
+      "namPhai": {
+        "policy": "Tiểu Hạn is a cooperating-weight palace input, currently wired only into the health domain (weight 0.2).",
+        "claimIds": ["CLM-AAV09-018"],
+        "sourceIds": ["SRC-AA-ENG-008"],
+        "status": "engineering-hypothesis",
+        "confidence": "low",
+        "runtimeCompatibility": "matches production annual-domain-mapping.nam-phai.v0.8.json",
+        "knownContradictions": []
+      },
+      "trungChau": {
+        "policy": "Not evaluated in this pack.",
+        "claimIds": [],
+        "sourceIds": [],
+        "status": "engineering-hypothesis",
+        "confidence": "low",
+        "runtimeCompatibility": "out of scope",
+        "knownContradictions": []
+      }
+    },
+    {
+      "topic": "TP4C role",
+      "namPhai": {
+        "policy": "V0.8 does not use a TP4C (Tứ Phương Chính Chiếu) frame; scoring is purely palace-weighted, not frame/aspect-based. TP4C/frame evidence collection is a V0.2-only concept (collect-domain-frames.ts) not used by the V0.8 formula.",
+        "claimIds": [],
+        "sourceIds": ["SRC-AA-ENG-008"],
+        "status": "engineering-hypothesis",
+        "confidence": "medium",
+        "runtimeCompatibility": "matches production — nam-phai-v08/score-domain.ts has no frame/aspect concept",
+        "knownContradictions": []
+      },
+      "trungChau": {
+        "policy": "V0.2 uses TP4C frames (focus/opposite/trine) as the core evidence-collection mechanism.",
+        "claimIds": [],
+        "sourceIds": [],
+        "status": "engineering-hypothesis",
+        "confidence": "medium",
+        "runtimeCompatibility": "out of scope; documented for contrast only",
+        "knownContradictions": []
+      }
+    },
+    {
+      "topic": "annual Tứ Hóa",
+      "namPhai": {
+        "policy": "Annual Tứ Hóa are temporally distinct identities from natal/decadal Tứ Hóa; only annual-scoped rules match them.",
+        "claimIds": ["CLM-AAV09-017"],
+        "sourceIds": ["SRC-AA-ENG-008"],
+        "status": "engineering-hypothesis",
+        "confidence": "medium",
+        "runtimeCompatibility": "matches production star-identity.ts exact-match behavior",
+        "knownContradictions": []
+      },
+      "trungChau": {
+        "policy": "Not evaluated in this pack.",
+        "claimIds": [],
+        "sourceIds": [],
+        "status": "engineering-hypothesis",
+        "confidence": "low",
+        "runtimeCompatibility": "out of scope",
+        "knownContradictions": []
+      }
+    },
+    {
+      "topic": "natal stars inside annual palace",
+      "namPhai": {
+        "policy": "Natal (and other-layer) static stars physically present in an annual-configured palace do contribute, at the same point-class weights as annual-layer stars in the same palace role.",
+        "claimIds": ["CLM-AAV09-003"],
+        "sourceIds": ["SRC-AA-CORE-001"],
+        "status": "derived",
+        "confidence": "high",
+        "runtimeCompatibility": "matches production match-stars.ts allowedTemporalLayers behavior; this audit measured its consequence (natal mass ratio 1.84, anchoring intra-year spread — see audit-findings.md Finding 2)",
+        "knownContradictions": []
+      },
+      "trungChau": {
+        "policy": "Not evaluated in this pack.",
+        "claimIds": [],
+        "sourceIds": [],
+        "status": "engineering-hypothesis",
+        "confidence": "low",
+        "runtimeCompatibility": "out of scope",
+        "knownContradictions": []
+      }
+    },
+    {
+      "topic": "annual auxiliary stars",
+      "namPhai": {
+        "policy": "12 Calculation-Core-supported annual auxiliary stars have zero scoring rules (see Finding 3); 5 more have no verified annual placement at all and are excluded from the registry entirely.",
+        "claimIds": ["CLM-AAV09-004", "CLM-AAV09-007", "CLM-AAV09-008", "CLM-AAV09-009", "CLM-AAV09-010", "CLM-AAV09-011", "CLM-AAV09-012"],
+        "sourceIds": ["SRC-AA-CORE-001"],
+        "status": "derived",
+        "confidence": "high",
+        "runtimeCompatibility": "matches production annual-star-capabilities.nam-phai.v0.8.json",
+        "knownContradictions": ["CONTRA-AAV09-001"]
+      },
+      "trungChau": {
+        "policy": "Not evaluated in this pack.",
+        "claimIds": [],
+        "sourceIds": [],
+        "status": "engineering-hypothesis",
+        "confidence": "low",
+        "runtimeCompatibility": "out of scope",
+        "knownContradictions": []
+      }
+    },
+    {
+      "topic": "dignity handling",
+      "namPhai": {
+        "policy": "Optional per-rule `requiresDignity` gate + `dignifiedStaticPositive` point class exist, but no source-backed research in this pack expands beyond current usage.",
+        "claimIds": ["CLM-AAV09-015"],
+        "sourceIds": ["SRC-AA-ENG-008"],
+        "status": "engineering-hypothesis",
+        "confidence": "low",
+        "runtimeCompatibility": "matches production match-stars.ts dignityOk()",
+        "knownContradictions": []
+      },
+      "trungChau": {
+        "policy": "Not evaluated in this pack.",
+        "claimIds": [],
+        "sourceIds": [],
+        "status": "engineering-hypothesis",
+        "confidence": "low",
+        "runtimeCompatibility": "out of scope",
+        "knownContradictions": []
+      }
+    },
+    {
+      "topic": "Lưu Thái Tuế",
+      "namPhai": {
+        "policy": "Prominence multiplier only (×1.25), magnitude-scaling, never a positive point source, never creates direction from zero.",
+        "claimIds": ["CLM-AAV09-013", "CLM-AAV09-014"],
+        "sourceIds": ["SRC-AA-ENG-008", "SRC-AA-CORE-001"],
+        "status": "engineering-hypothesis",
+        "confidence": "medium",
+        "runtimeCompatibility": "matches production score-domain.ts isLuuThaiTueInPalace/prominenceAdjustedRaw",
+        "knownContradictions": []
+      },
+      "trungChau": {
+        "policy": "Not evaluated in this pack.",
+        "claimIds": [],
+        "sourceIds": [],
+        "status": "engineering-hypothesis",
+        "confidence": "low",
+        "runtimeCompatibility": "out of scope",
+        "knownContradictions": []
+      }
+    },
+    {
+      "topic": "Tuần/Triệt annual treatment",
+      "namPhai": {
+        "policy": "No annual Tuần/Triệt identity is constructed; unsupported, disabled in production registry.",
+        "claimIds": ["CLM-AAV09-011", "CLM-AAV09-012"],
+        "sourceIds": ["SRC-AA-CORE-001", "SRC-AA-V09-UNVERIFIED-004"],
+        "status": "unsupported",
+        "confidence": "medium",
+        "runtimeCompatibility": "matches production — addVoidStars only constructs natal identities",
+        "knownContradictions": []
+      },
+      "trungChau": {
+        "policy": "Not evaluated in this pack.",
+        "claimIds": [],
+        "sourceIds": [],
+        "status": "engineering-hypothesis",
+        "confidence": "low",
+        "runtimeCompatibility": "out of scope",
+        "knownContradictions": []
+      }
+    },
+    {
+      "topic": "Bác Sĩ cycle annual treatment",
+      "namPhai": {
+        "policy": "Bác Sĩ cycle (incl. Đại Hao/Tiểu Hao/Phục Binh) is natal-only via addLuGroup; no annual identity constructed; unsupported, disabled in production registry.",
+        "claimIds": ["CLM-AAV09-008", "CLM-AAV09-009", "CLM-AAV09-010"],
+        "sourceIds": ["SRC-AA-CORE-001", "SRC-AA-V09-UNVERIFIED-003"],
+        "status": "unsupported",
+        "confidence": "medium",
+        "runtimeCompatibility": "matches production — annual addLuGroup does not emit these identities",
+        "knownContradictions": []
+      },
+      "trungChau": {
+        "policy": "Not evaluated in this pack.",
+        "claimIds": [],
+        "sourceIds": [],
+        "status": "engineering-hypothesis",
+        "confidence": "low",
+        "runtimeCompatibility": "out of scope",
+        "knownContradictions": []
+      }
+    },
+    {
+      "topic": "domain-palace relationships",
+      "namPhai": {
+        "policy": "Primary + up to 2 cooperating palaces per domain, 60/40 weight split; see domain-palace-policy.v0.9.json for the per-domain breakdown.",
+        "claimIds": ["CLM-AAV09-001", "CLM-AAV09-016"],
+        "sourceIds": ["SRC-AA-ENG-008", "SRC-AA-CORE-001"],
+        "status": "engineering-hypothesis",
+        "confidence": "medium",
+        "runtimeCompatibility": "matches production annual-domain-mapping.nam-phai.v0.8.json",
+        "knownContradictions": []
+      },
+      "trungChau": {
+        "policy": "Not evaluated in this pack.",
+        "claimIds": [],
+        "sourceIds": [],
+        "status": "engineering-hypothesis",
+        "confidence": "low",
+        "runtimeCompatibility": "out of scope",
+        "knownContradictions": []
+      }
+    }
+  ]
+}

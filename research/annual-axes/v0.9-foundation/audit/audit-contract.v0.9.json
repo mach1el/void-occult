@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "0.9.0",
+  "contractId": "annual-axes-v0.9-audit-contract",
+  "implementation": "src/lib/ziwei/analysis/modules/annual-axes/audit/v0.9/types.ts",
+  "description": "Read-only research audit contract over the production V0.8 engine trace. Computes nothing the engine doesn't already produce; never mutates or re-derives a production score.",
+  "domainObservationFields": {
+    "status": { "type": "enum", "values": ["available", "partial-data", "unavailable"] },
+    "score": { "type": "number|null", "invariant": "null only when status is unavailable; never fabricated" },
+    "band": { "type": "string|null" },
+    "scoreState": { "type": "enum", "values": ["scored", "no-signal", "balanced-signal", "partial-data", "unavailable"] },
+    "resolvedWeight": { "type": "number" },
+    "totalWeight": { "type": "number" },
+    "missingPalaces": { "type": "string[]" },
+    "primaryPalace": { "type": "string" },
+    "cooperatingPalaces": { "type": "string[]" },
+    "positivePoints": { "type": "number" },
+    "negativePoints": { "type": "number" },
+    "axisRawBeforeThaiTue": { "type": "number" },
+    "thaiTueApplied": { "type": "boolean" },
+    "thaiTueMultiplier": { "type": "number" },
+    "prominenceAdjustedRaw": { "type": "number" },
+    "palaceClampApplied": { "type": "boolean" },
+    "axisClampApplied": { "type": "boolean" },
+    "matchedRuleIds": { "type": "string[]" },
+    "matchedStarNames": { "type": "string[]" }
+  },
+  "observationFields": {
+    "chartId": { "type": "string" },
+    "school": { "type": "const", "value": "nam-phai" },
+    "annualYear": { "type": "number" },
+    "annualHeadPalaceIndex": { "type": "number|null" },
+    "domains": { "type": "record<health|family|wealth|career|social|romance, domainObservation>" }
+  },
+  "invariants": [
+    "partial-data scores are retained, never nulled",
+    "unavailable scores remain null",
+    "score state is captured independently of status",
+    "coverage (resolvedWeight/totalWeight/missingPalaces) is always captured, even when 0/0/[]",
+    "raw score fields (axisRawBeforeThaiTue, thaiTueMultiplier, prominenceAdjustedRaw) reconstruct the production score deterministically",
+    "palaceClampApplied/axisClampApplied are derived by comparing unclamped vs. clamped values, not assumed"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Annual Axes V0.9 Claim Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "registryId": { "type": "string" },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "claimId": { "type": "string", "pattern": "^CLM-AAV09-[0-9]{3}$" },
+          "topic": {
+            "type": "string",
+            "enum": [
+              "domain-palace", "cooperating-palace", "annual-star-placement", "star-domain",
+              "temporal-identity", "dignity", "thai-tue", "tieu-han", "tu-hoa", "scoring-policy"
+            ]
+          },
+          "statement": { "type": "string", "minLength": 1 },
+          "school": { "type": "string", "enum": ["nam-phai", "trung-chau", "mixed", "unspecified"] },
+          "status": { "type": "string", "enum": ["classical", "derived", "engineering-hypothesis", "disputed", "unsupported"] },
+          "confidence": { "type": "string", "enum": ["high", "medium", "low"] },
+          "sourceIds": { "type": "array", "items": { "type": "string" } },
+          "locators": { "type": "array", "items": { "type": "string" } },
+          "contradictingClaimIds": { "type": "array", "items": { "type": "string" } },
+          "runtimeImplication": { "type": "string", "minLength": 1 },
+          "notes": { "type": ["string", "null"] }
+        },
+        "required": [
+          "claimId", "topic", "statement", "school", "status", "confidence",
+          "sourceIds", "locators", "contradictingClaimIds", "runtimeImplication"
+        ]
+      }
+    }
+  },
+  "required": ["schemaVersion", "registryId", "claims"]
+}

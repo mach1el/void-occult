@@ -1,0 +1,214 @@
+{
+  "overall": {
+    "positiveRawMass": 15057,
+    "negativeRawMass": 15649,
+    "positiveWeightedMass": 5926.099999999753,
+    "negativeWeightedMass": 6240.199999999783,
+    "massRatioPositiveToNegative": 0.9496650748373383,
+    "matchCountPositive": 9716,
+    "matchCountNegative": 8650,
+    "matchCountRatioPositiveToNegative": 1.1232369942196532
+  },
+  "perDomain": {
+    "health": {
+      "positiveRawMass": 2241,
+      "negativeRawMass": 3805,
+      "positiveWeightedMass": 849.8500000000137,
+      "negativeWeightedMass": 1384.6000000000158,
+      "massRatioPositiveToNegative": 0.6137873754152853,
+      "matchCountPositive": 1950,
+      "matchCountNegative": 1897,
+      "matchCountRatioPositiveToNegative": 1.0279388508170797
+    },
+    "family": {
+      "positiveRawMass": 3499,
+      "negativeRawMass": 3629,
+      "positiveWeightedMass": 1198.5500000000266,
+      "negativeWeightedMass": 1269.0500000000168,
+      "massRatioPositiveToNegative": 0.9444466333083887,
+      "matchCountPositive": 2611,
+      "matchCountNegative": 2085,
+      "matchCountRatioPositiveToNegative": 1.2522781774580336
+    },
+    "wealth": {
+      "positiveRawMass": 2906,
+      "negativeRawMass": 2665,
+      "positiveWeightedMass": 1020.6499999999996,
+      "negativeWeightedMass": 990.8000000000089,
+      "massRatioPositiveToNegative": 1.030127169963656,
+      "matchCountPositive": 1169,
+      "matchCountNegative": 1469,
+      "matchCountRatioPositiveToNegative": 0.7957794417971409
+    },
+    "career": {
+      "positiveRawMass": 2704,
+      "negativeRawMass": 1742,
+      "positiveWeightedMass": 921.8000000000058,
+      "negativeWeightedMass": 613.9000000000013,
+      "massRatioPositiveToNegative": 1.5015474833034756,
+      "matchCountPositive": 1500,
+      "matchCountNegative": 883,
+      "matchCountRatioPositiveToNegative": 1.6987542468856172
+    },
+    "social": {
+      "positiveRawMass": 1832,
+      "negativeRawMass": 1727,
+      "positiveWeightedMass": 948.35,
+      "negativeWeightedMass": 887.8499999999995,
+      "massRatioPositiveToNegative": 1.0681421411274434,
+      "matchCountPositive": 1222,
+      "matchCountNegative": 1087,
+      "matchCountRatioPositiveToNegative": 1.124195032198712
+    },
+    "romance": {
+      "positiveRawMass": 1875,
+      "negativeRawMass": 2081,
+      "positiveWeightedMass": 986.9,
+      "negativeWeightedMass": 1094.0000000000007,
+      "massRatioPositiveToNegative": 0.9021023765996338,
+      "matchCountPositive": 1264,
+      "matchCountNegative": 1229,
+      "matchCountRatioPositiveToNegative": 1.0284784377542717
+    }
+  },
+  "perPointClass": {
+    "otherAnnualNegative": {
+      "positiveRawMass": 0,
+      "negativeRawMass": 7754,
+      "positiveWeightedMass": 0,
+      "negativeWeightedMass": 3009.100000000062,
+      "massRatioPositiveToNegative": 0,
+      "matchCountPositive": 0,
+      "matchCountNegative": 3877,
+      "matchCountRatioPositiveToNegative": 0
+    },
+    "staticPositive": {
+      "positiveRawMass": 5656,
+      "negativeRawMass": 0,
+      "positiveWeightedMass": 2308.6999999999643,
+      "negativeWeightedMass": 0,
+      "massRatioPositiveToNegative": null,
+      "matchCountPositive": 5656,
+      "matchCountNegative": 0,
+      "matchCountRatioPositiveToNegative": null
+    },
+    "otherAnnualPositive": {
+      "positiveRawMass": 3552,
+      "negativeRawMass": 0,
+      "positiveWeightedMass": 1207.2000000000123,
+      "negativeWeightedMass": 0,
+      "massRatioPositiveToNegative": null,
+      "matchCountPositive": 1776,
+      "matchCountNegative": 0,
+      "matchCountRatioPositiveToNegative": null
+    },
+    "staticNegative": {
+      "positiveRawMass": 0,
+      "negativeRawMass": 3212,
+      "positiveWeightedMass": 0,
+      "negativeWeightedMass": 1364.5000000000207,
+      "massRatioPositiveToNegative": 0,
+      "matchCountPositive": 0,
+      "matchCountNegative": 3212,
+      "matchCountRatioPositiveToNegative": 0
+    },
+    "annualTransformStrongPositive": {
+      "positiveRawMass": 3843,
+      "negativeRawMass": 0,
+      "positiveWeightedMass": 1566.899999999985,
+      "negativeWeightedMass": 0,
+      "massRatioPositiveToNegative": null,
+      "matchCountPositive": 1281,
+      "matchCountNegative": 0,
+      "matchCountRatioPositiveToNegative": null
+    },
+    "annualTransformNegative": {
+      "positiveRawMass": 0,
+      "negativeRawMass": 4683,
+      "positiveWeightedMass": 0,
+      "negativeWeightedMass": 1866.5999999999735,
+      "massRatioPositiveToNegative": 0,
+      "matchCountPositive": 0,
+      "matchCountNegative": 1561,
+      "matchCountRatioPositiveToNegative": 0
+    },
+    "annualTransformPositive": {
+      "positiveRawMass": 1396,
+      "negativeRawMass": 0,
+      "positiveWeightedMass": 640.4999999999985,
+      "negativeWeightedMass": 0,
+      "massRatioPositiveToNegative": null,
+      "matchCountPositive": 698,
+      "matchCountNegative": 0,
+      "matchCountRatioPositiveToNegative": null
+    },
+    "dignifiedStaticPositive": {
+      "positiveRawMass": 610,
+      "negativeRawMass": 0,
+      "positiveWeightedMass": 202.80000000000044,
+      "negativeWeightedMass": 0,
+      "massRatioPositiveToNegative": null,
+      "matchCountPositive": 305,
+      "matchCountNegative": 0,
+      "matchCountRatioPositiveToNegative": null
+    }
+  },
+  "perTemporalLayer": {
+    "annual": {
+      "positiveRawMass": 8791,
+      "negativeRawMass": 12437,
+      "positiveWeightedMass": 3414.6000000000213,
+      "negativeWeightedMass": 4875.699999999956,
+      "massRatioPositiveToNegative": 0.700330208995642,
+      "matchCountPositive": 3755,
+      "matchCountNegative": 5438,
+      "matchCountRatioPositiveToNegative": 0.6905112173593233
+    },
+    "natal": {
+      "positiveRawMass": 6266,
+      "negativeRawMass": 3212,
+      "positiveWeightedMass": 2511.4999999999436,
+      "negativeWeightedMass": 1364.5000000000207,
+      "massRatioPositiveToNegative": 1.8406009527298686,
+      "matchCountPositive": 5961,
+      "matchCountNegative": 3212,
+      "matchCountRatioPositiveToNegative": 1.8558530510585305
+    }
+  },
+  "perPalaceRole": {
+    "small-limit": {
+      "positiveRawMass": 715,
+      "negativeRawMass": 1534,
+      "positiveWeightedMass": 165.94999999999996,
+      "negativeWeightedMass": 357.6999999999983,
+      "massRatioPositiveToNegative": 0.46393625943528305,
+      "matchCountPositive": 627,
+      "matchCountNegative": 762,
+      "matchCountRatioPositiveToNegative": 0.8228346456692913
+    },
+    "cooperating": {
+      "positiveRawMass": 8750,
+      "negativeRawMass": 8159,
+      "positiveWeightedMass": 2231.6500000000883,
+      "negativeWeightedMass": 2101.9000000000715,
+      "massRatioPositiveToNegative": 1.0617298634568784,
+      "matchCountPositive": 5455,
+      "matchCountNegative": 4546,
+      "matchCountRatioPositiveToNegative": 1.1999560052793665
+    },
+    "primary": {
+      "positiveRawMass": 5592,
+      "negativeRawMass": 5956,
+      "positiveWeightedMass": 3528.4999999998754,
+      "negativeWeightedMass": 3780.59999999989,
+      "massRatioPositiveToNegative": 0.933317462836581,
+      "matchCountPositive": 3634,
+      "matchCountNegative": 3342,
+      "matchCountRatioPositiveToNegative": 1.0873728306403352
+    }
+  },
+  "zeroPositiveAndNegativeRate": 0.0725,
+  "positiveOnlyRate": 0.1951388888888889,
+  "negativeOnlyRate": 0.18458333333333332,
+  "mixedSignalRate": 0.5477777777777778
+}

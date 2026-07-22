@@ -1,0 +1,86 @@
+{
+  "totalDomainObservations": 7200,
+  "noSignalCount": 522,
+  "noSignalRate": 0.0725,
+  "balancedSignalCount": 398,
+  "balancedSignalRate": 0.05527777777777778,
+  "neutralScoreBreakdown": {
+    "totalScore50Count": 1027,
+    "noSignalScore50Count": 522,
+    "balancedSignalScore50Count": 398,
+    "partialDataScore50Count": 0,
+    "scoredStateScore50Count": 107
+  },
+  "perDomain": {
+    "health": {
+      "noSignalRate": 0.03,
+      "balancedSignalRate": 0.05583333333333333,
+      "neutralScoreBreakdown": {
+        "totalScore50Count": 122,
+        "noSignalScore50Count": 36,
+        "balancedSignalScore50Count": 67,
+        "partialDataScore50Count": 0,
+        "scoredStateScore50Count": 19
+      }
+    },
+    "family": {
+      "noSignalRate": 0.005,
+      "balancedSignalRate": 0.06416666666666666,
+      "neutralScoreBreakdown": {
+        "totalScore50Count": 114,
+        "noSignalScore50Count": 6,
+        "balancedSignalScore50Count": 77,
+        "partialDataScore50Count": 0,
+        "scoredStateScore50Count": 31
+      }
+    },
+    "wealth": {
+      "noSignalRate": 0.07416666666666667,
+      "balancedSignalRate": 0.07,
+      "neutralScoreBreakdown": {
+        "totalScore50Count": 187,
+        "noSignalScore50Count": 89,
+        "balancedSignalScore50Count": 84,
+        "partialDataScore50Count": 0,
+        "scoredStateScore50Count": 14
+      }
+    },
+    "career": {
+      "noSignalRate": 0.10166666666666667,
+      "balancedSignalRate": 0.049166666666666664,
+      "neutralScoreBreakdown": {
+        "totalScore50Count": 196,
+        "noSignalScore50Count": 122,
+        "balancedSignalScore50Count": 59,
+        "partialDataScore50Count": 0,
+        "scoredStateScore50Count": 15
+      }
+    },
+    "social": {
+      "noSignalRate": 0.13666666666666666,
+      "balancedSignalRate": 0.035833333333333335,
+      "neutralScoreBreakdown": {
+        "totalScore50Count": 220,
+        "noSignalScore50Count": 164,
+        "balancedSignalScore50Count": 43,
+        "partialDataScore50Count": 0,
+        "scoredStateScore50Count": 13
+      }
+    },
+    "romance": {
+      "noSignalRate": 0.0875,
+      "balancedSignalRate": 0.056666666666666664,
+      "neutralScoreBreakdown": {
+        "totalScore50Count": 188,
+        "noSignalScore50Count": 105,
+        "balancedSignalScore50Count": 68,
+        "partialDataScore50Count": 0,
+        "scoredStateScore50Count": 15
+      }
+    }
+  },
+  "notes": [
+    "score === 50 is split into no-signal / balanced-signal / partial-data / scored buckets.",
+    "scoredStateScore50Count should always be 0 under the current V0.8 formula (raw=0 cannot coexist with the 'scored' state); a nonzero value is a regression signal, not a doctrinal finding."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Annual Axes V0.9 School Policy Matrix",
+  "description": "Validates policy/school-policy-matrix.v0.9.json. The other 6 policy files (domain-palace, star-domain, temporal-identity, dignity, thai-tue, unsupported-star) intentionally have topic-specific shapes and are checked by targeted assertions in __tests__/schema-validation.test.ts rather than this generic schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "policyId": { "type": "string" },
+    "notes": { "type": "array", "items": { "type": "string" } },
+    "topics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "topic": { "type": "string", "minLength": 1 },
+          "namPhai": { "$ref": "#/definitions/schoolEntry" },
+          "trungChau": { "$ref": "#/definitions/schoolEntry" }
+        },
+        "required": ["topic", "namPhai", "trungChau"]
+      }
+    }
+  },
+  "required": ["schemaVersion", "policyId", "topics"],
+  "definitions": {
+    "schoolEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "policy": { "type": "string", "minLength": 1 },
+        "claimIds": { "type": "array", "items": { "type": "string" } },
+        "sourceIds": { "type": "array", "items": { "type": "string" } },
+        "status": { "type": "string", "enum": ["classical", "derived", "engineering-hypothesis", "disputed", "unsupported"] },
+        "confidence": { "type": "string", "enum": ["high", "medium", "low"] },
+        "runtimeCompatibility": { "type": "string" },
+        "knownContradictions": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["policy", "claimIds", "sourceIds", "status", "confidence", "runtimeCompatibility", "knownContradictions"]
+    }
+  }
+}
