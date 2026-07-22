@@ -3,7 +3,7 @@ import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import type { ChartData } from "@/types/chart";
 import { ANNUAL_AXIS_DOMAINS } from "../../../contracts/annual-axes";
 import { loadAnnualAxesKnowledgeV04NamPhai } from "../../../knowledge/annual-axes/v0.4";
-import { analyzeAnnualAxes } from "../analyze";
+import { analyzeAnnualAxesNamPhaiV04 } from "../nam-phai-v04/analyze";
 import { normalizeAnnualDeltaV04 } from "../nam-phai-v04/normalize-delta";
 import { domainFrameCoverage } from "../nam-phai-v04/routing";
 
@@ -87,7 +87,7 @@ describe("Annual Axes V0.4 · neutrality invariants", () => {
       }),
     };
 
-    const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
+    const result = analyzeAnnualAxesNamPhaiV04(chart);
     expect(result.status).toBe("available");
     for (const domain of ANNUAL_AXIS_DOMAINS) {
       const axis = result.axes[domain];
@@ -106,7 +106,7 @@ describe("Annual Axes V0.4 · neutrality invariants", () => {
 describe("Annual Axes V0.4 · trigger and frame coverage", () => {
   it("rejects natal-derived numeric evidence without annualTriggerIds", () => {
     const chart = calculateNamPhai(REGRESSION);
-    const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
+    const result = analyzeAnnualAxesNamPhaiV04(chart);
     for (const domain of ANNUAL_AXIS_DOMAINS) {
       const axis = result.axes[domain];
       if (axis.status !== "available") continue;
@@ -142,7 +142,7 @@ describe("Annual Axes V0.4 · trigger and frame coverage", () => {
       (headIdx + 8) % 12,
     ]);
 
-    const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
+    const result = analyzeAnnualAxesNamPhaiV04(chart);
     const axis = result.axes.career;
     expect(axis.status).toBe("available");
     if (axis.status !== "available") return;
@@ -156,15 +156,9 @@ describe("Annual Axes V0.4 · trigger and frame coverage", () => {
   });
 
   it("identical charts are byte-stable; different annual years change scores or head", () => {
-    const a = analyzeAnnualAxes(calculateNamPhai({ ...REGRESSION, annualYear: "2026" }), {
-      school: "nam-phai",
-    });
-    const b = analyzeAnnualAxes(calculateNamPhai({ ...REGRESSION, annualYear: "2026" }), {
-      school: "nam-phai",
-    });
-    const c = analyzeAnnualAxes(calculateNamPhai({ ...REGRESSION, annualYear: "2027" }), {
-      school: "nam-phai",
-    });
+    const a = analyzeAnnualAxesNamPhaiV04(calculateNamPhai({ ...REGRESSION, annualYear: "2026" }));
+    const b = analyzeAnnualAxesNamPhaiV04(calculateNamPhai({ ...REGRESSION, annualYear: "2026" }));
+    const c = analyzeAnnualAxesNamPhaiV04(calculateNamPhai({ ...REGRESSION, annualYear: "2027" }));
 
     expect(JSON.stringify(a.axes)).toBe(JSON.stringify(b.axes));
     const sameScores =

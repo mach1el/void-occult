@@ -111,16 +111,15 @@ describe("AnnualAxesSection — Nam Phái available result", () => {
     expect(container.textContent ?? "").toContain("Nam Phái V0.8");
   });
 
-  it("ignores legacy rollback query flags and stays on V0.8", () => {
-    window.history.replaceState({}, "", "/?ziweiAnnualAxesV05=0&ziweiAnnualAxesV08=0");
+  it("V08=0 rollback shows V0.7 engine badge", () => {
+    window.history.replaceState({}, "", "/?ziweiAnnualAxesV08=0");
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
     const { container } = render(
       <AnnualAxesSection chart={chart} school="nam-phai" result={result} />,
     );
-    expect(container.textContent ?? "").toContain("Nam Phái V0.8");
-    expect(container.textContent ?? "").toContain("Engine 0.8.0");
-    expect(result.versions.engineVersion).toBe("0.8.0");
+    expect(result.versions.engineVersion).toBe("0.7.0");
+    expect(container.textContent ?? "").toContain("Engine 0.7.0");
   });
 });
 

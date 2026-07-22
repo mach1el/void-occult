@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "0.7.0",
+  "profileId": "annual-evidence-dedupe-policy-nam-phai-v0-7",
+  "status": "experimental",
+  "signedDedupeKey": [
+    "domain",
+    "physicalFactId"
+  ],
+  "layerPrecedence": [
+    "annual",
+    "major-fortune",
+    "natal-activated"
+  ],
+  "geometryPrecedence": [
+    "direct-exact-target",
+    "direct-head-focus",
+    "tp4c-opposite",
+    "tp4c-trine",
+    "context-only"
+  ],
+  "samePhysicalFactMultipleSignedPaths": "keep-highest-precedence",
+  "samePhysicalFactActivationContribution": "count-once-at-strongest-path",
+  "stableTieBreak": [
+    "ruleId",
+    "evidenceId"
+  ],
+  "sourceIds": [
+    "SRC-AA-ENG-004"
+  ]
+}

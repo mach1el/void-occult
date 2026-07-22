@@ -4,6 +4,7 @@ import type { AnnualAxisDomain } from "@/lib/ziwei/analysis";
 import {
   analyzeAnnualAxes,
   type AnnualAxesResult,
+  type AnnualAxisResult,
 } from "@/lib/ziwei/analysis/modules/annual-axes";
 import { AnnualAxesRadar } from "./AnnualAxesRadar";
 import { AnnualAxisDetail } from "./AnnualAxisDetail";
@@ -17,26 +18,38 @@ import "./annual-axes.css";
 export interface AnnualAxesSectionProps {
   chart: ChartData;
   school: School;
-  /** Precomputed analyzer result — passed in from the parent so the
-   * potentially expensive `analyzeAnnualAxes` call can be memoized at
-   * the ChartPage level (see mission spec). When omitted, this component
-   * computes it locally as a fallback. */
   result?: AnnualAxesResult;
 }
 
-/**
- * Public Annual Axes section. Layout mirrors PalaceOverviewRadar:
- * header, then radar | tooltip, then an optional detail block. Emits no
- * prediction prose.
- */
 function engineBadgeLabel(result: AnnualAxesResult): string {
   if (result.school === "trung-chau") {
-    return "Trung Châu · Experimental";
+    return "Trung Châu";
   }
   if (result.versions.engineVersion === "0.8.0") {
     return "Nam Phái V0.8";
   }
-  return "Experimental";
+  if (result.versions.engineVersion === "0.7.0") {
+    return "Nam Phái V0.7";
+  }
+  if (result.versions.engineVersion === "0.5.0") {
+    return "Nam Phái V0.5";
+  }
+  return "Nam Phái";
+}
+
+function scoreStateDescription(axis: Extract<AnnualAxisResult, { status: "available" }>): string | null {
+  const trace = axis.scoreTrace;
+  if (trace?.formulaVersion !== "v0.8-annual-palace-weighted-score") return null;
+  switch (trace.scoreState) {
+    case "no-signal":
+      return "Chưa có tín hiệu lưu niên nổi bật trong các cung được ánh xạ.";
+    case "balanced-signal":
+      return "Cát tinh và hung tinh đang cân bằng theo ánh xạ V0.8.";
+    case "partial-data":
+      return "Thiếu một phần dữ liệu cung lưu niên; điểm được tính từ dữ liệu hiện có.";
+    case "scored":
+      return null;
+  }
 }
 
 export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionProps) {
@@ -48,8 +61,6 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
   const [selectedDomain, setSelectedDomain] = useState<AnnualAxisDomain | null>(null);
   const [hoveredDomain, setHoveredDomain] = useState<AnnualAxisDomain | null>(null);
 
-  // Reset selection when the chart/school changes so a stale domain
-  // detail from a different chart cannot linger on-screen.
   useEffect(() => {
     setSelectedDomain(null);
     setHoveredDomain(null);
@@ -66,6 +77,11 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
   }
 
   const badgeLabel = engineBadgeLabel(computed);
+  const v08Trace =
+    activeAxis?.status === "available" &&
+    activeAxis.scoreTrace?.formulaVersion === "v0.8-annual-palace-weighted-score"
+      ? activeAxis.scoreTrace
+      : null;
 
   return (
     <section className="annual-axes-section" data-module="annual-axes" aria-label="Sáu trục khí vận năm">
@@ -93,25 +109,32 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
               {ANNUAL_AXIS_LABEL_VI[activeDomain]}
             </strong>
             <p className="annual-axes-section__tooltip-summary">
-              Điểm {activeAxis.score.toFixed(1)} · {ANNUAL_AXIS_BAND_LABEL_VI[activeAxis.band]}
-              {typeof activeAxis.annualDelta === "number" ? (
+              Điểm {activeAxis.score.toFixed(1)}
+              {v08Trace ? (
                 <>
+                  {scoreStateDescription(activeAxis) ? (
+                    <>
+                      <br />
+                      {scoreStateDescription(activeAxis)}
+                    </>
+                  ) : (
+                    <>
+                      <br />
+                      {ANNUAL_AXIS_BAND_LABEL_VI[activeAxis.band]}
+                    </>
+                  )}
                   <br />
-                  Delta năm {activeAxis.annualDelta >= 0 ? "+" : ""}
-                  {activeAxis.annualDelta.toFixed(1)} (trung tính 50)
-                </>
-              ) : null}
-              {activeAxis.scoreTrace?.formulaVersion === "v0.8-direct-anchor-robust-score" ? (
-                <>
+                  Cung trọng tâm {v08Trace.primary.palaceName}
                   <br />
-                  Độ tin cậy {(activeAxis.scoreTrace.confidence * 100).toFixed(0)}%
+                  Cung phối hợp{" "}
+                  {v08Trace.cooperating.map((c) => c.palaceName).join(", ") || "—"}
                   <br />
-                  Kích hoạt năm {activeAxis.scoreTrace.activationGate.toFixed(2)}
-                  <br />
-                  Cung gốc {activeAxis.scoreTrace.anchorPalaceName}
+                  Lưu Thái Tuế nổi bật: {v08Trace.isThaiTueHighlighted ? "Có" : "Không"}
                 </>
               ) : (
                 <>
+                  {" "}
+                  · {ANNUAL_AXIS_BAND_LABEL_VI[activeAxis.band]}
                   <br />
                   Cường độ {activeAxis.intensity} · Xung đột {activeAxis.conflict}
                 </>

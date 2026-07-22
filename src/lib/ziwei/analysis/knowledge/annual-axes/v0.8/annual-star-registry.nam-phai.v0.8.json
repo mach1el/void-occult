@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "0.8.0",
+  "catalogId": "annual-star-registry-nam-phai-v0-8",
+  "axes": {
+    "health": {
+      "positive": [
+        { "starName": "Lưu Hóa Khoa", "pointClass": "annualTransformPositive", "ruleId": "health-pos-luu-hoa-khoa", "isTuHoa": true },
+        { "starName": "Thiên Y", "pointClass": "staticPositive", "ruleId": "health-pos-thien-y" },
+        { "starName": "Thiên Giải", "pointClass": "staticPositive", "ruleId": "health-pos-thien-giai" },
+        { "starName": "Giải Thần", "pointClass": "staticPositive", "ruleId": "health-pos-giai-than" },
+        { "starName": "Ân Quang", "pointClass": "staticPositive", "ruleId": "health-pos-an-quang" },
+        { "starName": "Thiên Quý", "pointClass": "staticPositive", "ruleId": "health-pos-thien-quy" },
+        { "starName": "Phúc Đức", "pointClass": "staticPositive", "ruleId": "health-pos-phuc-duc" }
+      ],
+      "negative": [
+        { "starName": "Lưu Kình Dương", "pointClass": "otherAnnualNegative", "ruleId": "health-neg-luu-kinh-duong" },
+        { "starName": "Lưu Đà La", "pointClass": "otherAnnualNegative", "ruleId": "health-neg-luu-da-la" },
+        { "starName": "Lưu Tang Môn", "pointClass": "otherAnnualNegative", "ruleId": "health-neg-luu-tang-mon" },
+        { "starName": "Lưu Bạch Hổ", "pointClass": "otherAnnualNegative", "ruleId": "health-neg-luu-bach-ho" },
+        { "starName": "Lưu Hóa Kỵ", "pointClass": "annualTransformNegative", "ruleId": "health-neg-luu-hoa-ky", "isTuHoa": true },
+        { "starName": "Thiên Hình", "pointClass": "staticNegative", "ruleId": "health-neg-thien-hinh" }
+      ]
+    },
+    "family": {
+      "positive": [
+        { "starName": "Lưu Lộc Tồn", "pointClass": "otherAnnualPositive", "ruleId": "family-pos-luu-loc-ton" },
+        { "starName": "Lưu Thiên Khôi", "pointClass": "otherAnnualPositive", "ruleId": "family-pos-luu-thien-khoi" },
+        { "starName": "Lưu Thiên Việt", "pointClass": "otherAnnualPositive", "ruleId": "family-pos-luu-thien-viet" },
+        { "starName": "Hóa Lộc", "pointClass": "staticPositive", "ruleId": "family-pos-hoa-loc", "isTuHoa": true },
+        { "starName": "Lưu Hóa Lộc", "pointClass": "annualTransformStrongPositive", "ruleId": "family-pos-luu-hoa-loc", "isTuHoa": true },
+        { "starName": "Long Trì", "pointClass": "staticPositive", "ruleId": "family-pos-long-tri" },
+        { "starName": "Phượng Các", "pointClass": "staticPositive", "ruleId": "family-pos-phuong-cac" },
+        { "starName": "Tam Thai", "pointClass": "staticPositive", "ruleId": "family-pos-tam-thai" },
+        { "starName": "Bát Tọa", "pointClass": "staticPositive", "ruleId": "family-pos-bat-toa" },
+        { "starName": "Ân Quang", "pointClass": "staticPositive", "ruleId": "family-pos-an-quang" }
+      ],
+      "negative": [
+        { "starName": "Lưu Thiên Khốc", "pointClass": "otherAnnualNegative", "ruleId": "family-neg-luu-thien-khoc" },
+        { "starName": "Lưu Thiên Hư", "pointClass": "otherAnnualNegative", "ruleId": "family-neg-luu-thien-hu" },
+        { "starName": "Lưu Tang Môn", "pointClass": "otherAnnualNegative", "ruleId": "family-neg-luu-tang-mon" },
+        { "starName": "Lưu Hóa Kỵ", "pointClass": "annualTransformNegative", "ruleId": "family-neg-luu-hoa-ky", "isTuHoa": true },
+        { "starName": "Địa Không", "pointClass": "staticNegative", "ruleId": "family-neg-dia-khong" },
+        { "starName": "Địa Kiếp", "pointClass": "staticNegative", "ruleId": "family-neg-dia-kiep" },
+        { "starName": "Địa Võng", "pointClass": "staticNegative", "ruleId": "family-neg-dia-vong" }
+      ]
+    },
+    "wealth": {
+      "positive": [
+        { "starName": "Lưu Lộc Tồn", "pointClass": "otherAnnualPositive", "ruleId": "wealth-pos-luu-loc-ton" },
+        { "starName": "Lưu Hóa Lộc", "pointClass": "annualTransformStrongPositive", "ruleId": "wealth-pos-luu-hoa-loc", "isTuHoa": true },
+        { "starName": "Lưu Hóa Quyền", "pointClass": "annualTransformStrongPositive", "ruleId": "wealth-pos-luu-hoa-quyen", "isTuHoa": true },
+        { "starName": "Vũ Khúc", "pointClass": "dignifiedStaticPositive", "ruleId": "wealth-pos-vu-khuc", "requiresDignity": ["Miếu", "Vượng"] },
+        { "starName": "Thái Âm", "pointClass": "dignifiedStaticPositive", "ruleId": "wealth-pos-thai-am", "requiresDignity": ["Miếu", "Vượng"] }
+      ],
+      "negative": [
+        { "starName": "Lưu Đại Hao", "pointClass": "otherAnnualNegative", "ruleId": "wealth-neg-luu-dai-hao" },
+        { "starName": "Lưu Tiểu Hao", "pointClass": "otherAnnualNegative", "ruleId": "wealth-neg-luu-tieu-hao" },
+        { "starName": "Lưu Kình Dương", "pointClass": "otherAnnualNegative", "ruleId": "wealth-neg-luu-kinh-duong" },
+        { "starName": "Lưu Đà La", "pointClass": "otherAnnualNegative", "ruleId": "wealth-neg-luu-da-la" },
+        { "starName": "Lưu Hóa Kỵ", "pointClass": "annualTransformNegative", "ruleId": "wealth-neg-luu-hoa-ky", "isTuHoa": true },
+        { "starName": "Địa Không", "pointClass": "staticNegative", "ruleId": "wealth-neg-dia-khong" },
+        { "starName": "Địa Kiếp", "pointClass": "staticNegative", "ruleId": "wealth-neg-dia-kiep" }
+      ]
+    },
+    "career": {
+      "positive": [
+        { "starName": "Lưu Hóa Quyền", "pointClass": "annualTransformStrongPositive", "ruleId": "career-pos-luu-hoa-quyen", "isTuHoa": true },
+        { "starName": "Lưu Thiên Khôi", "pointClass": "otherAnnualPositive", "ruleId": "career-pos-luu-thien-khoi" },
+        { "starName": "Lưu Thiên Việt", "pointClass": "otherAnnualPositive", "ruleId": "career-pos-luu-thien-viet" },
+        { "starName": "Quốc Ấn", "pointClass": "staticPositive", "ruleId": "career-pos-quoc-an" },
+        { "starName": "Tướng Quân", "pointClass": "staticPositive", "ruleId": "career-pos-tuong-quan" }
+      ],
+      "negative": [
+        { "starName": "Lưu Hóa Kỵ", "pointClass": "annualTransformNegative", "ruleId": "career-neg-luu-hoa-ky", "isTuHoa": true },
+        { "starName": "Lưu Tuần", "pointClass": "otherAnnualNegative", "ruleId": "career-neg-luu-tuan" },
+        { "starName": "Lưu Triệt", "pointClass": "otherAnnualNegative", "ruleId": "career-neg-luu-triet" },
+        { "starName": "Lưu Thiên Khốc", "pointClass": "otherAnnualNegative", "ruleId": "career-neg-luu-thien-khoc" },
+        { "starName": "Thiên Hình", "pointClass": "staticNegative", "ruleId": "career-neg-thien-hinh" }
+      ]
+    },
+    "social": {
+      "positive": [
+        { "starName": "Tả Phù", "pointClass": "staticPositive", "ruleId": "social-pos-ta-phu" },
+        { "starName": "Hữu Bật", "pointClass": "staticPositive", "ruleId": "social-pos-huu-bat" },
+        { "starName": "Lưu Hóa Khoa", "pointClass": "annualTransformPositive", "ruleId": "social-pos-luu-hoa-khoa", "isTuHoa": true },
+        { "starName": "Lưu Hóa Lộc", "pointClass": "annualTransformStrongPositive", "ruleId": "social-pos-luu-hoa-loc", "isTuHoa": true },
+        { "starName": "Thiên Quan", "pointClass": "staticPositive", "ruleId": "social-pos-thien-quan" },
+        { "starName": "Thiên Phúc", "pointClass": "staticPositive", "ruleId": "social-pos-thien-phuc" }
+      ],
+      "negative": [
+        { "starName": "Lưu Hóa Kỵ", "pointClass": "annualTransformNegative", "ruleId": "social-neg-luu-hoa-ky", "isTuHoa": true },
+        { "starName": "Lưu Đà La", "pointClass": "otherAnnualNegative", "ruleId": "social-neg-luu-da-la" },
+        { "starName": "Địa Không", "pointClass": "staticNegative", "ruleId": "social-neg-dia-khong" },
+        { "starName": "Địa Kiếp", "pointClass": "staticNegative", "ruleId": "social-neg-dia-kiep" },
+        { "starName": "Kiếp Sát", "pointClass": "staticNegative", "ruleId": "social-neg-kiep-sat" }
+      ]
+    },
+    "romance": {
+      "positive": [
+        { "starName": "Lưu Hóa Lộc", "pointClass": "annualTransformStrongPositive", "ruleId": "romance-pos-luu-hoa-loc", "isTuHoa": true },
+        { "starName": "Lưu Hóa Khoa", "pointClass": "annualTransformPositive", "ruleId": "romance-pos-luu-hoa-khoa", "isTuHoa": true },
+        { "starName": "Đào Hoa", "pointClass": "staticPositive", "ruleId": "romance-pos-dao-hoa" },
+        { "starName": "Hồng Loan", "pointClass": "staticPositive", "ruleId": "romance-pos-hong-loan" },
+        { "starName": "Thiên Hỷ", "pointClass": "staticPositive", "ruleId": "romance-pos-thien-hy" },
+        { "starName": "Thanh Long", "pointClass": "staticPositive", "ruleId": "romance-pos-thanh-long" }
+      ],
+      "negative": [
+        { "starName": "Lưu Hóa Kỵ", "pointClass": "annualTransformNegative", "ruleId": "romance-neg-luu-hoa-ky", "isTuHoa": true },
+        { "starName": "Lưu Kình Dương", "pointClass": "otherAnnualNegative", "ruleId": "romance-neg-luu-kinh-duong" },
+        { "starName": "Lưu Đà La", "pointClass": "otherAnnualNegative", "ruleId": "romance-neg-luu-da-la" },
+        { "starName": "Cô Thần", "pointClass": "staticNegative", "ruleId": "romance-neg-co-than" },
+        { "starName": "Quả Tú", "pointClass": "staticNegative", "ruleId": "romance-neg-qua-tu" },
+        { "starName": "Phá Toái", "pointClass": "staticNegative", "ruleId": "romance-neg-pha-toai" },
+        { "starName": "Lưu Phục Binh", "pointClass": "otherAnnualNegative", "ruleId": "romance-neg-luu-phuc-binh" }
+      ]
+    }
+  },
+  "sourceIds": ["SRC-AA-ENG-004"]
+}

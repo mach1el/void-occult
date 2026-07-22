@@ -1,189 +1,355 @@
+import type { ChartData } from "@/types/chart";
 import type { AnnualAxisDomain } from "../../../contracts/annual-axes";
 import type {
   AnnualAxesKnowledgeV08NamPhai,
-  V08ScoreProfileId,
+  V08DomainPalaceInput,
 } from "../../../knowledge/annual-axes/v0.8";
-import type { V08DirectAggregateResult } from "./aggregate-direct";
-import type { V08DomainRootAnchor } from "./resolve-domain-root";
+import { V08_FORMULA_VERSION } from "../../../knowledge/annual-axes/v0.8";
 import {
-  clamp,
-  computeActivationGate,
-  computeActivationModulator,
-  roundToPrecision,
-} from "./bucket-formula";
+  resolveAnnualPalace,
+  resolveSmallLimitPalace,
+  type ResolvedAnnualPalace,
+} from "./resolve-annual-palace";
+import {
+  clampPalaceRaw,
+  matchPalaceStars,
+  type MatchedStarFact,
+} from "./match-stars";
 
-export const V08_FORMULA_VERSION = "v0.8-direct-anchor-robust-score" as const;
+export type V08ScoreState =
+  | "scored"
+  | "no-signal"
+  | "balanced-signal"
+  | "partial-data";
+
+export interface V08PalaceContributionTrace {
+  role: string;
+  palaceName: string;
+  palaceIndex: number | null;
+  configuredWeight: number;
+  positivePoints: number;
+  negativePoints: number;
+  palaceRaw: number;
+  matchedFacts: MatchedStarFact[];
+  missingReason?: string;
+}
 
 export interface V08DomainScoreTrace {
   formulaVersion: typeof V08_FORMULA_VERSION;
-  candidateId: V08ScoreProfileId;
-  anchorPalaceIndex: number;
-  anchorPalaceName: string;
-  anchorBranch: string;
-  anchorProvenance: string;
-  retainedDirectFactCount: number;
-  excludedTp4cFactCount: number;
-  excludedOppositeFactCount: number;
-  excludedContextFactCount: number;
-  excludedAdjacentFactCount: number;
-  excludedCrossDomainFactCount: number;
-  directSupportRaw: number;
-  directPressureRaw: number;
-  directTotalRaw: number;
-  directIntensity: number;
-  directPolarity: number;
-  directSignedRaw: number;
-  domainCenter: number;
-  robustScale: number;
-  directZ: number;
-  clampedDirectZ: number;
-  annualActivationRaw: number;
-  activationScale: number;
-  activationGate: number;
-  activationModulator: number;
-  effectiveZ: number;
-  scoreStepPerRobustSigma: number;
+  primary: V08PalaceContributionTrace;
+  cooperating: V08PalaceContributionTrace[];
+  axisRawBeforeThaiTue: number;
+  isThaiTueHighlighted: boolean;
+  thaiTueMultiplier: number;
+  prominenceAdjustedRaw: number;
   rawScore: number;
   absoluteScore: number;
-  conflictRatio: number;
-  coverage: number;
-  confidence: number;
-  tp4cSignedContribution: 0;
-  natalGainAppliedToScore: false;
+  scoreState: V08ScoreState;
+  configuredPalaceCount: number;
+  resolvedPalaceCount: number;
+  matchedStarCount: number;
+  missingInputs: string[];
 }
 
 export interface V08DomainScoreResult {
   score: number;
-  confidence: number;
-  activationGate: number;
-  effectiveZ: number;
-  directSignedRaw: number;
-  trace: V08DomainScoreTrace;
+  scoreState: V08ScoreState;
   intensity: number;
   conflict: number;
   supportNorm: number;
   pressureNorm: number;
+  isThaiTueHighlighted: boolean;
+  matchedFacts: MatchedStarFact[];
+  trace: V08DomainScoreTrace;
 }
 
+function roundToPrecision(value: number, precision: number): number {
+  const f = 10 ** precision;
+  return Math.round(value * f) / f;
+}
+
+function clamp(n: number, lo: number, hi: number): number {
+  return Math.min(hi, Math.max(lo, n));
+}
+
+function resolveInput(
+  chart: ChartData,
+  input: V08DomainPalaceInput,
+): { ok: true; palace: ResolvedAnnualPalace } | { ok: false; reason: string } {
+  if (input.type === "small-limit-palace") {
+    return resolveSmallLimitPalace(chart);
+  }
+  if (!input.palace) {
+    return { ok: false, reason: "missing-palace-config" };
+  }
+  return resolveAnnualPalace(chart, input.palace);
+}
+
+function scoreResolvedPalace(
+  chart: ChartData,
+  palace: ResolvedAnnualPalace,
+  domain: AnnualAxisDomain,
+  knowledge: AnnualAxesKnowledgeV08NamPhai,
+): {
+  positivePoints: number;
+  negativePoints: number;
+  palaceRaw: number;
+  matchedFacts: MatchedStarFact[];
+} {
+  const matched = matchPalaceStars({
+    chart,
+    palaceIndex: palace.palaceIndex,
+    annualPalaceName: palace.annualPalaceName,
+    domain,
+    knowledge,
+  });
+  const palaceRaw = clampPalaceRaw(
+    matched.positivePoints,
+    matched.negativePoints,
+    knowledge,
+  );
+  return {
+    positivePoints: matched.positivePoints,
+    negativePoints: matched.negativePoints,
+    palaceRaw,
+    matchedFacts: matched.matchedFacts,
+  };
+}
+
+function isThaiTueInPalace(chart: ChartData, palaceIndex: number): boolean {
+  if (chart.taiTuePalace?.index === palaceIndex) return true;
+  const palace = chart.palaces.find((p) => p.index === palaceIndex);
+  return (palace?.stars ?? []).some(
+    (s) => s.name === "Lưu Thái Tuế" || s.name === "Thái Tuế",
+  );
+}
+
+/**
+ * Score one domain with the explicit palace-weighted V0.8 formula.
+ * Same physical palace used in multiple roles is scored once; weights combine.
+ */
 export function scoreV08Domain(input: {
-  aggregate: V08DirectAggregateResult;
-  anchor: V08DomainRootAnchor;
+  chart: ChartData;
   domain: AnnualAxisDomain;
   knowledge: AnnualAxesKnowledgeV08NamPhai;
-  candidateId: V08ScoreProfileId;
-  scoreStepPerRobustSigma: number;
-  domainCenterOverride?: number;
-  robustScaleOverride?: number;
-  activationScaleOverride?: number;
 }): V08DomainScoreResult {
-  const { aggregate, anchor, knowledge, candidateId } = input;
-  const domainCenter =
-    input.domainCenterOverride ?? knowledge.calibration.domainCenters[input.domain];
-  const robustScale =
-    input.robustScaleOverride ?? knowledge.calibration.robustScales[input.domain];
-  const activationScale =
-    input.activationScaleOverride ?? knowledge.calibration.activationScales[input.domain];
-  const { zClip } = knowledge.scoreProfile.robustCalibration;
-  const bounds = knowledge.scoreProfile.scoreBounds;
-  const confidenceProfile = knowledge.scoreProfile.confidenceProfile;
-  const step = input.scoreStepPerRobustSigma;
+  const { chart, domain, knowledge } = input;
+  const mapping = knowledge.domainMapping.domains[domain];
+  const pc = knowledge.pointClasses;
 
-  const activationGate = computeActivationGate(
-    aggregate.annualActivationRaw,
-    activationScale,
-  );
-  const activationModulator = computeActivationModulator(activationGate);
+  const configuredInputs: Array<V08DomainPalaceInput & { role: string; isPrimary: boolean }> = [
+    {
+      ...mapping.primary,
+      role: mapping.primary.role ?? "primary",
+      isPrimary: true,
+    },
+    ...mapping.cooperating.map((c, i) => ({
+      ...c,
+      role: c.role ?? `cooperating-${i}`,
+      isPrimary: false,
+    })),
+  ];
 
-  const directZ =
-    robustScale > 0 ? (aggregate.directSignedRaw - domainCenter) / robustScale : 0;
-  const clampedDirectZ = clamp(directZ, -zClip, zClip);
-  const effectiveZ = clampedDirectZ * activationModulator;
+  const missingInputs: string[] = [];
+  /** physical palace index → accumulated weight + role traces */
+  const byPhysical = new Map<
+    number,
+    {
+      weight: number;
+      palace: ResolvedAnnualPalace;
+      roles: Array<{ role: string; weight: number; isPrimary: boolean; palaceName: string }>;
+    }
+  >();
 
-  const noEvidence = aggregate.retainedDirectFactCount === 0;
-  const rawScore = bounds.neutral + step * effectiveZ;
-  let absoluteScore: number;
-  if (activationGate <= 0 || noEvidence) {
-    absoluteScore = bounds.neutral;
-  } else if (aggregate.directSignedRaw === domainCenter) {
-    absoluteScore = bounds.neutral;
-  } else {
-    absoluteScore = roundToPrecision(
-      clamp(rawScore, bounds.minimum, bounds.maximum),
-      bounds.precision,
-    );
+  const unresolvedRoles: V08PalaceContributionTrace[] = [];
+  let primaryTracePlaceholder: V08PalaceContributionTrace | null = null;
+
+  for (const cfg of configuredInputs) {
+    const resolved = resolveInput(chart, cfg);
+    const palaceName =
+      cfg.type === "small-limit-palace"
+        ? "Tiểu Hạn"
+        : (cfg.palace ?? "unknown");
+
+    if (!resolved.ok) {
+      missingInputs.push(resolved.reason);
+      const empty: V08PalaceContributionTrace = {
+        role: cfg.role,
+        palaceName,
+        palaceIndex: null,
+        configuredWeight: cfg.weight,
+        positivePoints: 0,
+        negativePoints: 0,
+        palaceRaw: 0,
+        matchedFacts: [],
+        missingReason: resolved.reason,
+      };
+      if (cfg.isPrimary) primaryTracePlaceholder = empty;
+      else unresolvedRoles.push(empty);
+      continue;
+    }
+
+    const existing = byPhysical.get(resolved.palace.palaceIndex);
+    if (existing) {
+      existing.weight += cfg.weight;
+      existing.roles.push({
+        role: cfg.role,
+        weight: cfg.weight,
+        isPrimary: cfg.isPrimary,
+        palaceName:
+          cfg.type === "small-limit-palace"
+            ? `Tiểu Hạn (${resolved.palace.annualPalaceName})`
+            : resolved.palace.annualPalaceName,
+      });
+    } else {
+      byPhysical.set(resolved.palace.palaceIndex, {
+        weight: cfg.weight,
+        palace: resolved.palace,
+        roles: [
+          {
+            role: cfg.role,
+            weight: cfg.weight,
+            isPrimary: cfg.isPrimary,
+            palaceName:
+              cfg.type === "small-limit-palace"
+                ? `Tiểu Hạn (${resolved.palace.annualPalaceName})`
+                : resolved.palace.annualPalaceName,
+          },
+        ],
+      });
+    }
   }
 
-  const conflictRatio =
-    aggregate.directTotalRaw > knowledge.bucketFormula.epsilon
-      ? (2 *
-          Math.min(aggregate.directSupportRaw, aggregate.directPressureRaw)) /
-        (aggregate.directTotalRaw + knowledge.bucketFormula.epsilon)
-      : 0;
-  const coverage = clamp(
-    aggregate.uniqueRetainedDirectFacts / confidenceProfile.factsForFullCoverage,
-    0,
-    1,
-  );
-  const confidence = clamp(
-    coverage *
-      (0.5 + 0.5 * activationGate) *
-      (1 - confidenceProfile.conflictPenalty * conflictRatio),
-    0,
-    1,
+  // Score each unique physical palace once.
+  const scoredPalaces = new Map<
+    number,
+    {
+      positivePoints: number;
+      negativePoints: number;
+      palaceRaw: number;
+      matchedFacts: MatchedStarFact[];
+      weight: number;
+      palace: ResolvedAnnualPalace;
+      roles: Array<{ role: string; weight: number; isPrimary: boolean; palaceName: string }>;
+    }
+  >();
+
+  for (const [index, entry] of byPhysical) {
+    const scored = scoreResolvedPalace(chart, entry.palace, domain, knowledge);
+    scoredPalaces.set(index, { ...entry, ...scored });
+  }
+
+  let axisRaw = 0;
+  const allFacts: MatchedStarFact[] = [];
+  for (const scored of scoredPalaces.values()) {
+    axisRaw += scored.weight * scored.palaceRaw;
+    allFacts.push(...scored.matchedFacts);
+  }
+
+  const mappedIndexes = [...scoredPalaces.keys()];
+  const isThaiTueHighlighted = mappedIndexes.some((i) => isThaiTueInPalace(chart, i));
+  const thaiTueMultiplier = isThaiTueHighlighted
+    ? pc.thaiTueMultiplier
+    : pc.thaiTueNeutralMultiplier;
+
+  const prominenceAdjustedRaw = clamp(
+    axisRaw * thaiTueMultiplier,
+    pc.axisRawClamp.minimum,
+    pc.axisRawClamp.maximum,
   );
 
-  const evidenceScale = knowledge.bucketFormula.evidenceScale;
-  const supportNorm = 1 - Math.exp(-Math.max(0, aggregate.directSupportRaw) / evidenceScale);
-  const pressureNorm = 1 - Math.exp(-Math.max(0, aggregate.directPressureRaw) / evidenceScale);
+  const rawScore = pc.score.neutral + pc.score.pointsPerRawUnit * prominenceAdjustedRaw;
+  const absoluteScore = roundToPrecision(
+    clamp(rawScore, pc.score.minimum, pc.score.maximum),
+    pc.score.precision,
+  );
+
+  const matchedStarCount = allFacts.length;
+  const configuredPalaceCount = configuredInputs.length;
+  const resolvedPalaceCount = byPhysical.size;
+  const hasPartial = missingInputs.length > 0;
+
+  let scoreState: V08ScoreState;
+  if (matchedStarCount === 0 && prominenceAdjustedRaw === 0) {
+    scoreState = hasPartial ? "partial-data" : "no-signal";
+  } else if (prominenceAdjustedRaw === 0) {
+    scoreState = hasPartial ? "partial-data" : "balanced-signal";
+  } else if (hasPartial) {
+    scoreState = "partial-data";
+  } else {
+    scoreState = "scored";
+  }
+
+  // Build primary / cooperating traces for UI (split combined weights back per role).
+  let primaryTrace: V08PalaceContributionTrace =
+    primaryTracePlaceholder ??
+    ({
+      role: "primary",
+      palaceName: mapping.primary.palace ?? "primary",
+      palaceIndex: null,
+      configuredWeight: mapping.primary.weight,
+      positivePoints: 0,
+      negativePoints: 0,
+      palaceRaw: 0,
+      matchedFacts: [],
+    } as V08PalaceContributionTrace);
+
+  const cooperatingTraces: V08PalaceContributionTrace[] = [...unresolvedRoles];
+
+  for (const scored of scoredPalaces.values()) {
+    for (const role of scored.roles) {
+      const trace: V08PalaceContributionTrace = {
+        role: role.role,
+        palaceName: role.palaceName,
+        palaceIndex: scored.palace.palaceIndex,
+        configuredWeight: role.weight,
+        positivePoints: scored.positivePoints,
+        negativePoints: scored.negativePoints,
+        palaceRaw: scored.palaceRaw,
+        matchedFacts: scored.matchedFacts,
+      };
+      if (role.isPrimary) primaryTrace = trace;
+      else cooperatingTraces.push(trace);
+    }
+  }
+
+  cooperatingTraces.sort((a, b) => a.role.localeCompare(b.role));
+
+  const posAbs = allFacts
+    .filter((f) => f.polarity === "positive")
+    .reduce((s, f) => s + f.points, 0);
+  const negAbs = allFacts
+    .filter((f) => f.polarity === "negative")
+    .reduce((s, f) => s + Math.abs(f.points), 0);
+  const supportNorm = clamp(posAbs / 8, 0, 1);
+  const pressureNorm = clamp(negAbs / 8, 0, 1);
 
   const trace: V08DomainScoreTrace = {
     formulaVersion: V08_FORMULA_VERSION,
-    candidateId,
-    anchorPalaceIndex: anchor.anchorPalaceIndex,
-    anchorPalaceName: anchor.anchorPalaceName,
-    anchorBranch: anchor.anchorBranch,
-    anchorProvenance: anchor.provenance,
-    retainedDirectFactCount: aggregate.retainedDirectFactCount,
-    excludedTp4cFactCount: aggregate.excludedTp4cFactCount,
-    excludedOppositeFactCount: aggregate.excludedOppositeFactCount,
-    excludedContextFactCount: aggregate.excludedContextFactCount,
-    excludedAdjacentFactCount: aggregate.excludedAdjacentFactCount,
-    excludedCrossDomainFactCount: aggregate.excludedCrossDomainFactCount,
-    directSupportRaw: aggregate.directSupportRaw,
-    directPressureRaw: aggregate.directPressureRaw,
-    directTotalRaw: aggregate.directTotalRaw,
-    directIntensity: aggregate.directIntensity,
-    directPolarity: aggregate.directPolarity,
-    directSignedRaw: aggregate.directSignedRaw,
-    domainCenter,
-    robustScale,
-    directZ,
-    clampedDirectZ,
-    annualActivationRaw: aggregate.annualActivationRaw,
-    activationScale,
-    activationGate,
-    activationModulator,
-    effectiveZ: activationGate <= 0 ? 0 : effectiveZ,
-    scoreStepPerRobustSigma: step,
+    primary: primaryTrace,
+    cooperating: cooperatingTraces,
+    axisRawBeforeThaiTue: axisRaw,
+    isThaiTueHighlighted,
+    thaiTueMultiplier,
+    prominenceAdjustedRaw,
     rawScore,
     absoluteScore,
-    conflictRatio,
-    coverage,
-    confidence,
-    tp4cSignedContribution: 0,
-    natalGainAppliedToScore: false,
+    scoreState,
+    configuredPalaceCount,
+    resolvedPalaceCount,
+    matchedStarCount,
+    missingInputs: [...missingInputs].sort((a, b) => a.localeCompare(b)),
   };
 
   return {
     score: absoluteScore,
-    confidence,
-    activationGate,
-    effectiveZ: trace.effectiveZ,
-    directSignedRaw: aggregate.directSignedRaw,
-    trace,
-    intensity: Math.round(100 * activationGate),
-    conflict: Math.round(100 * conflictRatio * activationGate),
+    scoreState,
+    intensity: Math.round(100 * supportNorm),
+    conflict: Math.round(100 * Math.min(supportNorm, pressureNorm)),
     supportNorm,
     pressureNorm,
+    isThaiTueHighlighted,
+    matchedFacts: allFacts,
+    trace,
   };
 }

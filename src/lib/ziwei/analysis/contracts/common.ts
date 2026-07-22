@@ -3,7 +3,6 @@
 import { isPalaceOverviewV1Enabled } from "../feature-flags";
 import { loadAnnualAxesKnowledgeV0 } from "../knowledge/annual-axes";
 import { loadAnnualAxesKnowledgeV04NamPhai } from "../knowledge/annual-axes/v0.4";
-import { loadAnnualAxesKnowledgeV042NamPhai } from "../knowledge/annual-axes/v0.4.2";
 import { loadAnnualAxesKnowledgeV08NamPhai } from "../knowledge/annual-axes/v0.8";
 import { loadPalaceOverviewKnowledgeV1 } from "../knowledge";
 import type { ZiweiSchool } from "../facts";
@@ -63,22 +62,6 @@ function annualAxesStatusForNamPhaiV08(): ZiweiAnalysisStatus {
   if (!knowledge04.ok) {
     if (import.meta.env.DEV) {
       console.warn("[annual-axes] invalid V0.4 knowledge", knowledge04.issues);
-    }
-    return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
-  }
-
-  const knowledge042 = loadAnnualAxesKnowledgeV042NamPhai();
-  if (!knowledge042.ok) {
-    if (import.meta.env.DEV) {
-      console.warn("[annual-axes] invalid V0.4.2 knowledge", knowledge042.issues);
-    }
-    return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
-  }
-
-  const numericKnowledge = loadPalaceOverviewKnowledgeV1();
-  if (!numericKnowledge.ok) {
-    if (import.meta.env.DEV) {
-      console.warn("[annual-axes] invalid palace-overview numeric knowledge", numericKnowledge.issues);
     }
     return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
   }

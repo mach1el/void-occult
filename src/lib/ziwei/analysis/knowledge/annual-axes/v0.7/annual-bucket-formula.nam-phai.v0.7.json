@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "0.7.0",
+  "profileId": "annual-bucket-formula-nam-phai-v0-7",
+  "status": "experimental",
+  "evidenceScale": 1,
+  "epsilon": 1e-9,
+  "signedLayerWeights": {
+    "annual": 1,
+    "major-fortune": 0,
+    "natal-activated": 0.25
+  },
+  "annualActivationStrength": {
+    "supportWeight": 0,
+    "pressureWeight": 0,
+    "activationWeight": 1
+  },
+  "diminishingReturns": {
+    "function": "inverse-square-root-rank",
+    "groupBy": [
+      "domain",
+      "geometryBucket",
+      "layer",
+      "stackingGroup"
+    ]
+  },
+  "contextChannels": {
+    "mayContributeActivation": true
+  },
+  "sourceIds": [
+    "SRC-AA-ENG-004"
+  ],
+  "signedLayerFactors": {
+    "annual": 1,
+    "natalActivated": 0.25,
+    "majorFortune": 0,
+    "global": 0
+  }
+}

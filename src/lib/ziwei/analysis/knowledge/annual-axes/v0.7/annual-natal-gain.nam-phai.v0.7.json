@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "0.7.0",
+  "profileId": "annual-natal-gain-nam-phai-v0-7",
+  "status": "experimental",
+  "sensitivityCoefficient": 0.2,
+  "resilienceCoefficient": 0.1,
+  "minimum": 0.85,
+  "maximum": 1.15,
+  "sourceIds": [
+    "SRC-AA-ENG-004"
+  ]
+}

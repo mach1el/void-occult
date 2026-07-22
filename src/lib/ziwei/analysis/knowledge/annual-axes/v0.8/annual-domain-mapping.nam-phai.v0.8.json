@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "0.8.0",
+  "catalogId": "annual-domain-mapping-nam-phai-v0-8",
+  "formulaVersion": "v0.8-annual-palace-weighted-score",
+  "domains": {
+    "health": {
+      "primary": {
+        "type": "annual-palace",
+        "palace": "Tật Ách",
+        "weight": 0.6
+      },
+      "cooperating": [
+        {
+          "type": "annual-palace",
+          "palace": "Mệnh",
+          "weight": 0.2,
+          "role": "luu-menh"
+        },
+        {
+          "type": "small-limit-palace",
+          "weight": 0.2,
+          "role": "tieu-han"
+        }
+      ]
+    },
+    "family": {
+      "primary": {
+        "type": "annual-palace",
+        "palace": "Điền Trạch",
+        "weight": 0.6
+      },
+      "cooperating": [
+        {
+          "type": "annual-palace",
+          "palace": "Phúc Đức",
+          "weight": 0.2,
+          "role": "luu-phuc-duc"
+        },
+        {
+          "type": "annual-palace",
+          "palace": "Phụ Mẫu",
+          "weight": 0.2,
+          "role": "luu-phu-mau"
+        }
+      ]
+    },
+    "wealth": {
+      "primary": {
+        "type": "annual-palace",
+        "palace": "Tài Bạch",
+        "weight": 0.6
+      },
+      "cooperating": [
+        {
+          "type": "annual-palace",
+          "palace": "Phúc Đức",
+          "weight": 0.2,
+          "role": "luu-phuc-duc"
+        },
+        {
+          "type": "annual-palace",
+          "palace": "Điền Trạch",
+          "weight": 0.2,
+          "role": "luu-dien-trach"
+        }
+      ]
+    },
+    "career": {
+      "primary": {
+        "type": "annual-palace",
+        "palace": "Quan Lộc",
+        "weight": 0.6
+      },
+      "cooperating": [
+        {
+          "type": "annual-palace",
+          "palace": "Thiên Di",
+          "weight": 0.2,
+          "role": "luu-thien-di"
+        },
+        {
+          "type": "annual-palace",
+          "palace": "Mệnh",
+          "weight": 0.2,
+          "role": "luu-menh"
+        }
+      ]
+    },
+    "social": {
+      "primary": {
+        "type": "annual-palace",
+        "palace": "Nô Bộc",
+        "weight": 0.6
+      },
+      "cooperating": [
+        {
+          "type": "annual-palace",
+          "palace": "Thiên Di",
+          "weight": 0.4,
+          "role": "luu-thien-di"
+        }
+      ]
+    },
+    "romance": {
+      "primary": {
+        "type": "annual-palace",
+        "palace": "Phu Thê",
+        "weight": 0.6
+      },
+      "cooperating": [
+        {
+          "type": "annual-palace",
+          "palace": "Tử Tức",
+          "weight": 0.4,
+          "role": "luu-tu-tuc"
+        }
+      ]
+    }
+  },
+  "sourceIds": ["SRC-AA-ENG-004"]
+}

@@ -1,16 +1,14 @@
 {
-  "proof": "annual-axes-v08-ui-dom",
-  "v08": {
-    "badge": "Nam Phái V0.8",
-    "engine": "0.8.0",
-    "scores": {
-      "health": 30.3,
-      "family": 50,
-      "wealth": 50,
-      "career": 31.3,
-      "social": 64.1,
-      "romance": 47.6
-    },
-    "svgSnapshot": "<svg class=\"annual-axes-radar__svg\" viewBox=\"0 0 420 420\" role=\"img\" aria-label=\"Radar sáu trục khí vận năm\"><polygon points=\"210,169 245.50704155516198,189.5 245.507041555162,230.5 210,251 174.49295844483802,230.5 174.49295844483802,189.5\" fill=\"none\" stroke=\"currentColor\" stroke-opacity=\"0.18\"></polygon><polygon points=\"210,128 281.01408311032395,169 281.014083110324,251 210,292 138.98591688967605,251.00000000000003 138.98591688967605,169\" fill=\"none\" stroke=\"currentColor\" stroke-opacity=\"0.18\"></polygon><polygon points=\"210,87 316.52112466548596,148.5 316.52112466548596,271.5 210,333 103.47887533451407,271.50000000000006 103.47887533451406,148.5\" fill=\"none\" stroke=\"currentColor\" stroke-opacity=\"0.18\"></polygon><polygon points=\"210,46 352.0281662206479,128 352.02816622064796,292 210,374 67.9718337793521,292.00000000000006 67.97183377935207,127.99999999999999\" fill=\"none\" stroke=\"currentColor\" stroke-opacity=\"0.18\"></polygon><line x1=\"210\" y1=\"210\" x2=\"210\" y2=\"46\" stroke=\"currentColor\" stroke-opacity=\"0.14\"></line><line x1=\"210\" y1=\"210\" x2=\"352.0281662206479\" y2=\"128\" stroke=\"currentColor\" stroke-opacity=\"0.14\"></line><line x1=\"210\" y1=\"210\" x2=\"352.02816622064796\" y2=\"292\" stroke=\"currentColor\" stroke-opacity=\"0.14\"></line><line x1=\"210\" y1=\"210\" x2=\"210\" y2=\"374\" stroke=\"currentColor\" stroke-opacity=\"0.14\"></line><line x1=\"210\" y1=\"210\" x2=\"67.9718337793521\" y2=\"292.00000000000006\" stroke=\"currentColor\" stroke-opacity=\"0.14\"></line><line x1=\"210\" y1=\"210\" x2=\"67.97183377935207\" y2=\"127.99999999999999\" stroke=\"currentColor\" stroke-opacity=\"0.14\"></line><polygon points=\"210.0,160.3 281.0,169.0 281.0,251.0 210.0,261.3 119.0,262.6 142.4,171.0\" fill=\"color-mix(in srgb, currentColor 18%, transparent)\" stroke=\"currentColor\" stroke-width=\"1.4\"></polygon><g class=\"annual-axes-radar__point\" tabindex=\"0\" role=\"button\" aria-pressed=\"false\" aria-disabled=\"false\" aria-label=\"Sức khỏe — điểm 30.3\" data-domain=\"health\"><circle cx=\"210\" cy=\"160.308\" r=\"22\" fill=\"transparent\" pointer-events=\"all\"></circle><circle cx=\"210\" cy=\"160.308\" r=\"3.5\" fill=\"currentColor\"></circle><text class=\"annual-axes-radar__label\" x=\"210\" y=\"34\" dx=\"0\" dy=\"-2\" text-anchor=\"middle\" dominant-baseline=\"middle\">Sức khỏe</text></g><g class=\"annual-axes-radar__point\" tabindex=\"0\" role=\"button\" aria-pressed=\"false\" aria-disabled=\"false\" aria-label=\"Gia đạo — điểm 50\" data-domain=\"family\"><circle cx=\"281.01408311032395\" cy=\"169\" r=\"22\" fill=\"transparent\" pointer-events=\"all\"></circle><circle cx=\"281.01408311032395\" cy=\"169\" r=\"3.5\" fill=\"currentColor\"></circle><text class=\"annual-axes-radar__label\" x=\"362.42047106606117\" y=\"122\" dx=\"4\" dy=\"0\" text-anchor=\"start\" dominant-baseline=\"middle\">Gia đạo</text></g><g class=\"annual-axes-radar__point\" tabindex=\"0\" role=\"button\" aria-pressed=\"false\" aria-disabled=\"false\" aria-label=\"Tài lộc — điểm 50\" data-domain=\"wealth\"><circle cx=\"281.014083110324\" cy=\"251\" r=\"22\" fill=\"transparent\" pointer-events=\"all\"></circle><circle cx=\"281.014083110324\" cy=\"251\" r=\"3.5\" fill=\"currentColor\"></circle><text class=\"annual-axes-radar__label\" x=\"362.4204710660612\" y=\"298\" dx=\"4\" dy=\"0\" text-anchor=\"start\" dominant-baseline=\"middle\">Tài lộc</text></g><g class=\"annual-axes-radar__point\" tabindex=\"0\" role=\"button\" aria-pressed=\"false\" aria-disabled=\"false\" aria-label=\"Công việc — điểm 31.3\" data-domain=\"career\"><circle cx=\"210\" cy=\"261.332\" r=\"22\" fill=\"transparent\" pointer-events=\"all\"></circle><circle cx=\"210\" cy=\"261.332\" r=\"3.5\" fill=\"currentColor\"></circle><text class=\"annual-axes-radar__label\" x=\"210\" y=\"386\" dx=\"0\" dy=\"3\" text-anchor=\"middle\" dominant-baseline=\"middle\">Công việc</text></g><g class=\"annual-axes-radar__point\" tabindex=\"0\" role=\"button\" aria-pressed=\"false\" aria-disabled=\"false\" aria-label=\"Giao hữu — điểm 64.1\" data-domain=\"social\"><circle cx=\"118.95994545256471\" cy=\"262.562\" r=\"22\" fill=\"transparent\" pointer-events=\"all\"></circle><circle cx=\"118.95994545256471\" cy=\"262.562\" r=\"3.5\" fill=\"currentColor\"></circle><text class=\""
-  }
+  "engineVersion": "0.8.0",
+  "formulaVersion": "v0.8-annual-palace-weighted-score",
+  "knowledgeVersion": "0.8.0",
+  "scores": {
+    "health": 40,
+    "family": 42,
+    "wealth": 57,
+    "career": 46,
+    "social": 49,
+    "romance": 26.3
+  },
+  "noConfidencePercentage": true
 }

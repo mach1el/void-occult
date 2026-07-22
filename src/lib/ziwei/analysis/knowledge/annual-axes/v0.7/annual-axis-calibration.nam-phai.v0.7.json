@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "0.7.0",
+  "profileId": "annual-axis-calibration-nam-phai-v0-7",
+  "engineVersion": "0.7.0",
+  "formulaVersion": "v0.7-robust-centered-annual-score",
+  "trainingCorpusId": "annual-axes-audit-full-v0.4",
+  "splitPolicy": {
+    "trainingFraction": 0.8,
+    "holdoutFraction": 0.2,
+    "splitBy": "stable-chart-id"
+  },
+  "activationTargetMedianGate": 0.7,
+  "activationScale": 12.089302186318386,
+  "medianPositiveAnnualActivationRaw": 10.485058165646807,
+  "domainCenters": {
+    "health": 0.22637242840828048,
+    "family": 0.15353121830378516,
+    "wealth": 0.16559944882809458,
+    "career": 0.14805572596012612,
+    "social": 0.11626945688948156,
+    "romance": 0.15253213740311772
+  },
+  "domainScales": {
+    "health": 0.3376364599898803,
+    "family": 0.346986345839938,
+    "wealth": 0.2767155204144342,
+    "career": 0.27242937659598243,
+    "social": 0.3817431821921644,
+    "romance": 0.32277226132324854
+  },
+  "q75AbsStrictLatent": {
+    "health": 0.1854657820236405,
+    "family": 0.19060173176989922,
+    "wealth": 0.15200153559624427,
+    "career": 0.1496471304612693,
+    "social": 0.20969387553579044,
+    "romance": 0.17730078636545762
+  },
+  "trainingDiagnostics": {
+    "medianActivationGate": 0.6990259861922142,
+    "p90ActivationGate": 0.8938861816606153,
+    "maxActivationGate": 0.9798899003570146
+  },
+  "generatedAt": "2026-07-21T00:00:00.000Z",
+  "sourceIds": [
+    "SRC-AA-ENG-004"
+  ],
+  "signedLayerFactors": {
+    "annual": 1,
+    "natalActivated": 0.25,
+    "majorFortune": 0,
+    "global": 0
+  },
+  "selectionStatus": "no-variant-approved"
+}

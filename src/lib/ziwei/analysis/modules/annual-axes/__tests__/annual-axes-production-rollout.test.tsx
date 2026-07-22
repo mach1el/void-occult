@@ -29,7 +29,7 @@ function scoresFor(result: ReturnType<typeof analyzeAnnualAxes>): number[] {
   });
 }
 
-describe("Annual Axes V0.8-only Nam Phái routing", () => {
+describe("Annual Axes Nam Phái production routing", () => {
   beforeEach(resetSession);
 
   it("Nam Phái default → engine 0.8.0", () => {
@@ -38,7 +38,31 @@ describe("Annual Axes V0.8-only Nam Phái routing", () => {
     expect(result.versions.engineVersion).toBe("0.8.0");
   });
 
-  it("legacy query flags cannot select removed engines", () => {
+  it("V08=0 selects V0.7; V07=0 selects V0.5; V05=0 selects V0.4.2", () => {
+    window.history.replaceState({}, "", "/?ziweiAnnualAxesV08=0");
+    const chart = calculateNamPhai(REGRESSION);
+    expect(analyzeAnnualAxes(chart, { school: "nam-phai" }).versions.engineVersion).toBe(
+      "0.7.0",
+    );
+
+    window.sessionStorage.clear();
+    window.history.replaceState({}, "", "/?ziweiAnnualAxesV08=0&ziweiAnnualAxesV07=0");
+    expect(analyzeAnnualAxes(chart, { school: "nam-phai" }).versions.engineVersion).toBe(
+      "0.5.0",
+    );
+
+    window.sessionStorage.clear();
+    window.history.replaceState(
+      {},
+      "",
+      "/?ziweiAnnualAxesV08=0&ziweiAnnualAxesV07=0&ziweiAnnualAxesV05=0",
+    );
+    expect(analyzeAnnualAxes(chart, { school: "nam-phai" }).versions.engineVersion).toBe(
+      "0.4.2",
+    );
+  });
+
+  it("opt-in flags for older engines do not override default V0.8", () => {
     window.history.replaceState(
       {},
       "",
@@ -122,8 +146,9 @@ describe("Annual Axes V0.8 UI score equality", () => {
     expect(axis.status).toBe("available");
     if (axis.status !== "available") return;
     expect(container.textContent ?? "").toContain(`Điểm ${axis.score.toFixed(1)}`);
-    expect(container.textContent ?? "").toContain(axis.scoreTrace?.formulaVersion === "v0.8-direct-anchor-robust-score"
-      ? axis.scoreTrace.anchorPalaceName
-      : "");
+    if (axis.scoreTrace?.formulaVersion === "v0.8-annual-palace-weighted-score") {
+      expect(container.textContent ?? "").toContain(axis.scoreTrace.primary.palaceName);
+      expect(container.textContent ?? "").not.toMatch(/Độ tin cậy\s+\d+%/);
+    }
   });
 });

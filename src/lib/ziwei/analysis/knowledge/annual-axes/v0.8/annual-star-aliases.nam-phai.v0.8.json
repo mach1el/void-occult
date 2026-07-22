@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "0.8.0",
+  "catalogId": "annual-star-aliases-nam-phai-v0-8",
+  "groups": {
+    "KhoiViet": ["Thiên Khôi", "Thiên Việt", "Lưu Thiên Khôi", "Lưu Thiên Việt"],
+    "KinhDa": ["Kình Dương", "Đà La", "Lưu Kình Dương", "Lưu Đà La"],
+    "KhongKiep": ["Địa Không", "Địa Kiếp"],
+    "LongPhuong": ["Long Trì", "Phượng Các"],
+    "ThaiToa": ["Tam Thai", "Bát Tọa"],
+    "QuangQuy": ["Ân Quang", "Thiên Quý"]
+  },
+  "sourceIds": ["SRC-AA-ENG-004"]
+}

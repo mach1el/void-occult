@@ -1,0 +1,39 @@
+{
+  "birth": {
+    "solarDate": "1991-09-21",
+    "birthHour": "Dậu",
+    "gender": "female",
+    "timezone": "7",
+    "annualYear": "2026",
+    "flowBase": "luu-nien"
+  },
+  "v05Baseline": {
+    "health": 41.9,
+    "family": 59.2,
+    "wealth": 47.5,
+    "career": 50,
+    "social": 53.7,
+    "romance": 58.9
+  },
+  "productFixture": {
+    "health": 16.4,
+    "family": 61.1,
+    "wealth": 38.2,
+    "career": 35.2,
+    "social": 44.4,
+    "romance": 56.5,
+    "minimum": 16.4,
+    "maximum": 61.1,
+    "radarRange": 44.7,
+    "countAbove50": 2,
+    "countAtOrBelow45": 4,
+    "countAtOrAbove58": 1,
+    "l1FromV05": 63.199999999999996,
+    "passesProductGates": false,
+    "productBlockers": [
+      "maximum 61.1 < 65",
+      "countAtOrAbove58 1 < 2"
+    ]
+  },
+  "selectionStatus": "no-variant-approved"
+}

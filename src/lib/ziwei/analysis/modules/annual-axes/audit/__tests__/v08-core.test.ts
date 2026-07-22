@@ -1,23 +1,21 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, beforeEach } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
-import type { BirthInput } from "@/types/chart";
+import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
+import type { BirthInput, ChartData, ChartStar } from "@/types/chart";
+import { analyzeAnnualAxes } from "../../analyze";
+import { analyzeAnnualAxesNamPhaiV08 } from "../../nam-phai-v08/analyze";
+import {
+  resolveAnnualPalace,
+  resolveSmallLimitPalace,
+  annualIdentityOf,
+} from "../../nam-phai-v08/resolve-annual-palace";
+import { matchPalaceStars, clampPalaceRaw } from "../../nam-phai-v08/match-stars";
+import { scoreV08Domain } from "../../nam-phai-v08/score-domain";
 import {
   loadAnnualAxesKnowledgeV08NamPhai,
-  resetAnnualAxesKnowledgeV08NamPhaiCache,
+  type AnnualAxesKnowledgeV08NamPhai,
 } from "../../../../knowledge/annual-axes/v0.8";
-import {
-  computeDirectSigned,
-  computeActivationModulator,
-} from "../../nam-phai-v08/bucket-formula";
-import {
-  classifyRelativeToDomainRoot,
-  partitionDirectAnchorEligibility,
-} from "../../nam-phai-v08/eligibility";
-import { resolveDomainRootV08 } from "../../nam-phai-v08/resolve-domain-root";
-import { analyzeAnnualAxesNamPhaiV08 } from "../../nam-phai-v08/analyze";
 import { ANNUAL_AXIS_DOMAINS } from "../../../../contracts/annual-axes";
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
 
 const REGRESSION: BirthInput = {
   solarDate: "1991-09-21",
@@ -28,139 +26,336 @@ const REGRESSION: BirthInput = {
   flowBase: "luu-nien",
 };
 
-describe("annual-axes v0.8 core", () => {
-  it("loads V0.8 knowledge with direct-only geometry policy", () => {
-    resetAnnualAxesKnowledgeV08NamPhaiCache();
-    const loaded = loadAnnualAxesKnowledgeV08NamPhai();
-    expect(loaded.ok).toBe(true);
-    if (!loaded.ok) return;
-    const geo = loaded.knowledge.bucketFormula.signedGeometryPolicy;
-    expect(geo.direct).toBe(1);
-    expect(geo.tp4c).toBe(0);
-    expect(geo.opposite).toBe(0);
-    expect(geo.contextOnly).toBe(0);
-    expect(geo.adjacent).toBe(0);
-    expect(loaded.knowledge.scoreProfile.scoreProfiles).toHaveLength(3);
-    expect(loaded.knowledge.calibration.selectedVariant).toBe("DIRECT-STRICT-18");
-    expect(loaded.knowledge.calibration.selectionStatus).toBe("approved");
-  });
+const loaded = loadAnnualAxesKnowledgeV08NamPhai();
+if (!loaded.ok) throw new Error("v0.8 knowledge invalid");
+const knowledge: AnnualAxesKnowledgeV08NamPhai = loaded.knowledge;
 
-  it("classifies geometry relative to domain root", () => {
-    expect(classifyRelativeToDomainRoot(3, 3)).toBe("direct");
-    expect(classifyRelativeToDomainRoot(9, 3)).toBe("opposite");
-    expect(classifyRelativeToDomainRoot(7, 3)).toBe("tp4c");
-    expect(classifyRelativeToDomainRoot(4, 3)).toBe("adjacent");
-  });
+function withStars(chart: ChartData, palaceIndex: number, stars: ChartStar[]): ChartData {
+  return {
+    ...chart,
+    palaces: chart.palaces.map((p) =>
+      p.index === palaceIndex ? { ...p, stars: [...(p.stars ?? []), ...stars] } : p,
+    ),
+  };
+}
 
-  it("reconstructs directSigned and activation modulator", () => {
-    const signed = computeDirectSigned(2, 1, 1, 1e-9);
-    expect(signed.total).toBe(3);
-    expect(signed.signed).toBeCloseTo(signed.intensity * signed.polarity, 10);
-    expect(computeActivationModulator(0)).toBe(0);
-    expect(computeActivationModulator(0.49)).toBeCloseTo(Math.sqrt(0.49), 10);
-  });
-
-  it("resolves exactly one configured root anchor per domain", () => {
-    resetAnnualAxesKnowledgeV08NamPhaiCache();
-    const loaded = loadAnnualAxesKnowledgeV08NamPhai();
-    expect(loaded.ok).toBe(true);
-    if (!loaded.ok) return;
-    const chart = calculateNamPhai(REGRESSION);
+describe("Annual Axes V0.8 palace-weighted core", () => {
+  it("loads knowledge with exact 60/40 domain weights", () => {
     for (const domain of ANNUAL_AXIS_DOMAINS) {
-      const root = resolveDomainRootV08(chart, domain, loaded.knowledge);
-      expect(root.ok).toBe(true);
-      if (!root.ok) continue;
-      expect(root.anchor.domain).toBe(domain);
-      expect(Number.isInteger(root.anchor.anchorPalaceIndex)).toBe(true);
-      expect(root.anchor.anchorPalaceName.length).toBeGreaterThan(0);
-      expect(root.anchor.anchorBranch.length).toBeGreaterThan(0);
-      expect(root.anchor.provenance.length).toBeGreaterThan(0);
+      const m = knowledge.domainMapping.domains[domain];
+      expect(m.primary.weight).toBeCloseTo(0.6, 9);
+      const coop = m.cooperating.reduce((s, c) => s + c.weight, 0);
+      expect(coop).toBeCloseTo(0.4, 9);
     }
   });
 
-  it("scorer source has no hardcoded palace-name switch", () => {
-    const scoreDomain = readFileSync(
-      join(process.cwd(), "src/lib/ziwei/analysis/modules/annual-axes/nam-phai-v08/score-domain.ts"),
-      "utf8",
-    );
-    const aggregate = readFileSync(
-      join(process.cwd(), "src/lib/ziwei/analysis/modules/annual-axes/nam-phai-v08/aggregate-direct.ts"),
-      "utf8",
-    );
-    for (const src of [scoreDomain, aggregate]) {
-      expect(src).not.toMatch(/Tật Ách|Điền Trạch|Tài Bạch|Quan Lộc|Nô Bộc|Phu Thê/);
-      expect(src).not.toMatch(/switch\s*\(\s*palace/);
-    }
+  it("resolves annual palace identity, not natal name", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const head = chart.annualHeadPalace!;
+    expect(annualIdentityOf(head, chart)).toBe("Mệnh");
+
+    const tatAchNatal = chart.palaces.find((p) => p.name === "Tật Ách")!;
+    expect(annualIdentityOf(tatAchNatal, chart)).not.toBe("Tật Ách");
+
+    const luuTatAch = resolveAnnualPalace(chart, "Tật Ách");
+    expect(luuTatAch.ok).toBe(true);
+    if (!luuTatAch.ok) return;
+    expect(luuTatAch.palace.annualPalaceName).toBe("Tật Ách");
+    expect(luuTatAch.palace.natalPalaceName).not.toBe("Tật Ách");
   });
 
-  it("product fixture V0.8 has zero TP4C signed contribution and no natalGain on score", () => {
+  it("maps the six domains to the configured Lưu Niên palaces", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const expectPalace = (name: string) => {
+      const r = resolveAnnualPalace(chart, name);
+      expect(r.ok).toBe(true);
+      if (r.ok) expect(r.palace.annualPalaceName).toBe(name);
+    };
+    expectPalace("Tật Ách");
+    expectPalace("Mệnh");
+    expectPalace("Điền Trạch");
+    expectPalace("Phúc Đức");
+    expectPalace("Phụ Mẫu");
+    expectPalace("Tài Bạch");
+    expectPalace("Quan Lộc");
+    expectPalace("Thiên Di");
+    expectPalace("Nô Bộc");
+    expectPalace("Phu Thê");
+    expectPalace("Tử Tức");
+    expect(resolveSmallLimitPalace(chart).ok).toBe(true);
+  });
+
+  it("applies exact star point classes", () => {
+    expect(knowledge.pointClasses.classes.annualTransformStrongPositive).toBe(3);
+    expect(knowledge.pointClasses.classes.annualTransformPositive).toBe(2);
+    expect(knowledge.pointClasses.classes.annualTransformNegative).toBe(-3);
+    expect(knowledge.pointClasses.classes.otherAnnualPositive).toBe(2);
+    expect(knowledge.pointClasses.classes.otherAnnualNegative).toBe(-2);
+    expect(knowledge.pointClasses.classes.staticPositive).toBe(1);
+    expect(knowledge.pointClasses.classes.staticNegative).toBe(-1);
+    expect(knowledge.pointClasses.classes.dignifiedStaticPositive).toBe(2);
+  });
+
+  it("scores Lưu Hóa Lộc +3 and Lưu Hóa Kỵ -3 on wealth", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const wealth = resolveAnnualPalace(chart, "Tài Bạch");
+    expect(wealth.ok).toBe(true);
+    if (!wealth.ok) return;
+
+    const cleared: ChartData = {
+      ...chart,
+      palaces: chart.palaces.map((p) =>
+        p.index === wealth.palace.palaceIndex ? { ...p, stars: [] } : p,
+      ),
+    };
+    const withLoc = withStars(cleared, wealth.palace.palaceIndex, [
+      { name: "Lưu Hóa Lộc", source: "annual-mutagen" },
+    ]);
+    const pos = matchPalaceStars({
+      chart: withLoc,
+      palaceIndex: wealth.palace.palaceIndex,
+      annualPalaceName: "Tài Bạch",
+      domain: "wealth",
+      knowledge,
+    });
+    expect(pos.positivePoints).toBe(3);
+
+    const withKy = withStars(cleared, wealth.palace.palaceIndex, [
+      { name: "Lưu Hóa Kỵ", source: "annual-mutagen" },
+    ]);
+    const neg = matchPalaceStars({
+      chart: withKy,
+      palaceIndex: wealth.palace.palaceIndex,
+      annualPalaceName: "Tài Bạch",
+      domain: "wealth",
+      knowledge,
+    });
+    expect(neg.negativePoints).toBe(3);
+  });
+
+  it("requires miếu/vượng for Vũ Khúc and Thái Âm", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const wealth = resolveAnnualPalace(chart, "Tài Bạch");
+    if (!wealth.ok) throw new Error("missing");
+    const cleared: ChartData = {
+      ...chart,
+      palaces: chart.palaces.map((p) =>
+        p.index === wealth.palace.palaceIndex ? { ...p, stars: [] } : p,
+      ),
+    };
+    const weak = matchPalaceStars({
+      chart: withStars(cleared, wealth.palace.palaceIndex, [
+        { name: "Vũ Khúc", brightness: "Hãm" },
+      ]),
+      palaceIndex: wealth.palace.palaceIndex,
+      annualPalaceName: "Tài Bạch",
+      domain: "wealth",
+      knowledge,
+    });
+    expect(weak.positivePoints).toBe(0);
+
+    const strong = matchPalaceStars({
+      chart: withStars(cleared, wealth.palace.palaceIndex, [
+        { name: "Vũ Khúc", brightness: "Miếu" },
+      ]),
+      palaceIndex: wealth.palace.palaceIndex,
+      annualPalaceName: "Tài Bạch",
+      domain: "wealth",
+      knowledge,
+    });
+    expect(strong.positivePoints).toBe(2);
+  });
+
+  it("unknown stars have zero effect", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const wealth = resolveAnnualPalace(chart, "Tài Bạch");
+    if (!wealth.ok) throw new Error("missing");
+    const cleared: ChartData = {
+      ...chart,
+      palaces: chart.palaces.map((p) =>
+        p.index === wealth.palace.palaceIndex ? { ...p, stars: [] } : p,
+      ),
+    };
+    const matched = matchPalaceStars({
+      chart: withStars(cleared, wealth.palace.palaceIndex, [
+        { name: "Sao Không Tồn Tại", source: "annual" },
+      ]),
+      palaceIndex: wealth.palace.palaceIndex,
+      annualPalaceName: "Tài Bạch",
+      domain: "wealth",
+      knowledge,
+    });
+    expect(matched.matchedFacts).toHaveLength(0);
+  });
+
+  it("palace raw clamps to [-8,8]", () => {
+    expect(clampPalaceRaw(20, 0, knowledge)).toBe(8);
+    expect(clampPalaceRaw(0, 20, knowledge)).toBe(-8);
+  });
+
+  it("score reconstructs as 50 + 5 * adjusted raw and clamps to [10,90]", () => {
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxesNamPhaiV08(chart);
-    expect(result.versions.engineVersion).toBe("0.8.0");
     for (const domain of ANNUAL_AXIS_DOMAINS) {
       const axis = result.axes[domain];
+      expect(axis.status).toBe("available");
       if (axis.status !== "available") continue;
       const trace = axis.scoreTrace;
-      expect(trace?.formulaVersion).toBe("v0.8-direct-anchor-robust-score");
-      if (trace?.formulaVersion !== "v0.8-direct-anchor-robust-score") continue;
-      expect(trace.tp4cSignedContribution).toBe(0);
-      expect(trace.natalGainAppliedToScore).toBe(false);
+      expect(trace?.formulaVersion).toBe("v0.8-annual-palace-weighted-score");
+      if (trace?.formulaVersion !== "v0.8-annual-palace-weighted-score") continue;
+
+      const rebuiltAxis =
+        trace.primary.configuredWeight * trace.primary.palaceRaw +
+        trace.cooperating.reduce((s, c) => s + c.configuredWeight * c.palaceRaw, 0);
+      expect(rebuiltAxis).toBeCloseTo(trace.axisRawBeforeThaiTue, 9);
+
+      const adj = Math.min(
+        8,
+        Math.max(-8, trace.axisRawBeforeThaiTue * trace.thaiTueMultiplier),
+      );
+      expect(adj).toBeCloseTo(trace.prominenceAdjustedRaw, 9);
+
+      const raw = 50 + 5 * trace.prominenceAdjustedRaw;
+      expect(raw).toBeCloseTo(trace.rawScore, 9);
       expect(trace.absoluteScore).toBe(axis.score);
-      expect(Number.isFinite(trace.directSignedRaw)).toBe(true);
-      expect(Number.isFinite(trace.effectiveZ)).toBe(true);
-      expect(trace.directTotalRaw).toBeCloseTo(
-        trace.directSupportRaw + trace.directPressureRaw,
-        8,
-      );
-      expect(trace.directSignedRaw).toBeCloseTo(
-        trace.directIntensity * trace.directPolarity,
-        8,
-      );
-      if (trace.activationGate > 0) {
-        expect(trace.activationModulator).toBeCloseTo(Math.sqrt(trace.activationGate), 8);
-      }
-      for (const driver of [...axis.topSupportDrivers, ...axis.topPressureDrivers]) {
-        expect(driver.retainedForSignedScore).toBe(true);
-      }
+      expect(axis.score).toBeGreaterThanOrEqual(10);
+      expect(axis.score).toBeLessThanOrEqual(90);
     }
   });
 
-  it("rejects non-direct geometry before signed eligibility", () => {
-    resetAnnualAxesKnowledgeV08NamPhaiCache();
-    const loaded = loadAnnualAxesKnowledgeV08NamPhai();
-    expect(loaded.ok).toBe(true);
-    if (!loaded.ok) return;
+  it("Thái Tuế multiplies magnitude by 1.25 and cannot create direction from zero", () => {
+    expect(knowledge.pointClasses.thaiTueMultiplier).toBe(1.25);
     const chart = calculateNamPhai(REGRESSION);
-    const root = resolveDomainRootV08(chart, "health", loaded.knowledge);
-    expect(root.ok).toBe(true);
-    if (!root.ok) return;
-    const fakeTp4c = {
-      id: "fake-tp4c",
-      physicalFactId: "pf-tp4c",
-      targetPalaceIndex: (root.anchor.anchorPalaceIndex + 4) % 12,
-      targetPalaceName: "X",
-      layer: "annual" as const,
-      category: "star" as const,
-      frameRole: "trine" as const,
-      ownershipWeight: 1,
-      confidenceWeight: 1,
-      rawAxes: { support: 9, pressure: 0, stability: 0, activation: 1 },
-      weightedAxes: { support: 9, pressure: 0, stability: 0, activation: 1 },
-      annualTriggerIds: ["annual-moving-star-palace"],
-      activationPaths: [
-        {
-          channel: "direct-domain" as const,
-          triggerId: "annual-moving-star-palace",
-          affinityWeight: 1,
-        },
-      ],
+    // Force empty star chart on mapped palaces for romance — score state no-signal.
+    const empty = {
+      ...chart,
+      palaces: chart.palaces.map((p) => ({ ...p, stars: [] })),
+      annualMutagens: [],
+      natalMutagens: [],
+      annualStars: [],
     };
-    const partition = partitionDirectAnchorEligibility(
-      [fakeTp4c as never],
-      root.anchor,
-      loaded.knowledge,
-    );
-    expect(partition.signedEligible).toHaveLength(0);
-    expect(partition.counts.excludedTp4cFactCount).toBeGreaterThan(0);
+    const scored = scoreV08Domain({ chart: empty, domain: "romance", knowledge });
+    if (scored.trace.isThaiTueHighlighted) {
+      expect(scored.trace.prominenceAdjustedRaw).toBe(0);
+      expect(scored.score).toBe(50);
+    }
+  });
+
+  it("no matched star gives score 50 + no-signal", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const empty = {
+      ...chart,
+      palaces: chart.palaces.map((p) => ({ ...p, stars: [] })),
+      annualMutagens: [],
+      natalMutagens: [],
+      annualStars: [],
+      taiTuePalace: null,
+    };
+    const scored = scoreV08Domain({ chart: empty, domain: "social", knowledge });
+    expect(scored.score).toBe(50);
+    expect(scored.scoreState).toBe("no-signal");
+  });
+
+  it("missing cooperating palace produces partial-data without killing the module", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const broken = { ...chart, smallLimitPalace: null, palaces: chart.palaces.map((p) => ({ ...p, isSmallLimitPalace: false })) };
+    const scored = scoreV08Domain({ chart: broken, domain: "health", knowledge });
+    expect(scored.trace.missingInputs.some((m) => m.includes("small-limit"))).toBe(true);
+    expect(scored.scoreState).toBe("partial-data");
+    const result = analyzeAnnualAxesNamPhaiV08(broken);
+    expect(result.status).toBe("available");
+  });
+
+  it("generic TP4C palace not listed has no score effect", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const social = scoreV08Domain({ chart, domain: "social", knowledge });
+    const listed = new Set([
+      social.trace.primary.palaceIndex,
+      ...social.trace.cooperating.map((c) => c.palaceIndex),
+    ]);
+    // Add a strong star on an unlisted palace — must not change social score.
+    const unlisted = chart.palaces.find((p) => !listed.has(p.index))!;
+    const boosted = withStars(chart, unlisted.index, [
+      { name: "Lưu Hóa Lộc", source: "annual-mutagen" },
+      { name: "Lưu Hóa Khoa", source: "annual-mutagen" },
+    ]);
+    const again = scoreV08Domain({ chart: boosted, domain: "social", knowledge });
+    expect(again.score).toBe(social.score);
+  });
+
+  it("reversing star order preserves scores", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const forward = analyzeAnnualAxesNamPhaiV08(chart);
+    const reversed = analyzeAnnualAxesNamPhaiV08({
+      ...chart,
+      palaces: chart.palaces.map((p) => ({
+        ...p,
+        stars: [...(p.stars ?? [])].reverse(),
+      })),
+    });
+    for (const domain of ANNUAL_AXIS_DOMAINS) {
+      const a = forward.axes[domain];
+      const b = reversed.axes[domain];
+      expect(a.status).toBe("available");
+      expect(b.status).toBe("available");
+      if (a.status !== "available" || b.status !== "available") continue;
+      expect(b.score).toBe(a.score);
+    }
+  });
+
+  describe("routing", () => {
+    beforeEach(() => {
+      window.sessionStorage.clear();
+      window.history.replaceState({}, "", "/");
+    });
+
+    it("default Nam Phái runs V0.8", () => {
+      const chart = calculateNamPhai(REGRESSION);
+      expect(analyzeAnnualAxes(chart, { school: "nam-phai" }).versions.engineVersion).toBe(
+        "0.8.0",
+      );
+    });
+
+    it("V08=0 runs V0.7", () => {
+      window.history.replaceState({}, "", "/?ziweiAnnualAxesV08=0");
+      const chart = calculateNamPhai(REGRESSION);
+      expect(analyzeAnnualAxes(chart, { school: "nam-phai" }).versions.engineVersion).toBe(
+        "0.7.0",
+      );
+    });
+
+    it("V07=0 runs V0.5", () => {
+      window.history.replaceState({}, "", "/?ziweiAnnualAxesV08=0&ziweiAnnualAxesV07=0");
+      const chart = calculateNamPhai(REGRESSION);
+      expect(analyzeAnnualAxes(chart, { school: "nam-phai" }).versions.engineVersion).toBe(
+        "0.5.0",
+      );
+    });
+
+    it("V05=0 runs V0.4.2", () => {
+      window.history.replaceState(
+        {},
+        "",
+        "/?ziweiAnnualAxesV08=0&ziweiAnnualAxesV07=0&ziweiAnnualAxesV05=0",
+      );
+      const chart = calculateNamPhai(REGRESSION);
+      expect(analyzeAnnualAxes(chart, { school: "nam-phai" }).versions.engineVersion).toBe(
+        "0.4.2",
+      );
+    });
+
+    it("Trung Châu remains V0.2", () => {
+      const chart = calculateTrungChau(REGRESSION);
+      expect(analyzeAnnualAxes(chart, { school: "trung-chau" }).versions.engineVersion).toBe(
+        "0.2.0",
+      );
+    });
+  });
+
+  it("contains no robust calibration fields in V0.8 knowledge", () => {
+    const k = knowledge as unknown as Record<string, unknown>;
+    expect(k.calibration).toBeUndefined();
+    expect(k.bucketFormula).toBeUndefined();
+    expect((knowledge.pointClasses as unknown as { robustCalibration?: unknown }).robustCalibration).toBeUndefined();
   });
 });

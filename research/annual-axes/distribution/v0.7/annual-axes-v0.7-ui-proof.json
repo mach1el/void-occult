@@ -1,0 +1,30 @@
+{
+  "proof": "annual-axes-v07-ui-dom",
+  "badge": "Nam Phái V0.7 · Experimental",
+  "engine": "0.7.0",
+  "scores": {
+    "health": 16.4,
+    "family": 61.1,
+    "wealth": 38.2,
+    "career": 35.2,
+    "social": 44.4,
+    "romance": 56.5
+  },
+  "radarRange": 44.7,
+  "l1FromV05": 63.199999999999996,
+  "v05Rollback": {
+    "badge": "Nam Phái V0.5 · Fallback",
+    "engine": "0.5.0",
+    "scores": {
+      "health": 41.9,
+      "family": 59.2,
+      "wealth": 47.5,
+      "career": 50,
+      "social": 53.7,
+      "romance": 58.9
+    }
+  },
+  "svgSnapshot": "<svg class=\"annual-axes-radar__svg\" viewBox=\"0 0 420 420\" role=\"img\" aria-label=\"Radar sáu trục khí vận năm\"><polygon points=\"210,169 245.50704155516198,189.5 245.507041555162,230.5 210,251 174.49295844483802,230.5 174.49295844483802,189.5\" fill=\"none\" stroke=\"currentColor\" stroke-opacity=\"0.18\"></polygon><polygon points=\"210,128 281.01408311032395,169 281.014083110324,251 210,292 138.98591688967605,251.00000000000003 138.98591688967605,169\" fill=\"none\" stroke=\"currentColor\" stroke-opacity=\"0.18\"></polygon><polygon points=\"210,87 316.52112466548596,148.5 316.52112466548596,271.5 210,333 103.47887533451407,271.50000000000006 103.47887533451406,148.5\" fill=\"none\" stroke=\"currentColor\" stroke-opacity=\"0.18\"></polygon><polygon points=\"210,46 352.0281662206479,128 352.02816622064796,292 210,374 67.9718337793521,292.00000000000006 67.97183377935207,127.99999999999999\" fill=\"none\" stroke=\"currentColor\" stroke-opacity=\"0.18\"></polygon><line x1=\"210\" y1=\"210\" x2=\"210\" y2=\"46\" stroke=\"currentColor\" stroke-opacity=\"0.14\"></line><line x1=\"210\" y1=\"210\" x2=\"352.0281662206479\" y2=\"128\" stroke=\"currentColor\" stroke-opacity=\"0.14\"></line><line x1=\"210\" y1=\"210\" x2=\"352.02816622064796\" y2=\"292\" stroke=\"currentColor\" stroke-opacity=\"0.14\"></line><line x1=\"210\" y1=\"210\" x2=\"210\" y2=\"374\" stroke=\"currentColor\" stroke-opacity=\"0.14\"></line><line x1=\"210\" y1=\"210\" x2=\"67.9718337793521\" y2=\"292.00000000000006\" stroke=\"currentColor\" stroke-opacity=\"0.14\"></line><line x1=\"210\" y1=\"210\" x2=\"67.97183377935207\" y2=\"127.99999999999999\" stroke=\"currentColor\" stroke-opacity=\"0.14\"></line><polygon points=\"210.0,183.1 296.8,159.9 264.3,241.3 210.0,267.7 146.9,246.4 129.8,163.7\" fill=\"color-mix(in srgb, currentColor 18%, transparent)\" stroke=\"currentColor\" stroke-width=\"1.4\"></polygon><g class=\"annual-axes-radar__point\" tabindex=\"0\" role=\"button\" aria-pressed=\"false\" aria-disabled=\"false\" aria-label=\"Sức khỏe — điểm 16.4\" data-domain=\"health\"><circle cx=\"210\" cy=\"183.104\" r=\"22\" fill=\"transparent\" pointer-events=\"all\"></circle><circle cx=\"210\" cy=\"183.104\" r=\"3.5\" fill=\"currentColor\"></circle><text class=\"annual-axes-radar__label\" x=\"210\" y=\"34\" dx=\"0\" dy=\"-2\" text-anchor=\"middle\" dominant-baseline=\"middle\">Sức khỏe</text></g><g class=\"annual-axes-radar__point\" tabindex=\"0\" role=\"button\" aria-pressed=\"false\" aria-disabled=\"false\" aria-label=\"Gia đạo — điểm 61.1\" data-domain=\"family\"><circle cx=\"296.7792095608159\" cy=\"159.898\" r=\"22\" fill=\"transparent\" pointer-events=\"all\"></circle><circle cx=\"296.7792095608159\" cy=\"159.898\" r=\"3.5\" fill=\"currentColor\"></circle><text class=\"annual-axes-radar__label\" x=\"362.42047106606117\" y=\"122\" dx=\"4\" dy=\"0\" text-anchor=\"start\" dominant-baseline=\"middle\">Gia đạo</text></g><g class=\"annual-axes-radar__point\" tabindex=\"0\" role=\"button\" aria-pressed=\"false\" aria-disabled=\"false\" aria-label=\"Tài lộc — điểm 38.2\" data-domain=\"wealth\"><circle cx=\"264.25475949628753\" cy=\"241.32399999999998\" r=\"22\" fill=\"transparent\" pointer-events=\"all\"></circle><circle cx=\"264.25475949628753\" cy=\"241.32399999999998\" r=\"3.5\" fill=\"currentColor\"></circle><text class=\"annual-axes-radar__label\" x=\"362.4204710660612\" y=\"298\" dx=\"4\" dy=\"0\" text-anchor=\"start\" dominant-baseline=\"middle\">Tài lộc</text></g><g class=\"annual-axes-radar__point\" tabindex=\"0\" role=\"button\" aria-pressed=\"false\" aria-disabled=\"false\" aria-label=\"Công việc — điểm 35.2\" data-domain=\"career\"><circle cx=\"210\" cy=\"267.728\" r=\"22\" fill=\"transparent\" pointer-events=\"all\"></circle><circle cx=\"210\" cy=\"267.728\" r=\"3.5\" fill=\"currentColor\"></circle><text class=\"annual-axes-radar__label\" x=\"210\" y=\"386\" dx=\"0\" dy=\"3\" text-anchor=\"middle\" dominant-baseline=\"middle\">Công việc</text></g><g class=\"annual-axes-radar__point\" tabindex=\"0\" role=\"button\" aria-pressed=\"false\" aria-disabled=\"false\" aria-label=\"Giao hữu — điểm 44.4\" data-domain=\"social\"><circle cx=\"146.93949419803232\" cy=\"246.40800000000002\" r=\"22\" fill=\"transparent\" pointer-events=\"all\"></circle><circle cx=\"146.93949419803232\" cy=\"246.",
+  "selectionStatus": "no-variant-approved",
+  "note": "V0.7 remains opt-in; hard holdout/product gates did not all pass."
+}

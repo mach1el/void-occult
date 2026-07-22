@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "0.5.0",
+  "profileId": "annual-spatial-budget-nam-phai-v0-5",
+  "status": "experimental",
+  "requiresCalibration": true,
+  "signedBudget": {
+    "direct": 0.9,
+    "tp4c": 0.1,
+    "globalAnnualClimate": 0.0,
+    "majorFortuneBackground": 0.0
+  },
+  "pathClassification": {
+    "exactAnnualTargetIsDirect": true,
+    "annualHeadFocusIsDirect": true,
+    "oppositeIsTp4c": true,
+    "trineIsTp4c": true,
+    "outsideIsNumeric": false,
+    "collisionPolicy": "direct-wins"
+  },
+  "tp4cRelativeRoleWeights": {
+    "opposite": 0.8,
+    "trine": 0.7
+  },
+  "weightTolerance": 1e-12,
+  "sourceIds": [
+    "SRC-AA-ENG-004"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "0.7.0",
+  "profileId": "annual-score-profile-nam-phai-v0-7",
+  "status": "experimental",
+  "neutral": 50,
+  "amplitude": 44,
+  "targetQ75ScoreDelta": 22,
+  "minimum": 0,
+  "maximum": 100,
+  "precision": 1,
+  "minimumDomainScale": 0.01,
+  "maximumDomainScale": 10,
+  "latentTargetForDomainScale": 0.5493061443340548,
+  "sourceIds": [
+    "SRC-AA-ENG-004"
+  ]
+}

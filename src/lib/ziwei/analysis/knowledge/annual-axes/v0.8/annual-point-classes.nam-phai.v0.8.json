@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "0.8.0",
+  "profileId": "annual-point-classes-nam-phai-v0-8",
+  "classes": {
+    "annualTransformStrongPositive": 3,
+    "annualTransformPositive": 2,
+    "annualTransformNegative": -3,
+    "otherAnnualPositive": 2,
+    "otherAnnualNegative": -2,
+    "staticPositive": 1,
+    "staticNegative": -1,
+    "dignifiedStaticPositive": 2
+  },
+  "palaceRawClamp": { "minimum": -8, "maximum": 8 },
+  "axisRawClamp": { "minimum": -8, "maximum": 8 },
+  "thaiTueMultiplier": 1.25,
+  "thaiTueNeutralMultiplier": 1.0,
+  "score": {
+    "neutral": 50,
+    "pointsPerRawUnit": 5,
+    "minimum": 10,
+    "maximum": 90,
+    "precision": 1
+  },
+  "sourceIds": ["SRC-AA-ENG-004"]
+}

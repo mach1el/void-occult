@@ -26,6 +26,14 @@ import {
   type AnnualFocusSummary,
 } from "./types";
 import { analyzeAnnualAxesNamPhaiV08 } from "./nam-phai-v08/analyze";
+import { analyzeAnnualAxesNamPhaiV07 } from "./nam-phai-v07/analyze";
+import { analyzeAnnualAxesNamPhaiV05 } from "./nam-phai-v05/analyze";
+import { analyzeAnnualAxesNamPhaiV04 } from "./nam-phai-v04/analyze";
+import {
+  isAnnualAxesV05Enabled,
+  isAnnualAxesV07Enabled,
+  isAnnualAxesV08Enabled,
+} from "../../feature-flags";
 
 const CONTRACT_VERSION = "0.2.0";
 const ENGINE_VERSION = "0.2.0";
@@ -144,8 +152,16 @@ export function analyzeAnnualAxes(chart: ChartData, options: { school: ZiweiScho
   const { school } = options;
 
   if (school === "nam-phai") {
-    // Nam Phái Annual Axes is V0.8-only. Older public engines removed.
-    return analyzeAnnualAxesNamPhaiV08(chart);
+    if (!isAnnualAxesV05Enabled()) {
+      return analyzeAnnualAxesNamPhaiV04(chart);
+    }
+    if (!isAnnualAxesV07Enabled()) {
+      return analyzeAnnualAxesNamPhaiV05(chart);
+    }
+    if (isAnnualAxesV08Enabled()) {
+      return analyzeAnnualAxesNamPhaiV08(chart);
+    }
+    return analyzeAnnualAxesNamPhaiV07(chart);
   }
 
   const diagnostics = emptyAnnualAxesDiagnostics();

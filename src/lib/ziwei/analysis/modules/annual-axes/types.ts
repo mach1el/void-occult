@@ -285,43 +285,45 @@ export interface AnnualAxisScoreTraceV07 {
   absoluteScore: number;
 }
 
-/** V0.8 direct-anchor robust score. */
+/** V0.8 explicit Lưu Niên palace-weighted score. */
+export interface AnnualAxisMatchedStarFactV08 {
+  starName: string;
+  canonicalStarName: string;
+  ruleId: string;
+  polarity: "positive" | "negative";
+  points: number;
+  palaceIndex: number;
+  annualPalaceName: string;
+  sourceId: string;
+}
+
+export interface AnnualAxisPalaceContributionTraceV08 {
+  role: string;
+  palaceName: string;
+  palaceIndex: number | null;
+  configuredWeight: number;
+  positivePoints: number;
+  negativePoints: number;
+  palaceRaw: number;
+  matchedFacts: AnnualAxisMatchedStarFactV08[];
+  missingReason?: string;
+}
+
 export interface AnnualAxisScoreTraceV08 {
-  formulaVersion: "v0.8-direct-anchor-robust-score";
-  candidateId: string;
-  anchorPalaceIndex: number;
-  anchorPalaceName: string;
-  anchorBranch: string;
-  anchorProvenance: string;
-  retainedDirectFactCount: number;
-  excludedTp4cFactCount: number;
-  excludedOppositeFactCount: number;
-  excludedContextFactCount: number;
-  excludedAdjacentFactCount: number;
-  excludedCrossDomainFactCount: number;
-  directSupportRaw: number;
-  directPressureRaw: number;
-  directTotalRaw: number;
-  directIntensity: number;
-  directPolarity: number;
-  directSignedRaw: number;
-  domainCenter: number;
-  robustScale: number;
-  directZ: number;
-  clampedDirectZ: number;
-  annualActivationRaw: number;
-  activationScale: number;
-  activationGate: number;
-  activationModulator: number;
-  effectiveZ: number;
-  scoreStepPerRobustSigma: number;
+  formulaVersion: "v0.8-annual-palace-weighted-score";
+  primary: AnnualAxisPalaceContributionTraceV08;
+  cooperating: AnnualAxisPalaceContributionTraceV08[];
+  axisRawBeforeThaiTue: number;
+  isThaiTueHighlighted: boolean;
+  thaiTueMultiplier: number;
+  prominenceAdjustedRaw: number;
   rawScore: number;
   absoluteScore: number;
-  conflictRatio: number;
-  coverage: number;
-  confidence: number;
-  tp4cSignedContribution: 0;
-  natalGainAppliedToScore: false;
+  scoreState: "scored" | "no-signal" | "balanced-signal" | "partial-data";
+  configuredPalaceCount: number;
+  resolvedPalaceCount: number;
+  matchedStarCount: number;
+  missingInputs: string[];
 }
 
 /** V0.3 — head-centric routing exposure per domain. Undefined when the

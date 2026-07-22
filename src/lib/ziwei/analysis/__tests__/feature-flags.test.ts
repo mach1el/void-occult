@@ -4,19 +4,23 @@ import {
   HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG,
   isAnnualAxesV043Enabled,
   isAnnualAxesV05Enabled,
+  isAnnualAxesV07Enabled,
   isAnnualAxesV08Enabled,
 } from "../feature-flags";
 
-describe("legacy annual-axes flags (V0.8-only runtime)", () => {
+describe("annual-axes feature flag defaults", () => {
+  beforeEach(() => {
+    window.sessionStorage.clear();
+    window.history.replaceState({}, "", "/");
+  });
+
   it("V0.4.3 stays off", () => {
     expect(isAnnualAxesV043Enabled()).toBe(false);
   });
 
-  it("V0.5 stays off (engine removed)", () => {
-    expect(isAnnualAxesV05Enabled()).toBe(false);
-  });
-
-  it("V0.8 reports enabled for compatibility", () => {
+  it("V0.5 / V0.7 / V0.8 default ON", () => {
+    expect(isAnnualAxesV05Enabled()).toBe(true);
+    expect(isAnnualAxesV07Enabled()).toBe(true);
     expect(isAnnualAxesV08Enabled()).toBe(true);
   });
 });

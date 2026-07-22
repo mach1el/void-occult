@@ -4,17 +4,13 @@ import {
   loadAnnualAxesKnowledgeV04NamPhai,
   type AnnualAxesKnowledgeV04NamPhai,
 } from "../../../knowledge/annual-axes/v0.4";
-import { loadAnnualAxesKnowledgeV042NamPhai } from "../../../knowledge/annual-axes/v0.4.2";
 import { loadAnnualAxesKnowledgeV08NamPhai } from "../../../knowledge/annual-axes/v0.8";
-import { loadPalaceOverviewKnowledgeV1 } from "../../../knowledge";
 import { buildAnnualFocusFrame } from "../build-annual-focus-frame";
 import { resolveAnnualFocus } from "../resolvers/resolve-annual-focus";
 import {
   dedupeAnnualAxesDiagnostics,
   emptyAnnualAxesDiagnostics,
 } from "../diagnostics";
-import { collectNamPhaiV04TriggeredEvidence } from "../nam-phai-v04/collect-evidence";
-import { computeDomainRoutingsV04 } from "../nam-phai-v04/routing";
 import {
   type AnnualAxesCapabilities,
   type AnnualAxesResult,
@@ -23,29 +19,17 @@ import {
   type AnnualAxisResult,
   type AnnualFocusSummary,
   type AnnualAxesDiagnostics,
+  type AnnualAxisScoreTraceV08,
+  emptyAnnualAxes,
 } from "../types";
 import { ANNUAL_AXIS_DOMAINS } from "../../../contracts/annual-axes";
-import { resolveDomainRootV08 } from "./resolve-domain-root";
-import { partitionDirectAnchorEligibility } from "./eligibility";
-import { dedupeV08SpatialPaths } from "./dedupe";
-import { aggregateV08Direct } from "./aggregate-direct";
 import { scoreV08Domain } from "./score-domain";
-import { resolveBand } from "./score-chart";
-import type { V08ScoreProfileId } from "../../../knowledge/annual-axes/v0.8";
+import type { MatchedStarFact } from "./match-stars";
 
 const CONTRACT_VERSION = "0.8.0";
 const ENGINE_VERSION = "0.8.0";
+const KNOWLEDGE_VERSION = "0.8.0";
 const TOP_DRIVER_COUNT = 3;
-
-function topDrivers(
-  evidence: AnnualAxisEvidence[],
-  axis: "support" | "pressure",
-): AnnualAxisEvidence[] {
-  return evidence
-    .filter((e) => e.retainedForSignedScore === true && e.weightedAxes[axis] > 0)
-    .sort((a, b) => b.weightedAxes[axis] - a.weightedAxes[axis])
-    .slice(0, TOP_DRIVER_COUNT);
-}
 
 function unavailableAxisResult(
   domain: AnnualAxisDomain,
@@ -70,13 +54,6 @@ function invalidKnowledgeResult(
   for (const domain of ANNUAL_AXIS_DOMAINS) {
     axes[domain] = unavailableAxisResult(domain, ["invalid-knowledge"]);
   }
-  const capabilities: AnnualAxesCapabilities = {
-    supportsDomainScoring: false,
-    supportsAnnualFocus: false,
-    domainAnchorCoordinate: "natal-palace-name",
-    domainAnchorProvenance: "nam-phai-natal-domain-anchor",
-    primaryAnnualFocus: "annual-major-fortune",
-  };
   return {
     module: "annual-axes",
     annualYear,
@@ -89,12 +66,93 @@ function invalidKnowledgeResult(
     status: "unavailable",
     axes,
     diagnostics: dedupeAnnualAxesDiagnostics(diagnostics),
-    capabilities,
+    capabilities: {
+      supportsDomainScoring: false,
+      supportsAnnualFocus: false,
+      domainAnchorCoordinate: "natal-palace-name",
+      domainAnchorProvenance: "nam-phai-luu-nien-palace-mapping",
+      primaryAnnualFocus: "annual-major-fortune",
+    },
     annualFocus: null,
   };
 }
 
-/** Nam Phái Annual Axes V0.8 direct-anchor robust scoring core. */
+function resolveBand(
+  score: number,
+  knowledge04: AnnualAxesKnowledgeV04NamPhai,
+): AnnualAxisBand {
+  for (const band of knowledge04.deltaProfile.bands) {
+    const aboveMin = score >= band.minInclusive;
+    const belowMax =
+      band.maxExclusive !== undefined
+        ? score < band.maxExclusive
+        : band.maxInclusive !== undefined
+          ? score <= band.maxInclusive
+          : true;
+    if (aboveMin && belowMax) return band.id as AnnualAxisBand;
+  }
+  return "balanced";
+}
+
+function factToEvidence(
+  fact: MatchedStarFact,
+  domain: AnnualAxisDomain,
+  role: "primary" | "cooperating",
+): AnnualAxisEvidence {
+  const support = fact.polarity === "positive" ? Math.abs(fact.points) : 0;
+  const pressure = fact.polarity === "negative" ? Math.abs(fact.points) : 0;
+  return {
+    id: `${domain}|${fact.ruleId}|${fact.palaceIndex}|${fact.starName}`,
+    domain,
+    layer: "annual",
+    category: "star",
+    physicalFactId: `${fact.palaceIndex}|${fact.starName}`,
+    ruleId: fact.ruleId,
+    targetPalaceIndex: fact.palaceIndex,
+    targetPalaceName: fact.annualPalaceName,
+    targetAnnualPalaceName: fact.annualPalaceName,
+    frameRole: role === "primary" ? "focus" : "opposite",
+    anchorPalaceName: fact.annualPalaceName,
+    stackingGroup: fact.ruleId,
+    rawAxes: { support, pressure, stability: 0, activation: 0 },
+    effectiveWeight: 1,
+    weightedAxes: { support, pressure, stability: 0, activation: 0 },
+    confidenceWeight: 1,
+    factIds: [fact.ruleId],
+    sourceIds: [fact.sourceId],
+    knowledgeStatus: "experimental",
+    retainedForSignedScore: true,
+    retainedForActivation: false,
+  };
+}
+
+function topDrivers(
+  facts: MatchedStarFact[],
+  polarity: "positive" | "negative",
+  domain: AnnualAxisDomain,
+  primaryPalaceIndex: number | null,
+): AnnualAxisEvidence[] {
+  return facts
+    .filter((f) => f.polarity === polarity)
+    .sort((a, b) => {
+      const mag = Math.abs(b.points) - Math.abs(a.points);
+      if (mag !== 0) return mag;
+      const aPrimary = a.palaceIndex === primaryPalaceIndex ? 0 : 1;
+      const bPrimary = b.palaceIndex === primaryPalaceIndex ? 0 : 1;
+      if (aPrimary !== bPrimary) return aPrimary - bPrimary;
+      return a.ruleId.localeCompare(b.ruleId);
+    })
+    .slice(0, TOP_DRIVER_COUNT)
+    .map((f) =>
+      factToEvidence(
+        f,
+        domain,
+        f.palaceIndex === primaryPalaceIndex ? "primary" : "cooperating",
+      ),
+    );
+}
+
+/** Nam Phái Annual Axes V0.8 explicit Lưu Niên palace-weighted scoring core. */
 export function analyzeAnnualAxesNamPhaiV08(chart: ChartData): AnnualAxesResult {
   const diagnostics = emptyAnnualAxesDiagnostics();
 
@@ -107,15 +165,6 @@ export function analyzeAnnualAxesNamPhaiV08(chart: ChartData): AnnualAxesResult 
   }
   const knowledge04 = knowledge04Result.knowledge;
 
-  const knowledge042Result = loadAnnualAxesKnowledgeV042NamPhai();
-  if (!knowledge042Result.ok) {
-    for (const issue of knowledge042Result.issues) {
-      diagnostics.invalidKnowledge.push(`v0.4.2:${issue.path}: ${issue.message}`);
-    }
-    return invalidKnowledgeResult(chart.annualYear, diagnostics, "unavailable");
-  }
-  const knowledge042 = knowledge042Result.knowledge;
-
   const knowledge08Result = loadAnnualAxesKnowledgeV08NamPhai();
   if (!knowledge08Result.ok) {
     for (const issue of knowledge08Result.issues) {
@@ -125,15 +174,6 @@ export function analyzeAnnualAxesNamPhaiV08(chart: ChartData): AnnualAxesResult 
   }
   const knowledge08 = knowledge08Result.knowledge;
 
-  const numericResult = loadPalaceOverviewKnowledgeV1();
-  if (!numericResult.ok) {
-    for (const issue of numericResult.issues) {
-      diagnostics.invalidKnowledge.push(`numeric:${issue.path}: ${issue.message}`);
-    }
-    return invalidKnowledgeResult(chart.annualYear, diagnostics, "unavailable");
-  }
-  const numericKnowledge = numericResult.knowledge;
-
   const focusResolution = resolveAnnualFocus(chart, "nam-phai");
   const headFrame = focusResolution.focus
     ? buildAnnualFocusFrame(chart, focusResolution.focus)
@@ -141,109 +181,58 @@ export function analyzeAnnualAxesNamPhaiV08(chart: ChartData): AnnualAxesResult 
 
   const axes = {} as Record<AnnualAxisDomain, AnnualAxisResult>;
 
-  if (!headFrame) {
-    for (const domain of ANNUAL_AXIS_DOMAINS) {
-      axes[domain] = unavailableAxisResult(domain, ["missing-annual-head"]);
-    }
-    return {
-      module: "annual-axes",
-      annualYear: chart.annualYear,
-      school: "nam-phai",
-      versions: {
-        contractVersion: CONTRACT_VERSION,
-        engineVersion: ENGINE_VERSION,
-        knowledgeVersion: `annual-axes-v0.8@${knowledge08.calibration.formulaVersion}`,
-      },
-      status: "unavailable",
-      axes,
-      diagnostics: dedupeAnnualAxesDiagnostics(diagnostics),
-      capabilities: {
-        supportsDomainScoring: false,
-        supportsAnnualFocus: false,
-        domainAnchorCoordinate: "natal-palace-name",
-        domainAnchorProvenance: "nam-phai-natal-domain-anchor",
-        primaryAnnualFocus: "annual-major-fortune",
-      },
-      annualFocus: null,
-    };
-  }
-
-  const selected: V08ScoreProfileId =
-    knowledge08.calibration.selectedVariant ?? "DIRECT-STRICT-18";
-  const step =
-    knowledge08.scoreProfile.scoreProfiles.find((p) => p.id === selected)
-      ?.scoreStepPerRobustSigma ?? 18;
-
-  const routings = computeDomainRoutingsV04(chart, knowledge04, headFrame, diagnostics);
-
   for (const domain of ANNUAL_AXIS_DOMAINS) {
-    const root = resolveDomainRootV08(chart, domain, knowledge08);
-    if (!root.ok) {
-      axes[domain] = unavailableAxisResult(domain, root.reasonCodes);
-      continue;
-    }
-    const routing = routings.get(domain);
-    if (!routing) {
-      axes[domain] = unavailableAxisResult(domain, ["missing-routing"]);
-      continue;
-    }
-
-    const { evidence, stats } = collectNamPhaiV04TriggeredEvidence({
-      chart,
-      domain,
-      knowledge: knowledge04,
-      knowledge042,
-      numericKnowledge,
-      headFrame,
-      routing,
-      diagnostics,
-    });
-
-    const eligibility = partitionDirectAnchorEligibility(
-      evidence,
-      root.anchor,
-      knowledge08,
+    const scored = scoreV08Domain({ chart, domain, knowledge: knowledge08 });
+    const evidence = scored.matchedFacts.map((f) =>
+      factToEvidence(
+        f,
+        domain,
+        f.palaceIndex === scored.trace.primary.palaceIndex ? "primary" : "cooperating",
+      ),
     );
-    const deduped = dedupeV08SpatialPaths(
-      eligibility.signedEligible,
-      eligibility.activationEligible,
-      eligibility.rejected,
-      knowledge08,
-    );
-    const aggregate = aggregateV08Direct(deduped, eligibility, knowledge08);
-    const scored = scoreV08Domain({
-      aggregate,
-      anchor: root.anchor,
-      domain,
-      knowledge: knowledge08,
-      candidateId: selected,
-      scoreStepPerRobustSigma: step,
-    });
+    evidence.sort((a, b) => a.id.localeCompare(b.id));
+
+    const primaryIndex = scored.trace.primary.palaceIndex;
+    const pos = scored.matchedFacts
+      .filter((f) => f.polarity === "positive")
+      .reduce((s, f) => s + f.points, 0);
+    const neg = scored.matchedFacts
+      .filter((f) => f.polarity === "negative")
+      .reduce((s, f) => s + Math.abs(f.points), 0);
 
     axes[domain] = {
       domain,
       status: "available",
       score: scored.score,
-      band: resolveBand(scored.score, knowledge04) as AnnualAxisBand,
-      rawAxes: aggregate.rawAxes,
+      band: resolveBand(scored.score, knowledge04),
+      rawAxes: {
+        ...emptyAnnualAxes(),
+        support: pos,
+        pressure: neg,
+      },
       normalizedAxes: {
         support: scored.supportNorm,
         pressure: scored.pressureNorm,
         stability: 0,
-        activation: scored.activationGate,
+        activation: scored.isThaiTueHighlighted ? 1 : 0,
       },
       intensity: scored.intensity,
       conflict: scored.conflict,
-      evidence: aggregate.evidence,
-      topSupportDrivers: topDrivers(aggregate.evidence, "support"),
-      topPressureDrivers: topDrivers(aggregate.evidence, "pressure"),
+      evidence,
+      topSupportDrivers: topDrivers(
+        scored.matchedFacts,
+        "positive",
+        domain,
+        primaryIndex,
+      ),
+      topPressureDrivers: topDrivers(
+        scored.matchedFacts,
+        "negative",
+        domain,
+        primaryIndex,
+      ),
       annualDelta: Math.round((scored.score - 50) * 10) / 10,
-      activationGate: scored.activationGate,
-      latent: scored.effectiveZ,
-      scoreTrace: scored.trace,
-      spatialBudgetTrace: aggregate.spatialBudgetTrace,
-      dedupeTrace: deduped.trace,
-      collectStats: stats,
+      scoreTrace: scored.trace as AnnualAxisScoreTraceV08,
     };
   }
 
@@ -261,9 +250,17 @@ export function analyzeAnnualAxesNamPhaiV08(chart: ChartData): AnnualAxesResult 
         palaceName: focusResolution.focus.palaceName,
         palaceBranch: focusResolution.focus.palaceBranch,
         annualPalaceName: focusResolution.focus.annualPalaceName,
-        frameBranches: headFrame.frameBranches,
+        frameBranches: headFrame?.frameBranches ?? [],
       }
     : null;
+
+  const capabilities: AnnualAxesCapabilities = {
+    supportsDomainScoring: moduleStatus !== "unavailable",
+    supportsAnnualFocus: annualFocus !== null,
+    domainAnchorCoordinate: "natal-palace-name",
+    domainAnchorProvenance: "nam-phai-luu-nien-palace-mapping",
+    primaryAnnualFocus: "annual-major-fortune",
+  };
 
   return {
     module: "annual-axes",
@@ -272,21 +269,12 @@ export function analyzeAnnualAxesNamPhaiV08(chart: ChartData): AnnualAxesResult 
     versions: {
       contractVersion: CONTRACT_VERSION,
       engineVersion: ENGINE_VERSION,
-      knowledgeVersion: `annual-axes-v0.8@${knowledge08.calibration.formulaVersion}`,
+      knowledgeVersion: KNOWLEDGE_VERSION,
     },
     status: moduleStatus,
     axes,
     diagnostics: dedupeAnnualAxesDiagnostics(diagnostics),
-    capabilities: {
-      supportsDomainScoring: moduleStatus !== "unavailable",
-      supportsAnnualFocus: annualFocus !== null,
-      domainAnchorCoordinate: "natal-palace-name",
-      domainAnchorProvenance: "nam-phai-natal-domain-anchor",
-      primaryAnnualFocus: "annual-major-fortune",
-    },
+    capabilities,
     annualFocus,
   };
 }
-
-// silence unused import warning for type-only usage path
-void (null as unknown as AnnualAxesKnowledgeV04NamPhai);

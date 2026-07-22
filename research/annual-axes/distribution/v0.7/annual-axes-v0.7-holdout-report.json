@@ -1,0 +1,605 @@
+{
+  "selectionStatus": "no-variant-approved",
+  "passedAllHoldoutGates": false,
+  "holdoutMetrics": {
+    "allFinite": 1,
+    "allScoresInRange": 1,
+    "unavailableRate": 0,
+    "extremeScoreRate": 0,
+    "softExtremeScoreRate": 0.006944444444444444,
+    "tp4cContributionMaxAbs": 0.053779896268322275,
+    "globalMedianScore": 52.6,
+    "globalMeanScore": 49.57173611111112,
+    "positiveStrictLatentRate": 0.5451388888888888,
+    "negativeStrictLatentRate": 0.45069444444444445,
+    "meanIntraYearSixAxisSd": 19.460906454495863,
+    "medianIntraYearRange": 51.2,
+    "p25IntraYearRange": 41.650000000000006,
+    "p10IntraYearRange": 35.650000000000006,
+    "atLeastTwoOutside42To58Rate": 1,
+    "atLeastOneAtOrBelow42Rate": 0.9291666666666667,
+    "atLeastOneAtOrAbove62Rate": 0.9625,
+    "oneLowAndOneHighRate": 0.8916666666666667,
+    "allSixAbove50Rate": 0.029166666666666667,
+    "fiveOrMoreAbove50Rate": 0.10416666666666667,
+    "allSixInside45To65Rate": 0.008333333333333333,
+    "exactDuplicateVectorRate": 0,
+    "nearDuplicateVectorRate": 0,
+    "maxAbsInterAxisCorrelation": 0.5503862875976245,
+    "domainMedian_health": 55.400000000000006,
+    "domainPositiveStrictLatentRate_health": 0.5916666666666667,
+    "domainNegativeStrictLatentRate_health": 0.4041666666666667,
+    "domainTwelveYearRange_health": 27.200000000000003,
+    "domainAdjacentDelta_health": 4.949999999999996,
+    "domainMedian_family": 56.95,
+    "domainPositiveStrictLatentRate_family": 0.6208333333333333,
+    "domainNegativeStrictLatentRate_family": 0.37916666666666665,
+    "domainTwelveYearRange_family": 26.6,
+    "domainAdjacentDelta_family": 7.799999999999997,
+    "domainMedian_wealth": 40.7,
+    "domainPositiveStrictLatentRate_wealth": 0.26666666666666666,
+    "domainNegativeStrictLatentRate_wealth": 0.7291666666666666,
+    "domainTwelveYearRange_wealth": 29.650000000000002,
+    "domainAdjacentDelta_wealth": 5.3999999999999995,
+    "domainMedian_career": 49.3,
+    "domainPositiveStrictLatentRate_career": 0.49166666666666664,
+    "domainNegativeStrictLatentRate_career": 0.5083333333333333,
+    "domainTwelveYearRange_career": 25.7,
+    "domainAdjacentDelta_career": 7.099999999999998,
+    "domainMedian_social": 61.7,
+    "domainPositiveStrictLatentRate_social": 0.7125,
+    "domainNegativeStrictLatentRate_social": 0.2875,
+    "domainTwelveYearRange_social": 21.449999999999996,
+    "domainAdjacentDelta_social": 6.150000000000002,
+    "domainMedian_romance": 53.6,
+    "domainPositiveStrictLatentRate_romance": 0.5875,
+    "domainNegativeStrictLatentRate_romance": 0.3958333333333333,
+    "domainTwelveYearRange_romance": 27.75,
+    "domainAdjacentDelta_romance": 4.6000000000000085
+  },
+  "gateResults": [
+    {
+      "gate": "allFinite",
+      "passed": true,
+      "value": 1,
+      "threshold": 1,
+      "comparator": ">="
+    },
+    {
+      "gate": "allScoresInRange",
+      "passed": true,
+      "value": 1,
+      "threshold": 1,
+      "comparator": ">="
+    },
+    {
+      "gate": "unavailableRateMax",
+      "passed": true,
+      "value": 0,
+      "threshold": 0.02,
+      "comparator": "<="
+    },
+    {
+      "gate": "extremeScoreRateMax",
+      "passed": true,
+      "value": 0,
+      "threshold": 0.02,
+      "comparator": "<="
+    },
+    {
+      "gate": "softExtremeScoreRateMax",
+      "passed": true,
+      "value": 0.006944444444444444,
+      "threshold": 0.08,
+      "comparator": "<="
+    },
+    {
+      "gate": "tp4cContributionMaxAbs",
+      "passed": true,
+      "value": 0.053779896268322275,
+      "threshold": 0.1,
+      "comparator": "<="
+    },
+    {
+      "gate": "globalMedianScoreMin",
+      "passed": true,
+      "value": 52.6,
+      "threshold": 48,
+      "comparator": ">="
+    },
+    {
+      "gate": "globalMedianScoreMax",
+      "passed": false,
+      "value": 52.6,
+      "threshold": 52,
+      "comparator": "<="
+    },
+    {
+      "gate": "globalMeanScoreMin",
+      "passed": true,
+      "value": 49.57173611111112,
+      "threshold": 47,
+      "comparator": ">="
+    },
+    {
+      "gate": "globalMeanScoreMax",
+      "passed": true,
+      "value": 49.57173611111112,
+      "threshold": 53,
+      "comparator": "<="
+    },
+    {
+      "gate": "positiveStrictLatentRateMin",
+      "passed": true,
+      "value": 0.5451388888888888,
+      "threshold": 0.35,
+      "comparator": ">="
+    },
+    {
+      "gate": "positiveStrictLatentRateMax",
+      "passed": true,
+      "value": 0.5451388888888888,
+      "threshold": 0.65,
+      "comparator": "<="
+    },
+    {
+      "gate": "negativeStrictLatentRateMin",
+      "passed": true,
+      "value": 0.45069444444444445,
+      "threshold": 0.35,
+      "comparator": ">="
+    },
+    {
+      "gate": "negativeStrictLatentRateMax",
+      "passed": true,
+      "value": 0.45069444444444445,
+      "threshold": 0.65,
+      "comparator": "<="
+    },
+    {
+      "gate": "meanIntraYearSixAxisSdMin",
+      "passed": true,
+      "value": 19.460906454495863,
+      "threshold": 10,
+      "comparator": ">="
+    },
+    {
+      "gate": "medianIntraYearRangeMin",
+      "passed": true,
+      "value": 51.2,
+      "threshold": 28,
+      "comparator": ">="
+    },
+    {
+      "gate": "p25IntraYearRangeMin",
+      "passed": true,
+      "value": 41.650000000000006,
+      "threshold": 20,
+      "comparator": ">="
+    },
+    {
+      "gate": "p10IntraYearRangeMin",
+      "passed": true,
+      "value": 35.650000000000006,
+      "threshold": 14,
+      "comparator": ">="
+    },
+    {
+      "gate": "atLeastTwoOutside42To58RateMin",
+      "passed": true,
+      "value": 1,
+      "threshold": 0.7,
+      "comparator": ">="
+    },
+    {
+      "gate": "atLeastOneAtOrBelow42RateMin",
+      "passed": true,
+      "value": 0.9291666666666667,
+      "threshold": 0.6,
+      "comparator": ">="
+    },
+    {
+      "gate": "atLeastOneAtOrAbove62RateMin",
+      "passed": true,
+      "value": 0.9625,
+      "threshold": 0.6,
+      "comparator": ">="
+    },
+    {
+      "gate": "oneLowAndOneHighRateMin",
+      "passed": true,
+      "value": 0.8916666666666667,
+      "threshold": 0.55,
+      "comparator": ">="
+    },
+    {
+      "gate": "allSixAbove50RateMax",
+      "passed": true,
+      "value": 0.029166666666666667,
+      "threshold": 0.08,
+      "comparator": "<="
+    },
+    {
+      "gate": "fiveOrMoreAbove50RateMax",
+      "passed": true,
+      "value": 0.10416666666666667,
+      "threshold": 0.25,
+      "comparator": "<="
+    },
+    {
+      "gate": "allSixInside45To65RateMax",
+      "passed": true,
+      "value": 0.008333333333333333,
+      "threshold": 0.25,
+      "comparator": "<="
+    },
+    {
+      "gate": "exactDuplicateVectorRateMax",
+      "passed": true,
+      "value": 0,
+      "threshold": 0.01,
+      "comparator": "<="
+    },
+    {
+      "gate": "nearDuplicateVectorRateMax",
+      "passed": true,
+      "value": 0,
+      "threshold": 0.05,
+      "comparator": "<="
+    },
+    {
+      "gate": "maxAbsInterAxisCorrelationMax",
+      "passed": true,
+      "value": 0.5503862875976245,
+      "threshold": 0.9,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainMedianMin_health",
+      "passed": true,
+      "value": 55.400000000000006,
+      "threshold": 46,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainMedianMax_health",
+      "passed": false,
+      "value": 55.400000000000006,
+      "threshold": 54,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainPositiveStrictLatentRateMin_health",
+      "passed": true,
+      "value": 0.5916666666666667,
+      "threshold": 0.3,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainPositiveStrictLatentRateMax_health",
+      "passed": true,
+      "value": 0.5916666666666667,
+      "threshold": 0.7,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainNegativeStrictLatentRateMin_health",
+      "passed": true,
+      "value": 0.4041666666666667,
+      "threshold": 0.3,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainNegativeStrictLatentRateMax_health",
+      "passed": true,
+      "value": 0.4041666666666667,
+      "threshold": 0.7,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainTwelveYearRangeMin_health",
+      "passed": true,
+      "value": 27.200000000000003,
+      "threshold": 10,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainAdjacentDeltaMin_health",
+      "passed": true,
+      "value": 4.949999999999996,
+      "threshold": 2,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainMedianMin_family",
+      "passed": true,
+      "value": 56.95,
+      "threshold": 46,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainMedianMax_family",
+      "passed": false,
+      "value": 56.95,
+      "threshold": 54,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainPositiveStrictLatentRateMin_family",
+      "passed": true,
+      "value": 0.6208333333333333,
+      "threshold": 0.3,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainPositiveStrictLatentRateMax_family",
+      "passed": true,
+      "value": 0.6208333333333333,
+      "threshold": 0.7,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainNegativeStrictLatentRateMin_family",
+      "passed": true,
+      "value": 0.37916666666666665,
+      "threshold": 0.3,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainNegativeStrictLatentRateMax_family",
+      "passed": true,
+      "value": 0.37916666666666665,
+      "threshold": 0.7,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainTwelveYearRangeMin_family",
+      "passed": true,
+      "value": 26.6,
+      "threshold": 10,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainAdjacentDeltaMin_family",
+      "passed": true,
+      "value": 7.799999999999997,
+      "threshold": 2,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainMedianMin_wealth",
+      "passed": false,
+      "value": 40.7,
+      "threshold": 46,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainMedianMax_wealth",
+      "passed": true,
+      "value": 40.7,
+      "threshold": 54,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainPositiveStrictLatentRateMin_wealth",
+      "passed": false,
+      "value": 0.26666666666666666,
+      "threshold": 0.3,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainPositiveStrictLatentRateMax_wealth",
+      "passed": true,
+      "value": 0.26666666666666666,
+      "threshold": 0.7,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainNegativeStrictLatentRateMin_wealth",
+      "passed": true,
+      "value": 0.7291666666666666,
+      "threshold": 0.3,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainNegativeStrictLatentRateMax_wealth",
+      "passed": false,
+      "value": 0.7291666666666666,
+      "threshold": 0.7,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainTwelveYearRangeMin_wealth",
+      "passed": true,
+      "value": 29.650000000000002,
+      "threshold": 10,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainAdjacentDeltaMin_wealth",
+      "passed": true,
+      "value": 5.3999999999999995,
+      "threshold": 2,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainMedianMin_career",
+      "passed": true,
+      "value": 49.3,
+      "threshold": 46,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainMedianMax_career",
+      "passed": true,
+      "value": 49.3,
+      "threshold": 54,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainPositiveStrictLatentRateMin_career",
+      "passed": true,
+      "value": 0.49166666666666664,
+      "threshold": 0.3,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainPositiveStrictLatentRateMax_career",
+      "passed": true,
+      "value": 0.49166666666666664,
+      "threshold": 0.7,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainNegativeStrictLatentRateMin_career",
+      "passed": true,
+      "value": 0.5083333333333333,
+      "threshold": 0.3,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainNegativeStrictLatentRateMax_career",
+      "passed": true,
+      "value": 0.5083333333333333,
+      "threshold": 0.7,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainTwelveYearRangeMin_career",
+      "passed": true,
+      "value": 25.7,
+      "threshold": 10,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainAdjacentDeltaMin_career",
+      "passed": true,
+      "value": 7.099999999999998,
+      "threshold": 2,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainMedianMin_social",
+      "passed": true,
+      "value": 61.7,
+      "threshold": 46,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainMedianMax_social",
+      "passed": false,
+      "value": 61.7,
+      "threshold": 54,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainPositiveStrictLatentRateMin_social",
+      "passed": true,
+      "value": 0.7125,
+      "threshold": 0.3,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainPositiveStrictLatentRateMax_social",
+      "passed": false,
+      "value": 0.7125,
+      "threshold": 0.7,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainNegativeStrictLatentRateMin_social",
+      "passed": false,
+      "value": 0.2875,
+      "threshold": 0.3,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainNegativeStrictLatentRateMax_social",
+      "passed": true,
+      "value": 0.2875,
+      "threshold": 0.7,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainTwelveYearRangeMin_social",
+      "passed": true,
+      "value": 21.449999999999996,
+      "threshold": 10,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainAdjacentDeltaMin_social",
+      "passed": true,
+      "value": 6.150000000000002,
+      "threshold": 2,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainMedianMin_romance",
+      "passed": true,
+      "value": 53.6,
+      "threshold": 46,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainMedianMax_romance",
+      "passed": true,
+      "value": 53.6,
+      "threshold": 54,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainPositiveStrictLatentRateMin_romance",
+      "passed": true,
+      "value": 0.5875,
+      "threshold": 0.3,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainPositiveStrictLatentRateMax_romance",
+      "passed": true,
+      "value": 0.5875,
+      "threshold": 0.7,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainNegativeStrictLatentRateMin_romance",
+      "passed": true,
+      "value": 0.3958333333333333,
+      "threshold": 0.3,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainNegativeStrictLatentRateMax_romance",
+      "passed": true,
+      "value": 0.3958333333333333,
+      "threshold": 0.7,
+      "comparator": "<="
+    },
+    {
+      "gate": "domainTwelveYearRangeMin_romance",
+      "passed": true,
+      "value": 27.75,
+      "threshold": 10,
+      "comparator": ">="
+    },
+    {
+      "gate": "domainAdjacentDeltaMin_romance",
+      "passed": true,
+      "value": 4.6000000000000085,
+      "threshold": 2,
+      "comparator": ">="
+    }
+  ],
+  "holdoutBlockers": [
+    "globalMedianScoreMax: 52.6 vs <= 52",
+    "domainMedianMax_health: 55.400000000000006 vs <= 54",
+    "domainMedianMax_family: 56.95 vs <= 54",
+    "domainMedianMin_wealth: 40.7 vs >= 46",
+    "domainPositiveStrictLatentRateMin_wealth: 0.26666666666666666 vs >= 0.3",
+    "domainNegativeStrictLatentRateMax_wealth: 0.7291666666666666 vs <= 0.7",
+    "domainMedianMax_social: 61.7 vs <= 54",
+    "domainPositiveStrictLatentRateMax_social: 0.7125 vs <= 0.7",
+    "domainNegativeStrictLatentRateMin_social: 0.2875 vs >= 0.3"
+  ]
+}

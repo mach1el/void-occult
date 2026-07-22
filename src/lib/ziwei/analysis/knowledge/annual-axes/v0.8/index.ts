@@ -1,5 +1,5 @@
 export type * from "./schema";
-export { toDedupeAdapter } from "./schema";
+export { V08_FORMULA_VERSION } from "./schema";
 export {
   loadAnnualAxesKnowledgeV08NamPhai,
   resetAnnualAxesKnowledgeV08NamPhaiCache,
