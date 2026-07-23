@@ -1,4 +1,5 @@
 import type {
+  MajorFortuneOrdinalBandId,
   MajorFortuneOrdinalEvidence,
   MajorFortuneOrdinalResult,
 } from "../v0.3-ordinal/types";
@@ -24,8 +25,24 @@ export const LEVEL_LABEL_VI: Record<string, string> = {
   "-2": "Áp lực mạnh",
 };
 
+export const BAND_LABEL_VI: Record<MajorFortuneOrdinalBandId, string> = {
+  "strong-pressure": "Áp lực mạnh",
+  pressure: "Áp lực",
+  mixed: "Cân bằng",
+  support: "Thuận",
+  "strong-support": "Rất thuận",
+};
+
+export const PILLAR_STATE_LABEL_VI: Record<string, string> = {
+  classified: "Đã đánh giá",
+  "balanced-signal": "Cân bằng",
+  "no-signal": "Không có tín hiệu",
+  "partial-data": "Thiếu dữ liệu",
+  unavailable: "Không khả dụng",
+};
+
 const DISCLAIMER =
-  "Mô hình thử nghiệm phục vụ trực quan hóa và kiểm chứng sản phẩm; không phải công thức cổ điển đã được xác minh.";
+  "Điểm tổng hợp tham khảo theo mô hình định lượng V0.3, không phải công thức cổ điển tuyệt đối.";
 
 export function emptyDiagnostics(): MajorFortuneOrdinalAdapterDiagnostics {
   return {
@@ -44,6 +61,7 @@ export function emptyDiagnostics(): MajorFortuneOrdinalAdapterDiagnostics {
     ownershipViolations: [],
     disabledFamilies: [],
     notes: [],
+    outOfFrameTransformationCount: 0,
   };
 }
 
@@ -99,24 +117,30 @@ export function evidenceLabelVi(evidence: MajorFortuneOrdinalEvidence): string {
   return `${evidence.reasonCode} — ${direction}`;
 }
 
-function reasonLabelVi(code: string): string {
+function reasonLabelVi(code: string, school?: string): string {
   const map: Record<string, string> = {
     "missing-menh-element": "Thiếu ngũ hành Mệnh",
     "vo-chinh-dieu": "Vô Chính Diệu",
     "missing-brightness": "Thiếu độ sáng sao chính",
     "unsupported-brightness": "Nhãn độ sáng không hỗ trợ",
     "nam-phai-transformations-unavailable-calculation-core":
-      "Nam Phái: Tứ Hóa đại vận chưa có từ Calculation Core",
+      "Calculation Core chưa cung cấp Tứ Hóa Đại Vận Nam Phái",
     "missing-fortune-stem": "Thiếu thiên can đại vận",
     "no-context": "Thiếu ngữ cảnh đại vận",
     "unknown-palace-branch-element": "Không xác định ngũ hành chi cung",
+    "no-direct-major-fortune-transformation":
+      "Không có Tứ Hóa Đại Vận trực tiếp tại cung này",
   };
+  if (code === "nam-phai-transformations-unavailable-calculation-core" && school === "nam-phai") {
+    return map[code]!;
+  }
   return map[code] ?? code;
 }
 
 export function buildDisplay(
   result: MajorFortuneOrdinalResult | null,
   emittedEvidence: MajorFortuneOrdinalEvidence[],
+  options?: { school?: string },
 ): MajorFortuneOrdinalV03Display {
   const accepted = new Set(
     result
@@ -131,6 +155,11 @@ export function buildDisplay(
     "tu-hoa-sat-tinh",
   ];
 
+  const scoredCount = result?.coverage.scoredPillarIds.length ?? 0;
+  const scoringPct = result
+    ? Math.round(result.coverage.scoringCoverageWeight * 100)
+    : null;
+
   const pillarSummaries: MajorFortuneOrdinalPillarDisplaySummary[] = pillarIds.map(
     (pillarId) => {
       const pillar = result?.pillars[pillarId];
@@ -139,16 +168,25 @@ export function buildDisplay(
         .filter((e) => e.pillarId === pillarId && accepted.has(e.evidenceId))
         .map(evidenceLabelVi);
       const reasonLabels = (pillar?.reasonCodes ?? [])
-        .filter((c) => !c.startsWith("duplicate") && !c.startsWith("excluded"))
-        .map(reasonLabelVi);
+        .filter(
+          (c) =>
+            !c.startsWith("duplicate") &&
+            !c.startsWith("excluded") &&
+            !c.startsWith("out-of-frame"),
+        )
+        .map((c) => reasonLabelVi(c, options?.school));
 
       return {
         pillarId,
         labelVi: PILLAR_LABEL_VI[pillarId],
         level,
-        levelLabelVi: level == null ? "Thiếu dữ liệu" : (LEVEL_LABEL_VI[String(level)] ?? String(level)),
+        levelLabelVi:
+          level == null ? "Thiếu dữ liệu" : (LEVEL_LABEL_VI[String(level)] ?? String(level)),
         delta: pillar?.delta ?? 0,
         state: pillar?.state ?? "unavailable",
+        stateLabelVi:
+          PILLAR_STATE_LABEL_VI[pillar?.state ?? "unavailable"] ??
+          (pillar?.state ?? "unavailable"),
         evidenceLabels,
         reasonLabels,
       };
@@ -156,10 +194,21 @@ export function buildDisplay(
   );
 
   return {
-    title: "Đại Vận V0.3",
-    subtitle: "Experimental heuristic",
+    title: "Đại Vận",
+    subtitle: "V0.3 · Beta",
     disclaimer: DISCLAIMER,
-    experimentalBadge: "Experimental heuristic",
+    experimentalBadge: "V0.3 · Beta",
+    bandLabelVi: result?.band ? BAND_LABEL_VI[result.band] : null,
+    scoringCoveragePercent: scoringPct,
+    scoredPillarFractionLabel:
+      result && result.status === "partial"
+        ? `${scoredCount}/4 trụ đã được tính`
+        : null,
+    namPhaiPartialTuHoaNote:
+      options?.school === "nam-phai" &&
+      result?.coverage.partialPillarIds.includes("tu-hoa-sat-tinh")
+        ? "Tứ Hóa chưa khả dụng cho Nam Phái. Điểm hiện dựa trên 3/4 trụ."
+        : null,
     pillarSummaries,
   };
 }

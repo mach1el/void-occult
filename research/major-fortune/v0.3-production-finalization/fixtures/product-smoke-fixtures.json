@@ -1,0 +1,18 @@
+[
+  {
+    "id": "smoke-1991-09-21-Dau-nam-phai",
+    "school": "nam-phai",
+    "score": 28.8,
+    "band": "pressure",
+    "scoreState": "partial-data",
+    "evidenceCount": 2
+  },
+  {
+    "id": "smoke-1991-09-21-Dau-trung-chau",
+    "school": "trung-chau",
+    "score": 28.8,
+    "band": "pressure",
+    "scoreState": "scored",
+    "evidenceCount": 2
+  }
+]

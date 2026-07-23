@@ -41,6 +41,8 @@ export interface MajorFortuneAdapterDiagnostics {
   disabledFamilies: string[];
   evidenceValidationErrors: string[];
   notes: string[];
+  /** Count of Major Fortune transformations that did not target the active palace. */
+  outOfFrameTransformationCount: number;
 }
 
 export interface MajorFortuneOrdinalAdapterBuildResult {

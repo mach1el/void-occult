@@ -1,0 +1,36 @@
+{
+  "transformationFrame": "direct-active-major-fortune-palace-only",
+  "note": "Engineering heuristic: score only XF targeting the active Major Fortune palace.",
+  "bySchool": {
+    "nam-phai": {
+      "directTransformationActivationCount": 0,
+      "outOfFrameTransformationCount": 0,
+      "observationsWithDirectTransformation": 0,
+      "observationsWithoutDirectTransformation": 0,
+      "directTransformationActivationRate": null,
+      "tuHoaLevels": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "-2": 0,
+        "-1": 0,
+        "null": 1166
+      }
+    },
+    "trung-chau": {
+      "directTransformationActivationCount": 366,
+      "outOfFrameTransformationCount": 4298,
+      "observationsWithDirectTransformation": 338,
+      "observationsWithoutDirectTransformation": 828,
+      "directTransformationActivationRate": 0.28987993138936535,
+      "tuHoaLevels": {
+        "0": 828,
+        "1": 226,
+        "2": 8,
+        "-2": 84,
+        "-1": 20,
+        "null": 0
+      }
+    }
+  }
+}

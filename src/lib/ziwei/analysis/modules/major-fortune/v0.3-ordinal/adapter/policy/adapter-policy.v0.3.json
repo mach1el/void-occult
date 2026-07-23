@@ -1,12 +1,17 @@
 {
   "schemaVersion": "0.3.0",
   "policyId": "major-fortune-v0.3-adapter-policy",
-  "adapterVersion": "0.3.0-adapter-r1",
+  "adapterVersion": "0.3.1",
   "modelNature": "engineering-heuristic",
   "classicalDoctrineVerified": false,
   "numericAuthority": "engineering-defined",
-  "productionStatus": "research-only",
+  "productionStatus": "production",
   "framePolicy": "active-major-fortune-palace-only",
+  "transformationFrame": "direct-active-major-fortune-palace-only",
+  "integrationNotes": [
+    "0.3.1 is an adapter/frame and production-integration correction, not a formula redesign.",
+    "Scoring formula/budgets/bands remain V0.3 ordinal contract."
+  ],
   "round1DisabledFamilies": [
     {
       "signalFamilyId": "severe-pressure-evidence",

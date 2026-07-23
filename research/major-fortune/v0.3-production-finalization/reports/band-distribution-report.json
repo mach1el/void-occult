@@ -1,0 +1,18 @@
+{
+  "bySchool": {
+    "nam-phai": {
+      "mixed": 549,
+      "pressure": 162,
+      "support": 373,
+      "strong-support": 68,
+      "strong-pressure": 14
+    },
+    "trung-chau": {
+      "mixed": 524,
+      "pressure": 179,
+      "support": 325,
+      "strong-support": 116,
+      "strong-pressure": 22
+    }
+  }
+}

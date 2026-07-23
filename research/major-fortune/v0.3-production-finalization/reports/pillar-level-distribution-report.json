@@ -1,0 +1,112 @@
+{
+  "bySchool": {
+    "nam-phai": {
+      "levels": {
+        "thien-thoi": {
+          "0": 0,
+          "1": 461,
+          "2": 233,
+          "-2": 239,
+          "-1": 233,
+          "null": 0
+        },
+        "dia-loi": {
+          "0": 270,
+          "1": 359,
+          "2": 250,
+          "-2": 88,
+          "-1": 199,
+          "null": 0
+        },
+        "nhan-hoa": {
+          "0": 1040,
+          "1": 106,
+          "2": 0,
+          "-2": 0,
+          "-1": 20,
+          "null": 0
+        },
+        "tu-hoa-sat-tinh": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "-2": 0,
+          "-1": 0,
+          "null": 1166
+        }
+      },
+      "noSignalRate": {
+        "thien-thoi": 0,
+        "dia-loi": 0.22126929674099485,
+        "nhan-hoa": 0.8876500857632933,
+        "tu-hoa-sat-tinh": 0
+      },
+      "balancedRate": {
+        "thien-thoi": 0,
+        "dia-loi": 0.010291595197255575,
+        "nhan-hoa": 0.004288164665523156,
+        "tu-hoa-sat-tinh": 0
+      },
+      "partialRate": {
+        "thien-thoi": 0,
+        "dia-loi": 0,
+        "nhan-hoa": 0,
+        "tu-hoa-sat-tinh": 1
+      }
+    },
+    "trung-chau": {
+      "levels": {
+        "thien-thoi": {
+          "0": 0,
+          "1": 461,
+          "2": 233,
+          "-2": 239,
+          "-1": 233,
+          "null": 0
+        },
+        "dia-loi": {
+          "0": 270,
+          "1": 359,
+          "2": 250,
+          "-2": 88,
+          "-1": 199,
+          "null": 0
+        },
+        "nhan-hoa": {
+          "0": 1046,
+          "1": 107,
+          "2": 0,
+          "-2": 0,
+          "-1": 13,
+          "null": 0
+        },
+        "tu-hoa-sat-tinh": {
+          "0": 828,
+          "1": 226,
+          "2": 8,
+          "-2": 84,
+          "-1": 20,
+          "null": 0
+        }
+      },
+      "noSignalRate": {
+        "thien-thoi": 0,
+        "dia-loi": 0.22126929674099485,
+        "nhan-hoa": 0.8936535162950258,
+        "tu-hoa-sat-tinh": 0.7101200686106347
+      },
+      "balancedRate": {
+        "thien-thoi": 0,
+        "dia-loi": 0.010291595197255575,
+        "nhan-hoa": 0.003430531732418525,
+        "tu-hoa-sat-tinh": 0
+      },
+      "partialRate": {
+        "thien-thoi": 0,
+        "dia-loi": 0,
+        "nhan-hoa": 0,
+        "tu-hoa-sat-tinh": 0
+      }
+    }
+  }
+}

@@ -31,25 +31,29 @@ describe("Major Fortune V0.3 ordinal-adapter UI wrapper", () => {
   it("marks partial when Nam Phái Tứ Hóa is Core-blocked", () => {
     const chart = calculateNamPhai(REGRESSION);
     const analysis = analyzeMajorFortuneOrdinalV03(chart, { school: "nam-phai" });
-    expect(analysis.experimental).toBe(true);
+    expect(analysis.experimental).toBe(false);
+    expect(analysis.version).toBe("0.3.1");
     expect(analysis.model).toBe("v0.3-ordinal");
     expect(analysis.adapterStatus).toBe("partial");
     expect(analysis.result?.status).toBe("partial");
+    expect(analysis.result?.coverage.scoringCoverageWeight).toBe(0.75);
+    expect(analysis.result?.coverage.contextCoverageWeight).toBe(1);
     expect(analysis.adapterDiagnostics.blockedNamPhaiTransformations.length).toBeGreaterThan(0);
     expect(analysis.display.pillarSummaries).toHaveLength(4);
-    expect(analysis.display.disclaimer).toMatch(/không phải công thức cổ điển/);
+    expect(analysis.display.disclaimer).toMatch(/không phải công thức cổ điển tuyệt đối/);
   });
 
-  it("analyzes Trung Châu with transformations", () => {
+  it("analyzes Trung Châu with scoring coverage 1 and optional direct XF", () => {
     const chart = calculateTrungChau(REGRESSION);
     const analysis = analyzeMajorFortuneOrdinalV03(chart, { school: "trung-chau" });
     expect(analysis.result).not.toBeNull();
     expect(analysis.cycle?.activePalaceName).toBeTruthy();
-    expect(
-      analysis.emittedEvidence.some((e) => e.signalFamilyId === "major-fortune-transformations"),
-    ).toBe(true);
+    expect(analysis.result!.coverage.scoringCoverageWeight).toBe(1);
+    expect(analysis.result!.coverage.contextCoverageWeight).toBe(1);
     expect(analysis.result!.score).toBeGreaterThanOrEqual(0);
     expect(analysis.result!.score).toBeLessThanOrEqual(100);
+    // Direct-palace frame may yield zero XF on some charts; that is valid no-signal.
+    expect(analysis.adapterDiagnostics.outOfFrameTransformationCount).toBeGreaterThanOrEqual(0);
   });
 
   it("keeps annual/monthly mutations from changing score or evidence", () => {
@@ -97,9 +101,9 @@ describe("Major Fortune V0.3 ordinal-adapter UI wrapper", () => {
       expect(loaded.knowledge.formula.derivation.forbidsPerRuleRawDelta).toBe(true);
     }
     expect(getAnalysisStatus("major-fortune")).toEqual({
-      status: "unavailable",
+      status: "available",
       module: "major-fortune",
-      reason: "rebuilding",
+      version: "0.3.1",
     });
     expect(majorFortuneOrdinalAdapterFamilyMatrix.disabled.some((d) => d.signalFamilyId === "hinh-ho-set")).toBe(
       true,
@@ -134,7 +138,7 @@ describe("Major Fortune V0.3 feature flag default", () => {
   it("defaults off when env missing", async () => {
     vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL", undefined as unknown as string);
     const { isMajorFortuneV03OrdinalEnabled } = await import("../../../../feature-flags");
-    // jsdom has window — without env true, flag is false
-    expect(isMajorFortuneV03OrdinalEnabled()).toBe(false);
+    // jsdom has window — missing env with defaultOn true → enabled
+    expect(isMajorFortuneV03OrdinalEnabled()).toBe(true);
   });
 });

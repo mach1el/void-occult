@@ -2,8 +2,8 @@
   "ok": true,
   "issues": [],
   "productionRouting": {
-    "status": "unavailable",
+    "status": "available",
     "module": "major-fortune",
-    "reason": "rebuilding"
+    "version": "0.3.1"
   }
 }

@@ -1,0 +1,15 @@
+{
+  "corpusId": "major-fortune-v0.2-audit-corpus",
+  "seed": 20260723,
+  "chartCount": 100,
+  "trainCount": 80,
+  "holdoutCount": 20,
+  "cycleObservationCount": 2332,
+  "schoolObservations": {
+    "nam-phai": 1166,
+    "trung-chau": 1166
+  },
+  "adapterVersion": "0.3.1",
+  "v03ContractHash": "4f363277a8e0e3009410dee3b2fea75c65570d8d0feaa00eae6a489ce4830099",
+  "note": "Reuses frozen major-fortune-v0.2-audit-corpus; identities unchanged."
+}

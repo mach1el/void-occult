@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "0.3.0",
+  "registryId": "major-fortune-v0.3-adapter-engineering-provenance",
+  "modelNature": "engineering-heuristic",
+  "classicalDoctrineVerified": false,
+  "numericAuthority": "engineering-defined",
+  "entries": [
+    {
+      "policyId": "POL-MF-V03-ADAPTER-ELEMENT",
+      "claimId": "CLM-MF-V03-ADAPTER-ELEMENT",
+      "sourceId": "SRC-MF-V03-ADAPTER-ELEMENT",
+      "topic": "element-relation-mapping",
+      "status": "research-admitted"
+    },
+    {
+      "policyId": "POL-MF-V03-ADAPTER-DIGNITY",
+      "claimId": "CLM-MF-V03-ADAPTER-DIGNITY",
+      "sourceId": "SRC-MF-V03-ADAPTER-DIGNITY",
+      "topic": "principal-star-dignity-mapping",
+      "status": "research-admitted"
+    },
+    {
+      "policyId": "POL-MF-V03-ADAPTER-AUX",
+      "claimId": "CLM-MF-V03-ADAPTER-AUX",
+      "sourceId": "SRC-MF-V03-ADAPTER-AUX",
+      "topic": "auxiliary-set-definitions",
+      "status": "research-admitted"
+    },
+    {
+      "policyId": "POL-MF-V03-ADAPTER-XF",
+      "claimId": "CLM-MF-V03-ADAPTER-XF",
+      "sourceId": "SRC-MF-V03-ADAPTER-XF",
+      "topic": "transformation-polarity-mapping",
+      "status": "research-admitted",
+      "notes": "Includes Calculation Core short-label normalization Lộc/Quyền/Khoa/Kỵ → Hóa *."
+    },
+    {
+      "policyId": "POL-MF-V03-ADAPTER-FRAME",
+      "claimId": "CLM-MF-V03-ADAPTER-FRAME",
+      "sourceId": "SRC-MF-V03-ADAPTER-FRAME",
+      "topic": "adapter-frame-policy",
+      "status": "research-admitted"
+    }
+  ]
+}

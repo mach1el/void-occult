@@ -52,6 +52,8 @@ export interface MajorFortuneOrdinalTransformationTuple {
   transformationType: string;
   transformedStar: string;
   targetPalace: string;
+  /** Required for adapter-generated Major Fortune transformations. */
+  targetPalaceIndex?: number;
 }
 
 export interface MajorFortuneOrdinalEvidence {
@@ -109,8 +111,17 @@ export interface MajorFortuneOrdinalPillarResult {
 }
 
 export interface MajorFortuneOrdinalCoverage {
+  /**
+   * @deprecated Compatibility alias for contextCoverageWeight.
+   * Prefer contextCoverageWeight / scoringCoverageWeight explicitly.
+   */
   coverageWeight: number;
+  /** Budgets for non-unavailable pillar contexts / 100. */
+  contextCoverageWeight: number;
+  /** Budgets for pillars with a non-null ordinal level / 100. */
+  scoringCoverageWeight: number;
   evaluablePillarIds: MajorFortuneOrdinalPillarId[];
+  scoredPillarIds: MajorFortuneOrdinalPillarId[];
   missingPillarIds: MajorFortuneOrdinalPillarId[];
   partialPillarIds: MajorFortuneOrdinalPillarId[];
 }

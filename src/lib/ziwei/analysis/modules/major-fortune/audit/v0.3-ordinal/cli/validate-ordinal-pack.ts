@@ -89,10 +89,10 @@ function main(): void {
   }
 
   const status = getAnalysisStatus("major-fortune");
-  if (status.status !== "unavailable" || status.reason !== "rebuilding") {
+  if (status.status !== "available" || status.version !== "0.3.1") {
     issues.push({
       code: "production-routing",
-      message: `expected unavailable/rebuilding, got ${JSON.stringify(status)}`,
+      message: `expected available/0.3.1, got ${JSON.stringify(status)}`,
     });
   }
 

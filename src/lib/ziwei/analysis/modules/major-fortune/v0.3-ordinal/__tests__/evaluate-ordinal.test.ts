@@ -285,6 +285,7 @@ describe("Major Fortune V0.3 ordinal evaluator — synthetic fixtures", () => {
             transformationType: "Hóa Lộc",
             transformedStar: "Tử Vi",
             targetPalace: "Mệnh",
+            targetPalaceIndex: 0,
           },
         }),
       ],
@@ -329,9 +330,27 @@ describe("Major Fortune V0.3 ordinal evaluator — synthetic fixtures", () => {
     const result = run([], { pillarContexts: contexts });
     expect(result.status).toBe("partial");
     expect(result.coverage.coverageWeight).toBe(0.75);
+    expect(result.coverage.contextCoverageWeight).toBe(0.75);
+    expect(result.coverage.scoringCoverageWeight).toBe(0.75);
     expect(result.coverage.missingPillarIds).toEqual(["tu-hoa-sat-tinh"]);
     expect(result.score).toBe(50);
     expect(result.scoreState).toBe("partial-data");
+  });
+
+  it("13b. partial-data null level reduces scoring coverage only", () => {
+    const contexts = allAvailable();
+    contexts["tu-hoa-sat-tinh"] = {
+      availability: "partial-data",
+      reasonCodes: ["nam-phai-transformations-unavailable-calculation-core"],
+    };
+    const result = run([], { pillarContexts: contexts });
+    expect(result.status).toBe("partial");
+    expect(result.coverage.contextCoverageWeight).toBe(1);
+    expect(result.coverage.scoringCoverageWeight).toBe(0.75);
+    expect(result.coverage.coverageWeight).toBe(1);
+    expect(result.coverage.partialPillarIds).toEqual(["tu-hoa-sat-tinh"]);
+    expect(result.pillars["tu-hoa-sat-tinh"].level).toBeNull();
+    expect(result.coverage.scoredPillarIds).not.toContain("tu-hoa-sat-tinh");
   });
 
   it("14. unavailable required context", () => {
@@ -346,6 +365,8 @@ describe("Major Fortune V0.3 ordinal evaluator — synthetic fixtures", () => {
     expect(result.score).toBeNull();
     expect(result.scoreState).toBe("unavailable");
     expect(result.coverage.coverageWeight).toBe(0);
+    expect(result.coverage.contextCoverageWeight).toBe(0);
+    expect(result.coverage.scoringCoverageWeight).toBe(0);
   });
 
   it("15. annual fact rejected", () => {
@@ -477,11 +498,11 @@ describe("Major Fortune V0.3 ordinal evaluator — synthetic fixtures", () => {
     expect(withMeta.trace.yearInCycleIgnored).toBe(true);
   });
 
-  it("production routing remains rebuilding/unavailable", () => {
+  it("production routing is available at 0.3.1 by default", () => {
     expect(getAnalysisStatus("major-fortune")).toEqual({
-      status: "unavailable",
+      status: "available",
       module: "major-fortune",
-      reason: "rebuilding",
+      version: "0.3.1",
     });
   });
 

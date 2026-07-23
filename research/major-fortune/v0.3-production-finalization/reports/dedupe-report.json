@@ -1,0 +1,14 @@
+{
+  "bySchool": {
+    "nam-phai": {
+      "duplicatePhysicalFactCount": 0,
+      "duplicateClusterCount": 0,
+      "crossPillarOwnershipViolationCount": 0
+    },
+    "trung-chau": {
+      "duplicatePhysicalFactCount": 0,
+      "duplicateClusterCount": 0,
+      "crossPillarOwnershipViolationCount": 0
+    }
+  }
+}

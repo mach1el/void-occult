@@ -1,0 +1,12 @@
+{
+  "adapterVersion": "0.3.1",
+  "uiIntegrationVersion": "0.3.1",
+  "productionModuleVersion": "0.3.1",
+  "formulaContractVersion": "0.3.0",
+  "note": "Adapter/frame and production-integration correction; ordinal formula unchanged.",
+  "transformationFrame": "direct-active-major-fortune-palace-only",
+  "coverageSemantics": {
+    "contextCoverageWeight": "sum of budgets for non-unavailable pillar contexts / 100",
+    "scoringCoverageWeight": "sum of budgets for pillars with non-null ordinal level / 100"
+  }
+}

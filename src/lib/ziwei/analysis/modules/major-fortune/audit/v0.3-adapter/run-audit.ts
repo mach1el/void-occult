@@ -35,9 +35,22 @@ export interface SchoolAdapterMetrics {
   };
   bandCounts: Record<string, number>;
   scoreStateCounts: Record<string, number>;
+  /** @deprecated alias of contextCoverageHistogram */
   coverageHistogram: Record<string, number>;
+  contextCoverageHistogram: Record<string, number>;
+  scoringCoverageHistogram: Record<string, number>;
+  meanContextCoverageWeight: number | null;
+  meanScoringCoverageWeight: number | null;
   partialRate: number;
   unavailableRate: number;
+  /** In-frame major-fortune-transformations evidence emissions. */
+  directTransformationActivationCount: number;
+  /** Transformations seen but not scored (wrong palace target). */
+  outOfFrameTransformationCount: number;
+  /** Observations with ≥1 in-frame XF evidence. */
+  observationsWithDirectTransformation: number;
+  /** Observations with zero in-frame XF evidence (still scored as no-signal when available). */
+  observationsWithoutDirectTransformation: number;
   pillarLevels: Record<MajorFortuneOrdinalPillarId, Record<string, number>>;
   pillarNoSignalRate: Record<MajorFortuneOrdinalPillarId, number>;
   pillarBalancedRate: Record<MajorFortuneOrdinalPillarId, number>;
@@ -100,9 +113,14 @@ export interface MajorFortuneV03AdapterAuditMetrics {
     scoreState: string;
     status: string;
     coverageWeight: number;
+    contextCoverageWeight: number;
+    scoringCoverageWeight: number;
     evidenceCount: number;
     acceptedCount: number;
     rejectedCount: number;
+    outOfFrameTransformationCount: number;
+    directTransformationCount: number;
+    tuHoaLevel: number | null;
   }>;
 }
 
@@ -150,8 +168,16 @@ function emptySchool(school: string): SchoolAdapterMetrics {
     bandCounts: {},
     scoreStateCounts: {},
     coverageHistogram: {},
+    contextCoverageHistogram: {},
+    scoringCoverageHistogram: {},
+    meanContextCoverageWeight: null,
+    meanScoringCoverageWeight: null,
     partialRate: 0,
     unavailableRate: 0,
+    directTransformationActivationCount: 0,
+    outOfFrameTransformationCount: 0,
+    observationsWithDirectTransformation: 0,
+    observationsWithoutDirectTransformation: 0,
     pillarLevels,
     pillarNoSignalRate,
     pillarBalancedRate,
@@ -222,6 +248,9 @@ interface SchoolAcc {
   charts: Set<string>;
   partial: number;
   unavailable: number;
+  contextCoverageSum: number;
+  scoringCoverageSum: number;
+  coverageObs: number;
   pillarStateHits: Record<MajorFortuneOrdinalPillarId, { noSignal: number; balanced: number; partial: number; total: number }>;
   satNeg: Record<MajorFortuneOrdinalPillarId, number>;
   satPos: Record<MajorFortuneOrdinalPillarId, number>;
@@ -237,7 +266,19 @@ function newAcc(school: string): SchoolAcc {
     satNeg[id] = 0;
     satPos[id] = 0;
   }
-  return { metrics, scores: [], charts: new Set(), partial: 0, unavailable: 0, pillarStateHits, satNeg, satPos };
+  return {
+    metrics,
+    scores: [],
+    charts: new Set(),
+    partial: 0,
+    unavailable: 0,
+    contextCoverageSum: 0,
+    scoringCoverageSum: 0,
+    coverageObs: 0,
+    pillarStateHits,
+    satNeg,
+    satPos,
+  };
 }
 
 function finalizeSchool(acc: SchoolAcc): SchoolAdapterMetrics {
@@ -256,6 +297,10 @@ function finalizeSchool(acc: SchoolAcc): SchoolAdapterMetrics {
   m.score.median = median(sorted);
   m.partialRate = totalObs === 0 ? 0 : acc.partial / totalObs;
   m.unavailableRate = totalObs === 0 ? 0 : acc.unavailable / totalObs;
+  m.meanContextCoverageWeight =
+    acc.coverageObs === 0 ? null : acc.contextCoverageSum / acc.coverageObs;
+  m.meanScoringCoverageWeight =
+    acc.coverageObs === 0 ? null : acc.scoringCoverageSum / acc.coverageObs;
   for (const id of MAJOR_FORTUNE_ORDINAL_PILLAR_IDS) {
     const hits = acc.pillarStateHits[id]!;
     m.pillarNoSignalRate[id] = hits.total === 0 ? 0 : hits.noSignal / hits.total;
@@ -279,13 +324,23 @@ function recordObservation(
   acc.metrics.incompleteTransformationTupleCount +=
     diag.incompleteTransformationTuples.length;
   acc.metrics.missingProvenanceCount += diag.evidenceValidationErrors.length;
+  acc.metrics.outOfFrameTransformationCount += diag.outOfFrameTransformationCount;
   if (obs.school === "nam-phai" && diag.namPhaiTransformationBlocked.length > 0) {
     acc.metrics.namPhaiXfUnavailableCount += 1;
   }
 
+  let directXf = 0;
   for (const e of analysis.build.emittedEvidence) {
     acc.metrics.familyActivation[e.signalFamilyId] =
       (acc.metrics.familyActivation[e.signalFamilyId] ?? 0) + 1;
+    if (e.signalFamilyId === "major-fortune-transformations") {
+      directXf += 1;
+    }
+  }
+  acc.metrics.directTransformationActivationCount += directXf;
+  if (obs.school === "trung-chau") {
+    if (directXf > 0) acc.metrics.observationsWithDirectTransformation += 1;
+    else acc.metrics.observationsWithoutDirectTransformation += 1;
   }
 
   if (!evalResult) {
@@ -314,8 +369,19 @@ function recordObservation(
   acc.metrics.scoreStateCounts[evalResult.scoreState] =
     (acc.metrics.scoreStateCounts[evalResult.scoreState] ?? 0) + 1;
 
-  const cov = coverageBucket(evalResult.coverage.coverageWeight);
-  acc.metrics.coverageHistogram[cov] = (acc.metrics.coverageHistogram[cov] ?? 0) + 1;
+  const contextCov = evalResult.coverage.contextCoverageWeight;
+  const scoringCov = evalResult.coverage.scoringCoverageWeight;
+  const contextBucket = coverageBucket(contextCov);
+  const scoringBucket = coverageBucket(scoringCov);
+  acc.metrics.coverageHistogram[contextBucket] =
+    (acc.metrics.coverageHistogram[contextBucket] ?? 0) + 1;
+  acc.metrics.contextCoverageHistogram[contextBucket] =
+    (acc.metrics.contextCoverageHistogram[contextBucket] ?? 0) + 1;
+  acc.metrics.scoringCoverageHistogram[scoringBucket] =
+    (acc.metrics.scoringCoverageHistogram[scoringBucket] ?? 0) + 1;
+  acc.contextCoverageSum += contextCov;
+  acc.scoringCoverageSum += scoringCov;
+  acc.coverageObs += 1;
 
   for (const id of MAJOR_FORTUNE_ORDINAL_PILLAR_IDS) {
     const pillar = evalResult.pillars[id];
@@ -458,9 +524,17 @@ export function runMajorFortuneV03AdapterAudit(
       scoreState: analysis.evaluation?.scoreState ?? "unavailable",
       status: analysis.evaluation?.status ?? "unavailable",
       coverageWeight: analysis.evaluation?.coverage.coverageWeight ?? 0,
+      contextCoverageWeight: analysis.evaluation?.coverage.contextCoverageWeight ?? 0,
+      scoringCoverageWeight: analysis.evaluation?.coverage.scoringCoverageWeight ?? 0,
       evidenceCount: analysis.build.emittedEvidence.length,
       acceptedCount: analysis.evaluation?.diagnostics.acceptedEvidenceCount ?? 0,
       rejectedCount: analysis.evaluation?.diagnostics.rejectedEvidenceCount ?? 0,
+      outOfFrameTransformationCount:
+        analysis.build.adapterDiagnostics.outOfFrameTransformationCount,
+      directTransformationCount: analysis.build.emittedEvidence.filter(
+        (e) => e.signalFamilyId === "major-fortune-transformations",
+      ).length,
+      tuHoaLevel: analysis.evaluation?.pillars["tu-hoa-sat-tinh"]?.level ?? null,
     });
   }
 
@@ -500,9 +574,34 @@ export function runMajorFortuneV03AdapterAudit(
     }
   }
 
+  // Production transformation-frame gates (Trung Châu)
+  const tc = schools["trung-chau"];
+  if (tc) {
+    const tuLevels = tc.pillarLevels["tu-hoa-sat-tinh"] ?? {};
+    const scoredTu =
+      (tuLevels["-2"] ?? 0) +
+      (tuLevels["-1"] ?? 0) +
+      (tuLevels["0"] ?? 0) +
+      (tuLevels["1"] ?? 0) +
+      (tuLevels["2"] ?? 0);
+    const plusOne = tuLevels["1"] ?? 0;
+    if (scoredTu > 0 && plusOne === scoredTu) {
+      hardGateFailures.push("trung-chau-tu-hoa-constant-plus-one");
+    }
+    const directObs = tc.observationsWithDirectTransformation;
+    const noDirectObs = tc.observationsWithoutDirectTransformation;
+    const tcObs = directObs + noDirectObs;
+    if (tc.directTransformationActivationCount === 0) {
+      hardGateFailures.push("trung-chau-direct-transformation-activation-zero");
+    }
+    if (tcObs > 0 && directObs === tcObs) {
+      hardGateFailures.push("trung-chau-direct-transformation-activation-100pct");
+    }
+  }
+
   const routing = getAnalysisStatus("major-fortune");
-  if (routing.status !== "unavailable" || routing.reason !== "rebuilding") {
-    hardGateFailures.push("production-routing-changed");
+  if (routing.status !== "available" || routing.version !== "0.3.1") {
+    hardGateFailures.push("production-routing-unexpected");
   }
 
   // Product smoke fixtures (outside calibration — fixed regression birth)

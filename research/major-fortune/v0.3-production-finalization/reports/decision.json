@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "0.3.1",
+  "decisionId": "major-fortune-v0.3-production-finalization-decision",
+  "readinessDecision": "PROMOTE_MAJOR_FORTUNE_V03_TO_PRODUCTION",
+  "modelNature": "engineering-heuristic",
+  "classicalDoctrineVerified": false,
+  "numericAuthority": "engineering-defined",
+  "productionStatus": "production",
+  "adapterVersion": "0.3.1",
+  "uiIntegrationVersion": "0.3.1",
+  "productionModuleVersion": "0.3.1",
+  "formulaContractVersion": "0.3.0",
+  "corpusId": "major-fortune-v0.2-audit-corpus",
+  "v03ContractHash": "4f363277a8e0e3009410dee3b2fea75c65570d8d0feaa00eae6a489ce4830099",
+  "hardGateFailures": [],
+  "featureFlagDefaultOn": true,
+  "killSwitch": "VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL=false",
+  "noFurtherImplementationPhaseRequired": true,
+  "notes": "All production hard gates passed. Major Fortune V0.3 is the production module."
+}

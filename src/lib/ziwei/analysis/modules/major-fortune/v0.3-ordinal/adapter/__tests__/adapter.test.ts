@@ -150,14 +150,70 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     const xf = build.emittedEvidence.filter(
       (e) => e.signalFamilyId === "major-fortune-transformations",
     );
-    expect(xf.length).toBeGreaterThan(0);
     for (const e of xf) {
       expect(e.transformationTuple).toBeTruthy();
       expect(e.transformationTuple?.fortuneStem).toBeTruthy();
       expect(e.transformationTuple?.targetPalace).toBeTruthy();
       expect(e.transformationTuple?.transformationType).toMatch(/^Hóa /);
+      expect(e.transformationTuple?.targetPalaceIndex).toBe(
+        chart.majorFortunePalace!.index,
+      );
       expect(e.physicalFactKind).toBe("major-fortune-transformation");
     }
+  });
+
+  it("scores only direct-active-palace Trung Châu transformations", () => {
+    const chart = calculateTrungChau(REGRESSION);
+    const active = chart.majorFortunePalace!;
+    const other = chart.palaces.find((p) => p.index !== active.index)!;
+    const stem = active.stem ?? "Giáp";
+    const patched = {
+      ...chart,
+      majorMutagens: [
+        {
+          mutagen: "Lộc",
+          starName: "Tử Vi",
+          palace: { ...active, name: active.name, index: active.index },
+        },
+        {
+          mutagen: "Kỵ",
+          starName: "Thất Sát",
+          palace: { ...other, name: other.name, index: other.index },
+        },
+      ],
+    };
+    const build = adaptChartToMajorFortuneOrdinalInput(patched, { school: "trung-chau" });
+    const xf = build.emittedEvidence.filter(
+      (e) => e.signalFamilyId === "major-fortune-transformations",
+    );
+    expect(xf).toHaveLength(1);
+    expect(xf[0]?.reasonCode).toBe("transformation:Hóa Lộc");
+    expect(build.adapterDiagnostics.outOfFrameTransformationCount).toBe(1);
+  });
+
+  it("no direct transformation yields available Tứ Hóa with no evidence", () => {
+    const chart = calculateTrungChau(REGRESSION);
+    const active = chart.majorFortunePalace!;
+    const other = chart.palaces.find((p) => p.index !== active.index)!;
+    const patched = {
+      ...chart,
+      majorMutagens: [
+        {
+          mutagen: "Lộc",
+          starName: "Tử Vi",
+          palace: { ...other, index: other.index, name: other.name },
+        },
+      ],
+    };
+    const analysis = analyzeMajorFortuneOrdinalV03(patched, { school: "trung-chau" });
+    expect(
+      analysis.build.emittedEvidence.some(
+        (e) => e.signalFamilyId === "major-fortune-transformations",
+      ),
+    ).toBe(false);
+    expect(analysis.evaluation?.pillars["tu-hoa-sat-tinh"].level).toBe(0);
+    expect(analysis.evaluation?.pillars["tu-hoa-sat-tinh"].state).toMatch(/no-signal|balanced/);
+    expect(analysis.build.adapterDiagnostics.outOfFrameTransformationCount).toBeGreaterThan(0);
   });
 
   it("rejects incomplete Trung Châu transformation tuples", () => {
@@ -273,9 +329,9 @@ describe("Major Fortune V0.3 evidence adapter", () => {
       expect(loaded.knowledge.formula.derivation.forbidsPerRuleRawDelta).toBe(true);
     }
     expect(getAnalysisStatus("major-fortune")).toEqual({
-      status: "unavailable",
+      status: "available",
       module: "major-fortune",
-      reason: "rebuilding",
+      version: "0.3.1",
     });
   });
 
@@ -285,7 +341,9 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     expect(result.evaluation?.status).toBe("partial");
     expect(result.build.pillarContexts?.["tu-hoa-sat-tinh"].availability).toBe("partial-data");
     expect(result.evaluation?.coverage.partialPillarIds).toContain("tu-hoa-sat-tinh");
-    // Partial pillars remain coverage-evaluable (budgets not renormalized).
+    // Partial pillars remain context-evaluable; scoring coverage excludes null levels.
+    expect(result.evaluation?.coverage.contextCoverageWeight).toBe(1);
+    expect(result.evaluation?.coverage.scoringCoverageWeight).toBe(0.75);
     expect(result.evaluation?.coverage.coverageWeight).toBe(1);
     expect(result.build.pillarContexts?.["thien-thoi"].availability).not.toBe("unavailable");
   });

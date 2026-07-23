@@ -1,9 +1,13 @@
 /** Shared contracts for Zi Wei analysis modules. */
 
-import { isPalaceOverviewV1Enabled } from "../feature-flags";
+import {
+  isMajorFortuneV03OrdinalEnabled,
+  isPalaceOverviewV1Enabled,
+} from "../feature-flags";
 import { loadAnnualAxesKnowledgeV0 } from "../knowledge/annual-axes";
 import { loadAnnualAxesKnowledgeV08NamPhai } from "../knowledge/annual-axes/v0.8";
 import { loadPalaceOverviewKnowledgeV1 } from "../knowledge";
+import { loadMajorFortuneOrdinalKnowledge } from "../knowledge/major-fortune-scoring/v0.3-ordinal";
 import type { ZiweiSchool } from "../facts";
 
 export type ZiweiAnalysisModule =
@@ -31,7 +35,7 @@ export interface GetAnalysisStatusOptions {
 function annualAxesStatusForTrungChau(): ZiweiAnalysisStatus {
   const annualKnowledge = loadAnnualAxesKnowledgeV0();
   if (!annualKnowledge.ok) {
-    if (import.meta.env.DEV) {
+    if (import.meta.env?.DEV) {
       console.warn("[annual-axes] invalid Trung Châu knowledge", annualKnowledge.issues);
     }
     return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
@@ -39,7 +43,7 @@ function annualAxesStatusForTrungChau(): ZiweiAnalysisStatus {
 
   const numericKnowledge = loadPalaceOverviewKnowledgeV1();
   if (!numericKnowledge.ok) {
-    if (import.meta.env.DEV) {
+    if (import.meta.env?.DEV) {
       console.warn("[annual-axes] invalid palace-overview numeric knowledge", numericKnowledge.issues);
     }
     return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
@@ -51,7 +55,7 @@ function annualAxesStatusForTrungChau(): ZiweiAnalysisStatus {
 function annualAxesStatusForNamPhaiV08(): ZiweiAnalysisStatus {
   const knowledge08 = loadAnnualAxesKnowledgeV08NamPhai();
   if (!knowledge08.ok) {
-    if (import.meta.env.DEV) {
+    if (import.meta.env?.DEV) {
       console.warn("[annual-axes] invalid V0.8 knowledge", knowledge08.issues);
     }
     return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
@@ -70,7 +74,7 @@ export function getAnalysisStatus(
     }
     const loaded = loadPalaceOverviewKnowledgeV1();
     if (!loaded.ok) {
-      if (import.meta.env.DEV) {
+      if (import.meta.env?.DEV) {
         console.warn("[palace-overview] invalid knowledge", loaded.issues);
       }
       return { status: "unavailable", module, reason: "invalid-knowledge" };
@@ -86,8 +90,21 @@ export function getAnalysisStatus(
     return annualAxesStatusForNamPhaiV08();
   }
 
-  // major-fortune and monthly-flow intentionally remain "rebuilding" —
-  // their scoring engines exist but no UI has been published yet.
+  if (module === "major-fortune") {
+    if (!isMajorFortuneV03OrdinalEnabled()) {
+      return { status: "unavailable", module, reason: "rebuilding" };
+    }
+    const loaded = loadMajorFortuneOrdinalKnowledge();
+    if (!loaded.ok) {
+      if (import.meta.env?.DEV) {
+        console.warn("[major-fortune] invalid V0.3 knowledge", loaded.issues);
+      }
+      return { status: "unavailable", module, reason: "invalid-knowledge" };
+    }
+    return { status: "available", module, version: "0.3.1" };
+  }
+
+  // monthly-flow intentionally remains "rebuilding".
   return { status: "unavailable", module, reason: "rebuilding" };
 }
 

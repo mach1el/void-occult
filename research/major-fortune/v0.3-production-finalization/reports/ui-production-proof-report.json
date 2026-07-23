@@ -1,0 +1,23 @@
+{
+  "singleModuleSlot": true,
+  "experimentalSlotRemoved": true,
+  "featureFlag": "ziweiMajorFortuneV03Ordinal",
+  "featureFlagDefault": "enabled",
+  "killSwitchEnv": "VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL=false",
+  "productionStatus": {
+    "status": "available",
+    "module": "major-fortune",
+    "version": "0.3.1"
+  },
+  "monthlyFlowStatus": {
+    "status": "unavailable",
+    "module": "monthly-flow",
+    "reason": "rebuilding"
+  },
+  "adapterVersion": "0.3.1",
+  "uiIntegrationVersion": "0.3.1",
+  "productionModuleVersion": "0.3.1",
+  "vietnameseBandLabels": true,
+  "scoringCoverageDisplayed": true,
+  "namPhaiShowsThreeOfFourPillars": true
+}

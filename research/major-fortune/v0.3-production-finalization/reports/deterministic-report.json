@@ -1,0 +1,11 @@
+{
+  "bySchool": {
+    "nam-phai": {
+      "determinismFailures": 0
+    },
+    "trung-chau": {
+      "determinismFailures": 0
+    }
+  },
+  "overallDeterminismFailures": 0
+}

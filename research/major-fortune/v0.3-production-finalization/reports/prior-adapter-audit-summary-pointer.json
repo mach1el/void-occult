@@ -1,0 +1,324 @@
+{
+  "corpusId": "major-fortune-v0.2-audit-corpus",
+  "seed": 20260723,
+  "adapterVersion": "0.3.0-adapter-r1",
+  "v03ContractHash": "ab40ba34d55f784cbcbe926f444b39f07984bf02127b2452b706e91af312b8e7",
+  "chartCount": 100,
+  "cycleObservationCount": 2332,
+  "trainChartCount": 80,
+  "holdoutChartCount": 20,
+  "bySchool": {
+    "nam-phai": {
+      "chartCount": 100,
+      "cycleObservationCount": 1166,
+      "score": {
+        "min": 22.5,
+        "max": 82.5,
+        "mean": 54.37641509434009,
+        "median": 55,
+        "histogram": {
+          "40-44": 121,
+          "35-39": 99,
+          "45-49": 140,
+          "70-74": 157,
+          "60-64": 149,
+          "50-54": 110,
+          "65-69": 67,
+          "25-29": 47,
+          "75-79": 61,
+          "55-59": 178,
+          "80-84": 7,
+          "20-24": 14,
+          "30-34": 16
+        }
+      },
+      "bandCounts": {
+        "mixed": 549,
+        "pressure": 162,
+        "support": 373,
+        "strong-support": 68,
+        "strong-pressure": 14
+      },
+      "scoreStateCounts": {
+        "partial-data": 1166
+      },
+      "coverageHistogram": {
+        "1.00": 1166
+      },
+      "partialRate": 1,
+      "unavailableRate": 0,
+      "pillarLevels": {
+        "thien-thoi": {
+          "0": 0,
+          "1": 461,
+          "2": 233,
+          "-2": 239,
+          "-1": 233,
+          "null": 0
+        },
+        "dia-loi": {
+          "0": 270,
+          "1": 359,
+          "2": 250,
+          "-2": 88,
+          "-1": 199,
+          "null": 0
+        },
+        "nhan-hoa": {
+          "0": 1040,
+          "1": 106,
+          "2": 0,
+          "-2": 0,
+          "-1": 20,
+          "null": 0
+        },
+        "tu-hoa-sat-tinh": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "-2": 0,
+          "-1": 0,
+          "null": 1166
+        }
+      },
+      "pillarNoSignalRate": {
+        "thien-thoi": 0,
+        "dia-loi": 0.22126929674099485,
+        "nhan-hoa": 0.8876500857632933,
+        "tu-hoa-sat-tinh": 0
+      },
+      "pillarBalancedRate": {
+        "thien-thoi": 0,
+        "dia-loi": 0.010291595197255575,
+        "nhan-hoa": 0.004288164665523156,
+        "tu-hoa-sat-tinh": 0
+      },
+      "pillarPartialRate": {
+        "thien-thoi": 0,
+        "dia-loi": 0,
+        "nhan-hoa": 0,
+        "tu-hoa-sat-tinh": 1
+      },
+      "acceptedEvidenceByFamily": {
+        "element-relation": 1166,
+        "principal-star-dignity": 1258,
+        "support-pressure-auxiliary-sets": 136
+      },
+      "supportMassByFamily": {
+        "principal-star-dignity": 871,
+        "element-relation": 927,
+        "support-pressure-auxiliary-sets": 111
+      },
+      "pressureMassByFamily": {
+        "element-relation": 711,
+        "principal-star-dignity": 387,
+        "support-pressure-auxiliary-sets": 25
+      },
+      "saturationNeg2": {
+        "thien-thoi": 0.20497427101200685,
+        "dia-loi": 0.07547169811320754,
+        "nhan-hoa": 0,
+        "tu-hoa-sat-tinh": 0
+      },
+      "saturationPos2": {
+        "thien-thoi": 0.1998284734133791,
+        "dia-loi": 0.2144082332761578,
+        "nhan-hoa": 0,
+        "tu-hoa-sat-tinh": 0
+      },
+      "rejectedEvidenceReasons": {},
+      "missingProvenanceCount": 0,
+      "duplicatePhysicalFactCount": 0,
+      "duplicateClusterCount": 0,
+      "crossPillarOwnershipViolationCount": 0,
+      "incompleteTransformationTupleCount": 0,
+      "annualMonthlyInfluenceFailures": 0,
+      "determinismFailures": 0,
+      "boundsFailures": 0,
+      "levelFailures": 0,
+      "familyActivation": {
+        "element-relation": 1166,
+        "principal-star-dignity": 1258,
+        "support-pressure-auxiliary-sets": 136
+      },
+      "namPhaiXfUnavailableCount": 1166
+    },
+    "trung-chau": {
+      "chartCount": 100,
+      "cycleObservationCount": 1166,
+      "score": {
+        "min": 28.8,
+        "max": 88.8,
+        "mean": 60.66286449399708,
+        "median": 61.3,
+        "histogram": {
+          "45-49": 120,
+          "40-44": 98,
+          "50-54": 86,
+          "75-79": 172,
+          "55-59": 153,
+          "70-74": 189,
+          "65-69": 47,
+          "35-39": 61,
+          "80-84": 61,
+          "60-64": 156,
+          "85-89": 7,
+          "25-29": 14,
+          "30-34": 2
+        }
+      },
+      "bandCounts": {
+        "mixed": 457,
+        "strong-support": 240,
+        "support": 392,
+        "pressure": 77
+      },
+      "scoreStateCounts": {
+        "scored": 1166
+      },
+      "coverageHistogram": {
+        "1.00": 1166
+      },
+      "partialRate": 0,
+      "unavailableRate": 0,
+      "pillarLevels": {
+        "thien-thoi": {
+          "0": 0,
+          "1": 461,
+          "2": 233,
+          "-2": 239,
+          "-1": 233,
+          "null": 0
+        },
+        "dia-loi": {
+          "0": 270,
+          "1": 359,
+          "2": 250,
+          "-2": 88,
+          "-1": 199,
+          "null": 0
+        },
+        "nhan-hoa": {
+          "0": 1046,
+          "1": 107,
+          "2": 0,
+          "-2": 0,
+          "-1": 13,
+          "null": 0
+        },
+        "tu-hoa-sat-tinh": {
+          "0": 0,
+          "1": 1166,
+          "2": 0,
+          "-2": 0,
+          "-1": 0,
+          "null": 0
+        }
+      },
+      "pillarNoSignalRate": {
+        "thien-thoi": 0,
+        "dia-loi": 0.22126929674099485,
+        "nhan-hoa": 0.8936535162950258,
+        "tu-hoa-sat-tinh": 0
+      },
+      "pillarBalancedRate": {
+        "thien-thoi": 0,
+        "dia-loi": 0.010291595197255575,
+        "nhan-hoa": 0.003430531732418525,
+        "tu-hoa-sat-tinh": 0
+      },
+      "pillarPartialRate": {
+        "thien-thoi": 0,
+        "dia-loi": 0,
+        "nhan-hoa": 0,
+        "tu-hoa-sat-tinh": 0
+      },
+      "acceptedEvidenceByFamily": {
+        "element-relation": 1166,
+        "principal-star-dignity": 1258,
+        "major-fortune-transformations": 4664,
+        "support-pressure-auxiliary-sets": 128
+      },
+      "supportMassByFamily": {
+        "principal-star-dignity": 871,
+        "major-fortune-transformations": 3498,
+        "element-relation": 927,
+        "support-pressure-auxiliary-sets": 111
+      },
+      "pressureMassByFamily": {
+        "element-relation": 711,
+        "major-fortune-transformations": 2332,
+        "principal-star-dignity": 387,
+        "support-pressure-auxiliary-sets": 17
+      },
+      "saturationNeg2": {
+        "thien-thoi": 0.20497427101200685,
+        "dia-loi": 0.07547169811320754,
+        "nhan-hoa": 0,
+        "tu-hoa-sat-tinh": 0
+      },
+      "saturationPos2": {
+        "thien-thoi": 0.1998284734133791,
+        "dia-loi": 0.2144082332761578,
+        "nhan-hoa": 0,
+        "tu-hoa-sat-tinh": 0
+      },
+      "rejectedEvidenceReasons": {},
+      "missingProvenanceCount": 0,
+      "duplicatePhysicalFactCount": 0,
+      "duplicateClusterCount": 0,
+      "crossPillarOwnershipViolationCount": 0,
+      "incompleteTransformationTupleCount": 0,
+      "annualMonthlyInfluenceFailures": 0,
+      "determinismFailures": 0,
+      "boundsFailures": 0,
+      "levelFailures": 0,
+      "familyActivation": {
+        "element-relation": 1166,
+        "principal-star-dignity": 1258,
+        "major-fortune-transformations": 4664,
+        "support-pressure-auxiliary-sets": 128
+      },
+      "namPhaiXfUnavailableCount": 0
+    }
+  },
+  "overall": {
+    "enabledFamilyActivation": {
+      "element-relation": 2332,
+      "principal-star-dignity": 2516,
+      "support-pressure-auxiliary-sets": 264,
+      "major-fortune-transformations": 4664
+    },
+    "disabledFamilies": [
+      "severe-pressure-evidence:Pressure star sets are owned by Nhân Hòa; re-emitting into Tứ Hóa would violate cross-pillar ownership.",
+      "hinh-ho-set:Hình–Hổ lacks an unambiguous canonical set definition in repository-owned catalogs for Round 1."
+    ],
+    "hardGateFailures": [],
+    "productionRouting": {
+      "status": "unavailable",
+      "module": "major-fortune",
+      "reason": "rebuilding"
+    },
+    "v03ContractValid": true
+  },
+  "productSmoke": [
+    {
+      "id": "smoke-1991-09-21-Dau-nam-phai",
+      "school": "nam-phai",
+      "score": 28.8,
+      "band": "pressure",
+      "scoreState": "partial-data",
+      "evidenceCount": 2
+    },
+    {
+      "id": "smoke-1991-09-21-Dau-trung-chau",
+      "school": "trung-chau",
+      "score": 35,
+      "band": "pressure",
+      "scoreState": "scored",
+      "evidenceCount": 6
+    }
+  ],
+  "readinessDecision": "EVIDENCE_ADAPTER_READY_FOR_CANDIDATE_EVALUATION",
+  "hardGateFailures": []
+}

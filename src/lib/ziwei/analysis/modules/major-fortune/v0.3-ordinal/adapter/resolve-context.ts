@@ -20,6 +20,7 @@ function emptyDiagnostics(): MajorFortuneAdapterDiagnostics {
     disabledFamilies: [],
     evidenceValidationErrors: [],
     notes: [],
+    outOfFrameTransformationCount: 0,
   };
 }
 

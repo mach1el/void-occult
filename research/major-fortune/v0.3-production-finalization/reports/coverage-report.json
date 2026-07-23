@@ -1,0 +1,30 @@
+{
+  "semantics": {
+    "contextCoverageWeight": "non-unavailable pillar budgets / 100",
+    "scoringCoverageWeight": "non-null level pillar budgets / 100"
+  },
+  "bySchool": {
+    "nam-phai": {
+      "meanContextCoverageWeight": 1,
+      "meanScoringCoverageWeight": 0.75,
+      "contextCoverageHistogram": {
+        "1.00": 1166
+      },
+      "scoringCoverageHistogram": {
+        "0.75": 1166
+      },
+      "partialRate": 1
+    },
+    "trung-chau": {
+      "meanContextCoverageWeight": 1,
+      "meanScoringCoverageWeight": 1,
+      "contextCoverageHistogram": {
+        "1.00": 1166
+      },
+      "scoringCoverageHistogram": {
+        "1.00": 1166
+      },
+      "partialRate": 0
+    }
+  }
+}

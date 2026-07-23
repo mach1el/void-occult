@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "0.3.0",
+  "policyId": "major-fortune-v0.3-adapter-policy",
+  "adapterVersion": "0.3.1",
+  "modelNature": "engineering-heuristic",
+  "classicalDoctrineVerified": false,
+  "numericAuthority": "engineering-defined",
+  "productionStatus": "production",
+  "framePolicy": "active-major-fortune-palace-only",
+  "transformationFrame": "direct-active-major-fortune-palace-only",
+  "integrationNotes": [
+    "0.3.1 is an adapter/frame and production-integration correction, not a formula redesign.",
+    "Scoring formula/budgets/bands remain V0.3 ordinal contract."
+  ],
+  "round1DisabledFamilies": [
+    {
+      "signalFamilyId": "severe-pressure-evidence",
+      "reason": "Pressure star sets are owned by Nhân Hòa; re-emitting into Tứ Hóa would violate cross-pillar ownership."
+    },
+    {
+      "signalFamilyId": "hinh-ho-set",
+      "reason": "Hình–Hổ lacks an unambiguous canonical set definition in repository-owned catalogs for Round 1."
+    }
+  ],
+  "enabledSignalFamilies": [
+    "element-relation",
+    "principal-star-dignity",
+    "support-pressure-auxiliary-sets",
+    "major-fortune-transformations"
+  ],
+  "elementRelationMapping": {
+    "palace_generates_natal": {
+      "direction": "support",
+      "strength": "strong"
+    },
+    "same_element": {
+      "direction": "support",
+      "strength": "normal"
+    },
+    "natal_controls_palace": {
+      "direction": "support",
+      "strength": "normal"
+    },
+    "natal_generates_palace": {
+      "direction": "pressure",
+      "strength": "normal"
+    },
+    "palace_controls_natal": {
+      "direction": "pressure",
+      "strength": "strong"
+    }
+  },
+  "dignityMapping": {
+    "Miếu": {
+      "direction": "support",
+      "strength": "normal"
+    },
+    "Vượng": {
+      "direction": "support",
+      "strength": "normal"
+    },
+    "Đắc": {
+      "direction": "support",
+      "strength": "normal"
+    },
+    "Bình": null,
+    "Hãm": {
+      "direction": "pressure",
+      "strength": "normal"
+    }
+  },
+  "auxiliarySets": {
+    "support": [
+      {
+        "setId": "khoi-viet",
+        "mode": "all",
+        "members": [
+          "Thiên Khôi",
+          "Thiên Việt"
+        ]
+      },
+      {
+        "setId": "ta-huu",
+        "mode": "all",
+        "members": [
+          "Tả Phụ",
+          "Hữu Bật"
+        ]
+      },
+      {
+        "setId": "loc-ton",
+        "mode": "singleton",
+        "members": [
+          "Lộc Tồn"
+        ]
+      }
+    ],
+    "pressure": [
+      {
+        "setId": "khong-kiep",
+        "mode": "all",
+        "members": [
+          "Địa Không",
+          "Địa Kiếp"
+        ]
+      },
+      {
+        "setId": "kinh-da",
+        "mode": "all",
+        "members": [
+          "Kình Dương",
+          "Đà La"
+        ]
+      },
+      {
+        "setId": "linh-hoa",
+        "mode": "all",
+        "members": [
+          "Linh Tinh",
+          "Hỏa Tinh"
+        ]
+      }
+    ]
+  },
+  "transformationPolarity": {
+    "Hóa Lộc": {
+      "direction": "support",
+      "strength": "normal"
+    },
+    "Hóa Quyền": {
+      "direction": "support",
+      "strength": "normal"
+    },
+    "Hóa Khoa": {
+      "direction": "support",
+      "strength": "normal"
+    },
+    "Hóa Kỵ": {
+      "direction": "pressure",
+      "strength": "strong"
+    }
+  },
+  "calculationCoreMutagenAliases": {
+    "Lộc": "Hóa Lộc",
+    "Quyền": "Hóa Quyền",
+    "Khoa": "Hóa Khoa",
+    "Kỵ": "Hóa Kỵ",
+    "Hóa Lộc": "Hóa Lộc",
+    "Hóa Quyền": "Hóa Quyền",
+    "Hóa Khoa": "Hóa Khoa",
+    "Hóa Kỵ": "Hóa Kỵ"
+  },
+  "notes": [
+    "Calculation Core emits short mutagen labels (Lộc/Quyền/Khoa/Kỵ); adapter normalizes to Hóa * forms before polarity mapping."
+  ],
+  "principalStarNames": [
+    "Tử Vi",
+    "Thiên Cơ",
+    "Thái Dương",
+    "Vũ Khúc",
+    "Thiên Đồng",
+    "Liêm Trinh",
+    "Thiên Phủ",
+    "Thái Âm",
+    "Tham Lang",
+    "Cự Môn",
+    "Thiên Tướng",
+    "Thiên Lương",
+    "Thất Sát",
+    "Phá Quân"
+  ],
+  "forbiddenAnnualMonthlyFields": [
+    "annualStars",
+    "annualMutagens",
+    "taiTuePalace",
+    "smallLimitPalace",
+    "annualHeadPalace",
+    "isLuuNienDaiVan",
+    "monthlyPalaces",
+    "flowMonths"
+  ]
+}

@@ -9,7 +9,7 @@ import {
   MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG,
 } from "@/lib/ziwei/analysis/feature-flags";
 import { getAnalysisStatus } from "@/lib/ziwei/analysis";
-import { MajorFortuneV03OrdinalSection } from "./MajorFortuneV03OrdinalSection";
+import { MajorFortuneSection } from "./MajorFortuneSection";
 
 const REGRESSION: BirthInput = {
   solarDate: "1991-09-21",
@@ -20,7 +20,7 @@ const REGRESSION: BirthInput = {
   flowBase: "luu-nien",
 };
 
-describe("isMajorFortuneV03OrdinalEnabled", () => {
+describe("isMajorFortuneV03OrdinalEnabled production defaults", () => {
   beforeEach(() => {
     window.sessionStorage.clear();
     window.history.replaceState({}, "", "/");
@@ -30,81 +30,79 @@ describe("isMajorFortuneV03OrdinalEnabled", () => {
     vi.unstubAllEnvs();
   });
 
-  it("defaults off", () => {
-    expect(isMajorFortuneV03OrdinalEnabled()).toBe(false);
-  });
-
-  it("env true enables", () => {
-    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL", "true");
+  it("defaults on when env missing", () => {
     expect(isMajorFortuneV03OrdinalEnabled()).toBe(true);
   });
 
-  it("env false stays off even with query 1", () => {
+  it("env false disables", () => {
     vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL", "false");
-    window.history.replaceState({}, "", `/?${MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG}=1`);
     expect(isMajorFortuneV03OrdinalEnabled()).toBe(false);
   });
 
-  it("invalid env is off", () => {
-    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL", "yes");
+  it("query 0 disables session", () => {
+    window.history.replaceState({}, "", `/?${MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG}=0`);
     expect(isMajorFortuneV03OrdinalEnabled()).toBe(false);
   });
 });
 
-describe("MajorFortuneV03OrdinalSection", () => {
-  afterEach(() => {
-    cleanup();
+describe("MajorFortuneSection production UI", () => {
+  beforeEach(() => {
+    window.sessionStorage.clear();
+    window.history.replaceState({}, "", "/");
   });
 
-  it("renders experimental badge, disclaimer, score and four pillars", () => {
+  afterEach(() => {
+    cleanup();
+    vi.unstubAllEnvs();
+  });
+
+  it("renders Beta badge, disclaimer, scoring coverage and four pillars", () => {
     const chart = calculateNamPhai(REGRESSION);
     const analysis = analyzeMajorFortuneOrdinalV03(chart, { school: "nam-phai" });
-    render(
-      <MajorFortuneV03OrdinalSection chart={chart} school="nam-phai" analysis={analysis} />,
-    );
-    expect(screen.getByText("Đại Vận V0.3")).toBeTruthy();
-    expect(screen.getAllByText(/Experimental heuristic/).length).toBeGreaterThan(0);
-    expect(
-      screen.getByText(/không phải công thức cổ điển đã được xác minh/),
-    ).toBeTruthy();
+    render(<MajorFortuneSection chart={chart} school="nam-phai" analysis={analysis} />);
+    expect(screen.getByText("Đại Vận")).toBeTruthy();
+    expect(screen.getAllByText(/V0\.3 · Beta/).length).toBeGreaterThan(0);
+    expect(screen.getByText(/không phải công thức cổ điển tuyệt đối/)).toBeTruthy();
     expect(screen.getByText("Thiên Thời")).toBeTruthy();
     expect(screen.getByText("Địa Lợi")).toBeTruthy();
     expect(screen.getByText("Nhân Hòa")).toBeTruthy();
     expect(screen.getByText("Tứ Hóa & Sát Tinh")).toBeTruthy();
-    expect(screen.getByText("Coverage")).toBeTruthy();
-    expect(screen.getByText("Partial")).toBeTruthy();
-    expect(
-      screen.getByText(/Nam Phái: Tứ Hóa đại vận chưa có từ Calculation Core/),
-    ).toBeTruthy();
+    expect(screen.getByText("Độ phủ tính điểm")).toBeTruthy();
+    expect(screen.getByText("75%")).toBeTruthy();
+    expect(screen.getByText("3/4 trụ đã được tính")).toBeTruthy();
+    expect(screen.getByText(/Tứ Hóa chưa khả dụng cho Nam Phái/)).toBeTruthy();
+    expect(screen.queryByText("strong-support")).toBeNull();
+    expect(screen.queryByText("partial-data")).toBeNull();
   });
 
-  it("renders Trung Châu scored state", () => {
+  it("renders Trung Châu with Vietnamese band", () => {
     const chart = calculateTrungChau(REGRESSION);
     const analysis = analyzeMajorFortuneOrdinalV03(chart, { school: "trung-chau" });
     render(
-      <MajorFortuneV03OrdinalSection
-        chart={chart}
-        school="trung-chau"
-        analysis={analysis}
-      />,
+      <MajorFortuneSection chart={chart} school="trung-chau" analysis={analysis} />,
     );
     expect(screen.getByText("Điểm")).toBeTruthy();
     expect(analysis.result?.score).not.toBeNull();
+    expect(analysis.display.bandLabelVi).toBeTruthy();
+    expect(analysis.result?.coverage.scoringCoverageWeight).toBe(1);
   });
 
   it("renders unavailable without active palace", () => {
     const chart = { ...calculateNamPhai(REGRESSION), majorFortunePalace: null };
     const analysis = analyzeMajorFortuneOrdinalV03(chart, { school: "nam-phai" });
-    render(
-      <MajorFortuneV03OrdinalSection chart={chart} school="nam-phai" analysis={analysis} />,
-    );
+    render(<MajorFortuneSection chart={chart} school="nam-phai" analysis={analysis} />);
     expect(screen.getByText(/Không có cung Đại Vận đang hoạt động/)).toBeTruthy();
   });
 
-  it("does not change production major-fortune routing", () => {
-    expect(getAnalysisStatus("major-fortune")).toEqual({
-      status: "unavailable",
+  it("production status is available by default", () => {
+    expect(getAnalysisStatus("major-fortune")).toMatchObject({
+      status: "available",
       module: "major-fortune",
+      version: "0.3.1",
+    });
+    expect(getAnalysisStatus("monthly-flow")).toEqual({
+      status: "unavailable",
+      module: "monthly-flow",
       reason: "rebuilding",
     });
   });

@@ -51,6 +51,17 @@
   background: rgba(255, 255, 255, 0.03);
 }
 
+.mf-v03__partial-note {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.4;
+  opacity: 0.95;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid rgba(246, 224, 164, 0.25);
+  border-radius: 10px;
+  background: rgba(246, 224, 164, 0.06);
+}
+
 .mf-v03__unavailable {
   margin: 0;
   opacity: 0.9;

@@ -33,8 +33,8 @@ function main(): void {
   if (!loaded.ok) issues.push("v03-knowledge-invalid");
 
   const routing = getAnalysisStatus("major-fortune");
-  if (routing.status !== "unavailable" || routing.reason !== "rebuilding") {
-    issues.push("production-routing-changed");
+  if (routing.status !== "available" || routing.version !== "0.3.1") {
+    issues.push("production-routing-unexpected");
   }
 
   if (existsSync(join(PACK, "reports/decision.json"))) {

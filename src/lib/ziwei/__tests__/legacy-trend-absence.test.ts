@@ -77,14 +77,17 @@ describe("legacy trend scoring absence", () => {
 });
 
 describe("analysis availability after reset", () => {
-  it("marks major-fortune and monthly-flow unavailable/rebuilding (no UI published)", () => {
-    for (const module of ["major-fortune", "monthly-flow"] as const) {
-      expect(getAnalysisStatus(module)).toEqual({
-        status: "unavailable",
-        module,
-        reason: "rebuilding",
-      });
-    }
+  it("marks major-fortune available at 0.3.1 and monthly-flow rebuilding", () => {
+    expect(getAnalysisStatus("major-fortune")).toEqual({
+      status: "available",
+      module: "major-fortune",
+      version: "0.3.1",
+    });
+    expect(getAnalysisStatus("monthly-flow")).toEqual({
+      status: "unavailable",
+      module: "monthly-flow",
+      reason: "rebuilding",
+    });
   });
 
   it("marks palace-overview available (default-on since the chart UI publish)", () => {

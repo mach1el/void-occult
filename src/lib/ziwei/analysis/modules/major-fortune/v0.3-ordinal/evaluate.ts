@@ -87,8 +87,10 @@ function transformationTupleComplete(
   const tuple = evidence.transformationTuple;
   if (!tuple) return false;
   for (const field of fields) {
-    const value = (tuple as unknown as Record<string, string>)[field];
-    if (typeof value !== "string" || value.trim() === "") return false;
+    const value = (tuple as unknown as Record<string, unknown>)[field];
+    if (typeof value === "number" && Number.isFinite(value)) continue;
+    if (typeof value === "string" && value.trim() !== "") continue;
+    return false;
   }
   return true;
 }
@@ -143,7 +145,10 @@ function unavailableModuleResult(
     scoreState: "unavailable",
     coverage: {
       coverageWeight: 0,
+      contextCoverageWeight: 0,
+      scoringCoverageWeight: 0,
       evaluablePillarIds: [],
+      scoredPillarIds: [],
       missingPillarIds: [...MAJOR_FORTUNE_ORDINAL_PILLAR_IDS],
       partialPillarIds: [],
     },
@@ -499,6 +504,9 @@ export function evaluateMajorFortuneOrdinal(
     const state = pillars[id]!.state;
     return state !== "unavailable";
   });
+  const scoredPillarIds = MAJOR_FORTUNE_ORDINAL_PILLAR_IDS.filter(
+    (id) => pillars[id]!.level != null,
+  );
   const missingPillarIds = MAJOR_FORTUNE_ORDINAL_PILLAR_IDS.filter(
     (id) => pillars[id]!.state === "unavailable",
   );
@@ -506,9 +514,15 @@ export function evaluateMajorFortuneOrdinal(
     (id) => pillars[id]!.state === "partial-data",
   );
 
-  // Coverage: budgets for pillars with evaluable context / 100. Partial still evaluable.
-  const coverageWeight =
+  // Context coverage: budgets for non-unavailable pillar contexts / 100.
+  const contextCoverageWeight =
     evaluablePillarIds.reduce((sum, id) => sum + pillars[id]!.budget, 0) / 100;
+  // Scoring coverage: budgets for pillars with a non-null ordinal level / 100.
+  // Partial pillars with level null contribute zero delta and zero scoring weight.
+  const scoringCoverageWeight =
+    scoredPillarIds.reduce((sum, id) => sum + pillars[id]!.budget, 0) / 100;
+  /** @deprecated alias — prefer contextCoverageWeight */
+  const coverageWeight = contextCoverageWeight;
 
   const sumDelta = MAJOR_FORTUNE_ORDINAL_PILLAR_IDS.reduce(
     (sum, id) => sum + pillarDeltas[id]!,
@@ -563,7 +577,10 @@ export function evaluateMajorFortuneOrdinal(
     scoreState,
     coverage: {
       coverageWeight: roundToDecimals(coverageWeight, 4),
+      contextCoverageWeight: roundToDecimals(contextCoverageWeight, 4),
+      scoringCoverageWeight: roundToDecimals(scoringCoverageWeight, 4),
       evaluablePillarIds,
+      scoredPillarIds,
       missingPillarIds,
       partialPillarIds,
     },

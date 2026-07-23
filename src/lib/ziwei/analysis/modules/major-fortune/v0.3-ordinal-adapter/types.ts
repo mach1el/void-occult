@@ -39,6 +39,7 @@ export interface MajorFortuneOrdinalAdapterDiagnostics {
   ownershipViolations: string[];
   disabledFamilies: string[];
   notes: string[];
+  outOfFrameTransformationCount: number;
 }
 
 export type MajorFortuneOrdinalAdapterStatus = "ready" | "partial" | "unavailable";
@@ -59,6 +60,7 @@ export interface MajorFortuneOrdinalPillarDisplaySummary {
   levelLabelVi: string;
   delta: number;
   state: string;
+  stateLabelVi: string;
   evidenceLabels: string[];
   reasonLabels: string[];
 }
@@ -68,12 +70,17 @@ export interface MajorFortuneOrdinalV03Display {
   subtitle: string;
   disclaimer: string;
   experimentalBadge: string;
+  bandLabelVi: string | null;
+  scoringCoveragePercent: number | null;
+  scoredPillarFractionLabel: string | null;
+  namPhaiPartialTuHoaNote: string | null;
   pillarSummaries: MajorFortuneOrdinalPillarDisplaySummary[];
 }
 
 export interface MajorFortuneOrdinalV03Analysis {
   model: "v0.3-ordinal";
-  experimental: true;
+  experimental: false;
+  version: "0.3.1";
   school: ZiweiSchool;
   adapterStatus: MajorFortuneOrdinalAdapterStatus;
   cycle: MajorFortuneOrdinalCycleMetadata | null;
@@ -83,7 +90,7 @@ export interface MajorFortuneOrdinalV03Analysis {
   display: MajorFortuneOrdinalV03Display;
 }
 
-/** @deprecated internal alias — prefer MajorFortuneOrdinalAdapterResult */
-export type MajorFortuneOrdinalAnalysisResult = MajorFortuneOrdinalV03Analysis;
+/** Production public result alias. */
+export type MajorFortuneProductionResult = MajorFortuneOrdinalV03Analysis;
 
 export type { ChartData, ZiweiSchool };

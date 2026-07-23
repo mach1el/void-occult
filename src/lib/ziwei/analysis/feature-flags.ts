@@ -34,7 +34,7 @@ function readSessionFlag(
 export function isPalaceOverviewV1Enabled(): boolean {
   return readSessionFlag(
     PALACE_OVERVIEW_FEATURE_FLAG,
-    import.meta.env.VITE_ZIWEI_PALACE_OVERVIEW_V1,
+    import.meta.env?.VITE_ZIWEI_PALACE_OVERVIEW_V1,
     true,
   );
 }
@@ -47,7 +47,7 @@ export const ANNUAL_AXES_FEATURE_FLAG = "ziweiAnnualAxes";
 export function isAnnualAxesEnabled(): boolean {
   return readSessionFlag(
     ANNUAL_AXES_FEATURE_FLAG,
-    import.meta.env.VITE_ZIWEI_ANNUAL_AXES,
+    import.meta.env?.VITE_ZIWEI_ANNUAL_AXES,
     true,
   );
 }
@@ -56,7 +56,7 @@ export const HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG = "ziweiHuyenKhiPreviewV01";
 
 export function isHuyenKhiPreviewV01Enabled(): boolean {
   if (typeof window === "undefined") return false;
-  if (import.meta.env.VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01 === "false") return false;
+  if (import.meta.env?.VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01 === "false") return false;
   try {
     const params = new URLSearchParams(window.location.search);
     const queryValue = params.get(HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG);
@@ -66,34 +66,23 @@ export function isHuyenKhiPreviewV01Enabled(): boolean {
     const stored = window.sessionStorage.getItem(HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG);
     if (stored === "0") return false;
     if (stored === "1") return true;
-    return import.meta.env.VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01 === "true";
+    return import.meta.env?.VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01 === "true";
   } catch {
     return false;
   }
 }
 
 /**
- * Major Fortune V0.3 ordinal experimental UI + analysis path.
- * Default OFF. Enable only via VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL=true
- * (or session query override when env is true).
- * Does not change getAnalysisStatus("major-fortune") production routing.
+ * Major Fortune V0.3 ordinal — production path with kill-switch.
+ * Default ON. Disable via VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL=false
+ * or ?ziweiMajorFortuneV03Ordinal=0 (session).
  */
 export const MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG = "ziweiMajorFortuneV03Ordinal";
 
 export function isMajorFortuneV03OrdinalEnabled(): boolean {
-  if (typeof window === "undefined") return false;
-  if (import.meta.env.VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL === "false") return false;
-  try {
-    const params = new URLSearchParams(window.location.search);
-    const queryValue = params.get(MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG);
-    if (queryValue === "0" || queryValue === "1") {
-      window.sessionStorage.setItem(MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG, queryValue);
-    }
-    const stored = window.sessionStorage.getItem(MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG);
-    if (stored === "0") return false;
-    if (stored === "1") return true;
-    return import.meta.env.VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL === "true";
-  } catch {
-    return false;
-  }
+  return readSessionFlag(
+    MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG,
+    import.meta.env?.VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL,
+    true,
+  );
 }

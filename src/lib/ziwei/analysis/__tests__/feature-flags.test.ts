@@ -83,13 +83,18 @@ describe("isMajorFortuneV03OrdinalEnabled", () => {
     vi.unstubAllEnvs();
   });
 
-  it("defaults off", () => {
-    expect(isMajorFortuneV03OrdinalEnabled()).toBe(false);
+  it("defaults on", () => {
+    expect(isMajorFortuneV03OrdinalEnabled()).toBe(true);
   });
 
   it("env true enables", () => {
     vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL", "true");
     expect(isMajorFortuneV03OrdinalEnabled()).toBe(true);
+  });
+
+  it("env false disables", () => {
+    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL", "false");
+    expect(isMajorFortuneV03OrdinalEnabled()).toBe(false);
   });
 
   it("env false + query 1 stays off", () => {

@@ -1,0 +1,702 @@
+[
+  {
+    "birthChartId": "mfv02-chart-000",
+    "split": "train",
+    "solarDate": "1978-11-09",
+    "birthHour": "Hợi",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-001",
+    "split": "train",
+    "solarDate": "1971-02-18",
+    "birthHour": "Tỵ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-002",
+    "split": "train",
+    "solarDate": "1961-10-21",
+    "birthHour": "Dậu",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-003",
+    "split": "train",
+    "solarDate": "1999-04-06",
+    "birthHour": "Tý",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-004",
+    "split": "train",
+    "solarDate": "1993-12-28",
+    "birthHour": "Mão",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-005",
+    "split": "train",
+    "solarDate": "1997-01-16",
+    "birthHour": "Mùi",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-006",
+    "split": "train",
+    "solarDate": "1987-07-12",
+    "birthHour": "Thân",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-007",
+    "split": "train",
+    "solarDate": "1967-08-22",
+    "birthHour": "Sửu",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-008",
+    "split": "train",
+    "solarDate": "1969-06-20",
+    "birthHour": "Thìn",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-009",
+    "split": "train",
+    "solarDate": "1974-09-11",
+    "birthHour": "Dần",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-010",
+    "split": "train",
+    "solarDate": "1966-03-14",
+    "birthHour": "Tuất",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-011",
+    "split": "train",
+    "solarDate": "1996-05-26",
+    "birthHour": "Ngọ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-012",
+    "split": "train",
+    "solarDate": "1980-11-04",
+    "birthHour": "Hợi",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-013",
+    "split": "train",
+    "solarDate": "1975-02-05",
+    "birthHour": "Tỵ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-014",
+    "split": "train",
+    "solarDate": "1965-10-03",
+    "birthHour": "Dậu",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-015",
+    "split": "train",
+    "solarDate": "1989-04-23",
+    "birthHour": "Tý",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-016",
+    "split": "train",
+    "solarDate": "1998-12-25",
+    "birthHour": "Mão",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-017",
+    "split": "train",
+    "solarDate": "1972-01-24",
+    "birthHour": "Mùi",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-018",
+    "split": "train",
+    "solarDate": "1976-07-10",
+    "birthHour": "Thân",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-019",
+    "split": "train",
+    "solarDate": "1986-08-08",
+    "birthHour": "Sửu",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-020",
+    "split": "train",
+    "solarDate": "1960-06-27",
+    "birthHour": "Thìn",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-021",
+    "split": "train",
+    "solarDate": "1962-09-07",
+    "birthHour": "Dần",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-022",
+    "split": "train",
+    "solarDate": "1973-03-19",
+    "birthHour": "Tuất",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-023",
+    "split": "train",
+    "solarDate": "1964-05-01",
+    "birthHour": "Ngọ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-024",
+    "split": "train",
+    "solarDate": "1995-11-15",
+    "birthHour": "Hợi",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-025",
+    "split": "train",
+    "solarDate": "1968-02-17",
+    "birthHour": "Tỵ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-026",
+    "split": "train",
+    "solarDate": "1985-10-02",
+    "birthHour": "Dậu",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-027",
+    "split": "train",
+    "solarDate": "1984-04-13",
+    "birthHour": "Tý",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-028",
+    "split": "train",
+    "solarDate": "1988-12-09",
+    "birthHour": "Mão",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-029",
+    "split": "train",
+    "solarDate": "1990-01-18",
+    "birthHour": "Mùi",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-030",
+    "split": "train",
+    "solarDate": "1994-07-21",
+    "birthHour": "Thân",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-031",
+    "split": "train",
+    "solarDate": "1983-08-06",
+    "birthHour": "Sửu",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-032",
+    "split": "train",
+    "solarDate": "1991-06-28",
+    "birthHour": "Thìn",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-033",
+    "split": "train",
+    "solarDate": "1963-09-16",
+    "birthHour": "Dần",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-034",
+    "split": "train",
+    "solarDate": "1979-03-12",
+    "birthHour": "Tuất",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-035",
+    "split": "train",
+    "solarDate": "1992-05-22",
+    "birthHour": "Ngọ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-036",
+    "split": "train",
+    "solarDate": "1981-11-20",
+    "birthHour": "Hợi",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-037",
+    "split": "train",
+    "solarDate": "1977-02-11",
+    "birthHour": "Tỵ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-038",
+    "split": "train",
+    "solarDate": "1970-10-14",
+    "birthHour": "Dậu",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-039",
+    "split": "train",
+    "solarDate": "1982-04-26",
+    "birthHour": "Tý",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-040",
+    "split": "train",
+    "solarDate": "1978-12-04",
+    "birthHour": "Mão",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-041",
+    "split": "train",
+    "solarDate": "1971-01-05",
+    "birthHour": "Mùi",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-042",
+    "split": "train",
+    "solarDate": "1961-07-03",
+    "birthHour": "Thân",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-043",
+    "split": "train",
+    "solarDate": "1999-08-23",
+    "birthHour": "Sửu",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-044",
+    "split": "train",
+    "solarDate": "1993-06-25",
+    "birthHour": "Thìn",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-045",
+    "split": "train",
+    "solarDate": "1997-09-24",
+    "birthHour": "Dần",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-046",
+    "split": "train",
+    "solarDate": "1987-03-10",
+    "birthHour": "Tuất",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-047",
+    "split": "train",
+    "solarDate": "1967-05-08",
+    "birthHour": "Ngọ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-048",
+    "split": "train",
+    "solarDate": "1969-11-27",
+    "birthHour": "Hợi",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-049",
+    "split": "train",
+    "solarDate": "1974-02-07",
+    "birthHour": "Tỵ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-050",
+    "split": "train",
+    "solarDate": "1966-10-19",
+    "birthHour": "Dậu",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-051",
+    "split": "train",
+    "solarDate": "1996-04-01",
+    "birthHour": "Tý",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-052",
+    "split": "train",
+    "solarDate": "1980-12-15",
+    "birthHour": "Mão",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-053",
+    "split": "train",
+    "solarDate": "1975-01-17",
+    "birthHour": "Mùi",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-054",
+    "split": "train",
+    "solarDate": "1965-07-02",
+    "birthHour": "Thân",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-055",
+    "split": "train",
+    "solarDate": "1989-08-13",
+    "birthHour": "Sửu",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-056",
+    "split": "train",
+    "solarDate": "1998-06-09",
+    "birthHour": "Thìn",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-057",
+    "split": "train",
+    "solarDate": "1972-09-18",
+    "birthHour": "Dần",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-058",
+    "split": "train",
+    "solarDate": "1976-03-21",
+    "birthHour": "Tuất",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-059",
+    "split": "train",
+    "solarDate": "1986-05-06",
+    "birthHour": "Ngọ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-060",
+    "split": "train",
+    "solarDate": "1960-11-28",
+    "birthHour": "Hợi",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-061",
+    "split": "train",
+    "solarDate": "1962-02-16",
+    "birthHour": "Tỵ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-062",
+    "split": "train",
+    "solarDate": "1973-10-12",
+    "birthHour": "Dậu",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-063",
+    "split": "train",
+    "solarDate": "1964-04-22",
+    "birthHour": "Tý",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-064",
+    "split": "train",
+    "solarDate": "1995-12-20",
+    "birthHour": "Mão",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-065",
+    "split": "train",
+    "solarDate": "1968-01-11",
+    "birthHour": "Mùi",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-066",
+    "split": "train",
+    "solarDate": "1985-07-14",
+    "birthHour": "Thân",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-067",
+    "split": "train",
+    "solarDate": "1984-08-26",
+    "birthHour": "Sửu",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-068",
+    "split": "train",
+    "solarDate": "1988-06-04",
+    "birthHour": "Thìn",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-069",
+    "split": "train",
+    "solarDate": "1990-09-05",
+    "birthHour": "Dần",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-070",
+    "split": "train",
+    "solarDate": "1994-03-03",
+    "birthHour": "Tuất",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-071",
+    "split": "train",
+    "solarDate": "1983-05-23",
+    "birthHour": "Ngọ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-072",
+    "split": "train",
+    "solarDate": "1991-11-25",
+    "birthHour": "Hợi",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-073",
+    "split": "train",
+    "solarDate": "1963-02-24",
+    "birthHour": "Tỵ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-074",
+    "split": "train",
+    "solarDate": "1979-10-10",
+    "birthHour": "Dậu",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-075",
+    "split": "train",
+    "solarDate": "1992-04-08",
+    "birthHour": "Tý",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-076",
+    "split": "train",
+    "solarDate": "1981-12-27",
+    "birthHour": "Mão",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-077",
+    "split": "train",
+    "solarDate": "1977-01-07",
+    "birthHour": "Mùi",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-078",
+    "split": "train",
+    "solarDate": "1970-07-19",
+    "birthHour": "Thân",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-079",
+    "split": "train",
+    "solarDate": "1982-08-01",
+    "birthHour": "Sửu",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-080",
+    "split": "holdout",
+    "solarDate": "1978-06-15",
+    "birthHour": "Thìn",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-081",
+    "split": "holdout",
+    "solarDate": "1971-09-17",
+    "birthHour": "Dần",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-082",
+    "split": "holdout",
+    "solarDate": "1961-03-02",
+    "birthHour": "Tuất",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-083",
+    "split": "holdout",
+    "solarDate": "1999-05-13",
+    "birthHour": "Ngọ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-084",
+    "split": "holdout",
+    "solarDate": "1993-11-09",
+    "birthHour": "Hợi",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-085",
+    "split": "holdout",
+    "solarDate": "1997-02-18",
+    "birthHour": "Tỵ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-086",
+    "split": "holdout",
+    "solarDate": "1987-10-21",
+    "birthHour": "Dậu",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-087",
+    "split": "holdout",
+    "solarDate": "1967-04-06",
+    "birthHour": "Tý",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-088",
+    "split": "holdout",
+    "solarDate": "1969-12-28",
+    "birthHour": "Mão",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-089",
+    "split": "holdout",
+    "solarDate": "1974-01-16",
+    "birthHour": "Mùi",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-090",
+    "split": "holdout",
+    "solarDate": "1966-07-12",
+    "birthHour": "Thân",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-091",
+    "split": "holdout",
+    "solarDate": "1996-08-22",
+    "birthHour": "Sửu",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-092",
+    "split": "holdout",
+    "solarDate": "1980-06-20",
+    "birthHour": "Thìn",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-093",
+    "split": "holdout",
+    "solarDate": "1975-09-11",
+    "birthHour": "Dần",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-094",
+    "split": "holdout",
+    "solarDate": "1965-03-14",
+    "birthHour": "Tuất",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-095",
+    "split": "holdout",
+    "solarDate": "1989-05-26",
+    "birthHour": "Ngọ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-096",
+    "split": "holdout",
+    "solarDate": "1998-11-04",
+    "birthHour": "Hợi",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-097",
+    "split": "holdout",
+    "solarDate": "1972-02-05",
+    "birthHour": "Tỵ",
+    "gender": "male"
+  },
+  {
+    "birthChartId": "mfv02-chart-098",
+    "split": "holdout",
+    "solarDate": "1976-10-03",
+    "birthHour": "Dậu",
+    "gender": "female"
+  },
+  {
+    "birthChartId": "mfv02-chart-099",
+    "split": "holdout",
+    "solarDate": "1986-04-23",
+    "birthHour": "Tý",
+    "gender": "male"
+  }
+]

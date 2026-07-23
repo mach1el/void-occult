@@ -5,8 +5,8 @@
   "issues": [],
   "readinessDecision": "ORDINAL_CONTRACT_READY_FOR_ADAPTER",
   "productionStatus": {
-    "status": "unavailable",
+    "status": "available",
     "module": "major-fortune",
-    "reason": "rebuilding"
+    "version": "0.3.1"
   }
 }

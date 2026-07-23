@@ -27,10 +27,10 @@ function decide(metrics: MajorFortuneV03AdapterAuditMetrics): {
   const failures = [...metrics.overall.hardGateFailures];
   if (!metrics.overall.v03ContractValid) failures.push("v03-contract-invalid");
   if (
-    metrics.overall.productionRouting.status !== "unavailable" ||
-    metrics.overall.productionRouting.reason !== "rebuilding"
+    metrics.overall.productionRouting.status !== "available" ||
+    metrics.overall.productionRouting.version !== "0.3.1"
   ) {
-    failures.push("production-routing-changed");
+    failures.push("production-routing-unexpected");
   }
   const unique = [...new Set(failures)].sort();
   return {
@@ -108,6 +108,10 @@ export function writeMajorFortuneV03AdapterAudit(
         bandCounts: s.bandCounts,
         scoreStateCounts: s.scoreStateCounts,
         coverageHistogram: s.coverageHistogram,
+        contextCoverageHistogram: s.contextCoverageHistogram,
+        scoringCoverageHistogram: s.scoringCoverageHistogram,
+        meanContextCoverageWeight: s.meanContextCoverageWeight,
+        meanScoringCoverageWeight: s.meanScoringCoverageWeight,
         partialRate: s.partialRate,
         unavailableRate: s.unavailableRate,
         pillarLevels: s.pillarLevels,
@@ -131,6 +135,10 @@ export function writeMajorFortuneV03AdapterAudit(
         levelFailures: s.levelFailures,
         familyActivation: s.familyActivation,
         namPhaiXfUnavailableCount: s.namPhaiXfUnavailableCount,
+        directTransformationActivationCount: s.directTransformationActivationCount,
+        outOfFrameTransformationCount: s.outOfFrameTransformationCount,
+        observationsWithDirectTransformation: s.observationsWithDirectTransformation,
+        observationsWithoutDirectTransformation: s.observationsWithoutDirectTransformation,
       },
     ]),
   );
@@ -141,6 +149,10 @@ export function writeMajorFortuneV03AdapterAudit(
         k,
         {
           coverageHistogram: s.coverageHistogram,
+          contextCoverageHistogram: s.contextCoverageHistogram,
+          scoringCoverageHistogram: s.scoringCoverageHistogram,
+          meanContextCoverageWeight: s.meanContextCoverageWeight,
+          meanScoringCoverageWeight: s.meanScoringCoverageWeight,
           partialRate: s.partialRate,
           unavailableRate: s.unavailableRate,
         },
@@ -181,6 +193,7 @@ export function writeMajorFortuneV03AdapterAudit(
     enabledFamilies: adapterPolicy.enabledSignalFamilies,
     disabledFamilies: m.overall.disabledFamilies,
     overallActivation: m.overall.enabledFamilyActivation,
+    transformationFrame: adapterPolicy.transformationFrame ?? null,
     bySchool: Object.fromEntries(
       Object.entries(m.schools).map(([k, s]) => [
         k,
@@ -189,6 +202,18 @@ export function writeMajorFortuneV03AdapterAudit(
           acceptedEvidenceByFamily: s.acceptedEvidenceByFamily,
           supportMassByFamily: s.supportMassByFamily,
           pressureMassByFamily: s.pressureMassByFamily,
+          directTransformationActivationCount: s.directTransformationActivationCount,
+          outOfFrameTransformationCount: s.outOfFrameTransformationCount,
+          observationsWithDirectTransformation: s.observationsWithDirectTransformation,
+          observationsWithoutDirectTransformation: s.observationsWithoutDirectTransformation,
+          directTransformationActivationRate:
+            s.observationsWithDirectTransformation +
+              s.observationsWithoutDirectTransformation ===
+            0
+              ? null
+              : s.observationsWithDirectTransformation /
+                (s.observationsWithDirectTransformation +
+                  s.observationsWithoutDirectTransformation),
         },
       ]),
     ),
@@ -332,13 +357,13 @@ export function writeMajorFortuneV03AdapterAudit(
       "- V0.1 unchanged",
       "- V0.2 unchanged",
       "- V0.3 ordinal formula contract unchanged",
-      "- `getAnalysisStatus(\"major-fortune\")` remains `unavailable` / `rebuilding`",
-      "- No UI / feature flag / production routing",
+      "- `getAnalysisStatus(\"major-fortune\")` → `available` / `0.3.1` when enabled",
+      "- Production UI + feature-flag kill-switch live in the production-finalization pack",
       "",
       "## Next step",
       "",
       decision.readinessDecision === "EVIDENCE_ADAPTER_READY_FOR_CANDIDATE_EVALUATION"
-        ? "Proceed to candidate evaluation / family calibration research only if separately authorized."
+        ? "Adapter audit remains a historical research artifact; production rollout is owned by `v0.3-production-finalization`."
         : "Revise adapter emitters or provenance until hard gates clear.",
       "",
     ].join("\n"),

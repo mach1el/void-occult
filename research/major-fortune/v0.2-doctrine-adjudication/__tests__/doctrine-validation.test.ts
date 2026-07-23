@@ -196,11 +196,11 @@ describe("Major Fortune V0.2 doctrine adjudication pack", () => {
     60_000,
   );
 
-  it("production routing remains rebuilding", () => {
+  it("Major Fortune production routing is available 0.3.1", () => {
     expect(getAnalysisStatus("major-fortune")).toEqual({
-      status: "unavailable",
+      status: "available",
       module: "major-fortune",
-      reason: "rebuilding",
+      version: "0.3.1",
     });
   });
 

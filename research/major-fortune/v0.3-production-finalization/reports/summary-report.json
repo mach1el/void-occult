@@ -1,0 +1,138 @@
+{
+  "corpusId": "major-fortune-v0.2-audit-corpus",
+  "seed": 20260723,
+  "adapterVersion": "0.3.1",
+  "v03ContractHash": "4f363277a8e0e3009410dee3b2fea75c65570d8d0feaa00eae6a489ce4830099",
+  "chartCount": 100,
+  "cycleObservationCount": 2332,
+  "bySchool": {
+    "nam-phai": {
+      "observations": 1166,
+      "score": {
+        "min": 22.5,
+        "max": 82.5,
+        "mean": 54.37641509434009,
+        "median": 55,
+        "histogram": {
+          "40-44": 121,
+          "35-39": 99,
+          "45-49": 140,
+          "70-74": 157,
+          "60-64": 149,
+          "50-54": 110,
+          "65-69": 67,
+          "25-29": 47,
+          "75-79": 61,
+          "55-59": 178,
+          "80-84": 7,
+          "20-24": 14,
+          "30-34": 16
+        }
+      },
+      "meanContextCoverageWeight": 1,
+      "meanScoringCoverageWeight": 0.75,
+      "xf": {
+        "directTransformationActivationCount": 0,
+        "outOfFrameTransformationCount": 0,
+        "observationsWithDirectTransformation": 0,
+        "observationsWithoutDirectTransformation": 0,
+        "directTransformationActivationRate": null,
+        "tuHoaLevels": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "-2": 0,
+          "-1": 0,
+          "null": 1166
+        }
+      },
+      "bandCounts": {
+        "mixed": 549,
+        "pressure": 162,
+        "support": 373,
+        "strong-support": 68,
+        "strong-pressure": 14
+      },
+      "scoreStateCounts": {
+        "partial-data": 1166
+      }
+    },
+    "trung-chau": {
+      "observations": 1166,
+      "score": {
+        "min": 10,
+        "max": 95,
+        "mean": 54.69974271012054,
+        "median": 57.5,
+        "histogram": {
+          "40-44": 111,
+          "35-39": 119,
+          "45-49": 108,
+          "55-59": 193,
+          "60-64": 129,
+          "50-54": 112,
+          "65-69": 78,
+          "25-29": 42,
+          "90-94": 2,
+          "75-79": 87,
+          "80-84": 24,
+          "70-74": 118,
+          "20-24": 16,
+          "15-19": 5,
+          "30-34": 18,
+          "10-14": 1,
+          "85-89": 2,
+          "95-99": 1
+        }
+      },
+      "meanContextCoverageWeight": 1,
+      "meanScoringCoverageWeight": 1,
+      "xf": {
+        "directTransformationActivationCount": 366,
+        "outOfFrameTransformationCount": 4298,
+        "observationsWithDirectTransformation": 338,
+        "observationsWithoutDirectTransformation": 828,
+        "directTransformationActivationRate": 0.28987993138936535,
+        "tuHoaLevels": {
+          "0": 828,
+          "1": 226,
+          "2": 8,
+          "-2": 84,
+          "-1": 20,
+          "null": 0
+        }
+      },
+      "bandCounts": {
+        "mixed": 524,
+        "pressure": 179,
+        "support": 325,
+        "strong-support": 116,
+        "strong-pressure": 22
+      },
+      "scoreStateCounts": {
+        "scored": 1166
+      }
+    }
+  },
+  "overall": {
+    "enabledFamilyActivation": {
+      "element-relation": 2332,
+      "principal-star-dignity": 2516,
+      "support-pressure-auxiliary-sets": 264,
+      "major-fortune-transformations": 366
+    },
+    "disabledFamilies": [
+      "severe-pressure-evidence:Pressure star sets are owned by Nhân Hòa; re-emitting into Tứ Hóa would violate cross-pillar ownership.",
+      "hinh-ho-set:Hình–Hổ lacks an unambiguous canonical set definition in repository-owned catalogs for Round 1."
+    ],
+    "hardGateFailures": [],
+    "productionRouting": {
+      "status": "available",
+      "module": "major-fortune",
+      "version": "0.3.1"
+    },
+    "v03ContractValid": true
+  },
+  "readinessDecision": "PROMOTE_MAJOR_FORTUNE_V03_TO_PRODUCTION",
+  "hardGateFailures": []
+}

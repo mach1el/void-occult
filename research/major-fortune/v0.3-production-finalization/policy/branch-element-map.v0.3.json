@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "0.3.0",
+  "mapId": "major-fortune-v0.3-adapter-branch-element",
+  "authority": "engineering-defined",
+  "classicalDoctrineVerified": false,
+  "elements": [
+    "Mộc",
+    "Hỏa",
+    "Thổ",
+    "Kim",
+    "Thủy"
+  ],
+  "branchToElement": {
+    "Tý": "Thủy",
+    "Sửu": "Thổ",
+    "Dần": "Mộc",
+    "Mão": "Mộc",
+    "Thìn": "Thổ",
+    "Tỵ": "Hỏa",
+    "Tị": "Hỏa",
+    "Ngọ": "Hỏa",
+    "Mùi": "Thổ",
+    "Thân": "Kim",
+    "Dậu": "Kim",
+    "Tuất": "Thổ",
+    "Hợi": "Thủy"
+  },
+  "generates": {
+    "Mộc": "Hỏa",
+    "Hỏa": "Thổ",
+    "Thổ": "Kim",
+    "Kim": "Thủy",
+    "Thủy": "Mộc"
+  },
+  "controls": {
+    "Mộc": "Thổ",
+    "Hỏa": "Kim",
+    "Thổ": "Thủy",
+    "Kim": "Mộc",
+    "Thủy": "Hỏa"
+  },
+  "sourceIds": [
+    "SRC-MF-V03-ADAPTER-ELEMENT"
+  ],
+  "claimIds": [
+    "CLM-MF-V03-ADAPTER-ELEMENT"
+  ]
+}

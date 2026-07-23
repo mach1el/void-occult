@@ -84,7 +84,12 @@
     "research:major-fortune-v03-adapter:decision": "npx tsx src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-adapter/cli/decision-adapter.ts",
     "research:major-fortune-v03-adapter-ui:validate": "npx tsx src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-adapter-ui/cli/validate-adapter-ui.ts",
     "research:major-fortune-v03-adapter-ui:report": "npx tsx src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-adapter-ui/cli/report-adapter-ui.ts",
-    "research:major-fortune-v03-adapter-ui:decision": "npx tsx src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-adapter-ui/cli/decision-adapter-ui.ts"
+    "research:major-fortune-v03-adapter-ui:decision": "npx tsx src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-adapter-ui/cli/decision-adapter-ui.ts",
+    "test:major-fortune-v03-production": "vitest run src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-production/__tests__ src/components/ziwei/major-fortune src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal/adapter/__tests__ src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-adapter/__tests__ src/lib/ziwei/analysis/__tests__/feature-flags.test.ts",
+    "research:major-fortune-v03-production:validate": "npx tsx src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-production/cli/validate-production-pack.ts",
+    "research:major-fortune-v03-production:audit": "npx tsx src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-production/cli/audit-production.ts",
+    "research:major-fortune-v03-production:report": "npx tsx src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-production/cli/report-production.ts",
+    "research:major-fortune-v03-production:decision": "npx tsx src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-production/cli/decision-production.ts"
   },
   "dependencies": {
     "html-to-image": "1.11.13",

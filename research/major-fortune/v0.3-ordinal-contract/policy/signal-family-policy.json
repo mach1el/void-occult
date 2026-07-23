@@ -44,7 +44,8 @@
         "fortuneStem",
         "transformationType",
         "transformedStar",
-        "targetPalace"
+        "targetPalace",
+        "targetPalaceIndex"
       ],
       "namPhaiStatus": "unavailable-until-calculation-core",
       "classicalDoctrineVerified": false,

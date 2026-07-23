@@ -1,0 +1,35 @@
+{
+  "before": {
+    "note": "Pre-0.3.1 global XF frame scored all four stem transformations into Tứ Hóa.",
+    "expectedConstantPlusOneAcrossTrungChau": true
+  },
+  "after": {
+    "transformationFrame": "direct-active-major-fortune-palace-only",
+    "trungChau": {
+      "directTransformationActivationCount": 366,
+      "outOfFrameTransformationCount": 4298,
+      "observationsWithDirectTransformation": 338,
+      "observationsWithoutDirectTransformation": 828,
+      "directTransformationActivationRate": 0.28987993138936535,
+      "tuHoaLevels": {
+        "0": 828,
+        "1": 226,
+        "2": 8,
+        "-2": 84,
+        "-1": 20,
+        "null": 0
+      }
+    },
+    "tuHoaLevelCounts": {
+      "0": 828,
+      "1": 226,
+      "2": 8,
+      "-2": 84,
+      "-1": 20,
+      "null": 0
+    },
+    "scoredObservations": 1166,
+    "plusOneObservations": 226,
+    "constantPlusOneEliminated": true
+  }
+}

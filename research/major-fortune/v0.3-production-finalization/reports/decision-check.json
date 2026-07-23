@@ -1,0 +1,5 @@
+{
+  "readinessDecision": "PROMOTE_MAJOR_FORTUNE_V03_TO_PRODUCTION",
+  "markdownMatchesDecisionJson": true,
+  "ok": true
+}

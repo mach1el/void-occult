@@ -29,11 +29,10 @@ import { ZiweiAnalysisRebuilding } from "./analysis/ZiweiAnalysisRebuilding";
 import { PalaceOverviewRadar } from "./analysis/PalaceOverviewRadar";
 import { AnnualAxesSection } from "./annual-axes/AnnualAxesSection";
 import { HuyenKhiResearchPreview } from "./huyen-khi/HuyenKhiResearchPreview";
-import { MajorFortuneV03OrdinalSection } from "./major-fortune/MajorFortuneV03OrdinalSection";
+import { MajorFortuneSection } from "./major-fortune/MajorFortuneSection";
 import {
   getAnalysisStatus,
   isHuyenKhiPreviewV01Enabled,
-  isMajorFortuneV03OrdinalEnabled,
 } from "@/lib/ziwei/analysis";
 import { analyzeAnnualAxes } from "@/lib/ziwei/analysis/modules/annual-axes";
 
@@ -287,6 +286,11 @@ export function ChartPage() {
     }
     return result;
   }, [chartData, school, annualAxesStatus, locationSearch]);
+
+  const majorFortuneStatus = useMemo(
+    () => getAnalysisStatus("major-fortune", { school }),
+    [school, locationSearch],
+  );
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -751,14 +755,16 @@ export function ChartPage() {
             aria-label="Module vận khí"
           >
             <div className="trend-analysis-grid">
-              <ZiweiAnalysisRebuilding module="major-fortune" />
+              {chartData && majorFortuneStatus.status === "available" ? (
+                <MajorFortuneSection chart={chartData} school={school} />
+              ) : (
+                <ZiweiAnalysisRebuilding
+                  module="major-fortune"
+                  status={majorFortuneStatus}
+                />
+              )}
               <ZiweiAnalysisRebuilding module="monthly-flow" />
             </div>
-            {chartData && isMajorFortuneV03OrdinalEnabled() ? (
-              <div className="mf-v03-experimental-slot">
-                <MajorFortuneV03OrdinalSection chart={chartData} school={school} />
-              </div>
-            ) : null}
           </section>
         </main>
 

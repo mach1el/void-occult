@@ -118,10 +118,15 @@ describe("analyzeMajorFortuneV02 — core contract", () => {
     expect(chart.palaces.reduce((n, p) => n + (p.stars?.length ?? 0), 0)).toBe(beforeStarCount);
   });
 
-  it("does not change production routing", () => {
+  it("does not change Monthly Flow routing; Major Fortune is production V0.3.1", () => {
     expect(getAnalysisStatus("major-fortune")).toEqual({
-      status: "unavailable",
+      status: "available",
       module: "major-fortune",
+      version: "0.3.1",
+    });
+    expect(getAnalysisStatus("monthly-flow")).toEqual({
+      status: "unavailable",
+      module: "monthly-flow",
       reason: "rebuilding",
     });
   });

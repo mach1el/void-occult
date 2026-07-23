@@ -1,0 +1,12 @@
+{
+  "bySchool": {
+    "nam-phai": {
+      "annualMonthlyInfluenceFailures": 0,
+      "determinismFailures": 0
+    },
+    "trung-chau": {
+      "annualMonthlyInfluenceFailures": 0,
+      "determinismFailures": 0
+    }
+  }
+}

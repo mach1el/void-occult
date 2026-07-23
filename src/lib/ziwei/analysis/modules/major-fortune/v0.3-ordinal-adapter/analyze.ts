@@ -36,6 +36,7 @@ function mapDiagnostics(
   );
   diagnostics.disabledFamilies = [...raw.disabledFamilies];
   diagnostics.notes = [...raw.notes];
+  diagnostics.outOfFrameTransformationCount = raw.outOfFrameTransformationCount ?? 0;
   if (evaluationRejects) {
     diagnostics.duplicatePhysicalFacts = evaluationRejects.duplicatePhysicalFacts;
     diagnostics.duplicateEvidenceClusters = evaluationRejects.duplicateEvidenceClusters;
@@ -117,7 +118,7 @@ export function adaptChartToMajorFortuneOrdinalInput(
 }
 
 /**
- * End-to-end experimental analysis: adapter → pure evaluator → UI display model.
+ * End-to-end production analysis: adapter → pure evaluator → UI display model.
  */
 export function analyzeMajorFortuneOrdinalV03(
   chart: ChartData,
@@ -165,13 +166,16 @@ export function analyzeMajorFortuneOrdinalV03(
 
   return {
     model: "v0.3-ordinal",
-    experimental: true,
+    experimental: false,
+    version: "0.3.1",
     school: options.school,
     adapterStatus,
     cycle,
     result: core.evaluation,
     adapterDiagnostics: diagnostics,
     emittedEvidence: core.build.emittedEvidence,
-    display: buildDisplay(core.evaluation, core.build.emittedEvidence),
+    display: buildDisplay(core.evaluation, core.build.emittedEvidence, {
+      school: options.school,
+    }),
   };
 }

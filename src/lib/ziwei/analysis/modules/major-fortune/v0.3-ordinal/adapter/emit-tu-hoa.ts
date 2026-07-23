@@ -40,6 +40,7 @@ export function emitTuHoaSatTinh(
     { direction: "support" | "pressure"; strength: "normal" | "strong" }
   >;
   const aliases = adapterPolicy.calculationCoreMutagenAliases as Record<string, string>;
+  const activeIndex = ctx.cycle.activePalaceIndex;
 
   for (const xf of ctx.transformations) {
     const canonicalType = aliases[xf.mutagen] ?? null;
@@ -62,6 +63,16 @@ export function emitTuHoaSatTinh(
       continue;
     }
 
+    // Round 1 production frame: only score transformations that land in the
+    // active Major Fortune palace. Out-of-frame tuples are reported, not scored.
+    if (targetIndex !== activeIndex) {
+      diagnostics.outOfFrameTransformationCount += 1;
+      diagnostics.notes.push(
+        `out-of-frame-transformation:${canonicalType}:${xf.starName}:target=${targetIndex}:active=${activeIndex}`,
+      );
+      continue;
+    }
+
     evidence.push({
       evidenceId: `mf-v03-xf-${cycleKey}-${canonicalType}-${xf.starName}-${targetIndex}`,
       physicalFactId: `mf-xf:${ctx.fortuneStem}:${canonicalType}:${xf.starName}:${targetIndex}`,
@@ -77,6 +88,7 @@ export function emitTuHoaSatTinh(
         `transformationType:${canonicalType}`,
         `transformedStar:${xf.starName}`,
         `targetPalace:${targetPalace}`,
+        `targetPalaceIndex:${targetIndex}`,
         `coreMutagenLabel:${xf.mutagen}`,
       ],
       sourceIds: SRC,
@@ -89,12 +101,17 @@ export function emitTuHoaSatTinh(
         transformationType: canonicalType,
         transformedStar: xf.starName,
         targetPalace,
+        targetPalaceIndex: targetIndex,
       },
     });
   }
 
   return {
     evidence,
-    context: { availability: "available" },
+    context: {
+      availability: "available",
+      reasonCodes:
+        evidence.length === 0 ? ["no-direct-major-fortune-transformation"] : undefined,
+    },
   };
 }
