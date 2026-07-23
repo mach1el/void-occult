@@ -10,6 +10,7 @@ import {
 } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production";
 import { MonthlyFlowSection } from "./MonthlyFlowSection";
 import { MonthlyFlowTimelineChart } from "./MonthlyFlowTimelineChart";
+import { PRODUCTION_DISCLAIMER_VI } from "./labels";
 
 const REGRESSION: BirthInput = {
   solarDate: "1991-09-21",
@@ -227,5 +228,17 @@ describe("MonthlyFlowSection", () => {
     render(<MonthlyFlowSection chart={chart} school="nam-phai" now={NOW_JULY_2026} />);
     expect(screen.getByLabelText("Lưu Nguyệt V0.1")).toBeInTheDocument();
     expect(screen.getByTestId("mf-flow-six-axis")).toBeInTheDocument();
+  });
+
+  it("health gate: no Sức khỏe label, no health data-domain, disclaimer present", () => {
+    const chart = calculateTrungChau(REGRESSION);
+    const { container } = render(
+      <MonthlyFlowSection chart={chart} school="trung-chau" now={NOW_JULY_2026} />,
+    );
+
+    expect(screen.queryByText("Sức khỏe")).not.toBeInTheDocument();
+    expect(container.querySelector('[data-domain="health"]')).toBeNull();
+    expect(screen.getByText(PRODUCTION_DISCLAIMER_VI)).toBeInTheDocument();
+    expect(container.querySelector(".mf-flow__disclaimer")).toBeInTheDocument();
   });
 });

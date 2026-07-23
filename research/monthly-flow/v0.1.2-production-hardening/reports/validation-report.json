@@ -1,0 +1,32 @@
+{
+  "hardGates": {
+    "determinismFailures": 0,
+    "scoreBoundFailures": 0,
+    "duplicatePhysicalFactFailures": 0,
+    "missingSourceIds": 0,
+    "providerSchoolMismatch": 0,
+    "fabricatedLeapMonthCount": 0,
+    "anchorFidelityFailures": 0,
+    "productionFocusFallbackCount": 0,
+    "healthUiExposureFailures": 0,
+    "currentMonthIdentityFailures": 0,
+    "domainMapFailures": 0,
+    "chartMonthObservations": 2400,
+    "domainObservations": 14400,
+    "observed": {
+      "determinismFailures": 0,
+      "scoreBoundFailures": 0,
+      "duplicatePhysicalFactFailures": 0,
+      "missingSourceIds": 0,
+      "providerSchoolMismatch": 0,
+      "fabricatedLeapMonthCount": 0,
+      "anchorFidelityFailures": 0,
+      "productionFocusFallbackCount": 0,
+      "healthUiExposureFailures": 0,
+      "currentMonthIdentityFailures": 0,
+      "domainMapFailures": 0
+    }
+  },
+  "hardGateFailures": [],
+  "pass": true
+}

@@ -1,0 +1,16 @@
+{
+  "integrationVersion": "0.1.2",
+  "uiVersion": "0.1.2",
+  "featureFlag": "ziweiMonthlyFlowV01",
+  "killSwitch": "VITE_ZIWEI_MONTHLY_FLOW_V01=false",
+  "productionStatus": {
+    "status": "available",
+    "module": "monthly-flow",
+    "version": "0.1.2"
+  },
+  "timeline": "12-month SVG composite bars (5 visible domains)",
+  "sixAxisDetail": "selected-month horizontal bars (health excluded)",
+  "compositeLabel": "Điểm tổng hợp 5 trục hiển thị",
+  "leapMonthPolicy": "explicit_resolved_context_only",
+  "currentMonthPolicy": "resolveActualCurrentMonthKey — no false leap fallback"
+}
