@@ -3,18 +3,27 @@ import type {
   MonthlyFlowBand,
   MonthlyFlowEvidence,
 } from "@/lib/ziwei/analysis/modules/monthly-flow/types";
+import {
+  MONTHLY_FLOW_VISIBLE_DOMAINS,
+  type MonthlyFlowVisibleDomain,
+} from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production/display-projection";
 
-/** Domain order — matches annual axes contract order. */
-export const DOMAIN_ORDER: readonly AnnualAxisDomain[] = [
-  "health",
-  "family",
-  "wealth",
-  "career",
-  "social",
-  "romance",
-] as const;
+/** Production UI domain order — excludes health (no prognosis surface). */
+export const DOMAIN_ORDER: readonly MonthlyFlowVisibleDomain[] = MONTHLY_FLOW_VISIBLE_DOMAINS;
 
-export const DOMAIN_LABEL_VI: Record<AnnualAxisDomain, string> = {
+/** @deprecated Prefer DOMAIN_ORDER — kept alias for clarity in charts. */
+export const VISIBLE_DOMAIN_ORDER = DOMAIN_ORDER;
+
+export const DOMAIN_LABEL_VI: Record<MonthlyFlowVisibleDomain, string> = {
+  family: "Gia đạo",
+  wealth: "Tài lộc",
+  career: "Công việc",
+  social: "Giao hữu",
+  romance: "Tình duyên",
+};
+
+/** Full label map including health — must not be used in production UI rendering. */
+export const DOMAIN_LABEL_VI_ALL: Record<AnnualAxisDomain, string> = {
   health: "Sức khỏe",
   family: "Gia đạo",
   wealth: "Tài lộc",
@@ -78,18 +87,13 @@ export function evidenceDisplayLabel(evidence: MonthlyFlowEvidence): string {
     return `${starName} · ${targetNatalPalaceName}`;
   }
 
-  if (physicalFactId.startsWith("annual-transformation-context:")) {
-    const parts = physicalFactId.split(":");
-    const mutagen = parts[2] ?? "";
-    const starName = parts.slice(3).join(":");
-    return `Tứ Hóa lưu niên ${mutagen} → ${starName} · ${targetNatalPalaceName}`;
-  }
-
   if (physicalFactId.startsWith("structural:")) {
-    const markerId = physicalFactId.split(":")[1] ?? "";
-    const markerLabel = STRUCTURAL_MARKER_LABEL_VI[markerId] ?? "Kích hoạt cấu trúc";
-    return `${markerLabel} · ${targetNatalPalaceName}`;
+    const markerId = physicalFactId.slice("structural:".length);
+    return STRUCTURAL_MARKER_LABEL_VI[markerId] ?? `Cấu trúc · ${targetNatalPalaceName}`;
   }
 
-  return targetNatalPalaceName;
+  return targetNatalPalaceName || "Tín hiệu đã ghi nhận";
 }
+
+export const PRODUCTION_DISCLAIMER_VI =
+  "Các chỉ số chỉ mô tả tín hiệu cấu trúc được ghi nhận trong mô hình, không phải dự báo chắc chắn và không dùng để chẩn đoán hoặc tiên lượng sức khỏe.";

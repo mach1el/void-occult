@@ -127,7 +127,7 @@ describe("MonthlyFlowSection", () => {
     expect(screen.getByLabelText("Lưu Nguyệt V0.1")).toHaveAttribute("data-version", "0.1.2");
     expect(container.querySelector('[data-module="monthly-flow"]')).toBeInTheDocument();
     expect(screen.getByText("Lưu Nguyệt")).toBeInTheDocument();
-    expect(screen.getByText("Điểm tổng hợp 6 trục")).toBeInTheDocument();
+    expect(screen.getByText("Điểm tổng hợp 5 trục hiển thị")).toBeInTheDocument();
     expect(screen.queryByText(/Module vận khí đang được tái cấu trúc/i)).not.toBeInTheDocument();
   });
 
@@ -182,14 +182,13 @@ describe("MonthlyFlowSection", () => {
     expect(screen.queryByText(/Đang xem:/)).not.toBeInTheDocument();
   });
 
-  it("shows six domain labels and Vietnamese bands without raw IDs", () => {
+  it("shows five visible domain labels and Vietnamese bands without raw IDs", () => {
     const chart = calculateTrungChau(REGRESSION);
     const { container } = render(
       <MonthlyFlowSection chart={chart} school="trung-chau" now={NOW_JULY_2026} />,
     );
 
     for (const label of [
-      "Sức khỏe",
       "Gia đạo",
       "Tài lộc",
       "Công việc",
@@ -198,8 +197,10 @@ describe("MonthlyFlowSection", () => {
     ]) {
       expect(screen.getAllByText(label).length).toBeGreaterThan(0);
     }
+    expect(screen.queryByText("Sức khỏe")).not.toBeInTheDocument();
+    expect(container.querySelector('[data-domain="health"]')).toBeNull();
 
-    expect(container.querySelectorAll(".mf-flow-six-axis__row")).toHaveLength(6);
+    expect(container.querySelectorAll(".mf-flow-six-axis__row")).toHaveLength(5);
     expect(container.textContent).toMatch(/Cần thận trọng|Cân bằng|Thuận lợi|Rất thuận/);
 
     const html = container.innerHTML;

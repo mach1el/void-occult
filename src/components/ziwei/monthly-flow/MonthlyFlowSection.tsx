@@ -2,9 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import type { ChartData, School } from "@/types/chart";
 import {
   analyzeMonthlyFlowProduction,
+  projectVisibleMonthSummary,
   resolveDefaultSelectedMonthKey,
   type MonthlyFlowProductionAnalysis,
 } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production";
+import { MONTHLY_FLOW_VISIBLE_DOMAIN_COUNT } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production/display-projection";
 import { MonthlyFlowTimelineChart } from "./MonthlyFlowTimelineChart";
 import { MonthlyFlowSixAxisChart } from "./MonthlyFlowSixAxisChart";
 import {
@@ -12,6 +14,7 @@ import {
   DOMAIN_ORDER,
   evidenceDisplayLabel,
   formatMonthViewLabel,
+  PRODUCTION_DISCLAIMER_VI,
 } from "./labels";
 import "./monthly-flow.css";
 
@@ -31,7 +34,8 @@ function monthStateLabel(status: "available" | "partial" | "unavailable"): strin
 }
 
 /**
- * Production Monthly Flow V0.1 section — timeline + six-axis detail.
+ * Production Monthly Flow V0.1 section — timeline + visible-domain detail.
+ * Health is never rendered (presentation policy).
  */
 export function MonthlyFlowSection({
   chart,
@@ -77,6 +81,10 @@ export function MonthlyFlowSection({
     analysis.monthSummaries[0] ??
     null;
 
+  const selectedVisible = selectedMonth
+    ? projectVisibleMonthSummary(selectedMonth)
+    : null;
+
   const [evidenceOpen, setEvidenceOpen] = useState(false);
 
   const viewingOther =
@@ -86,9 +94,11 @@ export function MonthlyFlowSection({
 
   const schoolLabel = school === "nam-phai" ? "Nam Phái" : "Trung Châu";
   const compositeText =
-    selectedMonth?.compositeScore == null ? "—" : selectedMonth.compositeScore.toFixed(1);
-  const coverageText = selectedMonth
-    ? `${selectedMonth.availableAxisCount}/6 trục`
+    selectedVisible?.visibleCompositeScore == null
+      ? "—"
+      : selectedVisible.visibleCompositeScore.toFixed(1);
+  const coverageText = selectedVisible
+    ? `${selectedVisible.visibleAxisCount}/${MONTHLY_FLOW_VISIBLE_DOMAIN_COUNT} trục`
     : "—";
 
   return (
@@ -137,11 +147,11 @@ export function MonthlyFlowSection({
             onSelectMonthKey={setSelectedMonthKey}
           />
 
-          {selectedMonth ? (
+          {selectedMonth && selectedVisible ? (
             <>
               <div className="mf-flow__selection" aria-label="Tóm tắt tháng">
                 <div className="mf-flow__score-block">
-                  <span className="mf-flow__score-label">Điểm tổng hợp 6 trục</span>
+                  <span className="mf-flow__score-label">Điểm tổng hợp 5 trục hiển thị</span>
                   <span className="mf-flow__score-value">{compositeText}</span>
                 </div>
                 <div className="mf-flow__meta-row">
@@ -150,16 +160,16 @@ export function MonthlyFlowSection({
                   </span>
                   <span className="mf-flow__meta-item">Độ phủ {coverageText}</span>
                   <span className="mf-flow__meta-item">
-                    {monthStateLabel(selectedMonth.status)}
+                    {monthStateLabel(selectedVisible.status)}
                   </span>
-                  {selectedMonth.strongestDomain ? (
+                  {selectedVisible.visibleStrongestDomain ? (
                     <span className="mf-flow__meta-item">
-                      Mạnh: {DOMAIN_LABEL_VI[selectedMonth.strongestDomain]}
+                      Mạnh: {DOMAIN_LABEL_VI[selectedVisible.visibleStrongestDomain]}
                     </span>
                   ) : null}
-                  {selectedMonth.weakestDomain ? (
+                  {selectedVisible.visibleWeakestDomain ? (
                     <span className="mf-flow__meta-item">
-                      Thấp: {DOMAIN_LABEL_VI[selectedMonth.weakestDomain]}
+                      Thấp: {DOMAIN_LABEL_VI[selectedVisible.visibleWeakestDomain]}
                     </span>
                   ) : null}
                 </div>
@@ -221,10 +231,7 @@ export function MonthlyFlowSection({
         </>
       )}
 
-      <p className="mf-flow__disclaimer">
-        Điểm tổng hợp và trục tháng chỉ phản ánh tín hiệu đã ghi nhận trong mô hình V0.1;
-        không phải dự báo chắc chắn.
-      </p>
+      <p className="mf-flow__disclaimer">{PRODUCTION_DISCLAIMER_VI}</p>
     </section>
   );
 }

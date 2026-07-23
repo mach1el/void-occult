@@ -36,7 +36,7 @@ describe("MonthlyFlowTimelineChart — focused chart tests", () => {
 
     const tooltip = screen.getByTestId("mf-flow-timeline-tooltip");
     expect(tooltip.textContent).toMatch(/Điểm tổng hợp:/);
-    expect(tooltip.textContent).toMatch(/Độ phủ: \d\/6 trục/);
+    expect(tooltip.textContent).toMatch(/Độ phủ: \d\/5 trục/);
     expect(tooltip.textContent).toMatch(/Trục mạnh nhất:/);
     expect(tooltip.textContent).toMatch(/Trục thấp nhất:/);
   });
@@ -61,7 +61,7 @@ describe("MonthlyFlowTimelineChart — focused chart tests", () => {
     );
 
     expect(container.querySelector(".mf-flow-timeline__legend")?.textContent).toContain(
-      "Điểm tổng hợp 6 trục",
+      "Điểm tổng hợp 5 trục hiển thị",
     );
     expect(container.querySelector(".mf-flow-timeline__legend")?.textContent).toContain(
       "Tháng hiện tại",
