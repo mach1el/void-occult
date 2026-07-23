@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "0.2.0",
+  "corpusId": "major-fortune-v0.2-audit-corpus",
+  "seed": 20260723,
+  "chartCount": 100,
+  "trainCount": 80,
+  "holdoutCount": 20,
+  "schools": [
+    "nam-phai",
+    "trung-chau"
+  ],
+  "includeAllAvailableMajorFortuneCycles": true,
+  "productFixturesOutsideCalibration": true,
+  "researchGatesNote": "Distribution thresholds are research gates only; passing tests ≠ production approval."
+}

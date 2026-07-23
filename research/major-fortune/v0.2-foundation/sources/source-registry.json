@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "0.2.0",
+  "registryId": "major-fortune-v0.2-source-registry",
+  "sources": [
+    {
+      "sourceId": "SRC-MF-V02-INTAKE-001",
+      "title": "Major Fortune V0.2 four-pillar mission brief (internal research intake)",
+      "language": "en",
+      "sourceType": "internal_research_intake",
+      "qualityTier": "unverified",
+      "schoolScope": "mixed",
+      "locator": "agent mission brief 2026-07-23 Major Fortune V0.2 four-pillar foundation",
+      "accessStatus": "internal",
+      "allowedUsage": [
+        "candidate_formula_design"
+      ],
+      "prohibitedUsage": [
+        "production_claim",
+        "school_policy_override",
+        "classical_attribution"
+      ],
+      "notes": "Unverified intake. Break into atomic claims; do not upgrade status because text seems plausible."
+    },
+    {
+      "sourceId": "SRC-MF-V02-CAP-001",
+      "title": "Major Fortune V0.1 school capabilities (experimental)",
+      "language": "en",
+      "sourceType": "internal-engineering-policy",
+      "qualityTier": "engineering",
+      "schoolScope": "mixed",
+      "locator": "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/major-fortune-school-capabilities.v0.json",
+      "accessStatus": "verified",
+      "allowedUsage": [
+        "document school capability gates",
+        "Nam Phái transformation exclusion"
+      ],
+      "prohibitedUsage": [
+        "classical attribution",
+        "production numeric authority for V0.2 deltas"
+      ],
+      "notes": "Authoritative for what V0.1 already encodes about school capabilities."
+    },
+    {
+      "sourceId": "SRC-MF-V02-CORE-BRANCH-001",
+      "title": "Branch–element mapping owned for V0.2 knowledge (seeded from calendar sexagenary)",
+      "language": "vi",
+      "sourceType": "internal-calculation-contract",
+      "qualityTier": "engineering",
+      "schoolScope": "mixed",
+      "locator": "src/lib/calendar/sexagenary.ts#BRANCH_ELEMENTS (normalized element spelling Hỏa/Thủy)",
+      "accessStatus": "verified",
+      "allowedUsage": [
+        "palace element lookup for element-relation pillar"
+      ],
+      "prohibitedUsage": [
+        "doctrine authority for rawDelta magnitudes"
+      ],
+      "notes": "Explicit validated map copied into V0.2 knowledge; not inferred from display prose."
+    }
+  ]
+}

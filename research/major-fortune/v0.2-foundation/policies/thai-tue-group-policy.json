@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "0.2.0",
+  "policyId": "mf-v02-thai-tue-group",
+  "pillarId": "thien-thoi",
+  "mutualExclusionGroup": "thai-tue-group",
+  "annualTaiTuePalace": {
+    "status": "blocked",
+    "reason": "annual-year-independence"
+  },
+  "natalRingAttachedToActivePalace": {
+    "status": "unproven",
+    "enabled": false
+  },
+  "claimIds": [
+    "CLM-MFV02-004"
+  ],
+  "sourceIds": [
+    "SRC-MF-V02-INTAKE-001",
+    "SRC-MF-V02-CAP-001"
+  ]
+}

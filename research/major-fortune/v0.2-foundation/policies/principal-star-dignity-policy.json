@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "0.2.0",
+  "policyId": "mf-v02-principal-star-dignity",
+  "pillarId": "nhan-hoa",
+  "mutualExclusionGroup": "principal-dignity",
+  "cases": [
+    "one-principal",
+    "two-principals",
+    "vo-chinh-dieu",
+    "missing-brightness",
+    "conflicting-brightness"
+  ],
+  "tamKhongException": {
+    "status": "research-blocked",
+    "claimIds": [
+      "CLM-MFV02-007"
+    ]
+  },
+  "reusePalaceOverviewFacts": [
+    "starIdentity",
+    "brightness"
+  ],
+  "forbidPalaceOverviewScore": true,
+  "claimIds": [
+    "CLM-MFV02-006"
+  ],
+  "sourceIds": [
+    "SRC-MF-V02-INTAKE-001"
+  ]
+}

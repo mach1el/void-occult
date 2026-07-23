@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "0.2.0",
+  "policyId": "mf-v02-benefic-malefic",
+  "pillarId": "tu-hoa-sat-tinh",
+  "matching": "exact-canonical-star-name",
+  "substringMatching": false,
+  "frameGeometry": "tp4c",
+  "stackingPolicy": "dedupe-by-exact-star-name",
+  "sets": [
+    {
+      "setId": "khong-kiep",
+      "stars": [
+        "Địa Không",
+        "Địa Kiếp"
+      ],
+      "mode": "all",
+      "polarity": "malefic"
+    },
+    {
+      "setId": "kinh-da",
+      "stars": [
+        "Kình Dương",
+        "Đà La"
+      ],
+      "mode": "all",
+      "polarity": "malefic"
+    },
+    {
+      "setId": "linh-hoa",
+      "stars": [
+        "Linh Tinh",
+        "Hỏa Tinh"
+      ],
+      "mode": "all",
+      "polarity": "malefic"
+    },
+    {
+      "setId": "hinh-ho",
+      "stars": [
+        "Thiên Hình",
+        "Đà La"
+      ],
+      "mode": "any",
+      "polarity": "malefic"
+    },
+    {
+      "setId": "khoi-viet",
+      "stars": [
+        "Thiên Khôi",
+        "Thiên Việt"
+      ],
+      "mode": "all",
+      "polarity": "benefic"
+    },
+    {
+      "setId": "ta-huu",
+      "stars": [
+        "Tả Phụ",
+        "Hữu Bật"
+      ],
+      "mode": "all",
+      "polarity": "benefic"
+    },
+    {
+      "setId": "loc-ton",
+      "stars": [
+        "Lộc Tồn"
+      ],
+      "mode": "all",
+      "polarity": "benefic"
+    }
+  ],
+  "claimIds": [
+    "CLM-MFV02-011"
+  ],
+  "sourceIds": [
+    "SRC-MF-V02-INTAKE-001"
+  ]
+}

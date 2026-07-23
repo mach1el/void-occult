@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "0.2.0",
+  "policyId": "mf-v02-major-transformation",
+  "pillarId": "tu-hoa-sat-tinh",
+  "schools": {
+    "trung-chau": {
+      "status": "conditional",
+      "requires": [
+        "fortuneStem",
+        "majorMutagens",
+        "exactTargetStar",
+        "exactTargetPalace"
+      ]
+    },
+    "nam-phai": {
+      "status": "blocked-by-calculation-core",
+      "fabricate": false,
+      "futureTask": "Calculation Core Nam Phái Major Fortune stem + Tứ Hóa producers"
+    }
+  },
+  "claimIds": [
+    "CLM-MFV02-009",
+    "CLM-MFV02-010"
+  ],
+  "sourceIds": [
+    "SRC-MF-V02-INTAKE-001",
+    "SRC-MF-V02-CAP-001"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "0.2.0",
+  "policyId": "mf-v02-star-pattern-compatibility",
+  "pillarId": "nhan-hoa",
+  "patterns": [
+    {
+      "patternId": "sat-pha-tham",
+      "stars": [
+        "Thất Sát",
+        "Phá Quân",
+        "Tham Lang"
+      ],
+      "mode": "all"
+    },
+    {
+      "patternId": "co-nguyet-dong-luong",
+      "stars": [
+        "Thiên Cơ",
+        "Thái Âm",
+        "Thiên Đồng",
+        "Thiên Lương"
+      ],
+      "mode": "all"
+    },
+    {
+      "patternId": "tu-vi-thien-phu",
+      "stars": [
+        "Tử Vi",
+        "Thiên Phủ"
+      ],
+      "mode": "all"
+    },
+    {
+      "patternId": "nhat-nguyet",
+      "stars": [
+        "Thái Dương",
+        "Thái Âm"
+      ],
+      "mode": "all"
+    }
+  ],
+  "unsupportedOrMixedBehavior": "neutral-no-rule",
+  "claimIds": [
+    "CLM-MFV02-008"
+  ],
+  "sourceIds": [
+    "SRC-MF-V02-INTAKE-001"
+  ]
+}

@@ -1,0 +1,250 @@
+{
+  "schemaVersion": "0.2.0",
+  "registryId": "major-fortune-v0.2-claim-registry",
+  "claims": [
+    {
+      "claimId": "CLM-MFV02-001",
+      "topic": "formula",
+      "statement": "Candidate score = clamp(50 + sum(clamped pillar deltas), 0, 100) with pillar caps 30/25/20/25.",
+      "school": "mixed",
+      "status": "engineering-hypothesis",
+      "confidence": "medium",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "locators": [
+        "mission:formula-contract"
+      ],
+      "contradictingClaimIds": [],
+      "runtimeImplication": "Implement formula scaffolding; do not treat as classical.",
+      "notes": null
+    },
+    {
+      "claimId": "CLM-MFV02-002",
+      "topic": "bands",
+      "statement": "Candidate bands: han-bi 0–29.9, thu-thach 30–44.9, binh-on 45–64.9, thuan-loi 65–79.9, dai-van-vang 80–100.",
+      "school": "mixed",
+      "status": "engineering-hypothesis",
+      "confidence": "medium",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "locators": [
+        "mission:candidate-bands"
+      ],
+      "contradictingClaimIds": [],
+      "runtimeImplication": "Bands as data; validate continuity.",
+      "notes": null
+    },
+    {
+      "claimId": "CLM-MFV02-003",
+      "topic": "element-relation",
+      "statement": "Exactly one of five element relations between palace element and natal menhElement may match; no double counting.",
+      "school": "mixed",
+      "status": "engineering-hypothesis",
+      "confidence": "low",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001",
+        "SRC-MF-V02-CORE-BRANCH-001"
+      ],
+      "locators": [
+        "mission:element-relation"
+      ],
+      "contradictingClaimIds": [],
+      "runtimeImplication": "Mutex matcher; rawDelta blocked until sourced.",
+      "notes": null
+    },
+    {
+      "claimId": "CLM-MFV02-004",
+      "topic": "thai-tue",
+      "statement": "Major Fortune must remain independent of annualYear; annual taiTuePalace must not drive numeric MF V0.2.",
+      "school": "mixed",
+      "status": "derived",
+      "confidence": "high",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001",
+        "SRC-MF-V02-CAP-001"
+      ],
+      "locators": [
+        "mission:independence",
+        "V0.1 forbiddenInputs"
+      ],
+      "contradictingClaimIds": [],
+      "runtimeImplication": "Block annual Thái Tuế rules.",
+      "notes": null
+    },
+    {
+      "claimId": "CLM-MFV02-005",
+      "topic": "natal-palace-group",
+      "statement": "Active Major Fortune physical palace maps to exactly one of four natal groups covering all twelve palaces.",
+      "school": "mixed",
+      "status": "engineering-hypothesis",
+      "confidence": "medium",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "locators": [
+        "mission:natal-palace-group"
+      ],
+      "contradictingClaimIds": [],
+      "runtimeImplication": "Validate full coverage uniqueness; rawDelta blocked.",
+      "notes": null
+    },
+    {
+      "claimId": "CLM-MFV02-006",
+      "topic": "principal-dignity",
+      "statement": "Principal-star dignity must handle one/two principals, vô chính diệu, missing and conflicting brightness deterministically.",
+      "school": "mixed",
+      "status": "engineering-hypothesis",
+      "confidence": "low",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "locators": [
+        "mission:principal-star-dignity"
+      ],
+      "contradictingClaimIds": [],
+      "runtimeImplication": "Case classifier; rawDelta blocked.",
+      "notes": null
+    },
+    {
+      "claimId": "CLM-MFV02-007",
+      "topic": "principal-dignity",
+      "statement": "Đắc Tam Không exception must not be coded without an atomic sourced policy.",
+      "school": "mixed",
+      "status": "unsupported",
+      "confidence": "low",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "locators": [
+        "mission:tam-khong"
+      ],
+      "contradictingClaimIds": [],
+      "runtimeImplication": "Keep research-blocked.",
+      "notes": null
+    },
+    {
+      "claimId": "CLM-MFV02-008",
+      "topic": "star-pattern",
+      "statement": "Star-pattern taxonomy must be an explicit catalog; unsupported/mixed patterns return neutral/no-rule.",
+      "school": "mixed",
+      "status": "engineering-hypothesis",
+      "confidence": "medium",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "locators": [
+        "mission:star-pattern-compatibility"
+      ],
+      "contradictingClaimIds": [],
+      "runtimeImplication": "Catalog + coverage report; no guessing.",
+      "notes": null
+    },
+    {
+      "claimId": "CLM-MFV02-009",
+      "topic": "transformation",
+      "statement": "Trung Châu transformation rules contribute only when Core provides stem, mutagen, exact target star and palace.",
+      "school": "trung-chau",
+      "status": "derived",
+      "confidence": "high",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001",
+        "SRC-MF-V02-CAP-001"
+      ],
+      "locators": [
+        "mission:major-fortune-transformations",
+        "V0.1 capabilities"
+      ],
+      "contradictingClaimIds": [],
+      "runtimeImplication": "Gate on full tuple; rawDelta still blocked pending intake magnitudes.",
+      "notes": null
+    },
+    {
+      "claimId": "CLM-MFV02-010",
+      "topic": "transformation",
+      "statement": "Nam Phái does not expose Major Fortune transformations; scorer must not fabricate them.",
+      "school": "nam-phai",
+      "status": "derived",
+      "confidence": "high",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001",
+        "SRC-MF-V02-CAP-001"
+      ],
+      "locators": [
+        "supportsMajorFortuneTransformations:false"
+      ],
+      "contradictingClaimIds": [],
+      "runtimeImplication": "blocked-by-calculation-core; record Core task separately.",
+      "notes": null
+    },
+    {
+      "claimId": "CLM-MFV02-011",
+      "topic": "benefic-malefic",
+      "statement": "Benefic/malefic sets use exact canonical star names with explicit all/any/threshold semantics; no substring matching.",
+      "school": "mixed",
+      "status": "engineering-hypothesis",
+      "confidence": "medium",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "locators": [
+        "mission:benefics-and-malefics"
+      ],
+      "contradictingClaimIds": [],
+      "runtimeImplication": "Exact-name catalogs; rawDelta blocked.",
+      "notes": null
+    },
+    {
+      "claimId": "CLM-MFV02-012",
+      "topic": "void-treatment",
+      "statement": "Tuần/Triệt two-pass adjustment requires explicit numeric thresholds; without sources leave research-blocked.",
+      "school": "mixed",
+      "status": "unsupported",
+      "confidence": "low",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "locators": [
+        "mission:tuan-triet"
+      ],
+      "contradictingClaimIds": [],
+      "runtimeImplication": "No void numeric adjustment in this foundation.",
+      "notes": null
+    },
+    {
+      "claimId": "CLM-MFV02-013",
+      "topic": "natal-resilience",
+      "statement": "Natal resilience is metadata only (numericEffect null); no hidden floor/ceiling/multiplier without approved policy.",
+      "school": "mixed",
+      "status": "engineering-hypothesis",
+      "confidence": "high",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "locators": [
+        "mission:natal-resilience"
+      ],
+      "contradictingClaimIds": [],
+      "runtimeImplication": "Emit natalResilience with numericEffect:null.",
+      "notes": null
+    },
+    {
+      "claimId": "CLM-MFV02-014",
+      "topic": "independence",
+      "statement": "Changing only annualYear while keeping the resolved Major Fortune decade identical must produce byte-identical V0.2 output.",
+      "school": "mixed",
+      "status": "derived",
+      "confidence": "high",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "locators": [
+        "mission:independence-invariants"
+      ],
+      "contradictingClaimIds": [],
+      "runtimeImplication": "Hard audit gate.",
+      "notes": null
+    }
+  ]
+}

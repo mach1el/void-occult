@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Major Fortune V0.2 Claim Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "registryId",
+    "claims"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string"
+    },
+    "registryId": {
+      "type": "string"
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "claimId",
+          "topic",
+          "statement",
+          "school",
+          "status",
+          "sourceIds",
+          "runtimeImplication"
+        ],
+        "properties": {
+          "claimId": {
+            "type": "string",
+            "pattern": "^CLM-MFV02-[0-9]{3}$"
+          },
+          "topic": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string"
+          },
+          "school": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "string"
+          },
+          "sourceIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "locators": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "contradictingClaimIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "runtimeImplication": {
+            "type": "string"
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  }
+}

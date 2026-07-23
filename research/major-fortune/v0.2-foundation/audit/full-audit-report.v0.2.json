@@ -1,0 +1,118 @@
+{
+  "corpusId": "major-fortune-v0.2-audit-corpus",
+  "seed": 20260723,
+  "chartCount": 100,
+  "observationCount": 200,
+  "schools": [
+    "nam-phai",
+    "trung-chau"
+  ],
+  "score": {
+    "min": 50,
+    "max": 50,
+    "mean": 50,
+    "median": 50,
+    "quantiles": {
+      "p10": 50,
+      "p25": 50,
+      "p75": 50,
+      "p90": 50
+    },
+    "saturation0": 0,
+    "saturation50": 200,
+    "saturation100": 0,
+    "nanOrInfinity": 0
+  },
+  "bandDistribution": {
+    "binh-on": 200
+  },
+  "scoreStateDistribution": {
+    "partial-data": 200
+  },
+  "pillarClipRate": {
+    "thien-thoi": 0,
+    "dia-loi": 0,
+    "nhan-hoa": 0,
+    "tu-hoa-sat-tinh": 0
+  },
+  "pillarRaw": {
+    "thien-thoi": {
+      "min": 0,
+      "max": 0,
+      "mean": 0
+    },
+    "dia-loi": {
+      "min": 0,
+      "max": 0,
+      "mean": 0
+    },
+    "nhan-hoa": {
+      "min": 0,
+      "max": 0,
+      "mean": 0
+    },
+    "tu-hoa-sat-tinh": {
+      "min": 0,
+      "max": 0,
+      "mean": 0
+    }
+  },
+  "ruleCoverage": {
+    "matchedStructuralRuleIds": [
+      "MFV02-BM-hinh-ho-nam-phai",
+      "MFV02-BM-hinh-ho-trung-chau",
+      "MFV02-BM-khoi-viet-nam-phai",
+      "MFV02-BM-khoi-viet-trung-chau",
+      "MFV02-BM-khong-kiep-nam-phai",
+      "MFV02-BM-khong-kiep-trung-chau",
+      "MFV02-BM-kinh-da-nam-phai",
+      "MFV02-BM-kinh-da-trung-chau",
+      "MFV02-BM-linh-hoa-nam-phai",
+      "MFV02-BM-linh-hoa-trung-chau",
+      "MFV02-BM-loc-ton-nam-phai",
+      "MFV02-BM-loc-ton-trung-chau",
+      "MFV02-BM-ta-huu-nam-phai",
+      "MFV02-BM-ta-huu-trung-chau",
+      "MFV02-EL-natal-controls-palace-nam-phai",
+      "MFV02-EL-natal-controls-palace-trung-chau",
+      "MFV02-EL-natal-generates-palace-nam-phai",
+      "MFV02-EL-natal-generates-palace-trung-chau",
+      "MFV02-EL-palace-controls-natal-nam-phai",
+      "MFV02-EL-palace-controls-natal-trung-chau",
+      "MFV02-EL-palace-generates-natal-nam-phai",
+      "MFV02-EL-palace-generates-natal-trung-chau",
+      "MFV02-EL-same-element-nam-phai",
+      "MFV02-EL-same-element-trung-chau",
+      "MFV02-NP-dien-tat-huynh-nam-phai",
+      "MFV02-NP-dien-tat-huynh-trung-chau",
+      "MFV02-NP-menh-tai-quan-nam-phai",
+      "MFV02-NP-menh-tai-quan-trung-chau",
+      "MFV02-NP-phu-tu-no-nam-phai",
+      "MFV02-NP-phu-tu-no-trung-chau",
+      "MFV02-NP-phuc-di-phu-nam-phai",
+      "MFV02-NP-phuc-di-phu-trung-chau",
+      "MFV02-PD-conflicting-brightness-nam-phai",
+      "MFV02-PD-conflicting-brightness-trung-chau",
+      "MFV02-PD-one-principal-nam-phai",
+      "MFV02-PD-one-principal-trung-chau",
+      "MFV02-PD-two-principals-nam-phai",
+      "MFV02-PD-two-principals-trung-chau",
+      "MFV02-PD-vo-chinh-dieu-nam-phai",
+      "MFV02-PD-vo-chinh-dieu-trung-chau",
+      "MFV02-SP-nhat-nguyet-nam-phai",
+      "MFV02-SP-nhat-nguyet-trung-chau",
+      "MFV02-SP-tu-vi-thien-phu-nam-phai",
+      "MFV02-SP-tu-vi-thien-phu-trung-chau",
+      "MFV02-XF-trung-chau-exact"
+    ],
+    "executableContributionRuleIds": []
+  },
+  "namPhaiPartialRate": 1,
+  "trungChauTransformationStructuralHits": 100,
+  "duplicatePhysicalFactRate": 0,
+  "annualYearIndependenceFailures": 0,
+  "deterministicRerunFailures": 0,
+  "scoreBoundsFailures": 0,
+  "v01ControlReproducible": true,
+  "hardGateFailures": []
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "0.2.0",
+  "policyId": "mf-v02-natal-resilience",
+  "numericEffect": null,
+  "model": {
+    "natalResilienceState": "metadata",
+    "supportingFacts": [],
+    "blockingFacts": [],
+    "numericEffect": null
+  },
+  "forbidden": [
+    "hidden-score-floor",
+    "ceiling",
+    "multiplier"
+  ],
+  "claimIds": [
+    "CLM-MFV02-013"
+  ],
+  "sourceIds": [
+    "SRC-MF-V02-INTAKE-001"
+  ]
+}

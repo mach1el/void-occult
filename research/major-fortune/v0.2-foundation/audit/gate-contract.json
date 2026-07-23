@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "0.2.0",
+  "gateId": "major-fortune-v0.2-hard-gates",
+  "hardFail": [
+    "score-outside-0-100",
+    "bands-overlap-or-gap",
+    "pillar-exceeds-cap",
+    "mutex-multi-match",
+    "contribution-missing-provenance",
+    "annual-or-monthly-fact-affects-numeric",
+    "nondeterministic-artifacts",
+    "v01-output-changed",
+    "nam-phai-unsupported-transformation-contribution",
+    "unresolved-doctrine-treated-as-approved",
+    "invalid-knowledge-not-fail-closed"
+  ]
+}

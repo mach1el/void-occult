@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Major Fortune V0.2 Source Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "registryId",
+    "sources"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string"
+    },
+    "registryId": {
+      "type": "string"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "sourceId",
+          "title",
+          "sourceType",
+          "qualityTier",
+          "allowedUsage",
+          "prohibitedUsage"
+        ],
+        "properties": {
+          "sourceId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "sourceType": {
+            "type": "string"
+          },
+          "qualityTier": {
+            "type": "string"
+          },
+          "schoolScope": {
+            "type": "string"
+          },
+          "locator": {
+            "type": "string"
+          },
+          "accessStatus": {
+            "type": "string"
+          },
+          "allowedUsage": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "prohibitedUsage": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  }
+}

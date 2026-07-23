@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "0.2.0",
+  "policyId": "mf-v02-element-relation",
+  "pillarId": "thien-thoi",
+  "mutualExclusionGroup": "element-relation",
+  "relations": [
+    "palace_generates_natal",
+    "natal_generates_palace",
+    "same_element",
+    "palace_controls_natal",
+    "natal_controls_palace"
+  ],
+  "branchElementMapRef": "branch-element-map.v0.2.json",
+  "generates": {
+    "Mộc": "Hỏa",
+    "Hỏa": "Thổ",
+    "Thổ": "Kim",
+    "Kim": "Thủy",
+    "Thủy": "Mộc"
+  },
+  "controls": {
+    "Mộc": "Thổ",
+    "Hỏa": "Kim",
+    "Thổ": "Thủy",
+    "Kim": "Mộc",
+    "Thủy": "Hỏa"
+  },
+  "onAmbiguity": "fail-closed",
+  "claimIds": [
+    "CLM-MFV02-003"
+  ],
+  "sourceIds": [
+    "SRC-MF-V02-INTAKE-001",
+    "SRC-MF-V02-CORE-BRANCH-001"
+  ]
+}

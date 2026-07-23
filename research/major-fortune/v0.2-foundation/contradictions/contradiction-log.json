@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "0.2.0",
+  "logId": "major-fortune-v0.2-contradiction-log",
+  "contradictions": [
+    {
+      "contradictionId": "CTR-MFV02-001",
+      "claimIds": [
+        "CLM-MFV02-004"
+      ],
+      "summary": "Intake mentions Thái Tuế group scoring while independence forbids annual taiTuePalace; natal-only ring not proven.",
+      "adjudication": "block-annual-path",
+      "runtimeImplication": "Thai Tue annual matcher blocked; natal path not enabled without proof.",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001",
+        "SRC-MF-V02-CAP-001"
+      ]
+    },
+    {
+      "contradictionId": "CTR-MFV02-002",
+      "claimIds": [
+        "CLM-MFV02-010",
+        "CLM-MFV02-009"
+      ],
+      "summary": "Four-pillar model includes Tứ Hóa pillar, but Nam Phái Core cannot supply MF transformations.",
+      "adjudication": "school-gated",
+      "runtimeImplication": "Nam Phái transformation contribution forbidden; Core change is future task.",
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001",
+        "SRC-MF-V02-CAP-001"
+      ]
+    }
+  ]
+}
