@@ -15,8 +15,24 @@
           "existence",
           "scope",
           "polarity",
-          "frame"
-        ]
+          "frame",
+          "evidence"
+        ],
+        "properties": {
+          "evidence": {
+            "type": "object",
+            "required": [
+              "existenceClaimIds",
+              "scopeClaimIds",
+              "polarityClaimIds",
+              "frameClaimIds",
+              "stackingClaimIds"
+            ]
+          },
+          "stackingContract": {
+            "type": "string"
+          }
+        }
       }
     }
   }

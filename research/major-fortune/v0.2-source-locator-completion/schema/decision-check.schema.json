@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "readinessDecision",
+    "markdownMatchesDecisionJson",
+    "ok"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean"
+    }
+  }
+}

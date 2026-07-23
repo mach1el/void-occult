@@ -17,7 +17,8 @@
       "candidateEligibility": "candidate-eligible",
       "confidence": "high",
       "locators": [
-        "school-capabilities.v0.2.json#forbiddenInputs"
+        "school-capabilities.v0.2.json#forbiddenInputs",
+        "school-capabilities.v0.2.json#profiles.nam-phai.supportsMajorFortuneTransformations"
       ],
       "extractionIds": [
         "EXT-LOC-001"
@@ -32,7 +33,8 @@
         "SRC-MF-V02-LOC-CAP-001"
       ],
       "status": "engineering-verified",
-      "runtimeImplication": "Hard fail-closed; not a scoring contribution family."
+      "runtimeImplication": "Hard fail-closed; not a scoring contribution family.",
+      "familyId": null
     },
     {
       "polarity": null,
@@ -58,7 +60,8 @@
         "SRC-MF-V02-LOC-CAP-001"
       ],
       "status": "engineering-verified",
-      "runtimeImplication": "Keep blocked-by-calculation-core; do not require for Nam Phái shape."
+      "runtimeImplication": "Keep blocked-by-calculation-core; do not require for Nam Phái shape.",
+      "familyId": "nam-phai-transformations"
     },
     {
       "polarity": null,
@@ -86,7 +89,8 @@
         "SRC-MF-V02-LOC-BRANCH-001"
       ],
       "status": "engineering-verified",
-      "runtimeImplication": "Engineering fact only; does not authorize polarity."
+      "runtimeImplication": "Engineering fact only; does not authorize polarity.",
+      "familyId": "element-relation"
     },
     {
       "polarity": null,
@@ -113,7 +117,8 @@
         "SRC-MF-V02-LOC-INTAKE-001"
       ],
       "status": "unsupported",
-      "runtimeImplication": "Family remains research-blocked pending acquisition."
+      "runtimeImplication": "Family remains research-blocked pending acquisition.",
+      "familyId": "principal-star-dignity"
     },
     {
       "polarity": "unset",
@@ -142,7 +147,8 @@
         "SRC-MF-V02-LOC-TAN-BIEN-001"
       ],
       "status": "unsupported",
-      "runtimeImplication": "Do not infer polarity from classifier existence."
+      "runtimeImplication": "Do not infer polarity from classifier existence.",
+      "familyId": "principal-star-dignity"
     },
     {
       "polarity": null,
@@ -169,7 +175,8 @@
         "SRC-MF-V02-LOC-INTAKE-001"
       ],
       "status": "unsupported",
-      "runtimeImplication": "Exclude all BM sets from eligible fragments."
+      "runtimeImplication": "Exclude all BM sets from eligible fragments.",
+      "familyId": "benefic-malefic-sets"
     },
     {
       "polarity": "unset",
@@ -184,7 +191,8 @@
       "locators": [
         "school-capabilities.v0.2.json",
         "major-transformation-policy.json",
-        "Unknown"
+        "Unknown",
+        "school-capabilities.v0.2.json#profiles.nam-phai.supportsMajorFortuneTransformations"
       ],
       "extractionIds": [
         "EXT-LOC-001"
@@ -201,7 +209,8 @@
         "SRC-MF-V02-LOC-TOAN-THU-001"
       ],
       "status": "unsupported",
-      "runtimeImplication": "Keep numeric unset; family research-blocked for eligibility."
+      "runtimeImplication": "Keep numeric unset; family research-blocked for eligibility.",
+      "familyId": "trung-chau-transformations"
     },
     {
       "polarity": null,
@@ -218,7 +227,8 @@
       "confidence": "high",
       "locators": [
         "major-transformation-policy.json",
-        "supportsMajorFortuneTransformations:true"
+        "supportsMajorFortuneTransformations:true",
+        "school-capabilities.v0.2.json#profiles.nam-phai.supportsMajorFortuneTransformations"
       ],
       "extractionIds": [
         "EXT-LOC-001"
@@ -234,7 +244,8 @@
         "SRC-MF-V02-LOC-CAP-001"
       ],
       "status": "engineering-verified",
-      "runtimeImplication": "Tuple gate only; not Layer-1 polarity."
+      "runtimeImplication": "Tuple gate only; not Layer-1 polarity.",
+      "familyId": "trung-chau-transformations"
     },
     {
       "polarity": "unset",
@@ -247,11 +258,9 @@
       "candidateEligibility": "research-blocked",
       "confidence": "high",
       "locators": [
-        "Unknown",
-        "branch-element-map.v0.2.json"
+        "Unknown"
       ],
       "extractionIds": [
-        "EXT-LOC-002",
         "EXT-LOC-003"
       ],
       "notes": null,
@@ -265,7 +274,8 @@
         "SRC-MF-V02-LOC-BRANCH-001"
       ],
       "status": "unsupported",
-      "runtimeImplication": "Branch map ≠ polarity authority."
+      "runtimeImplication": "Branch map ≠ polarity authority.",
+      "familyId": "element-relation"
     },
     {
       "polarity": null,
@@ -292,7 +302,8 @@
         "SRC-MF-V02-LOC-INTAKE-001"
       ],
       "status": "unsupported",
-      "runtimeImplication": "Retain engineering pairwise scaffolding; no eligibility."
+      "runtimeImplication": "Retain engineering pairwise scaffolding; no eligibility.",
+      "familyId": "star-pattern-compatibility"
     },
     {
       "polarity": null,
@@ -320,7 +331,8 @@
         "SRC-MF-V02-LOC-TAN-BIEN-001"
       ],
       "status": "unsupported",
-      "runtimeImplication": "No direct score effect authorized."
+      "runtimeImplication": "No direct score effect authorized.",
+      "familyId": "natal-palace-groups"
     },
     {
       "polarity": null,
@@ -347,7 +359,8 @@
         "SRC-MF-V02-LOC-INTAKE-001"
       ],
       "status": "unsupported",
-      "runtimeImplication": "Keep research-blocked; no circular reduce-good/reduce-bad rule."
+      "runtimeImplication": "Keep research-blocked; no circular reduce-good/reduce-bad rule.",
+      "familyId": "tuan-triet"
     },
     {
       "polarity": null,
@@ -374,7 +387,8 @@
         "SRC-MF-V02-LOC-INTAKE-001"
       ],
       "status": "unsupported",
-      "runtimeImplication": "Exclude from minimal candidate shape."
+      "runtimeImplication": "Exclude from minimal candidate shape.",
+      "familyId": "tam-khong"
     },
     {
       "polarity": null,
@@ -386,7 +400,8 @@
       "confidence": "high",
       "locators": [
         "forbiddenInputs:taiTuePalace",
-        "v0.2-doctrine-adjudication/V0.2-DOCTRINE-DECISION.md"
+        "v0.2-doctrine-adjudication/V0.2-DOCTRINE-DECISION.md",
+        "school-capabilities.v0.2.json#profiles.nam-phai.supportsMajorFortuneTransformations"
       ],
       "extractionIds": [
         "EXT-LOC-001"
@@ -402,7 +417,8 @@
         "SRC-MF-V02-LOC-DOCTRINE-PACK-001"
       ],
       "status": "derived",
-      "runtimeImplication": "Do not acquire annual Thái Tuế into score."
+      "runtimeImplication": "Do not acquire annual Thái Tuế into score.",
+      "familyId": "thai-tue"
     },
     {
       "polarity": null,
@@ -426,7 +442,8 @@
         "SRC-MF-V02-LOC-DOCTRINE-PACK-001"
       ],
       "status": "derived",
-      "runtimeImplication": "No score floor/ceiling/multiplier."
+      "runtimeImplication": "No score floor/ceiling/multiplier.",
+      "familyId": "natal-resilience"
     }
   ]
 }

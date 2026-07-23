@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "ledgerId",
+    "entries"
+  ],
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "acquisitionId",
+          "sourceId",
+          "attemptedAccess",
+          "result",
+          "accessStatus",
+          "nextAction"
+        ]
+      }
+    }
+  }
+}

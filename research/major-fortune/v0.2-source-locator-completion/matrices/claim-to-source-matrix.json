@@ -4,19 +4,23 @@
   "rows": [
     {
       "claimId": "CLM-MFV02-LOC-NO-ANNUAL",
+      "familyId": null,
       "sourceIds": [
         "SRC-MF-V02-LOC-CAP-001"
       ],
       "locators": [
-        "school-capabilities.v0.2.json#forbiddenInputs"
+        "school-capabilities.v0.2.json#forbiddenInputs",
+        "school-capabilities.v0.2.json#profiles.nam-phai.supportsMajorFortuneTransformations"
       ],
       "extractionIds": [
         "EXT-LOC-001"
       ],
-      "status": "engineering-verified"
+      "status": "engineering-verified",
+      "dimension": "scope"
     },
     {
       "claimId": "CLM-MFV02-LOC-NP-XF-CORE",
+      "familyId": "nam-phai-transformations",
       "sourceIds": [
         "SRC-MF-V02-LOC-CAP-001"
       ],
@@ -26,10 +30,12 @@
       "extractionIds": [
         "EXT-LOC-001"
       ],
-      "status": "engineering-verified"
+      "status": "engineering-verified",
+      "dimension": "scope"
     },
     {
       "claimId": "CLM-MFV02-LOC-EL-MAP",
+      "familyId": "element-relation",
       "sourceIds": [
         "SRC-MF-V02-LOC-BRANCH-001"
       ],
@@ -39,10 +45,12 @@
       "extractionIds": [
         "EXT-LOC-002"
       ],
-      "status": "engineering-verified"
+      "status": "engineering-verified",
+      "dimension": "required-facts"
     },
     {
       "claimId": "CLM-MFV02-LOC-PD-EXIST-GAP",
+      "familyId": "principal-star-dignity",
       "sourceIds": [
         "SRC-MF-V02-LOC-TAN-BIEN-001",
         "SRC-MF-V02-LOC-INTAKE-001"
@@ -53,10 +61,12 @@
       "extractionIds": [
         "EXT-LOC-003"
       ],
-      "status": "unsupported"
+      "status": "unsupported",
+      "dimension": "existence"
     },
     {
       "claimId": "CLM-MFV02-LOC-PD-POLARITY-GAP",
+      "familyId": "principal-star-dignity",
       "sourceIds": [
         "SRC-MF-V02-LOC-INTAKE-001",
         "SRC-MF-V02-LOC-TAN-BIEN-001"
@@ -67,10 +77,12 @@
       "extractionIds": [
         "EXT-LOC-003"
       ],
-      "status": "unsupported"
+      "status": "unsupported",
+      "dimension": "polarity"
     },
     {
       "claimId": "CLM-MFV02-LOC-BM-GAP",
+      "familyId": "benefic-malefic-sets",
       "sourceIds": [
         "SRC-MF-V02-LOC-TAN-BIEN-001",
         "SRC-MF-V02-LOC-INTAKE-001"
@@ -81,10 +93,12 @@
       "extractionIds": [
         "EXT-LOC-003"
       ],
-      "status": "unsupported"
+      "status": "unsupported",
+      "dimension": "existence"
     },
     {
       "claimId": "CLM-MFV02-LOC-XF-TC-POLARITY-GAP",
+      "familyId": "trung-chau-transformations",
       "sourceIds": [
         "SRC-MF-V02-LOC-CAP-001",
         "SRC-MF-V02-LOC-XF-POLICY-001",
@@ -93,46 +107,52 @@
       "locators": [
         "school-capabilities.v0.2.json",
         "major-transformation-policy.json",
-        "Unknown"
+        "Unknown",
+        "school-capabilities.v0.2.json#profiles.nam-phai.supportsMajorFortuneTransformations"
       ],
       "extractionIds": [
         "EXT-LOC-001"
       ],
-      "status": "unsupported"
+      "status": "unsupported",
+      "dimension": "polarity"
     },
     {
       "claimId": "CLM-MFV02-LOC-XF-TC-FRAME-ENG",
+      "familyId": "trung-chau-transformations",
       "sourceIds": [
         "SRC-MF-V02-LOC-XF-POLICY-001",
         "SRC-MF-V02-LOC-CAP-001"
       ],
       "locators": [
         "major-transformation-policy.json",
-        "supportsMajorFortuneTransformations:true"
+        "supportsMajorFortuneTransformations:true",
+        "school-capabilities.v0.2.json#profiles.nam-phai.supportsMajorFortuneTransformations"
       ],
       "extractionIds": [
         "EXT-LOC-001"
       ],
-      "status": "engineering-verified"
+      "status": "engineering-verified",
+      "dimension": "frame"
     },
     {
       "claimId": "CLM-MFV02-LOC-EL-POLARITY-GAP",
+      "familyId": "element-relation",
       "sourceIds": [
         "SRC-MF-V02-LOC-TAN-BIEN-001",
         "SRC-MF-V02-LOC-BRANCH-001"
       ],
       "locators": [
-        "Unknown",
-        "branch-element-map.v0.2.json"
+        "Unknown"
       ],
       "extractionIds": [
-        "EXT-LOC-002",
         "EXT-LOC-003"
       ],
-      "status": "unsupported"
+      "status": "unsupported",
+      "dimension": "polarity"
     },
     {
       "claimId": "CLM-MFV02-LOC-SP-GAP",
+      "familyId": "star-pattern-compatibility",
       "sourceIds": [
         "SRC-MF-V02-LOC-TAN-BIEN-001",
         "SRC-MF-V02-LOC-INTAKE-001"
@@ -143,10 +163,12 @@
       "extractionIds": [
         "EXT-LOC-003"
       ],
-      "status": "unsupported"
+      "status": "unsupported",
+      "dimension": "existence"
     },
     {
       "claimId": "CLM-MFV02-LOC-NPG-GAP",
+      "familyId": "natal-palace-groups",
       "sourceIds": [
         "SRC-MF-V02-LOC-INTAKE-001",
         "SRC-MF-V02-LOC-TAN-BIEN-001"
@@ -158,10 +180,12 @@
       "extractionIds": [
         "EXT-LOC-003"
       ],
-      "status": "unsupported"
+      "status": "unsupported",
+      "dimension": "existence"
     },
     {
       "claimId": "CLM-MFV02-LOC-VOID-GAP",
+      "familyId": "tuan-triet",
       "sourceIds": [
         "SRC-MF-V02-LOC-TAN-BIEN-001",
         "SRC-MF-V02-LOC-INTAKE-001"
@@ -172,10 +196,12 @@
       "extractionIds": [
         "EXT-LOC-003"
       ],
-      "status": "unsupported"
+      "status": "unsupported",
+      "dimension": "existence"
     },
     {
       "claimId": "CLM-MFV02-LOC-TAM-KHONG-GAP",
+      "familyId": "tam-khong",
       "sourceIds": [
         "SRC-MF-V02-LOC-TAN-BIEN-001",
         "SRC-MF-V02-LOC-INTAKE-001"
@@ -186,25 +212,30 @@
       "extractionIds": [
         "EXT-LOC-003"
       ],
-      "status": "unsupported"
+      "status": "unsupported",
+      "dimension": "exception"
     },
     {
       "claimId": "CLM-MFV02-LOC-THAI-TUE-EXCL",
+      "familyId": "thai-tue",
       "sourceIds": [
         "SRC-MF-V02-LOC-CAP-001",
         "SRC-MF-V02-LOC-DOCTRINE-PACK-001"
       ],
       "locators": [
         "forbiddenInputs:taiTuePalace",
-        "v0.2-doctrine-adjudication/V0.2-DOCTRINE-DECISION.md"
+        "v0.2-doctrine-adjudication/V0.2-DOCTRINE-DECISION.md",
+        "school-capabilities.v0.2.json#profiles.nam-phai.supportsMajorFortuneTransformations"
       ],
       "extractionIds": [
         "EXT-LOC-001"
       ],
-      "status": "derived"
+      "status": "derived",
+      "dimension": "scope"
     },
     {
       "claimId": "CLM-MFV02-LOC-RESILIENCE-META",
+      "familyId": "natal-resilience",
       "sourceIds": [
         "SRC-MF-V02-LOC-DOCTRINE-PACK-001"
       ],
@@ -212,7 +243,8 @@
         "v0.2-doctrine-adjudication topic natal-resilience"
       ],
       "extractionIds": [],
-      "status": "derived"
+      "status": "derived",
+      "dimension": "scope"
     }
   ]
 }

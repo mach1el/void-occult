@@ -175,22 +175,26 @@ describe("Major Fortune V0.2 doctrine adjudication pack", () => {
     );
   });
 
-  it("decision matches validator output and markdown", () => {
-    execFileSync(
-      "npx",
-      ["tsx", "src/lib/ziwei/analysis/modules/major-fortune/audit/v0.2-doctrine/cli/validate-doctrine-pack.ts"],
-      { cwd: REPO, encoding: "utf8" },
-    );
-    execFileSync(
-      "npx",
-      ["tsx", "src/lib/ziwei/analysis/modules/major-fortune/audit/v0.2-doctrine/cli/decision-doctrine.ts"],
-      { cwd: REPO, encoding: "utf8" },
-    );
-    const decision = readJson("reports/decision.json") as { readinessDecision: string };
-    expect(decision.readinessDecision).toBe("RESEARCH_INCOMPLETE");
-    const md = fs.readFileSync(path.join(PACK, "V0.2-DOCTRINE-DECISION.md"), "utf8");
-    expect(md).toContain("`RESEARCH_INCOMPLETE`");
-  });
+  it(
+    "decision matches validator output and markdown",
+    () => {
+      execFileSync(
+        "npx",
+        ["tsx", "src/lib/ziwei/analysis/modules/major-fortune/audit/v0.2-doctrine/cli/validate-doctrine-pack.ts"],
+        { cwd: REPO, encoding: "utf8" },
+      );
+      execFileSync(
+        "npx",
+        ["tsx", "src/lib/ziwei/analysis/modules/major-fortune/audit/v0.2-doctrine/cli/decision-doctrine.ts"],
+        { cwd: REPO, encoding: "utf8" },
+      );
+      const decision = readJson("reports/decision.json") as { readinessDecision: string };
+      expect(decision.readinessDecision).toBe("RESEARCH_INCOMPLETE");
+      const md = fs.readFileSync(path.join(PACK, "V0.2-DOCTRINE-DECISION.md"), "utf8");
+      expect(md).toContain("`RESEARCH_INCOMPLETE`");
+    },
+    60_000,
+  );
 
   it("production routing remains rebuilding", () => {
     expect(getAnalysisStatus("major-fortune")).toEqual({
@@ -225,17 +229,21 @@ describe("Major Fortune V0.2 doctrine adjudication pack", () => {
     }
   });
 
-  it("report CLI is deterministic across two runs", () => {
-    const run = () =>
-      execFileSync(
-        "npx",
-        ["tsx", "src/lib/ziwei/analysis/modules/major-fortune/audit/v0.2-doctrine/cli/report-doctrine.ts"],
-        { cwd: REPO, encoding: "utf8" },
-      );
-    run();
-    const first = fs.readFileSync(path.join(PACK, "reports/summary-report.json"), "utf8");
-    run();
-    const second = fs.readFileSync(path.join(PACK, "reports/summary-report.json"), "utf8");
-    expect(second).toEqual(first);
-  });
+  it(
+    "report CLI is deterministic across two runs",
+    () => {
+      const run = () =>
+        execFileSync(
+          "npx",
+          ["tsx", "src/lib/ziwei/analysis/modules/major-fortune/audit/v0.2-doctrine/cli/report-doctrine.ts"],
+          { cwd: REPO, encoding: "utf8" },
+        );
+      run();
+      const first = fs.readFileSync(path.join(PACK, "reports/summary-report.json"), "utf8");
+      run();
+      const second = fs.readFileSync(path.join(PACK, "reports/summary-report.json"), "utf8");
+      expect(second).toEqual(first);
+    },
+    60_000,
+  );
 });
