@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "0.2.2",
+  "ledgerId": "major-fortune-v0.2-page-scan-extraction-ledger",
+  "copyrightPolicy": "No long copied passages. Short paraphrase + locator only when inspected.",
+  "extractions": [
+    {
+      "extractionId": "EXT-LOC-001",
+      "sourceId": "SRC-MF-V02-LOC-CAP-001",
+      "locator": "school-capabilities.v0.2.json#profiles.nam-phai.supportsMajorFortuneTransformations",
+      "excerptOrParaphrase": "Nam Phái supportsMajorFortuneTransformations=false; both schools forbid annual/monthly inputs including taiTuePalace.",
+      "excerptLengthChars": 117,
+      "claimIds": [
+        "CLM-MFV02-LOC-NO-ANNUAL",
+        "CLM-MFV02-LOC-NP-XF-CORE",
+        "CLM-MFV02-LOC-THAI-TUE-EXCL",
+        "CLM-MFV02-LOC-XF-TC-FRAME-ENG",
+        "CLM-MFV02-LOC-XF-TC-POLARITY-GAP"
+      ],
+      "layer": "engineering"
+    },
+    {
+      "extractionId": "EXT-LOC-002",
+      "sourceId": "SRC-MF-V02-LOC-BRANCH-001",
+      "locator": "branch-element-map.v0.2.json#branchToElement",
+      "excerptOrParaphrase": "Twelve branches map to five elements (Hỏa/Thủy spelling normalized) for palace element lookup.",
+      "excerptLengthChars": 94,
+      "claimIds": [
+        "CLM-MFV02-LOC-EL-MAP"
+      ],
+      "layer": "engineering"
+    },
+    {
+      "extractionId": "EXT-LOC-003",
+      "sourceId": "SRC-MF-V02-LOC-TAN-BIEN-001",
+      "locator": "Unknown",
+      "excerptOrParaphrase": null,
+      "excerptLengthChars": 0,
+      "claimIds": [
+        "CLM-MFV02-LOC-BM-GAP",
+        "CLM-MFV02-LOC-EL-POLARITY-GAP",
+        "CLM-MFV02-LOC-NPG-GAP",
+        "CLM-MFV02-LOC-PD-EXIST-GAP",
+        "CLM-MFV02-LOC-PD-POLARITY-GAP",
+        "CLM-MFV02-LOC-SP-GAP",
+        "CLM-MFV02-LOC-TAM-KHONG-GAP",
+        "CLM-MFV02-LOC-VOID-GAP"
+      ],
+      "layer": "doctrine",
+      "blockedReason": "blocked-missing-locator — no page/scan inspected"
+    }
+  ]
+}

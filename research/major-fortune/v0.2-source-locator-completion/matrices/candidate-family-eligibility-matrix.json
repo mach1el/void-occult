@@ -1,0 +1,275 @@
+{
+  "schemaVersion": "0.2.2",
+  "matrixId": "major-fortune-v0.2-candidate-family-eligibility",
+  "families": [
+    {
+      "familyId": "principal-star-dignity",
+      "priority": 1,
+      "eligibility": "research-blocked",
+      "existence": false,
+      "scope": false,
+      "polarity": false,
+      "frame": false,
+      "stacking": false,
+      "stackingContract": "unresolved",
+      "evidence": {
+        "existenceClaimIds": [],
+        "scopeClaimIds": [],
+        "polarityClaimIds": [],
+        "frameClaimIds": [],
+        "stackingClaimIds": []
+      },
+      "blockingGaps": [
+        "CLM-MFV02-LOC-PD-EXIST-GAP",
+        "CLM-MFV02-LOC-PD-POLARITY-GAP"
+      ]
+    },
+    {
+      "familyId": "benefic-malefic-sets",
+      "priority": 2,
+      "eligibility": "research-blocked",
+      "existence": false,
+      "scope": false,
+      "polarity": false,
+      "frame": false,
+      "stacking": false,
+      "stackingContract": "unresolved",
+      "evidence": {
+        "existenceClaimIds": [],
+        "scopeClaimIds": [],
+        "polarityClaimIds": [],
+        "frameClaimIds": [],
+        "stackingClaimIds": []
+      },
+      "blockingGaps": [
+        "CLM-MFV02-LOC-BM-GAP"
+      ],
+      "perSet": [
+        {
+          "setId": "khong-kiep",
+          "eligibility": "research-blocked"
+        },
+        {
+          "setId": "kinh-da",
+          "eligibility": "research-blocked"
+        },
+        {
+          "setId": "linh-hoa",
+          "eligibility": "research-blocked"
+        },
+        {
+          "setId": "hinh-ho",
+          "eligibility": "research-blocked"
+        },
+        {
+          "setId": "khoi-viet",
+          "eligibility": "research-blocked"
+        },
+        {
+          "setId": "ta-huu",
+          "eligibility": "research-blocked"
+        },
+        {
+          "setId": "loc-ton",
+          "eligibility": "research-blocked"
+        }
+      ]
+    },
+    {
+      "familyId": "trung-chau-transformations",
+      "priority": 3,
+      "eligibility": "research-blocked",
+      "existence": false,
+      "scope": false,
+      "polarity": false,
+      "frame": true,
+      "stacking": false,
+      "stackingContract": "unresolved",
+      "evidence": {
+        "existenceClaimIds": [],
+        "scopeClaimIds": [],
+        "polarityClaimIds": [],
+        "frameClaimIds": [
+          "CLM-MFV02-LOC-XF-TC-FRAME-ENG"
+        ],
+        "stackingClaimIds": []
+      },
+      "blockingGaps": [
+        "CLM-MFV02-LOC-XF-TC-POLARITY-GAP"
+      ],
+      "notes": "Engineering frame/tuple available; polarity missing"
+    },
+    {
+      "familyId": "element-relation",
+      "priority": 4,
+      "eligibility": "research-blocked",
+      "existence": false,
+      "scope": false,
+      "polarity": false,
+      "frame": false,
+      "stacking": false,
+      "stackingContract": "unresolved",
+      "evidence": {
+        "existenceClaimIds": [],
+        "scopeClaimIds": [],
+        "polarityClaimIds": [],
+        "frameClaimIds": [],
+        "stackingClaimIds": []
+      },
+      "blockingGaps": [
+        "CLM-MFV02-LOC-EL-POLARITY-GAP"
+      ]
+    },
+    {
+      "familyId": "star-pattern-compatibility",
+      "priority": 5,
+      "eligibility": "research-blocked",
+      "existence": false,
+      "scope": false,
+      "polarity": false,
+      "frame": false,
+      "stacking": false,
+      "stackingContract": "unresolved",
+      "evidence": {
+        "existenceClaimIds": [],
+        "scopeClaimIds": [],
+        "polarityClaimIds": [],
+        "frameClaimIds": [],
+        "stackingClaimIds": []
+      },
+      "blockingGaps": [
+        "CLM-MFV02-LOC-SP-GAP"
+      ]
+    },
+    {
+      "familyId": "natal-palace-groups",
+      "priority": 6,
+      "eligibility": "research-blocked",
+      "existence": false,
+      "scope": false,
+      "polarity": false,
+      "frame": false,
+      "stacking": false,
+      "stackingContract": "unresolved",
+      "evidence": {
+        "existenceClaimIds": [],
+        "scopeClaimIds": [],
+        "polarityClaimIds": [],
+        "frameClaimIds": [],
+        "stackingClaimIds": []
+      },
+      "blockingGaps": [
+        "CLM-MFV02-LOC-NPG-GAP"
+      ]
+    },
+    {
+      "familyId": "tuan-triet",
+      "priority": 7,
+      "eligibility": "research-blocked",
+      "existence": false,
+      "scope": false,
+      "polarity": false,
+      "frame": false,
+      "stacking": false,
+      "stackingContract": "unresolved",
+      "evidence": {
+        "existenceClaimIds": [],
+        "scopeClaimIds": [],
+        "polarityClaimIds": [],
+        "frameClaimIds": [],
+        "stackingClaimIds": []
+      },
+      "blockingGaps": [
+        "CLM-MFV02-LOC-VOID-GAP"
+      ]
+    },
+    {
+      "familyId": "tam-khong",
+      "priority": 8,
+      "eligibility": "excluded-from-v0.2",
+      "existence": false,
+      "scope": false,
+      "polarity": false,
+      "frame": false,
+      "stacking": false,
+      "stackingContract": "excluded-from-combinations-requiring-stacking",
+      "evidence": {
+        "existenceClaimIds": [],
+        "scopeClaimIds": [],
+        "polarityClaimIds": [],
+        "frameClaimIds": [],
+        "stackingClaimIds": []
+      },
+      "blockingGaps": [
+        "CLM-MFV02-LOC-TAM-KHONG-GAP"
+      ]
+    },
+    {
+      "familyId": "thai-tue",
+      "priority": 99,
+      "eligibility": "excluded-from-v0.2",
+      "existence": false,
+      "scope": true,
+      "polarity": false,
+      "frame": false,
+      "stacking": false,
+      "stackingContract": "excluded-from-combinations-requiring-stacking",
+      "evidence": {
+        "existenceClaimIds": [],
+        "scopeClaimIds": [
+          "CLM-MFV02-LOC-THAI-TUE-EXCL"
+        ],
+        "polarityClaimIds": [],
+        "frameClaimIds": [],
+        "stackingClaimIds": []
+      },
+      "blockingGaps": [
+        "CLM-MFV02-LOC-THAI-TUE-EXCL"
+      ]
+    },
+    {
+      "familyId": "natal-resilience",
+      "priority": 100,
+      "eligibility": "metadata-only",
+      "existence": false,
+      "scope": true,
+      "polarity": false,
+      "frame": false,
+      "stacking": false,
+      "stackingContract": "non-stacking",
+      "evidence": {
+        "existenceClaimIds": [],
+        "scopeClaimIds": [
+          "CLM-MFV02-LOC-RESILIENCE-META"
+        ],
+        "polarityClaimIds": [],
+        "frameClaimIds": [],
+        "stackingClaimIds": []
+      },
+      "blockingGaps": []
+    },
+    {
+      "familyId": "nam-phai-transformations",
+      "priority": 3,
+      "eligibility": "blocked-by-calculation-core",
+      "existence": false,
+      "scope": true,
+      "polarity": false,
+      "frame": false,
+      "stacking": false,
+      "stackingContract": "excluded-from-combinations-requiring-stacking",
+      "evidence": {
+        "existenceClaimIds": [],
+        "scopeClaimIds": [
+          "CLM-MFV02-LOC-NP-XF-CORE"
+        ],
+        "polarityClaimIds": [],
+        "frameClaimIds": [],
+        "stackingClaimIds": []
+      },
+      "blockingGaps": [
+        "CLM-MFV02-LOC-NP-XF-CORE"
+      ]
+    }
+  ]
+}

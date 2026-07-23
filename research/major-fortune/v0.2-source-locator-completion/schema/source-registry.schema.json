@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "registryId",
+    "historicalMutationForbidden",
+    "sources"
+  ],
+  "properties": {
+    "historicalMutationForbidden": {
+      "const": true
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "sourceId",
+          "title",
+          "author",
+          "edition",
+          "publisher",
+          "language",
+          "schoolAlignment",
+          "sourceType",
+          "qualityTier",
+          "accessStatus",
+          "pageOrInternalLocator",
+          "extractionStatus",
+          "allowedUsage",
+          "prohibitedUsage"
+        ],
+        "properties": {
+          "sourceId": {
+            "type": "string",
+            "pattern": "^SRC-"
+          },
+          "accessStatus": {
+            "type": "string"
+          },
+          "extractionStatus": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

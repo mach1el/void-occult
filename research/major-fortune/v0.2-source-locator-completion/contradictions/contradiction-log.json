@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "0.2.2",
+  "logId": "major-fortune-v0.2-source-locator-contradiction-log",
+  "extends": [
+    "research/major-fortune/v0.2-doctrine-adjudication/contradictions/contradiction-log.json"
+  ],
+  "contradictions": [
+    {
+      "contradictionId": "CTR-MFV02-LOC-001",
+      "claimIds": [
+        "CLM-MFV02-LOC-PD-POLARITY-GAP",
+        "CLM-MFV02-LOC-EL-POLARITY-GAP",
+        "CLM-MFV02-LOC-XF-TC-POLARITY-GAP"
+      ],
+      "summary": "Layer-1 polarity authorization remains open: intake/engineering cannot supply classical polarity; classical pages not inspected.",
+      "adjudication": "open-source-gaps",
+      "runtimeImplication": "No scoring family becomes candidate-eligible; decision SOURCE_GAPS_REMAIN.",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-TAN-BIEN-001",
+        "SRC-MF-V02-LOC-INTAKE-001",
+        "SRC-MF-V02-LOC-CAP-001"
+      ],
+      "status": "open"
+    }
+  ]
+}

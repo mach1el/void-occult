@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "readinessDecision",
+    "eligibleScoringFamilyCount",
+    "eligibleShapeFragmentCount",
+    "authorizedFinalRawDelta",
+    "numericCandidatesEvaluated",
+    "historicalRegistryMutation"
+  ],
+  "properties": {
+    "readinessDecision": {
+      "enum": [
+        "LOCATOR_COMPLETION_READY_FOR_SHAPE_FREEZE",
+        "SOURCE_GAPS_REMAIN",
+        "SOURCE_ACCESS_BLOCKED"
+      ]
+    },
+    "authorizedFinalRawDelta": {
+      "const": false
+    },
+    "numericCandidatesEvaluated": {
+      "const": false
+    },
+    "historicalRegistryMutation": {
+      "const": false
+    }
+  }
+}

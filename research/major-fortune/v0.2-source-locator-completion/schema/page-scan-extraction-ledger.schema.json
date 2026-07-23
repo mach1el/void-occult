@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "ledgerId",
+    "extractions"
+  ],
+  "properties": {
+    "extractions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "extractionId",
+          "sourceId",
+          "locator",
+          "excerptLengthChars",
+          "claimIds",
+          "layer"
+        ],
+        "properties": {
+          "excerptOrParaphrase": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "excerptLengthChars": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "layer": {
+            "enum": [
+              "engineering",
+              "doctrine",
+              "governance"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

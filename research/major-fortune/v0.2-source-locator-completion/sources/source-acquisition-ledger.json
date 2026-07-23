@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "0.2.2",
+  "ledgerId": "major-fortune-v0.2-source-acquisition-ledger",
+  "entries": [
+    {
+      "acquisitionId": "ACQ-MFV02-001",
+      "sourceId": "SRC-MF-V02-LOC-TAN-BIEN-001",
+      "attemptedAccess": "workspace + Research tree search for PDF/scan",
+      "result": "not-found",
+      "accessStatus": "bibliographic-only",
+      "nextAction": "Obtain inspected edition with page/scan for Đại Vận / sao sáng tối / sát tinh sections"
+    },
+    {
+      "acquisitionId": "ACQ-MFV02-002",
+      "sourceId": "SRC-MF-V02-LOC-TOAN-THU-001",
+      "attemptedAccess": "bibliographic lead from source-quality-policy.md only",
+      "result": "edition-unspecified",
+      "accessStatus": "bibliographic-only",
+      "nextAction": "Identify school-aligned edition and acquire inspectable pages"
+    },
+    {
+      "acquisitionId": "ACQ-MFV02-003",
+      "sourceId": "SRC-MF-V02-LOC-CAP-001",
+      "attemptedAccess": "read repository file",
+      "result": "inspected",
+      "accessStatus": "verified",
+      "nextAction": "none-for-engineering-gates"
+    },
+    {
+      "acquisitionId": "ACQ-MFV02-004",
+      "sourceId": "SRC-MF-V02-LOC-BRANCH-001",
+      "attemptedAccess": "read repository file",
+      "result": "inspected",
+      "accessStatus": "verified",
+      "nextAction": "none-for-engineering-map"
+    },
+    {
+      "acquisitionId": "ACQ-MFV02-005",
+      "sourceId": "SRC-MF-V02-LOC-INTAKE-001",
+      "attemptedAccess": "prior mission text in foundation/doctrine packs",
+      "result": "inspected-non-classical",
+      "accessStatus": "internal",
+      "nextAction": "do-not-promote-to-classical"
+    }
+  ]
+}

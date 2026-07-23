@@ -1,0 +1,241 @@
+{
+  "schemaVersion": "0.2.2",
+  "registryId": "major-fortune-v0.2-source-locator-registry",
+  "extends": [
+    "research/major-fortune/v0.2-foundation/sources/source-registry.json",
+    "research/major-fortune/v0.2-doctrine-adjudication/sources/source-registry.json",
+    "research/major-fortune/sources/source-registry.json"
+  ],
+  "historicalMutationForbidden": true,
+  "sources": [
+    {
+      "sourceId": "SRC-MF-V02-LOC-TAN-BIEN-001",
+      "title": "Tử Vi Đẩu Số Tân Biên",
+      "author": "Vân Đằng Thái Thứ Lang",
+      "editorOrTranslator": null,
+      "edition": "Classical Vietnamese edition (bibliographic; specific printing not inspected)",
+      "publisher": "Unknown / pre-1975 classical press (not inspected)",
+      "publicationYear": null,
+      "language": "vi",
+      "schoolAlignment": [
+        "nam-phai"
+      ],
+      "sourceType": "classical_text",
+      "qualityTier": "primary",
+      "accessStatus": "bibliographic-only",
+      "pageOrInternalLocator": "Unknown",
+      "extractionStatus": "blocked-missing-locator",
+      "allowedUsage": [
+        "bibliographic_reference",
+        "acquisition_target"
+      ],
+      "prohibitedUsage": [
+        "verified_doctrine_authority",
+        "polarity_authorization",
+        "fabricated_page_locator",
+        "classical_attribution_without_inspection"
+      ],
+      "uncertaintyNotes": "Title/author known from prior MF registry. No PDF/scan/page inspected in this workspace. Cannot authorize Layer-1 scoring doctrine.",
+      "topicsTargeted": [
+        "principal-star-dignity",
+        "benefic-malefic",
+        "element-relation",
+        "star-pattern",
+        "natal-palace-groups",
+        "tuan-triet",
+        "tam-khong"
+      ]
+    },
+    {
+      "sourceId": "SRC-MF-V02-LOC-TOAN-THU-001",
+      "title": "Tử Vi Đẩu Số Toàn Thư",
+      "author": "Unknown / traditional compilation (bibliographic lead)",
+      "editorOrTranslator": null,
+      "edition": "Not inspected",
+      "publisher": "Unknown",
+      "publicationYear": null,
+      "language": "zh/vi",
+      "schoolAlignment": [
+        "mixed"
+      ],
+      "sourceType": "classical_text",
+      "qualityTier": "primary",
+      "accessStatus": "bibliographic-only",
+      "pageOrInternalLocator": "Unknown",
+      "extractionStatus": "blocked-missing-locator",
+      "allowedUsage": [
+        "bibliographic_reference",
+        "acquisition_target",
+        "discovery_lead"
+      ],
+      "prohibitedUsage": [
+        "verified_doctrine_authority",
+        "polarity_authorization",
+        "fabricated_page_locator"
+      ],
+      "uncertaintyNotes": "Named in source-quality-policy as example primary text. No edition/pages available here. Discovery lead only.",
+      "topicsTargeted": [
+        "principal-star-dignity",
+        "benefic-malefic",
+        "trung-chau-transformations",
+        "element-relation"
+      ]
+    },
+    {
+      "sourceId": "SRC-MF-V02-LOC-INTAKE-001",
+      "title": "Major Fortune V0.2 four-pillar mission brief (internal research intake)",
+      "author": "internal mission brief",
+      "editorOrTranslator": null,
+      "edition": "2026-07-23",
+      "publisher": "apexvoid-occult research",
+      "publicationYear": 2026,
+      "language": "en",
+      "schoolAlignment": [
+        "mixed"
+      ],
+      "sourceType": "internal_research_intake",
+      "qualityTier": "unverified",
+      "accessStatus": "internal",
+      "pageOrInternalLocator": "agent mission brief 2026-07-23 Major Fortune V0.2 four-pillar foundation",
+      "extractionStatus": "hypothesis-only",
+      "allowedUsage": [
+        "candidate_formula_design",
+        "gap_enumeration"
+      ],
+      "prohibitedUsage": [
+        "classical_attribution",
+        "verified_doctrine_authority",
+        "polarity_authorization"
+      ],
+      "uncertaintyNotes": "Accessible text, but not classical. May seed acquisition questions only.",
+      "topicsTargeted": [
+        "all-priority-topics"
+      ]
+    },
+    {
+      "sourceId": "SRC-MF-V02-LOC-CAP-001",
+      "title": "Major Fortune V0.2 school capabilities (engineering)",
+      "author": "apexvoid-occult engineering",
+      "editorOrTranslator": null,
+      "edition": "v0.2",
+      "publisher": "apexvoid-occult repository",
+      "publicationYear": 2026,
+      "language": "en",
+      "schoolAlignment": [
+        "nam-phai",
+        "trung-chau"
+      ],
+      "sourceType": "internal-engineering-policy",
+      "qualityTier": "engineering",
+      "accessStatus": "verified",
+      "pageOrInternalLocator": "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.2/school-capabilities.v0.2.json",
+      "extractionStatus": "engineering-verified",
+      "allowedUsage": [
+        "school_capability_gates",
+        "forbidden_annual_monthly_inputs",
+        "nam_phai_xf_core_block_documentation"
+      ],
+      "prohibitedUsage": [
+        "classical_attribution",
+        "polarity_authorization",
+        "verified_doctrine_authority"
+      ],
+      "uncertaintyNotes": "Stable repo locator. Engineering only — proves capability, not classical polarity.",
+      "topicsTargeted": [
+        "trung-chau-transformations",
+        "nam-phai-transformations",
+        "independence"
+      ]
+    },
+    {
+      "sourceId": "SRC-MF-V02-LOC-BRANCH-001",
+      "title": "Branch–element map V0.2 (engineering calculation contract)",
+      "author": "apexvoid-occult engineering",
+      "editorOrTranslator": null,
+      "edition": "v0.2",
+      "publisher": "apexvoid-occult repository",
+      "publicationYear": 2026,
+      "language": "vi",
+      "schoolAlignment": [
+        "mixed"
+      ],
+      "sourceType": "internal-calculation-contract",
+      "qualityTier": "engineering",
+      "accessStatus": "verified",
+      "pageOrInternalLocator": "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.2/branch-element-map.v0.2.json",
+      "extractionStatus": "engineering-verified",
+      "allowedUsage": [
+        "palace_element_lookup"
+      ],
+      "prohibitedUsage": [
+        "classical_attribution",
+        "polarity_authorization",
+        "verified_doctrine_authority"
+      ],
+      "uncertaintyNotes": "Map is engineering fact. Does not authorize decade climate polarity.",
+      "topicsTargeted": [
+        "element-relation"
+      ]
+    },
+    {
+      "sourceId": "SRC-MF-V02-LOC-DOCTRINE-PACK-001",
+      "title": "Major Fortune V0.2 doctrine adjudication pack (PR #121)",
+      "author": "apexvoid research",
+      "editorOrTranslator": null,
+      "edition": "merged master@92e89ef",
+      "publisher": "apexvoid-occult repository",
+      "publicationYear": 2026,
+      "language": "en",
+      "schoolAlignment": [
+        "mixed"
+      ],
+      "sourceType": "internal-research-pack",
+      "qualityTier": "engineering",
+      "accessStatus": "verified",
+      "pageOrInternalLocator": "research/major-fortune/v0.2-doctrine-adjudication/",
+      "extractionStatus": "engineering-verified",
+      "allowedUsage": [
+        "reference_prior_adjudication",
+        "preserve_historical_decisions"
+      ],
+      "prohibitedUsage": [
+        "classical_attribution",
+        "rewrite_historical_decision"
+      ],
+      "uncertaintyNotes": "Historical research artifact. Extends, does not replace.",
+      "topicsTargeted": [
+        "governance"
+      ]
+    },
+    {
+      "sourceId": "SRC-MF-V02-LOC-XF-POLICY-001",
+      "title": "Major Fortune V0.2 major-transformation policy (foundation)",
+      "author": "apexvoid research",
+      "editorOrTranslator": null,
+      "edition": "v0.2-foundation",
+      "publisher": "apexvoid-occult repository",
+      "publicationYear": 2026,
+      "language": "en",
+      "schoolAlignment": [
+        "trung-chau",
+        "nam-phai"
+      ],
+      "sourceType": "internal-research-policy",
+      "qualityTier": "engineering",
+      "accessStatus": "verified",
+      "pageOrInternalLocator": "research/major-fortune/v0.2-foundation/policies/major-transformation-policy.json",
+      "extractionStatus": "engineering-verified",
+      "allowedUsage": [
+        "document_tuple_gate_requirements"
+      ],
+      "prohibitedUsage": [
+        "classical_attribution",
+        "polarity_authorization"
+      ],
+      "uncertaintyNotes": "Documents required Core fields; not classical polarity.",
+      "topicsTargeted": [
+        "trung-chau-transformations"
+      ]
+    }
+  ]
+}

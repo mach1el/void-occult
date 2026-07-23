@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "0.2.2",
+  "queueId": "major-fortune-v0.2-unresolved-source-queue",
+  "items": [
+    {
+      "queueId": "Q-MFV02-001",
+      "priority": 1,
+      "sourceId": "SRC-MF-V02-LOC-TAN-BIEN-001",
+      "neededTopics": [
+        "principal-star-dignity",
+        "benefic-malefic"
+      ],
+      "neededLocatorType": "printed-or-scan-page",
+      "blocker": "blocked-missing-locator",
+      "ownerAction": "Acquire inspectable edition; record exact pages before any verified claim"
+    },
+    {
+      "queueId": "Q-MFV02-002",
+      "priority": 2,
+      "sourceId": "SRC-MF-V02-LOC-TOAN-THU-001",
+      "neededTopics": [
+        "trung-chau-transformations",
+        "element-relation"
+      ],
+      "neededLocatorType": "edition-plus-page",
+      "blocker": "bibliographic-only",
+      "ownerAction": "Identify school-aligned edition (Trung Châu priority for XF)"
+    },
+    {
+      "queueId": "Q-MFV02-003",
+      "priority": 3,
+      "sourceId": null,
+      "neededTopics": [
+        "benefic-malefic"
+      ],
+      "neededLocatorType": "classical-or-school-manual-pages-per-set",
+      "blocker": "no-inspected-per-set-authority",
+      "ownerAction": "Locate per-set doctrine; exclude unsourced sets from minimal shape rather than blocking forever"
+    }
+  ]
+}
