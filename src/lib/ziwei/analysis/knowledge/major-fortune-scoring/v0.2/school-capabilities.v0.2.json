@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "0.2.0",
+  "catalogId": "major-fortune-v0.2-school-capabilities",
+  "profiles": {
+    "nam-phai": {
+      "supportsOverallFrame": true,
+      "supportsTwelveDomainOverlay": false,
+      "supportsMajorFortuneTransformations": false,
+      "forbiddenInputs": [
+        "annualStars",
+        "annualMutagens",
+        "taiTuePalace",
+        "smallLimitPalace",
+        "annualHeadPalace",
+        "isLuuNienDaiVan",
+        "monthlyPalaces",
+        "flowMonths"
+      ]
+    },
+    "trung-chau": {
+      "supportsOverallFrame": true,
+      "supportsTwelveDomainOverlay": true,
+      "supportsMajorFortuneTransformations": true,
+      "forbiddenInputs": [
+        "annualStars",
+        "annualMutagens",
+        "taiTuePalace",
+        "smallLimitPalace",
+        "annualHeadPalace",
+        "isLuuNienDaiVan",
+        "monthlyPalaces",
+        "flowMonths"
+      ]
+    }
+  },
+  "sourceIds": [
+    "SRC-MF-V02-CAP-001"
+  ]
+}

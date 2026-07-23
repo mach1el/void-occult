@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "0.2.0",
+  "catalogId": "major-fortune-v0.2-bands",
+  "bands": [
+    {
+      "bandId": "han-bi",
+      "labelVi": "hạn-bĩ",
+      "minInclusive": 0,
+      "maxInclusive": 29.9
+    },
+    {
+      "bandId": "thu-thach",
+      "labelVi": "thử-thách",
+      "minInclusive": 30,
+      "maxInclusive": 44.9
+    },
+    {
+      "bandId": "binh-on",
+      "labelVi": "bình-ổn",
+      "minInclusive": 45,
+      "maxInclusive": 64.9
+    },
+    {
+      "bandId": "thuan-loi",
+      "labelVi": "thuận-lợi",
+      "minInclusive": 65,
+      "maxInclusive": 79.9
+    },
+    {
+      "bandId": "dai-van-vang",
+      "labelVi": "đại-vận-vàng",
+      "minInclusive": 80,
+      "maxInclusive": 100
+    }
+  ],
+  "claimIds": [
+    "CLM-MFV02-002"
+  ],
+  "sourceIds": [
+    "SRC-MF-V02-INTAKE-001"
+  ]
+}

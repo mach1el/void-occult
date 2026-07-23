@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "0.2.0",
+  "catalogId": "major-fortune-v0.2-natal-palace-groups",
+  "groups": [
+    {
+      "groupId": "menh-tai-quan",
+      "labelVi": "Mệnh–Tài–Quan",
+      "palaceNames": [
+        "Mệnh",
+        "Tài Bạch",
+        "Quan Lộc"
+      ]
+    },
+    {
+      "groupId": "phuc-di-phu",
+      "labelVi": "Phúc–Di–Phụ",
+      "palaceNames": [
+        "Phúc Đức",
+        "Thiên Di",
+        "Phụ Mẫu"
+      ]
+    },
+    {
+      "groupId": "dien-tat-huynh",
+      "labelVi": "Điền–Tật–Huynh",
+      "palaceNames": [
+        "Điền Trạch",
+        "Tật Ách",
+        "Huynh Đệ"
+      ]
+    },
+    {
+      "groupId": "phu-tu-no",
+      "labelVi": "Phu–Tử–Nô",
+      "palaceNames": [
+        "Phu Thê",
+        "Tử Tức",
+        "Nô Bộc"
+      ]
+    }
+  ],
+  "claimIds": [
+    "CLM-MFV02-005"
+  ],
+  "sourceIds": [
+    "SRC-MF-V02-INTAKE-001"
+  ]
+}

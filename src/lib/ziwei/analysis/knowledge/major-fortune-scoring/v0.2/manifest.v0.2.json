@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "0.2.0",
+  "knowledgeVersion": "0.2.0",
+  "contractVersion": "0.2.0",
+  "engineVersion": "0.2.0-candidate",
+  "formulaVersion": "0.2.0",
+  "status": "research-incomplete",
+  "files": [
+    "formula.v0.2.json",
+    "bands.v0.2.json",
+    "branch-element-map.v0.2.json",
+    "school-capabilities.v0.2.json",
+    "rules.v0.2.json",
+    "natal-palace-groups.v0.2.json"
+  ]
+}

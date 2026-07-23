@@ -1,0 +1,1571 @@
+{
+  "schemaVersion": "0.2.0",
+  "catalogId": "major-fortune-v0.2-rules",
+  "rules": [
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceBranch",
+        "menhElement",
+        "branchElementMap"
+      ],
+      "mutualExclusionGroup": "element-relation:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-EL-palace-generates-natal-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "thien-thoi",
+      "claimIds": [
+        "CLM-MFV02-003"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "element-relation",
+        "relationId": "palace_generates_natal"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceBranch",
+        "menhElement",
+        "branchElementMap"
+      ],
+      "mutualExclusionGroup": "element-relation:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-EL-palace-generates-natal-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "thien-thoi",
+      "claimIds": [
+        "CLM-MFV02-003"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "element-relation",
+        "relationId": "palace_generates_natal"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceBranch",
+        "menhElement",
+        "branchElementMap"
+      ],
+      "mutualExclusionGroup": "element-relation:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-EL-natal-generates-palace-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "thien-thoi",
+      "claimIds": [
+        "CLM-MFV02-003"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "element-relation",
+        "relationId": "natal_generates_palace"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceBranch",
+        "menhElement",
+        "branchElementMap"
+      ],
+      "mutualExclusionGroup": "element-relation:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-EL-natal-generates-palace-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "thien-thoi",
+      "claimIds": [
+        "CLM-MFV02-003"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "element-relation",
+        "relationId": "natal_generates_palace"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceBranch",
+        "menhElement",
+        "branchElementMap"
+      ],
+      "mutualExclusionGroup": "element-relation:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-EL-same-element-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "thien-thoi",
+      "claimIds": [
+        "CLM-MFV02-003"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "element-relation",
+        "relationId": "same_element"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceBranch",
+        "menhElement",
+        "branchElementMap"
+      ],
+      "mutualExclusionGroup": "element-relation:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-EL-same-element-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "thien-thoi",
+      "claimIds": [
+        "CLM-MFV02-003"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "element-relation",
+        "relationId": "same_element"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceBranch",
+        "menhElement",
+        "branchElementMap"
+      ],
+      "mutualExclusionGroup": "element-relation:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-EL-palace-controls-natal-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "thien-thoi",
+      "claimIds": [
+        "CLM-MFV02-003"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "element-relation",
+        "relationId": "palace_controls_natal"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceBranch",
+        "menhElement",
+        "branchElementMap"
+      ],
+      "mutualExclusionGroup": "element-relation:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-EL-palace-controls-natal-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "thien-thoi",
+      "claimIds": [
+        "CLM-MFV02-003"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "element-relation",
+        "relationId": "palace_controls_natal"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceBranch",
+        "menhElement",
+        "branchElementMap"
+      ],
+      "mutualExclusionGroup": "element-relation:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-EL-natal-controls-palace-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "thien-thoi",
+      "claimIds": [
+        "CLM-MFV02-003"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "element-relation",
+        "relationId": "natal_controls_palace"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceBranch",
+        "menhElement",
+        "branchElementMap"
+      ],
+      "mutualExclusionGroup": "element-relation:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-EL-natal-controls-palace-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "thien-thoi",
+      "claimIds": [
+        "CLM-MFV02-003"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "element-relation",
+        "relationId": "natal_controls_palace"
+      }
+    },
+    {
+      "status": "blocked-by-annual-independence",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [],
+      "mutualExclusionGroup": "thai-tue-group:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "Requires annual taiTuePalace; forbidden for Major Fortune independence.",
+      "ruleId": "MFV02-TT-annual-blocked-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "thien-thoi",
+      "claimIds": [
+        "CLM-MFV02-004"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001",
+        "SRC-MF-V02-CAP-001"
+      ],
+      "matcher": {
+        "kind": "thai-tue",
+        "mode": "annual-taiTuePalace"
+      }
+    },
+    {
+      "status": "blocked-by-annual-independence",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [],
+      "mutualExclusionGroup": "thai-tue-group:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "Requires annual taiTuePalace; forbidden for Major Fortune independence.",
+      "ruleId": "MFV02-TT-annual-blocked-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "thien-thoi",
+      "claimIds": [
+        "CLM-MFV02-004"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001",
+        "SRC-MF-V02-CAP-001"
+      ],
+      "matcher": {
+        "kind": "thai-tue",
+        "mode": "annual-taiTuePalace"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activeNatalPalaceName"
+      ],
+      "mutualExclusionGroup": "natal-palace-group:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-NP-menh-tai-quan-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "dia-loi",
+      "claimIds": [
+        "CLM-MFV02-005"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "natal-palace-group",
+        "groupId": "menh-tai-quan"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activeNatalPalaceName"
+      ],
+      "mutualExclusionGroup": "natal-palace-group:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-NP-menh-tai-quan-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "dia-loi",
+      "claimIds": [
+        "CLM-MFV02-005"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "natal-palace-group",
+        "groupId": "menh-tai-quan"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activeNatalPalaceName"
+      ],
+      "mutualExclusionGroup": "natal-palace-group:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-NP-phuc-di-phu-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "dia-loi",
+      "claimIds": [
+        "CLM-MFV02-005"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "natal-palace-group",
+        "groupId": "phuc-di-phu"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activeNatalPalaceName"
+      ],
+      "mutualExclusionGroup": "natal-palace-group:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-NP-phuc-di-phu-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "dia-loi",
+      "claimIds": [
+        "CLM-MFV02-005"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "natal-palace-group",
+        "groupId": "phuc-di-phu"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activeNatalPalaceName"
+      ],
+      "mutualExclusionGroup": "natal-palace-group:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-NP-dien-tat-huynh-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "dia-loi",
+      "claimIds": [
+        "CLM-MFV02-005"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "natal-palace-group",
+        "groupId": "dien-tat-huynh"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activeNatalPalaceName"
+      ],
+      "mutualExclusionGroup": "natal-palace-group:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-NP-dien-tat-huynh-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "dia-loi",
+      "claimIds": [
+        "CLM-MFV02-005"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "natal-palace-group",
+        "groupId": "dien-tat-huynh"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activeNatalPalaceName"
+      ],
+      "mutualExclusionGroup": "natal-palace-group:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-NP-phu-tu-no-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "dia-loi",
+      "claimIds": [
+        "CLM-MFV02-005"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "natal-palace-group",
+        "groupId": "phu-tu-no"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activeNatalPalaceName"
+      ],
+      "mutualExclusionGroup": "natal-palace-group:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-NP-phu-tu-no-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "dia-loi",
+      "claimIds": [
+        "CLM-MFV02-005"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "natal-palace-group",
+        "groupId": "phu-tu-no"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": "principal-dignity:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-PD-one-principal-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-006"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "principal-dignity",
+        "caseId": "one-principal"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": "principal-dignity:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-PD-one-principal-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-006"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "principal-dignity",
+        "caseId": "one-principal"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": "principal-dignity:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-PD-two-principals-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-006"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "principal-dignity",
+        "caseId": "two-principals"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": "principal-dignity:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-PD-two-principals-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-006"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "principal-dignity",
+        "caseId": "two-principals"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": "principal-dignity:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-PD-vo-chinh-dieu-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-006"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "principal-dignity",
+        "caseId": "vo-chinh-dieu"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": "principal-dignity:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-PD-vo-chinh-dieu-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-006"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "principal-dignity",
+        "caseId": "vo-chinh-dieu"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": "principal-dignity:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-PD-missing-brightness-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-006"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "principal-dignity",
+        "caseId": "missing-brightness"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": "principal-dignity:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-PD-missing-brightness-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-006"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "principal-dignity",
+        "caseId": "missing-brightness"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": "principal-dignity:nam-phai",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-PD-conflicting-brightness-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-006"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "principal-dignity",
+        "caseId": "conflicting-brightness"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": "principal-dignity:trung-chau",
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-PD-conflicting-brightness-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-006"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "principal-dignity",
+        "caseId": "conflicting-brightness"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "Đắc Tam Không exception not atomized to executable policy.",
+      "ruleId": "MFV02-PD-tam-khong-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-007"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "principal-dignity",
+        "caseId": "tam-khong-exception"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "Đắc Tam Không exception not atomized to executable policy.",
+      "ruleId": "MFV02-PD-tam-khong-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-007"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "principal-dignity",
+        "caseId": "tam-khong-exception"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-SP-sat-pha-tham-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-008"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "star-pattern",
+        "patternId": "sat-pha-tham",
+        "stars": [
+          "Thất Sát",
+          "Phá Quân",
+          "Tham Lang"
+        ],
+        "mode": "all"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-SP-sat-pha-tham-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-008"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "star-pattern",
+        "patternId": "sat-pha-tham",
+        "stars": [
+          "Thất Sát",
+          "Phá Quân",
+          "Tham Lang"
+        ],
+        "mode": "all"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-SP-co-nguyet-dong-luong-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-008"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "star-pattern",
+        "patternId": "co-nguyet-dong-luong",
+        "stars": [
+          "Thiên Cơ",
+          "Thái Âm",
+          "Thiên Đồng",
+          "Thiên Lương"
+        ],
+        "mode": "all"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-SP-co-nguyet-dong-luong-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-008"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "star-pattern",
+        "patternId": "co-nguyet-dong-luong",
+        "stars": [
+          "Thiên Cơ",
+          "Thái Âm",
+          "Thiên Đồng",
+          "Thiên Lương"
+        ],
+        "mode": "all"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-SP-tu-vi-thien-phu-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-008"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "star-pattern",
+        "patternId": "tu-vi-thien-phu",
+        "stars": [
+          "Tử Vi",
+          "Thiên Phủ"
+        ],
+        "mode": "all"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-SP-tu-vi-thien-phu-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-008"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "star-pattern",
+        "patternId": "tu-vi-thien-phu",
+        "stars": [
+          "Tử Vi",
+          "Thiên Phủ"
+        ],
+        "mode": "all"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-SP-nhat-nguyet-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-008"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "star-pattern",
+        "patternId": "nhat-nguyet",
+        "stars": [
+          "Thái Dương",
+          "Thái Âm"
+        ],
+        "mode": "all"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "activePalaceStars"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-SP-nhat-nguyet-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "nhan-hoa",
+      "claimIds": [
+        "CLM-MFV02-008"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "star-pattern",
+        "patternId": "nhat-nguyet",
+        "stars": [
+          "Thái Dương",
+          "Thái Âm"
+        ],
+        "mode": "all"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "fortuneStem",
+        "majorMutagens",
+        "exactTargetStar",
+        "exactTargetPalace"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "May contribute only when Calculation Core resolves full transformation tuple.",
+      "ruleId": "MFV02-XF-trung-chau-exact",
+      "school": "trung-chau",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-009"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001",
+        "SRC-MF-V02-CAP-001"
+      ],
+      "matcher": {
+        "kind": "major-transformation",
+        "schoolGate": "trung-chau"
+      }
+    },
+    {
+      "status": "blocked-by-calculation-core",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "Nam Phái Core does not expose MF transformations; do not fabricate.",
+      "ruleId": "MFV02-XF-nam-phai-forbidden",
+      "school": "nam-phai",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-010"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001",
+        "SRC-MF-V02-CAP-001"
+      ],
+      "matcher": {
+        "kind": "major-transformation",
+        "schoolGate": "nam-phai-forbidden"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "frameStarsExactNames"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-BM-khong-kiep-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-011"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "benefic-malefic-set",
+        "setId": "khong-kiep",
+        "stars": [
+          "Địa Không",
+          "Địa Kiếp"
+        ],
+        "mode": "all",
+        "polarity": "malefic",
+        "frame": "tp4c",
+        "dedupIdentity": "exact-star-name"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "frameStarsExactNames"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-BM-khong-kiep-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-011"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "benefic-malefic-set",
+        "setId": "khong-kiep",
+        "stars": [
+          "Địa Không",
+          "Địa Kiếp"
+        ],
+        "mode": "all",
+        "polarity": "malefic",
+        "frame": "tp4c",
+        "dedupIdentity": "exact-star-name"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "frameStarsExactNames"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-BM-kinh-da-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-011"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "benefic-malefic-set",
+        "setId": "kinh-da",
+        "stars": [
+          "Kình Dương",
+          "Đà La"
+        ],
+        "mode": "all",
+        "polarity": "malefic",
+        "frame": "tp4c",
+        "dedupIdentity": "exact-star-name"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "frameStarsExactNames"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-BM-kinh-da-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-011"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "benefic-malefic-set",
+        "setId": "kinh-da",
+        "stars": [
+          "Kình Dương",
+          "Đà La"
+        ],
+        "mode": "all",
+        "polarity": "malefic",
+        "frame": "tp4c",
+        "dedupIdentity": "exact-star-name"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "frameStarsExactNames"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-BM-linh-hoa-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-011"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "benefic-malefic-set",
+        "setId": "linh-hoa",
+        "stars": [
+          "Linh Tinh",
+          "Hỏa Tinh"
+        ],
+        "mode": "all",
+        "polarity": "malefic",
+        "frame": "tp4c",
+        "dedupIdentity": "exact-star-name"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "frameStarsExactNames"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-BM-linh-hoa-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-011"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "benefic-malefic-set",
+        "setId": "linh-hoa",
+        "stars": [
+          "Linh Tinh",
+          "Hỏa Tinh"
+        ],
+        "mode": "all",
+        "polarity": "malefic",
+        "frame": "tp4c",
+        "dedupIdentity": "exact-star-name"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "frameStarsExactNames"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-BM-hinh-ho-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-011"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "benefic-malefic-set",
+        "setId": "hinh-ho",
+        "stars": [
+          "Thiên Hình",
+          "Đà La"
+        ],
+        "mode": "any",
+        "polarity": "malefic",
+        "frame": "tp4c",
+        "dedupIdentity": "exact-star-name"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "frameStarsExactNames"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-BM-hinh-ho-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-011"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "benefic-malefic-set",
+        "setId": "hinh-ho",
+        "stars": [
+          "Thiên Hình",
+          "Đà La"
+        ],
+        "mode": "any",
+        "polarity": "malefic",
+        "frame": "tp4c",
+        "dedupIdentity": "exact-star-name"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "frameStarsExactNames"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-BM-khoi-viet-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-011"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "benefic-malefic-set",
+        "setId": "khoi-viet",
+        "stars": [
+          "Thiên Khôi",
+          "Thiên Việt"
+        ],
+        "mode": "all",
+        "polarity": "benefic",
+        "frame": "tp4c",
+        "dedupIdentity": "exact-star-name"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "frameStarsExactNames"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-BM-khoi-viet-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-011"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "benefic-malefic-set",
+        "setId": "khoi-viet",
+        "stars": [
+          "Thiên Khôi",
+          "Thiên Việt"
+        ],
+        "mode": "all",
+        "polarity": "benefic",
+        "frame": "tp4c",
+        "dedupIdentity": "exact-star-name"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "frameStarsExactNames"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-BM-ta-huu-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-011"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "benefic-malefic-set",
+        "setId": "ta-huu",
+        "stars": [
+          "Tả Phụ",
+          "Hữu Bật"
+        ],
+        "mode": "all",
+        "polarity": "benefic",
+        "frame": "tp4c",
+        "dedupIdentity": "exact-star-name"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "frameStarsExactNames"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-BM-ta-huu-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-011"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "benefic-malefic-set",
+        "setId": "ta-huu",
+        "stars": [
+          "Tả Phụ",
+          "Hữu Bật"
+        ],
+        "mode": "all",
+        "polarity": "benefic",
+        "frame": "tp4c",
+        "dedupIdentity": "exact-star-name"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "frameStarsExactNames"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-BM-loc-ton-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-011"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "benefic-malefic-set",
+        "setId": "loc-ton",
+        "stars": [
+          "Lộc Tồn"
+        ],
+        "mode": "all",
+        "polarity": "benefic",
+        "frame": "tp4c",
+        "dedupIdentity": "exact-star-name"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "frameStarsExactNames"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "No sourced numeric delta in intake; structural matcher only.",
+      "ruleId": "MFV02-BM-loc-ton-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "tu-hoa-sat-tinh",
+      "claimIds": [
+        "CLM-MFV02-011"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "benefic-malefic-set",
+        "setId": "loc-ton",
+        "stars": [
+          "Lộc Tồn"
+        ],
+        "mode": "all",
+        "polarity": "benefic",
+        "frame": "tp4c",
+        "dedupIdentity": "exact-star-name"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "voidMarkers"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "Thresholds not source-backed; leave research-blocked.",
+      "ruleId": "MFV02-VOID-two-pass-nam-phai",
+      "school": "nam-phai",
+      "pillarId": "thien-thoi",
+      "claimIds": [
+        "CLM-MFV02-012"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "void-treatment",
+        "mode": "two-pass-threshold"
+      }
+    },
+    {
+      "status": "research-blocked",
+      "knowledgeStatus": "unverified",
+      "rawDelta": null,
+      "factRequirements": [
+        "voidMarkers"
+      ],
+      "mutualExclusionGroup": null,
+      "unavailableBehavior": "fail-closed-skip",
+      "notes": "Thresholds not source-backed; leave research-blocked.",
+      "ruleId": "MFV02-VOID-two-pass-trung-chau",
+      "school": "trung-chau",
+      "pillarId": "thien-thoi",
+      "claimIds": [
+        "CLM-MFV02-012"
+      ],
+      "sourceIds": [
+        "SRC-MF-V02-INTAKE-001"
+      ],
+      "matcher": {
+        "kind": "void-treatment",
+        "mode": "two-pass-threshold"
+      }
+    }
+  ]
+}

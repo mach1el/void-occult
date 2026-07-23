@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "0.2.0",
+  "formulaId": "major-fortune-v0.2-four-pillar",
+  "formulaVersion": "0.2.0",
+  "baseScore": 50,
+  "scorePrecisionDecimals": 1,
+  "pillars": [
+    {
+      "pillarId": "thien-thoi",
+      "cap": 30,
+      "labelVi": "Thiên Thời"
+    },
+    {
+      "pillarId": "dia-loi",
+      "cap": 25,
+      "labelVi": "Địa Lợi"
+    },
+    {
+      "pillarId": "nhan-hoa",
+      "cap": 20,
+      "labelVi": "Nhân Hòa"
+    },
+    {
+      "pillarId": "tu-hoa-sat-tinh",
+      "cap": 25,
+      "labelVi": "Tứ Hóa & Sát Tinh"
+    }
+  ],
+  "claimIds": [
+    "CLM-MFV02-001"
+  ],
+  "sourceIds": [
+    "SRC-MF-V02-INTAKE-001"
+  ]
+}
