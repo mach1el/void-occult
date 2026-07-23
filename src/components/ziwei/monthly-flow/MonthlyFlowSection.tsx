@@ -2,9 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import type { ChartData, School } from "@/types/chart";
 import {
   analyzeMonthlyFlowProduction,
+  projectVisibleMonthSummary,
+  resolveActualCurrentMonthKey,
   resolveDefaultSelectedMonthKey,
   type MonthlyFlowProductionAnalysis,
 } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production";
+import { MONTHLY_FLOW_VISIBLE_DOMAIN_COUNT } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production/display-projection";
 import { MonthlyFlowTimelineChart } from "./MonthlyFlowTimelineChart";
 import { MonthlyFlowSixAxisChart } from "./MonthlyFlowSixAxisChart";
 import {
@@ -12,6 +15,7 @@ import {
   DOMAIN_ORDER,
   evidenceDisplayLabel,
   formatMonthViewLabel,
+  PRODUCTION_DISCLAIMER_VI,
 } from "./labels";
 import "./monthly-flow.css";
 
@@ -31,7 +35,8 @@ function monthStateLabel(status: "available" | "partial" | "unavailable"): strin
 }
 
 /**
- * Production Monthly Flow V0.1 section — timeline + six-axis detail.
+ * Production Monthly Flow V0.1 section — timeline + visible-domain detail.
+ * Health is never rendered (presentation policy).
  */
 export function MonthlyFlowSection({
   chart,
@@ -44,15 +49,16 @@ export function MonthlyFlowSection({
     [analysisProp, chart, school],
   );
 
-  const currentMonthKey = useMemo(() => {
-    if (now.getFullYear() !== analysis.annualYear) return null;
-    return resolveDefaultSelectedMonthKey({
-      annualYear: analysis.annualYear,
-      school,
-      monthSummaries: analysis.monthSummaries,
-      now,
-    });
-  }, [analysis.annualYear, analysis.monthSummaries, now, school]);
+  const actualCurrentMonthKey = useMemo(
+    () =>
+      resolveActualCurrentMonthKey({
+        annualYear: analysis.annualYear,
+        school,
+        monthSummaries: analysis.monthSummaries,
+        now,
+      }),
+    [analysis.annualYear, analysis.monthSummaries, now, school],
+  );
 
   const defaultMonthKey = useMemo(
     () =>
@@ -73,29 +79,35 @@ export function MonthlyFlowSection({
 
   const selectedMonth =
     analysis.monthSummaries.find((m) => m.monthKey === selectedMonthKey) ??
-    analysis.monthSummaries.find((m) => m.monthKey === currentMonthKey) ??
+    analysis.monthSummaries.find((m) => m.monthKey === actualCurrentMonthKey) ??
     analysis.monthSummaries[0] ??
     null;
+
+  const selectedVisible = selectedMonth
+    ? projectVisibleMonthSummary(selectedMonth)
+    : null;
 
   const [evidenceOpen, setEvidenceOpen] = useState(false);
 
   const viewingOther =
     selectedMonthKey != null &&
-    currentMonthKey != null &&
-    selectedMonthKey !== currentMonthKey;
+    actualCurrentMonthKey != null &&
+    selectedMonthKey !== actualCurrentMonthKey;
 
   const schoolLabel = school === "nam-phai" ? "Nam Phái" : "Trung Châu";
   const compositeText =
-    selectedMonth?.compositeScore == null ? "—" : selectedMonth.compositeScore.toFixed(1);
-  const coverageText = selectedMonth
-    ? `${selectedMonth.availableAxisCount}/6 trục`
+    selectedVisible?.visibleCompositeScore == null
+      ? "—"
+      : selectedVisible.visibleCompositeScore.toFixed(1);
+  const coverageText = selectedVisible
+    ? `${selectedVisible.visibleAxisCount}/${MONTHLY_FLOW_VISIBLE_DOMAIN_COUNT} trục`
     : "—";
 
   return (
     <section
       className="mf-flow"
       data-module="monthly-flow"
-      data-version="0.1.1"
+      data-version="0.1.2"
       data-status={analysis.status}
       aria-label="Lưu Nguyệt V0.1"
     >
@@ -106,7 +118,7 @@ export function MonthlyFlowSection({
           <span className="mf-flow__school-chip">{schoolLabel}</span>
           <span className="mf-flow__year">Năm {analysis.annualYear}</span>
         </div>
-        {viewingOther && selectedMonth ? (
+        {viewingOther && selectedMonth && actualCurrentMonthKey ? (
           <div className="mf-flow__viewing" role="status">
             <span>
               Đang xem: {formatMonthViewLabel(selectedMonth.lunarMonth, selectedMonth.isLeapMonth)}
@@ -115,7 +127,7 @@ export function MonthlyFlowSection({
               type="button"
               className="mf-flow__back-current"
               onClick={() => {
-                if (currentMonthKey) setSelectedMonthKey(currentMonthKey);
+                setSelectedMonthKey(actualCurrentMonthKey);
               }}
             >
               Về tháng hiện tại
@@ -133,15 +145,15 @@ export function MonthlyFlowSection({
           <MonthlyFlowTimelineChart
             summaries={analysis.monthSummaries}
             selectedMonthKey={selectedMonthKey}
-            currentMonthKey={currentMonthKey}
+            currentMonthKey={actualCurrentMonthKey}
             onSelectMonthKey={setSelectedMonthKey}
           />
 
-          {selectedMonth ? (
+          {selectedMonth && selectedVisible ? (
             <>
               <div className="mf-flow__selection" aria-label="Tóm tắt tháng">
                 <div className="mf-flow__score-block">
-                  <span className="mf-flow__score-label">Điểm tổng hợp 6 trục</span>
+                  <span className="mf-flow__score-label">Điểm tổng hợp 5 trục hiển thị</span>
                   <span className="mf-flow__score-value">{compositeText}</span>
                 </div>
                 <div className="mf-flow__meta-row">
@@ -150,16 +162,16 @@ export function MonthlyFlowSection({
                   </span>
                   <span className="mf-flow__meta-item">Độ phủ {coverageText}</span>
                   <span className="mf-flow__meta-item">
-                    {monthStateLabel(selectedMonth.status)}
+                    {monthStateLabel(selectedVisible.status)}
                   </span>
-                  {selectedMonth.strongestDomain ? (
+                  {selectedVisible.visibleStrongestDomain ? (
                     <span className="mf-flow__meta-item">
-                      Mạnh: {DOMAIN_LABEL_VI[selectedMonth.strongestDomain]}
+                      Mạnh: {DOMAIN_LABEL_VI[selectedVisible.visibleStrongestDomain]}
                     </span>
                   ) : null}
-                  {selectedMonth.weakestDomain ? (
+                  {selectedVisible.visibleWeakestDomain ? (
                     <span className="mf-flow__meta-item">
-                      Thấp: {DOMAIN_LABEL_VI[selectedMonth.weakestDomain]}
+                      Thấp: {DOMAIN_LABEL_VI[selectedVisible.visibleWeakestDomain]}
                     </span>
                   ) : null}
                 </div>
@@ -221,10 +233,7 @@ export function MonthlyFlowSection({
         </>
       )}
 
-      <p className="mf-flow__disclaimer">
-        Điểm tổng hợp và trục tháng chỉ phản ánh tín hiệu đã ghi nhận trong mô hình V0.1;
-        không phải dự báo chắc chắn.
-      </p>
+      <p className="mf-flow__disclaimer">{PRODUCTION_DISCLAIMER_VI}</p>
     </section>
   );
 }

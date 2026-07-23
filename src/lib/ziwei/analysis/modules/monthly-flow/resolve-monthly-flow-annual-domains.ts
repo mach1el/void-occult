@@ -23,7 +23,18 @@ export interface MonthlyFlowAnnualDomainAdapterDiagnostics {
   incompletePrimaryMap: string[];
   missingDomainCoverage: string[];
   unresolvedAmbiguousAnchors: string[];
+  missingFocusAnchor: string[];
+  focusAnchorDomainMismatch: string[];
   notes: string[];
+}
+
+/** Full resolved domain context for production scoring (map + focus). */
+export interface MonthlyFlowResolvedDomainContext {
+  coordinate: "natal-palace-name" | "annual-palace-name";
+  provenance: string;
+  primaryDomainByPalaceIndex: ReadonlyMap<number, AnnualAxisDomain>;
+  focusPalaceIndexByDomain: ReadonlyMap<AnnualAxisDomain, number>;
+  anchorsByDomain: ResolvedAnnualDomainAnchors["anchorsByDomain"];
 }
 
 export interface MonthlyFlowAnnualDomainAdapterResult {
@@ -33,6 +44,10 @@ export interface MonthlyFlowAnnualDomainAdapterResult {
   anchorsByDomain: ResolvedAnnualDomainAnchors["anchorsByDomain"];
   /** Compatibility map for analyzeMonthlyFlow `explicitAnnualDomainMap`. */
   primaryDomainByPalaceIndex: ReadonlyMap<number, AnnualAxisDomain> | null;
+  /** Highest-weight focus palace per domain; null when adapter failed. */
+  focusPalaceIndexByDomain: ReadonlyMap<AnnualAxisDomain, number> | null;
+  /** Convenience bundle when ok — production passes this into analyzeMonthlyFlow. */
+  resolvedDomainContext: MonthlyFlowResolvedDomainContext | null;
   diagnostics: MonthlyFlowAnnualDomainAdapterDiagnostics;
 }
 
@@ -45,6 +60,8 @@ function emptyDiagnostics(): MonthlyFlowAnnualDomainAdapterDiagnostics {
     incompletePrimaryMap: [],
     missingDomainCoverage: [],
     unresolvedAmbiguousAnchors: [],
+    missingFocusAnchor: [],
+    focusAnchorDomainMismatch: [],
     notes: [],
   };
 }
@@ -93,8 +110,49 @@ export function derivePrimaryDomainByPalaceIndex(
 }
 
 /**
+ * Derive focus palace per domain from resolved weighted anchors.
+ * Highest weight wins; equal weights break by palaceIndex ascending.
+ * Fail closed when focus palace's primary domain does not match.
+ */
+export function deriveFocusPalaceIndexByDomain(
+  anchorsByDomain: ReadonlyMap<AnnualAxisDomain, readonly ResolvedDomainAnchor[]>,
+  primaryDomainByPalaceIndex: ReadonlyMap<number, AnnualAxisDomain>,
+): {
+  map: Map<AnnualAxisDomain, number>;
+  missingFocusAnchor: string[];
+  focusAnchorDomainMismatch: string[];
+} {
+  const map = new Map<AnnualAxisDomain, number>();
+  const missingFocusAnchor: string[] = [];
+  const focusAnchorDomainMismatch: string[] = [];
+
+  for (const domain of ANNUAL_AXIS_DOMAINS) {
+    const anchors = [...(anchorsByDomain.get(domain) ?? [])];
+    if (anchors.length === 0) {
+      missingFocusAnchor.push(`domain:${domain}`);
+      continue;
+    }
+    anchors.sort((a, b) => {
+      if (b.weight !== a.weight) return b.weight - a.weight;
+      return a.palaceIndex - b.palaceIndex;
+    });
+    const top = anchors[0]!;
+    const primary = primaryDomainByPalaceIndex.get(top.palaceIndex);
+    if (primary !== domain) {
+      focusAnchorDomainMismatch.push(
+        `domain:${domain}:palaceIndex:${top.palaceIndex}:primary=${primary ?? "missing"}`,
+      );
+      continue;
+    }
+    map.set(domain, top.palaceIndex);
+  }
+
+  return { map, missingFocusAnchor, focusAnchorDomainMismatch };
+}
+
+/**
  * Resolve Monthly Flow annual-domain anchors via the approved Annual Axes
- * school resolver, then derive the primary-domain compatibility map.
+ * school resolver, then derive the primary-domain map and focus indices.
  */
 export function resolveMonthlyFlowAnnualDomains(
   chart: ChartData,
@@ -140,6 +198,10 @@ export function resolveMonthlyFlowAnnualDomains(
     }
   }
 
+  const focusDerived = deriveFocusPalaceIndexByDomain(resolved.anchorsByDomain, map);
+  diagnostics.missingFocusAnchor.push(...focusDerived.missingFocusAnchor);
+  diagnostics.focusAnchorDomainMismatch.push(...focusDerived.focusAnchorDomainMismatch);
+
   const hasHardFailure =
     diagnostics.incompleteChartPalaces.length > 0 ||
     diagnostics.duplicateNatalPalaceNames.length > 0 ||
@@ -147,7 +209,10 @@ export function resolveMonthlyFlowAnnualDomains(
     diagnostics.ambiguousDomainAnchor.length > 0 ||
     diagnostics.incompletePrimaryMap.length > 0 ||
     diagnostics.missingDomainCoverage.length > 0 ||
-    map.size !== 12;
+    diagnostics.missingFocusAnchor.length > 0 ||
+    diagnostics.focusAnchorDomainMismatch.length > 0 ||
+    map.size !== 12 ||
+    focusDerived.map.size !== ANNUAL_AXIS_DOMAINS.length;
 
   if (hasHardFailure) {
     return {
@@ -156,9 +221,19 @@ export function resolveMonthlyFlowAnnualDomains(
       provenance: resolved.provenance,
       anchorsByDomain: resolved.anchorsByDomain,
       primaryDomainByPalaceIndex: null,
+      focusPalaceIndexByDomain: null,
+      resolvedDomainContext: null,
       diagnostics,
     };
   }
+
+  const resolvedDomainContext: MonthlyFlowResolvedDomainContext = {
+    coordinate: resolved.coordinate,
+    provenance: resolved.provenance,
+    primaryDomainByPalaceIndex: map,
+    focusPalaceIndexByDomain: focusDerived.map,
+    anchorsByDomain: resolved.anchorsByDomain,
+  };
 
   return {
     ok: true,
@@ -166,6 +241,8 @@ export function resolveMonthlyFlowAnnualDomains(
     provenance: resolved.provenance,
     anchorsByDomain: resolved.anchorsByDomain,
     primaryDomainByPalaceIndex: map,
+    focusPalaceIndexByDomain: focusDerived.map,
+    resolvedDomainContext,
     diagnostics,
   };
 }

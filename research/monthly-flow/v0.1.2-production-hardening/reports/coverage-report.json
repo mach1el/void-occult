@@ -1,0 +1,63 @@
+{
+  "chartCount": 100,
+  "schoolCount": 2,
+  "chartMonthObservations": 2400,
+  "domainObservations": 14400,
+  "monthStatus": {
+    "available": 2400,
+    "partial": 0,
+    "unavailable": 0
+  },
+  "meanAxisCoverage": 1,
+  "composite": {
+    "count": 2400,
+    "min": 48.8,
+    "max": 58.9,
+    "mean": 55.325,
+    "median": 55.4
+  },
+  "bandCounts": {
+    "health": {
+      "guarded": 303,
+      "balanced": 1283,
+      "supportive": 814,
+      "strong": 0,
+      "unavailable": 0
+    },
+    "family": {
+      "guarded": 290,
+      "balanced": 1271,
+      "supportive": 839,
+      "strong": 0,
+      "unavailable": 0
+    },
+    "wealth": {
+      "guarded": 316,
+      "balanced": 1264,
+      "supportive": 820,
+      "strong": 0,
+      "unavailable": 0
+    },
+    "career": {
+      "guarded": 270,
+      "balanced": 1341,
+      "supportive": 789,
+      "strong": 0,
+      "unavailable": 0
+    },
+    "social": {
+      "guarded": 273,
+      "balanced": 1288,
+      "supportive": 839,
+      "strong": 0,
+      "unavailable": 0
+    },
+    "romance": {
+      "guarded": 282,
+      "balanced": 1313,
+      "supportive": 805,
+      "strong": 0,
+      "unavailable": 0
+    }
+  }
+}

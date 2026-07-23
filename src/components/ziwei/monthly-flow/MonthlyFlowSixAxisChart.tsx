@@ -1,4 +1,3 @@
-import type { AnnualAxisDomain } from "@/lib/ziwei/analysis";
 import type { MonthlyFlowMonthSummary } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production";
 import type { MonthlyFlowAxisResult } from "@/lib/ziwei/analysis/modules/monthly-flow/types";
 import {
@@ -28,8 +27,8 @@ function driverLabels(
 }
 
 /**
- * Six horizontal domain bars for the selected lunar month.
- * Values come from monthly-flow axis scores only — never annual-axes UI.
+ * Visible-domain horizontal bars for the selected lunar month.
+ * Excludes health. Values come from monthly-flow axis scores only.
  */
 export function MonthlyFlowSixAxisChart({ selectedMonth }: MonthlyFlowSixAxisChartProps) {
   const axes = selectedMonth.result.axes;
@@ -38,10 +37,10 @@ export function MonthlyFlowSixAxisChart({ selectedMonth }: MonthlyFlowSixAxisCha
     <div
       className="mf-flow-six-axis"
       role="list"
-      aria-label={`Sáu trục tháng ${selectedMonth.lunarMonth}`}
+      aria-label={`Năm trục hiển thị tháng ${selectedMonth.lunarMonth}`}
       data-testid="mf-flow-six-axis"
     >
-      {DOMAIN_ORDER.map((domain: AnnualAxisDomain) => {
+      {DOMAIN_ORDER.map((domain) => {
         const axis = axes[domain];
         const score =
           axis.status === "available" && axis.score != null

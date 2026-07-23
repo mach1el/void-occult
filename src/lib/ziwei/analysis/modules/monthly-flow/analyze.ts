@@ -47,9 +47,10 @@ import type {
   MonthResult,
   ResolvedMonthlyFlowContext,
 } from "./types";
+import type { MonthlyFlowResolvedDomainContext } from "./resolve-monthly-flow-annual-domains";
 
 const CONTRACT_VERSION = "0.1.0";
-const ENGINE_VERSION = "0.1.1";
+const ENGINE_VERSION = "0.1.2";
 const TOP_DRIVER_COUNT = 3;
 
 type MonthlyKnowledge = DeepReadonly<MonthlyFlowScoringKnowledgeV0> | MonthlyFlowScoringKnowledgeV0;
@@ -367,9 +368,21 @@ export function analyzeMonthlyFlow(
      * not invent ad-hoc palace→domain maps.
      */
     explicitAnnualDomainMap?: ReadonlyMap<number, AnnualAxisDomain>;
+    /**
+     * Full school-resolved domain context (primary map + focus anchors).
+     * Production must supply this; when present, frames never use the
+     * lowest-palace-index focus fallback.
+     */
+    resolvedDomainContext?: MonthlyFlowResolvedDomainContext;
   },
 ): MonthlyFlowResult {
-  const { school, provider, explicitLeapContexts, explicitAnnualDomainMap } = options;
+  const {
+    school,
+    provider,
+    explicitLeapContexts,
+    explicitAnnualDomainMap,
+    resolvedDomainContext,
+  } = options;
   const yearDiagnostics = emptyMonthlyFlowYearDiagnostics();
 
   yearDiagnostics.missingCalculationPolicyProfile.push(
@@ -474,9 +487,18 @@ export function analyzeMonthlyFlow(
   const domainMap: AnnualDomainMap | null = resolveAnnualDomainMap({
     chart,
     axisDefinitions: annualKnowledge.axisDefinitions,
-    explicitAnnualDomainMap,
+    explicitAnnualDomainMap:
+      resolvedDomainContext?.primaryDomainByPalaceIndex ?? explicitAnnualDomainMap,
     diagnostics: yearDiagnostics,
   });
+
+  if (resolvedDomainContext) {
+    for (const domain of ANNUAL_AXIS_DOMAINS) {
+      if (!resolvedDomainContext.focusPalaceIndexByDomain.has(domain)) {
+        yearDiagnostics.missingFocusAnchor.push(`domain:${domain}`);
+      }
+    }
+  }
 
   const domainFrames = domainMap
     ? buildAllAnnualDomainFrames(
@@ -485,8 +507,30 @@ export function analyzeMonthlyFlow(
         annualKnowledge.axisDefinitions,
         monthlyKnowledge.domainDefinitions.annualDomainFrame,
         yearDiagnostics,
+        resolvedDomainContext?.focusPalaceIndexByDomain ?? null,
       )
     : new Map<AnnualAxisDomain, AnnualDomainFrame>();
+
+  // When production supplies resolvedDomainContext but frames are incomplete,
+  // fail closed — do not score with partial/wrong focus.
+  if (
+    resolvedDomainContext &&
+    domainMap &&
+    (yearDiagnostics.missingFocusAnchor.length > 0 ||
+      yearDiagnostics.focusAnchorDomainMismatch.length > 0 ||
+      domainFrames.size !== ANNUAL_AXIS_DOMAINS.length)
+  ) {
+    return {
+      module: "monthly-flow",
+      annualYear: chart.annualYear,
+      school,
+      versions: versionProvenance(monthlyKnowledge),
+      status: "unavailable",
+      months: [],
+      capabilities,
+      diagnostics: dedupeMonthlyFlowYearDiagnostics(yearDiagnostics),
+    };
+  }
 
   if (!capabilities.supportsSixAxisOverlayFromCurrentChart && !explicitAnnualDomainMap) {
     yearDiagnostics.unsupportedSchoolCapability.push(`${school}:six-axis-overlay`);

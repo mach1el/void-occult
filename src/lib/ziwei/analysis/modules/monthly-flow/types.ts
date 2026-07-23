@@ -134,6 +134,9 @@ export interface MonthlyFlowYearDiagnostics {
   missingCalculationPolicyProfile: string[];
   unsupportedSchoolCapability: string[];
   leapMonthPolicyUnavailable: string[];
+  missingFocusAnchor: string[];
+  focusAnchorDomainMismatch: string[];
+  productionFocusFallbackUsed: string[];
 }
 
 export interface MonthlyFlowMonthIdentity {
@@ -291,5 +294,8 @@ export function emptyMonthlyFlowYearDiagnostics(): MonthlyFlowYearDiagnostics {
     missingCalculationPolicyProfile: [],
     unsupportedSchoolCapability: [],
     leapMonthPolicyUnavailable: [],
+    missingFocusAnchor: [],
+    focusAnchorDomainMismatch: [],
+    productionFocusFallbackUsed: [],
   };
 }

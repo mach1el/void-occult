@@ -52,6 +52,9 @@ export function dedupeMonthlyFlowYearDiagnostics(
     missingCalculationPolicyProfile: dedupeSorted(diagnostics.missingCalculationPolicyProfile),
     unsupportedSchoolCapability: dedupeSorted(diagnostics.unsupportedSchoolCapability),
     leapMonthPolicyUnavailable: dedupeSorted(diagnostics.leapMonthPolicyUnavailable),
+    missingFocusAnchor: dedupeSorted(diagnostics.missingFocusAnchor),
+    focusAnchorDomainMismatch: dedupeSorted(diagnostics.focusAnchorDomainMismatch),
+    productionFocusFallbackUsed: dedupeSorted(diagnostics.productionFocusFallbackUsed),
   };
 }
 

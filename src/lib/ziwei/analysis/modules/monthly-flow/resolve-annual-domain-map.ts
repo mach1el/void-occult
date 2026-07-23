@@ -146,6 +146,7 @@ export function pickAnnualDomainFocusIndex(
   map: AnnualDomainMap,
   chart: ChartData,
   domains: readonly AnnualDomainDefinition[],
+  diagnostics?: MonthlyFlowYearDiagnostics,
 ): number | null {
   const domainDef = domains.find((d) => d.domain === domainId);
   if (!domainDef) return null;
@@ -161,5 +162,11 @@ export function pickAnnualDomainFocusIndex(
   const fallback = [...map.entries()]
     .filter(([, d]) => d === domainId)
     .sort((a, b) => a[0] - b[0])[0];
-  return fallback ? fallback[0] : null;
+  if (fallback) {
+    diagnostics?.productionFocusFallbackUsed.push(
+      `domain:${domainId}:palaceIndex:${fallback[0]}`,
+    );
+    return fallback[0];
+  }
+  return null;
 }

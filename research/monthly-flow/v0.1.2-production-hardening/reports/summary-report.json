@@ -1,0 +1,86 @@
+{
+  "module": "monthly-flow",
+  "contractVersion": "0.1.0",
+  "scoringKnowledgeVersion": "V0.1",
+  "integrationVersion": "0.1.2",
+  "uiVersion": "0.1.2",
+  "coverage": {
+    "chartCount": 100,
+    "schoolCount": 2,
+    "chartMonthObservations": 2400,
+    "domainObservations": 14400,
+    "monthStatus": {
+      "available": 2400,
+      "partial": 0,
+      "unavailable": 0
+    },
+    "meanAxisCoverage": 1,
+    "composite": {
+      "count": 2400,
+      "min": 48.8,
+      "max": 58.9,
+      "mean": 55.325,
+      "median": 55.4
+    },
+    "bandCounts": {
+      "health": {
+        "guarded": 303,
+        "balanced": 1283,
+        "supportive": 814,
+        "strong": 0,
+        "unavailable": 0
+      },
+      "family": {
+        "guarded": 290,
+        "balanced": 1271,
+        "supportive": 839,
+        "strong": 0,
+        "unavailable": 0
+      },
+      "wealth": {
+        "guarded": 316,
+        "balanced": 1264,
+        "supportive": 820,
+        "strong": 0,
+        "unavailable": 0
+      },
+      "career": {
+        "guarded": 270,
+        "balanced": 1341,
+        "supportive": 789,
+        "strong": 0,
+        "unavailable": 0
+      },
+      "social": {
+        "guarded": 273,
+        "balanced": 1288,
+        "supportive": 839,
+        "strong": 0,
+        "unavailable": 0
+      },
+      "romance": {
+        "guarded": 282,
+        "balanced": 1313,
+        "supportive": 805,
+        "strong": 0,
+        "unavailable": 0
+      }
+    }
+  },
+  "diagnostics": {
+    "unknownStars": 0,
+    "unresolvedTransformationTargets": 0,
+    "duplicatePhysicalFacts": 0,
+    "missingSourceIds": 0,
+    "providerSchoolMismatch": 0,
+    "domainMapFailures": 0,
+    "leapMonthCount": 0,
+    "fabricatedLeapMonthCount": 0,
+    "anchorFidelityFailures": 0,
+    "productionFocusFallbackCount": 0,
+    "healthUiExposureFailures": 0,
+    "currentMonthIdentityFailures": 0
+  },
+  "readinessDecision": "PROMOTE_MONTHLY_FLOW_V01_TO_PRODUCTION",
+  "hardGateFailures": []
+}

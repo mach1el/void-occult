@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { ZiweiAnalysisRebuilding } from "./ZiweiAnalysisRebuilding";
 
 describe("ZiweiAnalysisRebuilding", () => {
-  it("reports monthly-flow as available at V0.1.1 production", () => {
+  it("reports monthly-flow as available at V0.1.2 production", () => {
     const { container } = render(<ZiweiAnalysisRebuilding module="monthly-flow" />);
     expect(container.querySelector("[data-status='available']")).not.toBeNull();
   });

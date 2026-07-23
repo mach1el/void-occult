@@ -1,5 +1,5 @@
 /**
- * Validate Monthly Flow V0.1 production research pack presence + routing.
+ * Validate Monthly Flow V0.1.2 production hardening research pack presence + routing.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -14,7 +14,7 @@ function main(): void {
 
   const required = [
     "README.md",
-    "V0.1-PRODUCTION-DECISION.md",
+    "V0.1.2-PRODUCTION-HARDENING-DECISION.md",
     "policy/domain-adapter-policy.md",
     "policy/provider-policy.md",
     "corpus/corpus-manifest.json",
@@ -41,7 +41,7 @@ function main(): void {
     const decision = JSON.parse(
       readFileSync(join(pack, "reports/decision.json"), "utf8"),
     ) as { readinessDecision?: string; hardGateFailures?: string[] };
-    const md = readFileSync(join(pack, "V0.1-PRODUCTION-DECISION.md"), "utf8");
+    const md = readFileSync(join(pack, "V0.1.2-PRODUCTION-HARDENING-DECISION.md"), "utf8");
     if (decision.readinessDecision && !md.includes(decision.readinessDecision)) {
       issues.push("decision-md-mismatch");
     }

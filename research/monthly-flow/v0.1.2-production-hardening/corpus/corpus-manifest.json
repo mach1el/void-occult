@@ -1,0 +1,14 @@
+{
+  "corpusId": "monthly-flow-v0.1.2-production-hardening",
+  "reusedFrom": "major-fortune-v0.2-audit-corpus",
+  "seed": 20260723,
+  "chartCount": 100,
+  "schools": [
+    "nam-phai",
+    "trung-chau"
+  ],
+  "regularMonthsPerChart": 12,
+  "expectedChartMonthObservations": 2400,
+  "expectedDomainObservations": 14400,
+  "probeAnnualYear": 2026
+}

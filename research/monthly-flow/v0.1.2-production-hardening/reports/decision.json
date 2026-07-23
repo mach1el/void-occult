@@ -1,0 +1,5 @@
+{
+  "readinessDecision": "PROMOTE_MONTHLY_FLOW_V01_TO_PRODUCTION",
+  "hardGateFailures": [],
+  "promoteWhen": "all structural + V0.1.2 hardening gates pass"
+}

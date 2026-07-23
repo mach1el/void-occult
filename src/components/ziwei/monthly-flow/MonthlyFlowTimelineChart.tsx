@@ -2,6 +2,10 @@ import { useCallback, useId, useMemo, useState } from "react";
 import type { KeyboardEvent } from "react";
 import type { MonthlyFlowMonthSummary } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production";
 import {
+  MONTHLY_FLOW_VISIBLE_DOMAIN_COUNT,
+  projectVisibleMonthSummary,
+} from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production/display-projection";
+import {
   DOMAIN_LABEL_VI,
   formatMonthShortLabel,
   formatMonthViewLabel,
@@ -22,42 +26,46 @@ const PAD_T = 28;
 const PAD_B = 44;
 const Y_MAX = 100;
 const Y_TICKS = [0, 20, 40, 60, 80, 100];
+const COMPOSITE_LABEL = "Điểm tổng hợp 5 trục hiển thị";
 
 function scoreToY(score: number): number {
   const plotH = VIEW_H - PAD_T - PAD_B;
   return PAD_T + plotH * (1 - score / Y_MAX);
 }
 
-function moduleStateLabel(summary: MonthlyFlowMonthSummary): string {
-  if (summary.status === "unavailable") return "Không khả dụng";
-  if (summary.status === "partial") return "Thiếu dữ liệu";
+function moduleStateLabel(status: "available" | "partial" | "unavailable"): string {
+  if (status === "unavailable") return "Không khả dụng";
+  if (status === "partial") return "Thiếu dữ liệu";
   return "Đã đánh giá";
 }
 
 function tooltipLines(summary: MonthlyFlowMonthSummary): string[] {
+  const visible = projectVisibleMonthSummary(summary);
   const lines = [formatMonthViewLabel(summary.lunarMonth, summary.isLeapMonth), ""];
 
-  if (summary.compositeScore == null) {
+  if (visible.visibleCompositeScore == null) {
     lines.push("Điểm tổng hợp: —");
   } else {
-    lines.push(`Điểm tổng hợp: ${summary.compositeScore.toFixed(1)}`);
+    lines.push(`Điểm tổng hợp: ${visible.visibleCompositeScore.toFixed(1)}`);
   }
 
-  lines.push(`Độ phủ: ${summary.availableAxisCount}/6 trục`);
+  lines.push(
+    `Độ phủ: ${visible.visibleAxisCount}/${MONTHLY_FLOW_VISIBLE_DOMAIN_COUNT} trục`,
+  );
 
-  if (summary.strongestDomain) {
-    lines.push(`Trục mạnh nhất: ${DOMAIN_LABEL_VI[summary.strongestDomain]}`);
+  if (visible.visibleStrongestDomain) {
+    lines.push(`Trục mạnh nhất: ${DOMAIN_LABEL_VI[visible.visibleStrongestDomain]}`);
   } else {
     lines.push("Trục mạnh nhất: —");
   }
 
-  if (summary.weakestDomain) {
-    lines.push(`Trục thấp nhất: ${DOMAIN_LABEL_VI[summary.weakestDomain]}`);
+  if (visible.visibleWeakestDomain) {
+    lines.push(`Trục thấp nhất: ${DOMAIN_LABEL_VI[visible.visibleWeakestDomain]}`);
   } else {
     lines.push("Trục thấp nhất: —");
   }
 
-  lines.push(`Trạng thái: ${moduleStateLabel(summary)}`);
+  lines.push(`Trạng thái: ${moduleStateLabel(visible.status)}`);
   return lines;
 }
 
@@ -129,7 +137,7 @@ export function MonthlyFlowTimelineChart({
     <div className="mf-flow-timeline">
       <div className="mf-flow-timeline__legend" aria-hidden="true">
         <span className="mf-flow-timeline__swatch mf-flow-timeline__swatch--composite" />
-        Điểm tổng hợp 6 trục
+        {COMPOSITE_LABEL}
         <span className="mf-flow-timeline__swatch mf-flow-timeline__swatch--current" />
         Tháng hiện tại
       </div>
@@ -145,7 +153,7 @@ export function MonthlyFlowTimelineChart({
           role="img"
           aria-label="Biểu đồ Lưu Nguyệt theo tháng âm lịch"
         >
-          <title>Lưu Nguyệt — điểm tổng hợp 6 trục theo tháng</title>
+          <title>Lưu Nguyệt — điểm tổng hợp 5 trục hiển thị theo tháng</title>
 
           <defs>
             <pattern
@@ -191,9 +199,10 @@ export function MonthlyFlowTimelineChart({
 
           <g className="mf-flow-timeline__bars">
             {layout.map(({ summary, cx, barW }) => {
+              const visible = projectVisibleMonthSummary(summary);
               const selected = summary.monthKey === selectedMonthKey;
               const partial = summary.status === "partial";
-              const unavailable = summary.compositeScore == null;
+              const unavailable = visible.visibleCompositeScore == null;
 
               if (unavailable) {
                 return (
@@ -210,7 +219,7 @@ export function MonthlyFlowTimelineChart({
                 );
               }
 
-              const y = scoreToY(summary.compositeScore!);
+              const y = scoreToY(visible.visibleCompositeScore!);
               const h = Math.max(plotBottom - y, 0);
               return (
                 <rect

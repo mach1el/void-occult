@@ -77,7 +77,7 @@ describe("legacy trend scoring absence", () => {
 });
 
 describe("analysis availability after reset", () => {
-  it("marks major-fortune available at 0.3.2 and monthly-flow available at 0.1.1", () => {
+  it("marks major-fortune available at 0.3.2 and monthly-flow available at 0.1.2", () => {
     expect(getAnalysisStatus("major-fortune")).toEqual({
       status: "available",
       module: "major-fortune",
@@ -86,7 +86,7 @@ describe("analysis availability after reset", () => {
     expect(getAnalysisStatus("monthly-flow")).toEqual({
       status: "available",
       module: "monthly-flow",
-      version: "0.1.1",
+      version: "0.1.2",
     });
   });
 

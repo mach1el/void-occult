@@ -33,12 +33,9 @@ function toFrameNode(
 }
 
 /**
- * Build one TP4C for a given annual domain. Focus palace is chosen by
- * `pickAnnualDomainFocusIndex` (top-anchor of that domain among the
- * palaces mapped to it), and opposite/trines are pure index arithmetic
- * off the monthly knowledge's `annualDomainFrame` offsets. Returns null
- * when any of the four physical palaces is missing — the caller must not
- * fabricate a partial frame.
+ * Build one TP4C for a given annual domain.
+ * When `explicitFocusPalaceIndex` is provided, use it (production path).
+ * Otherwise fall back to `pickAnnualDomainFocusIndex` (legacy / unit tests).
  */
 export function buildAnnualDomainFrame(
   domain: AnnualAxisDomain,
@@ -46,8 +43,21 @@ export function buildAnnualDomainFrame(
   chart: ChartData,
   axisDefinitions: AnnualAxisDefinitionsCatalog,
   monthlyGeometry: MonthlyFlowDomainDefinitionsCatalog["annualDomainFrame"],
+  options?: {
+    explicitFocusPalaceIndex?: number;
+    diagnostics?: MonthlyFlowYearDiagnostics;
+  },
 ): AnnualDomainFrame | null {
-  const focusIndex = pickAnnualDomainFocusIndex(domain, map, chart, axisDefinitions.domains);
+  const focusIndex =
+    options?.explicitFocusPalaceIndex !== undefined
+      ? options.explicitFocusPalaceIndex
+      : pickAnnualDomainFocusIndex(
+          domain,
+          map,
+          chart,
+          axisDefinitions.domains,
+          options?.diagnostics,
+        );
   if (focusIndex === null) return null;
 
   const { oppositeOffset, trineOffsets, modulo } = monthlyGeometry;
@@ -85,12 +95,37 @@ export function buildAllAnnualDomainFrames(
   axisDefinitions: AnnualAxisDefinitionsCatalog,
   monthlyGeometry: MonthlyFlowDomainDefinitionsCatalog["annualDomainFrame"],
   diagnostics: MonthlyFlowYearDiagnostics,
+  focusPalaceIndexByDomain?: ReadonlyMap<AnnualAxisDomain, number> | null,
 ): Map<AnnualAxisDomain, AnnualDomainFrame> {
   const out = new Map<AnnualAxisDomain, AnnualDomainFrame>();
   for (const domain of ANNUAL_AXIS_DOMAINS) {
-    const frame = buildAnnualDomainFrame(domain, map, chart, axisDefinitions, monthlyGeometry);
+    const explicitFocus = focusPalaceIndexByDomain?.get(domain);
+    if (focusPalaceIndexByDomain && explicitFocus === undefined) {
+      diagnostics.missingFocusAnchor.push(`domain:${domain}`);
+      continue;
+    }
+    const frame = buildAnnualDomainFrame(
+      domain,
+      map,
+      chart,
+      axisDefinitions,
+      monthlyGeometry,
+      {
+        explicitFocusPalaceIndex: explicitFocus,
+        diagnostics: focusPalaceIndexByDomain ? undefined : diagnostics,
+      },
+    );
     if (!frame) {
       diagnostics.missingMonthlyFrameNodes.push(`annual-domain:${domain}`);
+      continue;
+    }
+    if (
+      focusPalaceIndexByDomain &&
+      map.get(frame.focusPalaceIndex) !== domain
+    ) {
+      diagnostics.focusAnchorDomainMismatch.push(
+        `domain:${domain}:palaceIndex:${frame.focusPalaceIndex}`,
+      );
       continue;
     }
     out.set(domain, frame);
