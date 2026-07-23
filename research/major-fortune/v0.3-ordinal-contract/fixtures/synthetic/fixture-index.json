@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "0.3.0",
+  "catalogId": "major-fortune-v0.3-ordinal-synthetic-fixture-index",
+  "note": "Executable fixtures live in vitest evaluate-ordinal.test.ts; this index documents coverage.",
+  "fixtures": [
+    { "id": "no-signal-score-50", "covers": 1 },
+    { "id": "one-support-pillar", "covers": 2 },
+    { "id": "one-pressure-pillar", "covers": 3 },
+    { "id": "all-pillars-plus-2", "covers": 4 },
+    { "id": "all-pillars-minus-2", "covers": 5 },
+    { "id": "balanced-evidence-level-0", "covers": 6 },
+    { "id": "duplicate-physical-fact", "covers": 7 },
+    { "id": "duplicate-evidence-cluster", "covers": 8 },
+    { "id": "blocked-evidence-ignored", "covers": 9 },
+    { "id": "excluded-evidence-rejected", "covers": 10 },
+    { "id": "nam-phai-transformation-rejected", "covers": 11 },
+    { "id": "trung-chau-incomplete-tuple-rejected", "covers": 12 },
+    { "id": "partial-coverage", "covers": 13 },
+    { "id": "unavailable-required-context", "covers": 14 },
+    { "id": "annual-fact-rejected", "covers": 15 },
+    { "id": "monthly-fact-rejected", "covers": 16 },
+    { "id": "deterministic-repeated-execution", "covers": 17 },
+    { "id": "input-immutability", "covers": 18 },
+    { "id": "invalid-budget-total-rejected", "covers": 19 },
+    { "id": "invalid-ordinal-level-impossible", "covers": 20 }
+  ]
+}

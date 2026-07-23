@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "governanceId",
+    "modelNature",
+    "doctrineRelationship",
+    "numericAuthority",
+    "productionStatus"
+  ],
+  "properties": {
+    "modelNature": { "const": "engineering-heuristic" },
+    "doctrineRelationship": {
+      "const": "doctrine-informed-not-classical-reconstruction"
+    },
+    "numericAuthority": { "const": "engineering-defined" },
+    "productionStatus": { "const": "research-only" }
+  },
+  "additionalProperties": true
+}

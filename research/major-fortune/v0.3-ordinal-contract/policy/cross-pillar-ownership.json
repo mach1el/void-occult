@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "0.3.0",
+  "catalogId": "major-fortune-v0.3-ordinal-cross-pillar-ownership",
+  "policy": "explicit-ownership-required",
+  "silentCrossPillarDoubleCounting": "forbidden",
+  "ownership": [
+    {
+      "physicalFactKind": "element-relation",
+      "ownerPillarId": "thien-thoi",
+      "notes": "Element relation facts belong exclusively to Thiên Thời."
+    },
+    {
+      "physicalFactKind": "principal-star-dignity",
+      "ownerPillarId": "dia-loi",
+      "notes": "Principal dignity facts belong exclusively to Địa Lợi."
+    },
+    {
+      "physicalFactKind": "auxiliary-set-member",
+      "ownerPillarId": "nhan-hoa",
+      "notes": "Auxiliary support/pressure set members belong exclusively to Nhân Hòa."
+    },
+    {
+      "physicalFactKind": "major-fortune-transformation",
+      "ownerPillarId": "tu-hoa-sat-tinh",
+      "notes": "Transformation facts belong exclusively to Tứ Hóa & Sát Tinh."
+    },
+    {
+      "physicalFactKind": "severe-pressure",
+      "ownerPillarId": "tu-hoa-sat-tinh",
+      "notes": "Severe pressure facts belong exclusively to Tứ Hóa & Sát Tinh."
+    }
+  ],
+  "dedupeRules": [
+    {
+      "ruleId": "DEDUP-PHYSICAL-FACT",
+      "scope": "per-pillar",
+      "key": "physicalFactId",
+      "behavior": "first-accepted-wins"
+    },
+    {
+      "ruleId": "DEDUP-EVIDENCE-CLUSTER",
+      "scope": "per-pillar",
+      "key": "evidenceClusterId",
+      "behavior": "first-accepted-wins"
+    },
+    {
+      "ruleId": "DEDUP-CROSS-PILLAR-OWNERSHIP",
+      "scope": "cross-pillar",
+      "key": "physicalFactId",
+      "behavior": "owner-pillar-only-or-reject"
+    }
+  ]
+}

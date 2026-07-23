@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "0.3.0",
+  "catalogId": "major-fortune-v0.3-ordinal-pillars",
+  "pillars": [
+    {
+      "pillarId": "thien-thoi",
+      "budget": 30,
+      "labelVi": "Thiên Thời",
+      "allowedSignalFamilyIds": ["element-relation"],
+      "round1Notes": "Active Major Fortune palace branch element ↔ natal Mệnh element only. No annual/monthly element inputs."
+    },
+    {
+      "pillarId": "dia-loi",
+      "budget": 25,
+      "labelVi": "Địa Lợi",
+      "allowedSignalFamilyIds": ["principal-star-dignity"],
+      "round1Notes": "Principal-star dignity in active Major Fortune palace. Round 1 has no complicated exceptions."
+    },
+    {
+      "pillarId": "nhan-hoa",
+      "budget": 20,
+      "labelVi": "Nhân Hòa",
+      "allowedSignalFamilyIds": ["support-pressure-auxiliary-sets"],
+      "round1Notes": "Research-admitted engineering taxonomy for auxiliary support/pressure sets."
+    },
+    {
+      "pillarId": "tu-hoa-sat-tinh",
+      "budget": 25,
+      "labelVi": "Tứ Hóa & Sát Tinh",
+      "allowedSignalFamilyIds": [
+        "major-fortune-transformations",
+        "severe-pressure-evidence"
+      ],
+      "round1Notes": "Trung Châu transformations require a complete tuple. Nam Phái transformations remain unavailable/partial until Calculation Core supports them."
+    }
+  ]
+}

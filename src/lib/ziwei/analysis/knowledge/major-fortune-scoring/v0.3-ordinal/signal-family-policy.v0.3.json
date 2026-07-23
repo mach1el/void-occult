@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "0.3.0",
+  "catalogId": "major-fortune-v0.3-ordinal-signal-families",
+  "families": [
+    {
+      "signalFamilyId": "element-relation",
+      "pillarId": "thien-thoi",
+      "directionality": "bidirectional",
+      "policyStatus": "research-admitted",
+      "schoolScope": ["nam-phai", "trung-chau"],
+      "description": "Major Fortune palace branch element relative to natal Mệnh element.",
+      "classicalDoctrineVerified": false
+    },
+    {
+      "signalFamilyId": "principal-star-dignity",
+      "pillarId": "dia-loi",
+      "directionality": "bidirectional",
+      "policyStatus": "research-admitted",
+      "schoolScope": ["nam-phai", "trung-chau"],
+      "description": "Principal-star dignity classes (Miếu/Vượng/Đắc/Bình/Hãm/Vô Chính Diệu) in active Major Fortune palace.",
+      "classicalDoctrineVerified": false
+    },
+    {
+      "signalFamilyId": "support-pressure-auxiliary-sets",
+      "pillarId": "nhan-hoa",
+      "directionality": "bidirectional",
+      "policyStatus": "research-admitted",
+      "schoolScope": ["nam-phai", "trung-chau"],
+      "classicalDoctrineVerified": false,
+      "seedSets": {
+        "support": ["Khôi–Việt", "Tả–Hữu", "Lộc Tồn"],
+        "pressure": ["Không–Kiếp", "Kình–Đà", "Linh–Hỏa", "Hình–Hổ"]
+      },
+      "description": "Engineering taxonomy entries for auxiliary support/pressure sets. Not verified classical doctrine."
+    },
+    {
+      "signalFamilyId": "major-fortune-transformations",
+      "pillarId": "tu-hoa-sat-tinh",
+      "directionality": "bidirectional",
+      "policyStatus": "research-admitted",
+      "schoolScope": ["trung-chau"],
+      "requiresCompleteTransformationTuple": true,
+      "transformationTupleFields": [
+        "fortuneStem",
+        "transformationType",
+        "transformedStar",
+        "targetPalace"
+      ],
+      "namPhaiStatus": "unavailable-until-calculation-core",
+      "classicalDoctrineVerified": false,
+      "description": "Major Fortune layer transformations. Trung Châu requires a complete tuple; Nam Phái remains unavailable/partial."
+    },
+    {
+      "signalFamilyId": "severe-pressure-evidence",
+      "pillarId": "tu-hoa-sat-tinh",
+      "directionality": "pressure-leaning",
+      "policyStatus": "research-admitted",
+      "schoolScope": ["nam-phai", "trung-chau"],
+      "classicalDoctrineVerified": false,
+      "description": "Severe pressure evidence admitted for Round 1 engineering taxonomy on the Tứ Hóa & Sát Tinh pillar."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "0.3.0",
+  "modelId": "major-fortune-v0.3-ordinal",
+  "readinessDecision": "ORDINAL_CONTRACT_READY_FOR_ADAPTER",
+  "governance": {
+    "modelNature": "engineering-heuristic",
+    "doctrineRelationship": "doctrine-informed-not-classical-reconstruction",
+    "numericAuthority": "engineering-defined",
+    "productionStatus": "research-only"
+  },
+  "budgets": {
+    "thien-thoi": 30,
+    "dia-loi": 25,
+    "nhan-hoa": 20,
+    "tu-hoa-sat-tinh": 25
+  },
+  "formulaVersion": "v0.3-ordinal-four-pillar",
+  "forbidsPerRuleRawDelta": true,
+  "fixtureSpotChecks": [
+    {
+      "id": "no-signal",
+      "score": 50,
+      "scoreState": "no-signal"
+    },
+    {
+      "id": "all-plus-2",
+      "score": 100,
+      "scoreState": "scored"
+    },
+    {
+      "id": "all-minus-2",
+      "score": 0,
+      "scoreState": "scored"
+    }
+  ],
+  "excludedTemporalScopes": [
+    "annual",
+    "monthly"
+  ],
+  "excludedSignalFamilyCount": 12
+}

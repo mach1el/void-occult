@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "0.3.0",
+  "catalogId": "major-fortune-v0.3-ordinal-exclusions",
+  "excludedSignalFamilyIds": [
+    "thai-tue",
+    "annual-facts",
+    "monthly-facts",
+    "tam-khong",
+    "tuan-triet-numeric-modifiers",
+    "star-pattern-compatibility",
+    "four-natal-palace-groups",
+    "natal-resilience-numeric-effects",
+    "natal-score-floors",
+    "natal-score-ceilings",
+    "natal-score-multipliers",
+    "entry-core-exit-numeric-adjustments"
+  ],
+  "excludedTemporalScopes": ["annual", "monthly"],
+  "metadataOnlyFields": ["yearInCycle"],
+  "notes": [
+    "yearInCycle may appear as metadata only and must never affect score.",
+    "Excluded families and temporal scopes fail closed — they never contribute mass or level."
+  ]
+}

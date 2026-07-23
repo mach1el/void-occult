@@ -71,7 +71,11 @@
     "research:major-fortune-v02-source:report": "npx tsx src/lib/ziwei/analysis/modules/major-fortune/audit/v0.2-source/cli/report-source.ts",
     "research:major-fortune-v02-source:decision": "npx tsx src/lib/ziwei/analysis/modules/major-fortune/audit/v0.2-source/cli/decision-source.ts",
     "test:major-fortune-v01": "vitest run src/lib/ziwei/analysis/modules/major-fortune/__tests__",
-    "test:major-fortune-v02": "vitest run src/lib/ziwei/analysis/modules/major-fortune/v0.2/__tests__ src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.2/__tests__ src/lib/ziwei/analysis/modules/major-fortune/audit/v0.2/__tests__ research/major-fortune/v0.2-foundation/__tests__ research/major-fortune/v0.2-doctrine-adjudication/__tests__ research/major-fortune/v0.2-source-locator-completion/__tests__"
+    "test:major-fortune-v02": "vitest run src/lib/ziwei/analysis/modules/major-fortune/v0.2/__tests__ src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.2/__tests__ src/lib/ziwei/analysis/modules/major-fortune/audit/v0.2/__tests__ research/major-fortune/v0.2-foundation/__tests__ research/major-fortune/v0.2-doctrine-adjudication/__tests__ research/major-fortune/v0.2-source-locator-completion/__tests__",
+    "test:major-fortune-v03-ordinal": "vitest run src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal/__tests__ src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.3-ordinal/__tests__ research/major-fortune/v0.3-ordinal-contract/__tests__",
+    "research:major-fortune-v03-ordinal:validate": "npx tsx src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-ordinal/cli/validate-ordinal-pack.ts",
+    "research:major-fortune-v03-ordinal:report": "npx tsx src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-ordinal/cli/report-ordinal.ts",
+    "research:major-fortune-v03-ordinal:decision": "npx tsx src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-ordinal/cli/decision-ordinal.ts"
   },
   "dependencies": {
     "html-to-image": "1.11.13",

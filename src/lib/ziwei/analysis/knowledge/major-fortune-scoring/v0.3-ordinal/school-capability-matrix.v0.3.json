@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "0.3.0",
+  "catalogId": "major-fortune-v0.3-ordinal-school-capabilities",
+  "profiles": {
+    "nam-phai": {
+      "supportsElementRelation": true,
+      "supportsPrincipalStarDignity": true,
+      "supportsAuxiliarySets": true,
+      "supportsSeverePressureEvidence": true,
+      "supportsMajorFortuneTransformations": false,
+      "majorFortuneTransformationsBehavior": "reject-or-partial",
+      "forbiddenTemporalScopes": ["annual", "monthly"],
+      "failClosedOnUnsupportedFamily": true
+    },
+    "trung-chau": {
+      "supportsElementRelation": true,
+      "supportsPrincipalStarDignity": true,
+      "supportsAuxiliarySets": true,
+      "supportsSeverePressureEvidence": true,
+      "supportsMajorFortuneTransformations": true,
+      "majorFortuneTransformationsBehavior": "require-complete-tuple",
+      "forbiddenTemporalScopes": ["annual", "monthly"],
+      "failClosedOnUnsupportedFamily": true
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "0.3.0",
+  "governanceId": "major-fortune-v0.3-ordinal-governance",
+  "modelNature": "engineering-heuristic",
+  "doctrineRelationship": "doctrine-informed-not-classical-reconstruction",
+  "numericAuthority": "engineering-defined",
+  "productionStatus": "research-only",
+  "notClaims": [
+    "restored-classical-formula",
+    "verified-nam-phai-scoring-system",
+    "verified-trung-chau-scoring-system",
+    "doctrine-authorized-numeric-scoring"
+  ],
+  "relationshipToV02": {
+    "v02Remains": "historical-doctrine-oriented-research-line",
+    "v02ReadinessUnchanged": "RESEARCH_INCOMPLETE",
+    "v02SourceGapsUnchanged": "SOURCE_GAPS_REMAIN",
+    "v02CandidateEligibleFamilies": 0,
+    "v02EligibleShapeFragments": 0,
+    "v03Objective": "explainable-engineering-ordinal-model-informed-by-tu-vi-concepts"
+  },
+  "notes": [
+    "V0.3 intentionally changes the research objective from classical reconstruction to an engineering heuristic.",
+    "Numeric movement is derived only from pillar budgets and ordinal levels — never per-rule rawDelta magnitudes."
+  ]
+}

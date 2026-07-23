@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "0.3.0",
+  "formulaId": "major-fortune-v0.3-ordinal-four-pillar",
+  "formulaVersion": "v0.3-ordinal-four-pillar",
+  "baseScore": 50,
+  "scorePrecisionDecimals": 1,
+  "scoreMinimum": 0,
+  "scoreMaximum": 100,
+  "ordinalDivisor": 4,
+  "ordinalLevels": [-2, -1, 0, 1, 2],
+  "ordinalSemantics": {
+    "-2": "strong-pressure",
+    "-1": "pressure",
+    "0": "mixed-neutral-or-no-signal",
+    "1": "support",
+    "2": "strong-support"
+  },
+  "massWeights": {
+    "normal": 1,
+    "strong": 2
+  },
+  "pillars": [
+    {
+      "pillarId": "thien-thoi",
+      "budget": 30,
+      "labelVi": "Thiên Thời"
+    },
+    {
+      "pillarId": "dia-loi",
+      "budget": 25,
+      "labelVi": "Địa Lợi"
+    },
+    {
+      "pillarId": "nhan-hoa",
+      "budget": 20,
+      "labelVi": "Nhân Hòa"
+    },
+    {
+      "pillarId": "tu-hoa-sat-tinh",
+      "budget": 25,
+      "labelVi": "Tứ Hóa & Sát Tinh"
+    }
+  ],
+  "derivation": {
+    "pillarDelta": "pillarBudget * pillarLevel / ordinalDivisor",
+    "score": "clamp(baseScore + sum(pillarDelta), scoreMinimum, scoreMaximum)",
+    "forbidsPerRuleRawDelta": true
+  }
+}

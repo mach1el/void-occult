@@ -18,3 +18,5 @@ export { detectDisabledInteractionHits, transformationTargetKey } from "./detect
 export { resolveMajorFortuneContext, type ResolvedMajorFortuneContext } from "./resolve-context";
 /** Candidate V0.2 four-pillar scorer — research-only; does not replace V0.1. */
 export { analyzeMajorFortuneV02 } from "./v0.2";
+/** V0.3 ordinal engineering-heuristic contract — research-only; no production route. */
+export { evaluateMajorFortuneOrdinal } from "./v0.3-ordinal";

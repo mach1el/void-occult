@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "0.3.0",
+  "knowledgeVersion": "0.3.0",
+  "contractVersion": "0.3.0",
+  "engineVersion": "0.3.0-ordinal",
+  "formulaVersion": "v0.3-ordinal-four-pillar",
+  "modelId": "major-fortune-v0.3-ordinal",
+  "status": "research-only",
+  "files": [
+    "manifest.v0.3.json",
+    "governance.v0.3.json",
+    "formula.v0.3.json",
+    "bands.v0.3.json",
+    "pillar-registry.v0.3.json",
+    "signal-family-policy.v0.3.json",
+    "exclusion-registry.v0.3.json",
+    "school-capability-matrix.v0.3.json",
+    "cross-pillar-ownership.v0.3.json"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "0.3.0",
+  "ok": true,
+  "issueCount": 0,
+  "issues": [],
+  "readinessDecision": "ORDINAL_CONTRACT_READY_FOR_ADAPTER",
+  "productionStatus": {
+    "status": "unavailable",
+    "module": "major-fortune",
+    "reason": "rebuilding"
+  }
+}

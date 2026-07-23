@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "decisionId",
+    "readinessDecision",
+    "modelNature",
+    "doctrineRelationship",
+    "numericAuthority",
+    "productionStatus"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "decisionId": { "type": "string" },
+    "baseMasterSha": { "type": "string" },
+    "readinessDecision": {
+      "type": "string",
+      "enum": [
+        "ORDINAL_CONTRACT_READY_FOR_ADAPTER",
+        "ORDINAL_CONTRACT_REVISION_REQUIRED"
+      ]
+    },
+    "modelNature": { "const": "engineering-heuristic" },
+    "doctrineRelationship": {
+      "const": "doctrine-informed-not-classical-reconstruction"
+    },
+    "numericAuthority": { "const": "engineering-defined" },
+    "productionStatus": { "const": "research-only" },
+    "v01Unchanged": { "type": "boolean" },
+    "v02Unchanged": { "type": "boolean" },
+    "productionRoutingUnchanged": { "type": "boolean" },
+    "formula": { "type": "object" },
+    "notes": { "type": "string" }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "0.3.0",
+  "decisionId": "major-fortune-v0.3-ordinal-contract-decision",
+  "baseMasterSha": "d16ebd16e1d79ddcdb98d338dacac445f2df82a4",
+  "readinessDecision": "ORDINAL_CONTRACT_READY_FOR_ADAPTER",
+  "modelNature": "engineering-heuristic",
+  "doctrineRelationship": "doctrine-informed-not-classical-reconstruction",
+  "numericAuthority": "engineering-defined",
+  "productionStatus": "research-only",
+  "v01Unchanged": true,
+  "v02Unchanged": true,
+  "v02HistoricalDecisionsUnchanged": {
+    "readiness": "RESEARCH_INCOMPLETE",
+    "sourceGaps": "SOURCE_GAPS_REMAIN",
+    "candidateEligibleFamilies": 0,
+    "eligibleShapeFragments": 0
+  },
+  "productionRoutingUnchanged": true,
+  "productionRoutingExpected": {
+    "status": "unavailable",
+    "module": "major-fortune",
+    "reason": "rebuilding"
+  },
+  "formula": {
+    "baseScore": 50,
+    "ordinalDivisor": 4,
+    "budgets": {
+      "thien-thoi": 30,
+      "dia-loi": 25,
+      "nhan-hoa": 20,
+      "tu-hoa-sat-tinh": 25
+    },
+    "forbidsPerRuleRawDelta": true
+  },
+  "includesChartDataAdapter": false,
+  "includesCorpusTuning": false,
+  "includesHoldout": false,
+  "includesUi": false,
+  "notes": "Ordinal contract ready for a future research-only ChartData adapter."
+}

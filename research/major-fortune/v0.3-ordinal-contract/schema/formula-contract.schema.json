@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "required": ["schemaVersion", "formulaId", "baseScore", "pillars", "derivation"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "formulaId": { "type": "string" },
+    "formulaVersion": { "type": "string" },
+    "baseScore": { "const": 50 },
+    "scorePrecisionDecimals": { "const": 1 },
+    "ordinalDivisor": { "const": 4 },
+    "pillars": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "derivation": {
+      "type": "object",
+      "required": ["forbidsPerRuleRawDelta"],
+      "properties": {
+        "forbidsPerRuleRawDelta": { "const": true }
+      }
+    }
+  },
+  "additionalProperties": true
+}

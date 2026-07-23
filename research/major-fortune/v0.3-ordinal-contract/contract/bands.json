@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "0.3.0",
+  "catalogId": "major-fortune-v0.3-ordinal-bands",
+  "authority": "engineering-display-policy",
+  "classicalAuthorityClaimed": false,
+  "bands": [
+    {
+      "bandId": "strong-pressure",
+      "labelVi": "áp-lực-mạnh",
+      "minInclusive": 0,
+      "maxInclusive": 24.9
+    },
+    {
+      "bandId": "pressure",
+      "labelVi": "áp-lực",
+      "minInclusive": 25,
+      "maxInclusive": 39.9
+    },
+    {
+      "bandId": "mixed",
+      "labelVi": "hỗn-hợp",
+      "minInclusive": 40,
+      "maxInclusive": 59.9
+    },
+    {
+      "bandId": "support",
+      "labelVi": "hỗ-trợ",
+      "minInclusive": 60,
+      "maxInclusive": 74.9
+    },
+    {
+      "bandId": "strong-support",
+      "labelVi": "hỗ-trợ-mạnh",
+      "minInclusive": 75,
+      "maxInclusive": 100
+    }
+  ]
+}
