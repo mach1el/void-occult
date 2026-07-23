@@ -487,6 +487,12 @@ export function writeMonthlyFlowV012HardeningPack(
 
 \`${decision.readinessDecision}\`
 
+## Versions
+
+- contractVersion: 0.1.0
+- scoringKnowledgeVersion: V0.1 (unchanged)
+- engineVersion / integrationVersion / uiVersion: 0.1.2
+
 ## Hard gates
 
 \`\`\`json
@@ -505,6 +511,23 @@ ${JSON.stringify(decision.hardGateFailures, null, 2)}
 
 - chart-month: ${m.chartMonthObservations}
 - domain: ${m.domainObservations}
+
+## Cần thầy duyệt
+
+1. Production UI tiếp tục chấm đủ 6 domain trong engine nhưng chỉ công khai 5 domain (không health) — đã ship theo AGENTS §8.
+2. Disclaimer tiếng Việt đã dùng trên ChartPage.
+3. Tie-break focus: weight desc, rồi palaceIndex asc.
+4. Fail closed khi focus palace primary domain ≠ domain của neo.
+
+## Phát hiện thêm
+
+- Composite range vẫn hẹp. Không hiệu chỉnh scoring trong hotfix này.
+- Đề xuất branch research riêng nếu cần: \`research/ziwei-monthly-flow-v0-2-calibration-audit\`.
+
+## UI proof
+
+- Automated: timeline labels, no health DOM, current-month identity tests green.
+- Manual ChartPage desktop + mobile screenshots: attach to PR.
 `,
     "utf8",
   );
