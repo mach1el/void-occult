@@ -16,3 +16,5 @@ export { collectTransformationEvidence } from "./collect-transformation-evidence
 export { collectStructuralEvidence } from "./collect-structural-evidence";
 export { detectDisabledInteractionHits, transformationTargetKey } from "./detect-disabled-interactions";
 export { resolveMajorFortuneContext, type ResolvedMajorFortuneContext } from "./resolve-context";
+/** Candidate V0.2 four-pillar scorer — research-only; does not replace V0.1. */
+export { analyzeMajorFortuneV02 } from "./v0.2";
