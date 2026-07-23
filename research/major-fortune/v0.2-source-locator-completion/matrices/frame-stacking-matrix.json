@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "0.2.2",
+  "matrixId": "major-fortune-v0.2-frame-stacking",
+  "rows": [
+    {
+      "familyId": "principal-star-dignity",
+      "frame": "unset",
+      "stacking": "unset",
+      "evidence": "missing"
+    },
+    {
+      "familyId": "benefic-malefic-sets",
+      "frame": "intake-hypothesized-tp4c",
+      "stacking": "unset",
+      "evidence": "missing-classical"
+    },
+    {
+      "familyId": "trung-chau-transformations",
+      "frame": "exact-target-palace-with-stem-mutagen",
+      "stacking": "unset-pending-doctrine",
+      "evidence": "engineering-only"
+    },
+    {
+      "familyId": "element-relation",
+      "frame": "active-palace-branch-vs-menhElement",
+      "stacking": "mutex-hypothesized",
+      "evidence": "map-engineering-polarity-missing"
+    },
+    {
+      "familyId": "star-pattern-compatibility",
+      "frame": "pairwise-palace-local-hypothesized",
+      "stacking": "neutral-mixed",
+      "evidence": "missing-classical"
+    },
+    {
+      "familyId": "natal-palace-groups",
+      "frame": "active-natal-palace-name",
+      "stacking": "exclusive-partition-engineering",
+      "evidence": "not-doctrine-linked"
+    },
+    {
+      "familyId": "tuan-triet",
+      "frame": "unset",
+      "stacking": "unset",
+      "evidence": "missing"
+    },
+    {
+      "familyId": "tam-khong",
+      "frame": "unset",
+      "stacking": "unset",
+      "evidence": "missing"
+    }
+  ]
+}

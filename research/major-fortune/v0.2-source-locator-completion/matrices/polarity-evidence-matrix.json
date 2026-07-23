@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "0.2.2",
+  "matrixId": "major-fortune-v0.2-polarity-evidence",
+  "rows": [
+    {
+      "familyId": "principal-star-dignity",
+      "polarityVerified": false,
+      "evidenceClaimIds": [
+        "CLM-MFV02-LOC-PD-EXIST-GAP",
+        "CLM-MFV02-LOC-PD-POLARITY-GAP"
+      ],
+      "status": "missing-classical-locator"
+    },
+    {
+      "familyId": "benefic-malefic-sets",
+      "polarityVerified": false,
+      "evidenceClaimIds": [
+        "CLM-MFV02-LOC-BM-GAP"
+      ],
+      "status": "missing-classical-locator"
+    },
+    {
+      "familyId": "trung-chau-transformations",
+      "polarityVerified": false,
+      "evidenceClaimIds": [
+        "CLM-MFV02-LOC-XF-TC-POLARITY-GAP"
+      ],
+      "status": "missing-classical-locator"
+    },
+    {
+      "familyId": "element-relation",
+      "polarityVerified": false,
+      "evidenceClaimIds": [
+        "CLM-MFV02-LOC-EL-POLARITY-GAP"
+      ],
+      "status": "missing-classical-locator"
+    },
+    {
+      "familyId": "star-pattern-compatibility",
+      "polarityVerified": false,
+      "evidenceClaimIds": [
+        "CLM-MFV02-LOC-SP-GAP"
+      ],
+      "status": "missing-classical-locator"
+    },
+    {
+      "familyId": "natal-palace-groups",
+      "polarityVerified": false,
+      "evidenceClaimIds": [
+        "CLM-MFV02-LOC-NPG-GAP"
+      ],
+      "status": "missing-classical-locator"
+    },
+    {
+      "familyId": "tuan-triet",
+      "polarityVerified": false,
+      "evidenceClaimIds": [
+        "CLM-MFV02-LOC-VOID-GAP"
+      ],
+      "status": "missing-classical-locator"
+    },
+    {
+      "familyId": "tam-khong",
+      "polarityVerified": false,
+      "evidenceClaimIds": [
+        "CLM-MFV02-LOC-TAM-KHONG-GAP"
+      ],
+      "status": "missing-classical-locator"
+    },
+    {
+      "familyId": "thai-tue",
+      "polarityVerified": false,
+      "evidenceClaimIds": [],
+      "status": "missing-classical-locator"
+    },
+    {
+      "familyId": "nam-phai-transformations",
+      "polarityVerified": false,
+      "evidenceClaimIds": [],
+      "status": "missing-classical-locator"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "0.2.2",
+  "reportId": "major-fortune-v0.2-topic-evidence",
+  "priorityOrder": [
+    "principal-star-dignity",
+    "benefic-malefic",
+    "trung-chau-transformations",
+    "element-relation",
+    "star-pattern",
+    "natal-palace-groups",
+    "tuan-triet",
+    "tam-khong"
+  ],
+  "topics": [
+    {
+      "topicId": "principal-star-dignity",
+      "inspectedClassicalPages": 0,
+      "layer1Verified": false,
+      "outcome": "research-blocked",
+      "needed": "pages on Đại Vận + brightness / Vô Chính Diệu"
+    },
+    {
+      "topicId": "benefic-malefic",
+      "inspectedClassicalPages": 0,
+      "layer1Verified": false,
+      "outcome": "research-blocked",
+      "needed": "per-set star membership, co-occurrence, frame, polarity"
+    },
+    {
+      "topicId": "trung-chau-transformations",
+      "inspectedClassicalPages": 0,
+      "layer1Verified": false,
+      "outcome": "research-blocked",
+      "needed": "Hóa Lộc/Quyền/Khoa/Kỵ polarity + stacking vs natal XF"
+    },
+    {
+      "topicId": "element-relation",
+      "inspectedClassicalPages": 0,
+      "layer1Verified": false,
+      "outcome": "research-blocked",
+      "needed": "decade climate use of palace↔Mệnh element"
+    },
+    {
+      "topicId": "star-pattern",
+      "inspectedClassicalPages": 0,
+      "layer1Verified": false,
+      "outcome": "research-blocked",
+      "needed": "pairwise natal↔vận pattern doctrine"
+    },
+    {
+      "topicId": "natal-palace-groups",
+      "inspectedClassicalPages": 0,
+      "layer1Verified": false,
+      "outcome": "research-blocked",
+      "needed": "explicit MF evaluation linkage or exclude"
+    },
+    {
+      "topicId": "tuan-triet",
+      "inspectedClassicalPages": 0,
+      "layer1Verified": false,
+      "outcome": "research-blocked",
+      "needed": "deterministic void identity/frame/ordering"
+    },
+    {
+      "topicId": "tam-khong",
+      "inspectedClassicalPages": 0,
+      "layer1Verified": false,
+      "outcome": "excluded-from-v0.2",
+      "needed": "atomic exception policy or keep excluded"
+    }
+  ]
+}

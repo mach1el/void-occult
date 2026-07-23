@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "registryId",
+    "exactRawDeltaForbidden",
+    "claims"
+  ],
+  "properties": {
+    "exactRawDeltaForbidden": {
+      "const": true
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "claimId",
+          "topic",
+          "dimension",
+          "statement",
+          "school",
+          "sourceIds",
+          "locators",
+          "confidence",
+          "status",
+          "runtimeImplication",
+          "candidateEligibility"
+        ],
+        "properties": {
+          "claimId": {
+            "type": "string",
+            "pattern": "^CLM-"
+          },
+          "dimension": {
+            "enum": [
+              "existence",
+              "scope",
+              "polarity",
+              "frame",
+              "stacking",
+              "exception",
+              "required-facts",
+              "relative-strength"
+            ]
+          },
+          "school": {
+            "enum": [
+              "nam-phai",
+              "trung-chau",
+              "mixed"
+            ]
+          },
+          "candidateEligibility": {
+            "enum": [
+              "candidate-eligible",
+              "research-blocked",
+              "blocked-by-calculation-core",
+              "excluded-from-v0.2",
+              "metadata-only"
+            ]
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

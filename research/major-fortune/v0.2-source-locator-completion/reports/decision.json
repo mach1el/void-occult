@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "0.2.2",
+  "decisionId": "major-fortune-v0.2-source-locator-decision",
+  "baseMasterSha": "92e89ef",
+  "doctrinePrMerged": "#121",
+  "readinessDecision": "SOURCE_GAPS_REMAIN",
+  "eligibleScoringFamilyCount": 0,
+  "eligibleShapeFragmentCount": 0,
+  "authorizedFinalRawDelta": false,
+  "numericCandidatesEvaluated": false,
+  "historicalRegistryMutation": false,
+  "v01Unchanged": true,
+  "productionRoutingUnchanged": true,
+  "productionRoutingExpected": {
+    "status": "unavailable",
+    "module": "major-fortune",
+    "reason": "rebuilding"
+  },
+  "openContradictionIds": [
+    "CTR-MFV02-LOC-001"
+  ],
+  "notes": "Classical pages not inspected. Engineering locators verified for capabilities/maps only. Not LOCATOR_COMPLETION_READY_FOR_SHAPE_FREEZE."
+}

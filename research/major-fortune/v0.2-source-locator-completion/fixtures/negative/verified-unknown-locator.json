@@ -1,0 +1,14 @@
+{
+  "claimId": "CLM-BAD",
+  "status": "verified-doctrine",
+  "locators": [
+    "Unknown"
+  ],
+  "sourceIds": [
+    "SRC-MF-V02-LOC-TAN-BIEN-001"
+  ],
+  "candidateEligibility": "candidate-eligible",
+  "polarity": "positive",
+  "frame": "tp4c",
+  "dimension": "polarity"
+}

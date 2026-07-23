@@ -1,0 +1,12 @@
+{
+  "claimId": "CLM-BAD2",
+  "status": "verified-doctrine",
+  "dimension": "polarity",
+  "sourceIds": [
+    "SRC-MF-V02-LOC-CAP-001"
+  ],
+  "locators": [
+    "school-capabilities.v0.2.json"
+  ],
+  "candidateEligibility": "candidate-eligible"
+}

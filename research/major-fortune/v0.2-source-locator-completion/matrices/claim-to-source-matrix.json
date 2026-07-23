@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "0.2.2",
+  "matrixId": "major-fortune-v0.2-claim-to-source",
+  "rows": [
+    {
+      "claimId": "CLM-MFV02-LOC-NO-ANNUAL",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-CAP-001"
+      ],
+      "locators": [
+        "school-capabilities.v0.2.json#forbiddenInputs"
+      ],
+      "extractionIds": [
+        "EXT-LOC-001"
+      ],
+      "status": "engineering-verified"
+    },
+    {
+      "claimId": "CLM-MFV02-LOC-NP-XF-CORE",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-CAP-001"
+      ],
+      "locators": [
+        "school-capabilities.v0.2.json#profiles.nam-phai.supportsMajorFortuneTransformations"
+      ],
+      "extractionIds": [
+        "EXT-LOC-001"
+      ],
+      "status": "engineering-verified"
+    },
+    {
+      "claimId": "CLM-MFV02-LOC-EL-MAP",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-BRANCH-001"
+      ],
+      "locators": [
+        "branch-element-map.v0.2.json#branchToElement"
+      ],
+      "extractionIds": [
+        "EXT-LOC-002"
+      ],
+      "status": "engineering-verified"
+    },
+    {
+      "claimId": "CLM-MFV02-LOC-PD-EXIST-GAP",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-TAN-BIEN-001",
+        "SRC-MF-V02-LOC-INTAKE-001"
+      ],
+      "locators": [
+        "Unknown"
+      ],
+      "extractionIds": [
+        "EXT-LOC-003"
+      ],
+      "status": "unsupported"
+    },
+    {
+      "claimId": "CLM-MFV02-LOC-PD-POLARITY-GAP",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-INTAKE-001",
+        "SRC-MF-V02-LOC-TAN-BIEN-001"
+      ],
+      "locators": [
+        "Unknown"
+      ],
+      "extractionIds": [
+        "EXT-LOC-003"
+      ],
+      "status": "unsupported"
+    },
+    {
+      "claimId": "CLM-MFV02-LOC-BM-GAP",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-TAN-BIEN-001",
+        "SRC-MF-V02-LOC-INTAKE-001"
+      ],
+      "locators": [
+        "Unknown"
+      ],
+      "extractionIds": [
+        "EXT-LOC-003"
+      ],
+      "status": "unsupported"
+    },
+    {
+      "claimId": "CLM-MFV02-LOC-XF-TC-POLARITY-GAP",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-CAP-001",
+        "SRC-MF-V02-LOC-XF-POLICY-001",
+        "SRC-MF-V02-LOC-TOAN-THU-001"
+      ],
+      "locators": [
+        "school-capabilities.v0.2.json",
+        "major-transformation-policy.json",
+        "Unknown"
+      ],
+      "extractionIds": [
+        "EXT-LOC-001"
+      ],
+      "status": "unsupported"
+    },
+    {
+      "claimId": "CLM-MFV02-LOC-XF-TC-FRAME-ENG",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-XF-POLICY-001",
+        "SRC-MF-V02-LOC-CAP-001"
+      ],
+      "locators": [
+        "major-transformation-policy.json",
+        "supportsMajorFortuneTransformations:true"
+      ],
+      "extractionIds": [
+        "EXT-LOC-001"
+      ],
+      "status": "engineering-verified"
+    },
+    {
+      "claimId": "CLM-MFV02-LOC-EL-POLARITY-GAP",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-TAN-BIEN-001",
+        "SRC-MF-V02-LOC-BRANCH-001"
+      ],
+      "locators": [
+        "Unknown",
+        "branch-element-map.v0.2.json"
+      ],
+      "extractionIds": [
+        "EXT-LOC-002",
+        "EXT-LOC-003"
+      ],
+      "status": "unsupported"
+    },
+    {
+      "claimId": "CLM-MFV02-LOC-SP-GAP",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-TAN-BIEN-001",
+        "SRC-MF-V02-LOC-INTAKE-001"
+      ],
+      "locators": [
+        "Unknown"
+      ],
+      "extractionIds": [
+        "EXT-LOC-003"
+      ],
+      "status": "unsupported"
+    },
+    {
+      "claimId": "CLM-MFV02-LOC-NPG-GAP",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-INTAKE-001",
+        "SRC-MF-V02-LOC-TAN-BIEN-001"
+      ],
+      "locators": [
+        "Unknown",
+        "natal-palace-groups.v0.2.json"
+      ],
+      "extractionIds": [
+        "EXT-LOC-003"
+      ],
+      "status": "unsupported"
+    },
+    {
+      "claimId": "CLM-MFV02-LOC-VOID-GAP",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-TAN-BIEN-001",
+        "SRC-MF-V02-LOC-INTAKE-001"
+      ],
+      "locators": [
+        "Unknown"
+      ],
+      "extractionIds": [
+        "EXT-LOC-003"
+      ],
+      "status": "unsupported"
+    },
+    {
+      "claimId": "CLM-MFV02-LOC-TAM-KHONG-GAP",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-TAN-BIEN-001",
+        "SRC-MF-V02-LOC-INTAKE-001"
+      ],
+      "locators": [
+        "Unknown"
+      ],
+      "extractionIds": [
+        "EXT-LOC-003"
+      ],
+      "status": "unsupported"
+    },
+    {
+      "claimId": "CLM-MFV02-LOC-THAI-TUE-EXCL",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-CAP-001",
+        "SRC-MF-V02-LOC-DOCTRINE-PACK-001"
+      ],
+      "locators": [
+        "forbiddenInputs:taiTuePalace",
+        "v0.2-doctrine-adjudication/V0.2-DOCTRINE-DECISION.md"
+      ],
+      "extractionIds": [
+        "EXT-LOC-001"
+      ],
+      "status": "derived"
+    },
+    {
+      "claimId": "CLM-MFV02-LOC-RESILIENCE-META",
+      "sourceIds": [
+        "SRC-MF-V02-LOC-DOCTRINE-PACK-001"
+      ],
+      "locators": [
+        "v0.2-doctrine-adjudication topic natal-resilience"
+      ],
+      "extractionIds": [],
+      "status": "derived"
+    }
+  ]
+}

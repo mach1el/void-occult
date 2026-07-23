@@ -1,0 +1,36 @@
+{
+  "reportId": "major-fortune-v0.2-source-locator-summary",
+  "readinessDecision": "SOURCE_GAPS_REMAIN",
+  "sourcesByAccess": {
+    "bibliographic-only": 2,
+    "internal": 1,
+    "verified": 4
+  },
+  "sourcesByExtraction": {
+    "blocked-missing-locator": 2,
+    "hypothesis-only": 1,
+    "engineering-verified": 4
+  },
+  "familyEligibility": {
+    "principal-star-dignity": "research-blocked",
+    "benefic-malefic-sets": "research-blocked",
+    "trung-chau-transformations": "research-blocked",
+    "element-relation": "research-blocked",
+    "star-pattern-compatibility": "research-blocked",
+    "natal-palace-groups": "research-blocked",
+    "tuan-triet": "research-blocked",
+    "tam-khong": "excluded-from-v0.2",
+    "thai-tue": "excluded-from-v0.2",
+    "natal-resilience": "metadata-only",
+    "nam-phai-transformations": "blocked-by-calculation-core"
+  },
+  "eligibleShapeFragmentCount": 0,
+  "unresolvedQueueCount": 3,
+  "openContradictions": [
+    "CTR-MFV02-LOC-001"
+  ],
+  "numericCandidatesEvaluated": false,
+  "authorizedFinalRawDelta": false,
+  "v01Unchanged": true,
+  "productionRoutingUnchanged": true
+}

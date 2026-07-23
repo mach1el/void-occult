@@ -1,0 +1,8 @@
+{
+  "familyId": "element-relation",
+  "eligibility": "candidate-eligible",
+  "existence": true,
+  "scope": true,
+  "polarity": false,
+  "frame": true
+}
