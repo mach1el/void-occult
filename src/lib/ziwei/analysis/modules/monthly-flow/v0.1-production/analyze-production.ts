@@ -1,5 +1,5 @@
 /**
- * UI-facing Monthly Flow production analysis wrapper (integration 0.1.1).
+ * UI-facing Monthly Flow production analysis wrapper (integration 0.1.2).
  * Wires Calculation Core provider + school-aware domain adapter into the
  * existing analyzeMonthlyFlow scorer without copying scoring logic.
  */
@@ -24,7 +24,7 @@ import {
   type MonthlyFlowMonthSummary,
 } from "./month-summaries";
 
-export const MONTHLY_FLOW_INTEGRATION_VERSION = "0.1.1";
+export const MONTHLY_FLOW_INTEGRATION_VERSION = "0.1.2";
 export const MONTHLY_FLOW_CONTRACT_VERSION = "0.1.0";
 
 export interface MonthlyFlowProductionDiagnostics {
@@ -39,7 +39,7 @@ export interface MonthlyFlowProductionDiagnostics {
 
 export interface MonthlyFlowProductionAnalysis {
   module: "monthly-flow";
-  version: "0.1.1";
+  version: "0.1.2";
   annualYear: number;
   school: ZiweiSchool;
   result: MonthlyFlowResult | null;
@@ -64,7 +64,7 @@ function emptyProductionDiagnostics(): MonthlyFlowProductionDiagnostics {
 /**
  * Production pipeline:
  * ChartData → Calculation Core provider → school-aware annual-domain adapter
- * → analyzeMonthlyFlow → display summaries.
+ * → analyzeMonthlyFlow(resolvedDomainContext) → display summaries.
  */
 export function analyzeMonthlyFlowProduction(
   chart: ChartData,
@@ -152,7 +152,7 @@ export function analyzeMonthlyFlowProduction(
   );
   diagnostics.domainAdapter = domainAdapter.diagnostics;
 
-  if (!domainAdapter.ok || !domainAdapter.primaryDomainByPalaceIndex) {
+  if (!domainAdapter.ok || !domainAdapter.resolvedDomainContext) {
     diagnostics.domainAdapterFailed = true;
     return {
       module: "monthly-flow",
@@ -171,7 +171,7 @@ export function analyzeMonthlyFlowProduction(
     school,
     provider,
     explicitLeapContexts,
-    explicitAnnualDomainMap: domainAdapter.primaryDomainByPalaceIndex,
+    resolvedDomainContext: domainAdapter.resolvedDomainContext,
   });
 
   diagnostics.engine = result.diagnostics;

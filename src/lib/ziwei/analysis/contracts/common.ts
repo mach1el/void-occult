@@ -134,7 +134,7 @@ export function getAnalysisStatus(
       return { status: "unavailable", module, reason: "invalid-knowledge" };
     }
 
-    return { status: "available", module, version: "0.1.1" };
+    return { status: "available", module, version: "0.1.2" };
   }
 
   return { status: "unavailable", module, reason: "rebuilding" };

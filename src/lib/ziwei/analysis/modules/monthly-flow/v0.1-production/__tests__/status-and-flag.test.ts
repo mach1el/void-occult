@@ -20,11 +20,11 @@ describe("Monthly Flow V0.1 production status + flag", () => {
     expect(isMonthlyFlowV01Enabled()).toBe(true);
   });
 
-  it("valid knowledge returns available@0.1.1", () => {
+  it("valid knowledge returns available@0.1.2", () => {
     expect(getAnalysisStatus("monthly-flow")).toEqual({
       status: "available",
       module: "monthly-flow",
-      version: "0.1.1",
+      version: "0.1.2",
     });
   });
 

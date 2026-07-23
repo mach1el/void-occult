@@ -38,11 +38,11 @@ describe("Major Fortune V0.3 production status + flag", () => {
     });
   });
 
-  it("marks monthly-flow available at 0.1.1", () => {
+  it("marks monthly-flow available at 0.1.2", () => {
     expect(getAnalysisStatus("monthly-flow")).toEqual({
       status: "available",
       module: "monthly-flow",
-      version: "0.1.1",
+      version: "0.1.2",
     });
   });
 

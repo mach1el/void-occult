@@ -95,7 +95,7 @@ export function MonthlyFlowSection({
     <section
       className="mf-flow"
       data-module="monthly-flow"
-      data-version="0.1.1"
+      data-version="0.1.2"
       data-status={analysis.status}
       aria-label="Lưu Nguyệt V0.1"
     >

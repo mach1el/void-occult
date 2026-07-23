@@ -33,7 +33,7 @@ function main(): void {
   if (!loaded.ok) issues.push("monthly-flow-knowledge-invalid");
 
   const routing = getAnalysisStatus("monthly-flow");
-  if (routing.status !== "available" || routing.version !== "0.1.1") {
+  if (routing.status !== "available" || routing.version !== "0.1.2") {
     issues.push("production-routing-unexpected");
   }
 

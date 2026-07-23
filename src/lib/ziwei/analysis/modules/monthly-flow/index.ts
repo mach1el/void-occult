@@ -4,8 +4,10 @@ export { createMonthlyCalculationProvider } from "./create-monthly-calculation-p
 export {
   resolveMonthlyFlowAnnualDomains,
   derivePrimaryDomainByPalaceIndex,
+  deriveFocusPalaceIndexByDomain,
   type MonthlyFlowAnnualDomainAdapterResult,
   type MonthlyFlowAnnualDomainAdapterDiagnostics,
+  type MonthlyFlowResolvedDomainContext,
 } from "./resolve-monthly-flow-annual-domains";
 export {
   analyzeMonthlyFlowProduction,

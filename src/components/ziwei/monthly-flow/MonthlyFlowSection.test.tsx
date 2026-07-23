@@ -124,7 +124,7 @@ describe("MonthlyFlowSection", () => {
       <MonthlyFlowSection chart={chart} school="trung-chau" now={NOW_JULY_2026} />,
     );
 
-    expect(screen.getByLabelText("Lưu Nguyệt V0.1")).toHaveAttribute("data-version", "0.1.1");
+    expect(screen.getByLabelText("Lưu Nguyệt V0.1")).toHaveAttribute("data-version", "0.1.2");
     expect(container.querySelector('[data-module="monthly-flow"]')).toBeInTheDocument();
     expect(screen.getByText("Lưu Nguyệt")).toBeInTheDocument();
     expect(screen.getByText("Điểm tổng hợp 6 trục")).toBeInTheDocument();

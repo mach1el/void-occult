@@ -109,7 +109,7 @@ describe("MajorFortuneSection production UI", () => {
     expect(getAnalysisStatus("monthly-flow")).toEqual({
       status: "available",
       module: "monthly-flow",
-      version: "0.1.1",
+      version: "0.1.2",
     });
   });
 });

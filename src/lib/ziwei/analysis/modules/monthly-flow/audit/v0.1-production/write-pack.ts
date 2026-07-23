@@ -199,8 +199,8 @@ function hardGateFailures(metrics: MonthlyFlowSmokeMetrics): string[] {
   }
   if (!isMonthlyFlowV01Enabled()) failures.push("feature-flag-default-disabled");
   const routing = getAnalysisStatus("monthly-flow");
-  if (routing.status !== "available" || routing.version !== "0.1.1") {
-    failures.push("production-status-not-available-0.1.1");
+  if (routing.status !== "available" || routing.version !== "0.1.2") {
+    failures.push("production-status-not-available-0.1.2");
   }
   return failures.sort();
 }
@@ -299,8 +299,8 @@ export function writeMonthlyFlowV01ProductionPack(
   writeJson(join(packDir, "reports/coverage-report.json"), coverage);
 
   writeJson(join(packDir, "reports/ui-proof-report.json"), {
-    integrationVersion: "0.1.1",
-    uiVersion: "0.1.1",
+    integrationVersion: "0.1.2",
+    uiVersion: "0.1.2",
     featureFlag: "ziweiMonthlyFlowV01",
     killSwitch: "VITE_ZIWEI_MONTHLY_FLOW_V01=false",
     productionStatus: getAnalysisStatus("monthly-flow"),
@@ -328,8 +328,8 @@ export function writeMonthlyFlowV01ProductionPack(
     module: "monthly-flow",
     contractVersion: "0.1.0",
     scoringKnowledgeVersion: "V0.1",
-    integrationVersion: "0.1.1",
-    uiVersion: "0.1.1",
+    integrationVersion: "0.1.2",
+    uiVersion: "0.1.2",
     coverage,
     diagnostics: {
       unknownStars: m.unknownStars,
@@ -369,8 +369,8 @@ ${JSON.stringify(decision.hardGateFailures, null, 2)}
 
 - contractVersion: 0.1.0
 - scoringKnowledgeVersion: existing V0.1
-- engine/integrationVersion: 0.1.1
-- UIVersion: 0.1.1
+- engine/integrationVersion: 0.1.2
+- UIVersion: 0.1.2
 
 ## Observations
 

@@ -5,12 +5,12 @@ import { hardGateShape } from "../hard-gate-shape";
 
 // Lightweight gate tests — full corpus audit is CLI-only.
 describe("Monthly Flow V0.1 production gates", () => {
-  it("feature flag defaults on and status is available 0.1.1", () => {
+  it("feature flag defaults on and status is available 0.1.2", () => {
     expect(isMonthlyFlowV01Enabled()).toBe(true);
     expect(getAnalysisStatus("monthly-flow")).toEqual({
       status: "available",
       module: "monthly-flow",
-      version: "0.1.1",
+      version: "0.1.2",
     });
   });
 
